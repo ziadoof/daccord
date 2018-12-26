@@ -2,11 +2,38 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}On a d'accord{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icons/favicon.png') }}"/>
+        <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                  integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                  crossorigin="anonymous">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+            <section id="container" >
+                {% block header %}{% include "header.html.twig" %}{% endblock %}
+
+                {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
+                <section id="main-content">
+                    <section class="wrapper">
+                        <div class="">
+                            <div class="centr-changer col-md-8 col-md-offset-2 ">
+                                {% block content %}
+
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                {% block footer %}{#{% include "footer.html.twig" %}#}{% endblock %}
+            </section>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('build/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

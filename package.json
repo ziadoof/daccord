@@ -1,0 +1,35 @@
+{
+  "name": "daccord",
+  "version": "1.0.0",
+  "description": "on a d'accord",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bootstrap-scss": "^4.1.3",
+    "bootswatch": "^4.1.3",
+    "jquery": "^3.3.1",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.22.2",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "webpack-notifier": "^1.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziadoof/daccord.git"
+  },
+  "author": "ziadoof",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ziadoof/daccord/issues"
+  },
+  "homepage": "https://github.com/ziadoof/daccord#readme"
+}

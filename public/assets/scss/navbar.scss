@@ -1,0 +1,304 @@
+.navbar {
+  background-color: $accodr1;
+  padding: 0.1rem 1rem;
+}
+.logo img {
+  width: 36px;
+  height: 36px;
+}
+
+.icon img{
+  width: 16px;
+  height: 16px;
+}
+
+.logo {
+  float: left;
+  padding-left: 5px;
+  padding-top: 10px;
+
+  cursor: pointer;
+}
+
+.logo-acoord {
+  cursor: pointer;
+  float: left;
+  padding-left: 10px;
+}
+
+.logo-acoord span {
+  color: $accodr3;
+  font-size: 24px;
+  font-weight: revert;
+}
+
+.logo-acoord span span {
+  color: $accodr2;
+  font-size: 26px;
+
+}
+.sidebar-toggle-box {
+  margin-left: 0;
+  margin-top: 9px;
+}
+.user-profile {
+  float: right;
+  margin-top: 5px;
+}
+.header .fa.fa-fw.fa-bars{
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  padding-top: 3px;
+}
+
+.sidebar-toggle-box .fa-bars {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 30px;
+}
+
+.fa-fw {
+  text-align: left;
+}
+
+
+/***********************  side Bar ********************/
+.sidebar{
+  width:203px;
+  background-color:$accodr1;
+  transition: all 0.5s  ease-in-out;
+  position:fixed;
+  min-height: 100vh;
+  max-height: calc(100% - 5px);
+  overflow-y: auto;
+
+}
+
+.fix-search  {
+  max-height: calc(100% - 5px);
+  overflow-y: auto;
+}
+
+
+
+.bg-defoult{background-color:$accodr1;}
+.sidebar li a,.sidebar li a.collapsed.active{ display:block; padding:5px 2px; color:#fff;border-left:0px solid #dedede;  text-decoration:none}
+.sidebar li a.active{background-color:#3e3e3e;border-left:5px solid #dedede; transition: all 0.5s  ease-in-out}
+.sidebar li a:hover{
+  box-shadow:190px 5px 80px #777777 inset;
+  -webkit-transition-duration: 0.5s;
+}
+
+.sidebar ul {
+  padding-left: 2px;
+  margin-top: 80px;
+  list-style:none;
+}
+
+.sidebar ul li a .fa-car {
+  font-size: 23px;
+  padding-left: 0;
+}
+
+.sidebar ul li a .fa-bed {
+  font-size: 22px;
+  padding-left: 0;
+}
+
+.sidebar ul li a .fa-coffee {
+  font-size: 20px;
+}
+
+.sidebar ul li a .fa-handshake {
+  font-size: 20px;
+}
+
+.sidebar ul li a .fa-affiliatetheme {
+  font-size: 22px;
+}
+
+.sidebar ul li a .fa-adversal {
+  font-size: 22px;
+}
+
+.sidebar ul li a .fa-gratipay {
+  font-size: 24px;
+}
+
+.sidebar ul li a .fa-calendar-check {
+  font-size: 25px;
+}
+
+
+.sidebar li a i{ padding-right:5px;
+  margin-left: 7px;
+}
+.sidebar ul li .sub-menu li a{ position:relative}
+.sidebar ul li .sub-menu li a:before{
+  font-family: FontAwesome;
+  content: "\f105";
+  display: inline-block;
+  padding-left: 0px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+.sidebar ul li .sub-menu li a:hover:after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 5px;
+  background-color: #111;
+  height: 100%;
+}
+.sidebar ul li .sub-menu li a:hover{ background-color:#222; padding-left:20px; transition: all 0.5s  ease-in-out}
+.sub-menu{ border-left:5px solid #dedede;}
+.sidebar li a .nav-label,.sidebar li a .nav-label+span{ transition: all 0.5s  ease-in-out}
+
+
+.sidebar.fliph li a .nav-label,.sidebar.fliph li a .nav-label+span{ display:none;transition: all 0.3s  ease-in-out}
+.sidebar.fliph {
+  width: 46px;
+  transition: all 0.5s  ease-in-out;
+
+}
+
+.sidebar.fliph li{ position:relative}
+.sidebar.fliph .sub-menu {
+  position: absolute;
+  left: 39px;
+  top: 0;
+  background-color: #3e3e3e;
+  width: 150px;
+  z-index: 900;
+}
+
+
+.user-panel {
+  clear: left;
+  display: block;
+  float: left;
+}
+.user-panel>.image>img {
+  width: 100%;
+  max-width: 45px;
+  height: auto;
+}
+.user-panel>.info,  .user-panel>.info>a {
+  color: #fff;
+}
+.user-panel>.info>p {
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+.user-panel {
+  clear: left;
+  display: block;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 25px 15px;
+  border-bottom: 1px solid;
+}
+.user-panel>.info {
+  padding: 5px 5px 5px 15px;
+  line-height: 1;
+  position: absolute;
+  left: 55px;
+}
+
+.fliph .user-panel{ display: none; }
+
+.fa-janabox img{
+  width: 22.5px;
+  height: 21px;
+  margin-left: 8px;
+}
+.fa-lightbulb {
+  margin-left: 1px;
+}
+.sidebar ul li a .fa-lightbulb {
+  font-size: 24px;
+  padding-left: 3px;
+}
+.fa-bell {
+  margin-left: 1px;
+}
+
+.sidebar ul li a .fa-bell {
+  font-size: 24px;
+}
+
+.extantion li {
+  padding: 0 10px;
+  margin-top: -10px;
+  margin-left: 30%;
+}
+
+.extantion li ::before {
+  content: "|";
+  color: #ed145b;
+  font-weight: bold;
+
+}
+
+@media (min-width: 1200px) {
+  .sidebar li {
+    padding: 8px 2px;
+  }
+}
+@media (max-width: 930px)and (min-width: 400px){
+
+
+  .left  {
+    margin-top:40px;
+  }
+}
+@media (max-width: 1199px)and (min-width: 930px){
+  .sidebar{
+    width:180px;
+  }
+  .sidebar li {
+    padding: 1px 2px;
+  }
+  .sidebar ul li a i {
+    font-size: 16px;
+  }
+  .fa-janabox img{
+    width: 20.5px;
+    height: 20px;
+    margin-left: 5px;
+  }
+  .fa-lightbulb {
+    margin-left: 0;
+  }
+  .sidebar ul li a .fa-lightbulb {
+    font-size: 22px;
+    padding-left: 1px;
+  }
+  .fa-bell {
+    margin-left: 1px;
+  }
+
+  .sidebar ul li a .fa-bell {
+    font-size: 21px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.nono {
+  width: 100%;
+}

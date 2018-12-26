@@ -1,0 +1,56 @@
+<header class="header">
+    <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 pl-0">
+        <div class=" navbar-collapse flex-row-reverse" id="navbarNavDropdown">
+           <div class="row">
+              <div class=" col-md-12">
+                  <div class="logo">
+                      <img src="{{ asset('assets/images/icons/favicon.png') }}" alt="" onclick="dashboard();">
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-3 backnavbar">
+                      <div class="">
+
+                          <div id="all-logo" >
+                              <div class="logo-acoord">
+                                  <div onclick="dashboard();"><span > On a d<span>'</span>accord </span></div>
+                              </div>
+
+                          </div>
+                          <div class="sidebar-toggle-box">
+                              <div class="float-left"> <a href="#" class="button-left"><span class="fa fa-fw fa-bars"></span></a> </div>
+                          </div>
+                      </div>
+                  </div>
+                 {# <div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6   col-xs-2 col-xs-offset-6">
+                      <!-- user login dropdown start-->
+                      <div class="user-profile">
+                          <a data-toggle="dropdown" class="dropdown-toggle" href="">
+                              <span class="profile-ava">
+                                  <img alt="" src="/assets/images/avatar_small.png" id="avatar-small">
+                              </span>
+                          </a>
+                          <ul class="dropdown-menu extended logout">
+                              <li class="username">
+                                  <h3 >#}{#{{ app.user.firstName }} {{ app.user.lastName }}#}{#</h3>
+                              </li>
+                              <li class="eborder-top">
+                                <a href="#" data-toggle="modal" data-target="#edit-user3"><i class="fas fa-user"></i>Modifier mon profile</a>
+                              </li>
+                              <li>
+                                <a href="#}{#{{ path("logout", {'id': app.session.get('authTokenId')}) }}#}{#"><i class="fas fa-sign-out-alt"></i>Se déconnecter
+                                </a>
+                              </li>
+                          </ul>
+                      <!-- user login dropdown end -->
+                      </div>
+                  </div>#}
+                  <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right">
+                      <form class="form-inline my-2 my-lg-0 float-right">
+                          <button class="btn btn-secondary my-2 my-sm-0 " type="submit">Register</button>
+                          <button class="btn btn-secondary my-2 my-sm-0 ml-2" type="submit">Login</button>
+                      </form>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </nav>
+</header>
