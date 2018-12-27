@@ -20111,8 +20111,8 @@ a.text-dark:focus {
 }
 
 .sidebar li a:hover {
-  box-shadow: 190px 5px 80px #777777 inset;
-  -webkit-transition-duration: 0.5s;
+  box-shadow: 190px 5px 80px #00B5CE inset;
+  -webkit-transition-duration: 0.04s;
 }
 
 .sidebar ul {
