@@ -11,6 +11,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use App\Entity\Regions;
+use App\Entity\Departments;
+use App\Entity\Cities;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProfilType extends AbstractType
 {
@@ -99,7 +103,23 @@ class ProfilType extends AbstractType
             ->add('carImage', TextType::class, [
                 'label' => 'image de voiteur',
                 'required' => false,
-            ]);
+            ])
+            ->add('department', EntityType::class, [
+                'required' => true,
+                'class' => Departments::class,
+                'label' => 'Département',
+                'placeholder' => 'Choisir un département',
+                'choice_label' => function ($name) {
+                    return $name->getName();
+                }])
+            ->add('regions', EntityType::class, [
+                'required' => true,
+                'class' => Regions::class,
+                'label' => 'Region',
+                'placeholder' => 'Choisir un Region',
+                'choice_label' => function ($name) {
+                    return $name->getName();
+                }]);
 
     }
 
