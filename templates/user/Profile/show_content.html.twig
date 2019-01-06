@@ -1,0 +1,79 @@
+{% extends "layout_user.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+<div class="fos_user_user_show">
+    <div class="row border-accord">
+        <div class="col-md-2 user_avatar">
+            <a class="editer_utilisateur" data-toggle="modal" data-target="#edit-user">
+                <img src="{{ asset('assets/images/icons/4.png') }}" alt="logo" class="mb-3 "/>
+                <span class="middle">Modifier</span>
+            </a>
+        </div>
+        <div class="col-md-3 offset-2">
+            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
+        </div>
+        <div class="col-md-2 offset-3">
+            <h1 class="text-center pt-3 bdg-accord">{{ user.point }} <span class="title-blue">Points</span></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 border-respo  pt-2">
+            <div>
+                <h5 class="text-center pt-0 title-blue">Renseignements personnels</h5>
+            </div>
+            <div class="col">
+                <h6 class="d-inline font-weight-bold">Votre email :  </h6><span>  {{ user.email }}</span>
+            </div>
+            <div class="col">
+                <h6 class="d-inline font-weight-bold">Phone numbre :  </h6><span>  {{ user.phoneNumber }}</span>
+            </div>
+            <div class="col">
+                <h6 class="d-inline font-weight-bold">gender :  </h6><span>  {{ user.gender }}</span>
+            </div>
+            <div class="col mb-4">
+                <h6 class="d-inline font-weight-bold">Birthday :  </h6><span>  {{ user.birthday|date('d / m / Y') }}</span>
+            </div>
+        </div>
+        <div class="col-md-6 border-respo  pt-2">
+            <div>
+                <h5 class="text-center title-blue">Emplacement</h5>
+            </div>
+            <div class="col">
+                <h6 class="d-inline font-weight-bold">Ville :  </h6><span>  {{ user.city }}</span>
+            </div>
+            <div class="col">
+                <h6 class="d-inline font-weight-bold">Code postal :  </h6><span>  {{ user.postalCode }}</span>
+            </div>
+            <div class="col">
+                <h6 class="d-inline font-weight-bold">Departement :  </h6><span>  {{ user.point }}</span>
+            </div>
+            <div class="col mb-4">
+                <h6 class="d-inline font-weight-bold">Région :  </h6><span>  {{ user.point }}</span>
+            </div>
+        </div>
+        <div class="col-md-12 border-respo  pt-2">
+            <div>
+                <h5 class="text-center title-blue">Driver</h5>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="col">
+                        <h6 class="d-inline font-weight-bold">Voiteur :  </h6><span>  {{ user.city }}</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="d-inline font-weight-bold">Color :  </h6><span style="background-color:{{ user.color }};color:{{ user.color }}">____</span>
+                    </div>
+                    <div class="col">
+                        <h6 class="d-inline font-weight-bold">Max distance :  </h6><span>  {{ user.point }} <span class="font-weight-bold">Km</span></span>
+                    </div>
+                </div>
+                <div class="col-md-4 editer_utilisateur" >
+                    <div class="col mb-4">
+                        <img src="{{ asset('assets/images/icons/1.png') }}" alt="logo" class="mb-3 "/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

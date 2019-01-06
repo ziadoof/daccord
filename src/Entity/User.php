@@ -7,12 +7,18 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="user")
+ * @UniqueEntity(fields="email", message="Email déjà pris")
+ * @UniqueEntity(fields="username", message="Username déjà pris")
  */
-class User extends BaseUser
+class User  extends BaseUser
 {
     /**
      * @ORM\Id()
@@ -26,14 +32,14 @@ class User extends BaseUser
      */
     private $firstname;
 
-    /**
+   /**
      * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $lastname;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+   /**
+    * @ORM\Column(type="boolean")
+    */
     private $emailStatus;
 
     /**
@@ -65,6 +71,11 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $gender;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $genderStatus;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -121,9 +132,22 @@ class User extends BaseUser
      */
     private $point;
 
+
     public function __construct()
     {
         parent::__construct();
+        $this->setCreatedAt(new \DateTime('now'));
+        $this->setEmailStatus(false);
+        $this->setEnabled(true);
+        $this->setMaxDistance(10);
+        $this->setPhonNumberStatus(false);
+        $this->setPoint(10);
+        $this->setBirthdayStatus(false);
+        $this->setFirstname('Utilisateur');
+        $this->setLastname( (string) $this->getId());
+        $this->setUsername("onadaccordUser" );
+        $this->setgenderStatus(false );
+
         // your own logic
     }
 
@@ -368,6 +392,18 @@ class User extends BaseUser
     public function setPoint(int $point): self
     {
         $this->point = $point;
+
+        return $this;
+    }
+
+    public function getGenderStatus(): ?bool
+    {
+        return $this->genderStatus;
+    }
+
+    public function setGenderStatus(bool $genderStatus): self
+    {
+        $this->genderStatus = $genderStatus;
 
         return $this;
     }

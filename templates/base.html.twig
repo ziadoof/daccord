@@ -15,13 +15,14 @@
     <body>
         {% block body %}
             <section id="container" >
-                {% block header %}{% include "header.html.twig" %}{% endblock %}
-
+                    {% block header %}{% include "header.html.twig" %}{% endblock %}
+                {% if app.user != null%}
                 {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
+                {% endif %}
                 <section id="main-content">
-                    <section class="wrapper">
-                        <div class="">
-                            <div class="centr-changer col-md-8 col-md-offset-2 ">
+                    <section class="container-fluid ">
+                        <div class="wrapper">
+                            <div class="col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2 col-sm-9 col-sm-offset-3 col-xs-7 col-xs-offset-5 mt-4">
                                 {% block content %}
 
                                 {% endblock %}
@@ -34,6 +35,9 @@
         {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('build/app.js') }}"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                    crossorigin="anonymous"></script>
         {% endblock %}
     </body>
 </html>

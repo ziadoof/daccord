@@ -1,10 +1,10 @@
 .navbar {
-  background-color: $accodr1;
+  background-color: $noird;
   padding: 0.1rem 1rem;
 }
 .logo img {
-  width: 36px;
-  height: 36px;
+  width: 38.6px;
+  height: 50px;
 }
 
 .icon img{
@@ -27,13 +27,13 @@
 }
 
 .logo-acoord span {
-  color: $accodr3;
+  color: $blued;
   font-size: 24px;
   font-weight: revert;
 }
 
 .logo-acoord span span {
-  color: $accodr2;
+  color: $rosed;
   font-size: 26px;
 
 }
@@ -66,7 +66,7 @@
 /***********************  side Bar ********************/
 .sidebar{
   width:203px;
-  background-color:$accodr1;
+  background-color:$noird;
   transition: all 0.5s  ease-in-out;
   position:fixed;
   min-height: 100vh;
@@ -82,7 +82,7 @@
 
 
 
-.bg-defoult{background-color:$accodr1;}
+.bg-defoult{background-color:$noird;}
 .sidebar li a,.sidebar li a.collapsed.active{ display:block; padding:5px 2px; color:#fff;border-left:0px solid #dedede;  text-decoration:none}
 .sidebar li a.active{background-color:#3e3e3e;border-left:5px solid #dedede; transition: all 0.5s  ease-in-out}
 .sidebar li a:hover {
@@ -248,16 +248,14 @@
     padding: 8px 2px;
   }
 }
-@media (max-width: 930px)and (min-width: 400px){
 
-
-  .left  {
-    margin-top:40px;
-  }
-}
-@media (max-width: 1199px)and (min-width: 930px){
+@media (max-width: 1199px)and (min-width: 946px){
   .sidebar{
     width:180px;
+  }
+
+  .logo-acoord span {
+    font-size: 19px;
   }
   .sidebar li {
     padding: 1px 2px;
@@ -265,27 +263,33 @@
   .sidebar ul li a i {
     font-size: 16px;
   }
-  .fa-janabox img{
-    width: 20.5px;
-    height: 20px;
-    margin-left: 5px;
-  }
-  .fa-lightbulb {
-    margin-left: 0;
-  }
-  .sidebar ul li a .fa-lightbulb {
-    font-size: 22px;
-    padding-left: 1px;
-  }
-  .fa-bell {
-    margin-left: 1px;
+
+}
+@media (max-width: 946px)and (min-width: 400px){
+  .logo-acoord span {
+    font-size: 16px;
   }
 
-  .sidebar ul li a .fa-bell {
-    font-size: 21px;
+  .left  {
+    margin-top:0px;
+  }
+
+  .sidebar {
+    width: 160px;
+  }
+  .sidebar ul li a i {
+    font-size: 14px;
+  }
+  .sidebar ul li a i {
+    font-size: 16px;
+  }
+  .sidebar ul {
+    margin-top: 40px;
+  }
+  .nav-label{
+    font-size: small;
   }
 }
-
 ::-webkit-scrollbar {
   width: 2px;
 }
@@ -302,3 +306,60 @@
 .nono {
   width: 100%;
 }
+
+.wrapper {
+  display: inline-block;
+  /* margin-top: 60px;*/
+  padding: 15px;
+  width: 100%;
+}
+
+
+#nav
+{
+  position:fixed;
+  top:0;
+  width: 100%;
+  display:inline-block;
+  z-index: 9999;
+}
+.header .dropdown-menu {
+  /* position: absolute; */
+  right: 0;
+  left: auto;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+.dropdown-menu.extended {
+  max-width: 220px !important;
+  min-width: 110px !important;
+  top: 42px;
+  width: 235px !important;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.176) !important;
+  border: none !important;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
+.dropdown-menu.extended.logout > li {
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.dropdown-menu.extended.logout > li > a i {
+  font-size: 17px;
+}
+
+#avatar-small {
+  width:  40px;
+  height: 40px;
+  float: right;
+  border-radius: 8px;
+}
+
+
+
