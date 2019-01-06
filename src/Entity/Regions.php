@@ -30,7 +30,7 @@ class Regions
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Departments", mappedBy="regionCode")
-     * @ORM\Column(type="string", length=3)
+     *
      */
     private $code;
 

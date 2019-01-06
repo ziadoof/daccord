@@ -20,12 +20,14 @@
                 <td>{{ department.slug }}</td>
             </tr>
             <tr>
-                <th>Code</th>
-                <td>{{ department.code }}</td>
+                <th>Cities</th>
+                {% for city in department.code %}
+                <td>{{ city.name }}</td>
+                {% endfor %}
             </tr>
             <tr>
                 <th>RegionCode</th>
-                <td>{{ department.regionCode }}</td>
+                <td>{{ department.regionCode.name }}</td><br>
             </tr>
         </tbody>
     </table>

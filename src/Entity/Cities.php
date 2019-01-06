@@ -49,7 +49,7 @@ class Cities
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Departments", inversedBy="code")
      * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(type="string", length=3)
+     *
      */
     private $departmentCode;
 

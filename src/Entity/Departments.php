@@ -30,14 +30,14 @@ class Departments
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Cities", mappedBy="departmentCode")
-     * @ORM\Column(type="string", length=3)
+     *
      */
     private $code;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Regions", inversedBy="code")
      * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(type="string", length=3)
+     *
      */
     private $regionCode;
 
