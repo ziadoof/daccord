@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DepartmentsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DepartmentRepository")
  */
 class Department
 {
@@ -35,7 +35,7 @@ class Department
     private $citys;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="department")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="departments")
      * @ORM\JoinColumn(nullable=false)
      *
      */
@@ -118,5 +118,9 @@ class Department
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 }

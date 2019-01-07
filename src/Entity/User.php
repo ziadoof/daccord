@@ -397,16 +397,36 @@ class User  extends BaseUser
         return $this;
     }
 
-    public function getCity(): ?Cities
+    public function getCity(): ?City
     {
         return $this->city;
     }
 
-    public function setCity(?Cities $city): self
+    public function setCity(?City $city): self
     {
         $this->city = $city;
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->firstname;
+    }
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setCreatedAt(new \DateTime('now'));
+        $this->setEmailStatus(false);
+        $this->setEnabled(true);
+        $this->setMaxDistance(10);
+        $this->setPhonNumberStatus(false);
+        $this->setPoint(10);
+        $this->setBirthdayStatus(false);
+        $this->setFirstname('Utilisateur');
+        $this->setLastname( (string) $this->getId());
+        $this->setUsername("onadaccordUser" );
+        $this->setgenderStatus(false );
+        // your own logic
+    }
 }
