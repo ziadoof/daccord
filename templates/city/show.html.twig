@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cities{% endblock %}
+{% block title %}City{% endblock %}
 
 {% block body %}
-    <h1>Cities</h1>
+    <h1>City</h1>
 
     <table class="table">
         <tbody>
@@ -35,16 +35,12 @@
                 <th>GpsLng</th>
                 <td>{{ city.gpsLng }}</td>
             </tr>
-            <tr>
-                <th>DepartmentCode</th>
-                <td>{{ city.departmentCode }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('cities_index') }}">back to list</a>
+    <a href="{{ path('city_index') }}">back to list</a>
 
-    <a href="{{ path('cities_edit', {'id': city.id}) }}">edit</a>
+    <a href="{{ path('city_edit', {'id': city.id}) }}">edit</a>
 
-    {{ include('cities/_delete_form.html.twig') }}
+    {{ include('city/_delete_form.html.twig') }}
 {% endblock %}

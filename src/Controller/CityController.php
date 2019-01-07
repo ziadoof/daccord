@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Cities;
-use App\Form\CitiesType;
+use App\Entity\City;
+use App\Form\CityType;
 use App\Repository\CitiesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,25 +11,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/cities")
+ * @Route("/city")
  */
-class CitiesController extends AbstractController
+class CityController extends AbstractController
 {
     /**
-     * @Route("/", name="cities_index", methods={"GET"})
+     * @Route("/", name="city_index", methods={"GET"})
      */
     public function index(CitiesRepository $citiesRepository): Response
     {
-        return $this->render('cities/index.html.twig', ['cities' => $citiesRepository->findAll()]);
+        return $this->render('city/index.html.twig', ['cities' => $citiesRepository->findAll()]);
     }
 
     /**
-     * @Route("/new", name="cities_new", methods={"GET","POST"})
+     * @Route("/new", name="city_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
-        $city = new Cities();
-        $form = $this->createForm(CitiesType::class, $city);
+        $city = new City();
+        $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -37,47 +37,47 @@ class CitiesController extends AbstractController
             $entityManager->persist($city);
             $entityManager->flush();
 
-            return $this->redirectToRoute('cities_index');
+            return $this->redirectToRoute('city_index');
         }
 
-        return $this->render('cities/new.html.twig', [
+        return $this->render('city/new.html.twig', [
             'city' => $city,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="cities_show", methods={"GET"})
+     * @Route("/{id}", name="city_show", methods={"GET"})
      */
-    public function show(Cities $city): Response
+    public function show(City $city): Response
     {
-        return $this->render('cities/show.html.twig', ['city' => $city]);
+        return $this->render('city/show.html.twig', ['city' => $city]);
     }
 
     /**
-     * @Route("/{id}/edit", name="cities_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="city_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Cities $city): Response
+    public function edit(Request $request, City $city): Response
     {
-        $form = $this->createForm(CitiesType::class, $city);
+        $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('cities_index', ['id' => $city->getId()]);
+            return $this->redirectToRoute('city_index', ['id' => $city->getId()]);
         }
 
-        return $this->render('cities/edit.html.twig', [
+        return $this->render('city/edit.html.twig', [
             'city' => $city,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="cities_delete", methods={"DELETE"})
+     * @Route("/{id}", name="city_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Cities $city): Response
+    public function delete(Request $request, City $city): Response
     {
         if ($this->isCsrfTokenValid('delete'.$city->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -85,6 +85,6 @@ class CitiesController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('cities_index');
+        return $this->redirectToRoute('city_index');
     }
 }

@@ -45,10 +45,10 @@
                 <h6 class="d-inline font-weight-bold">Code postal :  </h6><span>  {{ user.postalCode }}</span>
             </div>
             <div class="col">
-                <h6 class="d-inline font-weight-bold">Departement :  </h6><span>  {{ user.point }}</span>
+                <h6 class="d-inline font-weight-bold">Departement :  </h6><span>  {{ user.department.name }}</span>
             </div>
             <div class="col mb-4">
-                <h6 class="d-inline font-weight-bold">Région :  </h6><span>  {{ user.point }}</span>
+                <h6 class="d-inline font-weight-bold">Région :  </h6><span>  {{ user.region.name }}</span>
             </div>
         </div>
         <div class="col-md-12 border-respo  pt-2">
@@ -77,3 +77,4 @@
     </div>
 </div>
 {% endblock %}
+

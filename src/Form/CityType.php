@@ -2,27 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\Departments;
+use App\Entity\City;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DepartmentsType extends AbstractType
+class CityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('inseeCode')
+            ->add('zipCode')
             ->add('name')
             ->add('slug')
-            ->add('code')
-            ->add('regionCode')
+            ->add('gpsLat')
+            ->add('gpsLng')
+            ->add('department')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Departments::class,
+            'data_class' => City::class,
         ]);
     }
 }

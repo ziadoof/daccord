@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CitiesRepository")
  */
-class Cities
+class City
 {
     /**
      * @ORM\Id()
@@ -47,11 +49,21 @@ class Cities
     private $gpsLng;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Departments", inversedBy="code")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Department", inversedBy="citys")
      * @ORM\JoinColumn(nullable=false)
      *
      */
-    private $departmentCode;
+    private $department;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="city")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,15 +142,51 @@ class Cities
         return $this;
     }
 
-    public function getDepartmentCode(): ?Departments
+    public function getDepartment(): ?Department
     {
-        return $this->departmentCode;
+        return $this->department;
     }
 
-    public function setDepartmentCode(?Departments $departmentCode): self
+    public function setDepartment(?Department $department): self
     {
-        $this->departmentCode = $departmentCode;
+        $this->department = $department;
 
         return $this;
     }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setVille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getVille() === $this) {
+                $user->setVille(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }

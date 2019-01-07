@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cities index{% endblock %}
+{% block title %}City index{% endblock %}
 
 {% block body %}
-    <h1>Cities index</h1>
+    <h1>City index</h1>
 
     <table class="table">
         <thead>
@@ -15,7 +15,6 @@
                 <th>Slug</th>
                 <th>GpsLat</th>
                 <th>GpsLng</th>
-                <th>DepartmentCode</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,19 +28,18 @@
                 <td>{{ city.slug }}</td>
                 <td>{{ city.gpsLat }}</td>
                 <td>{{ city.gpsLng }}</td>
-                {#<td>{{ city.departmentCode }}</td>#}
                 <td>
-                    <a href="{{ path('cities_show', {'id': city.id}) }}">show</a>
-                    <a href="{{ path('cities_edit', {'id': city.id}) }}">edit</a>
+                    <a href="{{ path('city_show', {'id': city.id}) }}">show</a>
+                    <a href="{{ path('city_edit', {'id': city.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('cities_new') }}">Create new</a>
+    <a href="{{ path('city_new') }}">Create new</a>
 {% endblock %}

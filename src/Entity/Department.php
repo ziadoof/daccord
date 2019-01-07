@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DepartmentsRepository")
  */
-class Departments
+class Department
 {
     /**
      * @ORM\Id()
@@ -29,21 +29,21 @@ class Departments
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Cities", mappedBy="departmentCode")
+     * @ORM\OneToMany(targetEntity="App\Entity\City", mappedBy="department")
      *
      */
-    private $code;
+    private $citys;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Regions", inversedBy="code")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="department")
      * @ORM\JoinColumn(nullable=false)
      *
      */
-    private $regionCode;
+    private $region;
 
     public function __construct()
     {
-        $this->code = new ArrayCollection();
+        $this->citys = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,45 +76,47 @@ class Departments
     }
 
     /**
-     * @return Collection|Cities[]
+     * @return Collection|City[]
      */
-    public function getCode(): Collection
+    public function getCitys(): Collection
     {
-        return $this->code;
+        return $this->citys;
     }
 
-    public function addCode(Cities $code): self
+    public function addCity(City $city): self
     {
-        if (!$this->code->contains($code)) {
-            $this->code[] = $code;
-            $code->setDepartmentCode($this);
+        if (!$this->citys->contains($city)) {
+            $this->citys[] = $city;
+            $city->setDepartment($this);
         }
 
         return $this;
     }
 
-    public function removeCode(Cities $code): self
+    public function removeCity(City $city): self
     {
-        if ($this->code->contains($code)) {
-            $this->code->removeElement($code);
+        if ($this->citys->contains($city)) {
+            $this->citys->removeElement($city);
             // set the owning side to null (unless already changed)
-            if ($code->getDepartmentCode() === $this) {
-                $code->setDepartmentCode(null);
+            if ($city->getDepartment() === $this) {
+                $city->setDepartment(null);
             }
         }
 
         return $this;
     }
 
-    public function getRegionCode(): ?Regions
+    public function getRegion(): ?Region
     {
-        return $this->regionCode;
+        return $this->region;
     }
 
-    public function setRegionCode(?Regions $regionCode): self
+    public function setRegion(?Region $region): self
     {
-        $this->regionCode = $regionCode;
+        $this->region = $region;
 
         return $this;
     }
+
+
 }

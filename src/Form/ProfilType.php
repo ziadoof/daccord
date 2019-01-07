@@ -11,10 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
-use App\Entity\Regions;
-use App\Entity\Departments;
-use App\Entity\Cities;
+use App\Entity\Region;
+use App\Entity\Department;
+use App\Entity\City;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use App\Entity\User;
+use Symfony\Component\Form\Form;
+use Doctrine\ORM\EntityRepository;
+
 
 class ProfilType extends AbstractType
 {
@@ -103,23 +110,115 @@ class ProfilType extends AbstractType
             ->add('carImage', TextType::class, [
                 'label' => 'image de voiteur',
                 'required' => false,
-            ])
-            ->add('department', EntityType::class, [
-                'required' => true,
+            ]);
+        $builder
+            ->add('region', EntityType::class, [
+                'class'       => 'App\Entity\Region',
+                'placeholder' => 'Sélectionnez votre région',
+                'mapped'      => false,
+                'required'    => false,
+            ]);
+
+        $builder->get('region')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+               /* $this->addDepartmentField($form->getParent(), $form->getData());*/
+                $form->getParent()->add('department',EntityType::class,[
+                    'class' => 'App\Entity\Department',
+                    'placeholder'=>'Select departement',
+                    'mapped'=> false,
+                    'required'=> false,
+                    'choices'=> $form->getData()->getDepartments()
+                ]);
+
+            }
+        );
+
+/*       $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event) {
+                $data = $event->getData();*/
+
+                 /* @var $ville City */
+         /*       $ville = $data->getVille();
+                $form = $event->getForm();
+                if ($ville) {
+                    // On récupère le département et la région
+                    $department = $ville->getDepartment();
+                    $region = $department->getRegion();
+                    // On crée les 2 champs supplémentaires
+                    $this->addDepartmentField($form, $region);
+                    $this->addVilleField($form, $department);
+                    // On set les données
+                    $form->get('region')->setData($region);
+                    $form->get('department')->setData($department);
+                } else {
+                    // On crée les 2 champs en les laissant vide (champs utilisé pour le JavaScript)
+                    $this->addDepartmentField($form, null);
+                    $this->addVilleField($form, null);
+                }
+            }
+        );*/
+
+    }
+
+    /*
+     * Rajout un champs department au formulaire
+     * @param FormInterface $form
+     * @param Regions $region
+     */
+    private function addDepartmentField(FormInterface $form, ?Region $region)
+    {
+        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
+            'department',
+            EntityType::class,
+            null,
+            [
+                'class'           => 'App\Entity\Department',
+                'placeholder'     => $region ? 'Sélectionnez votre département' : 'Sélectionnez votre région',
+                'mapped'          => false,
+                'required'        => false,
+                'auto_initialize' => false,
+                'choices'         => $region ? $region->getDepartments() : []
+            ]
+        );
+        $builder->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+                $this->addVilleField($form->getParent(), $form->getData());
+            }
+        );
+        $form->add($builder->getForm());
+    }
+
+    private function addVilleField(FormInterface $form, ?Department $department)
+    {
+        $form->add('ville', EntityType::class, [
+            'class'       => 'App\Entity\City',
+            'placeholder' => $department ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
+            'choices'     => $department ? $department->getCitys() : []
+
+        ]);
+
+      /*  $builder->add('department', EntityType::class, [
+                'required' => false,
                 'class' => Departments::class,
                 'label' => 'Département',
                 'placeholder' => 'Choisir un département',
                 'choice_label' => function ($name) {
                     return $name->getName();
                 }])
-            ->add('regions', EntityType::class, [
-                'required' => true,
-                'class' => Regions::class,
-                'label' => 'Region',
-                'placeholder' => 'Choisir un Region',
+
+            ->add('ville', EntityType::class, [
+                'required' => false,
+                'class' => Cities::class,
+                'label' => 'Ville',
+                'placeholder' => 'Choisir un Ville',
                 'choice_label' => function ($name) {
                     return $name->getName();
-                }]);
+                }]);*/
 
     }
 
@@ -142,4 +241,10 @@ class ProfilType extends AbstractType
         return $this->getBlockPrefix();
     }
 
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => User::class,
+        ));
+    }
 }

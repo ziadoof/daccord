@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Departments;
-use App\Form\DepartmentsType;
+use App\Entity\Department;
+use App\Form\DepartmentType;
 use App\Repository\DepartmentsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,25 +11,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/departments")
+ * @Route("/department")
  */
-class DepartmentsController extends AbstractController
+class DepartmentController extends AbstractController
 {
     /**
-     * @Route("/", name="departments_index", methods={"GET"})
+     * @Route("/", name="department_index", methods={"GET"})
      */
     public function index(DepartmentsRepository $departmentsRepository): Response
     {
-        return $this->render('departments/index.html.twig', ['departments' => $departmentsRepository->findAll()]);
+        return $this->render('department/index.html.twig', ['departments' => $departmentsRepository->findAll()]);
     }
 
     /**
-     * @Route("/new", name="departments_new", methods={"GET","POST"})
+     * @Route("/new", name="department_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
-        $department = new Departments();
-        $form = $this->createForm(DepartmentsType::class, $department);
+        $department = new Department();
+        $form = $this->createForm(DepartmentType::class, $department);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -37,47 +37,47 @@ class DepartmentsController extends AbstractController
             $entityManager->persist($department);
             $entityManager->flush();
 
-            return $this->redirectToRoute('departments_index');
+            return $this->redirectToRoute('department_index');
         }
 
-        return $this->render('departments/new.html.twig', [
+        return $this->render('department/new.html.twig', [
             'department' => $department,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="departments_show", methods={"GET"})
+     * @Route("/{id}", name="department_show", methods={"GET"})
      */
-    public function show(Departments $department): Response
+    public function show(Department $department): Response
     {
-        return $this->render('departments/show.html.twig', ['department' => $department]);
+        return $this->render('department/show.html.twig', ['department' => $department]);
     }
 
     /**
-     * @Route("/{id}/edit", name="departments_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="department_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Departments $department): Response
+    public function edit(Request $request, Department $department): Response
     {
-        $form = $this->createForm(DepartmentsType::class, $department);
+        $form = $this->createForm(DepartmentType::class, $department);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('departments_index', ['id' => $department->getId()]);
+            return $this->redirectToRoute('department_index', ['id' => $department->getId()]);
         }
 
-        return $this->render('departments/edit.html.twig', [
+        return $this->render('department/edit.html.twig', [
             'department' => $department,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="departments_delete", methods={"DELETE"})
+     * @Route("/{id}", name="department_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Departments $department): Response
+    public function delete(Request $request, Department $department): Response
     {
         if ($this->isCsrfTokenValid('delete'.$department->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -85,6 +85,6 @@ class DepartmentsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('departments_index');
+        return $this->redirectToRoute('department_index');
     }
 }

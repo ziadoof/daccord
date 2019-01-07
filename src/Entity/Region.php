@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RegionsRepository")
  */
-class Regions
+class Region
 {
     /**
      * @ORM\Id()
@@ -29,14 +29,14 @@ class Regions
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Departments", mappedBy="regionCode")
+     * @ORM\OneToMany(targetEntity="App\Entity\Department", mappedBy="region")
      *
      */
-    private $code;
+    private $departments;
 
     public function __construct()
     {
-        $this->code = new ArrayCollection();
+        $this->departments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -69,33 +69,36 @@ class Regions
     }
 
     /**
-     * @return Collection|Departments[]
+     * @return Collection|Department[]
      */
-    public function getCode(): Collection
+    public function getDepartments(): Collection
     {
-        return $this->code;
+        return $this->departments;
     }
 
-    public function addCode(Departments $code): self
+    public function addDepartment(Department $department): self
     {
-        if (!$this->code->contains($code)) {
-            $this->code[] = $code;
-            $code->setRegionCode($this);
+        if (!$this->departments->contains($department)) {
+            $this->departments[] = $department;
+            $department->setRegion($this);
         }
 
         return $this;
     }
 
-    public function removeCode(Departments $code): self
+    public function removeDepartment(Department $department): self
     {
-        if ($this->code->contains($code)) {
-            $this->code->removeElement($code);
+        if ($this->departments->contains($department)) {
+            $this->departments->removeElement($department);
             // set the owning side to null (unless already changed)
-            if ($code->getRegionCode() === $this) {
-                $code->setRegionCode(null);
+            if ($department->getRegion() === $this) {
+                $department->setRegion(null);
             }
         }
 
         return $this;
     }
+
+
+
 }
