@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RegionsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\RegionRepository")
  */
 class Region
 {
@@ -30,9 +30,9 @@ class Region
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Department", mappedBy="region")
-     *
      */
     private $departments;
+
 
     public function __construct()
     {

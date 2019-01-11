@@ -19,6 +19,11 @@
                 <th>Slug</th>
                 <td>{{ department.slug }}</td>
             </tr>
+            {% for city in department.citys %}
+                <tr>
+                    <td>{{ city }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

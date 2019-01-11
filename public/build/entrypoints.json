@@ -12,6 +12,11 @@
       "js": [
         "/public/style.js"
       ]
+    },
+    "jquery-3.3.1.min.js": {
+      "js": [
+        "/public/jquery-3.3.1.min.js.js"
+      ]
     }
   }
 }

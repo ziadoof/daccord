@@ -35,11 +35,11 @@ class Department
     private $citys;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="departments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region",inversedBy="departments")
      * @ORM\JoinColumn(nullable=false)
-     *
      */
     private $region;
+
 
     public function __construct()
     {

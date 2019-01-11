@@ -19,6 +19,11 @@
                 <th>Slug</th>
                 <td>{{ region.slug }}</td>
             </tr>
+        {% for department in region.departments %}
+            <tr>
+                <td>{{ department }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 

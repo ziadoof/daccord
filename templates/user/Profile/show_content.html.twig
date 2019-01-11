@@ -1,6 +1,20 @@
 {% extends "layout_user.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
+    <div class="row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                {% if label != 'comment' %}
+                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
 <div class="fos_user_user_show">
     <div class="row border-accord">
         <div class="col-md-2 user_avatar">
@@ -16,6 +30,7 @@
             <h1 class="text-center pt-3 bdg-accord">{{ user.point }} <span class="title-blue">Points</span></h1>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-6 border-respo  pt-2">
             <div>
@@ -39,17 +54,36 @@
                 <h5 class="text-center title-blue">Emplacement</h5>
             </div>
             <div class="col">
-                <h6 class="d-inline font-weight-bold">Ville :  </h6><span>  {{ user.city }}</span>
+                <h6 class="d-inline font-weight-bold">Ville :  </h6>
+                    {% if user.city %}
+                    <span>  {{ user.city.name }}</span>
+                    {% else %}
+                        <a href="{{ path('set_area') }}">Choisissez votre ville</a>
+                    {% endif %}
             </div>
             <div class="col">
-                <h6 class="d-inline font-weight-bold">Code postal :  </h6><span>  {{ user.postalCode }}</span>
-            </div>
+                <h6 class="d-inline font-weight-bold">Code postal :  </h6>
+                {% if user.city %}
+                    <span>  {{ user.city.zipCode }}</span>
+                {% else %}
+                    <a href="{{ path('set_area') }}">Choisissez votre code postal</a>
+                {% endif %}            </div>
             <div class="col">
-                <h6 class="d-inline font-weight-bold">Departement :  </h6><span>  {{ user.department.name }}</span>
+                <h6 class="d-inline font-weight-bold">Departement :  </h6>
+                {% if user.city %}
+                    <span>  {{ user.city.department.name }}</span>
+                {% else %}
+                    <a href="{{ path('set_area') }}">Choisissez votre département</a>
+                {% endif %}
             </div>
             <div class="col mb-4">
-                <h6 class="d-inline font-weight-bold">Région :  </h6><span>  {{ user.region.name }}</span>
-            </div>
+                <h6 class="d-inline font-weight-bold">Région :  </h6>
+                {% if user.city %}
+                    <span>  {{ user.city.department.region.name }}</span>
+                {% else %}
+                    <a href="{{ path('set_area') }}">Choisissez votre region</a>
+                {% endif %}            </div>
+
         </div>
         <div class="col-md-12 border-respo  pt-2">
             <div>

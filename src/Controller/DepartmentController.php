@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Department;
 use App\Form\DepartmentType;
-use App\Repository\DepartmentsRepository;
+use App\Repository\DepartmentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class DepartmentController extends AbstractController
     /**
      * @Route("/", name="department_index", methods={"GET"})
      */
-    public function index(DepartmentsRepository $departmentsRepository): Response
+    public function index(DepartmentRepository $departmentsRepository): Response
     {
         return $this->render('department/index.html.twig', ['departments' => $departmentsRepository->findAll()]);
     }

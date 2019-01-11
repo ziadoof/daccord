@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends "layout_user.html.twig" %}
 
-{% block title %}Edit User{% endblock %}
+{#{% block title %}Edit User{% endblock %}
 
 {% block body %}
     <h1>Edit User</h1>
@@ -10,4 +10,128 @@
     <a href="{{ path('user_index') }}">back to list</a>
 
     {{ include('user/_delete_form.html.twig') }}
+{% endblock %}#}
+{% block content %}
+    {% block fos_user_content %}
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        <div class="row">
+            <div class="col-md-12 editer_utilisateur">
+                <img src="{{ asset('assets/images/icons/4.png') }}" alt="logo" class="mb-3 "/>
+                <span class="middle">Modifier</span>
+            </div>
+        </div>
+        <div class="fos_user_user_show border-respo px-4 py-4">
+            <h5 class="text-center pt-0 title-blue"><a href="#" onclick="fo();">Nom de l'utilisateur</a></h5>
+            <div class="row ">
+                <div class="col-md-3 offset-2">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="col-md-3 offset-2">
+                    {{ form_row(form.lastname) }}
+                </div>
+            </div>
+            <hr>
+            <h5 class="text-center pt-0 title-blue">L'information de l'utilisateur</h5>
+            <div class="row ">
+                <div class="col-md-3">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.emailStatus) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.phoneNumber) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.phonNumberStatus) }}
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-3">
+                    {{ form_row(form.gender) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.genderStatus) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.birthday) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.birthdayStatus) }}
+                </div>
+            </div>
+            <hr>
+            <h5 class="text-center pt-0 title-blue">Zone de service</h5>
+            <div class="row ">
+               <div class="col-md-3">
+                    {{ form_row(form.region) }}
+                </div>
+                <div class="col-md-3">
+
+                    {{ form_row(form.department) }}
+
+                </div>
+                <div class="col-md-3">
+
+                    {{ form_row(form.city) }}
+
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.postalCode) }}
+                </div>
+            </div>
+            <hr>
+            <h5 class="text-center pt-0 title-blue">livraison</h5>
+            <div class="row ">
+                <div class="col-md-3">
+                    {{ form_row(form.car) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.color) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.maxDistance) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.carImage) }}
+                </div>
+            </div>
+            <hr>
+            <div class="row justify-content-center">
+                <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+        {{ form_widget(form) }}
+
+    {% endblock fos_user_content %}
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function fo() {
+            alert('nanoooo');
+        }
+
+        import $ from "jquery";
+        $(document).on('change', '#user_region, #user_department', function () {
+            let $field = $(this)
+            let $regionField = $('#user_region')
+            let $form = $field.closest('form')
+            let target = '#' + $field.attr('id').replace('department', 'city').replace('region', 'department')
+            // Les données à envoyer en Ajax
+            let data = {}
+            data[$regionField.attr('name')] = $regionField.val()
+            data[$field.attr('name')] = $field.val()
+            // On soumet les données
+            $.post($form.attr('action'), data).then(function (data) {
+                // On récupère le nouveau <select>
+                let $input = $(data).find(target)
+                // On remplace notre <select> actuel
+                $(target).replaceWith($input)
+            })
+        })
+    </script>
+
+
 {% endblock %}

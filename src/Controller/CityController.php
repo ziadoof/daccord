@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\City;
 use App\Form\CityType;
-use App\Repository\CitiesRepository;
+use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class CityController extends AbstractController
     /**
      * @Route("/", name="city_index", methods={"GET"})
      */
-    public function index(CitiesRepository $citiesRepository): Response
+    public function index(CityRepository $citiesRepository): Response
     {
         return $this->render('city/index.html.twig', ['cities' => $citiesRepository->findAll()]);
     }
