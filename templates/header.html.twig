@@ -42,7 +42,7 @@
                          </a>
                          <ul class="dropdown-menu extended logout">
                              <li class="username">
-                                 <h6 >{{ app.user.firstName }} {{ app.user.username }}</h6>
+                                 <h6 >{{ app.user.firstName }} {{ app.user.lastname }}</h6>
                              </li>
                              <li >
                                  <a href="{{ path('fos_user_profile_show') }}">Mon profile</a>
@@ -51,7 +51,7 @@
                                <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profile</a>
                              </li>
                              <li>
-                                 <a href="#">Modifier ma Ville</a>
+                                 <a href="{{ path('set_area') }}">Modifier ma Ville</a>
                              </li>
                              <li>
                                  <a href="{{ path('fos_user_change_password') }}">Modifier ma mot de passe</a>

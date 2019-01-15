@@ -48,7 +48,8 @@ class User  extends BaseUser
     private $postalCode;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="users")
+     *
      */
     private $city;
 
@@ -133,23 +134,11 @@ class User  extends BaseUser
     private $point;
 
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setCreatedAt(new \DateTime('now'));
-        $this->setEmailStatus(false);
-        $this->setEnabled(true);
-        $this->setMaxDistance(10);
-        $this->setPhonNumberStatus(false);
-        $this->setPoint(10);
-        $this->setBirthdayStatus(false);
-        $this->setFirstname('Utilisateur');
-        $this->setLastname( (string) $this->getId());
-        $this->setUsername("onadaccordUser" );
-        $this->setgenderStatus(false );
-
-        // your own logic
-    }
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     *
+     */
+    private $ville;
 
     public function getId(): ?int
     {
@@ -204,18 +193,6 @@ class User  extends BaseUser
         return $this;
     }
 
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(?string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
     public function getPhoneNumber(): ?int
     {
         return $this->phoneNumber;
@@ -260,6 +237,18 @@ class User  extends BaseUser
     public function setGender(?string $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getGenderStatus(): ?bool
+    {
+        return $this->genderStatus;
+    }
+
+    public function setGenderStatus(bool $genderStatus): self
+    {
+        $this->genderStatus = $genderStatus;
 
         return $this;
     }
@@ -396,15 +385,48 @@ class User  extends BaseUser
         return $this;
     }
 
-    public function getGenderStatus(): ?bool
+    public function getVille(): ?string
     {
-        return $this->genderStatus;
+        return $this->ville;
     }
 
-    public function setGenderStatus(bool $genderStatus): self
+    public function setVille(?string $ville): self
     {
-        $this->genderStatus = $genderStatus;
+        $this->ville = $ville;
 
         return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->firstname;
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setCreatedAt(new \DateTime('now'));
+        $this->setEmailStatus(false);
+        $this->setEnabled(true);
+        $this->setMaxDistance(10);
+        $this->setPhonNumberStatus(false);
+        $this->setPoint(10);
+        $this->setBirthdayStatus(false);
+        $this->setFirstname('Utilisateur');
+        $this->setLastname( (string) $this->getId());
+        $this->setUsername("onadaccordUser" );
+        $this->setgenderStatus(false );
+        // your own logic
     }
 }

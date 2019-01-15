@@ -1,11 +1,36 @@
-const $ = require('jquery');
+
+var autocompleter = require('./autocompleter');
+
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 require('bootstrap');
 
+
+
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
+
+$(document).on('change', '#user_city_region, #user_city_department', function () {
+    let $field = $(this)
+    let $regionField = $('#user_city_region')
+    let $form = $field.closest('form')
+    let target = '#' + $field.attr('id').replace('department', 'city').replace('region', 'department')
+    // Les données à envoyer en Ajax
+    let data = {}
+    data[$regionField.attr('name')] = $regionField.val()
+    data[$field.attr('name')] = $field.val()
+    // On soumet les données
+    $.post($form.attr('action'), data).then(function (data) {
+        // On récupère le nouveau <select>
+        let $input = $(data).find(target)
+        // On remplace notre <select> actuel
+        $(target).replaceWith($input)
+    })
+
+});
+
+
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
@@ -14,7 +39,7 @@ $(document).ready(function() {
 
 //sidebar//
 
-myStorage = window.localStorage;
+ myStorage = window.localStorage;
 
 /*navbar toggle*/
 $(document).ready(function(){
@@ -74,6 +99,4 @@ $(document).ready( function(e) {
 });
 
 
-//end sidebar//
 
-//dropdown user  from bootstrap//

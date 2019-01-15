@@ -1,4 +1,4 @@
-{% extends 'layout_user.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
@@ -24,11 +24,11 @@
                 <th>Lastname</th>
                 <th>EmailStatus</th>
                 <th>PostalCode</th>
-                <th>City</th>
                 <th>PhoneNumber</th>
                 <th>PhonNumberStatus</th>
                 <th>CreatedAt</th>
                 <th>Gender</th>
+                <th>GenderStatus</th>
                 <th>Birthday</th>
                 <th>BirthdayStatus</th>
                 <th>MapX</th>
@@ -40,6 +40,7 @@
                 <th>CarImage</th>
                 <th>MaxDistance</th>
                 <th>Point</th>
+                <th>Ville</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -62,11 +63,11 @@
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.emailStatus ? 'Yes' : 'No' }}</td>
                 <td>{{ user.postalCode }}</td>
-                <td>{{ user.city }}</td>
                 <td>{{ user.phoneNumber }}</td>
                 <td>{{ user.phonNumberStatus ? 'Yes' : 'No' }}</td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.gender }}</td>
+                <td>{{ user.genderStatus ? 'Yes' : 'No' }}</td>
                 <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
                 <td>{{ user.birthdayStatus ? 'Yes' : 'No' }}</td>
                 <td>{{ user.mapX }}</td>
@@ -78,6 +79,7 @@
                 <td>{{ user.carImage }}</td>
                 <td>{{ user.maxDistance }}</td>
                 <td>{{ user.point }}</td>
+                <td>{{ user.ville }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
@@ -85,7 +87,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="33">no records found</td>
+                <td colspan="34">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

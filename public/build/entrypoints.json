@@ -1,5 +1,10 @@
 {
   "entrypoints": {
+    "jquery": {
+      "js": [
+        "/public/jquery.js"
+      ]
+    },
     "app": {
       "js": [
         "/public/app.js"

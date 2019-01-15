@@ -11,6 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use App\Entity\Region;
+use App\Entity\Department;
+use App\Entity\City;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use App\Entity\User;
+use Symfony\Component\Form\Form;
+use Doctrine\ORM\EntityRepository;
+
 
 class ProfilType extends AbstractType
 {
@@ -32,16 +43,6 @@ class ProfilType extends AbstractType
                 'label' => 'Email de contact',
                 'disabled'=> true
             ])
-            ->add('city', TextType::class, [
-                'label' => 'Ville',
-                'attr' => array('rows' => '4', 'cols' => '10'),
-                'required' => true,
-            ])
-            ->add('postalCode', TextType::class, [
-                'label' => 'Code postal',
-                'attr' => array('rows' => '4', 'cols' => '10'),
-                'required' => true,
-            ])
             ->add('phoneNumber', TextType::class, [
                 'label' => 'nomeru de portable',
                 'attr' => array('rows' => '4', 'cols' => '10'),
@@ -55,7 +56,6 @@ class ProfilType extends AbstractType
                 ],
                 'expanded' => true,
                 'required' => false,
-
             ])
             ->add('birthday', DateType::class, [
                 'required' => false,
@@ -66,7 +66,7 @@ class ProfilType extends AbstractType
             ])
             ->add('genderStatus', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'Votre gender est disponible au public ?',
+                'label'    => 'Votre genre est disponible au public ?',
             ])
             ->add('birthdayStatus', CheckboxType::class, [
                 'required' => false,
@@ -100,7 +100,6 @@ class ProfilType extends AbstractType
                 'label' => 'image de voiteur',
                 'required' => false,
             ]);
-
     }
 
     /**
@@ -121,5 +120,4 @@ class ProfilType extends AbstractType
     {
         return $this->getBlockPrefix();
     }
-
 }

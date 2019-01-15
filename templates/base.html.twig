@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}On a d'accord{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icons/favicon.png') }}"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icons/tam.png') }}"/>
         <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+
         {% block stylesheets %}
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
                   integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -34,10 +35,10 @@
             </section>
         {% endblock %}
         {% block javascripts %}
+            <script src="{{ asset('build/jquery.js') }}"></script>
+            <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+            <script src="{{ asset('bundles/pugxautocompleter/js/autocompleter-jqueryui.js') }}"></script>
             <script src="{{ asset('build/app.js') }}"></script>
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                    crossorigin="anonymous"></script>
         {% endblock %}
     </body>
 </html>
