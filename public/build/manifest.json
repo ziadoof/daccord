@@ -1,6 +1,6 @@
 {
   "public/app.js": "/public/app.js",
-  "public/jquery-3.3.1.min.js.js": "/public/jquery-3.3.1.min.js.js",
+  "public/jquery.js": "/public/jquery.js",
   "public/style.css": "/public/style.css",
   "public/style.js": "/public/style.js"
 }

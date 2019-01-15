@@ -66,7 +66,7 @@ class ProfilType extends AbstractType
             ])
             ->add('genderStatus', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'Votre gender est disponible au public ?',
+                'label'    => 'Votre genre est disponible au public ?',
             ])
             ->add('birthdayStatus', CheckboxType::class, [
                 'required' => false,
@@ -99,8 +99,7 @@ class ProfilType extends AbstractType
             ->add('carImage', TextType::class, [
                 'label' => 'image de voiteur',
                 'required' => false,
-            ]
-        );
+            ]);
     }
 
     /**

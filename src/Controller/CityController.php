@@ -13,8 +13,38 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/city")
  */
-class CityController extends AbstractController
+final class CityController extends AbstractController
 {
+
+    /**
+     * @Route("/search-city", name="search_city", defaults={"_format"="json"}, methods={"GET"})
+     *
+     */
+    public function searchAction(CityRepository $repo, Request $request): Response
+    {
+        $qs = $request->query->get('q', $request->query->get('term', ''));
+        $citys = $repo->findLike($qs);
+
+
+        return $this->render('user/Profile/search.json.twig', ['citys' => $citys]);
+    }
+
+    /**
+     * @Route("/get-city/{id}", name="get_city", defaults={"_format"="json"}, methods={"GET"})
+     *
+     */
+    public function getAction(int $id = null, CityRepository $repo): Response
+    {
+        if (null === $city = $repo->find($id)) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->json($city->getName());
+    }
+
+
+
+
     /**
      * @Route("/", name="city_index", methods={"GET"})
      */

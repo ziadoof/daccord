@@ -1,46 +1,62 @@
 {% extends "layout_user.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
-        {{ form_start(form)}}
+
         <div class="row">
             <div class="col-md-12 editer_utilisateur">
                 <img src="{{ asset('assets/images/icons/4.png') }}" alt="logo" class="mb-3 "/>
                 <span class="middle">Modifier</span>
             </div>
         </div>
-        <div class="fos_user_user_show border-respo px-4 py-4">
-            <h5 class="text-center pt-0 title-blue">Votre AREA acctuel</h5>
-            <h4 class="text-center pt-0 title-rose">{{ user.city.name }}</h4>
+        <div class="fos_user_user_show  px-4 py-4">
+            <div class="border-respo px-4 py-4">
+                <h6 class="text-center pt-0 title-blue">Votre AREA acctuel</h6>
 
-            <h4 class="text-center pt-0 ">{{ user.city.zipCode }}</h4>
-            <hr>
-            <div class="row">
-                <div class="col-md-12">
-                    <h6 class="text-center pt-0">Entrez votre nom de ville ou votre code postal</h6>
-                </div>
-                <div class="">
-                    {{ user.city }}
-                </div>
+                {% if user.ville != null %}
+                <h5 class="text-center pt-0 title-rose">{{ user.ville }}</h5>
+                <h2 class="text-center pt-0 ">{{ user.postalCode }}</h2>
+                {% else %}
+                    <h5 class="text-center pt-0 title-rose">Vous n'avez pas choisi une ville</h5>
+                {% endif %}
             </div>
             <hr>
-
-            <h5 class="text-center pt-0 title-blue">Changer votre AREA</h5>
-            <div class="row ">
-                <div class="col-md-4">
-                    {{ form_row(form.region) }}
-                </div>
-                <div class="col-md-4">
-                    {{ form_row(form.department) }}
-                </div>
-                <div class="col-md-4">
-                    {{ form_row(form.city) }}
+            <div class="border-respo px-4 py-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6 class="text-center pt-0 title-blue">Entrez votre nom de ville</h6>
+                        {{ form_start(formCity) }}
+                        {{ form_row(formCity.city, { 'label': 'Ville' }) }}
+                        <div class="row justify-content-center">
+                            <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+                        </div>
+                        {{ form_end(formCity) }}
+                        <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+                        <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
+                    </div>
                 </div>
             </div>
-            <hr>
-            <div class="row justify-content-center">
-                <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+            <h2 class="text-center pt-0 title-rose">OU</h2>
+            <div class="border-respo px-4 py-4">
+                <h6 class="text-center pt-0 title-blue">Changer votre AREA</h6>
+                {{ form_start(formRegion) }}
+                <div class="row ">
+                    <div class="col-md-4">
+                        {{ form_row(formRegion.region) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(formRegion.department) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(formRegion.city) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+                </div>
+                {{ form_end(formRegion) }}
             </div>
-            {{ form_end(form) }}
         </div>
+
 {% endblock %}
+
 

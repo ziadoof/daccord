@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method City|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +15,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CityRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, City::class);
     }
@@ -47,4 +48,31 @@ class CityRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function findLike(String $city): ?array
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->where('c.name LIKE :city')
+            ->setParameter( 'city', "%$city%")
+            ->orderBy('c.name')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+   /* public function find($id)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->where('c = :id')
+            ->setParameter('id',$$id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }*/
 }

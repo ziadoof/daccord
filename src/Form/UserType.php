@@ -16,14 +16,15 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
+            ->add('city', AutocompleteType::class, ['class' => City::class]);
+   /*     $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Region',
                 'placeholder' => 'Sélectionnez votre région',
@@ -46,7 +47,7 @@ class UserType extends AbstractType
             function (FormEvent $event) {
                 $data = $event->getData();
 
-                /* @var $city City */
+                // @var $city City
                 $city = $data->getCity();
                 $form = $event->getForm();
                 if ($city) {
@@ -65,13 +66,7 @@ class UserType extends AbstractType
                     $this->addVilleField($form, null);
                 }
             }
-        );
-    /*$builder
-        ->add('city', EntityType::class, [
-            'class'       => 'App\Entity\City',
-            'placeholder' => 'Sélectionnez votre ville',
-
-        ]);*/
+        );*/
 
     }
 
@@ -80,7 +75,7 @@ class UserType extends AbstractType
      * @param FormInterface $form
      * @param Region $region
      */
-    private function addDepartmentField(FormInterface $form, ?Region $region)
+    /*private function addDepartmentField(FormInterface $form, ?Region $region)
     {
         $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
             'department',
@@ -113,7 +108,7 @@ class UserType extends AbstractType
             'choices'     => $department ? $department->getCitys() : []
 
         ]);
-    }
+    }*/
 
 
     public function configureOptions(OptionsResolver $resolver)
