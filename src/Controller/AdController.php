@@ -39,15 +39,17 @@ class AdController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $file = $form->get('imageOne')->getData();
-            $fileName1 = $fileUploader->upload($file);
+
             $category = $form->get('cato')->getData();
 
-            $fileName2 = $fileUploader->upload($form->get('imageTow')->getData());
-            $fileName3 = $fileUploader->upload($form->get('imageThree')->getData());
-            $fileName1 ? $ad->setImageOne($fileName1):$ad->setImageOne(null);
-            $fileName2 ? $ad->setImageTow($fileName2):$ad->setImageTow(null);
-            $fileName3 ? $ad->setImageThree($fileName3):$ad->setImageThree(null);
+            $file1 = $form->get('imageOne')->getData();
+            $file2 = $form->get('imageTow')->getData();
+            $file3 = $form->get('imageThree')->getData();
+
+            $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
+            $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
+            $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);
+
 
             $ad->setUser($this->getUser());
             $ad->setTypeOfAd($type);

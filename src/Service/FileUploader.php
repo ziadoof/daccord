@@ -21,15 +21,20 @@ class FileUploader
 
     public function upload(UploadedFile $file)
     {
-        $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+        if ($file !==null){
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
-        try {
-            $file->move($this->getTargetDirectory(), $fileName);
-        } catch (FileException $e) {
-            // ... handle exception if something happens during file upload
+            try {
+                $file->move($this->getTargetDirectory(), $fileName);
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+            return $fileName;
         }
+        else
+            return null;
 
-        return $fileName;
     }
 
     public function getTargetDirectory()

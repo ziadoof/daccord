@@ -1,5 +1,6 @@
 
 var autocompleter = require('./autocompleter');
+var category = require('./category');
 
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
