@@ -19,36 +19,43 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-               {{ form_row(form.title) }}
-                 {{ form_row(form.price) }}
-                {{ form_row(form.donate) }}
-                {{ form_row(form.withDriver) }}
-            </div>
-            <div class="col-md-6">
-                <div class="">
-                    {{ form_row(form.description) }}
+                <div class="col-md-4">
+                    {{ form_row(form.title) }}
                 </div>
-                    <div class="">
-                        <div class="">
-                            {{ form_row(form.imageOne) }}
-                            <img id="image4" src="http://www.placehold.it/180x90/EFEFEF/AAAAAA&amp;text=Add photo" alt="your image" class="mt-0"/>
-
-                        </div>
-
-                        <div class="">
-                            {{ form_row(form.imageTow) }}
-                            <img id="image4" src="http://www.placehold.it/180x90/EFEFEF/AAAAAA&amp;text=Add photo" alt="your image" class="mt-0"/>
-                        </div>
-                        <div class="">
-                            {{ form_row(form.imageThree) }}
-                            <img id="image4" src="http://www.placehold.it/180x90/EFEFEF/AAAAAA&amp;text=Add photo" alt="your image" class="mt-0"/>
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    {{ form_row(form.price) }}
+                </div>
+                <div class="col-md-2 mt-5">
+                    {{ form_row(form.donate) }}
+                </div>
+                <div class="col-md-2 mt-5">
+                    {{ form_row(form.withDriver) }}
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.description) }}
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_row(form.imageOne) }}
+                <img id="image4" src="http://www.placehold.it/180x90/EFEFEF/AAAAAA&amp;text=Add photo" alt="your image" class="mt-0"/>
+
+            </div>
+
+            <div class="col-md-4">
+                {{ form_row(form.imageTow) }}
+                <img id="image4" src="http://www.placehold.it/180x90/EFEFEF/AAAAAA&amp;text=Add photo" alt="your image" class="mt-0"/>
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.imageThree) }}
+                <img id="image4" src="http://www.placehold.it/180x90/EFEFEF/AAAAAA&amp;text=Add photo" alt="your image" class="mt-0"/>
+            </div>
+        </div>
+        <hr>
         <div class="row justify-content-center">
-            <input type="submit" class="btn btn-primary col-md-3 offset-4" value="{{ 'Valider'|trans }}" />
+            <input type="submit" class="btn btn-primary" value="{{ 'Valider'|trans }}" />
         </div>
         {{ form_end(form) }}
     </div>
