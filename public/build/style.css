@@ -17525,6 +17525,10 @@ input[type="button"].btn-block {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
+.ana {
+    display: none;
+}
+
 .custom-range {
   width: 100%;
   height: calc(1rem + 0.4rem);
