@@ -22,9 +22,9 @@ class AdType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('imageOne', FileType::class, ['label' => false, 'required' => false])
-            ->add('imageTow', FileType::class, ['label' => false, 'required' => false])
-             ->add('imageThree',FileType::class, ['label' => false, 'required' => false])
+            ->add('imageOne', FileType::class, [ 'required' => false])
+            ->add('imageTow', FileType::class, [ 'required' => false])
+             ->add('imageThree',FileType::class, [ 'required' => false])
             ->add('price')
             ->add('donate')
             ->add('withDriver');

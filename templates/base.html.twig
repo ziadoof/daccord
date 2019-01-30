@@ -32,11 +32,10 @@
                 </section>
                 {% block footer %}{#{% include "footer.html.twig" %}#}{% endblock %}
             </section>
+
         {% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('build/jquery.js') }}"></script>
-            <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-            <script src="{{ asset('bundles/pugxautocompleter/js/autocompleter-jqueryui.js') }}"></script>
+            <script src="{{ asset('build/runtime.js') }}"></script>
             <script src="{{ asset('build/app.js') }}"></script>
         {% endblock %}
     </body>

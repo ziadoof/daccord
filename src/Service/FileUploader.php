@@ -10,6 +10,8 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
 class FileUploader
 {
     private $targetDirectory;
@@ -51,4 +53,5 @@ class FileUploader
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+
 }
