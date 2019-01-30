@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'fr'
+    adsimages: '%kernel.project_dir%/public/assets/images/annonce/'
+    profileimages: '%kernel.project_dir%/public/assets/images/profile/'
 
 services:
     # default configuration for services in *this* file
@@ -47,3 +49,7 @@ services:
     App\Controller\ProfileController:
         arguments:
             $formFactory: '@fos_user.profile.form.factory'
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%adsimages%'

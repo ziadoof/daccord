@@ -6,7 +6,9 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "friendsofsymfony/user-bundle": "~2.0",
+        "kartik-v/bootstrap-fileinput": "@dev",
         "pugx/autocompleter-bundle": "^1.4",
+        "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
@@ -25,6 +27,7 @@
         "symfony/twig-bundle": "4.2.*",
         "symfony/validator": "4.2.*",
         "symfony/web-link": "4.2.*",
+        "symfony/webpack-encore-bundle": "^1.1",
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {

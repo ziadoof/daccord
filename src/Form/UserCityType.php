@@ -36,7 +36,6 @@ class UserCityType extends AbstractType
 
                 $form = $event->getForm();
                 $this->addDepartmentField($form->getParent(), $form->getData());
-                dump($form->getData());
             }
         );
 

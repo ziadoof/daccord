@@ -1,0 +1,66 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}Ad index{% endblock %}
+
+{% block content %}
+    <h1>Ad index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>category</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>ImageOne</th>
+                <th>ImageTow</th>
+                <th>ImageThree</th>
+                <th>Price</th>
+                <th>Donate</th>
+                <th>Date</th>
+                <th>WithDriver</th>
+                <th>TypeOfAd</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ad in ads %}
+            <tr>
+                <td>{{ ad.id }}</td>
+                {% if ad.category.parent is  null %}
+                <td>{{ ad.category.name }}</td>
+                {% elseif ad.category.parent.parent %}
+                <td>{{ ad.category.name }}{{ '-' }}{{ ad.category.parent.name }}{{ '-' }}{{ ad.category.parent.parent.name }}</td>
+                {% else %}
+                {{ ad.category.name }}{{ '-' }}{{ ad.category.parent.name }}
+                {% endif %}
+                <td>{{ ad.title }}</td>
+                <td>{{ ad.description }}</td>
+                <td>{{ ad.imageOne }}</td>
+               {# {% if ad.image %}
+                <td>{{ ad.image.filename }}</td>
+                {% else %}
+                    <td></td>
+                    {% endif %}#}
+                <td>{{ ad.imageTow }}</td>
+                <td>{{ ad.imageThree }}</td>
+                <td>{{ ad.price }}</td>
+                <td>{{ ad.donate ? 'Yes' : 'No' }}</td>
+                <td>{{ ad.date ? ad.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ ad.withDriver ? 'Yes' : 'No' }}</td>
+                <td>{{ ad.typeOfAd }}</td>
+                <td>
+                    <a href="{{ path('ad_show', {'id': ad.id}) }}">show</a>
+                    <a href="{{ path('ad_edit', {'id': ad.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#<a href="{{ path('ad_new') }}">Create new</a>#}
+{% endblock %}

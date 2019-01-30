@@ -140,6 +140,11 @@ class User  extends BaseUser
      */
     private $ville;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="user", orphanRemoval=true)
+     */
+    private $ads;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -427,6 +432,38 @@ class User  extends BaseUser
         $this->setLastname( (string) $this->getId());
         $this->setUsername("onadaccordUser" );
         $this->setgenderStatus(false );
+        $this->ads = new ArrayCollection();
         // your own logic
+    }
+
+    /**
+     * @return Collection|Ad[]
+     */
+    public function getAds(): Collection
+    {
+        return $this->ads;
+    }
+
+    public function addAd(Ad $ad): self
+    {
+        if (!$this->ads->contains($ad)) {
+            $this->ads[] = $ad;
+            $ad->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAd(Ad $ad): self
+    {
+        if ($this->ads->contains($ad)) {
+            $this->ads->removeElement($ad);
+            // set the owning side to null (unless already changed)
+            if ($ad->getUser() === $this) {
+                $ad->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

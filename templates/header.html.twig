@@ -63,13 +63,17 @@
                     <!-- user login dropdown end -->
                       </div>
 
-
+                      <div>
+                          <a href="{{ path('ad_new',{'type': 'Offer'}) }}">| offre |</a>
+                          <a href="{{ path('ad_new',{'type': 'Demand'}) }}">| demend |</a>
+                      </div>
                   {% endif %}
                   </div>
-            </div>
+              </div>
+           </div>
         </div>
     </nav>
-
+</header>
     <!-- Modal start-->
     <div class="modal fade bd-example-modal-lg" id="Registration" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel">
@@ -109,6 +113,6 @@
         </div>
     </div>
     <!-- Modal end-->
-</header>
+
 
 

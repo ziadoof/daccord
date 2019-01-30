@@ -1,21 +1,27 @@
-    var Encore = require('@symfony/webpack-encore');
+var Encore = require('@symfony/webpack-encore');
 
-	Encore
-        .setOutputPath('public/build/')
-        .setPublicPath('/public')
-		.cleanupOutputBeforeBuild()
-		.enableSourceMaps(!Encore.isProduction())
-		.addEntry('jquery', './public/assets/js/jquery.init.js')
-		.addEntry('app', './public/assets/js/app.js')
-	    .addEntry('style', './public/assets/scss/main.scss')
-	   /* .addEntry('jquery-3.3.1.min', './public/assets/js/jquery-3.3.1.min.js')
-	    .addEntry('jquery-ui.min', './public/assets/js/jquery-ui.min.js')
-	    .addEntry('autocompleter', './public/assets/js/autocompleter.js')*/
-	    /*.addEntry('autocompleter-jqueryui', './public/assets/js/autocompleter-jqueryui')*/
-        .enableBuildNotifications()
-	    .enableSassLoader();
+Encore
 
+    .setOutputPath('public/build/')
+    .setPublicPath('/build')
+    .addEntry('app', './assets/js/app.js')
+    .addEntry('style', './assets/scss/main.scss')
+    /*.addEntry('jquery', './assets/js/jquery.init.js')*/
+    //.addEntry('page1', './assets/js/page1.js')
+    //.addEntry('page2', './assets/js/page2.js')
 
-	module.exports = Encore.getWebpackConfig();
+    // will require an extra script tag for runtime.js
+    // but, you probably want this, unless you're building a single-page app
+    .enableSingleRuntimeChunk()
+    .cleanupOutputBeforeBuild()
+    .enableBuildNotifications()
+    .enableSourceMaps(!Encore.isProduction())
+    .enableSassLoader()
+
+    // uncomment if you're having problems with a jQuery plugin
+    //.autoProvidejQuery()
+;
+
+module.exports = Encore.getWebpackConfig();
 
 

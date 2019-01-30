@@ -1,0 +1,62 @@
+{% block content %}
+
+    <div class="">
+        {{ form_start(form) }}
+        <div class="row mt-4 pt-4">
+            <div class="col-md-12 ">
+                <h1 class="text-center pt-0 title-blue">Nouvell annonce</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_row(form.category) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.sous) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.cato) }}
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-4">
+                    {{ form_row(form.title) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.price) }}
+                </div>
+                <div class="col-md-2 mt-5">
+                    {{ form_row(form.donate) }}
+                </div>
+                <div class="col-md-2 mt-5">
+                    {{ form_row(form.withDriver) }}
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.description) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_row(form.imageOne) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.imageTow) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.imageThree) }}
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <input type="submit" class="btn btn-primary" value="{{ 'Valider'|trans }}" />
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+
+
+
+

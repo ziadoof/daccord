@@ -6,7 +6,6 @@
         <title>{% block title %}On a d'accord{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icons/tam.png') }}"/>
         <link rel="stylesheet" href="{{ asset('build/style.css') }}">
-
         {% block stylesheets %}
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
                   integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -23,7 +22,7 @@
                 <section id="main-content">
                     <section class="container-fluid ">
                         <div class="wrapper">
-                            <div class="col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2 col-sm-9 col-sm-offset-3 col-xs-7 col-xs-offset-5 mt-4">
+                            <div class="col-md-9 col-md-offset-2 col-lg-9 col-lg-offset-2 col-sm-9 col-sm-offset-3 col-xs-7 col-xs-offset-5 mt-4 mb-4">
                                 {% block content %}
 
                                 {% endblock %}
@@ -33,11 +32,10 @@
                 </section>
                 {% block footer %}{#{% include "footer.html.twig" %}#}{% endblock %}
             </section>
+
         {% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('build/jquery.js') }}"></script>
-            <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-            <script src="{{ asset('bundles/pugxautocompleter/js/autocompleter-jqueryui.js') }}"></script>
+            <script src="{{ asset('build/runtime.js') }}"></script>
             <script src="{{ asset('build/app.js') }}"></script>
         {% endblock %}
     </body>

@@ -1,0 +1,36 @@
+
+@import "bottstrap-reset";
+@import "variables";
+@import "jqueryui";
+@import "profile";
+@import "bootswatchunited";
+@import "navbar";
+@import "fileinput";
+@import "fileinput-rtl";
+@import "~bootstrap/scss/bootstrap";
+
+
+
+
+body .welcome-text {
+  font-size: calc(20px + 10 * (100vw - 200px) / 1200);
+  text-align: center;
+  color: $blued;
+}
+
+
+
+/*------------dropdown user--------------------*/
+#avatar-small {
+  width:  40px;
+  height: 40px;
+  float: right;
+}
+
+/*------------dropdown user-------end-------------*/
+
+/*-------- hide costom input file from symfony----*/
+.cach-input {
+  display: none;
+}
+/*-----------------end---------------*/

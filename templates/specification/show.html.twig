@@ -1,0 +1,446 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Specification{% endblock %}
+
+{% block body %}
+    <h1>Specification</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ specification.id }}</td>
+            </tr>
+            <tr>
+                <th>Mission</th>
+                <td>{{ specification.mission }}</td>
+            </tr>
+            <tr>
+                <th>AcitvityArea</th>
+                <td>{{ specification.acitvityArea }}</td>
+            </tr>
+            <tr>
+                <th>FullPartial</th>
+                <td>{{ specification.fullPartial }}</td>
+            </tr>
+            <tr>
+                <th>TypeOfContract</th>
+                <td>{{ specification.typeOfContract }}</td>
+            </tr>
+            <tr>
+                <th>Experience</th>
+                <td>{{ specification.experience }}</td>
+            </tr>
+            <tr>
+                <th>LevelOfStudy</th>
+                <td>{{ specification.levelOfStudy }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ specification.language }}</td>
+            </tr>
+            <tr>
+                <th>TypeOfTranslation</th>
+                <td>{{ specification.typeOfTranslation }}</td>
+            </tr>
+            <tr>
+                <th>Material</th>
+                <td>{{ specification.material }}</td>
+            </tr>
+            <tr>
+                <th>PlaceOfLesson</th>
+                <td>{{ specification.placeOfLesson }}</td>
+            </tr>
+            <tr>
+                <th>LevelOfStudent</th>
+                <td>{{ specification.levelOfStudent }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ specification.brand }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ specification.color }}</td>
+            </tr>
+            <tr>
+                <th>FuelType</th>
+                <td>{{ specification.fuelType }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>{{ specification.model }}</td>
+            </tr>
+            <tr>
+                <th>ChangeGear</th>
+                <td>{{ specification.changeGear }}</td>
+            </tr>
+            <tr>
+                <th>ManufactureCompany</th>
+                <td>{{ specification.manufactureCompany }}</td>
+            </tr>
+            <tr>
+                <th>GeneralSituation</th>
+                <td>{{ specification.generalSituation }}</td>
+            </tr>
+            <tr>
+                <th>PaperSize</th>
+                <td>{{ specification.paperSize }}</td>
+            </tr>
+            <tr>
+                <th>PrintingType</th>
+                <td>{{ specification.printingType }}</td>
+            </tr>
+            <tr>
+                <th>PrintingColor</th>
+                <td>{{ specification.printingColor }}</td>
+            </tr>
+            <tr>
+                <th>KeyboardLanguage</th>
+                <td>{{ specification.keyboardLanguage }}</td>
+            </tr>
+            <tr>
+                <th>AnalogDigital</th>
+                <td>{{ specification.analogDigital }}</td>
+            </tr>
+            <tr>
+                <th>MachinName</th>
+                <td>{{ specification.machinName }}</td>
+            </tr>
+            <tr>
+                <th>AnimalColor</th>
+                <td>{{ specification.animalColor }}</td>
+            </tr>
+            <tr>
+                <th>AnimalSpecies</th>
+                <td>{{ specification.animalSpecies }}</td>
+            </tr>
+            <tr>
+                <th>FilmName</th>
+                <td>{{ specification.filmName }}</td>
+            </tr>
+            <tr>
+                <th>BookName</th>
+                <td>{{ specification.bookName }}</td>
+            </tr>
+            <tr>
+                <th>DvdCd</th>
+                <td>{{ specification.dvdCd }}</td>
+            </tr>
+            <tr>
+                <th>LanguageBookFilm</th>
+                <td>{{ specification.languageBookFilm }}</td>
+            </tr>
+            <tr>
+                <th>OriginCountry</th>
+                <td>{{ specification.originCountry }}</td>
+            </tr>
+            <tr>
+                <th>ClothesMaterial</th>
+                <td>{{ specification.clothesMaterial }}</td>
+            </tr>
+            <tr>
+                <th>ClothesSize</th>
+                <td>{{ specification.clothesSize }}</td>
+            </tr>
+            <tr>
+                <th>CoverMaterial</th>
+                <td>{{ specification.coverMaterial }}</td>
+            </tr>
+            <tr>
+                <th>Shape</th>
+                <td>{{ specification.shape }}</td>
+            </tr>
+            <tr>
+                <th>GazType</th>
+                <td>{{ specification.gazType }}</td>
+            </tr>
+            <tr>
+                <th>Heating</th>
+                <td>{{ specification.heating }}</td>
+            </tr>
+            <tr>
+                <th>HeatingType</th>
+                <td>{{ specification.heatingType }}</td>
+            </tr>
+            <tr>
+                <th>ClassEnergie</th>
+                <td>{{ specification.classEnergie }}</td>
+            </tr>
+            <tr>
+                <th>Ges</th>
+                <td>{{ specification.ges }}</td>
+            </tr>
+            <tr>
+                <th>EventType</th>
+                <td>{{ specification.eventType }}</td>
+            </tr>
+            <tr>
+                <th>SubjectName</th>
+                <td>{{ specification.subjectName }}</td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td>{{ specification.salary }}</td>
+            </tr>
+            <tr>
+                <th>DurationOfLesson</th>
+                <td>{{ specification.durationOfLesson }}</td>
+            </tr>
+            <tr>
+                <th>MaxDistance</th>
+                <td>{{ specification.maxDistance }}</td>
+            </tr>
+            <tr>
+                <th>ManufacturingYear</th>
+                <td>{{ specification.manufacturingYear }}</td>
+            </tr>
+            <tr>
+                <th>MaxManufacturingYear</th>
+                <td>{{ specification.maxManufacturingYear }}</td>
+            </tr>
+            <tr>
+                <th>MinManufacturingYear</th>
+                <td>{{ specification.minManufacturingYear }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfPassengers</th>
+                <td>{{ specification.numberOfPassengers }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfDoors</th>
+                <td>{{ specification.numberOfDoors }}</td>
+            </tr>
+            <tr>
+                <th>Kilometer</th>
+                <td>{{ specification.kilometer }}</td>
+            </tr>
+            <tr>
+                <th>MaxKilometer</th>
+                <td>{{ specification.maxKilometer }}</td>
+            </tr>
+            <tr>
+                <th>MinKilometer</th>
+                <td>{{ specification.minKilometer }}</td>
+            </tr>
+            <tr>
+                <th>Processor</th>
+                <td>{{ specification.processor }}</td>
+            </tr>
+            <tr>
+                <th>HddCapacity</th>
+                <td>{{ specification.hddCapacity }}</td>
+            </tr>
+            <tr>
+                <th>Ram</th>
+                <td>{{ specification.ram }}</td>
+            </tr>
+            <tr>
+                <th>ScreenSizeCm</th>
+                <td>{{ specification.screenSizeCm }}</td>
+            </tr>
+            <tr>
+                <th>ScreenSizeInch</th>
+                <td>{{ specification.screenSizeInch }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ specification.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Accuracy</th>
+                <td>{{ specification.accuracy }}</td>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <td>{{ specification.weight }}</td>
+            </tr>
+            <tr>
+                <th>Caliber</th>
+                <td>{{ specification.caliber }}</td>
+            </tr>
+            <tr>
+                <th>MaxCaliber</th>
+                <td>{{ specification.maxCaliber }}</td>
+            </tr>
+            <tr>
+                <th>MinCaliber</th>
+                <td>{{ specification.minCaliber }}</td>
+            </tr>
+            <tr>
+                <th>Gauge</th>
+                <td>{{ specification.gauge }}</td>
+            </tr>
+            <tr>
+                <th>SizePerfume</th>
+                <td>{{ specification.sizePerfume }}</td>
+            </tr>
+            <tr>
+                <th>ShoeSize</th>
+                <td>{{ specification.shoeSize }}</td>
+            </tr>
+            <tr>
+                <th>ParachuteSize</th>
+                <td>{{ specification.parachuteSize }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ specification.number }}</td>
+            </tr>
+            <tr>
+                <th>AnimalAge</th>
+                <td>{{ specification.animalAge }}</td>
+            </tr>
+            <tr>
+                <th>Width</th>
+                <td>{{ specification.width }}</td>
+            </tr>
+            <tr>
+                <th>Height</th>
+                <td>{{ specification.height }}</td>
+            </tr>
+            <tr>
+                <th>KidsClothesSize</th>
+                <td>{{ specification.kidsClothesSize }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfPersson</th>
+                <td>{{ specification.numberOfPersson }}</td>
+            </tr>
+            <tr>
+                <th>Length</th>
+                <td>{{ specification.length }}</td>
+            </tr>
+            <tr>
+                <th>DiapersSize</th>
+                <td>{{ specification.diapersSize }}</td>
+            </tr>
+            <tr>
+                <th>CapacitySize</th>
+                <td>{{ specification.capacitySize }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfDrawer</th>
+                <td>{{ specification.numberOfDrawer }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfStaging</th>
+                <td>{{ specification.numberOfStaging }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfHead</th>
+                <td>{{ specification.numberOfHead }}</td>
+            </tr>
+            <tr>
+                <th>WashingCapacity</th>
+                <td>{{ specification.washingCapacity }}</td>
+            </tr>
+            <tr>
+                <th>Ability</th>
+                <td>{{ specification.ability }}</td>
+            </tr>
+            <tr>
+                <th>TiresSize</th>
+                <td>{{ specification.tiresSize }}</td>
+            </tr>
+            <tr>
+                <th>Floor</th>
+                <td>{{ specification.floor }}</td>
+            </tr>
+            <tr>
+                <th>Area</th>
+                <td>{{ specification.area }}</td>
+            </tr>
+            <tr>
+                <th>MinArea</th>
+                <td>{{ specification.minArea }}</td>
+            </tr>
+            <tr>
+                <th>MaxArea</th>
+                <td>{{ specification.maxArea }}</td>
+            </tr>
+            <tr>
+                <th>RoomNumber</th>
+                <td>{{ specification.roomNumber }}</td>
+            </tr>
+            <tr>
+                <th>MinRoomNumber</th>
+                <td>{{ specification.minRoomNumber }}</td>
+            </tr>
+            <tr>
+                <th>MaxRoomNumber</th>
+                <td>{{ specification.maxRoomNumber }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfFloors</th>
+                <td>{{ specification.numberOfFloors }}</td>
+            </tr>
+            <tr>
+                <th>Hdmi</th>
+                <td>{{ specification.hdmi ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CdRoom</th>
+                <td>{{ specification.cdRoom ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Wifi</th>
+                <td>{{ specification.wifi ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Usb</th>
+                <td>{{ specification.usb ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TreeInOne</th>
+                <td>{{ specification.treeInOne ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Accessories</th>
+                <td>{{ specification.accessories ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>WithFreezer</th>
+                <td>{{ specification.withFreezer ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>ElectricHead</th>
+                <td>{{ specification.electricHead ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>WithOven</th>
+                <td>{{ specification.withOven ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Covered</th>
+                <td>{{ specification.covered ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>WithFurniture</th>
+                <td>{{ specification.withFurniture ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>WithGarden</th>
+                <td>{{ specification.withGarden ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>WithVerandah</th>
+                <td>{{ specification.withVerandah ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>WithElevator</th>
+                <td>{{ specification.withElevator ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ specification.date ? specification.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('specification_index') }}">back to list</a>
+
+    <a href="{{ path('specification_edit', {'id': specification.id}) }}">edit</a>
+
+    {{ include('specification/_delete_form.html.twig') }}
+{% endblock %}
