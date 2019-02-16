@@ -1,19 +1,52 @@
+$(function(){
+    $("#offer_generalcategory").change(function(){
+        var data = {
+            generalcategory_id: $(this).val()
+        };
+        var url = Routing.generate('select_subcategory');
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: data,
+            success: function(data) {
+                var $subcategory_selector = $('#offer_subcategory');
 
-$(document).on('change', '#ad_category, #ad_sous', function () {
-    let $field = $(this)
-    let $regionField = $('#ad_category')
-    let $form = $field.closest('form')
-    let target = '#' + $field.attr('id').replace('sous', 'cato').replace('category', 'sous')
-    // Les données à envoyer en Ajax
-    let data = {}
-    data[$regionField.attr('name')] = $regionField.val()
-    data[$field.attr('name')] = $field.val()
-    // On soumet les données
-    $.post($form.attr('action'), data).then(function (data) {
-        // On récupère le nouveau <select>
-        let $input = $(data).find(target)
-        // On remplace notre <select> actuel
-        $(target).replaceWith($input)
-    })
+                $subcategory_selector.html('<option>Sub category</option>');
 
+                for (var i=0, total = data.length; i < total; i++) {
+                    $subcategory_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                }
+
+                $('#offer_category').html("<option>Category</option>");
+            }
+        });
+
+    });
+
+    $("#offer_subcategory").change(function(){
+        var data = {
+            subcategory_id: $(this).val()
+        };
+        var url = Routing.generate('select_category');
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: data,
+            success: function(data) {
+                var $category_selector = $('#offer_category');
+
+                $category_selector.html('<option>category</option>');
+
+                for (var i=0, total = data.length; i < total; i++) {
+                    $category_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                }
+            }
+        });
+    });
 });
+
+
+
+
+
+

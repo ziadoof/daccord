@@ -2,8 +2,14 @@
 
 $(".custom-file-label").toggleClass("cach-input");
 
-$("#ad_imageOne").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
-$("#ad_imageTow").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
-$("#ad_imageThree").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+$("#offer_imageOne").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+$("#offer_imageTow").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+$("#offer_imageThree").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+
+
+
+$("#demand_imageOne").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+$("#demand_imageTow").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+$("#demand_imageThree").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
 
 //---------------------------------------------------------------------------

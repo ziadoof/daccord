@@ -3,79 +3,135 @@
 namespace App\Form;
 
 use App\Entity\Ad;
-use App\Entity\Category;
-use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 
 class AdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            /*->add('title')
             ->add('description')
-            ->add('imageOne', FileType::class, [ 'required' => false])
-            ->add('imageTow', FileType::class, [ 'required' => false])
-             ->add('imageThree',FileType::class, [ 'required' => false])
+            ->add('imageOne')
+            ->add('imageTow')
+            ->add('imageThree')
             ->add('price')
             ->add('donate')
-            ->add('withDriver');
-            /*->add('specification')*/
-
-        $builder->add('category',EntityType::class, [
-                    'required' => false,
-                    'class' => Category::class,
-                    'label' => 'Category',
-                    'placeholder' => 'Choisir un Category',
-                    'query_builder' => function (EntityRepository $er) {
-                        return $er->createQueryBuilder('c')
-                            ->andWhere('c.parent is null')
-                            ->orderBy('c.id', 'ASC');
-                    },
-                    'choice_label' => 'name'
-                 ]);
-        $builder->get('category')->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-
-                $form = $event->getForm();
-                $this->addSousField($form->getParent(), $form->getData());
-            }
-        );
-
-        $builder->addEventListener(
-            FormEvents::POST_SET_DATA,
-            function (FormEvent $event) {
-                $data = $event->getData();
-
-                // @var $name Category
-                $name= $data->getCategory();
-                $form = $event->getForm();
-                if ($name) {
-                    // On récupère le département et la région
-                    $sous = $name->getParent();
-                    $category = $sous->getParent();
-                    // On crée les 2 champs supplémentaires
-                    $this->addSousField($form, $category);
-                    $this->addCatoField($form, $sous);
-                    // On set les données
-                    $form->get('category')->setData($category);
-                    $form->get('sous')->setData($sous);
-                } else {
-                    // On crée les 2 champs en les laissant vide (champs utilisé pour le JavaScript)
-                    $this->addSousField($form, null);
-                    $this->addCatoField($form, null);
-                }
-            }
-        );
+            ->add('dateOfAd')
+            ->add('withDriver')
+            ->add('typeOfAd')*/
+            /*->add('mission')
+            ->add('acitvityArea')
+            ->add('fullPartial')
+            ->add('typeOfContract')
+            ->add('experience')
+            ->add('levelOfStudy')
+            ->add('language')
+            ->add('typeOfTranslation')
+            ->add('material')
+            ->add('placeOfLesson')
+            ->add('levelOfStudent')
+            ->add('brand')
+            ->add('color')
+            ->add('fuelType')
+            ->add('model')
+            ->add('changeGear')
+            ->add('manufactureCompany')
+            ->add('generalSituation')
+            ->add('paperSize')
+            ->add('printingType')
+            ->add('printingColor')
+            ->add('keyboardLanguage')
+            ->add('analogDigital')
+            ->add('machinName')
+            ->add('animalColor')
+            ->add('animalSpecies')
+            ->add('filmName')
+            ->add('bookName')
+            ->add('dvdCd')
+            ->add('languageBookFilm')
+            ->add('originCountry')
+            ->add('clothesMaterial')
+            ->add('clothesSize')
+            ->add('coverMaterial')
+            ->add('shape')
+            ->add('gazType')
+            ->add('heating')
+            ->add('heatingType')
+            ->add('classEnergie')
+            ->add('ges')
+            ->add('eventType')
+            ->add('subjectName')
+            ->add('salary')
+            ->add('durationOfLesson')
+            ->add('maxDistance')
+            ->add('manufacturingYear')
+            ->add('maxManufacturingYear')
+            ->add('minManufacturingYear')
+            ->add('numberOfPassengers')
+            ->add('numberOfDoors')
+            ->add('kilometer')
+            ->add('maxKilometer')
+            ->add('minKilometer')
+            ->add('processor')
+            ->add('hddCapacity')
+            ->add('ram')
+            ->add('screenSizeCm')
+            ->add('screenSizeInch')
+            ->add('capacity')
+            ->add('accuracy')
+            ->add('weight')
+            ->add('caliber')
+            ->add('maxCaliber')
+            ->add('minCaliber')
+            ->add('gauge')
+            ->add('sizePerfume')
+            ->add('shoeSize')
+            ->add('parachuteSize')
+            ->add('number')
+            ->add('animalAge')
+            ->add('width')
+            ->add('height')
+            ->add('kidsClothesSize')
+            ->add('numberOfPersson')
+            ->add('length')
+            ->add('diapersSize')
+            ->add('capacitySize')
+            ->add('numberOfDrawer')
+            ->add('numberOfStaging')
+            ->add('numberOfHead')
+            ->add('washingCapacity')
+            ->add('ability')
+            ->add('tiresSize')
+            ->add('floor')
+            ->add('area')
+            ->add('minArea')
+            ->add('maxArea')
+            ->add('roomNumber')
+            ->add('minRoomNumber')
+            ->add('maxRoomNumber')
+            ->add('numberOfFloors')
+            ->add('hdmi')
+            ->add('cdRoom')
+            ->add('wifi')
+            ->add('usb')
+            ->add('treeInOne')
+            ->add('accessories')
+            ->add('withFreezer')
+            ->add('electricHead')
+            ->add('withOven')
+            ->add('covered')
+            ->add('withFurniture')
+            ->add('withGarden')
+            ->add('withVerandah')
+            ->add('withElevator')
+            ->add('date')
+            ->add('category')
+            ->add('user')
+            ->add('city')*/
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -83,62 +139,5 @@ class AdType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Ad::class,
         ]);
-    }
-
-    /*
-        * Rajout un champs department au formulaire
-        * @param FormInterface $form
-        * @param Region $region
-        */
-    private function addSousField(FormInterface $form, ?Category $parent)
-    {
-        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
-            'sous',
-            EntityType::class,
-            null,
-            [
-                'class'           => 'App\Entity\Category',
-                'placeholder'     => $parent ? 'Sélectionnez votre Sous' : 'Sélectionnez votre Category',
-                'mapped'          => false,
-                'required'        => true,
-                'auto_initialize' => false,
-                'label' =>'Sous',
-                'choices'         => $parent ? $parent->getChildren() : []
-            ]
-        );
-        $builder->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function (FormEvent $event) {
-                $form = $event->getForm();
-                $this->addCatoField($form->getParent(), $form->getData());
-            }
-        );
-        $form->add($builder->getForm());
-    }
-
-    private function addCatoField(FormInterface $form, ?Category $childe)
-    {
-       /* $form->add('name', EntityType::class, [
-            'class'       => 'App\Entity\Category',
-            'label' =>'Cato',
-            'placeholder' => $childe ? 'Sélectionnez votre Cato' : 'Sélectionnez votre Sous',
-            'choices'     => $childe ? $childe->getChildren() : []
-
-        ]);*/
-        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
-            'cato',
-            EntityType::class,
-            null,
-            [
-                'class'           => 'App\Entity\Category',
-                'placeholder'     => $childe ? 'Sélectionnez votre Cato' : 'Sélectionnez votre Sous',
-                'mapped'          => false,
-                'required'        => true,
-                'auto_initialize' => false,
-                'label' =>'Cato',
-                'choices'         => $childe ? $childe->getChildren() : []
-            ]
-        );
-        $form->add($builder->getForm());
     }
 }

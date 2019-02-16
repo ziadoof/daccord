@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Ad;
 use App\Entity\User;
+use App\Entity\Category;
+use App\Form\OfferType;
+use App\Form\DemandType;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use App\Service\FileUploader;
@@ -35,42 +38,88 @@ class AdController extends AbstractController
      */
     public function new(Request $request, FileUploader $fileUploader, string $type): Response
     {
-        $ad = new Ad();
-        $form = $this->createForm(AdType::class, $ad);
-        $form->handleRequest($request);
+        if ($type === 'Offer'){
 
-
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $category = $form->get('cato')->getData();
-
-            $file1 = $form->get('imageOne')->getData();
-            $file2 = $form->get('imageTow')->getData();
-            $file3 = $form->get('imageThree')->getData();
-
-            $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
-            $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
-            $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);
+            $ad = new Ad();
+            $form = $this->createForm(OfferType::class, $ad,[
+                'entity_manager' => $entityManager,
+            ]);
+            $form->handleRequest($request);
 
 
-            $ad->setUser($this->getUser());
-            $ad->setTypeOfAd($type);
-            $ad->setCategory($category);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $category = $form->get('category')->getData();
+
+              /*  $file1 = $form->get('imageOne')->getData();
+                $file2 = $form->get('imageTow')->getData();
+                $file3 = $form->get('imageThree')->getData();
+
+                $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
+                $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
+                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);*/
 
 
-            $entityManager->persist($ad);
-            $entityManager->flush();
+                $ad->setUser($this->getUser());
+                $ad->setTypeOfAd($type);
+                $ad->setCategory($category);
 
-            return $this->redirectToRoute('ad_index');
+
+                $entityManager->persist($ad);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('ad_index');
+            }
+
+
+            return $this->render('ad/new.html.twig', [
+                'ad' => $ad,
+                'form' => $form->createView(),
+                /*'form2' => $form2->createView(),*/
+            ]);
+        }
+        else
+        {
+            $ad = new Ad();
+            $form = $this->createForm(DemandType::class, $ad);
+            $form->handleRequest($request);
+
+
+
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $category = $form->get('cato')->getData();
+
+                $file1 = $form->get('imageOne')->getData();
+                $file2 = $form->get('imageTow')->getData();
+                $file3 = $form->get('imageThree')->getData();
+
+                $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
+                $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
+                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);
+
+
+                $ad->setUser($this->getUser());
+                $ad->setTypeOfAd($type);
+                $ad->setCategory($category);
+
+
+                $entityManager->persist($ad);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('ad_index');
+            }
+
+            return $this->render('ad/new.html.twig', [
+                'ad' => $ad,
+                'form' => $form->createView(),
+            ]);
         }
 
-        return $this->render('ad/new.html.twig', [
-            'ad' => $ad,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -114,4 +163,36 @@ class AdController extends AbstractController
 
         return $this->redirectToRoute('ad_index');
     }
+
+    /**
+     * @Route("/adSpe", name="ad_spe", methods={"GET","POST"})
+     */
+ /*   public function addSpe(Request $request,  $cato=null): Response
+    {
+
+            $ad = new Ad();
+            $nan = 'ahmad';
+            $form2 = $this->createForm(AdType::class, $ad);
+            $form2->handleRequest($request);
+
+            if ($form2->isSubmitted() && $form2->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->persist($ad);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('ad_index');
+            }
+
+            return $this->render('ad/_form2.html.twig', [
+                'ad' => $ad,
+                'nan' => $nan,
+                'cato'=> $cato,
+                'form2' => $form2->createView(),
+            ]);
+
+
+
+
+    }*/
 }

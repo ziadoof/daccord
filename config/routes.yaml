@@ -23,3 +23,6 @@ fos_user_profile_edit:
 fos_user_profile_show:
     path: /profile
     controller: App\Controller\ProfileController::showAction
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

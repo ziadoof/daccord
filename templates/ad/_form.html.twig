@@ -1,5 +1,4 @@
 {% block content %}
-
     <div class="">
         {{ form_start(form) }}
         <div class="row mt-4 pt-4">
@@ -9,13 +8,13 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                {{ form_row(form.generalcategory) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.subcategory) }}
+            </div>
+            <div class="col-md-4" >
                 {{ form_row(form.category) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_row(form.sous) }}
-            </div>
-            <div class="col-md-4">
-                {{ form_row(form.cato) }}
             </div>
         </div>
         <div class="row">
@@ -39,14 +38,22 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                {{ form_row(form.imageOne) }}
+               {# {{ form_row(form.imageOne) }}#}
             </div>
             <div class="col-md-4">
-                {{ form_row(form.imageTow) }}
+               {# {{ form_row(form.imageTow) }}#}
             </div>
             <div class="col-md-4">
-                {{ form_row(form.imageThree) }}
+                {#{{ form_row(form.imageThree) }}#}
             </div>
+        </div>
+        <div id="dynamic_form">
+            {% if form.mission is defined %}
+                {{ form_row(form.mission) }}
+            {% endif %}
+            {% if form.withFreezer is defined %}
+                {{ form_row(form.withFreezer) }}
+            {% endif %}
         </div>
         <hr>
         <div class="row justify-content-center">

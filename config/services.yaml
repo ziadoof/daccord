@@ -53,3 +53,20 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%adsimages%'
+
+    App\Form\EventListener\AddCategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddSubcategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddGeneralcategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddSpecificationFieldSubscriber:
+        arguments:
+            $factory:
+            $entityManager:
