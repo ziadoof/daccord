@@ -91,7 +91,7 @@ class CategoryController extends AbstractController
 
 
     /**
-     * @Route("/subcategorys", name="select_subcategory", methods="GET|POST", options={"expose"=true})
+     * @Route("/categorys", name="select_category", methods="GET|POST", options={"expose"=true})
      */
     public function subcategoryAction(Request $request)
     {
@@ -102,19 +102,5 @@ class CategoryController extends AbstractController
         $subcategory = $em->getRepository(Category::class)->findCategoryByParentId($generalcategory_id);
 
         return new JsonResponse($subcategory);
-    }
-
-    /**
-     * @Route("/categorys", name="select_category", methods="GET|POST", options={"expose"=true})
-     */
-    public function categoryAction(Request $request)
-    {
-        $subcategory_id = $request->request->get('subcategory_id');
-
-        $em = $this->getDoctrine()->getManager();
-
-        $category = $em->getRepository(Category::class)->findCategoryByParentId($subcategory_id);
-
-        return new JsonResponse($category);
     }
 }

@@ -66,7 +66,7 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
         if ($category!== null) {
             $name = $category->getName();
             switch ($name) {
-                case 'Toshiba':
+                case 'Car':
                     $form->add('mission', TextType::class, $formToshiba);
                     break ;  /* Termine uniquement le switch. */
                 case 'HP':

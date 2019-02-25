@@ -58,10 +58,6 @@ services:
         arguments:
             $factory:
 
-    App\Form\EventListener\AddSubcategoryFieldSubscriber:
-        arguments:
-            $factory:
-
     App\Form\EventListener\AddGeneralcategoryFieldSubscriber:
         arguments:
             $factory:

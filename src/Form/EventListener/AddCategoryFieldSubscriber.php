@@ -48,21 +48,21 @@ class AddCategoryFieldSubscriber implements EventSubscriberInterface
         );
     }
 
-    private function addCategoryForm($form, $subcategory_id)
+    private function addCategoryForm($form, $generalcategory_id)
     {
 
         $formOptions = array(
             'class'         => Category::class,
-            'label'         => 'category',
+            /*'label'         => 'category',*/
             'required' => false,
-            'placeholder'     => $subcategory_id ? 'Sélectionnez votre category' : 'Sélectionnez votre subcategory',
+            'placeholder'     => $generalcategory_id ? 'Sélectionnez votre category' : 'Sélectionnez votre general category',
             'attr'          => array(
                 'class' => 'category_selector',
             ),
-            'query_builder' => function (EntityRepository $repository) use ($subcategory_id) {
+            'query_builder' => function (EntityRepository $repository) use ($generalcategory_id) {
                 $qb = $repository->createQueryBuilder('c')
-                    ->where('c.parent = :subcategory_id')
-                    ->setParameter('subcategory_id', $subcategory_id)
+                    ->where('c.parent = :generalcategory_id')
+                    ->setParameter('generalcategory_id', $generalcategory_id)
                 ;
                 return $qb;
             }
@@ -84,8 +84,8 @@ class AddCategoryFieldSubscriber implements EventSubscriberInterface
             ->enableExceptionOnInvalidIndex()
             ->getPropertyAccessor();
         $category        = $accessor->getValue($data, $this->factory);
-        $subcategory_id = ($category) ? $category->getParent()->getId() : null;
-        $this->addCategoryForm($form, $subcategory_id);
+        $generalcategory_id = ($category) ? $category->getParent()->getId() : null;
+        $this->addCategoryForm($form, $generalcategory_id);
     }
 
     public function preSubmit(FormEvent $event)
@@ -93,7 +93,7 @@ class AddCategoryFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
 
-        $subcategory_id = array_key_exists('subcategory', $data) ? $data['subcategory'] : null;
-        $this->addCategoryForm($form, $subcategory_id);
+        $generalcategory_id = array_key_exists('generalcategory', $data) ? $data['generalcategory'] : null;
+        $this->addCategoryForm($form, $generalcategory_id);
     }
 }

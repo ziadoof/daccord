@@ -39,7 +39,6 @@ class OfferType extends AbstractType
 
         $builder
             ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSubcategoryFieldSubscriber($category))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
             ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
 
