@@ -14,136 +14,236 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $vehicles = ['Car','Motors','Caravan','Boat','Agricultural machinery','Car parts','Motor parts','Vehicle accessories','Other'];
+        $vehicles = ['Car','Motor','Caravan','Boat','Agricultural machinery','Car parts','Motor parts','Vehicle accessories','vehicle_other'];
         foreach ($vehicles as $vehicle){
             $category = new Category();
-            $category->setName($vehicle);
+            if($vehicle === 'vehicle_other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($vehicle);
+            }
+
             $category->setParent($this->getReference('Vehicles'));
+            $this->addReference($vehicle,$category);
             $manager->persist($category);
         }
         $jobs = ['Job opportunity','Translation','Mathematics lessons','Music lessons','Language lessons','Language exchange',
-                 'House work','Maintenance services','Other'];
+                 'House work','Maintenance services','jobs_other'];
         foreach ($jobs as $job){
             $category = new Category();
-            $category->setName($job);
+            if($job === 'jobs_other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($job);
+            }
             $category->setParent($this->getReference('Jobs and services'));
+            $this->addReference($job,$category);
             $manager->persist($category);
         }
 
-        $medias = ['TV','Monitor','Wolkman','Camera','Audio accessories','Camera accessories',
-                   'Headphones','Telephone','Video games','DVD Games','Games accessories','Movies','Books','Other'];
+        $medias = ['TV','Wolkman','Camera','Audio accessories','Camera accessories',
+                   'Headphones','Telephone','Video games','DVD Games','Games accessories','Movies','Books','media_Other'];
         foreach ($medias as $media){
             $category = new Category();
-            $category->setName($media);
+            if($media === 'media_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($media);
+            }
             $category->setParent($this->getReference('Media'));
+            $this->addReference($media,$category);
             $manager->persist($category);
         }
 
-        $medias = ['Computer','laptop','Tablet','Mobile','Scanner','Printer',
-                   'Monitor','Mouse','keyboard','Speaker','Hard disk','Other'];
-        foreach ($medias as $media){
+        $informations = ['Computer','laptop','Tablet','Mobile','Scanner','Printer',
+                   'Monitor','information_mouse','keyboard','Speaker','Hard disk','information_Other'];
+        foreach ($informations as $information){
             $category = new Category();
-            $category->setName($media);
+            if($information === 'information_Other'){
+                $category->setName('Other');
+            }
+            elseif($information === 'information_mouse'){
+                $category->setName('Mouse');
+            }
+            else{
+                $category->setName($information);
+            }
             $category->setParent($this->getReference('Information'));
+            $this->addReference($information,$category);
             $manager->persist($category);
         }
 
         $fashions = ['T-shirt','Shirt','Trouser','Short','Costume','Dress',
-            'Wedding dress','Jacket','Langerie','Shoe','Slide sandal','Athletic shoe','Other'];
+            'Wedding dress','Jacket','Langerie','Shoe','Slide sandal','Athletic shoe','fashion_Other'];
         foreach ($fashions as $fashion){
             $category = new Category();
-            $category->setName($fashion);
+            if($fashion === 'fashion_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($fashion);
+            }
             $category->setParent($this->getReference('Fashion'));
+            $this->addReference($fashion,$category);
             $manager->persist($category);
         }
 
         $homeAppliances = ['Refrigerator','Cookers gas','Cookers electric','Gas plate','Washing machine','Fan','Coffee machine'
                             ,'Electric kettle','Vaccuum cleaner','Oven','Blender','Stand Mixer','Dishwashers','Electric fryer'
                             ,'Freezer','Pressure cooker','Heater','Iron','Men\'s shaver','Lady shavers','Sandwich toaster'
-                            ,'Meat grinder','Grilling charcoal','Hair dryer','Juicer machine','Electric vegetable','Kitchen accessories','Other'];
+                            ,'Meat grinder','Grilling charcoal','Hair dryer','Juicer machine','Electric vegetable','Kitchen accessories','home_Other'];
         foreach ($homeAppliances as $homeAppliance){
             $category = new Category();
-            $category->setName($homeAppliance);
+            if($homeAppliance === 'home_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($homeAppliance);
+            }
             $category->setParent($this->getReference('Home appliances'));
+            $this->addReference($homeAppliance,$category);
             $manager->persist($category);
         }
 
         $gardens = ['Garden table','Swing','Seedlings','Garden chair','Lawn mower','Chainsaw',
-            'Garden tools','Fuelwood','Electric generator','Other'];
+            'Garden tools','Fuelwood','Electric generator','garden_Other'];
         foreach ($gardens as $garden){
             $category = new Category();
-            $category->setName($garden);
+            if($garden === 'garden_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($garden);
+            }
             $category->setParent($this->getReference('Agriculture and gardens'));
+            $this->addReference($garden,$category);
             $manager->persist($category);
         }
 
         $residences = ['Sell house','Sell apartment','Sell office','Sell shop','Sell car parking','Sell farm',
-            'Rent house','Rent apartment','Office rental','Rent  shop','Rent car parking','Rent  farm','Collective housing','Other'];
+            'Rent house','Rent apartment','Office rental','Rent shop','Rent car parking','Rent farm','Collective housing','residence_Other'];
         foreach ($residences as $residence){
             $category = new Category();
-            $category->setName($residence);
+            if($residence === 'residence_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($residence);
+            }
             $category->setParent($this->getReference('Residence'));
+            $this->addReference($residence,$category);
             $manager->persist($category);
         }
         $jewelrys = ['Necklaces','Collier','Bracelet','Ring','Watch','Earrings',
-            'Perfumes','Wine','Other'];
+            'Perfumes','Wine','jewelry_Other'];
         foreach ($jewelrys as $jewelry){
             $category = new Category();
-            $category->setName($jewelry);
+            if($jewelry === 'jewelry_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($jewelry);
+            }
             $category->setParent($this->getReference('Jewelry and accessories'));
+            $this->addReference($jewelry,$category);
             $manager->persist($category);
         }
 
         $musics = ['Piano','Violin','Trumpet','Flute','Clarinet','Drums',
-            'Cello','Contrabass','Electric guitar','Classic guitar','Digital keyboard','Accordion','Music accessories','Other'];
+            'Cello','Contrabass','Electric guitar','Classic guitar','Digital keyboard','Accordion','Music accessories','music_Other'];
         foreach ($musics as $music){
             $category = new Category();
-            $category->setName($music);
+            if($music === 'music_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($music);
+            }
             $category->setParent($this->getReference('Music'));
+            $this->addReference($music,$category);
             $manager->persist($category);
         }
 
         $sports = ['Ski boots','Roller skating','Parachute','Swimming glasses','Football','Basketball',
-            'Iron balls','Volley ball','American football','Sports tool','Bicycle','Bicycle accessories','Other'];
+            'Iron balls','Volley ball','American football','Sports tool','Bicycle','Bicycle accessories','sport_Other'];
         foreach ($sports as $sport){
             $category = new Category();
-            $category->setName($sport);
+            if($sport === 'sport_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($sport);
+            }
             $category->setParent($this->getReference('Sport'));
+            $this->addReference($sport,$category);
             $manager->persist($category);
         }
 
-        $Pets = ['Cat','Dog','Hamster','Mouse','Other'];
+        $Pets = ['Cat','Dog','Hamster','Mouse','pet_Other'];
         foreach ($Pets as $Pet){
             $category = new Category();
-            $category->setName($Pet);
+            if($Pet === 'pet_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($Pet);
+            }
             $category->setParent($this->getReference('Pets'));
+            $this->addReference($Pet,$category);
             $manager->persist($category);
         }
 
-        $kids = ['Crib','Chest of drawers','Stroller','Diapers','Mattress','Baby clothes',
-            'Baby tools','Baby toys','Other'];
+        $kids = ['Crib','kids_Chest of drawers','Stroller','Diapers','kids_Mattress','Baby clothes',
+            'Baby tools','Baby toys','kid_Other'];
         foreach ($kids as $kid){
             $category = new Category();
-            $category->setName($kid);
+            if($kid === 'kid_Other'){
+                $category->setName('Other');
+            }
+            elseif($kid === 'kids_Chest of drawers'){
+                $category->setName('Chest of drawers');
+            }
+            elseif($kid === 'kids_Mattress'){
+                $category->setName('Mattress');
+            }
+            else{
+                $category->setName($kid);
+            }
             $category->setParent($this->getReference('Kids'));
+            $this->addReference($kid,$category);
             $manager->persist($category);
         }
 
         $furnitures = ['Couch','Dining table','Chest of drawers','Closet','Central table','Bed','Mattress'
             ,'Quilt','Carpet','Chair','Office chair','Sofa','Racks','Study table','Click clack','Nightstand','Shoe cabinet'
-            ,'Chandelier','Antic','Painting','Roses','Curtain','Floor lamp','Mirror','Other'];
+            ,'Chandelier','Antic','Painting','Roses','Curtain','Floor lamp','Mirror','furniture_Other'];
         foreach ($furnitures as $furniture){
             $category = new Category();
-            $category->setName($furniture);
+            if($furniture === 'furniture_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($furniture);
+            }
             $category->setParent($this->getReference('Furniture and decorations'));
+            $this->addReference($furniture,$category);
             $manager->persist($category);
         }
 
-        $holidays = ['Camp','Hotel','Cottage','Chalet','Cards and reservations','Other'];
+        $holidays = ['Camp','Hotel','Cottage','Chalet','Cards and reservations','holiday_Other'];
         foreach ($holidays as $holiday){
             $category = new Category();
-            $category->setName($holiday);
+            if($holiday === 'holiday_Other'){
+                $category->setName('Other');
+            }
+            else{
+                $category->setName($holiday);
+            }
             $category->setParent($this->getReference('Holidays'));
+            $this->addReference($holiday,$category);
             $manager->persist($category);
         }
         $manager->flush();

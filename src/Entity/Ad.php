@@ -23,8 +23,10 @@ class Ad
      */
     private $id;
 
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Type("string")
      */
     private $title;
 
@@ -50,6 +52,10 @@ class Ad
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $price;
 
@@ -63,10 +69,7 @@ class Ad
      */
     private $dateOfAd;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withDriver;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -89,9 +92,84 @@ class Ad
 /*-------------------start specification -------------------*/
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $withDriver;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mission;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $theType;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $secondLanguage;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
+     */
+    private $age;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
+     */
+    private $iSize;
+
+    /**
+     * @return mixed
+     */
+    public function getISize()
+    {
+        return $this->iSize;
+    }
+
+    /**
+     * @param mixed $iSize
+     */
+    public function setISize($iSize): void
+    {
+        $this->iSize = $iSize;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSSize()
+    {
+        return $this->sSize;
+    }
+
+    /**
+     * @param mixed $sSize
+     */
+    public function setSSize($sSize): void
+    {
+        $this->sSize = $sSize;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sSize;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $languages = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -101,7 +179,7 @@ class Ad
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $fullPartial;
+    private $workHours;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -196,22 +274,7 @@ class Ad
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $keyboardLanguage;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $analogDigital;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $machinName;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $animalColor;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -221,37 +284,12 @@ class Ad
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $filmName;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $bookName;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $dvdCd;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $languageBookFilm;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $originCountry;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $clothesMaterial;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $clothesSize;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -262,11 +300,6 @@ class Ad
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $shape;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $gazType;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -300,246 +333,342 @@ class Ad
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $salary;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $durationOfLesson;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $maxDistance;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $manufacturingYear;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $maxManufacturingYear;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $minManufacturingYear;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfPassengers;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfDoors;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $kilometer;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $maxKilometer;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $minKilometer;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $processor;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $hddCapacity;
+
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $ram;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $screenSizeCm;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $screenSizeInch;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $capacity;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $accuracy;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $weight;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $caliber;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $maxCaliber;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $minCaliber;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     */
-    private $gauge;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $sizePerfume;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $shoeSize;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $parachuteSize;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $number;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $animalAge;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $width;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $height;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     */
-    private $kidsClothesSize;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfPersson;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $length;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     */
-    private $diapersSize;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $capacitySize;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfDrawer;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfStaging;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfHead;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     */
-    private $washingCapacity;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $ability;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     */
-    private $tiresSize;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $floor;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $area;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $minArea;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $maxArea;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
-    private $roomNumber;
+    private $numberOfRooms;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
-    private $minRoomNumber;
+    private $minNumberOfRooms;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
-    private $maxRoomNumber;
+    private $maxNumberOfRooms;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
      */
     private $numberOfFloors;
 
@@ -566,7 +695,7 @@ class Ad
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $treeInOne;
+    private $threeInOne;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -616,1421 +745,37 @@ class Ad
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $date;
+    private $dateOfEvent;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\City", cascade={"persist", "remove"})
      */
     private $city;
 
-    public function getId(): ?int
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    /**
+     * @return mixed
+     */
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle(?string $title): self
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImageOne(): ?string
-    {
-        return $this->imageOne;
-    }
-
-    public function setImageOne(?string $imageOne): self
-    {
-        $this->imageOne = $imageOne;
-
-        return $this;
-    }
-
-    public function getImageTow(): ?string
-    {
-        return $this->imageTow;
-    }
-
-    public function setImageTow(?string $imageTow): self
-    {
-        $this->imageTow = $imageTow;
-
-        return $this;
-    }
-
-    public function getImageThree(): ?string
-    {
-        return $this->imageThree;
-    }
-
-    public function setImageThree(?string $imageThree): self
-    {
-        $this->imageThree = $imageThree;
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?float $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getDonate(): ?bool
-    {
-        return $this->donate;
-    }
-
-    public function setDonate(?bool $donate): self
-    {
-        $this->donate = $donate;
-
-        return $this;
-    }
-
-    public function getDateOfAd(): ?\DateTimeInterface
-    {
-        return $this->dateOfAd;
-    }
-
-    public function setDateOfAd(\DateTimeInterface $dateOfAd): self
-    {
-        $this->dateOfAd = $dateOfAd;
-
-        return $this;
-    }
-
-    public function getWithDriver(): ?bool
-    {
-        return $this->withDriver;
-    }
-
-    public function setWithDriver(?bool $withDriver): self
-    {
-        $this->withDriver = $withDriver;
-
-        return $this;
-    }
-
-    public function getTypeOfAd(): ?string
-    {
-        return $this->typeOfAd;
-    }
-
-    public function setTypeOfAd(string $typeOfAd): self
-    {
-        $this->typeOfAd = $typeOfAd;
-
-        return $this;
-    }
-
-    public function getMission(): ?string
-    {
-        return $this->mission;
-    }
-
-    public function setMission(?string $mission): self
-    {
-        $this->mission = $mission;
-
-        return $this;
-    }
-
-    public function getAcitvityArea(): ?string
-    {
-        return $this->acitvityArea;
-    }
-
-    public function setAcitvityArea(?string $acitvityArea): self
-    {
-        $this->acitvityArea = $acitvityArea;
-
-        return $this;
-    }
-
-    public function getFullPartial(): ?string
-    {
-        return $this->fullPartial;
-    }
-
-    public function setFullPartial(?string $fullPartial): self
-    {
-        $this->fullPartial = $fullPartial;
-
-        return $this;
-    }
-
-    public function getTypeOfContract(): ?string
-    {
-        return $this->typeOfContract;
-    }
-
-    public function setTypeOfContract(?string $typeOfContract): self
-    {
-        $this->typeOfContract = $typeOfContract;
-
-        return $this;
-    }
-
-    public function getExperience(): ?string
-    {
-        return $this->experience;
-    }
-
-    public function setExperience(?string $experience): self
-    {
-        $this->experience = $experience;
-
-        return $this;
-    }
-
-    public function getLevelOfStudy(): ?string
-    {
-        return $this->levelOfStudy;
-    }
-
-    public function setLevelOfStudy(?string $levelOfStudy): self
-    {
-        $this->levelOfStudy = $levelOfStudy;
-
-        return $this;
-    }
-
-    public function getLanguage(): ?string
-    {
-        return $this->language;
-    }
-
-    public function setLanguage(?string $language): self
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
-    public function getTypeOfTranslation(): ?string
-    {
-        return $this->typeOfTranslation;
-    }
-
-    public function setTypeOfTranslation(?string $typeOfTranslation): self
-    {
-        $this->typeOfTranslation = $typeOfTranslation;
-
-        return $this;
-    }
-
-    public function getMaterial(): ?string
-    {
-        return $this->material;
-    }
-
-    public function setMaterial(?string $material): self
-    {
-        $this->material = $material;
-
-        return $this;
-    }
-
-    public function getPlaceOfLesson(): ?string
-    {
-        return $this->placeOfLesson;
-    }
-
-    public function setPlaceOfLesson(?string $placeOfLesson): self
-    {
-        $this->placeOfLesson = $placeOfLesson;
-
-        return $this;
-    }
-
-    public function getLevelOfStudent(): ?string
-    {
-        return $this->levelOfStudent;
-    }
-
-    public function setLevelOfStudent(?string $levelOfStudent): self
-    {
-        $this->levelOfStudent = $levelOfStudent;
-
-        return $this;
-    }
-
-    public function getBrand(): ?string
-    {
-        return $this->brand;
-    }
-
-    public function setBrand(?string $brand): self
-    {
-        $this->brand = $brand;
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    public function getFuelType(): ?string
-    {
-        return $this->fuelType;
-    }
-
-    public function setFuelType(?string $fuelType): self
-    {
-        $this->fuelType = $fuelType;
-
-        return $this;
-    }
-
-    public function getModel(): ?string
-    {
-        return $this->model;
-    }
-
-    public function setModel(?string $model): self
-    {
-        $this->model = $model;
-
-        return $this;
-    }
-
-    public function getChangeGear(): ?string
-    {
-        return $this->changeGear;
-    }
-
-    public function setChangeGear(?string $changeGear): self
-    {
-        $this->changeGear = $changeGear;
-
-        return $this;
-    }
-
-    public function getManufactureCompany(): ?string
-    {
-        return $this->manufactureCompany;
-    }
-
-    public function setManufactureCompany(?string $manufactureCompany): self
-    {
-        $this->manufactureCompany = $manufactureCompany;
-
-        return $this;
-    }
-
-    public function getGeneralSituation(): ?string
-    {
-        return $this->generalSituation;
-    }
-
-    public function setGeneralSituation(?string $generalSituation): self
-    {
-        $this->generalSituation = $generalSituation;
-
-        return $this;
-    }
-
-    public function getPaperSize(): ?string
-    {
-        return $this->paperSize;
-    }
-
-    public function setPaperSize(?string $paperSize): self
-    {
-        $this->paperSize = $paperSize;
-
-        return $this;
-    }
-
-    public function getPrintingType(): ?string
-    {
-        return $this->printingType;
-    }
-
-    public function setPrintingType(?string $printingType): self
-    {
-        $this->printingType = $printingType;
-
-        return $this;
-    }
-
-    public function getPrintingColor(): ?string
-    {
-        return $this->printingColor;
-    }
-
-    public function setPrintingColor(?string $printingColor): self
-    {
-        $this->printingColor = $printingColor;
-
-        return $this;
-    }
-
-    public function getKeyboardLanguage(): ?string
-    {
-        return $this->keyboardLanguage;
-    }
-
-    public function setKeyboardLanguage(?string $keyboardLanguage): self
-    {
-        $this->keyboardLanguage = $keyboardLanguage;
-
-        return $this;
-    }
-
-    public function getAnalogDigital(): ?string
-    {
-        return $this->analogDigital;
-    }
-
-    public function setAnalogDigital(?string $analogDigital): self
-    {
-        $this->analogDigital = $analogDigital;
-
-        return $this;
-    }
-
-    public function getMachinName(): ?string
-    {
-        return $this->machinName;
-    }
-
-    public function setMachinName(?string $machinName): self
-    {
-        $this->machinName = $machinName;
-
-        return $this;
-    }
-
-    public function getAnimalColor(): ?string
-    {
-        return $this->animalColor;
-    }
-
-    public function setAnimalColor(?string $animalColor): self
-    {
-        $this->animalColor = $animalColor;
-
-        return $this;
-    }
-
-    public function getAnimalSpecies(): ?string
-    {
-        return $this->animalSpecies;
-    }
-
-    public function setAnimalSpecies(?string $animalSpecies): self
-    {
-        $this->animalSpecies = $animalSpecies;
-
-        return $this;
-    }
-
-    public function getFilmName(): ?string
-    {
-        return $this->filmName;
-    }
-
-    public function setFilmName(?string $filmName): self
-    {
-        $this->filmName = $filmName;
-
-        return $this;
-    }
-
-    public function getBookName(): ?string
-    {
-        return $this->bookName;
-    }
-
-    public function setBookName(?string $bookName): self
-    {
-        $this->bookName = $bookName;
-
-        return $this;
-    }
-
-    public function getDvdCd(): ?string
-    {
-        return $this->dvdCd;
-    }
-
-    public function setDvdCd(?string $dvdCd): self
-    {
-        $this->dvdCd = $dvdCd;
-
-        return $this;
-    }
-
-    public function getLanguageBookFilm(): ?string
-    {
-        return $this->languageBookFilm;
-    }
-
-    public function setLanguageBookFilm(?string $languageBookFilm): self
-    {
-        $this->languageBookFilm = $languageBookFilm;
-
-        return $this;
-    }
-
-    public function getOriginCountry(): ?string
-    {
-        return $this->originCountry;
-    }
-
-    public function setOriginCountry(?string $originCountry): self
-    {
-        $this->originCountry = $originCountry;
-
-        return $this;
-    }
-
-    public function getClothesMaterial(): ?string
-    {
-        return $this->clothesMaterial;
-    }
-
-    public function setClothesMaterial(?string $clothesMaterial): self
-    {
-        $this->clothesMaterial = $clothesMaterial;
-
-        return $this;
-    }
-
-    public function getClothesSize(): ?string
-    {
-        return $this->clothesSize;
-    }
-
-    public function setClothesSize(?string $clothesSize): self
-    {
-        $this->clothesSize = $clothesSize;
-
-        return $this;
-    }
-
-    public function getCoverMaterial(): ?string
-    {
-        return $this->coverMaterial;
-    }
-
-    public function setCoverMaterial(?string $coverMaterial): self
-    {
-        $this->coverMaterial = $coverMaterial;
-
-        return $this;
-    }
-
-    public function getShape(): ?string
-    {
-        return $this->shape;
-    }
-
-    public function setShape(?string $shape): self
-    {
-        $this->shape = $shape;
-
-        return $this;
-    }
-
-    public function getGazType(): ?string
-    {
-        return $this->gazType;
-    }
-
-    public function setGazType(?string $gazType): self
-    {
-        $this->gazType = $gazType;
-
-        return $this;
-    }
-
-    public function getHeating(): ?string
-    {
-        return $this->heating;
-    }
-
-    public function setHeating(?string $heating): self
-    {
-        $this->heating = $heating;
-
-        return $this;
-    }
-
-    public function getHeatingType(): ?string
-    {
-        return $this->heatingType;
-    }
-
-    public function setHeatingType(?string $heatingType): self
-    {
-        $this->heatingType = $heatingType;
-
-        return $this;
-    }
-
-    public function getClassEnergie(): ?string
-    {
-        return $this->classEnergie;
-    }
-
-    public function setClassEnergie(?string $classEnergie): self
-    {
-        $this->classEnergie = $classEnergie;
-
-        return $this;
-    }
-
-    public function getGes(): ?string
-    {
-        return $this->ges;
-    }
-
-    public function setGes(?string $ges): self
-    {
-        $this->ges = $ges;
-
-        return $this;
-    }
-
-    public function getEventType(): ?string
-    {
-        return $this->eventType;
-    }
-
-    public function setEventType(?string $eventType): self
-    {
-        $this->eventType = $eventType;
-
-        return $this;
-    }
-
-    public function getSubjectName(): ?string
-    {
-        return $this->subjectName;
-    }
-
-    public function setSubjectName(?string $subjectName): self
-    {
-        $this->subjectName = $subjectName;
-
-        return $this;
-    }
-
-    public function getSalary(): ?int
-    {
-        return $this->salary;
-    }
-
-    public function setSalary(?int $salary): self
-    {
-        $this->salary = $salary;
-
-        return $this;
-    }
-
-    public function getDurationOfLesson(): ?int
-    {
-        return $this->durationOfLesson;
-    }
-
-    public function setDurationOfLesson(?int $durationOfLesson): self
-    {
-        $this->durationOfLesson = $durationOfLesson;
-
-        return $this;
-    }
-
-    public function getMaxDistance(): ?int
-    {
-        return $this->maxDistance;
-    }
-
-    public function setMaxDistance(?int $maxDistance): self
-    {
-        $this->maxDistance = $maxDistance;
-
-        return $this;
-    }
-
-    public function getManufacturingYear(): ?int
-    {
-        return $this->manufacturingYear;
-    }
-
-    public function setManufacturingYear(?int $manufacturingYear): self
-    {
-        $this->manufacturingYear = $manufacturingYear;
-
-        return $this;
-    }
-
-    public function getMaxManufacturingYear(): ?int
-    {
-        return $this->maxManufacturingYear;
-    }
-
-    public function setMaxManufacturingYear(?int $maxManufacturingYear): self
-    {
-        $this->maxManufacturingYear = $maxManufacturingYear;
-
-        return $this;
-    }
-
-    public function getMinManufacturingYear(): ?int
-    {
-        return $this->minManufacturingYear;
-    }
-
-    public function setMinManufacturingYear(?int $minManufacturingYear): self
-    {
-        $this->minManufacturingYear = $minManufacturingYear;
-
-        return $this;
-    }
-
-    public function getNumberOfPassengers(): ?int
-    {
-        return $this->numberOfPassengers;
-    }
-
-    public function setNumberOfPassengers(?int $numberOfPassengers): self
-    {
-        $this->numberOfPassengers = $numberOfPassengers;
-
-        return $this;
-    }
-
-    public function getNumberOfDoors(): ?int
-    {
-        return $this->numberOfDoors;
-    }
-
-    public function setNumberOfDoors(?int $numberOfDoors): self
-    {
-        $this->numberOfDoors = $numberOfDoors;
-
-        return $this;
-    }
-
-    public function getKilometer(): ?int
-    {
-        return $this->kilometer;
-    }
-
-    public function setKilometer(?int $kilometer): self
-    {
-        $this->kilometer = $kilometer;
-
-        return $this;
-    }
-
-    public function getMaxKilometer(): ?int
-    {
-        return $this->maxKilometer;
-    }
-
-    public function setMaxKilometer(?int $maxKilometer): self
-    {
-        $this->maxKilometer = $maxKilometer;
-
-        return $this;
-    }
-
-    public function getMinKilometer(): ?int
-    {
-        return $this->minKilometer;
-    }
-
-    public function setMinKilometer(?int $minKilometer): self
-    {
-        $this->minKilometer = $minKilometer;
-
-        return $this;
-    }
-
-    public function getProcessor(): ?int
-    {
-        return $this->processor;
-    }
-
-    public function setProcessor(?int $processor): self
-    {
-        $this->processor = $processor;
-
-        return $this;
-    }
-
-    public function getHddCapacity(): ?int
-    {
-        return $this->hddCapacity;
-    }
-
-    public function setHddCapacity(?int $hddCapacity): self
-    {
-        $this->hddCapacity = $hddCapacity;
-
-        return $this;
-    }
-
-    public function getRam(): ?int
-    {
-        return $this->ram;
     }
 
-    public function setRam(?int $ram): self
-    {
-        $this->ram = $ram;
-
-        return $this;
-    }
-
-    public function getScreenSizeCm(): ?int
-    {
-        return $this->screenSizeCm;
-    }
-
-    public function setScreenSizeCm(?int $screenSizeCm): self
-    {
-        $this->screenSizeCm = $screenSizeCm;
-
-        return $this;
-    }
-
-    public function getScreenSizeInch(): ?int
-    {
-        return $this->screenSizeInch;
-    }
-
-    public function setScreenSizeInch(?int $screenSizeInch): self
-    {
-        $this->screenSizeInch = $screenSizeInch;
-
-        return $this;
-    }
-
-    public function getCapacity(): ?int
-    {
-        return $this->capacity;
-    }
-
-    public function setCapacity(?int $capacity): self
-    {
-        $this->capacity = $capacity;
-
-        return $this;
-    }
-
-    public function getAccuracy(): ?int
-    {
-        return $this->accuracy;
-    }
-
-    public function setAccuracy(?int $accuracy): self
-    {
-        $this->accuracy = $accuracy;
-
-        return $this;
-    }
-
-    public function getWeight(): ?int
-    {
-        return $this->weight;
-    }
-
-    public function setWeight(?int $weight): self
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
-    public function getCaliber(): ?int
-    {
-        return $this->caliber;
-    }
-
-    public function setCaliber(?int $caliber): self
-    {
-        $this->caliber = $caliber;
-
-        return $this;
-    }
-
-    public function getMaxCaliber(): ?int
-    {
-        return $this->maxCaliber;
-    }
-
-    public function setMaxCaliber(?int $maxCaliber): self
-    {
-        $this->maxCaliber = $maxCaliber;
-
-        return $this;
-    }
-
-    public function getMinCaliber(): ?int
-    {
-        return $this->minCaliber;
-    }
-
-    public function setMinCaliber(?int $minCaliber): self
-    {
-        $this->minCaliber = $minCaliber;
-
-        return $this;
-    }
-
-    public function getGauge(): ?int
-    {
-        return $this->gauge;
-    }
-
-    public function setGauge(?int $gauge): self
-    {
-        $this->gauge = $gauge;
-
-        return $this;
-    }
-
-    public function getSizePerfume(): ?int
-    {
-        return $this->sizePerfume;
-    }
-
-    public function setSizePerfume(?int $sizePerfume): self
-    {
-        $this->sizePerfume = $sizePerfume;
-
-        return $this;
-    }
-
-    public function getShoeSize(): ?int
-    {
-        return $this->shoeSize;
-    }
-
-    public function setShoeSize(?int $shoeSize): self
-    {
-        $this->shoeSize = $shoeSize;
-
-        return $this;
-    }
-
-    public function getParachuteSize(): ?int
-    {
-        return $this->parachuteSize;
-    }
-
-    public function setParachuteSize(?int $parachuteSize): self
-    {
-        $this->parachuteSize = $parachuteSize;
-
-        return $this;
-    }
-
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(?int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    public function getAnimalAge(): ?int
-    {
-        return $this->animalAge;
-    }
-
-    public function setAnimalAge(?int $animalAge): self
-    {
-        $this->animalAge = $animalAge;
-
-        return $this;
-    }
-
-    public function getWidth(): ?int
-    {
-        return $this->width;
-    }
-
-    public function setWidth(?int $width): self
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    public function getHeight(): ?int
-    {
-        return $this->height;
-    }
-
-    public function setHeight(?int $height): self
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    public function getKidsClothesSize(): ?int
-    {
-        return $this->kidsClothesSize;
-    }
-
-    public function setKidsClothesSize(?int $kidsClothesSize): self
-    {
-        $this->kidsClothesSize = $kidsClothesSize;
-
-        return $this;
-    }
-
-    public function getNumberOfPersson(): ?int
-    {
-        return $this->numberOfPersson;
-    }
-
-    public function setNumberOfPersson(?int $numberOfPersson): self
-    {
-        $this->numberOfPersson = $numberOfPersson;
-
-        return $this;
-    }
-
-    public function getLength(): ?int
-    {
-        return $this->length;
-    }
-
-    public function setLength(?int $length): self
-    {
-        $this->length = $length;
-
-        return $this;
-    }
-
-    public function getDiapersSize(): ?int
-    {
-        return $this->diapersSize;
-    }
-
-    public function setDiapersSize(?int $diapersSize): self
-    {
-        $this->diapersSize = $diapersSize;
-
-        return $this;
-    }
-
-    public function getCapacitySize(): ?int
-    {
-        return $this->capacitySize;
-    }
-
-    public function setCapacitySize(?int $capacitySize): self
-    {
-        $this->capacitySize = $capacitySize;
-
-        return $this;
-    }
-
-    public function getNumberOfDrawer(): ?int
-    {
-        return $this->numberOfDrawer;
-    }
-
-    public function setNumberOfDrawer(?int $numberOfDrawer): self
-    {
-        $this->numberOfDrawer = $numberOfDrawer;
-
-        return $this;
-    }
-
-    public function getNumberOfStaging(): ?int
-    {
-        return $this->numberOfStaging;
-    }
-
-    public function setNumberOfStaging(?int $numberOfStaging): self
-    {
-        $this->numberOfStaging = $numberOfStaging;
-
-        return $this;
-    }
-
-    public function getNumberOfHead(): ?int
-    {
-        return $this->numberOfHead;
-    }
-
-    public function setNumberOfHead(?int $numberOfHead): self
-    {
-        $this->numberOfHead = $numberOfHead;
-
-        return $this;
-    }
-
-    public function getWashingCapacity(): ?int
-    {
-        return $this->washingCapacity;
-    }
-
-    public function setWashingCapacity(?int $washingCapacity): self
-    {
-        $this->washingCapacity = $washingCapacity;
-
-        return $this;
-    }
-
-    public function getAbility(): ?int
-    {
-        return $this->ability;
-    }
-
-    public function setAbility(?int $ability): self
-    {
-        $this->ability = $ability;
-
-        return $this;
-    }
-
-    public function getTiresSize(): ?int
-    {
-        return $this->tiresSize;
-    }
-
-    public function setTiresSize(?int $tiresSize): self
-    {
-        $this->tiresSize = $tiresSize;
-
-        return $this;
-    }
-
-    public function getFloor(): ?int
-    {
-        return $this->floor;
-    }
-
-    public function setFloor(?int $floor): self
-    {
-        $this->floor = $floor;
-
-        return $this;
-    }
-
-    public function getArea(): ?int
-    {
-        return $this->area;
-    }
-
-    public function setArea(?int $area): self
-    {
-        $this->area = $area;
-
-        return $this;
-    }
-
-    public function getMinArea(): ?int
-    {
-        return $this->minArea;
-    }
-
-    public function setMinArea(?int $minArea): self
-    {
-        $this->minArea = $minArea;
-
-        return $this;
-    }
-
-    public function getMaxArea(): ?int
-    {
-        return $this->maxArea;
-    }
-
-    public function setMaxArea(?int $maxArea): self
-    {
-        $this->maxArea = $maxArea;
-
-        return $this;
-    }
-
-    public function getRoomNumber(): ?int
-    {
-        return $this->roomNumber;
-    }
-
-    public function setRoomNumber(?int $roomNumber): self
-    {
-        $this->roomNumber = $roomNumber;
-
-        return $this;
-    }
-
-    public function getMinRoomNumber(): ?int
-    {
-        return $this->minRoomNumber;
-    }
-
-    public function setMinRoomNumber(?int $minRoomNumber): self
-    {
-        $this->minRoomNumber = $minRoomNumber;
-
-        return $this;
-    }
-
-    public function getMaxRoomNumber(): ?int
-    {
-        return $this->maxRoomNumber;
-    }
-
-    public function setMaxRoomNumber(?int $maxRoomNumber): self
-    {
-        $this->maxRoomNumber = $maxRoomNumber;
-
-        return $this;
-    }
-
-    public function getNumberOfFloors(): ?int
-    {
-        return $this->numberOfFloors;
-    }
-
-    public function setNumberOfFloors(?int $numberOfFloors): self
-    {
-        $this->numberOfFloors = $numberOfFloors;
-
-        return $this;
-    }
-
-    public function getHdmi(): ?bool
-    {
-        return $this->hdmi;
-    }
-
-    public function setHdmi(?bool $hdmi): self
-    {
-        $this->hdmi = $hdmi;
-
-        return $this;
-    }
-
-    public function getCdRoom(): ?bool
-    {
-        return $this->cdRoom;
-    }
-
-    public function setCdRoom(?bool $cdRoom): self
-    {
-        $this->cdRoom = $cdRoom;
-
-        return $this;
-    }
-
-    public function getWifi(): ?bool
-    {
-        return $this->wifi;
-    }
-
-    public function setWifi(?bool $wifi): self
-    {
-        $this->wifi = $wifi;
-
-        return $this;
-    }
-
-    public function getUsb(): ?bool
-    {
-        return $this->usb;
-    }
-
-    public function setUsb(?bool $usb): self
-    {
-        $this->usb = $usb;
-
-        return $this;
-    }
-
-    public function getTreeInOne(): ?bool
-    {
-        return $this->treeInOne;
-    }
-
-    public function setTreeInOne(?bool $treeInOne): self
-    {
-        $this->treeInOne = $treeInOne;
-
-        return $this;
-    }
-
-    public function getAccessories(): ?bool
-    {
-        return $this->accessories;
-    }
-
-    public function setAccessories(?bool $accessories): self
-    {
-        $this->accessories = $accessories;
-
-        return $this;
-    }
-
-    public function getWithFreezer(): ?bool
-    {
-        return $this->withFreezer;
-    }
-
-    public function setWithFreezer(?bool $withFreezer): self
-    {
-        $this->withFreezer = $withFreezer;
-
-        return $this;
-    }
-
-    public function getElectricHead(): ?bool
-    {
-        return $this->electricHead;
-    }
-
-    public function setElectricHead(?bool $electricHead): self
-    {
-        $this->electricHead = $electricHead;
-
-        return $this;
-    }
-
-    public function getWithOven(): ?bool
-    {
-        return $this->withOven;
-    }
-
-    public function setWithOven(?bool $withOven): self
-    {
-        $this->withOven = $withOven;
-
-        return $this;
-    }
-
-    public function getCovered(): ?bool
-    {
-        return $this->covered;
-    }
-
-    public function setCovered(?bool $covered): self
-    {
-        $this->covered = $covered;
-
-        return $this;
-    }
-
-    public function getWithFurniture(): ?bool
-    {
-        return $this->withFurniture;
-    }
-
-    public function setWithFurniture(?bool $withFurniture): self
-    {
-        $this->withFurniture = $withFurniture;
-
-        return $this;
-    }
-
-    public function getWithGarden(): ?bool
-    {
-        return $this->withGarden;
-    }
-
-    public function setWithGarden(?bool $withGarden): self
-    {
-        $this->withGarden = $withGarden;
-
-        return $this;
-    }
-
-    public function getWithVerandah(): ?bool
-    {
-        return $this->withVerandah;
-    }
-
-    public function setWithVerandah(?bool $withVerandah): self
-    {
-        $this->withVerandah = $withVerandah;
-
-        return $this;
-    }
-
-    public function getWithElevator(): ?bool
-    {
-        return $this->withElevator;
-    }
-
-    public function setWithElevator(?bool $withElevator): self
-    {
-        $this->withElevator = $withElevator;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(?\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getSpecification(): ?Specification
-    {
-        return $this->specification;
-    }
-
-    public function setSpecification(?Specification $specification): self
-    {
-        $this->specification = $specification;
-
-        return $this;
-    }
 
     public function getCategory(): ?Category
     {
@@ -2068,12 +813,1596 @@ class Ad
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageOne()
+    {
+        return $this->imageOne;
+    }
+
+    /**
+     * @param mixed $imageOne
+     */
+    public function setImageOne($imageOne): void
+    {
+        $this->imageOne = $imageOne;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageTow()
+    {
+        return $this->imageTow;
+    }
+
+    /**
+     * @param mixed $imageTow
+     */
+    public function setImageTow($imageTow): void
+    {
+        $this->imageTow = $imageTow;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageThree()
+    {
+        return $this->imageThree;
+    }
+
+    /**
+     * @param mixed $imageThree
+     */
+    public function setImageThree($imageThree): void
+    {
+        $this->imageThree = $imageThree;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price): void
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDonate()
+    {
+        return $this->donate;
+    }
+
+    /**
+     * @param mixed $donate
+     */
+    public function setDonate($donate): void
+    {
+        $this->donate = $donate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateOfAd()
+    {
+        return $this->dateOfAd;
+    }
+
+    /**
+     * @param mixed $dateOfAd
+     */
+    public function setDateOfAd($dateOfAd): void
+    {
+        $this->dateOfAd = $dateOfAd;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeOfAd()
+    {
+        return $this->typeOfAd;
+    }
+
+    /**
+     * @param mixed $typeOfAd
+     */
+    public function setTypeOfAd($typeOfAd): void
+    {
+        $this->typeOfAd = $typeOfAd;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithDriver()
+    {
+        return $this->withDriver;
+    }
+
+    /**
+     * @param mixed $withDriver
+     */
+    public function setWithDriver($withDriver): void
+    {
+        $this->withDriver = $withDriver;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMission()
+    {
+        return $this->mission;
+    }
+
+    /**
+     * @param mixed $mission
+     */
+    public function setMission($mission): void
+    {
+        $this->mission = $mission;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTheType()
+    {
+        return $this->theType;
+    }
+
+    /**
+     * @param mixed $theType
+     */
+    public function setTheType($theType): void
+    {
+        $this->theType = $theType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSecondLanguage()
+    {
+        return $this->secondLanguage;
+    }
+
+    /**
+     * @param mixed $secondLanguage
+     */
+    public function setSecondLanguage($secondLanguage): void
+    {
+        $this->secondLanguage = $secondLanguage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param mixed $age
+     */
+    public function setAge($age): void
+    {
+        $this->age = $age;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguages()
+    {
+        return $this->languages;
+    }
+
+    /**
+     * @param mixed $languages
+     */
+    public function setLanguages($languages): void
+    {
+        $this->languages = $languages;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAcitvityArea()
+    {
+        return $this->acitvityArea;
+    }
+
+    /**
+     * @param mixed $acitvityArea
+     */
+    public function setAcitvityArea($acitvityArea): void
+    {
+        $this->acitvityArea = $acitvityArea;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeOfContract()
+    {
+        return $this->typeOfContract;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkHours()
+    {
+        return $this->workHours;
+    }
+
+    /**
+     * @param mixed $workHours
+     */
+    public function setWorkHours($workHours): void
+    {
+        $this->workHours = $workHours;
+    }
+
+    /**
+     * @param mixed $typeOfContract
+     */
+    public function setTypeOfContract($typeOfContract): void
+    {
+        $this->typeOfContract = $typeOfContract;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * @param mixed $experience
+     */
+    public function setExperience($experience): void
+    {
+        $this->experience = $experience;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevelOfStudy()
+    {
+        return $this->levelOfStudy;
+    }
+
+    /**
+     * @param mixed $levelOfStudy
+     */
+    public function setLevelOfStudy($levelOfStudy): void
+    {
+        $this->levelOfStudy = $levelOfStudy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     */
+    public function setLanguage($language): void
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeOfTranslation()
+    {
+        return $this->typeOfTranslation;
+    }
+
+    /**
+     * @param mixed $typeOfTranslation
+     */
+    public function setTypeOfTranslation($typeOfTranslation): void
+    {
+        $this->typeOfTranslation = $typeOfTranslation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaterial()
+    {
+        return $this->material;
+    }
+
+    /**
+     * @param mixed $material
+     */
+    public function setMaterial($material): void
+    {
+        $this->material = $material;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlaceOfLesson()
+    {
+        return $this->placeOfLesson;
+    }
+
+    /**
+     * @param mixed $placeOfLesson
+     */
+    public function setPlaceOfLesson($placeOfLesson): void
+    {
+        $this->placeOfLesson = $placeOfLesson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevelOfStudent()
+    {
+        return $this->levelOfStudent;
+    }
+
+    /**
+     * @param mixed $levelOfStudent
+     */
+    public function setLevelOfStudent($levelOfStudent): void
+    {
+        $this->levelOfStudent = $levelOfStudent;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param mixed $brand
+     */
+    public function setBrand($brand): void
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param mixed $color
+     */
+    public function setColor($color): void
+    {
+        $this->color = $color;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFuelType()
+    {
+        return $this->fuelType;
+    }
+
+    /**
+     * @param mixed $fuelType
+     */
+    public function setFuelType($fuelType): void
+    {
+        $this->fuelType = $fuelType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param mixed $model
+     */
+    public function setModel($model): void
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChangeGear()
+    {
+        return $this->changeGear;
+    }
+
+    /**
+     * @param mixed $changeGear
+     */
+    public function setChangeGear($changeGear): void
+    {
+        $this->changeGear = $changeGear;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManufactureCompany()
+    {
+        return $this->manufactureCompany;
+    }
+
+    /**
+     * @param mixed $manufactureCompany
+     */
+    public function setManufactureCompany($manufactureCompany): void
+    {
+        $this->manufactureCompany = $manufactureCompany;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGeneralSituation()
+    {
+        return $this->generalSituation;
+    }
+
+    /**
+     * @param mixed $generalSituation
+     */
+    public function setGeneralSituation($generalSituation): void
+    {
+        $this->generalSituation = $generalSituation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaperSize()
+    {
+        return $this->paperSize;
+    }
+
+    /**
+     * @param mixed $paperSize
+     */
+    public function setPaperSize($paperSize): void
+    {
+        $this->paperSize = $paperSize;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrintingType()
+    {
+        return $this->printingType;
+    }
+
+    /**
+     * @param mixed $printingType
+     */
+    public function setPrintingType($printingType): void
+    {
+        $this->printingType = $printingType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrintingColor()
+    {
+        return $this->printingColor;
+    }
+
+    /**
+     * @param mixed $printingColor
+     */
+    public function setPrintingColor($printingColor): void
+    {
+        $this->printingColor = $printingColor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnalogDigital()
+    {
+        return $this->analogDigital;
+    }
+
+    /**
+     * @param mixed $analogDigital
+     */
+    public function setAnalogDigital($analogDigital): void
+    {
+        $this->analogDigital = $analogDigital;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnimalSpecies()
+    {
+        return $this->animalSpecies;
+    }
+
+    /**
+     * @param mixed $animalSpecies
+     */
+    public function setAnimalSpecies($animalSpecies): void
+    {
+        $this->animalSpecies = $animalSpecies;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDvdCd()
+    {
+        return $this->dvdCd;
+    }
+
+    /**
+     * @param mixed $dvdCd
+     */
+    public function setDvdCd($dvdCd): void
+    {
+        $this->dvdCd = $dvdCd;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginCountry()
+    {
+        return $this->originCountry;
+    }
+
+    /**
+     * @param mixed $originCountry
+     */
+    public function setOriginCountry($originCountry): void
+    {
+        $this->originCountry = $originCountry;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoverMaterial()
+    {
+        return $this->coverMaterial;
+    }
+
+    /**
+     * @param mixed $coverMaterial
+     */
+    public function setCoverMaterial($coverMaterial): void
+    {
+        $this->coverMaterial = $coverMaterial;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShape()
+    {
+        return $this->shape;
+    }
+
+    /**
+     * @param mixed $shape
+     */
+    public function setShape($shape): void
+    {
+        $this->shape = $shape;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeating()
+    {
+        return $this->heating;
+    }
+
+    /**
+     * @param mixed $heating
+     */
+    public function setHeating($heating): void
+    {
+        $this->heating = $heating;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeatingType()
+    {
+        return $this->heatingType;
+    }
+
+    /**
+     * @param mixed $heatingType
+     */
+    public function setHeatingType($heatingType): void
+    {
+        $this->heatingType = $heatingType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClassEnergie()
+    {
+        return $this->classEnergie;
+    }
+
+    /**
+     * @param mixed $classEnergie
+     */
+    public function setClassEnergie($classEnergie): void
+    {
+        $this->classEnergie = $classEnergie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGes()
+    {
+        return $this->ges;
+    }
+
+    /**
+     * @param mixed $ges
+     */
+    public function setGes($ges): void
+    {
+        $this->ges = $ges;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEventType()
+    {
+        return $this->eventType;
+    }
+
+    /**
+     * @param mixed $eventType
+     */
+    public function setEventType($eventType): void
+    {
+        $this->eventType = $eventType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubjectName()
+    {
+        return $this->subjectName;
+    }
+
+    /**
+     * @param mixed $subjectName
+     */
+    public function setSubjectName($subjectName): void
+    {
+        $this->subjectName = $subjectName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalary()
+    {
+        return $this->salary;
+    }
+
+    /**
+     * @param mixed $salary
+     */
+    public function setSalary($salary): void
+    {
+        $this->salary = $salary;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDurationOfLesson()
+    {
+        return $this->durationOfLesson;
+    }
+
+    /**
+     * @param mixed $durationOfLesson
+     */
+    public function setDurationOfLesson($durationOfLesson): void
+    {
+        $this->durationOfLesson = $durationOfLesson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxDistance()
+    {
+        return $this->maxDistance;
+    }
+
+    /**
+     * @param mixed $maxDistance
+     */
+    public function setMaxDistance($maxDistance): void
+    {
+        $this->maxDistance = $maxDistance;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManufacturingYear()
+    {
+        return $this->manufacturingYear;
+    }
+
+    /**
+     * @param mixed $manufacturingYear
+     */
+    public function setManufacturingYear($manufacturingYear): void
+    {
+        $this->manufacturingYear = $manufacturingYear;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxManufacturingYear()
+    {
+        return $this->maxManufacturingYear;
+    }
+
+    /**
+     * @param mixed $maxManufacturingYear
+     */
+    public function setMaxManufacturingYear($maxManufacturingYear): void
+    {
+        $this->maxManufacturingYear = $maxManufacturingYear;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinManufacturingYear()
+    {
+        return $this->minManufacturingYear;
+    }
+
+    /**
+     * @param mixed $minManufacturingYear
+     */
+    public function setMinManufacturingYear($minManufacturingYear): void
+    {
+        $this->minManufacturingYear = $minManufacturingYear;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfPassengers()
+    {
+        return $this->numberOfPassengers;
+    }
+
+    /**
+     * @param mixed $numberOfPassengers
+     */
+    public function setNumberOfPassengers($numberOfPassengers): void
+    {
+        $this->numberOfPassengers = $numberOfPassengers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfDoors()
+    {
+        return $this->numberOfDoors;
+    }
+
+    /**
+     * @param mixed $numberOfDoors
+     */
+    public function setNumberOfDoors($numberOfDoors): void
+    {
+        $this->numberOfDoors = $numberOfDoors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKilometer()
+    {
+        return $this->kilometer;
+    }
+
+    /**
+     * @param mixed $kilometer
+     */
+    public function setKilometer($kilometer): void
+    {
+        $this->kilometer = $kilometer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxKilometer()
+    {
+        return $this->maxKilometer;
+    }
+
+    /**
+     * @param mixed $maxKilometer
+     */
+    public function setMaxKilometer($maxKilometer): void
+    {
+        $this->maxKilometer = $maxKilometer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinKilometer()
+    {
+        return $this->minKilometer;
+    }
+
+    /**
+     * @param mixed $minKilometer
+     */
+    public function setMinKilometer($minKilometer): void
+    {
+        $this->minKilometer = $minKilometer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProcessor()
+    {
+        return $this->processor;
+    }
+
+    /**
+     * @param mixed $processor
+     */
+    public function setProcessor($processor): void
+    {
+        $this->processor = $processor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRam()
+    {
+        return $this->ram;
+    }
+
+    /**
+     * @param mixed $ram
+     */
+    public function setRam($ram): void
+    {
+        $this->ram = $ram;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScreenSizeCm()
+    {
+        return $this->screenSizeCm;
+    }
+
+    /**
+     * @param mixed $screenSizeCm
+     */
+    public function setScreenSizeCm($screenSizeCm): void
+    {
+        $this->screenSizeCm = $screenSizeCm;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScreenSizeInch()
+    {
+        return $this->screenSizeInch;
+    }
+
+    /**
+     * @param mixed $screenSizeInch
+     */
+    public function setScreenSizeInch($screenSizeInch): void
+    {
+        $this->screenSizeInch = $screenSizeInch;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCapacity()
+    {
+        return $this->capacity;
+    }
+
+    /**
+     * @param mixed $capacity
+     */
+    public function setCapacity($capacity): void
+    {
+        $this->capacity = $capacity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccuracy()
+    {
+        return $this->accuracy;
+    }
+
+    /**
+     * @param mixed $accuracy
+     */
+    public function setAccuracy($accuracy): void
+    {
+        $this->accuracy = $accuracy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param mixed $weight
+     */
+    public function setWeight($weight): void
+    {
+        $this->weight = $weight;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCaliber()
+    {
+        return $this->caliber;
+    }
+
+    /**
+     * @param mixed $caliber
+     */
+    public function setCaliber($caliber): void
+    {
+        $this->caliber = $caliber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxCaliber()
+    {
+        return $this->maxCaliber;
+    }
+
+    /**
+     * @param mixed $maxCaliber
+     */
+    public function setMaxCaliber($maxCaliber): void
+    {
+        $this->maxCaliber = $maxCaliber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinCaliber()
+    {
+        return $this->minCaliber;
+    }
+
+    /**
+     * @param mixed $minCaliber
+     */
+    public function setMinCaliber($minCaliber): void
+    {
+        $this->minCaliber = $minCaliber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param mixed $number
+     */
+    public function setNumber($number): void
+    {
+        $this->number = $number;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * @param mixed $width
+     */
+    public function setWidth($width): void
+    {
+        $this->width = $width;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param mixed $height
+     */
+    public function setHeight($height): void
+    {
+        $this->height = $height;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfPersson()
+    {
+        return $this->numberOfPersson;
+    }
+
+    /**
+     * @param mixed $numberOfPersson
+     */
+    public function setNumberOfPersson($numberOfPersson): void
+    {
+        $this->numberOfPersson = $numberOfPersson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @param mixed $length
+     */
+    public function setLength($length): void
+    {
+        $this->length = $length;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfDrawer()
+    {
+        return $this->numberOfDrawer;
+    }
+
+    /**
+     * @param mixed $numberOfDrawer
+     */
+    public function setNumberOfDrawer($numberOfDrawer): void
+    {
+        $this->numberOfDrawer = $numberOfDrawer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfStaging()
+    {
+        return $this->numberOfStaging;
+    }
+
+    /**
+     * @param mixed $numberOfStaging
+     */
+    public function setNumberOfStaging($numberOfStaging): void
+    {
+        $this->numberOfStaging = $numberOfStaging;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfHead()
+    {
+        return $this->numberOfHead;
+    }
+
+    /**
+     * @param mixed $numberOfHead
+     */
+    public function setNumberOfHead($numberOfHead): void
+    {
+        $this->numberOfHead = $numberOfHead;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbility()
+    {
+        return $this->ability;
+    }
+
+    /**
+     * @param mixed $ability
+     */
+    public function setAbility($ability): void
+    {
+        $this->ability = $ability;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFloor()
+    {
+        return $this->floor;
+    }
+
+    /**
+     * @param mixed $floor
+     */
+    public function setFloor($floor): void
+    {
+        $this->floor = $floor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
+     * @param mixed $area
+     */
+    public function setArea($area): void
+    {
+        $this->area = $area;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinArea()
+    {
+        return $this->minArea;
+    }
+
+    /**
+     * @param mixed $minArea
+     */
+    public function setMinArea($minArea): void
+    {
+        $this->minArea = $minArea;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxArea()
+    {
+        return $this->maxArea;
+    }
+
+    /**
+     * @param mixed $maxArea
+     */
+    public function setMaxArea($maxArea): void
+    {
+        $this->maxArea = $maxArea;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfRooms()
+    {
+        return $this->numberOfRooms;
+    }
+
+    /**
+     * @param mixed $numberOfRooms
+     */
+    public function setNumberOfRooms($numberOfRooms): void
+    {
+        $this->numberOfRooms = $numberOfRooms;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinNumberOfRooms()
+    {
+        return $this->minNumberOfRooms;
+    }
+
+    /**
+     * @param mixed $minNumberOfRooms
+     */
+    public function setMinNumberOfRooms($minNumberOfRooms): void
+    {
+        $this->minNumberOfRooms = $minNumberOfRooms;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxNumberOfRooms()
+    {
+        return $this->maxNumberOfRooms;
+    }
+
+    /**
+     * @param mixed $maxNumberOfRooms
+     */
+    public function setMaxNumberOfRooms($maxNumberOfRooms): void
+    {
+        $this->maxNumberOfRooms = $maxNumberOfRooms;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfFloors()
+    {
+        return $this->numberOfFloors;
+    }
+
+    /**
+     * @param mixed $numberOfFloors
+     */
+    public function setNumberOfFloors($numberOfFloors): void
+    {
+        $this->numberOfFloors = $numberOfFloors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHdmi()
+    {
+        return $this->hdmi;
+    }
+
+    /**
+     * @param mixed $hdmi
+     */
+    public function setHdmi($hdmi): void
+    {
+        $this->hdmi = $hdmi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdRoom()
+    {
+        return $this->cdRoom;
+    }
+
+    /**
+     * @param mixed $cdRoom
+     */
+    public function setCdRoom($cdRoom): void
+    {
+        $this->cdRoom = $cdRoom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWifi()
+    {
+        return $this->wifi;
+    }
+
+    /**
+     * @param mixed $wifi
+     */
+    public function setWifi($wifi): void
+    {
+        $this->wifi = $wifi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsb()
+    {
+        return $this->usb;
+    }
+
+    /**
+     * @param mixed $usb
+     */
+    public function setUsb($usb): void
+    {
+        $this->usb = $usb;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThreeInOne()
+    {
+        return $this->threeInOne;
+    }
+
+    /**
+     * @param mixed $threeInOne
+     */
+    public function setThreeInOne($threeInOne): void
+    {
+        $this->threeInOne = $threeInOne;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccessories()
+    {
+        return $this->accessories;
+    }
+
+    /**
+     * @param mixed $accessories
+     */
+    public function setAccessories($accessories): void
+    {
+        $this->accessories = $accessories;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithFreezer()
+    {
+        return $this->withFreezer;
+    }
+
+    /**
+     * @param mixed $withFreezer
+     */
+    public function setWithFreezer($withFreezer): void
+    {
+        $this->withFreezer = $withFreezer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getElectricHead()
+    {
+        return $this->electricHead;
+    }
+
+    /**
+     * @param mixed $electricHead
+     */
+    public function setElectricHead($electricHead): void
+    {
+        $this->electricHead = $electricHead;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithOven()
+    {
+        return $this->withOven;
+    }
+
+    /**
+     * @param mixed $withOven
+     */
+    public function setWithOven($withOven): void
+    {
+        $this->withOven = $withOven;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCovered()
+    {
+        return $this->covered;
+    }
+
+    /**
+     * @param mixed $covered
+     */
+    public function setCovered($covered): void
+    {
+        $this->covered = $covered;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithFurniture()
+    {
+        return $this->withFurniture;
+    }
+
+    /**
+     * @param mixed $withFurniture
+     */
+    public function setWithFurniture($withFurniture): void
+    {
+        $this->withFurniture = $withFurniture;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithGarden()
+    {
+        return $this->withGarden;
+    }
+
+    /**
+     * @param mixed $withGarden
+     */
+    public function setWithGarden($withGarden): void
+    {
+        $this->withGarden = $withGarden;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithVerandah()
+    {
+        return $this->withVerandah;
+    }
+
+    /**
+     * @param mixed $withVerandah
+     */
+    public function setWithVerandah($withVerandah): void
+    {
+        $this->withVerandah = $withVerandah;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithElevator()
+    {
+        return $this->withElevator;
+    }
+
+    /**
+     * @param mixed $withElevator
+     */
+    public function setWithElevator($withElevator): void
+    {
+        $this->withElevator = $withElevator;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateOfEvent()
+    {
+        return $this->dateOfEvent;
+    }
+
+    /**
+     * @param mixed $dateOfEvent
+     */
+    public function setDateOfEvent($dateOfEvent): void
+    {
+        $this->dateOfEvent = $dateOfEvent;
+    }
+
     public function __construct()
     {
         $this->dateOfAd = new \DateTime('now');
     }
     public function __toString()
     {
-        return 'it is work';
+        return $this->title;
     }
 }

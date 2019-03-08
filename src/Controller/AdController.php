@@ -77,7 +77,7 @@ class AdController extends AbstractController
             return $this->render('ad/new.html.twig', [
                 'ad' => $ad,
                 'form' => $form->createView(),
-                /*'form2' => $form2->createView(),*/
+
             ]);
         }
         else

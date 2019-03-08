@@ -28,12 +28,10 @@
         {% for ad in ads %}
             <tr>
                 <td>{{ ad.id }}</td>
-                {% if ad.category.parent is  null %}
-                <td>{{ ad.category.name }}</td>
-                {% elseif ad.category.parent.parent %}
-                <td>{{ ad.category.name }}{{ '-' }}{{ ad.category.parent.name }}{{ '-' }}{{ ad.category.parent.parent.name }}</td>
-                {% else %}
-                {{ ad.category.name }}{{ '-' }}{{ ad.category.parent.name }}
+                {% if ad.category %}
+                <td>{{ ad.category.parent.name }}{{ '-' }}{{ ad.category.name }}</td>
+                    {% else %}
+                <td>{{ '' }}</td>
                 {% endif %}
                 <td>{{ ad.title }}</td>
                 <td>{{ ad.description }}</td>
@@ -47,7 +45,7 @@
                 <td>{{ ad.imageThree }}</td>
                 <td>{{ ad.price }}</td>
                 <td>{{ ad.donate ? 'Yes' : 'No' }}</td>
-                <td>{{ ad.date ? ad.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ ad.dateOfAd ? ad.dateOfAd|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ ad.withDriver ? 'Yes' : 'No' }}</td>
                 <td>{{ ad.mission }}</td>
                 <td>{{ ad.typeOfAd }}</td>
