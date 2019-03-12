@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Entity\City;
 use App\Entity\User;
 use App\Entity\Category;
 use App\Form\OfferType;
 use App\Form\DemandType;
 use App\Form\AdType;
+use App\Form\UserType;
 use App\Repository\AdRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 
 
@@ -42,6 +45,7 @@ class AdController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $ad = new Ad();
+
             $form = $this->createForm(OfferType::class, $ad,[
                 'entity_manager' => $entityManager,
             ]);
@@ -53,13 +57,13 @@ class AdController extends AbstractController
 
                 $category = $form->get('category')->getData();
 
-              /*  $file1 = $form->get('imageOne')->getData();
+                $file1 = $form->get('imageOne')->getData();
                 $file2 = $form->get('imageTow')->getData();
                 $file3 = $form->get('imageThree')->getData();
 
                 $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
                 $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
-                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);*/
+                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);
 
 
                 $ad->setUser($this->getUser());

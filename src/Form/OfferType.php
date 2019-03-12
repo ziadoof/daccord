@@ -3,11 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Ad;
+use App\Entity\City;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Form\EventListener\AddCategoryFieldSubscriber;
 use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Form\EventListener\AddSubcategoryFieldSubscriber;
 use App\Repository\CategoryRepository;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -46,12 +46,9 @@ class OfferType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-          /*  ->add('imageOne', FileType::class, [ 'required' => false])
-            ->add('imageTow', FileType::class, [ 'required' => false])
-             ->add('imageThree',FileType::class, [ 'required' => false])*/
-            ->add('price')
-            ->add('donate');
-
+            ->add('imageOne', FileType::class, [ 'required' => false, 'label'=>'Main photo'])
+            ->add('imageTow', FileType::class, [ 'required' => false, 'label'=>'Photo 2'])
+            ->add('imageThree',FileType::class, [ 'required' => false, 'label'=>'Photo 3']);
 
     }
 

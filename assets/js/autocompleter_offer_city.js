@@ -1,5 +1,4 @@
-
-$(document).ready(function () {
+$(document).on('click', "#offer_city",function () {
     'use strict';
     /* autocomplete city on new user (this is the main feature) */
     (function () {
@@ -14,10 +13,6 @@ $(document).ready(function () {
                 formatInputTooShort: 'Insert at least 2 character'
             }
         };
-        $('#user_city').autocompleter(options);
+        $('#offer_city').autocompleter(options);
     }());
 });
-
-
-
-//---------------------------------------------------------------------------

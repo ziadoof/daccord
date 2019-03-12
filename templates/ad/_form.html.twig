@@ -1,5 +1,6 @@
 {% block content %}
     <div class="">
+
         {{ form_start(form) }}
         <div class="row mt-4 pt-4">
             <div class="col-md-12 ">
@@ -18,12 +19,6 @@
                 <div class="col-md-4">
                     {{ form_row(form.title) }}
                 </div>
-                <div class="col-md-4">
-                    {{ form_row(form.price) }}
-                </div>
-                <div class="col-md-2 mt-5">
-                    {{ form_row(form.donate) }}
-                </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -32,13 +27,13 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-               {# {{ form_row(form.imageOne) }}#}
+                {{ form_row(form.imageOne) }}
             </div>
             <div class="col-md-4">
-               {# {{ form_row(form.imageTow) }}#}
+                {{ form_row(form.imageTow) }}
             </div>
             <div class="col-md-4">
-                {#{{ form_row(form.imageThree) }}#}
+                {{ form_row(form.imageThree) }}
             </div>
         </div>
         <div id="dynamic_form">
@@ -512,6 +507,18 @@
                     {% endif %}
                 </div>
                 <div class="row">
+                    {% if form.price is defined %}
+                        <div class="col-md-3 mt-5 ">
+                            {{ form_row(form.price) }}
+                        </div>
+                    {% endif %}
+                    {% if form.donate is defined %}
+                        <div class="col-md-3 mt-5 ">
+                                {{ form_row(form.donate) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row">
                     {% if form.withDriver is defined %}
                         <div class="col-md-12 mt-5 text-center">
                                 {{ form_row(form.withDriver) }}
@@ -525,6 +532,8 @@
             <input type="submit" class="btn btn-primary" value="{{ 'Valider'|trans }}" />
         </div>
         {{ form_end(form) }}
+            <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+            <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
     </div>
 {% endblock %}
 

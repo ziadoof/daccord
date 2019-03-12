@@ -9,6 +9,7 @@ require('./router');
 require('./jquery-ui.min');
 require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui')
 require('./autocompleter');
+require('./autocompleter_offer_city');
 
 require('./rdcity');
 require('./specification');
@@ -28,9 +29,14 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
 
+/*    document.getElementById('offer_donate').onchange = function() {
+    document.getElementById('offer_title').disabled = this.checked;
+};*/
 
+$(document).on('click', "#offer_donate",function () {
+    document.getElementById('offer_price').disabled = this.checked;
 
-
+});
 
 
 

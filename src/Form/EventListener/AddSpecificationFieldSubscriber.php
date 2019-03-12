@@ -8,6 +8,7 @@
 
 namespace App\Form\EventListener;
 
+use App\Form\UserCityType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,6 +21,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
+
 
 
 
@@ -35,6 +39,7 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
     {
         $this->factory = $factory;
         $this->entityManager = $entityManager;
+
     }
 
 
@@ -71,29 +76,30 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
             $specifications = $category->getSpecifications();
             foreach ($specifications as $specification){
                 $type = $specification->getType();
+                $name = $specification->getName();
+                $label =  $specification->getLabel();
                 if($type === 'TextType'){
-                    $options = array('label' => $specification->getLabel(), 'required' => false,);
-                    $form->add($specification->getName(), TextType::class, $options);
+                    $options = array('label' => $label, 'required' => false,);
+                    $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'CheckboxType'){
-                    $options = array('label' => $specification->getLabel(), 'required' => false,);
-                    $form->add($specification->getName(), CheckboxType::class, $options);
+                    $options = array('label' => $label, 'required' => false,);
+                    $form->add($name, CheckboxType::class, $options);
                 }
                 elseif($type === 'ColorType'){
-                    $options = array('label' => $specification->getLabel(), 'required' => false,);
-                    $form->add($specification->getName(), ColorType::class, $options);
+                    $options = array('label' => $label, 'required' => false,);
+                    $form->add($name, ColorType::class, $options);
                 }
                 elseif($type === 'EntityType'){
-                    $options = array('label' => $specification->getLabel(), 'required' => false,'class' => City::class,);
-                    $form->add($specification->getName(), EntityType::class, $options);
+                    $options = array('label' => $label, 'required' => false,'class' => City::class);
+                    $form->add($name, AutocompleteType::class, $options);
                 }
                 elseif($type === 'DateType'){
-                    $options = array('label' => $specification->getLabel(), 'required' => false,'widget' => 'single_text',);
-                    $form->add($specification->getName(), DateType::class, $options);
+                    $options = array('label' => $label, 'required' => false,'widget' => 'single_text',);
+                    $form->add($name, DateType::class, $options);
                 }
                 elseif ($type === 'ChoiceType'){
                     $typeOfChoice = $specification->getTypeOfChoice();
-                    $name =$specification->getName();
                     if($typeOfChoice === 'TextOptions'){
                         $choiceOptions = [];
                         $textOptions = $specification->getTextOptions();
@@ -101,21 +107,21 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             $choiceOptions[$textOption]= $textOption;
                         }
                         if($name === 'languages'){
-                            $options = array('label' => $specification->getLabel(), 'required' => false,
+                            $options = array('label' => $label, 'required' => false,
                                 'choices' => $choiceOptions,
-                                'placeholder' => 'Select'.' '.$specification->getLabel(),
+                                'placeholder' => 'Select'.' '.$label,
                                 /*'expanded'  => true,*/
                                 'multiple'  => true,
                             );
                         }
                         else{
-                            $options = array('label' => $specification->getLabel(), 'required' => false,
+                            $options = array('label' => $label, 'required' => false,
                                 'choices' => $choiceOptions,
-                                'placeholder' => 'Select'.' '.$specification->getLabel()
+                                'placeholder' => 'Select'.' '.$label
                             );
                         }
 
-                        $form->add($specification->getName(), ChoiceType::class, $options);
+                        $form->add($name, ChoiceType::class, $options);
                     }
                     elseif ($typeOfChoice === 'NumericOptions'){
                         $choiceOptions = [];
@@ -123,11 +129,11 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                         foreach ($numericOptions as $numericOption){
                             $choiceOptions[$numericOption]= $numericOption;
                         }
-                        $options = array('label' => $specification->getLabel(), 'required' => false,
+                        $options = array('label' => $label, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => 'Select'.' '.$specification->getLabel()
+                            'placeholder' => 'Select'.' '.$label
                         );
-                        $form->add($specification->getName(), ChoiceType::class, $options);
+                        $form->add($name, ChoiceType::class, $options);
                     }
                     elseif ($typeOfChoice === 'SequentialNumericOptions'){
                         $min = $specification->getMinOption();
@@ -136,11 +142,11 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             for ($i=$min;$i<=$max;$i++){
                                 $choiceOptions [$i]= $i;
                             }
-                        $options = array('label' => $specification->getLabel(), 'required' => false,
+                        $options = array('label' => $label, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => 'Select'.' '.$specification->getLabel()
+                            'placeholder' => 'Select'.' '.$label
                         );
-                        $form->add($specification->getName(), ChoiceType::class, $options);
+                        $form->add($name, ChoiceType::class, $options);
                     }
                 }
             }
