@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Specification;
+use App\Entity\Ospecification;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SpecificationType extends AbstractType
+class OspecificationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -27,7 +27,7 @@ class SpecificationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Specification::class,
+            'data_class' => Ospecification::class,
         ]);
     }
 }

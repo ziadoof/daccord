@@ -8,11 +8,9 @@
 
 namespace App\Form\EventListener;
 
-use App\Form\UserCityType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use App\Entity\Category;
 use App\Entity\City;
@@ -21,14 +19,13 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 
 
 
 
-class AddSpecificationFieldSubscriber implements EventSubscriberInterface
+class AddOspecificationFieldSubscriber implements EventSubscriberInterface
 
 {
 
@@ -69,11 +66,11 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
         );
     }
 
-    private function addSpecificationForm($form, $category)
+    private function addOspecificationForm($form, $category)
     {
 
         if ($category!== null) {
-            $specifications = $category->getSpecifications();
+            $specifications = $category->getOspecifications();
             foreach ($specifications as $specification){
                 $type = $specification->getType();
                 $name = $specification->getName();
@@ -165,7 +162,7 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
         $accessor    = PropertyAccess::createPropertyAccessor();
         $category        = $accessor->getValue($data, $this->factory);
         $category_id = ($category) ? $category->getId() : null;
-        $this->addSpecificationForm($form, $category_id);
+        $this->addOspecificationForm($form, $category_id);
     }
 
     public function preSubmit(FormEvent $event)
@@ -175,7 +172,7 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
 
         $category_id = array_key_exists('category', $data) ? $data['category'] : null;
         $category = ($category_id) ? $this->getCategory($category_id):null;
-        $this->addSpecificationForm($form, $category);
+        $this->addOspecificationForm($form, $category);
     }
 
     public function getCategory ( $category_id){

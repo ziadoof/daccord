@@ -40,15 +40,15 @@ class Category
     private $ads;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Specification", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ospecification", mappedBy="category")
      */
-    private $specifications;
+    private $ospecifications;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->ads = new ArrayCollection();
-        $this->specifications = new ArrayCollection();
+        $this->ospecifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,30 +148,30 @@ class Category
     }
 
     /**
-     * @return Collection|Specification[]
+     * @return Collection|Ospecification[]
      */
-    public function getSpecifications(): Collection
+    public function getOspecifications(): Collection
     {
-        return $this->specifications;
+        return $this->ospecifications;
     }
 
-    public function addSpecification(Specification $specification): self
+    public function addOspecification(Ospecification $ospecification): self
     {
-        if (!$this->specifications->contains($specification)) {
-            $this->specifications[] = $specification;
-            $specification->setCategory($this);
+        if (!$this->ospecifications->contains($ospecification)) {
+            $this->ospecifications[] = $ospecification;
+            $ospecification->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeSpecification(Specification $specification): self
+    public function removeOspecification(Ospecification $ospecification): self
     {
-        if ($this->specifications->contains($specification)) {
-            $this->specifications->removeElement($specification);
+        if ($this->ospecifications->contains($ospecification)) {
+            $this->ospecifications->removeElement($ospecification);
             // set the owning side to null (unless already changed)
-            if ($specification->getCategory() === $this) {
-                $specification->setCategory(null);
+            if ($ospecification->getCategory() === $this) {
+                $ospecification->setCategory(null);
             }
         }
 

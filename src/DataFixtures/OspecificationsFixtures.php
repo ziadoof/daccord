@@ -5,12 +5,12 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Category;
-use App\Entity\Specification;
+use App\Entity\Ospecification;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
 
-class SpecificationsFixtures extends Fixture implements DependentFixtureInterface
+class OspecificationsFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -1506,35 +1506,35 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
         $type = $choice['type'];
 
         if($type === 'TextType'){
-            $spe = new Specification($name);
+            $spe = new Ospecification($name);
             $spe->setType('TextType');
             if(isset($choice['label'])) {
                 $spe->setLabel($choice['label']);
             }
         }
         elseif($type === 'CheckboxType'){
-            $spe = new Specification($name);
+            $spe = new Ospecification($name);
             $spe->setType('CheckboxType');
             if(isset($choice['label'])) {
                 $spe->setLabel($choice['label']);
             }
         }
         elseif($type === 'ColorType'){
-            $spe = new Specification($name);
+            $spe = new Ospecification($name);
             $spe->setType('ColorType');
             if(isset($choice['label'])) {
                 $spe->setLabel($choice['label']);
             }
         }
         elseif($type === 'EntityType'){
-            $spe = new Specification($name);
+            $spe = new Ospecification($name);
             $spe->setType('EntityType');
             if(isset($choice['label'])) {
                 $spe->setLabel($choice['label']);
             }
         }
         elseif($type === 'DateType'){
-            $spe = new Specification($name);
+            $spe = new Ospecification($name);
             $spe->setType('DateType');
             if(isset($choice['label'])) {
                 $spe->setLabel($choice['label']);
@@ -1544,7 +1544,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             $typeOfChoice = $choice['typeOfChoice'];
             $choiceOptions = $choice['choice'];
-            $spe = new Specification($name);
+            $spe = new Ospecification($name);
             $spe->setType('ChoiceType');
             $spe->setTypeOfChoice($typeOfChoice);
             if(isset($choice['label'])) {

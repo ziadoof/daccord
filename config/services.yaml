@@ -62,7 +62,7 @@ services:
         arguments:
             $factory:
 
-    App\Form\EventListener\AddSpecificationFieldSubscriber:
+    App\Form\EventListener\AddOspecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:

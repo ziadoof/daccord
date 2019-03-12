@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SpecificationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\OspecificationRepository")
  */
-class Specification
+class Ospecification
 {
     /**
      * @ORM\Id()
@@ -32,7 +32,7 @@ class Specification
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="specifications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="ospecifications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

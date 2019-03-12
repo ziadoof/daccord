@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use App\Controller\AdController;
-use App\Form\EventListener\AddSpecificationFieldSubscriber;
+use App\Form\EventListener\AddOspecificationFieldSubscriber;
 
 
 
@@ -41,7 +41,7 @@ class OfferType extends AbstractType
         $builder
             ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddOspecificationFieldSubscriber($category, $entityManager));
 
         $builder
             ->add('title')
