@@ -39,10 +39,16 @@ class Category
      */
     private $ads;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ospecification", mappedBy="category")
+     */
+    private $ospecifications;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->ads = new ArrayCollection();
+        $this->ospecifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -139,5 +145,36 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Ospecification[]
+     */
+    public function getOspecifications(): Collection
+    {
+        return $this->ospecifications;
+    }
+
+    public function addOspecification(Ospecification $ospecification): self
+    {
+        if (!$this->ospecifications->contains($ospecification)) {
+            $this->ospecifications[] = $ospecification;
+            $ospecification->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOspecification(Ospecification $ospecification): self
+    {
+        if ($this->ospecifications->contains($ospecification)) {
+            $this->ospecifications->removeElement($ospecification);
+            // set the owning side to null (unless already changed)
+            if ($ospecification->getCategory() === $this) {
+                $ospecification->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 }

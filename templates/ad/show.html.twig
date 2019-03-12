@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ ad.date ? ad.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ ad.dateOfAd ? ad.dateOfAd|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>WithDriver</th>
@@ -50,6 +50,14 @@
             <tr>
                 <th>TypeOfAd</th>
                 <td>{{ ad.typeOfAd }}</td>
+            </tr>
+            <tr>
+                <th>Mission</th>
+                <td>{{ ad.mission }}</td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td>{{ ad.salary }}</td>
             </tr>
         </tbody>
     </table>

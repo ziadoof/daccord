@@ -13,15 +13,32 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableSassLoader()
+    .autoProvideVariables({
+        "Routing": "router"
+    })
+    .addLoader({
+        test: /jsrouting-bundle\/Resources\/public\/js\/router.js$/,
+
+    });
+
+    let config = Encore.getWebpackConfig();
+
+
+    config.resolve.alias = {
+
+        'router': __dirname + '/assets/js/router.js'
+
+    };
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-;
 
-module.exports = Encore.getWebpackConfig();
+
+    module.exports = config;
 
 

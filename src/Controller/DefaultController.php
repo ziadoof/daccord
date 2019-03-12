@@ -8,12 +8,11 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Image;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 
 

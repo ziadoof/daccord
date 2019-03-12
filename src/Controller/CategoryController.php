@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/category")
@@ -86,5 +87,20 @@ class CategoryController extends AbstractController
         }
 
         return $this->redirectToRoute('category_index');
+    }
+
+
+    /**
+     * @Route("/categorys", name="select_category", methods="GET|POST", options={"expose"=true})
+     */
+    public function subcategoryAction(Request $request)
+    {
+        $generalcategory_id = $request->request->get('generalcategory_id');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $subcategory = $em->getRepository(Category::class)->findCategoryByParentId($generalcategory_id);
+
+        return new JsonResponse($subcategory);
     }
 }

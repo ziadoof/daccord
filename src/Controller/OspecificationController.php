@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Specification;
-use App\Form\SpecificationType;
-use App\Repository\SpecificationRepository;
+use App\Entity\Ospecification;
+use App\Form\OspecificationType;
+use App\Repository\OspecificationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,14 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/specification")
  */
-class SpecificationController extends AbstractController
+class OspecificationController extends AbstractController
 {
     /**
      * @Route("/", name="specification_index", methods={"GET"})
      */
-    public function index(SpecificationRepository $specificationRepository): Response
+    public function index(OspecificationRepository $specificationRepository): Response
     {
-        return $this->render('specification/index.html.twig', ['specifications' => $specificationRepository->findAll()]);
+        return $this->render('specification/index.html.twig', [
+            'specifications' => $specificationRepository->findAll(),
+        ]);
     }
 
     /**
@@ -28,8 +30,8 @@ class SpecificationController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $specification = new Specification();
-        $form = $this->createForm(SpecificationType::class, $specification);
+        $specification = new Ospecification();
+        $form = $this->createForm(OspecificationType::class, $specification);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,23 +51,27 @@ class SpecificationController extends AbstractController
     /**
      * @Route("/{id}", name="specification_show", methods={"GET"})
      */
-    public function show(Specification $specification): Response
+    public function show(Ospecification $specification): Response
     {
-        return $this->render('specification/show.html.twig', ['specification' => $specification]);
+        return $this->render('specification/show.html.twig', [
+            'specification' => $specification,
+        ]);
     }
 
     /**
      * @Route("/{id}/edit", name="specification_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Specification $specification): Response
+    public function edit(Request $request, Ospecification $specification): Response
     {
-        $form = $this->createForm(SpecificationType::class, $specification);
+        $form = $this->createForm(OspecificationType::class, $specification);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('specification_index', ['id' => $specification->getId()]);
+            return $this->redirectToRoute('specification_index', [
+                'id' => $specification->getId(),
+            ]);
         }
 
         return $this->render('specification/edit.html.twig', [
@@ -77,7 +83,7 @@ class SpecificationController extends AbstractController
     /**
      * @Route("/{id}", name="specification_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Specification $specification): Response
+    public function delete(Request $request, Ospecification $specification): Response
     {
         if ($this->isCsrfTokenValid('delete'.$specification->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Specification;
+use App\Entity\Ospecification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Specification|null find($id, $lockMode = null, $lockVersion = null)
- * @method Specification|null findOneBy(array $criteria, array $orderBy = null)
- * @method Specification[]    findAll()
- * @method Specification[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Ospecification|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Ospecification|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Ospecification[]    findAll()
+ * @method Ospecification[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SpecificationRepository extends ServiceEntityRepository
+class OspecificationRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Specification::class);
+        parent::__construct($registry, Ospecification::class);
     }
 
     // /**
-    //  * @return Specification[] Returns an array of Specification objects
+    //  * @return Ospecification[] Returns an array of Ospecification objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class SpecificationRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Specification
+    public function findOneBySomeField($value): ?Ospecification
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
