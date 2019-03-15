@@ -480,6 +480,56 @@ class Ad
      *     message="You must enter numbers only."
      * )
      */
+    private $minCapacity;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
+     */
+    private $maxCapacity;
+
+    /**
+     * @return mixed
+     */
+    public function getMinCapacity()
+    {
+        return $this->minCapacity;
+    }
+
+    /**
+     * @param mixed $minCapacity
+     */
+    public function setMinCapacity($minCapacity): void
+    {
+        $this->minCapacity = $minCapacity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxCapacity()
+    {
+        return $this->maxCapacity;
+    }
+
+    /**
+     * @param mixed $maxCapacity
+     */
+    public function setMaxCapacity($maxCapacity): void
+    {
+        $this->maxCapacity = $maxCapacity;
+    }
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
+     */
     private $accuracy;
 
     /**

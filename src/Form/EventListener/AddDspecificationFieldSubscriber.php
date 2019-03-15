@@ -25,7 +25,7 @@ use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 
 
-class AddOspecificationFieldSubscriber implements EventSubscriberInterface
+class AddDspecificationFieldSubscriber implements EventSubscriberInterface
 
 {
 
@@ -66,11 +66,11 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
         );
     }
 
-    private function addOspecificationForm($form, $category)
+    private function addDspecificationForm($form, $category)
     {
 
         if ($category!== null) {
-            $specifications = $category->getOspecifications();
+            $specifications = $category->getDspecifications();
             foreach ($specifications as $specification){
                 $type = $specification->getType();
                 $name = $specification->getName();
@@ -84,7 +84,7 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
                     $form->add($name, CheckboxType::class, $options);
                 }
                 elseif($type === 'ColorType'){
-                    $options = array('label' => $label, 'required' => false);
+                    $options = array('label' => $label, 'required' => false,);
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'EntityType'){
@@ -162,7 +162,7 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
         $accessor    = PropertyAccess::createPropertyAccessor();
         $category        = $accessor->getValue($data, $this->factory);
         $category_id = ($category) ? $category->getId() : null;
-        $this->addOspecificationForm($form, $category_id);
+        $this->addDspecificationForm($form, $category_id);
     }
 
     public function preSubmit(FormEvent $event)
@@ -172,7 +172,7 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
 
         $category_id = array_key_exists('category', $data) ? $data['category'] : null;
         $category = ($category_id) ? $this->getCategory($category_id):null;
-        $this->addOspecificationForm($form, $category);
+        $this->addDspecificationForm($form, $category);
     }
 
     public function getCategory ( $category_id){

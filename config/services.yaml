@@ -67,4 +67,8 @@ services:
             $factory:
             $entityManager:
 
+    App\Form\EventListener\AddDspecificationFieldSubscriber:
+        arguments:
+            $factory:
+            $entityManager:
 
