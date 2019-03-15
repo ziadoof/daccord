@@ -1,0 +1,70 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}Ad{% endblock %}
+
+{% block content %}
+    <h1>Ad</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ad.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ ad.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ ad.description }}</td>
+            </tr>
+            <tr>
+                <th>ImageOne</th>
+                <td><img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt=""></td>
+            </tr>
+            <tr>
+                <th>ImageTow</th>
+                <td><img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt=""></td>
+            </tr>
+            <tr>
+                <th>ImageThree</th>
+                <td><img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt=""></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ ad.price }}</td>
+            </tr>
+            <tr>
+                <th>Donate</th>
+                <td>{{ ad.donate ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ ad.dateOfAd ? ad.dateOfAd|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>WithDriver</th>
+                <td>{{ ad.withDriver ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TypeOfAd</th>
+                <td>{{ ad.typeOfAd }}</td>
+            </tr>
+            <tr>
+                <th>Mission</th>
+                <td>{{ ad.mission }}</td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td>{{ ad.salary }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ad_index') }}">back to list</a>
+
+    <a href="{{ path('ad_edit', {'id': ad.id}) }}">edit</a>
+
+    {{ include('ad/_delete_form.html.twig') }}
+{% endblock %}

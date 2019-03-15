@@ -4,7 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'en'
+    locale: 'fr'
+    adsimages: '%kernel.project_dir%/public/assets/images/annonce/'
+    profileimages: '%kernel.project_dir%/public/assets/images/profile/'
 
 services:
     # default configuration for services in *this* file
@@ -14,6 +16,21 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
+
+    redirect.after.login:
+        class: App\Service\AfterLoginRedirection
+        arguments: ['@router']
+
+    app.form.registration:
+        class: App\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+    app.profile.form.type:
+        class: App\Form\ProfilType
+        arguments: ['%fos_user.model.user.class%']
+        tags:
+            - { name: form.type, alias: app_user_profile }
+
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
@@ -26,3 +43,32 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Controller\RegistrationController:
+        arguments:
+            $formFactory: '@fos_user.registration.form.factory'
+    App\Controller\ProfileController:
+        arguments:
+            $formFactory: '@fos_user.profile.form.factory'
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%adsimages%'
+
+    App\Form\EventListener\AddCategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddGeneralcategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddOspecificationFieldSubscriber:
+        arguments:
+            $factory:
+            $entityManager:
+
+    App\Form\EventListener\AddDspecificationFieldSubscriber:
+        arguments:
+            $factory:
+            $entityManager:
+

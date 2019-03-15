@@ -1,0 +1,25 @@
+{% extends "layout_visitor.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+    {% block fos_user_content %}
+        <div class="container pt-lg-5 pt-3">
+            <div class="row mb-md-3 mb-lg-3">
+                <div class="col-12">
+                    <h1 class="welcome-text mt-3">Bienvenue sur On a d'accord.</h1>
+                </div>
+            </div>
+            <hr>
+            <div class="row justify-content-center formLogin mt-4">
+                <p>Configurez votre mot de passe.</p>
+                <div class="col-12">
+                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                    {{ form_widget(form) }}
+                    <div class="text-center">
+                        <input type="submit" value="Créer le mot de passe" class="btn btn-dark"/>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    {% endblock fos_user_content %}
+{% endblock %}

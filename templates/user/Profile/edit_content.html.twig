@@ -1,0 +1,79 @@
+{% extends "layout_user.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+{% block fos_user_content %}
+    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    <div class="row">
+        <div class="col-md-12 editer_utilisateur">
+            <img src="{{ asset('assets/images/icons/4.png') }}" alt="logo" class="mb-3 "/>
+            <span class="middle">Modifier</span>
+        </div>
+    </div>
+    <div class="fos_user_user_show border-respo px-4 py-4">
+        <h5 class="text-center pt-0 title-blue">Nom de l'utilisateur</h5>
+        <div class="row ">
+            <div class="col-md-3 offset-2">
+                {{ form_row(form.firstname) }}
+            </div>
+            <div class="col-md-3 offset-2">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <hr>
+        <h5 class="text-center pt-0 title-blue">L'information de l'utilisateur</h5>
+        <div class="row ">
+            <div class="col-md-3">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.emailStatus) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.phoneNumber) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.phonNumberStatus) }}
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-3">
+                {{ form_row(form.gender) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.genderStatus) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.birthday) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.birthdayStatus) }}
+            </div>
+        </div>
+        <hr>
+        <h5 class="text-center pt-0 title-blue">livraison</h5>
+        <div class="row ">
+            <div class="col-md-3">
+                {{ form_row(form.car) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.color) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.maxDistance) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.carImage) }}
+            </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+    {{ form_widget(form) }}
+
+{% endblock fos_user_content %}
+{% endblock %}
+

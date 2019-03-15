@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dspecification index{% endblock %}
+
+{% block body %}
+    <h1>Dspecification index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Label</th>
+                <th>Type</th>
+                <th>TextOptions</th>
+                <th>NumericOptions</th>
+                <th>TypeOfChoice</th>
+                <th>MinOption</th>
+                <th>MaxOption</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dspecification in dspecifications %}
+            <tr>
+                <td>{{ dspecification.id }}</td>
+                <td>{{ dspecification.name }}</td>
+                <td>{{ dspecification.label }}</td>
+                <td>{{ dspecification.type }}</td>
+                <td>{{ dspecification.textOptions ? dspecification.textOptions|join(', ') : '' }}</td>
+                <td>{{ dspecification.numericOptions ? dspecification.numericOptions|join(', ') : '' }}</td>
+                <td>{{ dspecification.typeOfChoice }}</td>
+                <td>{{ dspecification.minOption }}</td>
+                <td>{{ dspecification.maxOption }}</td>
+                <td>
+                    <a href="{{ path('dspecification_show', {'id': dspecification.id}) }}">show</a>
+                    <a href="{{ path('dspecification_edit', {'id': dspecification.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('dspecification_new') }}">Create new</a>
+{% endblock %}

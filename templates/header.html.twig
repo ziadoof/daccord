@@ -1,0 +1,118 @@
+<header class="header pb-5">
+    <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 pl-0" id="nav">
+        <div class=" navbar-collapse flex-row-reverse" id="navbarNavDropdown">
+           <div class="row">
+              <div class=" col-md-12">
+                  <div class="logo py-2">
+                      <img src="{{ asset('assets/images/icons/4.png') }}" alt="" onclick="dashboard();">
+                  </div>
+                 {# <div class="logo2 py-2">
+                      <img src="{{ asset('assets/images/icons/1.png') }}" alt="" onclick="dashboard();">
+                  </div>#}
+                  {% if app.user != null%}
+                  <div class="col-md-3 col-sm-4 col-xs-4 backnavbar">
+                      <div class="">
+                          <div id="all-logo" >
+                              <div class="logo-acoord">
+                                  <div onclick="dashboard();"><span > On a d<span>'</span>accord </span></div>
+                              </div>
+                          </div>
+                          <div class="sidebar-toggle-box">
+                              <div class="float-left"> <a href="#" class="button-left ml-2"><span class="fa fa-fw fa-bars"></span></a> </div>
+                          </div>
+                      </div>
+                  </div>
+                  {% endif %}
+
+                  {% if app.user==null %}
+                  <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
+                      <form class="form-inline my-2 my-lg-0 float-right">
+                          <a class="btn btn-info my-2 my-sm-0" data-toggle="modal" data-target="#Registration">Register</a>
+                          <a class="btn btn-info my-2 my-sm-0 ml-2" data-toggle="modal" data-target="#login">Login</a>
+                      </form>
+                  </div>
+                  {% else %}
+                  <div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6  col-xs-2 col-xs-offset-6 float-right">
+                 <!-- user login dropdown start-->
+                      <div class="user-profile">
+                         <a data-toggle="dropdown"  href="#">
+                             <span class="profile-ava">
+                                 <img alt="" src="/assets/images/icons/avatar.jpeg" id="avatar-small">
+                             </span>
+                         </a>
+                         <ul class="dropdown-menu extended logout">
+                             <li class="username">
+                                 <h6 >{{ app.user.firstName }} {{ app.user.lastname }}</h6>
+                             </li>
+                             <li >
+                                 <a href="{{ path('fos_user_profile_show') }}">Mon profile</a>
+                             </li>
+                             <li >
+                               <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profile</a>
+                             </li>
+                             <li>
+                                 <a href="{{ path('set_area') }}">Modifier ma Ville</a>
+                             </li>
+                             <li>
+                                 <a href="{{ path('fos_user_change_password') }}">Modifier ma mot de passe</a>
+                             </li>
+                             <li>
+                                 <a href="{{ path('security_logout') }}">Se déconnecter</a>
+                             </li>
+                         </ul>
+                    <!-- user login dropdown end -->
+                      </div>
+
+                      <div>
+                          <a href="{{ path('ad_new',{'type': 'Offer'}) }}">| offre |</a>
+                          <a href="{{ path('ad_new',{'type': 'Demand'}) }}">| demend |</a>
+                      </div>
+                  {% endif %}
+                  </div>
+              </div>
+           </div>
+        </div>
+    </nav>
+</header>
+    <!-- Modal start-->
+    <div class="modal fade bd-example-modal-lg" id="Registration" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row ml-2">
+                        <h4 class="modal-title " id="myModalLabel">Crée nouvelle counte</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                        {{ render(controller('App\\Controller\\RegistrationController::registerAction')) }}
+                    <div class="modal-footer mt-2">
+                        <button  type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="login" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Log in</h4>
+                </div>
+                <div class="modal-body">
+                    {{ render(controller('App\\Controller\\SecurityController::login')) }}
+                </div>
+                <div class="modal-footer mt-2">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal end-->
+
+
+
