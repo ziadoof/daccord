@@ -4,7 +4,9 @@
         {{ form_start(form) }}
         <div class="row mt-4 pt-4">
             <div class="col-md-12 ">
-                <h1 class="text-center pt-0 title-blue">Nouvell annonce</h1>
+
+                <h1 class="text-center pt-0 title-blue">New {{ ad.typeOfAd }}</h1>
+
             </div>
         </div>
         <div class="row">
@@ -27,13 +29,19 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                {% if form.imageOne is defined %}
                 {{ form_row(form.imageOne) }}
+                {% endif %}
             </div>
             <div class="col-md-4">
+                {% if form.imageTow is defined %}
                 {{ form_row(form.imageTow) }}
+                {% endif %}
             </div>
             <div class="col-md-4">
+                {% if form.imageThree is defined %}
                 {{ form_row(form.imageThree) }}
+                {% endif %}
             </div>
         </div>
         <div id="dynamic_form">
@@ -209,6 +217,16 @@
                             {{ form_row(form.capacity) }}
                         </div>
                     {% endif %}
+                    {% if form.minCapacity is defined %}
+                        <div class="col-md-3">
+                                {{ form_row(form.minCapacity) }}
+                        </div>
+                    {% endif %}
+                    {% if form.maxCapacity is defined %}
+                        <div class="col-md-3">
+                                {{ form_row(form.maxCapacity) }}
+                        </div>
+                    {% endif %}
                     {% if form.dvdCd is defined %}
                         <div class="col-md-3">
                             {{ form_row(form.dvdCd) }}
@@ -304,9 +322,9 @@
                             {{ form_row(form.printingColor) }}
                         </div>
                     {% endif %}
-                    {% if form.printingtype is defined %}
+                    {% if form.printingType is defined %}
                         <div class="col-md-3">
-                            {{ form_row(form.printingtype) }}
+                            {{ form_row(form.printingType) }}
                         </div>
                     {% endif %}
                     {% if form.paperSize is defined %}

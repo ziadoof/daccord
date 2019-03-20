@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ospecification{% endblock %}
+
+{% block body %}
+    <h1>Edit Ospecification</h1>
+
+    {{ include('ospecification/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ospecification_index') }}">back to list</a>
+
+    {{ include('ospecification/_delete_form.html.twig') }}
+{% endblock %}

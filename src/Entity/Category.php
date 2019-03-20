@@ -44,11 +44,17 @@ class Category
      */
     private $ospecifications;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Dspecification", mappedBy="category")
+     */
+    private $dspecifications;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->ads = new ArrayCollection();
         $this->ospecifications = new ArrayCollection();
+        $this->dspecifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +178,37 @@ class Category
             // set the owning side to null (unless already changed)
             if ($ospecification->getCategory() === $this) {
                 $ospecification->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dspecification[]
+     */
+    public function getDspecifications(): Collection
+    {
+        return $this->dspecifications;
+    }
+
+    public function addDspecification(Dspecification $dspecification): self
+    {
+        if (!$this->dspecifications->contains($dspecification)) {
+            $this->dspecifications[] = $dspecification;
+            $dspecification->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDspecification(Dspecification $dspecification): self
+    {
+        if ($this->dspecifications->contains($dspecification)) {
+            $this->dspecifications->removeElement($dspecification);
+            // set the owning side to null (unless already changed)
+            if ($dspecification->getCategory() === $this) {
+                $dspecification->setCategory(null);
             }
         }
 

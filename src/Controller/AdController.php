@@ -45,7 +45,7 @@ class AdController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $ad = new Ad();
-
+            $ad->setTypeOfAd($type);
             $form = $this->createForm(OfferType::class, $ad,[
                 'entity_manager' => $entityManager,
             ]);
@@ -67,7 +67,7 @@ class AdController extends AbstractController
 
 
                 $ad->setUser($this->getUser());
-                $ad->setTypeOfAd($type);
+
                 $ad->setCategory($category);
 
 
@@ -86,29 +86,22 @@ class AdController extends AbstractController
         }
         else
         {
+            $entityManager = $this->getDoctrine()->getManager();
             $ad = new Ad();
-            $form = $this->createForm(DemandType::class, $ad);
+            $ad->setTypeOfAd($type);
+            $form = $this->createForm(DemandType::class, $ad,[
+                'entity_manager' => $entityManager,
+            ]);
             $form->handleRequest($request);
-
-
 
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
 
-                $category = $form->get('cato')->getData();
-
-                $file1 = $form->get('imageOne')->getData();
-                $file2 = $form->get('imageTow')->getData();
-                $file3 = $form->get('imageThree')->getData();
-
-                $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
-                $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
-                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);
+                $category = $form->get('category')->getData();
 
 
                 $ad->setUser($this->getUser());
-                $ad->setTypeOfAd($type);
                 $ad->setCategory($category);
 
 
@@ -131,7 +124,8 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad): Response
     {
-        return $this->render('ad/show.html.twig', ['ad' => $ad]);
+        $allSpecifications = $ad->getAllSpecifications();
+        return $this->render('ad/show.html.twig', ['ad' => $ad, 'specifications'=>$allSpecifications]);
     }
 
     /**

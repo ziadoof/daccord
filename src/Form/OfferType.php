@@ -2,26 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Ad;
-use App\Entity\City;
-use App\Entity\Category;
-use App\Form\CategoryType;
 use App\Form\EventListener\AddCategoryFieldSubscriber;
 use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Repository\CategoryRepository;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use App\Controller\AdController;
 use App\Form\EventListener\AddOspecificationFieldSubscriber;
 
 
