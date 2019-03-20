@@ -124,7 +124,8 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad): Response
     {
-        return $this->render('ad/show.html.twig', ['ad' => $ad]);
+        $allSpecifications = $ad->getAllSpecifications();
+        return $this->render('ad/show.html.twig', ['ad' => $ad, 'specifications'=>$allSpecifications]);
     }
 
     /**

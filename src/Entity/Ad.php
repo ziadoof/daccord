@@ -447,7 +447,7 @@ class Ad
     private $ram;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -456,7 +456,7 @@ class Ad
     private $screenSizeCm;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -465,7 +465,7 @@ class Ad
     private $screenSizeInch;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -474,7 +474,7 @@ class Ad
     private $capacity;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -483,7 +483,7 @@ class Ad
     private $minCapacity;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -524,7 +524,7 @@ class Ad
     }
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -533,7 +533,7 @@ class Ad
     private $accuracy;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -542,7 +542,7 @@ class Ad
     private $weight;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -551,7 +551,7 @@ class Ad
     private $caliber;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -560,7 +560,7 @@ class Ad
     private $maxCaliber;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -579,7 +579,7 @@ class Ad
 
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -588,7 +588,7 @@ class Ad
     private $width;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -606,7 +606,7 @@ class Ad
     private $numberOfPersson;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -642,7 +642,7 @@ class Ad
     private $numberOfHead;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -660,7 +660,7 @@ class Ad
     private $floor;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -669,7 +669,7 @@ class Ad
     private $area;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -678,7 +678,7 @@ class Ad
     private $minArea;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -2454,5 +2454,19 @@ class Ad
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getAllSpecifications(){
+       $vars  = get_object_vars($this);
+       $all = [];
+       $exp = ['id','title','imageOne','imageTow','imageThree','donate','price','dateOfAd','typeOfAd','category','user','description'];
+       foreach ($vars as $key=>$value){
+           if(!in_array($key,$exp)){
+               if($value !== null){
+                   $all[$key]=$value;
+               }
+           }
+       }
+        return $all;
     }
 }

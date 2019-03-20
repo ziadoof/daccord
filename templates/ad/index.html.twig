@@ -13,8 +13,6 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>ImageOne</th>
-                <th>ImageTow</th>
-                <th>ImageThree</th>
                 <th>Price</th>
                 <th>Donate</th>
                 <th>Date</th>
@@ -36,13 +34,6 @@
                 <td>{{ ad.title }}</td>
                 <td>{{ ad.description }}</td>
                 <td>{{ ad.imageOne }}</td>
-               {# {% if ad.image %}
-                <td>{{ ad.image.filename }}</td>
-                {% else %}
-                    <td></td>
-                    {% endif %}#}
-                <td>{{ ad.imageTow }}</td>
-                <td>{{ ad.imageThree }}</td>
                 <td>{{ ad.price }}</td>
                 <td>{{ ad.donate ? 'Yes' : 'No' }}</td>
                 <td>{{ ad.dateOfAd ? ad.dateOfAd|date('Y-m-d H:i:s') : '' }}</td>
