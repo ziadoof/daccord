@@ -3,24 +3,24 @@
 {% block title %}Ad{% endblock %}
 {% block content %}
         <div class="">
-            <div class="row border-offer">
-                <div class="col-md-2">
-                    <span class="float-left mt-4 mb-4">{{ ad.typeOfAd }} </span>
+                <div class="row border-offer">
+                    <div class="col-md-2">
+                        <span class="float-left mt-4 mb-4">{{ ad.typeOfAd }} </span>
+                    </div>
+                    <div class="col-md-8 mt-2 text-center">
+                        <span class="text-center title-rose">{{ ad.title }}</span>
+                    </div>
+                    <div class="col-md-2  mt-4">
+                        {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
+                           <span class="float-right title-blue">{{ 'Aujoud\'hui à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
+                        {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
+                            "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
+                            <span class="float-right title-blue">{{ 'Hier à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
+                        {% else %}
+                        <span class="float-right title-blue">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</span>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col-md-8 mt-2 text-center">
-                    <span class="text-center title-rose">{{ ad.title }}</span>
-                </div>
-                <div class="col-md-2  mt-4">
-                    {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
-                       <span class="float-right title-blue">{{ 'Aujoud\'hui à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
-                    {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
-                        "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
-                        <span class="float-right title-blue">{{ 'Hier à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
-                    {% else %}
-                    <span class="float-right title-blue">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</span>
-                    {% endif %}
-                </div>
-            </div>
                 <div class="row border-respo">
                 {% if ad.typeOfAd is same as ('Offer') %}
                     <div class="col-md-6 mt-4 mb-4">
@@ -35,15 +35,17 @@
                             <!--/.Indicators-->
                             <!--Slides-->
                             <div class="carousel-inner g-photo" role="listbox">
+                                {%  if ad.imageOne is not null %}
                                 <div class="carousel-item active">
                                     <div class="view">
-
                                         <div class="item active">
                                             <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
                                         </div>
                                         <div class="mask rgba-black-light"></div>
                                     </div>
                                 </div>
+                                {% endif %}
+                                {% if ad.imageTow is not null %}
                                 <div class="carousel-item">
                                     <!--Mask color-->
                                     <div class="view">
@@ -53,6 +55,8 @@
                                         <div class="mask rgba-black-light"></div>
                                     </div>
                                 </div>
+                                {% endif %}
+                                {% if ad.imageThree is not null %}
                                 <div class="carousel-item">
                                     <!--Mask color-->
                                     <div class="view">
@@ -62,6 +66,7 @@
                                         <div class="mask rgba-black-light"></div>
                                     </div>
                                 </div>
+                                {%endif%}
                             </div>
                             <!--/.Slides-->
                             <!--Controls-->
@@ -73,9 +78,9 @@
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
-                                  <!--/.Controls-->
+                            <!--/.Controls-->
                         </div>
-                                  <!--/.Carousel Wrapper-->
+                        <!--/.Carousel Wrapper-->
                     </div>
                     <div class="col-md-4 pt-5">
                         {% for spe in ad.category.ospecifications  %}
@@ -106,6 +111,9 @@
                             {% endif %}
                         </div>
                         <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
+                            {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
+                                <span class=""><del class="title-rose">{{ ad.pPrice }}€</del></span><br>
+                            {% endif %}
                             {% if(ad.price is not null) %}
                                 <span class="font-weight-bold">{{ ad.price }}€</span>
                             {% endif %}
@@ -113,86 +121,87 @@
                     </div>
                 </div>
                 {% else %}
-                            <div class="col-md-6 mt-4 mb-4">
-                                <img class="item " src="/assets/images/icons/search.jpg" alt="" style="width: 90%;height: 280px">
+                <div class="col-md-6 mt-4 mb-4">
+                    <img class="item " src="/assets/images/icons/search.jpg" alt="" style="width: 90%;height: 280px">
+                </div>
+                <div class="col-md-4 pt-5">
+                    {% for spe in ad.category.dspecifications  %}
+                        {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                            <div class="p-2">
+                                <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
                             </div>
-                    <div class="col-md-4 pt-5">
-                        {% for spe in ad.category.dspecifications  %}
-                            {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
-                                <div class="p-2">
-                                    <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-2 pt-4 text-center">
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                        <span class="font-weight-bold ">{{ ad.user.city.name }}</span><br>
+                        <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
                     </div>
-                    <div class="col-md-2 pt-4 text-center">
-                        <div class="p-2 border-respo mt-2 mb-2 pt-4">
-                            <span class="font-weight-bold ">{{ ad.user.city.name }}</span><br>
-                            <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
-                        </div>
-                        <div class="p-2 border-respo mt-2 mb-2 pt-4">
-                            {% if(ad.withDriver) %}
-                                <span class="font-weight-bold ">With Driver</span>
-                            {% else %}
-                                <span class="font-weight-bold ">With out Driver</span>
-                            {% endif %}
-                        </div>
-                        <div class="p-2 border-respo mt-2 mb-2 pt-4">
-                            {% if(ad.donate) %}
-                                <span class="font-weight-bold">Donate</span>
-                            {% else %}
-                                <span class="font-weight-bold">For Sell</span>
-                            {% endif %}
-                        </div>
-                        <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
-                            {% if(ad.price is not null) %}
-                                <span class="font-weight-bold">{{ ad.price }}€</span>
-                            {% endif %}
-                        </div>
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                        {% if(ad.withDriver) %}
+                            <span class="font-weight-bold ">With Driver</span>
+                        {% else %}
+                            <span class="font-weight-bold ">With out Driver</span>
+                        {% endif %}
                     </div>
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                        {% if(ad.donate) %}
+                            <span class="font-weight-bold">Donate</span>
+                        {% else %}
+                            <span class="font-weight-bold">For Sell</span>
+                        {% endif %}
+                    </div>
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
+                        {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
+                            <span class=""><del class="title-rose">{{ ad.pPrice }}€</del></span><br>
+                        {% endif %}
+                        {% if(ad.price is not null) %}
+                            <span class="title-blue">{{ ad.price }}€</span>
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+        {% endif %}
+        <div class="row border-respo">
+            <div class="row">
+                <div class="col-md-12 p-2 pl-4">
+                    <span class="title-blue">Description</span><br>
+                    {{ ad.description }}
+                </div>
+            </div>
+        </div>
+        <div class="row border-offer">
+            {% if ad.user is same as (app.user) %}
+                <div class="">
+                    <div class="col p-2 pl-4">
+                        <a class="btn btn-info btn-lg " href="{{ path('ad_edit', {'id': ad.id}) }}">Edit</a>
+                        <div class="btn " >{{ include('ad/_delete_form.html.twig') }}</div>
+                    </div>
+                </div>
+            {% else %}
+                {% if ad.user.emailStatus %}
+                    <div class="mt-4 ml-2 d-block">
+                        <span class="font-weight-bolder"> Email :</span> {{ ad.user.email }}
                     </div>
                 {% endif %}
-
-                <div class="row border-respo">
-                    <div class="row">
-                        <div class="col-md-12 p-2 pl-4">
-                            <span class="title-blue">Description</span><br>
-                            {{ ad.description }}
-                        </div>
+                {% if ad.user.phonNumberStatus %}
+                    <div class="mt-4 ml-2 d-block">
+                        <span class="font-weight-bold"> TEL :</span>{{ ad.user.phoneNumber }}
                     </div>
-                </div>
-                <div class="row border-offer">
-                    {% if ad.user is same as (app.user) %}
-                    <div class="">
-                        <div class="col-md-12 p-2 pl-4">
-                            <a class="btn btn-info btn-lg " href="{{ path('ad_edit', {'id': ad.id}) }}">Edit</a>
-                            <div class="btn btn-danger " >{{ include('ad/_delete_form.html.twig') }}</div>
-                        </div>
+                {% endif %}
+                    <div class="col mt-2 mb-2">
+                        <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Message</button>
                     </div>
-                    {% else %}
-                        {% if ad.user.emailStatus %}
-                            <div class="mt-4 ml-2 d-block">
-                                <span class="font-weight-bolder"> Email :</span> {{ ad.user.email }}
-                            </div>
-                        {% endif %}
-                        {% if ad.user.phonNumberStatus %}
-                            <div class="mt-4 ml-2 d-block">
-                                <span class="font-weight-bold"> TEL :</span>{{ ad.user.phoneNumber }}
-                            </div>
-                        {% endif %}
-                        <div class="col mt-2 mb-2">
-                            <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Message</button>
-                        </div>
-                        <div class="col mt-2 mb-2">
-                            <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Report</button>
-                        </div>
-                        <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
-                        <a data-toggle="dropdown"  href="{{ path('fos_user_profile_show') }}">
-                                 <span class="profile-ava">
-                                     <img alt="" src="/assets/images/icons/avatar.jpeg" id="avatar-small" class="mt-2 mb-2 mr-3">
-                                 </span>
-                        </a>
-                    {% endif %}
-                </div>
+                    <div class="col mt-2 mb-2">
+                        <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Report</button>
+                    </div>
+                    <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
+                    <a data-toggle="dropdown"  href="{{ path('fos_user_profile_show') }}">
+                             <span class="profile-ava">
+                                 <img alt="" src="/assets/images/icons/avatar.jpeg" id="avatar-small" class="mt-2 mb-2 mr-3">
+                             </span>
+                    </a>
+            {% endif %}
         </div>
 {% endblock %}

@@ -60,6 +60,30 @@ class Ad
     private $price;
 
     /**
+     * @return mixed
+     */
+    public function getPPrice()
+    {
+        return $this->pPrice;
+    }
+
+    /**
+     * @param mixed $pPrice
+     */
+    public function setPPrice($pPrice): void
+    {
+        $this->pPrice = $pPrice;
+    }
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(
+     *     type="numeric",
+     *     message="You must enter numbers only."
+     * )
+     */
+    private $pPrice;
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $donate;

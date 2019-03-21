@@ -131,6 +131,11 @@ class AdType extends AbstractType
             ->add('category')
             ->add('user')
             ->add('city')*/
+            ->add('title')
+            ->add('description')
+            ->add('donate')
+            ->add('withDriver')
+            ->add('price')
         ;
     }
 

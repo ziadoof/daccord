@@ -125,6 +125,7 @@ class AdController extends AbstractController
     public function show(Ad $ad): Response
     {
         $allSpecifications = $ad->getAllSpecifications();
+        dump($ad);
         return $this->render('ad/show.html.twig', ['ad' => $ad, 'specifications'=>$allSpecifications]);
     }
 
@@ -133,16 +134,20 @@ class AdController extends AbstractController
      */
     public function edit(Request $request, Ad $ad): Response
     {
+        $allSpecifications = $ad->getAllSpecifications();
+        $price = $ad->getPrice();
         $form = $this->createForm(AdType::class, $ad);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $ad->setPPrice($price);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ad_index', ['id' => $ad->getId()]);
+            return $this->redirectToRoute('ad_show', ['id' => $ad->getId()]);
         }
 
         return $this->render('ad/edit.html.twig', [
+            'specifications'=>$allSpecifications,
             'ad' => $ad,
             'form' => $form->createView(),
         ]);
@@ -161,36 +166,4 @@ class AdController extends AbstractController
 
         return $this->redirectToRoute('ad_index');
     }
-
-    /**
-     * @Route("/adSpe", name="ad_spe", methods={"GET","POST"})
-     */
- /*   public function addSpe(Request $request,  $cato=null): Response
-    {
-
-            $ad = new Ad();
-            $nan = 'ahmad';
-            $form2 = $this->createForm(AdType::class, $ad);
-            $form2->handleRequest($request);
-
-            if ($form2->isSubmitted() && $form2->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-
-                $entityManager->persist($ad);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('ad_index');
-            }
-
-            return $this->render('ad/_form2.html.twig', [
-                'ad' => $ad,
-                'nan' => $nan,
-                'cato'=> $cato,
-                'form2' => $form2->createView(),
-            ]);
-
-
-
-
-    }*/
 }
