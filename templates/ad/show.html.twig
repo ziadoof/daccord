@@ -77,13 +77,47 @@
                         </div>
                                   <!--/.Carousel Wrapper-->
                     </div>
+                    <div class="col-md-4 pt-5">
+                        {% for spe in ad.category.ospecifications  %}
+                            {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                                <div class="p-2">
+                                    <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-2 pt-4 text-center">
+                        <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                            <span class="font-weight-bold ">{{ ad.user.city.name }}</span><br>
+                            <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
+                        </div>
+                        <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                            {% if(ad.withDriver is same as (true)) %}
+                                <span class="font-weight-bold ">With Driver</span>
+                            {% else %}
+                                <span class="font-weight-bold ">With out Driver</span>
+                            {% endif %}
+                        </div>
+                        <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                            {% if(ad.donate is same as (true)) %}
+                                <span class="font-weight-bold">Donate</span>
+                            {% else %}
+                                <span class="font-weight-bold">For Sell</span>
+                            {% endif %}
+                        </div>
+                        <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
+                            {% if(ad.price is not null) %}
+                                <span class="font-weight-bold">{{ ad.price }}€</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
                 {% else %}
                             <div class="col-md-6 mt-4 mb-4">
                                 <img class="item " src="/assets/images/icons/search.jpg" alt="" style="width: 90%;height: 280px">
                             </div>
-                {% endif %}
                     <div class="col-md-4 pt-5">
-                        {% for spe in ad.category.ospecifications  %}
+                        {% for spe in ad.category.dspecifications  %}
                             {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
                                 <div class="p-2">
                                     <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
@@ -111,12 +145,13 @@
                             {% endif %}
                         </div>
                         <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
-                            {% if(ad.price is defined) %}
+                            {% if(ad.price is not null) %}
                                 <span class="font-weight-bold">{{ ad.price }}€</span>
                             {% endif %}
                         </div>
                     </div>
-                </div>
+                    </div>
+                {% endif %}
 
                 <div class="row border-respo">
                     <div class="row">
