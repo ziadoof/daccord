@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-
+use App\Repository\AdRepository;
 
 
 
@@ -21,8 +21,9 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(AdRepository $adRepository)
     {
-        return $this->render('index.html.twig');
+        return $this->render('ad/index.html.twig', ['ads' => $adRepository->findAll()]);
+
     }
 }
