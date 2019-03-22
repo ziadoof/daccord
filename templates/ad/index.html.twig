@@ -3,55 +3,58 @@
 {% block title %}Ad index{% endblock %}
 
 {% block content %}
-    <h1>Ad index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>category</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>ImageOne</th>
-                <th>Price</th>
-                <th>Donate</th>
-                <th>Date</th>
-                <th>WithDriver</th>
-                <th>Mision</th>
-                <th>TypeOfAd</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h1 class="text-center title-rose"> Ads index</h1>
+    <div class="row">
         {% for ad in ads %}
-            <tr>
-                <td>{{ ad.id }}</td>
-                {% if ad.category %}
-                <td>{{ ad.category.parent.name }}{{ '-' }}{{ ad.category.name }}</td>
-                    {% else %}
-                <td>{{ '' }}</td>
-                {% endif %}
-                <td>{{ ad.title }}</td>
-                <td>{{ ad.description }}</td>
-                <td>{{ ad.imageOne }}</td>
-                <td>{{ ad.price }}</td>
-                <td>{{ ad.donate ? 'Yes' : 'No' }}</td>
-                <td>{{ ad.dateOfAd ? ad.dateOfAd|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ ad.withDriver ? 'Yes' : 'No' }}</td>
-                <td>{{ ad.mission }}</td>
-                <td>{{ ad.typeOfAd }}</td>
-                <td>
-                    <a href="{{ path('ad_show', {'id': ad.id}) }}">show</a>
-                    <a href="{{ path('ad_edit', {'id': ad.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <div class="text-center col-md-3 px-md-2 my-2 ad_show">
+                <div id="ad_index" class="ad_index">
+                    <a href="{{ path('ad_show', {'id': ad.id}) }}"class="">
+                        <div class="px-2 border-ad">
+                            <div class="row">
+                                <div class="col-md-12 pt-2">
+                                    <div class=" ">
+                                        <b class="title-blue float-left">{{ ad.typeOfAd }}</b>
+                                        {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
+                                            <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
+                                        {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
+                                            "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
+                                            <b class="float-right ">{{ 'Hier' }}</b>
+                                        {% else %}
+                                            <b class="float-right ">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</b>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if ad.typeOfAd is same as ('Offer') %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img class="image_ad" src="{{ asset('assets/images/icons/search.jpg') }}" alt="">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% if ad.pPrice is not same as (null) %}
+                                        <span class="title-blue float-left"><del>{{ ad.pPrice }}€</del></span>
+                                    {% endif %}
+                                    {% if ad.price %}
+                                    <span class="title-rose float-left">{{ ad.price }}€</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mx-2">
 
-    {#<a href="{{ path('ad_new') }}">Create new</a>#}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
