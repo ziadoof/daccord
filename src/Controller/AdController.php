@@ -205,6 +205,4 @@ class AdController extends AbstractController
             'my_ads' => $my_ads,
         ]);
     }
-
-
 }
