@@ -1,0 +1,82 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}My ads{% endblock %}
+
+{% block content %}
+    <h1 class="text-center title-rose">My ads</h1>
+    {% if app.user is not same as (null) %}
+        {% if my_ads is not empty %}
+            <div class="row">
+                {% for my_ad in my_ads %}
+                    <div class="text-center col-md-3 px-md-2 my-2 ad_show">
+                        <div id="ad_index" class="ad_index">
+                            <a href="{{ path('ad_show', {'id': my_ad.id}) }}"class="">
+                                <div class="px-2 border-ad">
+                                    <div class="row">
+                                        <div class="col-md-12 pt-2">
+                                            <div class=" ">
+                                                <b class="title-blue float-left">{{ my_ad.typeOfAd }}</b>
+                                                {% if "now"|date('Y-m-d') == my_ad.dateOfAd|date('Y-m-d') %}
+                                                    <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
+                                                {% elseif "now"|date('Y') == my_ad.dateOfAd|date('Y') and "now"|date('m') == my_ad.dateOfAd|date('m') and
+                                                    "now"|date('d') == (my_ad.dateOfAd|date('d'))+1 %}
+                                                    <b class="float-right ">{{ 'Hier' }}</b>
+                                                {% else %}
+                                                    <b class="float-right ">{{ 'De ' }}{{ my_ad.dateOfAd|date('Y-m-d') }}</b>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if my_ad.typeOfAd is same as ('Offer') %}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {% if my_ad.imageOne is not null %}
+                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageOne) }}" alt="">
+                                                {% else %}
+                                                    {% if my_ad.imageTow is not null %}
+                                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageTow) }}" alt="">
+                                                    {% else %}
+                                                        {% if my_ad.imageThree is not null %}
+                                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageThree) }}" alt="">
+                                                        {% else %}
+                                                            <img class="image_ad " src="/assets/images/icons/sansphoto.jpeg" alt="">
+                                                        {%endif%}
+                                                    {%endif%}
+                                                {%endif%}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img class="image_ad" src="{{ asset('assets/images/icons/search.jpg') }}" alt="">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            {% if my_ad.pPrice is not same as (null) %}
+                                                <span class="title-blue float-left"><del>{{ my_ad.pPrice }}€</del></span>
+                                            {% endif %}
+                                            {% if my_ad.price %}
+                                                <span class="title-rose float-left">{{ my_ad.price }}€</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="float-right mt-3">{{ my_ad.user.city.name }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="mx-2">
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h1 class="text-center title-blue">You have not ads</h1>
+        {% endif %}
+    {% endif %}
+{# ------------------  End area ads -------------------#}
+{% endblock %}

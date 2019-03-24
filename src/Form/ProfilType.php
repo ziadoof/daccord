@@ -92,9 +92,28 @@ class ProfilType extends AbstractType
                 ],
                  'required' => false,
             ])
-            ->add('maxDistance', TextType::class, [
+            ->add('maxDistance', ChoiceType::class, [
                 'label' => 'Max distance',
-                'attr' => array('rows' => '4', 'cols' => '10')
+                'choices' => [
+                    '5 KM' => 5,
+                    '10 KM' => 10,
+                    '15 KM' => 15,
+                    '20 KM' => 20,
+                    '25 KM' => 25,
+                    '30 KM' => 30,
+                    '35 KM' => 35,
+                    '40 KM' => 40,
+                    '45 KM' => 45,
+                    '50 KM' => 50,
+                    '60 KM' => 60,
+                    '70 KM' => 70,
+                    '80 KM' => 80,
+                    '90 KM' => 90,
+                    '100 KM' => 100,
+                    '120 KM' => 120,
+                    '140 KM' => 140,
+                    '150 KM' => 150,
+                ]
             ])
             ->add('carImage', TextType::class, [
                 'label' => 'image de voiteur',

@@ -41,34 +41,52 @@
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner g-photo" role="listbox">
+                    {%  if ad.imageOne is not null %}
+                        <div class="carousel-item active">
+                            <div class="view">
+                                <div class="item active">
+                                    <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                </div>
+                                <div class="mask rgba-black-light"></div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if ad.imageTow is not null %}
+                    {% if ad.imageOne is  null %}
                     <div class="carousel-item active">
-                        <div class="view">
-
-                            <div class="item active">
-                                <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                        {% else %}
+                        <div class="carousel-item">
+                            {% endif %}
+                            <!--Mask color-->
+                            <div class="view">
+                                <div class="item active">
+                                    <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                </div>
+                                <div class="mask rgba-black-light"></div>
                             </div>
-                            <div class="mask rgba-black-light"></div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <!--Mask color-->
-                        <div class="view">
-                            <div class="item active">
-                                <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                        {% endif %}
+                        {% if ad.imageThree is not null %}
+                        {% if (ad.imageOne is  null) and (ad.imageTow is null) %}
+                        <div class="carousel-item active">
+                            {% else %}
+                            <div class="carousel-item">
+                                {% endif %}
+                                <!--Mask color-->
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
                             </div>
-                            <div class="mask rgba-black-light"></div>
+                            {%endif%}
+                            {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
+                                <div class="item active">
+                                    <img class="item " src="/assets/images/icons/sansphoto.jpeg" alt="">
+                                </div>
+                            {%endif%}
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <!--Mask color-->
-                        <div class="view">
-                            <div class="item active">
-                                <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
-                            </div>
-                            <div class="mask rgba-black-light"></div>
-                        </div>
-                    </div>
-                </div>
                 <!--/.Slides-->
                 <!--Controls-->
                 <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
@@ -86,9 +104,18 @@
         <div class="col-md-4 pt-5">
             {% for spe in ad.category.ospecifications  %}
                 {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
-                    <div class="p-2">
-                        <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
-                    </div>
+                    {% if spe.name is same as ('languages') %}
+                        <div class="p-2">
+                            <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span>
+                            {% for language in specifications[spe.name] %}
+                                <span class="title-blue ">{{ language }}&nbsp; </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="p-2">
+                            <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                        </div>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </div>

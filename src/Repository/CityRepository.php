@@ -37,17 +37,17 @@ class CityRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?City
+
+    public function findOneByName($value): ?City
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.name = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
     /**
      * @param string $city
      *
@@ -65,7 +65,7 @@ class CityRepository extends ServiceEntityRepository
             ->execute()
             ;
     }
-   /* public function find($id)
+    public function findById($id)
     {
         return $this
             ->createQueryBuilder('c')
@@ -74,5 +74,5 @@ class CityRepository extends ServiceEntityRepository
             ->setParameter('id',$$id)
             ->getQuery()
             ->getOneOrNullResult();
-    }*/
+    }
 }
