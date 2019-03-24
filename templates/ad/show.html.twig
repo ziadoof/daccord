@@ -67,6 +67,11 @@
                                     </div>
                                 </div>
                                 {%endif%}
+                                {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
+                                    <div class="item active">
+                                        <img class="item " src="/assets/images/icons/tam.png" alt="">
+                                    </div>
+                                {%endif%}
                             </div>
                             <!--/.Slides-->
                             <!--Controls-->

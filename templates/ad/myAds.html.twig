@@ -30,7 +30,19 @@
                                     {% if my_ad.typeOfAd is same as ('Offer') %}
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageOne) }}" alt="">
+                                                {% if my_ad.imageOne is not null %}
+                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageOne) }}" alt="">
+                                                {% else %}
+                                                    {% if my_ad.imageTow is not null %}
+                                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageTow) }}" alt="">
+                                                    {% else %}
+                                                        {% if my_ad.imageThree is not null %}
+                                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageThree) }}" alt="">
+                                                        {% else %}
+                                                            <img class="image_ad " src="/assets/images/icons/tam.png" alt="">
+                                                        {%endif%}
+                                                    {%endif%}
+                                                {%endif%}
                                             </div>
                                         </div>
                                     {% else %}

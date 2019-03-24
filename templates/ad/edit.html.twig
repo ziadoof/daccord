@@ -41,33 +41,44 @@
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner g-photo" role="listbox">
-                    <div class="carousel-item active">
-                        <div class="view">
+                    {%  if ad.imageOne is not null %}
+                        <div class="carousel-item active">
+                            <div class="view">
+                                <div class="item active">
+                                    <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                </div>
+                                <div class="mask rgba-black-light"></div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if ad.imageTow is not null %}
+                        <div class="carousel-item">
+                            <!--Mask color-->
+                            <div class="view">
+                                <div class="item active">
+                                    <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                </div>
+                                <div class="mask rgba-black-light"></div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if ad.imageThree is not null %}
+                        <div class="carousel-item">
+                            <!--Mask color-->
+                            <div class="view">
+                                <div class="item active">
+                                    <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                </div>
+                                <div class="mask rgba-black-light"></div>
+                            </div>
+                        </div>
+                    {%endif%}
+                    {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
 
-                            <div class="item active">
-                                <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
-                            </div>
-                            <div class="mask rgba-black-light"></div>
+                        <div class="col-md-6 mt-4 mb-4">
+                            <img class="item " src="/assets/images/icons/tam.png" alt="">
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <!--Mask color-->
-                        <div class="view">
-                            <div class="item active">
-                                <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
-                            </div>
-                            <div class="mask rgba-black-light"></div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <!--Mask color-->
-                        <div class="view">
-                            <div class="item active">
-                                <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
-                            </div>
-                            <div class="mask rgba-black-light"></div>
-                        </div>
-                    </div>
+                    {%endif%}
                 </div>
                 <!--/.Slides-->
                 <!--Controls-->
