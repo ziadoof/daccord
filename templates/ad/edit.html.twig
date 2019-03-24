@@ -52,7 +52,11 @@
                         </div>
                     {% endif %}
                     {% if ad.imageTow is not null %}
+                    {% if ad.imageOne is  null %}
+                    <div class="carousel-item active">
+                        {% else %}
                         <div class="carousel-item">
+                            {% endif %}
                             <!--Mask color-->
                             <div class="view">
                                 <div class="item active">
@@ -61,25 +65,28 @@
                                 <div class="mask rgba-black-light"></div>
                             </div>
                         </div>
-                    {% endif %}
-                    {% if ad.imageThree is not null %}
-                        <div class="carousel-item">
-                            <!--Mask color-->
-                            <div class="view">
-                                <div class="item active">
-                                    <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                        {% endif %}
+                        {% if ad.imageThree is not null %}
+                        {% if (ad.imageOne is  null) and (ad.imageTow is null) %}
+                        <div class="carousel-item active">
+                            {% else %}
+                            <div class="carousel-item">
+                                {% endif %}
+                                <!--Mask color-->
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
                                 </div>
-                                <div class="mask rgba-black-light"></div>
                             </div>
+                            {%endif%}
+                            {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
+                                <div class="item active">
+                                    <img class="item " src="/assets/images/icons/sansphoto.jpeg" alt="">
+                                </div>
+                            {%endif%}
                         </div>
-                    {%endif%}
-                    {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
-
-                        <div class="col-md-6 mt-4 mb-4">
-                            <img class="item " src="/assets/images/icons/tam.png" alt="">
-                        </div>
-                    {%endif%}
-                </div>
                 <!--/.Slides-->
                 <!--Controls-->
                 <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
