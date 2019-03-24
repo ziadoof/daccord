@@ -86,9 +86,18 @@
         <div class="col-md-4 pt-5">
             {% for spe in ad.category.ospecifications  %}
                 {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
-                    <div class="p-2">
-                        <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
-                    </div>
+                    {% if spe.name is same as ('languages') %}
+                        <div class="p-2">
+                            <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span>
+                            {% for language in specifications[spe.name] %}
+                                <span class="title-blue ">{{ language }}&nbsp; </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="p-2">
+                            <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                        </div>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </div>
