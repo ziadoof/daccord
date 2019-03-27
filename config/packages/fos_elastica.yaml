@@ -1,0 +1,42 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+  clients:
+    default: { host: localhost, port: 9200 }
+  indexes:
+    app:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              custom_search_analyzer:
+                type:    custom
+                tokenizer:    standard
+                filter:    [lowercase, asciifolding,standard]
+              custom_index_analyzer:
+                tokenizer:    standard
+                type:    custom
+                filter:    [lowercase, asciifolding,standard,custom_filter]
+            filter:
+              custom_filter:
+                type: edgeNGram
+                side: front
+                min_gram: 2
+                max_gram: 20
+      types:
+        ad:
+          properties:
+            title:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            price: ~
+            sSize: ~
+            manufacturingYear: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Ad
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\AdsRepository

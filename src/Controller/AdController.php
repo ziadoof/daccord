@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Model\AdModel;
+use App\Form\AdSearchType;
 use App\Entity\City;
 use App\Entity\User;
 use App\Entity\Category;
@@ -12,6 +14,8 @@ use App\Form\AdType;
 use App\Form\UserType;
 use App\Repository\AdRepository;
 use App\Service\FileUploader;
+use FOS\ElasticaBundle\FOSElasticaBundle;
+use FOS\ElasticaBundle\Repository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +24,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
+use App\Entity\AdsRepository;
+
 
 
 /**
@@ -28,10 +35,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class AdController extends AbstractController
 {
 
+    private $manager;
+    public function __construct(RepositoryManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="ad_index", methods={"GET"})
      */
-    public function index(AdRepository $adRepository): Response
+    public function index(Request $request, AdRepository $adRepository): Response
     {
         $user = $this->getUser();
         if($user !== null){
@@ -51,7 +64,22 @@ class AdController extends AbstractController
             return $this->render('ad/index.html.twig', ['ads' => $adRepository->findAll(),'ad_area'=>$ad_area]);
         }
         else{
-            return $this->render('ad/index.html.twig', ['ads' => $adRepository->findAll()]);
+            $adSearch = new AdModel();
+
+            $form = $this->createForm(AdSearchType::class, $adSearch);
+            $form->handleRequest($request);
+
+            $adSearch = $form->getData();
+
+/*            $elasticaManager = $this->get('fos_elastica.manager');*/
+            $results = $this->manager->getRepository('App:Ad')->searchAd($adSearch);
+            dump($results);
+
+            return $this->render('ad/index.html.twig', [
+                'ads' => $adRepository->findAll(),
+                'form' => $form->createView(),
+                'sAds' => $results
+            ]);
 
         }
     }

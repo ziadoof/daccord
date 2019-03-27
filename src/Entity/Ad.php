@@ -9,8 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
+ * @ORM\Table()
+ *
  */
 class Ad
 {
