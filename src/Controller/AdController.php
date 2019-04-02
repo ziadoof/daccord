@@ -47,6 +47,7 @@ class AdController extends AbstractController
     public function index(Request $request, AdRepository $adRepository): Response
     {
         $user = $this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();
@@ -66,14 +67,15 @@ class AdController extends AbstractController
         else{
             $adSearch = new AdModel();
 
-            $form = $this->createForm(AdSearchType::class, $adSearch);
+            $form = $this->createForm(AdSearchType::class, $adSearch,[
+                'entity_manager' => $entityManager,
+            ]);
             $form->handleRequest($request);
 
             $adSearch = $form->getData();
 
 /*            $elasticaManager = $this->get('fos_elastica.manager');*/
             $results = $this->manager->getRepository('App:Ad')->searchAd($adSearch);
-            dump($results);
 
             return $this->render('ad/index.html.twig', [
                 'ads' => $adRepository->findAll(),
@@ -115,8 +117,13 @@ class AdController extends AbstractController
 
 
                 $ad->setUser($this->getUser());
-
                 $ad->setCategory($category);
+                $ville = $this->getUser()->getCity();
+                $department = $this->getUser()->getCity()->getDepartment();
+                $region = $this->getUser()->getCity()->getDepartment()->getRegion();
+                $ad->setVille($ville);
+                $ad->setDepartment($department);
+                $ad->setRegion($region);
 
 
                 $entityManager->persist($ad);

@@ -31,8 +31,126 @@ fos_elastica:
               analyzer: custom_index_analyzer
               boost: 10
             price: ~
+            withDriver: ~
+            mission: ~
+            theType: ~
+            secondLanguage: ~
+            age: ~
+            iSize: ~
             sSize: ~
+            languages: ~
+            acitvityArea: ~
+            workHours: ~
+            typeOfContract: ~
+            experience: ~
+            levelOfStudy: ~
+            language: ~
+            typeOfTranslation: ~
+            material: ~
+            placeOfLesson: ~
+            levelOfStudent: ~
+            brand: ~
+            color: ~
+            fuelType: ~
+            model: ~
+            changeGear: ~
+            manufactureCompany: ~
+            generalSituation: ~
+            paperSize: ~
+            printingType: ~
+            printingColor: ~
+            analogDigital: ~
+            animalSpecies: ~
+            dvdCd: ~
+            originCountry: ~
+            coverMaterial: ~
+            shape: ~
+            heating: ~
+            heatingType: ~
+            classEnergie: ~
+            ges: ~
+            eventType: ~
+            subjectName: ~
+            salary: ~
+            durationOfLesson: ~
+            maxDistance: ~
             manufacturingYear: ~
+            maxManufacturingYear: ~
+            minManufacturingYear: ~
+            numberOfPassengers: ~
+            numberOfDoors: ~
+            kilometer: ~
+            maxKilometer: ~
+            minKilometer: ~
+            processor: ~
+            ram: ~
+            screenSizeCm: ~
+            screenSizeInch: ~
+            capacity: ~
+            minCapacity: ~
+            maxCapacity: ~
+            accuracy: ~
+            weight: ~
+            caliber: ~
+            maxCaliber: ~
+            minCaliber: ~
+            number: ~
+            width: ~
+            height: ~
+            numberOfPersson: ~
+            length: ~
+            numberOfDrawer: ~
+            numberOfStaging: ~
+            numberOfHead: ~
+            ability: ~
+            floor: ~
+            area: ~
+            minArea: ~
+            maxArea: ~
+            numberOfRooms: ~
+            minNumberOfRooms: ~
+            maxNumberOfRooms: ~
+            numberOfFloors: ~
+            hdmi: ~
+            cdRoom: ~
+            wifi: ~
+            usb: ~
+            threeInOne: ~
+            accessories: ~
+            withFreezer: ~
+            electricHead: ~
+            withOven: ~
+            covered: ~
+            withFurniture: ~
+            withGarden: ~
+            withVerandah: ~
+            withElevator: ~
+            dateOfEvent: ~
+            city: ~
+            ville:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            category:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
           persistence:
             driver: orm
             model: App\Entity\Ad

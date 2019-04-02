@@ -831,6 +831,71 @@ class Ad
     private $city;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\City",)
+     */
+    private $ville;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Department")
+     */
+    private $department;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region")
+     */
+    private $region;
+
+    /**
+     * @return mixed
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville): void
+    {
+        $this->ville = $ville;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * @param mixed $department
+     */
+    public function setDepartment($department): void
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param mixed $region
+     */
+    public function setRegion($region): void
+    {
+        $this->region = $region;
+    }
+
+
+
+    /**
      * @return int
      */
     public function getId(): int
