@@ -9,16 +9,11 @@
 namespace App\Form;
 
 
-use App\Entity\City;
 use App\Entity\Department;
 use App\Entity\Region;
-use App\Entity\User;
 use App\Form\EventListener\AddCategoryFieldSubscriber;
 use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Form\EventListener\AddOspecificationFieldSubscriber;
-use App\Form\EventListener\AddSDspecificationFieldSubscriber;
-use App\Form\EventListener\AddSOspecificationFieldSubscriber;
-use App\Model\AdModel;
+use App\Form\EventListener\AddSpecificationFieldSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -79,9 +74,9 @@ class DemandSearchType extends  AbstractType
         $entityManager = $options['entity_manager'];
 
         $builder
-            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category))
+            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category, 'SearchDemand'))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSDspecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
 
 
         $builder

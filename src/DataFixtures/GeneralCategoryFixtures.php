@@ -13,7 +13,7 @@ class GeneralCategoryFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         //create main category
-        $category1 = new Category();
+    /*    $category1 = new Category();
         $category1->setName('Vehicles');
         $category1->setParent(null);
         $this->addReference('Vehicles',$category1);
@@ -118,6 +118,49 @@ class GeneralCategoryFixtures extends Fixture
         $this->addReference('Holidays',$category17);
 
         $manager->persist($category17);
+
+        $manager->flush();*/
+
+        $general = ['Vehicles','Jobs and services','Media','Information','Fashion','Home appliances',
+            'Agriculture and gardens','Residence','Jewelry and accessories','Music','Sport','Pets','Kids','Furniture and decorations','Holidays'];
+
+        $this->addGeneralCategory($general,$manager);
+
+    }
+
+    public function addGeneralCategory($general,ObjectManager $manager){
+        foreach ($general as $generalCategory ){
+            $category = new Category();
+            $category->setName($generalCategory);
+            $category->setParent(null);
+            $category->setType('Offer');
+            $this->addReference($generalCategory.'_'.'Offer',$category);
+            $manager->persist($category);
+        }
+        foreach ($general as $generalCategory ){
+            $category = new Category();
+            $category->setName($generalCategory);
+            $category->setParent(null);
+            $category->setType('Demand');
+            $this->addReference($generalCategory.'_'.'Demand',$category);
+            $manager->persist($category);
+        }
+        foreach ($general as $generalCategory ){
+            $category = new Category();
+            $category->setName($generalCategory);
+            $category->setParent(null);
+            $category->setType('SearchOffer');
+            $this->addReference($generalCategory.'_'.'SearchOffer',$category);
+            $manager->persist($category);
+        }
+        foreach ($general as $generalCategory ){
+            $category = new Category();
+            $category->setName($generalCategory);
+            $category->setParent(null);
+            $category->setType('SearchDemand');
+            $this->addReference($generalCategory.'_'.'SearchDemand',$category);
+            $manager->persist($category);
+        }
 
         $manager->flush();
     }

@@ -20,7 +20,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad1->setPrice(1400);
         $ad1->setTypeOfAd('Offer');
         $ad1->setImageOne('5f1f2a899c9cdd6c04032e66384c025e.png');
-        $ad1->setCategory($this->getReference('Car'));
+        $ad1->setCategory($this->getReference('Car_Offer'));
         $ad1->setUser($this->getReference('naji'));
         $manager->persist($ad1);
 
@@ -29,7 +29,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad2->setTitle('Voiture a vendre');
         $ad2->setPrice(1200);
         $ad2->setTypeOfAd('Demand');
-        $ad2->setCategory($this->getReference('Motor'));
+        $ad2->setCategory($this->getReference('Motor_Demand'));
         $ad2->setUser($this->getReference('naji'));
         $manager->persist($ad2);
 
@@ -38,7 +38,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad3->setPrice(300);
         $ad3->setTypeOfAd('Offer');
         $ad3->setImageOne('76a889ea24b67a1e531a97ab5b0b9158.jpeg');
-        $ad3->setCategory($this->getReference('Translation'));
+        $ad3->setCategory($this->getReference('Translation_Offer'));
         $ad3->setUser($this->getReference('reem'));
         $manager->persist($ad3);
 
@@ -46,7 +46,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad4->setTitle('Voiture a vendre');
         $ad4->setPrice(120);
         $ad4->setTypeOfAd('Demand');
-        $ad4->setCategory($this->getReference('House work'));
+        $ad4->setCategory($this->getReference('House work_Demand'));
         $ad4->setUser($this->getReference('reem'));
         $manager->persist($ad4);
 
@@ -55,7 +55,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad5->setPrice(270);
         $ad5->setTypeOfAd('Offer');
         $ad5->setImageOne('53d352860eafee85394000770594e6eejpeg');
-        $ad5->setCategory($this->getReference('Camera'));
+        $ad5->setCategory($this->getReference('Camera_Offer'));
         $ad5->setUser($this->getReference('sami'));
         $manager->persist($ad5);
 
@@ -63,7 +63,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad6->setTitle('Books a vendre');
         $ad6->setPrice(2400);
         $ad6->setTypeOfAd('Demand');
-        $ad6->setCategory($this->getReference('Books'));
+        $ad6->setCategory($this->getReference('Books_Demand'));
         $ad6->setUser($this->getReference('sami'));
         $manager->persist($ad6);
 
@@ -72,7 +72,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad7->setPrice(15);
         $ad7->setTypeOfAd('Offer');
         $ad7->setImageOne('94b136e9acfabc8cea758d8271fe3f01png');
-        $ad7->setCategory($this->getReference('Mobile'));
+        $ad7->setCategory($this->getReference('Mobile_Offer'));
         $ad7->setUser($this->getReference('mich'));
         $manager->persist($ad7);
 
@@ -80,7 +80,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad8->setTitle('Voiture a vendre');
         $ad8->setPrice(60);
         $ad8->setTypeOfAd('Demand');
-        $ad8->setCategory($this->getReference('Speaker'));
+        $ad8->setCategory($this->getReference('Speaker_Demand'));
         $ad8->setUser($this->getReference('mich'));
         $manager->persist($ad8);
 
@@ -89,7 +89,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad9->setPrice(45);
         $ad9->setTypeOfAd('Offer');
         $ad9->setImageOne('5f1f2a899c9cdd6c04032e66384c025e.png');
-        $ad9->setCategory($this->getReference('Dress'));
+        $ad9->setCategory($this->getReference('Dress_Offer'));
         $ad9->setUser($this->getReference('nazem'));
         $manager->persist($ad9);
 
@@ -97,7 +97,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad10->setTitle('Jacket');
         $ad10->setPrice(214.2);
         $ad10->setTypeOfAd('Demand');
-        $ad10->setCategory($this->getReference('Jacket'));
+        $ad10->setCategory($this->getReference('Jacket_Demand'));
         $ad10->setUser($this->getReference('nazem'));
         $manager->persist($ad10);
 
@@ -106,7 +106,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad11->setPrice(1800);
         $ad11->setTypeOfAd('Offer');
         $ad11->setImageOne('706647f55641ff9dbd3a51b39e9104df.png');
-        $ad11->setCategory($this->getReference('Oven'));
+        $ad11->setCategory($this->getReference('Oven_Offer'));
         $ad11->setUser($this->getReference('wael'));
         $manager->persist($ad11);
 
@@ -114,7 +114,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad12->setTitle('Sandwich toaster');
         $ad12->setPrice(550);
         $ad12->setTypeOfAd('Demand');
-        $ad12->setCategory($this->getReference('Sandwich toaster'));
+        $ad12->setCategory($this->getReference('Sandwich toaster_Demand'));
         $ad12->setUser($this->getReference('wael'));
         $manager->persist($ad12);
 
@@ -123,7 +123,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad13->setPrice(612.25);
         $ad13->setTypeOfAd('Offer');
         $ad13->setImageOne('b2b4b67ee8a4afbdb9a1f45a3dd9c8af.jpeg');
-        $ad13->setCategory($this->getReference('Seedlings'));
+        $ad13->setCategory($this->getReference('Seedlings_Offer'));
         $ad13->setUser($this->getReference('samera'));
         $manager->persist($ad13);
 
@@ -131,7 +131,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad14->setTitle('Voit');
         $ad14->setPrice(3.5);
         $ad14->setTypeOfAd('Demand');
-        $ad14->setCategory($this->getReference('Fuelwood'));
+        $ad14->setCategory($this->getReference('Fuelwood_Demand'));
         $ad14->setUser($this->getReference('samera'));
         $manager->persist($ad14);
 
@@ -140,7 +140,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad15->setPrice(4800);
         $ad15->setTypeOfAd('Offer');
         $ad15->setImageOne('f18b20d69651d1f61367133206646b46');
-        $ad15->setCategory($this->getReference('Sell apartment'));
+        $ad15->setCategory($this->getReference('Sell apartment_Offer'));
         $ad15->setUser($this->getReference('razan'));
         $manager->persist($ad15);
 
@@ -148,7 +148,7 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad16->setTitle('Voiture a vendre');
         $ad16->setPrice(614.35);
         $ad16->setTypeOfAd('Demand');
-        $ad16->setCategory($this->getReference('Bracelet'));
+        $ad16->setCategory($this->getReference('Bracelet_Demand'));
         $ad16->setUser($this->getReference('razan'));
         $manager->persist($ad16);
 

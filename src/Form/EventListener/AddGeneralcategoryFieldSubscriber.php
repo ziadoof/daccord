@@ -21,9 +21,12 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
 
     private $factory ;
 
-    public function __construct($factory)
+    private $type ;
+
+    public function __construct($factory, $type)
     {
         $this->factory = $factory;
+        $this->type = $type;
     }
 
 
@@ -63,6 +66,8 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->andWhere('c.parent is null')
+                    ->andWhere('c.type = :type')
+                    ->setParameter('type', $this->type)
                     ->orderBy('c.id', 'ASC');
             },
             'choice_label' => 'name',

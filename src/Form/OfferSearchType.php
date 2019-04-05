@@ -9,15 +9,11 @@
 namespace App\Form;
 
 
-use App\Entity\City;
 use App\Entity\Department;
 use App\Entity\Region;
-use App\Entity\User;
 use App\Form\EventListener\AddCategoryFieldSubscriber;
 use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Form\EventListener\AddOspecificationFieldSubscriber;
-use App\Form\EventListener\AddSOspecificationFieldSubscriber;
-use App\Model\AdModel;
+use App\Form\EventListener\AddSpecificationFieldSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -26,7 +22,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 class OfferSearchType extends  AbstractType
 {
@@ -78,9 +73,9 @@ class OfferSearchType extends  AbstractType
         $entityManager = $options['entity_manager'];
 
         $builder
-            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category))
+            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category,'SearchOffer'))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSOspecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
 
 
         $builder
