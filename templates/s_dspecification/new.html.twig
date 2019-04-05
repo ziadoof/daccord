@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SDspecification{% endblock %}
+
+{% block body %}
+    <h1>Create new SDspecification</h1>
+
+    {{ include('s_dspecification/_form.html.twig') }}
+
+    <a href="{{ path('s_dspecification_index') }}">back to list</a>
+{% endblock %}

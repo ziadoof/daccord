@@ -1437,7 +1437,7 @@ class OspecificationsFixtures extends Fixture implements DependentFixtureInterfa
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Floor lamp'],
             //Mirror
             ['name'=>'length', 'label'=>'Length (cm)', 'type'=>'TextType', 'category'=>'Mirror'],
-            ['name'=>'width', 'label'=>'Width (cm)', 'label'=>'Width (cm)', 'type'=>'TextType', 'category'=>'Mirror'],
+            ['name'=>'width', 'label'=>'Width (cm)', 'type'=>'TextType', 'category'=>'Mirror'],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mirror'],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Mirror'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mirror'],

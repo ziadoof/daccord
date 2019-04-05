@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SOspecification{% endblock %}
+
+{% block body %}
+    <h1>Create new SOspecification</h1>
+
+    {{ include('s_ospecification/_form.html.twig') }}
+
+    <a href="{{ path('s_ospecification_index') }}">back to list</a>
+{% endblock %}

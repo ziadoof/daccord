@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Form\DemandSearchType;
 use App\Model\AdModel;
-use App\Form\AdSearchType;
+use App\Form\OfferSearchType;
 use App\Entity\City;
 use App\Entity\User;
 use App\Entity\Category;
@@ -65,22 +66,31 @@ class AdController extends AbstractController
             return $this->render('ad/index.html.twig', ['ads' => $adRepository->findAll(),'ad_area'=>$ad_area]);
         }
         else{
-            $adSearch = new AdModel();
+            $offerSearch = new AdModel();
+            $demandSearch = new AdModel();
 
-            $form = $this->createForm(AdSearchType::class, $adSearch,[
+            $offerForm = $this->createForm(OfferSearchType::class, $offerSearch,[
                 'entity_manager' => $entityManager,
             ]);
-            $form->handleRequest($request);
+            $offerForm->handleRequest($request);
+            $offerSearch = $offerForm->getData();
 
-            $adSearch = $form->getData();
+            $demandForm = $this->createForm(DemandSearchType::class, $demandSearch,[
+                'entity_manager' => $entityManager,
+            ]);
+            $demandForm->handleRequest($request);
+            $demandSearch = $demandForm->getData();
 
 /*            $elasticaManager = $this->get('fos_elastica.manager');*/
-            $results = $this->manager->getRepository('App:Ad')->searchAd($adSearch);
+            $offerResults = $this->manager->getRepository('App:Ad')->searchAd($offerSearch);
+            $demandResults = $this->manager->getRepository('App:Ad')->searchAd($demandSearch);
 
             return $this->render('ad/index.html.twig', [
                 'ads' => $adRepository->findAll(),
-                'form' => $form->createView(),
-                'sAds' => $results
+                'offerForm' => $offerForm->createView(),
+                'demandForm' => $demandForm->createView(),
+                'offerADS' => $offerResults,
+                'demandADS' => $demandResults,
             ]);
 
         }

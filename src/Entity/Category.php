@@ -49,12 +49,24 @@ class Category
      */
     private $dspecifications;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SOspecification", mappedBy="category")
+     */
+    private $sospecifications;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SDspecification", mappedBy="category")
+     */
+    private $sdspecifications;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->ads = new ArrayCollection();
         $this->ospecifications = new ArrayCollection();
         $this->dspecifications = new ArrayCollection();
+        $this->sdspecifications = new ArrayCollection();
+        $this->sospecifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,6 +221,67 @@ class Category
             // set the owning side to null (unless already changed)
             if ($dspecification->getCategory() === $this) {
                 $dspecification->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSospecifications()
+    {
+        return $this->sospecifications;
+    }
+
+    public function addSospecification(SOspecification $sospecification): self
+    {
+        if (!$this->sospecifications->contains($sospecification)) {
+            $this->sospecifications[] = $sospecification;
+            $sospecification->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSospecification(SOspecification $sospecification): self
+    {
+        if ($this->sospecifications->contains($sospecification)) {
+            $this->sospecifications->removeElement($sospecification);
+            // set the owning side to null (unless already changed)
+            if ($sospecification->getCategory() === $this) {
+                $sospecification->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+    /**
+     * @return mixed
+     */
+    public function getSdspecifications()
+    {
+        return $this->sdspecifications;
+    }
+
+    public function addSdspecification(SDspecification $sdspecification): self
+    {
+        if (!$this->sdspecifications->contains($sdspecification)) {
+            $this->sdspecifications[] = $sdspecification;
+            $sdspecification->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSdspecification(SDspecification $sdspecification): self
+    {
+        if ($this->sdspecifications->contains($sdspecification)) {
+            $this->sdspecifications->removeElement($sdspecification);
+            // set the owning side to null (unless already changed)
+            if ($sdspecification->getCategory() === $this) {
+                $sdspecification->setCategory(null);
             }
         }
 

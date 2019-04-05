@@ -16,6 +16,7 @@ use App\Entity\User;
 use App\Form\EventListener\AddCategoryFieldSubscriber;
 use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
 use App\Form\EventListener\AddOspecificationFieldSubscriber;
+use App\Form\EventListener\AddSOspecificationFieldSubscriber;
 use App\Model\AdModel;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -27,7 +28,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-class AdSearchType extends  AbstractType
+class OfferSearchType extends  AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -79,7 +80,7 @@ class AdSearchType extends  AbstractType
         $builder
             ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddOspecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddSOspecificationFieldSubscriber($category, $entityManager));
 
 
         $builder
@@ -87,9 +88,6 @@ class AdSearchType extends  AbstractType
             ->add('title', TextType::class, ['required' => false])
             ->add('donate', CheckboxType::class, ['required' => false])
             ->add('withDriver', CheckboxType::class, ['required' => false])
-/*            ->add('ville', EntityType::class, ['class' => City::class])*/
-/*            ->add('user', EntityType::class, ['class' => User::class])*/
-            ->add('submit', SubmitType::class,['label'=>'Search','attr'=>['class'=>'mt-4 btn-info']])
         ;
     }
 
