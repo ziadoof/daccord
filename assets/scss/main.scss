@@ -8,6 +8,7 @@
 @import "fileinput";
 @import "fileinput-rtl";
 @import "offer";
+@import "~bootstrap4-toggle/css/bootstrap4-toggle.css";
 @import "~bootstrap/scss/bootstrap";
 
 
@@ -35,3 +36,26 @@ body .welcome-text {
   display: none;
 }
 /*-----------------end---------------*/
+/*----------------charchbar---------------*/
+#search-bar{
+  background-color: $noird;
+}
+#search-bar .form-control {
+  font-size: 85%;
+  color: $noird;
+}
+.border-search{
+  border-right: solid;
+  border-right-width: 1px;
+  border-right-color: #000;
+  height: 40%;
+  margin-bottom: 1%;
+}
+.border-search-category{
+  border-right: solid;
+  border-right-width: 1px;
+  border-right-color: #000;
+  height: 40%;
+  margin-bottom: 1%;
+}
+/*-----------------end--------------*/

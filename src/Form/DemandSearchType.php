@@ -11,18 +11,16 @@ namespace App\Form;
 
 use App\Entity\Department;
 use App\Entity\Region;
-use App\Form\EventListener\AddCategoryFieldSubscriber;
-use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Form\EventListener\AddSpecificationFieldSubscriber;
+use App\Form\EventListener\AddSearchCategoryFieldSubscriber;
+use App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber;
+use App\Form\EventListener\AddSearchSpecificationFieldSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 class DemandSearchType extends  AbstractType
 {
@@ -31,7 +29,8 @@ class DemandSearchType extends  AbstractType
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Region',
-                'placeholder' => 'Sélectionnez votre région',
+                'placeholder' => 'Région',
+                'label' => false,
                 'required'    => true
             ]);
 
@@ -74,20 +73,15 @@ class DemandSearchType extends  AbstractType
         $entityManager = $options['entity_manager'];
 
         $builder
-            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category, 'SearchDemand'))
-            ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddSearchGeneralcategoryFieldSubscriber($category,'Offer'))
+            ->addEventSubscriber(new AddSearchCategoryFieldSubscriber($category))
+            ->addEventSubscriber(new AddSearchSpecificationFieldSubscriber($category, $entityManager, 'SearchDemand'));
 
 
         $builder
-            ->add('price', TextType::class, ['required' => false])
-            ->add('title', TextType::class, ['required' => false])
-            ->add('donate', CheckboxType::class, ['required' => false])
-            ->add('withDriver', CheckboxType::class, ['required' => false])
-/*            ->add('ville', EntityType::class, ['class' => City::class])*/
-/*            ->add('user', EntityType::class, ['class' => User::class])*/
-            ->add('submit', SubmitType::class,['label'=>'Search','attr'=>['class'=>'mt-4 btn-info']])
-        ;
+            ->add('title', TextType::class, ['required' => false, 'label'=> false, 'attr' => array(
+                'placeholder' => 'What are you looking for....',
+            )]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -112,10 +106,10 @@ class DemandSearchType extends  AbstractType
             null,
             [
                 'class'           => 'App\Entity\Department',
-                'placeholder'     => $region ? 'Sélectionnez votre département' : 'Sélectionnez votre région',
+                'placeholder'     => $region ? 'Département' : 'Select Region',
                 'required'        => false,
                 'auto_initialize' => false,
-                'label' =>'Département',
+                'label' =>false,
                 'choices'         => $region ? $region->getDepartments() : []
             ]
         );
@@ -133,9 +127,9 @@ class DemandSearchType extends  AbstractType
     {
         $form->add('ville', EntityType::class, [
             'class'       => 'App\Entity\City',
-            'label' =>'Ville',
+            'label' =>false,
             'required' => false,
-            'placeholder' => $department ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
+            'placeholder' => $department ? 'City' : 'Select Department',
             'choices'     => $department ? $department->getCitys() : []
 
         ]);

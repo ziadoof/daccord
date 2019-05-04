@@ -13,40 +13,60 @@ use App\Entity\City;
 use App\Entity\Department;
 use App\Entity\Region;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 class AdModel
 {
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ads")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="ads")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $category;
-    
+
+
+    protected $generalCategory;
+
+    /**
+     * @return mixed
+     */
+    public function getGeneralCategory()
+    {
+        return $this->generalCategory;
+    }
+
+    /**
+     * @param mixed $generalCategory
+     */
+    public function setGeneralCategory($generalCategory): void
+    {
+        $this->generalCategory = $generalCategory;
+    }
+
     protected $title;
 
     protected $price;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\City")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     protected $ville;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Department")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     protected $department;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Region")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     protected $region;
 
@@ -219,8 +239,25 @@ class AdModel
     protected $workHours;
 
     protected $typeOfContract;
+    protected $typeOfAd;
 
     protected $experience;
+
+    /**
+     * @return mixed
+     */
+    public function getTypeOfAd()
+    {
+        return $this->typeOfAd;
+    }
+
+    /**
+     * @param mixed $typeOfAd
+     */
+    public function setTypeOfAd($typeOfAd): void
+    {
+        $this->typeOfAd = $typeOfAd;
+    }
 
     protected $levelOfStudy;
 

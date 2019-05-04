@@ -25,7 +25,7 @@ use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 
 
-class AddSpecificationFieldSubscriber implements EventSubscriberInterface
+class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
 
 {
 
@@ -82,11 +82,13 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                 $name = $specification->getName();
                 $label =  $specification->getLabel();
                 if($type === 'TextType'){
-                    $options = array('label' => $label, 'required' => false,);
+                    $options = array('label' => false, 'required' => false, 'attr' => array(
+                        'placeholder' => $label,
+                    ));
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'CheckboxType'){
-                    $options = array('label' => $label, 'required' => false,);
+                    $options = array('label' => false, 'required' => false);
                     $form->add($name, CheckboxType::class, $options);
                 }
                 elseif($type === 'ColorType'){
@@ -94,7 +96,9 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'EntityType'){
-                    $options = array('label' => $label, 'required' => false,'class' => City::class);
+                    $options = array('label' => false, 'required' => false, 'class' => City::class, 'attr' => array(
+                        'placeholder' => 'Type the initials of the city name',
+                    ));
                     $form->add($name, AutocompleteType::class, $options);
                 }
                 elseif($type === 'DateType'){
@@ -110,17 +114,17 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             $choiceOptions[$textOption]= $textOption;
                         }
                         if($name === 'languages'){
-                            $options = array('label' => $label, 'required' => false,
+                            $options = array('label' => false, 'required' => false,
                                 'choices' => $choiceOptions,
-                                'placeholder' => 'Select'.' '.$label,
+                                'placeholder' => $label,
                                 /*'expanded'  => true,*/
                                 'multiple'  => true,
                             );
                         }
                         else{
-                            $options = array('label' => $label, 'required' => false,
+                            $options = array('label' => false, 'required' => false,
                                 'choices' => $choiceOptions,
-                                'placeholder' => 'Select'.' '.$label
+                                'placeholder' => $label
                             );
                         }
 
@@ -132,9 +136,9 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                         foreach ($numericOptions as $numericOption){
                             $choiceOptions[$numericOption]= $numericOption;
                         }
-                        $options = array('label' => $label, 'required' => false,
+                        $options = array('label' => false, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => 'Select'.' '.$label
+                            'placeholder' => $label
                         );
                         $form->add($name, ChoiceType::class, $options);
                     }
@@ -145,9 +149,9 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             for ($i=$min;$i<=$max;$i++){
                                 $choiceOptions [$i]= $i;
                             }
-                        $options = array('label' => $label, 'required' => false,
+                        $options = array('label' => false, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => 'Select'.' '.$label
+                            'placeholder' => $label
                         );
                         $form->add($name, ChoiceType::class, $options);
                     }

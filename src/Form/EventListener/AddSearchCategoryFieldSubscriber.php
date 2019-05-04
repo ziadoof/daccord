@@ -1,32 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ziadoof
- * Date: 11/02/19
- * Time: 12:50
- */
+
 
 namespace App\Form\EventListener;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Category;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
+class AddSearchCategoryFieldSubscriber implements EventSubscriberInterface
 
 {
 
-    private $factory ;
+    private $factory;
 
-    private $type ;
-
-    public function __construct($factory, $type)
+    public function __construct($factory)
     {
         $this->factory = $factory;
-        $this->type = $type;
     }
 
 
@@ -51,35 +43,33 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::POST_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT     => 'preSubmit'
         );
     }
 
-    private function addCategoryForm($form, $generalcategory_id=null)
+    private function addCategoryForm($form, $generalcategory_id)
     {
+
         $formOptions = array(
             'class'         => Category::class,
-            'mapped'        => false,
-            'label'         => 'General Category',
-            'required' => true,
-            'placeholder' => 'Choisir un general Category',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('c')
-                    ->andWhere('c.parent is null')
-                    ->andWhere('c.type = :type')
-                    ->setParameter('type', $this->type)
-                    ->orderBy('c.id', 'ASC');
-            },
-            'choice_label' => 'name',
+            'required' => false,
+            'placeholder'     => 'All categorys',
+            'label' => false,
             'attr'          => array(
-                'class' => 'generalcategory_selector',
+                'class' => 'category_selector ',
+
             ),
+            'query_builder' => function (EntityRepository $repository) use ($generalcategory_id) {
+                $qb = $repository->createQueryBuilder('c')
+                    ->where('c.parent = :generalcategory_id')
+                    ->setParameter('generalcategory_id', $generalcategory_id)
+                ;
+                return $qb;
+            }
         );
-        if ($generalcategory_id) {
-            $formOptions['data'] = $generalcategory_id;
-        }
-        $form->add('generalcategory', EntityType::class, $formOptions);
+
+        $form->add($this->factory, EntityType::class, $formOptions);
     }
 
     public function preSetData(FormEvent $event)
@@ -94,15 +84,17 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
         $accessor = PropertyAccess::createPropertyAccessorBuilder()
             ->enableExceptionOnInvalidIndex()
             ->getPropertyAccessor();
-
-        $category    = $accessor->getValue($data, $this->factory);
-        $generalcategory_id = ($category) ? $category->getParent()->getParent() : null;
+        $category        = $accessor->getValue($data, $this->factory);
+        $generalcategory_id = ($category) ? $category->getParent()->getId() : null;
         $this->addCategoryForm($form, $generalcategory_id);
     }
 
     public function preSubmit(FormEvent $event)
     {
+        $data = $event->getData();
         $form = $event->getForm();
-        $this->addCategoryForm($form);
+
+        $generalcategory_id = array_key_exists('generalcategory', $data) ? $data['generalcategory'] : null;
+        $this->addCategoryForm($form, $generalcategory_id);
     }
 }

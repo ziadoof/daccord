@@ -5,8 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -108,8 +108,33 @@ class Ad
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="ads")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
      */
     private $category;
+
+    /**
+     * @return mixed
+     */
+    public function getGeneralCategory()
+    {
+        return $this->generalCategory;
+    }
+
+    /**
+     * @param mixed $generalCategory
+     */
+    public function setGeneralCategory($generalCategory): void
+    {
+        $this->generalCategory = $generalCategory;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     *
+     *
+     */
+    private $generalCategory;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ads")

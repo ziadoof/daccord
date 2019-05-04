@@ -75,6 +75,7 @@ class AdController extends AbstractController
             $offerForm->handleRequest($request);
             $offerSearch = $offerForm->getData();
 
+
             $demandForm = $this->createForm(DemandSearchType::class, $demandSearch,[
                 'entity_manager' => $entityManager,
             ]);
@@ -128,6 +129,8 @@ class AdController extends AbstractController
 
                 $ad->setUser($this->getUser());
                 $ad->setCategory($category);
+                $ad->setGeneralCategory($category->getParent());
+
                 $ville = $this->getUser()->getCity();
                 $department = $this->getUser()->getCity()->getDepartment();
                 $region = $this->getUser()->getCity()->getDepartment()->getRegion();
@@ -160,6 +163,8 @@ class AdController extends AbstractController
             $form->handleRequest($request);
 
 
+
+
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
 
@@ -168,6 +173,7 @@ class AdController extends AbstractController
 
                 $ad->setUser($this->getUser());
                 $ad->setCategory($category);
+
 
 
                 $entityManager->persist($ad);
@@ -189,8 +195,14 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),'Demand');
         $allSpecifications = $ad->getAllSpecifications();
-        return $this->render('ad/show.html.twig', ['ad' => $ad, 'specifications'=>$allSpecifications]);
+        return $this->render('ad/show.html.twig', [
+            'ad' => $ad,
+            'realCategory'=> $realCategory,
+            'specifications'=>$allSpecifications
+        ]);
     }
 
     /**

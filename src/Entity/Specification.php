@@ -32,7 +32,7 @@ class Specification
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="ospecifications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="specifications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;

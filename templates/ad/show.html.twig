@@ -96,7 +96,7 @@
                         <!--/.Carousel Wrapper-->
                     </div>
                     <div class="col-md-4 pt-5">
-                        {% for spe in ad.category.ospecifications  %}
+                        {% for spe in ad.category.specifications  %}
                             {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
                                 {% if spe.name is same as ('languages') %}
                                     <div class="p-2">
@@ -147,7 +147,7 @@
                     <img class="item " src="/assets/images/icons/search.jpg" alt="" style="width: 90%;height: 280px">
                 </div>
                 <div class="col-md-4 pt-5">
-                    {% for spe in ad.category.dspecifications  %}
+                    {% for spe in realCategory.specifications  %}
                         {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
                             <div class="p-2">
                                 <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>

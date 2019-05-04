@@ -41,6 +41,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="category")
+     *
      */
     private $ads;
 

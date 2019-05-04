@@ -32,7 +32,58 @@ class AdsRepository extends Repository
     public function searchAd(AdModel $search)
     {
         $bool = new BoolQuery();
-        /*$searchForm = [
+
+        if ($search->getRegion() != null && $search->getRegion() != '') {
+            $nested = new Query\Nested();
+            $userBool = new BoolQuery();
+            $match = new Match();
+            $match->setFieldQuery('region.id', $search->getRegion()->getId());
+            $userBool->addMust($match);
+            $nested->setPath('region');
+            $nested->setQuery($userBool);
+            $bool->addMust($nested);
+            if ($search->getDepartment() != null && $search->getDepartment() != '') {
+                $nested = new Query\Nested();
+                $userBool = new BoolQuery();
+                $match = new Match();
+                $match->setFieldQuery('department.id', $search->getDepartment()->getId());
+                $userBool->addMust($match);
+                $nested->setPath('department');
+                $nested->setQuery($userBool);
+                $bool->addMust($nested);
+                if ($search->getVille() != null && $search->getVille() != '') {
+                    $nested = new Query\Nested();
+                    $userBool = new BoolQuery();
+                    $match = new Match();
+                    $match->setFieldQuery('ville.id', $search->getVille()->getId());
+                    $userBool->addMust($match);
+                    $nested->setPath('ville');
+                    $nested->setQuery($userBool);
+                    $bool->addMust($nested);
+                }
+            }
+        }
+
+
+        if ($search->getGeneralCategory() != null && $search->getGeneralCategory() !=''){
+            $nested = new Query\Nested();
+            $userBool = new BoolQuery();
+            $match = new Match();
+            if ($search->getCategory() != null && $search->getCategory() != '') {
+                $match->setFieldQuery('category.id', $search->getCategory()->getId());
+                $userBool->addMust($match);
+                $nested->setPath('category');
+            }
+            else{
+                $match->setFieldQuery('generalCategory.id', $search->getGeneralCategory()->getId());
+                $userBool->addMust($match);
+                $nested->setPath('generalCategory');
+            }
+            $nested->setQuery($userBool);
+            $bool->addMust($nested);
+        }
+
+      /*  $searchForm = [
             'price'=> $search->getPrice(),
             'title'=> $search->getTitle(),
             'sSize'=> $search->getSSize(),
@@ -70,88 +121,8 @@ class AdsRepository extends Repository
             $match->setFieldQuery('manufacturingYear', $search->getManufacturingYear());
             $bool->addMust($match);
         }
-        /*if ($search->getUser() != null && $search->getUser() != '') {
-            $nested = new Query\Nested();
-            $userBool = new BoolQuery();
-            $match = new Match();
-            $match->setFieldQuery('user.firstname', $search->getUser()->getFirstname());
-            $userBool->addMust($match);
-            $nested->setPath('user');
-            $nested->setQuery($userBool);
-            $bool->addMust($nested);
-        }*/
-        if ($search->getRegion() != null && $search->getRegion() != '') {
-            $nested = new Query\Nested();
-            $userBool = new BoolQuery();
-            $match = new Match();
-            $match->setFieldQuery('region.id', $search->getRegion()->getId());
-            $userBool->addMust($match);
-            $nested->setPath('region');
-            $nested->setQuery($userBool);
-            $bool->addMust($nested);
-            if ($search->getDepartment() != null && $search->getDepartment() != '') {
-                $nested = new Query\Nested();
-                $userBool = new BoolQuery();
-                $match = new Match();
-                $match->setFieldQuery('department.id', $search->getDepartment()->getId());
-                $userBool->addMust($match);
-                $nested->setPath('department');
-                $nested->setQuery($userBool);
-                $bool->addMust($nested);
-                if ($search->getVille() != null && $search->getVille() != '') {
-                    $nested = new Query\Nested();
-                    $userBool = new BoolQuery();
-                    $match = new Match();
-                    $match->setFieldQuery('ville.id', $search->getVille()->getId());
-                    $userBool->addMust($match);
-                    $nested->setPath('ville');
-                    $nested->setQuery($userBool);
-                    $bool->addMust($nested);
-                }
-            }
-        }
-        if ($search->getCategory() != null && $search->getCategory() != '') {
-            $nested = new Query\Nested();
-            $userBool = new BoolQuery();
-            $match = new Match();
-            $match->setFieldQuery('category.id', $search->getCategory()->getId());
-            $userBool->addMust($match);
-            $nested->setPath('category');
-            $nested->setQuery($userBool);
-            $bool->addMust($nested);
-        }
 
 
-
-        /*if ($search->getVille() != null && $search->getVille() != '') {
-
-            $userNested = new Query\Nested();
-            $userBool = new BoolQuery();
-            $userMatch = new Match();
-
-            $userMatch->setFieldQuery('user', $search->getUser());
-            $userBool->addMust($userMatch);
-
-
-            $userNested->setPath('user');
-
-
-            $cityNested = new Query\Nested();
-            $cityBool = new BoolQuery();
-            $cityMatch = new Match();
-
-                $cityMatch->setFieldQuery('user.city.name',$search->getUser()->getCity()->getName());
-
-            $cityBool->addMust($cityMatch);
-
-            $cityNested->setPath('user');
-            $cityNested->setQuery($cityBool);
-            $userBool->addMust($cityNested);
-            $userNested->setQuery($userBool);
-
-            $bool->addMust($userNested);
-
-        }*/
         $query = Query::create($bool);
         return $this->find($query,3000);
 

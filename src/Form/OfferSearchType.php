@@ -11,12 +11,11 @@ namespace App\Form;
 
 use App\Entity\Department;
 use App\Entity\Region;
-use App\Form\EventListener\AddCategoryFieldSubscriber;
-use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Form\EventListener\AddSpecificationFieldSubscriber;
+use App\Form\EventListener\AddSearchCategoryFieldSubscriber;
+use App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber;
+use App\Form\EventListener\AddSearchSpecificationFieldSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -27,10 +26,12 @@ class OfferSearchType extends  AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Region',
-                'placeholder' => 'Sélectionnez votre région',
+                'placeholder' => 'Région',
+                'label' => false,
                 'required'    => true
             ]);
 
@@ -72,18 +73,15 @@ class OfferSearchType extends  AbstractType
         $category = 'category';
         $entityManager = $options['entity_manager'];
 
-        $builder
-            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category,'SearchOffer'))
-            ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
-
 
         $builder
-            ->add('price', TextType::class, ['required' => false])
-            ->add('title', TextType::class, ['required' => false])
-            ->add('donate', CheckboxType::class, ['required' => false])
-            ->add('withDriver', CheckboxType::class, ['required' => false])
-        ;
+            ->addEventSubscriber(new AddSearchGeneralcategoryFieldSubscriber($category,'Offer'))
+            ->addEventSubscriber(new AddSearchCategoryFieldSubscriber($category))
+            ->addEventSubscriber(new AddSearchSpecificationFieldSubscriber($category, $entityManager, 'SearchOffer'));
+        $builder
+            ->add('title', TextType::class, ['required' => false, 'label'=> false, 'attr' => array(
+                'placeholder' => 'What are you looking for....',
+            )]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -108,10 +106,10 @@ class OfferSearchType extends  AbstractType
             null,
             [
                 'class'           => 'App\Entity\Department',
-                'placeholder'     => $region ? 'Sélectionnez votre département' : 'Sélectionnez votre région',
+                'placeholder'     => $region ? 'Département' : 'Select Region',
                 'required'        => false,
                 'auto_initialize' => false,
-                'label' =>'Département',
+                'label' => false,
                 'choices'         => $region ? $region->getDepartments() : []
             ]
         );
@@ -129,9 +127,9 @@ class OfferSearchType extends  AbstractType
     {
         $form->add('ville', EntityType::class, [
             'class'       => 'App\Entity\City',
-            'label' =>'Ville',
+            'label' => false,
             'required' => false,
-            'placeholder' => $department ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
+            'placeholder' => $department ? 'City' : 'Select Department',
             'choices'     => $department ? $department->getCitys() : []
 
         ]);

@@ -19,9 +19,9 @@ class DemandType extends AbstractType
         $category = 'category';
         $entityManager = $options['entity_manager'];
         $builder
-            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category, 'Demand'))
+            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category, 'Offer'))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager, 'Demand'));
 
         ;
         $builder

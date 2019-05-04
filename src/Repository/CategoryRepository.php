@@ -50,6 +50,21 @@ class CategoryRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function findCategoryByName($name, $type): ?Category
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.name = :name')
+            ->andWhere('c.type = :type')
+            ->setParameter('name', $name)
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */
