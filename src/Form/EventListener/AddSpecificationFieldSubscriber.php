@@ -72,8 +72,9 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
     {
 
         if ($category!== null) {
+            $parentName = $category->getParent()->getName();
             $em = $this->entityManager;
-            $realCategory = $em->getRepository(Category::class)->findCategoryByName($category->getName(),$this->type);
+            $realCategory = $em->getRepository(Category::class)->findCategoryByName($category->getName(),$this->type, $parentName);
 
             $specifications = $realCategory->getSpecifications();
 
@@ -115,6 +116,12 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                                 'placeholder' => 'Select'.' '.$label,
                                 /*'expanded'  => true,*/
                                 'multiple'  => true,
+                            );
+                        }
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'){
+                            $options = array('label' => $label, 'required' => false,
+                                'choices' => $textOptions,
+                                'placeholder' => 'Select'.' '.$label,
                             );
                         }
                         else{

@@ -196,8 +196,32 @@ class AdController extends AbstractController
     public function show(Ad $ad): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),'Demand');
+        $categoryParent = $ad->getCategory()->getParent()->getName();
+        $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),'Demand', $categoryParent);
         $allSpecifications = $ad->getAllSpecifications();
+        $classEnergieAndGes=[1=>'A',2=>'B',3=>'C',4=>'D',5=>'E',6=>'F',7=>'G'];
+        $paperSize=[1=>'4A0',2=>'2A0',3=>'A0',4=>'A1',5=>'A2',6=>'A3',7=>'A4',8=>'A5',9=>'A6',10>'A7',11=>'A8',12=>'A9',13=>'A10'];
+        $experience=[0=>'Not required',1=>'1 YEAR',2=>'2 YEARS' ,3=>'3 YEARS' ,4=>'4 YEARS' ,5=>'5 YEARS' ,6=>'+ 5 YEARS'];
+        $levelOfStudent=[1=>'Maternal school',2=>'Middle school',3=>'High school',4=>'Universities',5=>'Professional'];
+        foreach ($allSpecifications as $key=>$value){
+            switch ($key){
+                case 'ges':
+                    $allSpecifications[$key] = $classEnergieAndGes[$value];
+                    break;
+                case 'classEnergie':
+                    $allSpecifications[$key] = $classEnergieAndGes[$value];
+                    break;
+                case 'experience':
+                    $allSpecifications[$key] = $experience[$value];
+                    break;
+                case 'paperSize':
+                    $allSpecifications[$key] = $paperSize[$value];
+                    break;
+                case 'levelOfStudent':
+                    $allSpecifications[$key] = $levelOfStudent[$value];
+                    break;
+            }
+        }
         return $this->render('ad/show.html.twig', [
             'ad' => $ad,
             'realCategory'=> $realCategory,

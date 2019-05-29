@@ -54,7 +54,11 @@ fos_elastica:
             fuelType: ~
             model: ~
             changeGear: ~
-            manufactureCompany: ~
+            manufactureCompany:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             generalSituation: ~
             paperSize: ~
             printingType: ~

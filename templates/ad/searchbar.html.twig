@@ -1,6 +1,6 @@
 {% block content %}
     {% if app.user is same as (null) %}
-        <div class="row collapse" id="search-bar">
+        <div class="row {#collapse#}" id="search-bar">
             <div class="col-md-12">
                 <div class=" register ">
                     <div class="row">
@@ -18,7 +18,7 @@
                                 <div class="tab-pane fade show active text-align form-new" id="offer" role="tabpanel" aria-labelledby="offer-tab">
                                     <div class="row register-form">
                                         <div class="col-md-12 mt-4">
-                                            {{ form_start(offerForm) }}
+                                            {{ form_start(offerForm, {'attr': {'id': 'search-offer'}}) }}
                                             <div class="text-center ">
                                                 <div class="row">
                                                     <div class="col-md-2 border-search">
@@ -85,16 +85,13 @@
                                                                             {% if offerForm.city is defined %}
                                                                                 <div class="col-md-6">
                                                                                     {{ form_row(offerForm.city) }}
+                                                                                    <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+                                                                                    <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.age is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.age) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.dateOfEvent is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.dateOfEvent) }}
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.model is defined %}
@@ -137,19 +134,9 @@
                                                                                     {{ form_row(offerForm.fuelType) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.ability is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.ability) }}
-                                                                                </div>
-                                                                            {% endif %}
                                                                             {% if offerForm.acitvityArea is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.acitvityArea) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.mission is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.mission) }}
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.workHours is defined %}
@@ -190,11 +177,6 @@
                                                                             {% if offerForm.placeOfLesson is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.placeOfLesson) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.durationOfLesson is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.durationOfLesson) }}
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.language is defined %}
@@ -257,11 +239,6 @@
                                                                                     {{ form_row(offerForm.maxArea) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.floor is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.floor) }}
-                                                                                </div>
-                                                                            {% endif %}
                                                                             {% if offerForm.heating is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.heating) }}
@@ -297,11 +274,6 @@
                                                                                     {{ form_row(offerForm.minCaliber) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.caliber is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.caliber) }}
-                                                                                </div>
-                                                                            {% endif %}
                                                                             {% if offerForm.maxCaliber is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.maxCaliber) }}
@@ -310,11 +282,6 @@
                                                                             {% if offerForm.generalSituation is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.generalSituation) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.processor is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.processor) }}
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.ram is defined %}
@@ -378,11 +345,6 @@
                                                                                     {{ form_row(offerForm.numberOfDrawer) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.numberOfFloors is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.numberOfFloors) }}
-                                                                                </div>
-                                                                            {% endif %}
                                                                             {% if offerForm.numberOfHead is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.numberOfHead) }}
@@ -413,21 +375,6 @@
                                                                                     {{ form_row(offerForm.numberOfStaging) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.length is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.length) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.width is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.width) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.height is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.height) }}
-                                                                                </div>
-                                                                            {% endif %}
                                                                             {% if offerForm.weight is defined %}
                                                                                 <div class="col-md-3">
                                                                                     {{ form_row(offerForm.weight) }}
@@ -443,14 +390,9 @@
                                                                                     {{ form_row(offerForm.ges) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.color is defined %}
+                                                                            {% if offerForm.eventType is defined %}
                                                                                 <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.color) }}
-                                                                                </div>
-                                                                            {% endif %}
-                                                                            {% if offerForm.maxDistance is defined %}
-                                                                                <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.maxDistance) }}
+                                                                                    {{ form_row(offerForm.eventType) }}
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.accessories is defined %}
@@ -488,9 +430,9 @@
                                                                                     {{ form_row(offerForm.usb, {'attr': {'data-toggle':'toggle' ,'data-on':'With USB', 'data-off':'With out USB', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.whitOven is defined %}
+                                                                            {% if offerForm.withOven is defined %}
                                                                                 <div class="col-md-3">
-                                                                                    {{ form_row(offerForm.whitOven, {'attr': {'data-toggle':'toggle' ,'data-on':'With oven', 'data-off':'With out oven', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
+                                                                                    {{ form_row(offerForm.withOven, {'attr': {'data-toggle':'toggle' ,'data-on':'With oven', 'data-off':'With out oven', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
                                                                                 </div>
                                                                             {% endif %}
                                                                             {% if offerForm.wifi is defined %}
@@ -550,7 +492,7 @@
                                                 </div>
                                                 <div class="row justify-content-center mb-2">
                                                     <div class="col-md-12">
-                                                        <input type="submit" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
+                                                        <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -561,7 +503,7 @@
                                 <div class="tab-pane fade show text-align form-new " id="demand" role="tabpanel" aria-labelledby="demand-tab">
                                     <div class="row register-form">
                                         <div class="col-md-12 mt-4">
-                                            {{ form_start(demandForm) }}
+                                            {{ form_start(demandForm, {'attr': {'id': 'search-demand'}}) }}
                                             <div class="text-center ">
                                                 <div class="row">
                                                     <div class="col-md-2 border-search">
@@ -626,6 +568,8 @@
                                                                     {% if demandForm.city is defined %}
                                                                         <div class="col-md-6">
                                                                             {{ form_row(demandForm.city) }}
+                                                                            <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+                                                                            <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
                                                                         </div>
                                                                     {% endif %}
                                                                     {% if demandForm.age is defined %}
@@ -1029,9 +973,9 @@
                                                                             {{ form_row(demandForm.usb, {'attr': {'data-toggle':'toggle' ,'data-on':'With USB', 'data-off':'With out USB', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
                                                                         </div>
                                                                     {% endif %}
-                                                                    {% if demandForm.whitOven is defined %}
+                                                                    {% if demandForm.withOven is defined %}
                                                                         <div class="col-md-3">
-                                                                            {{ form_row(demandForm.whitOven, {'attr': {'data-toggle':'toggle' ,'data-on':'With oven', 'data-off':'With out oven', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
+                                                                            {{ form_row(demandForm.withOven, {'attr': {'data-toggle':'toggle' ,'data-on':'With oven', 'data-off':'With out oven', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
                                                                         </div>
                                                                     {% endif %}
                                                                     {% if demandForm.wifi is defined %}
@@ -1089,7 +1033,7 @@
                                                 </div>
                                                 <div class="row justify-content-center mb-2">
                                                     <div class="col-md-12">
-                                                        <input type="submit" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
+                                                        <input type="submit" id="valide-demand-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1104,4 +1048,96 @@
             </div>
         </div>
     {% endif %}
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+  {#  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>#}
+
+    {#
+        <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+    #}
+{#
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+#}
+{#
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+#}
+{#
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+#}
+
+
+    <script>
+
+
+
+
+
+
+  /*      $().ready(function() {
+            $("#search-offer").validate(
+                {
+                    rules: {
+                        offer_search_minManufacturingYear: "required",
+                    },
+                    messages: {
+                        offer_search_minManufacturingYear: "Please enter your first name",
+                    }
+                }
+            );
+        });*/
+
+        /*_________________________*/
+        /*$.formUtils.addValidator({
+
+            name : 'lessThan',
+            validatorFunction : function(val, param) {
+                console.log(param);
+                return parseInt(val, 10) <= param;
+            },
+            errorMessage : 'The MIN must be less than MAX',
+
+        });
+
+        $.validate({
+            lang: 'fr',
+            rules:{
+                "#offer_search_minManufacturingYear": {
+                    lessThan: $("#offer_search_maxManufacturingYear").val()
+                },
+                "#offer_search_maxManufacturingYear": {
+                    moreThan: "#offer_search_minManufacturingYear"
+                }
+            },
+        });*/
+
+
+
+     /*   $("#valide-offer-search").click(function(){
+            let errors = $('span.error').length ;
+            if(errors > 0 ){
+                return false;
+            }
+            else {
+
+                return true
+            }
+
+        });*/
+
+
+      /*  $('#valide-offer-search').click(function() {
+            console.log($('span.error').length);
+            if($('span.error').length &gt; 0){
+                alert('Errors! you have'+$('span.error').length+'error');
+                return false;
+            } else {
+                $('#valide-offer-search').after('<span class="error">Form Accepted.</span>');
+                return false;
+            }
+        });*/
+    </script>
 {% endblock %}

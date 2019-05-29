@@ -72,8 +72,9 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
     {
 
         if ($category!== null) {
+            $parentName = $category->getParent()->getName();
             $em = $this->entityManager;
-            $realCategory = $em->getRepository(Category::class)->findCategoryByName($category->getName(),$this->type);
+            $realCategory = $em->getRepository(Category::class)->findCategoryByName($category->getName(),$this->type, $parentName);
 
             $specifications = $realCategory->getSpecifications();
 
@@ -81,9 +82,16 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                 $type = $specification->getType();
                 $name = $specification->getName();
                 $label =  $specification->getLabel();
+
                 if($type === 'TextType'){
                     $options = array('label' => false, 'required' => false, 'attr' => array(
                         'placeholder' => $label,
+                        'data-validation-optional'=>"true",
+                        'data-validation'=>"alphanumeric",
+                        'data-validation-allowing'=>"-_",
+
+
+
                     ));
                     $form->add($name, TextType::class, $options);
                 }
@@ -102,7 +110,7 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                     $form->add($name, AutocompleteType::class, $options);
                 }
                 elseif($type === 'DateType'){
-                    $options = array('label' => $label, 'required' => false,'widget' => 'single_text',);
+                    $options = array('label' => false, 'required' => false,'widget' => 'single_text');
                     $form->add($name, DateType::class, $options);
                 }
                 elseif ($type === 'ChoiceType'){
@@ -119,6 +127,12 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                                 'placeholder' => $label,
                                 /*'expanded'  => true,*/
                                 'multiple'  => true,
+                            );
+                        }
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'){
+                            $options = array('label' => false, 'required' => false,
+                                'choices' => $textOptions,
+                                'placeholder' => $label,
                             );
                         }
                         else{

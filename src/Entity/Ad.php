@@ -240,7 +240,7 @@ class Ad
     private $typeOfContract;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $experience;
 
@@ -270,7 +270,7 @@ class Ad
     private $placeOfLesson;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $levelOfStudent;
 
@@ -310,7 +310,7 @@ class Ad
     private $generalSituation;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $paperSize;
 
@@ -365,12 +365,12 @@ class Ad
     private $heatingType;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $classEnergie;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $ges;
 

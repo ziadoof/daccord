@@ -1,5 +1,3 @@
-var $checkbox = ['accessories','cdRoom', 'covered', 'electricHead', 'hdmi', 'threeInOne', 'usb',
-    'whitOven', 'wifi', 'withElevator', 'withFreezer', 'withFurniture', 'withGarden', 'withVerandah', 'withDriver','donate'];
 var $ospecification = $("#offer_category");
 $(document).on('change', '#offer_category', function () {
     var $form = $(this).closest('form');
@@ -18,6 +16,7 @@ $(document).on('change', '#offer_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#dynamic_form').replaceWith($dynamicForm);
+            addBootstrapToggle('offer');
         }
     });
 });
@@ -39,6 +38,7 @@ $(document).on('change', '#demand_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#dynamic_form').replaceWith($dynamicForm);
+            addBootstrapToggle('demand');
         }
     });
 });
@@ -56,14 +56,13 @@ $(document).on('change', '#demand_search_category', function () {
         success: function(html) {
             var $dynamicForm = $(html).find('#demand_dynamic_form');
             $dynamicForm.children(".form-group").each(function (index, item){
-                var $item = $(item)
+                var $item = $(item);
                 $item.removeClass('has-error');
                 $item.find(".help-block").remove();
             });
             $('#demand_dynamic_form').replaceWith($dynamicForm);
-            for (var i=0, total = $checkbox.length; i < total; i++) {
-                $('#'+'demand_search_'+$checkbox[i]).bootstrapToggle();
-            }
+            addBootstrapToggle('demand_search');
+
         }
     });
 });
@@ -81,18 +80,33 @@ $(document).on('change', '#offer_search_category', function () {
         success: function(html) {
             var $dynamicForm = $(html).find('#dynamic_form');
             $dynamicForm.children(".form-group").each(function (index, item){
-                var $item = $(item)
+                var $item = $(item);
                 $item.removeClass('has-error');
                 $item.find(".help-block").remove();
-
             });
             $('#dynamic_form').replaceWith($dynamicForm);
+            addBootstrapToggle('offer_search');
 
-            for (var i=0, total = $checkbox.length; i < total; i++) {
-                $('#'+'offer_search_'+$checkbox[i]).bootstrapToggle();
-            }
         }
     });
 });
+donate('offer_search');
+donate('offer');
+donate('demand');
 
+var $checkbox = ['accessories','cdRoom', 'covered', 'electricHead', 'hdmi', 'threeInOne', 'usb',
+    'withOven', 'wifi', 'withElevator', 'withFreezer', 'withFurniture', 'withGarden', 'withVerandah', 'withDriver','donate'];
+
+
+function addBootstrapToggle($type) {
+    for (var i=0, total = $checkbox.length; i < total; i++) {
+        $('#'+ $type +'_'+$checkbox[i]).bootstrapToggle();
+    }
+}
+
+function donate($type) {
+    $(document).on('change', '#'+$type+'_donate', function () {
+        document.getElementById($type+'_price').disabled = this.checked;
+    });
+}
 

@@ -107,7 +107,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'salary','label'=>'Salary (€)', 'type'=>'TextType', 'category'=>'Job opportunity'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Job opportunity'],
             ['name'=>'typeOfContract', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['CDI','CDD','CTT','CUI','alternation','Independent']],
-            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','1 YEAR','2 YEARS','3 YEARS','4 YEARS','5 YEARS','+ 5 YEARS']],
+            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required' => 0,'1 YEAR'=> 1,'2 YEARS' => 2,'3 YEARS' => 3,'4 YEARS' => 4,'5 YEARS' => 5,'+ 5 YEARS' => 6]],
             ['name'=>'levelOfStudy', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','High School','Diploma','University','Postgraduate']],
 
             // Translation
@@ -119,7 +119,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'durationOfLesson','label'=>'Duration of lesson (minute)', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[45,60,75,90,105,120,180]],
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Mathematics lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             ['name'=>'maxDistance','label'=>'Max distance (km)', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[5,10,15,20,30,40,50,60,70]],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Mathematics lessons'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mathematics lessons'],
@@ -137,7 +137,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'durationOfLesson','label'=>'Duration of lesson (minute)', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[45,60,75,90,105,120]],
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Language lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             ['name'=>'maxDistance','label'=>'Max distance (km)', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[5,10,15,20,30,40,50,60,70]],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Language lessons'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Language lessons'],
@@ -321,7 +321,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Scanner'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Scanner'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Scanner'],
@@ -334,7 +334,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'threeInOne', 'type'=>'CheckboxType', 'category'=>'Printer'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Printer'],
@@ -777,8 +777,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'area','label'=>'Area (m²)', 'type'=>'TextType', 'category'=>'Sell house'],
             ['name'=>'numberOfRooms','type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'heatingType', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Electricity','Fuelwood','Gas','Other']],
-            ['name'=>'classEnergie', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
-            ['name'=>'ges', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
+            ['name'=>'classEnergie', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
+            ['name'=>'ges', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Sell house'],
 
             // Sell apartment
@@ -829,8 +829,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'area','label'=>'Area (m²)', 'type'=>'TextType', 'category'=>'Rent house'],
             ['name'=>'numberOfRooms','type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'heatingType', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Electricity','Fuelwood','Gas','Other']],
-            ['name'=>'classEnergie', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
-            ['name'=>'ges', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
+            ['name'=>'classEnergie', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
+            ['name'=>'ges', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
             ['name'=>'price','label'=>'Rent', 'type'=>'TextType', 'category'=>'Rent house'],
             // Rent apartment
             ['name'=>'withFurniture', 'type'=>'CheckboxType', 'category'=>'Rent apartment'],
@@ -1467,7 +1467,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Cards and reservations
 
-            ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
+            ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Cards and reservations'],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
@@ -1577,7 +1577,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'salary','label'=>'Salary MIN (€)', 'type'=>'TextType', 'category'=>'Job opportunity'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Job opportunity'],
             ['name'=>'typeOfContract', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['CDI','CDD','CTT','CUI','alternation','Independent']],
-            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','1 YEAR','2 YEARS','3 YEARS','4 YEARS','5 YEARS','+ 5 YEARS']],
+            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required' => 0,'1 YEAR'=> 1,'2 YEARS' => 2,'3 YEARS' => 3,'4 YEARS' => 4,'5 YEARS' => 5,'+ 5 YEARS' => 6]],
             ['name'=>'levelOfStudy', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','High School','Diploma','University','Postgraduate']],
 
             // Translation
@@ -1589,7 +1589,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'durationOfLesson','label'=>'Duration of lesson (minute)', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[45,60,75,90,105,120,180]],
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Mathematics lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             ['name'=>'maxDistance','label'=>'Max distance (km)', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[5,10,15,20,30,40,50,60,70]],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mathematics lessons'],
             // Music lessons
@@ -1605,7 +1605,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'durationOfLesson','label'=>'Duration of lesson (minute)', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[45,60,75,90,105,120]],
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Language lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             ['name'=>'maxDistance','label'=>'Max distance (km)', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'NumericOptions', 'choice'=>[5,10,15,20,30,40,50,60,70]],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Language lessons'],
             // Language exchange
@@ -1789,7 +1789,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Scanner'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Scanner'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Scanner'],
@@ -1802,7 +1802,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'threeInOne', 'type'=>'CheckboxType', 'category'=>'Printer'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Printer'],
@@ -2162,8 +2162,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'maxArea','label'=>'MAX Area (m²)', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'NumericOptions', 'choice'=>[50,60,70,80,90,100,110,120,150,200,250,300,400]],
             ['name'=>'numberOfRooms', 'label'=>'MIN Number of rooms','type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'heatingType', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Electricity','Fuelwood','Gas','Other']],
-            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
-            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
+            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
+            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sell house'],
 
             // Sell apartment
@@ -2215,8 +2215,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'maxArea','label'=>'MAX Area (m²)', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'NumericOptions', 'choice'=>[50,60,70,80,90,100,110,120,150,200,250,300,400]],
             ['name'=>'numberOfRooms', 'label'=>'MIN Number of rooms','type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'heatingType', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Electricity','Fuelwood','Gas','Other']],
-            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
-            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
+            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
+            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
             ['name'=>'price','label'=>'Rent MAX', 'type'=>'TextType', 'category'=>'Rent house'],
             // Rent apartment
             ['name'=>'withFurniture', 'type'=>'CheckboxType', 'category'=>'Rent apartment'],
@@ -2769,7 +2769,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Cards and reservations
 
-            ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
+            ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Cards and reservations'],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
@@ -2871,7 +2871,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'salary','label'=>'Salary MIN (€)', 'type'=>'TextType', 'category'=>'Job opportunity'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Job opportunity'],
             ['name'=>'typeOfContract', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['CDI','CDD','CTT','CUI','alternation','Independent']],
-            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','1 YEAR','2 YEARS','3 YEARS','4 YEARS','5 YEARS','+ 5 YEARS']],
+            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required' => 0,'1 YEAR'=> 1,'2 YEARS' => 2,'3 YEARS' => 3,'4 YEARS' => 4,'5 YEARS' => 5,'+ 5 YEARS' => 6]],
             ['name'=>'levelOfStudy', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','High School','Diploma','University','Postgraduate']],
 
             // Translation
@@ -2882,7 +2882,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             // Mathematics lessons
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Mathematics lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mathematics lessons'],
             // Music lessons
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Music lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important','Other']],
@@ -2894,7 +2894,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'subjectName', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['English','German','Italian','Spanish','Turkish','Arabic','Russian','Greek','Portuguese','Swedish','Chinese','Japanese','Other']],
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Language lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Language lessons'],
             // Language exchange
             ['name'=>'language', 'type'=>'ChoiceType', 'category'=>'Language exchange','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
@@ -3059,7 +3059,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Scanner'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Scanner'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Scanner'],
@@ -3071,7 +3071,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'threeInOne', 'type'=>'CheckboxType', 'category'=>'Printer'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Printer'],
@@ -3409,8 +3409,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'maxArea','label'=>'MAX Area (m²)', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'NumericOptions', 'choice'=>[50,60,70,80,90,100,110,120,150,200,250,300,400]],
             ['name'=>'numberOfRooms', 'label'=>'MIN Number of rooms','type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'heatingType', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Electricity','Fuelwood','Gas','Other']],
-            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
-            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
+            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
+            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Sell house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sell house'],
 
             // Sell apartment
@@ -3462,8 +3462,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'maxArea','label'=>'MAX Area (m²)', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'NumericOptions', 'choice'=>[50,60,70,80,90,100,110,120,150,200,250,300,400]],
             ['name'=>'numberOfRooms', 'label'=>'MIN Number of rooms','type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'heatingType', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Electricity','Fuelwood','Gas','Other']],
-            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
-            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A','B','C','D','E','F','G']],
+            ['name'=>'classEnergie', 'label'=>'Class energie MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
+            ['name'=>'ges', 'label'=>'GES MAX', 'type'=>'ChoiceType', 'category'=>'Rent house','typeOfChoice'=>'TextOptions', 'choice'=>['A'=> 1,'B'=> 2,'C' => 3,'D' => 4,'E'=>5,'F'=>6,'G'=>7]],
             ['name'=>'price','label'=>'Rent MAX', 'type'=>'TextType', 'category'=>'Rent house'],
             // Rent apartment
             ['name'=>'withFurniture', 'type'=>'CheckboxType', 'category'=>'Rent apartment'],
@@ -3990,7 +3990,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Cards and reservations
 
-            ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
+            ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Cards and reservations'],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
@@ -4057,7 +4057,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'workHours', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Full','Partial']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Job opportunity'],
             ['name'=>'typeOfContract', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['CDI','CDD','CTT','CUI','alternation','Independent']],
-            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','1 YEAR','2 YEARS','3 YEARS','4 YEARS','5 YEARS','+ 5 YEARS']],
+            ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required' => 0,'1 YEAR'=> 1,'2 YEARS' => 2,'3 YEARS' => 3,'4 YEARS' => 4,'5 YEARS' => 5,'+ 5 YEARS' => 6]],
             ['name'=>'levelOfStudy', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required','High School','Diploma','University','Postgraduate']],
 
             // Translation
@@ -4068,7 +4068,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             // Mathematics lessons
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Mathematics lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Mathematics lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
 
             // Music lessons
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Music lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important','Other']],
@@ -4079,7 +4079,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'subjectName', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['English','German','Italian','Spanish','Turkish','Arabic','Russian','Greek','Portuguese','Swedish','Chinese','Japanese','Other']],
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['At the student','At the teacher','Not important']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Language lessons'],
-            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school','Middle school','High school','Universities','Professional']],
+            ['name'=>'levelOfStudent', 'type'=>'ChoiceType', 'category'=>'Language lessons','typeOfChoice'=>'TextOptions', 'choice'=>['Maternal school'=>1,'Middle school'=>2,'High school'=>3,'Universities'=>4,'Professional'=>5]],
             // Language exchange
             ['name'=>'language', 'type'=>'ChoiceType', 'category'=>'Language exchange','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
             ['name'=>'secondLanguage', 'type'=>'ChoiceType', 'category'=>'Language exchange','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
@@ -4193,7 +4193,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Scanner'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Scanner'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
 
             // Printer
@@ -4203,7 +4203,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'threeInOne', 'type'=>'CheckboxType', 'category'=>'Printer'],
-            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0','2A0','A0','A1','A2','A3','A4','A5','A6','A7','A8','A9','A10']],
+            ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged','Medium','Good','Semi-new','Totally new']],
 
             // Monitor
@@ -4526,7 +4526,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'area','label'=>'Area (m²)', 'type'=>'TextType', 'category'=>'Rent farm'],
 
             // Collective housing
-            ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Collective housing','typeOfChoice'=>'TextOptions', 'choice'=>['House','','Apartment','Residential center','Other']],
+            ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Collective housing','typeOfChoice'=>'TextOptions', 'choice'=>['House','Apartment','Residential center','Other']],
             ['name'=>'withFurniture', 'type'=>'CheckboxType', 'category'=>'Collective housing'],
             ['name'=>'withElevator', 'type'=>'CheckboxType', 'category'=>'Collective housing'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Collective housing'],
@@ -4854,7 +4854,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Cards and reservations
 
-            ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
+            ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
             ['name'=>'number', 'label'=>'Number (unit)', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>10]],
