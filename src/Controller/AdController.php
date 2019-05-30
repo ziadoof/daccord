@@ -83,8 +83,8 @@ class AdController extends AbstractController
             $demandSearch = $demandForm->getData();
 
 /*            $elasticaManager = $this->get('fos_elastica.manager');*/
-            $offerResults = $this->manager->getRepository('App:Ad')->searchAd($offerSearch);
-            $demandResults = $this->manager->getRepository('App:Ad')->searchAd($demandSearch);
+            $offerResults = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
+            $demandResults = $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
 
             return $this->render('ad/index.html.twig', [
                 'ads' => $adRepository->findAll(),

@@ -12,7 +12,7 @@ $(document).ready(function () {
                 'demand[minArea]':              {moinDe: '#demand_maxArea'},
                 'demand[maxArea]':              {plusDe: '#demand_minArea'},
                 'demand[price]':                { regex: /^([0-9]{0,8})$/},
-                'demand[model]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
+                'demand[model]':                { regex: /^\s*[a-zA-Z0-9,\s]+\s*$/},
                 'demand[brand]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
                 'demand[age]':                  { regex: /^([0-9]{0,2})$/},
                 'demand[manufactureCompany]':   { regex: /^\s*[a-zA-Z,\s]+\s*$/},
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 'offer[minArea]':              {moinDe: '#offer_maxArea'},
                 'offer[maxArea]':              {plusDe: '#offer_minArea'},
                 'offer[price]':                { regex: /^([0-9]{0,8})$/},
-                'offer[model]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
+                'offer[model]':                { regex: /^\s*[a-zA-Z0-9,\s]+\s*$/},
                 'offer[brand]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
                 'offer[age]':                  { regex: /^([0-9]{0,2})$/},
                 'offer[manufactureCompany]':   { regex: /^\s*[a-zA-Z,\s]+\s*$/},
@@ -149,7 +149,7 @@ $(document).ready(function () {
                 'offer_search[minArea]':              {moinDe: '#offer_search_maxArea'},
                 'offer_search[maxArea]':              {plusDe: '#offer_search_minArea'},
                 'offer_search[price]':                { regex: /^([0-9]{0,8})$/},
-                'offer_search[model]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
+                'offer_search[model]':                { regex: /^\s*[a-zA-Z0-9,\s]+\s*$/},
                 'offer_search[brand]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
                 'offer_search[age]':                  { regex: /^([0-9]{0,2})$/},
                 'offer_search[manufactureCompany]':   { regex: /^\s*[a-zA-Z,\s]+\s*$/},
@@ -219,7 +219,7 @@ $(document).ready(function () {
                 'demand_search[minArea]':              {moinDe: '#demand_search_maxArea'},
                 'demand_search[maxArea]':              {plusDe: '#demand_search_minArea'},
                 'demand_search[price]':                { regex: /^([0-9]{0,8})$/},
-                'demand_search[model]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
+                'demand_search[model]':                { regex: /^\s*[a-zA-Z0-9,\s]+\s*$/},
                 'demand_search[brand]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
                 'demand_search[age]':                  { regex: /^([0-9]{0,2})$/},
                 'demand_search[manufactureCompany]':   { regex: /^\s*[a-zA-Z,\s]+\s*$/},
@@ -284,11 +284,12 @@ $.validator.addMethod( "moinDe", function( value, element, param ) {
             $( element ).valid();
         } );
     }
+
     if(target.val()=== ''){
         return true;
     }
     else {
-        return parseInt(value) <= parseInt(target.val()) ;
+         return this.optional(element) || parseInt(value) <= parseInt(target.val()) ;
     }
 }, "The minimum is greater than the maximum." );
 
@@ -299,11 +300,11 @@ $.validator.addMethod( "plusDe", function( value, element, param ) {
             $( element ).valid();
         } );
     }
-    if(target.val()=== ''){
+    if(target.val() === ''){
         return true;
     }
     else {
-        return parseInt(value) >= parseInt(target.val()) ;
+        return this.optional(element) || parseInt(value) >= parseInt(target.val()) ;
     }
 }, "The maximum is less than the minimum." );
 

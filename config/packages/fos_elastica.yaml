@@ -46,13 +46,29 @@ fos_elastica:
             levelOfStudy: ~
             language: ~
             typeOfTranslation: ~
-            material: ~
+            material:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             placeOfLesson: ~
             levelOfStudent: ~
-            brand: ~
-            color: ~
+            brand:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            color:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             fuelType: ~
-            model: ~
+            model:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             changeGear: ~
             manufactureCompany:
               type: text
@@ -64,7 +80,11 @@ fos_elastica:
             printingType: ~
             printingColor: ~
             analogDigital: ~
-            animalSpecies: ~
+            animalSpecies:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             dvdCd: ~
             originCountry: ~
             coverMaterial: ~
@@ -74,7 +94,11 @@ fos_elastica:
             classEnergie: ~
             ges: ~
             eventType: ~
-            subjectName: ~
+            subjectName:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             salary: ~
             durationOfLesson: ~
             maxDistance: ~
@@ -86,7 +110,11 @@ fos_elastica:
             kilometer: ~
             maxKilometer: ~
             minKilometer: ~
-            processor: ~
+            processor:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
             ram: ~
             screenSizeCm: ~
             screenSizeInch: ~
