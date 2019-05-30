@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Category;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
+class AddSearchGeneralcategoryFieldSubscriber implements EventSubscriberInterface
 
 {
 
@@ -60,10 +60,9 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
     {
         $formOptions = array(
             'class'         => Category::class,
-            'mapped'        => false,
-            'label'         => 'General Category',
+            'label' => false,
             'required' => true,
-            'placeholder' => 'Choisir un general Category',
+            'placeholder' => 'General Category',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->andWhere('c.parent is null')

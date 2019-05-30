@@ -10,17 +10,24 @@ require('./jquery-ui.min');
 require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui')
 require('./autocompleter');
 require('./autocompleter_offer_city');
+require('jquery-validation');
+require('../../node_modules/jquery-validation/dist/additional-methods');
+require('./searchBar');
+
 
 require('./rdcity');
 require('./specification');
 require('bootstrap-fileinput');
 require('../../node_modules/bootstrap-fileinput/js/locales/fr');
 require('../../node_modules/bootstrap-fileinput/js/locales/ar');
+require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle');
 
 require('./ad-images');
 require('bootstrap');
 require('./sidebar');
 require('./category');
+
+
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
@@ -29,14 +36,7 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
 
-/*    document.getElementById('offer_donate').onchange = function() {
-    document.getElementById('offer_title').disabled = this.checked;
-};*/
 
-$(document).on('click', "#offer_donate",function () {
-    document.getElementById('offer_price').disabled = this.checked;
-
-});
 
 
 

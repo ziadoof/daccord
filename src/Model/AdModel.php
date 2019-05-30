@@ -1,116 +1,36 @@
 <?php
-
-namespace App\Entity;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
-use Symfony\Component\Validator\Constraints as Assert;
-
-
-
-
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
- * @ORM\Table()
- *
+ * Created by PhpStorm.
+ * User: ziadoof
+ * Date: 26/03/19
+ * Time: 12:56
  */
-class Ad
+
+namespace App\Model;
+
+use App\Entity\User;
+use App\Entity\City;
+use App\Entity\Department;
+use App\Entity\Region;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+class AdModel
 {
+
     /**
-     * @var integer
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ads")
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Type("string")
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $imageOne;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $imageTow;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $imageThree;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $price;
-
-    /**
-     * @return mixed
-     */
-    public function getPPrice()
-    {
-        return $this->pPrice;
-    }
-
-    /**
-     * @param mixed $pPrice
-     */
-    public function setPPrice($pPrice): void
-    {
-        $this->pPrice = $pPrice;
-    }
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $pPrice;
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $donate;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateOfAd;
-
-
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $typeOfAd;
-
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="ads")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotNull
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $category;
+    protected $category;
+
+
+    protected $generalCategory;
 
     /**
      * @return mixed
@@ -128,762 +48,42 @@ class Ad
         $this->generalCategory = $generalCategory;
     }
 
+    protected $title;
+
+    protected $price;
+
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\City")
      *
-     *
      */
-    private $generalCategory;
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="ads")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-/*-------------------start specification -------------------*/
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withDriver;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $mission;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $theType;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $secondLanguage;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $age;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $iSize;
-
-    /**
-     * @return mixed
-     */
-    public function getISize()
-    {
-        return $this->iSize;
-    }
-
-    /**
-     * @param mixed $iSize
-     */
-    public function setISize($iSize): void
-    {
-        $this->iSize = $iSize;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSSize()
-    {
-        return $this->sSize;
-    }
-
-    /**
-     * @param mixed $sSize
-     */
-    public function setSSize($sSize): void
-    {
-        $this->sSize = $sSize;
-    }
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $sSize;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $languages = [];
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $acitvityArea;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $workHours;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $typeOfContract;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $experience;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $levelOfStudy;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $language;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $typeOfTranslation;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $material;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $placeOfLesson;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $levelOfStudent;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $brand;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $color;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $fuelType;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $model;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $changeGear;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $manufactureCompany;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $generalSituation;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $paperSize;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $printingType;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $printingColor;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $analogDigital;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $animalSpecies;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $dvdCd;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $originCountry;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $coverMaterial;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $shape;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $heating;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $heatingType;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $classEnergie;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $ges;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $eventType;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $subjectName;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $salary;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $durationOfLesson;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxDistance;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $manufacturingYear;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxManufacturingYear;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $minManufacturingYear;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfPassengers;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfDoors;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $kilometer;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxKilometer;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $minKilometer;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $processor;
-
-
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $ram;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $screenSizeCm;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $screenSizeInch;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $capacity;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $minCapacity;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxCapacity;
-
-    /**
-     * @return mixed
-     */
-    public function getMinCapacity()
-    {
-        return $this->minCapacity;
-    }
-
-    /**
-     * @param mixed $minCapacity
-     */
-    public function setMinCapacity($minCapacity): void
-    {
-        $this->minCapacity = $minCapacity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMaxCapacity()
-    {
-        return $this->maxCapacity;
-    }
-
-    /**
-     * @param mixed $maxCapacity
-     */
-    public function setMaxCapacity($maxCapacity): void
-    {
-        $this->maxCapacity = $maxCapacity;
-    }
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $accuracy;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $weight;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $caliber;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxCaliber;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $minCaliber;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $number;
-
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $width;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $height;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfPersson;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $length;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfDrawer;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfStaging;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfHead;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $ability;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $floor;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $area;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $minArea;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxArea;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfRooms;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $minNumberOfRooms;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $maxNumberOfRooms;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Type(
-     *     type="numeric",
-     *     message="You must enter numbers only."
-     * )
-     */
-    private $numberOfFloors;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $hdmi;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $cdRoom;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $wifi;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $usb;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $threeInOne;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $accessories;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withFreezer;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $electricHead;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withOven;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $covered;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withFurniture;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withGarden;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withVerandah;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withElevator;
-
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $dateOfEvent;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\City", cascade={"persist", "remove"})
-     */
-    private $city;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City",)
-     */
-    private $ville;
+    protected $ville;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Department")
+     *
      */
-    private $department;
+    protected $department;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Region")
+     *
      */
-    private $region;
+    protected $region;
 
     /**
      * @return mixed
      */
-    public function getVille()
+    public function getCategory()
     {
-        return $this->ville;
+        return $this->category;
     }
 
     /**
-     * @param mixed $ville
+     * @param mixed $category
      */
-    public function setVille($ville): void
+    public function setCategory($category): void
     {
-        $this->ville = $ville;
+        $this->category = $category;
     }
 
     /**
@@ -921,128 +121,67 @@ class Ad
 
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getId(): int
+    public function getVille()
     {
-        return $this->id;
+            return $this->ville;
+    }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville): void
+    {
+        $this->ville = $ville;
     }
 
     /**
      * @return mixed
      */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title): void
-    {
-        $this->title = $title;
-    }
-
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(?City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getManufacturingYear()
     {
-        return $this->description;
+        return $this->manufacturingYear;
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $manufacturingYear
      */
-    public function setDescription($description): void
+    public function setManufacturingYear($manufacturingYear): void
     {
-        $this->description = $description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImageOne()
-    {
-        return $this->imageOne;
-    }
-
-    /**
-     * @param mixed $imageOne
-     */
-    public function setImageOne($imageOne): void
-    {
-        $this->imageOne = $imageOne;
+        $this->manufacturingYear = $manufacturingYear;
     }
 
     /**
      * @return mixed
      */
-    public function getImageTow()
+    public function getSSize()
     {
-        return $this->imageTow;
+        return $this->sSize;
     }
 
     /**
-     * @param mixed $imageTow
+     * @param mixed $sSize
      */
-    public function setImageTow($imageTow): void
+    public function setSSize($sSize): void
     {
-        $this->imageTow = $imageTow;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImageThree()
-    {
-        return $this->imageThree;
-    }
-
-    /**
-     * @param mixed $imageThree
-     */
-    public function setImageThree($imageThree): void
-    {
-        $this->imageThree = $imageThree;
+        $this->sSize = $sSize;
     }
 
     /**
@@ -1064,34 +203,45 @@ class Ad
     /**
      * @return mixed
      */
-    public function getDonate()
+    public function getTitle()
     {
-        return $this->donate;
+        return $this->title;
     }
 
     /**
-     * @param mixed $donate
+     * @param mixed $title
      */
-    public function setDonate($donate): void
+    public function setTitle($title): void
     {
-        $this->donate = $donate;
+        $this->title = $title;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateOfAd()
-    {
-        return $this->dateOfAd;
-    }
+    /////   specification
+    
+    protected $withDriver;
 
-    /**
-     * @param mixed $dateOfAd
-     */
-    public function setDateOfAd($dateOfAd): void
-    {
-        $this->dateOfAd = $dateOfAd;
-    }
+    protected $mission;
+
+    protected $theType;
+
+    protected $secondLanguage;
+
+    protected $age;
+
+    protected $iSize;
+
+    protected $sSize;
+
+    protected $languages = [];
+
+    protected $acitvityArea;
+
+    protected $workHours;
+
+    protected $typeOfContract;
+    protected $typeOfAd;
+
+    protected $experience;
 
     /**
      * @return mixed
@@ -1108,6 +258,194 @@ class Ad
     {
         $this->typeOfAd = $typeOfAd;
     }
+
+    protected $levelOfStudy;
+
+    protected $language;
+
+    protected $typeOfTranslation;
+
+    protected $material;
+
+    protected $placeOfLesson;
+
+    protected $levelOfStudent;
+
+    protected $brand;
+
+    protected $color;
+
+    protected $fuelType;
+
+    protected $model;
+
+    protected $changeGear;
+
+    protected $manufactureCompany;
+
+    protected $generalSituation;
+
+    protected $paperSize;
+
+    protected $printingType;
+
+    protected $printingColor;
+
+    protected $analogDigital;
+
+    protected $animalSpecies;
+
+    protected $dvdCd;
+
+    protected $originCountry;
+
+    protected $coverMaterial;
+
+    protected $shape;
+
+    protected $heating;
+
+    protected $heatingType;
+
+    protected $classEnergie;
+    
+    protected $ges;
+
+    protected $eventType;
+
+    protected $subjectName;
+
+    protected $salary;
+
+    protected $durationOfLesson;
+
+    protected $maxDistance;
+    
+    protected $manufacturingYear;
+    
+    protected $maxManufacturingYear;
+    
+    protected $minManufacturingYear;
+    
+    protected $numberOfPassengers;
+    
+    protected $numberOfDoors;
+
+    protected $kilometer;
+
+    protected $maxKilometer;
+
+    protected $minKilometer;
+
+    protected $processor;
+
+    protected $ram;
+
+    protected $screenSizeCm;
+
+    protected $screenSizeInch;
+
+    protected $capacity;
+    
+    protected $minCapacity;
+    
+    protected $maxCapacity;
+
+    protected $accuracy;
+
+    protected $weight;
+
+    protected $caliber;
+
+    protected $maxCaliber;
+
+    protected $minCaliber;
+
+    protected $number;
+
+    protected $width;
+
+    protected $height;
+
+    protected $numberOfPersson;
+
+    protected $length;
+
+    protected $numberOfDrawer;
+
+    protected $numberOfStaging;
+
+    protected $numberOfHead;
+
+    protected $ability;
+
+    protected $floor;
+
+    protected $area;
+
+    protected $minArea;
+
+    protected $maxArea;
+
+    protected $numberOfRooms;
+
+    protected $minNumberOfRooms;
+
+    protected $maxNumberOfRooms;
+
+    protected $numberOfFloors;
+
+    protected $hdmi;
+
+    protected $cdRoom;
+
+    protected $wifi;
+
+    protected $usb;
+
+    protected $threeInOne;
+
+    protected $accessories;
+
+    protected $withFreezer;
+
+    protected $electricHead;
+
+    protected $withOven;
+
+    protected $covered;
+
+    protected $withFurniture;
+
+    protected $withGarden;
+
+    protected $withVerandah;
+
+    protected $withElevator;
+
+    protected $dateOfEvent;
+
+    protected $city;
+
+    protected $donate;
+
+    /**
+     * @return mixed
+     */
+    public function getDonate()
+    {
+        return $this->donate;
+    }
+
+    /**
+     * @param mixed $donate
+     */
+    public function setDonate($donate): void
+    {
+        $this->donate = $donate;
+    }
+
+// end search spécifications
 
     /**
      * @return mixed
@@ -1192,15 +530,31 @@ class Ad
     /**
      * @return mixed
      */
-    public function getLanguages()
+    public function getISize()
+    {
+        return $this->iSize;
+    }
+
+    /**
+     * @param mixed $iSize
+     */
+    public function setISize($iSize): void
+    {
+        $this->iSize = $iSize;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLanguages(): array
     {
         return $this->languages;
     }
 
     /**
-     * @param mixed $languages
+     * @param array $languages
      */
-    public function setLanguages($languages): void
+    public function setLanguages(array $languages): void
     {
         $this->languages = $languages;
     }
@@ -1224,14 +578,6 @@ class Ad
     /**
      * @return mixed
      */
-    public function getTypeOfContract()
-    {
-        return $this->typeOfContract;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getWorkHours()
     {
         return $this->workHours;
@@ -1243,6 +589,14 @@ class Ad
     public function setWorkHours($workHours): void
     {
         $this->workHours = $workHours;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeOfContract()
+    {
+        return $this->typeOfContract;
     }
 
     /**
@@ -1768,22 +1122,6 @@ class Ad
     /**
      * @return mixed
      */
-    public function getManufacturingYear()
-    {
-        return $this->manufacturingYear;
-    }
-
-    /**
-     * @param mixed $manufacturingYear
-     */
-    public function setManufacturingYear($manufacturingYear): void
-    {
-        $this->manufacturingYear = $manufacturingYear;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getMaxManufacturingYear()
     {
         return $this->maxManufacturingYear;
@@ -1971,6 +1309,38 @@ class Ad
     public function setCapacity($capacity): void
     {
         $this->capacity = $capacity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinCapacity()
+    {
+        return $this->minCapacity;
+    }
+
+    /**
+     * @param mixed $minCapacity
+     */
+    public function setMinCapacity($minCapacity): void
+    {
+        $this->minCapacity = $minCapacity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxCapacity()
+    {
+        return $this->maxCapacity;
+    }
+
+    /**
+     * @param mixed $maxCapacity
+     */
+    public function setMaxCapacity($maxCapacity): void
+    {
+        $this->maxCapacity = $maxCapacity;
     }
 
     /**
@@ -2565,26 +1935,21 @@ class Ad
         $this->dateOfEvent = $dateOfEvent;
     }
 
-    public function __construct()
+    /**
+     * @return mixed
+     */
+    public function getCity()
     {
-        $this->dateOfAd = new \DateTime('now');
-    }
-    public function __toString()
-    {
-        return $this->title;
+        return $this->city;
     }
 
-    public function getAllSpecifications(){
-       $vars  = get_object_vars($this);
-       $all = [];
-       $exp = ['id','title','imageOne','imageTow','imageThree','donate','price','dateOfAd','typeOfAd','category','user','description'];
-       foreach ($vars as $key=>$value){
-           if(!in_array($key,$exp)){
-               if($value !== null){
-                   $all[$key]=$value;
-               }
-           }
-       }
-        return $all;
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
     }
+
+
 }

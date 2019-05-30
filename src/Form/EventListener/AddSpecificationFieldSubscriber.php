@@ -25,17 +25,19 @@ use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 
 
 
-class AddOspecificationFieldSubscriber implements EventSubscriberInterface
+class AddSpecificationFieldSubscriber implements EventSubscriberInterface
 
 {
 
     private $factory;
     private $entityManager;
+    private $type;
 
-    public function __construct($factory, $entityManager)
+    public function __construct($factory, $entityManager, $type)
     {
         $this->factory = $factory;
         $this->entityManager = $entityManager;
+        $this->type = $type;
 
     }
 
@@ -66,11 +68,16 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
         );
     }
 
-    private function addOspecificationForm($form, $category)
+    private function addSpecificationForm($form, $category)
     {
 
         if ($category!== null) {
-            $specifications = $category->getOspecifications();
+            $parentName = $category->getParent()->getName();
+            $em = $this->entityManager;
+            $realCategory = $em->getRepository(Category::class)->findCategoryByName($category->getName(),$this->type, $parentName);
+
+            $specifications = $realCategory->getSpecifications();
+
             foreach ($specifications as $specification){
                 $type = $specification->getType();
                 $name = $specification->getName();
@@ -109,6 +116,12 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
                                 'placeholder' => 'Select'.' '.$label,
                                 /*'expanded'  => true,*/
                                 'multiple'  => true,
+                            );
+                        }
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'){
+                            $options = array('label' => $label, 'required' => false,
+                                'choices' => $textOptions,
+                                'placeholder' => 'Select'.' '.$label,
                             );
                         }
                         else{
@@ -162,7 +175,7 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
         $accessor    = PropertyAccess::createPropertyAccessor();
         $category        = $accessor->getValue($data, $this->factory);
         $category_id = ($category) ? $category->getId() : null;
-        $this->addOspecificationForm($form, $category_id);
+        $this->addSpecificationForm($form, $category_id);
     }
 
     public function preSubmit(FormEvent $event)
@@ -172,7 +185,7 @@ class AddOspecificationFieldSubscriber implements EventSubscriberInterface
 
         $category_id = array_key_exists('category', $data) ? $data['category'] : null;
         $category = ($category_id) ? $this->getCategory($category_id):null;
-        $this->addOspecificationForm($form, $category);
+        $this->addSpecificationForm($form, $category);
     }
 
     public function getCategory ( $category_id){

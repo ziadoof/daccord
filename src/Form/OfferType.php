@@ -4,11 +4,11 @@ namespace App\Form;
 
 use App\Form\EventListener\AddCategoryFieldSubscriber;
 use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
+use App\Form\EventListener\AddSpecificationFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use App\Form\EventListener\AddOspecificationFieldSubscriber;
 
 
 
@@ -25,9 +25,9 @@ class OfferType extends AbstractType
         $entityManager = $options['entity_manager'];
 
         $builder
-            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category))
+            ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category, 'Offer'))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
-            ->addEventSubscriber(new AddOspecificationFieldSubscriber($category, $entityManager));
+            ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager, 'Offer'));
 
         $builder
             ->add('title')

@@ -1,0 +1,198 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+  clients:
+    default: { host: localhost, port: 9200 }
+  indexes:
+    app:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              custom_search_analyzer:
+                type:    custom
+                tokenizer:    standard
+                filter:    [lowercase, asciifolding,standard]
+              custom_index_analyzer:
+                tokenizer:    standard
+                type:    custom
+                filter:    [lowercase, asciifolding,standard,custom_filter]
+            filter:
+              custom_filter:
+                type: edgeNGram
+                side: front
+                min_gram: 2
+                max_gram: 20
+      types:
+        ad:
+          properties:
+            title:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            price: ~
+            withDriver: ~
+            mission: ~
+            theType: ~
+            secondLanguage: ~
+            age: ~
+            iSize: ~
+            sSize: ~
+            languages: ~
+            acitvityArea: ~
+            workHours: ~
+            typeOfContract: ~
+            experience: ~
+            levelOfStudy: ~
+            language: ~
+            typeOfTranslation: ~
+            material:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            placeOfLesson: ~
+            levelOfStudent: ~
+            brand:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            color:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            fuelType: ~
+            model:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            changeGear: ~
+            manufactureCompany:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            generalSituation: ~
+            paperSize: ~
+            printingType: ~
+            printingColor: ~
+            analogDigital: ~
+            animalSpecies:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            dvdCd: ~
+            originCountry: ~
+            coverMaterial: ~
+            shape: ~
+            heating: ~
+            heatingType: ~
+            classEnergie: ~
+            ges: ~
+            eventType: ~
+            subjectName:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            salary: ~
+            durationOfLesson: ~
+            maxDistance: ~
+            manufacturingYear: ~
+            maxManufacturingYear: ~
+            minManufacturingYear: ~
+            numberOfPassengers: ~
+            numberOfDoors: ~
+            kilometer: ~
+            maxKilometer: ~
+            minKilometer: ~
+            processor:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            ram: ~
+            screenSizeCm: ~
+            screenSizeInch: ~
+            capacity: ~
+            minCapacity: ~
+            maxCapacity: ~
+            accuracy: ~
+            weight: ~
+            caliber: ~
+            maxCaliber: ~
+            minCaliber: ~
+            number: ~
+            width: ~
+            height: ~
+            numberOfPersson: ~
+            length: ~
+            numberOfDrawer: ~
+            numberOfStaging: ~
+            numberOfHead: ~
+            ability: ~
+            floor: ~
+            area: ~
+            minArea: ~
+            maxArea: ~
+            numberOfRooms: ~
+            minNumberOfRooms: ~
+            maxNumberOfRooms: ~
+            numberOfFloors: ~
+            hdmi: ~
+            cdRoom: ~
+            wifi: ~
+            usb: ~
+            threeInOne: ~
+            accessories: ~
+            withFreezer: ~
+            electricHead: ~
+            withOven: ~
+            covered: ~
+            withFurniture: ~
+            withGarden: ~
+            withVerandah: ~
+            withElevator: ~
+            dateOfEvent: ~
+            city: ~
+            ville:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            category:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            generalCategory:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Ad
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\AdsRepository

@@ -21,3 +21,4 @@ fos_user:
     profile:
         form:
             type: App\Form\ProfilType
+

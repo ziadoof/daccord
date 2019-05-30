@@ -61,14 +61,25 @@ services:
     App\Form\EventListener\AddGeneralcategoryFieldSubscriber:
         arguments:
             $factory:
+            $type:
 
-    App\Form\EventListener\AddOspecificationFieldSubscriber:
+    App\Form\EventListener\AddSpecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:
+            $type:
 
-    App\Form\EventListener\AddDspecificationFieldSubscriber:
+
+    App\Form\EventListener\AddSearchCategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber:
+        arguments:
+            $factory:
+            $type:
+    App\Form\EventListener\AddSearchSpecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:
-
+            $type:

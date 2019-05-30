@@ -24,6 +24,11 @@ class Category
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="children")
      */
     private $parent;
@@ -36,30 +41,42 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="category")
+     *
      */
     private $ads;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ospecification", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Specification", mappedBy="category")
      */
-    private $ospecifications;
+    private $specifications;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Dspecification", mappedBy="category")
-     */
-    private $dspecifications;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->ads = new ArrayCollection();
-        $this->ospecifications = new ArrayCollection();
-        $this->dspecifications = new ArrayCollection();
+        $this->specifications = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 
     public function getName(): ?string
@@ -154,64 +171,34 @@ class Category
     }
 
     /**
-     * @return Collection|Ospecification[]
+     * @return Collection|Specification[]
      */
-    public function getOspecifications(): Collection
+    public function getSpecifications(): Collection
     {
-        return $this->ospecifications;
+        return $this->specifications;
     }
 
-    public function addOspecification(Ospecification $ospecification): self
+    public function addSpecification(Specification $specification): self
     {
-        if (!$this->ospecifications->contains($ospecification)) {
-            $this->ospecifications[] = $ospecification;
-            $ospecification->setCategory($this);
+        if (!$this->specifications->contains($specification)) {
+            $this->specifications[] = $specification;
+            $specification->setCategory($this);
         }
 
         return $this;
     }
 
-    public function removeOspecification(Ospecification $ospecification): self
+    public function removeSpecification(Specification $specification): self
     {
-        if ($this->ospecifications->contains($ospecification)) {
-            $this->ospecifications->removeElement($ospecification);
+        if ($this->specifications->contains($specification)) {
+            $this->specifications->removeElement($specification);
             // set the owning side to null (unless already changed)
-            if ($ospecification->getCategory() === $this) {
-                $ospecification->setCategory(null);
+            if ($specification->getCategory() === $this) {
+                $specification->setCategory(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection|Dspecification[]
-     */
-    public function getDspecifications(): Collection
-    {
-        return $this->dspecifications;
-    }
-
-    public function addDspecification(Dspecification $dspecification): self
-    {
-        if (!$this->dspecifications->contains($dspecification)) {
-            $this->dspecifications[] = $dspecification;
-            $dspecification->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDspecification(Dspecification $dspecification): self
-    {
-        if ($this->dspecifications->contains($dspecification)) {
-            $this->dspecifications->removeElement($dspecification);
-            // set the owning side to null (unless already changed)
-            if ($dspecification->getCategory() === $this) {
-                $dspecification->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
 }

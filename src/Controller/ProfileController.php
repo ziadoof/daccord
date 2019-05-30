@@ -5,6 +5,7 @@ use FOS\UserBundle\Controller\ProfileController as BaseProController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\City;
+use App\Entity\Ad;
 use Doctrine\ORM\Mapping as ORM;
 use App\Form\UserType;
 use App\Form\UserCityType;
@@ -94,5 +95,39 @@ class ProfileController extends BaseProController
             'formRegion' => $formRegion->createView(),
             'formCity' => $formCity->createView(),
             ]);
+    }
+
+    /**
+     * @Route("/changeAdsArea", name="chang_ads_area", methods={"GET","POST"})
+     */
+    public function changeAdsArea(Request $request){
+        $user = $this->getUser();
+        $city = $user->getCity();
+        $userAds = $user->getAds();
+        $entityManager = $this->getDoctrine()->getManager();
+        $ads = 0;
+        $offer = 0;
+        $demand=0;
+        foreach ($userAds as $ad){
+            $ad->setVille($city);
+            $ad->setDepartment($city->getDepartment());
+            $ad->setRegion($city->getDepartment()->getRegion());
+            $entityManager->persist($ad);
+            if($ad->getTypeOfAd() === 'Offer'){
+                $offer +=1;
+                $ads +=1;
+            }
+            else{
+                $demand +=1;
+                $ads+=1;
+            }
+        }
+        $entityManager->flush();
+        return $this->render('user/Profile/changeAdsArea.html.twig', [
+            'user' => $user,
+            'ads' => $ads,
+            'offer' => $offer,
+            'demand' => $demand,
+        ]);
     }
 }
