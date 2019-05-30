@@ -15,10 +15,6 @@
     <body>
         {% block body %}
             <section id="container" >
-                    {% block header %}{% include "header.html.twig" %}{% endblock %}
-                {% if app.user != null%}
-                {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
-                {% endif %}
                 <section id="main-content">
                     <section class="container-fluid ">
                         <div class="wrapper">
