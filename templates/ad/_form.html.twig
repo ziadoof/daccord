@@ -177,6 +177,11 @@
                             {{ form_row(form.salary) }}
                         </div>
                     {% endif %}
+                    {% if form.eventType is defined %}
+                        <div class="col-md-3">
+                                {{ form_row(form.eventType) }}
+                        </div>
+                    {% endif %}
                     {% if form.typeOfTranslation is defined %}
                         <div class="col-md-3">
                             {{ form_row(form.typeOfTranslation) }}

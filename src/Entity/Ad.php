@@ -305,7 +305,7 @@ class Ad
     private $manufactureCompany;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $generalSituation;
 
@@ -650,7 +650,7 @@ class Ad
     private $height;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(
      *     type="numeric",
      *     message="You must enter numbers only."
@@ -851,7 +851,7 @@ class Ad
     private $dateOfEvent;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\City", cascade={"persist", "remove"})
+     *  @ORM\ManyToOne(targetEntity="App\Entity\City",)
      */
     private $city;
 

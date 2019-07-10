@@ -341,10 +341,6 @@ class AdModel
 
     protected $ram;
 
-    protected $screenSizeCm;
-
-    protected $screenSizeInch;
-
     protected $capacity;
     
     protected $minCapacity;
@@ -399,6 +395,9 @@ class AdModel
 
     protected $cdRoom;
 
+    /**
+     * @var boolean
+     */
     protected $wifi;
 
     protected $usb;
@@ -1263,37 +1262,6 @@ class AdModel
         $this->ram = $ram;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getScreenSizeCm()
-    {
-        return $this->screenSizeCm;
-    }
-
-    /**
-     * @param mixed $screenSizeCm
-     */
-    public function setScreenSizeCm($screenSizeCm): void
-    {
-        $this->screenSizeCm = $screenSizeCm;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScreenSizeInch()
-    {
-        return $this->screenSizeInch;
-    }
-
-    /**
-     * @param mixed $screenSizeInch
-     */
-    public function setScreenSizeInch($screenSizeInch): void
-    {
-        $this->screenSizeInch = $screenSizeInch;
-    }
 
     /**
      * @return mixed
@@ -1742,6 +1710,8 @@ class AdModel
     {
         $this->wifi = $wifi;
     }
+
+
 
     /**
      * @return mixed

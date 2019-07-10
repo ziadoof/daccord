@@ -107,7 +107,11 @@
                                     </div>
                                 {% else %}
                                 <div class="p-2">
+                                    {% if spe.name is same as ('dateOfEvent') %}
+                                    <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|date("m/d/Y") }} </span><br>
+                                    {% else %}
                                     <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                                    {% endif %}
                                 </div>
                                 {% endif %}
                             {% endif %}
