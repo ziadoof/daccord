@@ -67,13 +67,17 @@ class AdsRepository extends Repository
                     $nested->setQuery($userBool);
                     $bool->addMust($nested);
                     if ($search->getVille() != null && $search->getVille() != ''){
+                        $listCitys = $search->getVille();
                         $nested = new Query\Nested();
-                        $userBool = new BoolQuery();
-                        $match = new Match();
-                            $match->setFieldQuery('city.id', $search->getVille()->getId());
-                            $userBool->addMust($match);
-                            $nested->setPath('city');
-                        $nested->setQuery($userBool);
+                        $shold = new BoolQuery();
+
+                        foreach ($listCitys as $city){
+                            $match = new Match();
+                            $match->setFieldQuery('ville.id', $city->getId());
+                            $shold->addShould($match);
+                        }
+                        $nested->setPath('ville');
+                        $nested->setQuery($shold);
                         $bool->addMust($nested);
                     }
                 }
@@ -99,13 +103,17 @@ class AdsRepository extends Repository
                     $nested->setQuery($userBool);
                     $bool->addMust($nested);
                     if ($search->getVille() != null && $search->getVille() != ''){
+                        $listCitys = $search->getVille();
                         $nested = new Query\Nested();
-                        $userBool = new BoolQuery();
-                        $match = new Match();
-                            $match->setFieldQuery('ville.id', $search->getVille()->getId());
-                            $userBool->addMust($match);
-                            $nested->setPath('ville');
-                        $nested->setQuery($userBool);
+                        $shold = new BoolQuery();
+
+                        foreach ($listCitys as $city){
+                            $match = new Match();
+                            $match->setFieldQuery('ville.id', $city->getId());
+                            $shold->addShould($match);
+                        }
+                        $nested->setPath('ville');
+                        $nested->setQuery($shold);
                         $bool->addMust($nested);
                     }
                 }

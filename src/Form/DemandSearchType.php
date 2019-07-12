@@ -109,7 +109,7 @@ class DemandSearchType extends  AbstractType
                 'placeholder'     => $region ? 'Département' : 'Select Region',
                 'required'        => false,
                 'auto_initialize' => false,
-                'label' =>false,
+                'label' => false,
                 'choices'         => $region ? $region->getDepartments() : []
             ]
         );

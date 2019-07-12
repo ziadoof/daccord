@@ -32,7 +32,6 @@
                                                             {{ form_row(offerForm.ville) }}
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-2 border-search-category mt-4">
                                                         <div class="">
                                                             {{ form_row(offerForm.generalcategory) }}
@@ -500,6 +499,8 @@
                                     </div>
                                 </div>
                                 {{ form_end(offerForm) }}
+                                <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+                                <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
                                 <div class="tab-pane fade show text-align form-new " id="demand" role="tabpanel" aria-labelledby="demand-tab">
                                     <div class="row register-form">
                                         <div class="col-md-12 mt-4">
@@ -1049,3 +1050,10 @@
         </div>
     {% endif %}
 {% endblock %}
+{#
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+#}
+
+<script>
+
+</script>

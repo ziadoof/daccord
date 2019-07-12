@@ -10,6 +10,7 @@
 @import "offer";
 @import "~bootstrap4-toggle/css/bootstrap4-toggle.css";
 @import "~bootstrap/scss/bootstrap";
+@import "~select2/dist/css/select2.css";
 
 
 
@@ -44,6 +45,16 @@ body .welcome-text {
   font-size: 85%;
   color: $noird;
 }
+.select2-container--default
+.select2-results__option--highlighted[aria-selected] {
+  font-size: 85%;
+  background-color: $blued;
+  color: white;
+}
+.select2-selection--multiple {
+  padding-bottom: 4vh;
+}
+
 .border-search{
   border-right: solid;
   border-right-width: 1px;

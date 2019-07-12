@@ -14,19 +14,21 @@ require('jquery-validation');
 require('../../node_modules/jquery-validation/dist/additional-methods');
 require('./searchBar');
 
+require('../../node_modules/select2/dist/js/select2.min');
 
-require('./rdcity');
+
 require('./specification');
 require('bootstrap-fileinput');
 require('../../node_modules/bootstrap-fileinput/js/locales/fr');
 require('../../node_modules/bootstrap-fileinput/js/locales/ar');
 require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle');
+require('./rdcity');
+
 
 require('./ad-images');
 require('bootstrap');
 require('./sidebar');
 require('./category');
-
 
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
@@ -35,6 +37,7 @@ require('./category');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
 
 
 
