@@ -73,10 +73,10 @@ class AdsRepository extends Repository
 
                         foreach ($listCitys as $city){
                             $match = new Match();
-                            $match->setFieldQuery('ville.id', $city->getId());
+                            $match->setFieldQuery('city.id', $city->getId());
                             $shold->addShould($match);
                         }
-                        $nested->setPath('ville');
+                        $nested->setPath('city');
                         $nested->setQuery($shold);
                         $bool->addMust($nested);
                     }
@@ -278,10 +278,6 @@ class AdsRepository extends Repository
         }
 
 
-
-
-
-
         $query = Query::create($bool);
         return $this->find($query,3000);
 
@@ -293,33 +289,75 @@ class AdsRepository extends Repository
     {
         $bool = new BoolQuery();
 
-        if ($search->getRegion() != null && $search->getRegion() != '') {
-            $nested = new Query\Nested();
-            $userBool = new BoolQuery();
-            $match = new Match();
-            $match->setFieldQuery('region.id', $search->getRegion()->getId());
-            $userBool->addMust($match);
-            $nested->setPath('region');
-            $nested->setQuery($userBool);
-            $bool->addMust($nested);
-            if ($search->getDepartment() != null && $search->getDepartment() != '') {
+        if($this->isHaveCity($this->generalCategory)){
+            if ($search->getRegion() != null && $search->getRegion() != '') {
                 $nested = new Query\Nested();
                 $userBool = new BoolQuery();
                 $match = new Match();
-                $match->setFieldQuery('department.id', $search->getDepartment()->getId());
+                $match->setFieldQuery('city.department.region.id', $search->getRegion()->getId());
                 $userBool->addMust($match);
-                $nested->setPath('department');
+                $nested->setPath('city.department.region');
                 $nested->setQuery($userBool);
                 $bool->addMust($nested);
-                if ($search->getVille() != null && $search->getVille() != '') {
+                if ($search->getDepartment() != null && $search->getDepartment() != '') {
                     $nested = new Query\Nested();
                     $userBool = new BoolQuery();
                     $match = new Match();
-                    $match->setFieldQuery('ville.id', $search->getVille()->getId());
+                    $match->setFieldQuery('city.department.id', $search->getDepartment()->getId());
                     $userBool->addMust($match);
-                    $nested->setPath('ville');
+                    $nested->setPath('city.department');
                     $nested->setQuery($userBool);
                     $bool->addMust($nested);
+                    if ($search->getVille() != null && $search->getVille() != ''){
+                        $listCitys = $search->getVille();
+                        $nested = new Query\Nested();
+                        $shold = new BoolQuery();
+
+                        foreach ($listCitys as $city){
+                            $match = new Match();
+                            $match->setFieldQuery('city.id', $city->getId());
+                            $shold->addShould($match);
+                        }
+                        $nested->setPath('city');
+                        $nested->setQuery($shold);
+                        $bool->addMust($nested);
+                    }
+                }
+            }
+        }
+        else{
+            if ($search->getRegion() != null && $search->getRegion() != '') {
+                $nested = new Query\Nested();
+                $userBool = new BoolQuery();
+                $match = new Match();
+                $match->setFieldQuery('region.id', $search->getRegion()->getId());
+                $userBool->addMust($match);
+                $nested->setPath('region');
+                $nested->setQuery($userBool);
+                $bool->addMust($nested);
+                if ($search->getDepartment() != null && $search->getDepartment() != '') {
+                    $nested = new Query\Nested();
+                    $userBool = new BoolQuery();
+                    $match = new Match();
+                    $match->setFieldQuery('department.id', $search->getDepartment()->getId());
+                    $userBool->addMust($match);
+                    $nested->setPath('department');
+                    $nested->setQuery($userBool);
+                    $bool->addMust($nested);
+                    if ($search->getVille() != null && $search->getVille() != ''){
+                        $listCitys = $search->getVille();
+                        $nested = new Query\Nested();
+                        $shold = new BoolQuery();
+
+                        foreach ($listCitys as $city){
+                            $match = new Match();
+                            $match->setFieldQuery('ville.id', $city->getId());
+                            $shold->addShould($match);
+                        }
+                        $nested->setPath('ville');
+                        $nested->setQuery($shold);
+                        $bool->addMust($nested);
+                    }
                 }
             }
         }
@@ -342,41 +380,32 @@ class AdsRepository extends Repository
             $bool->addMust($nested);
         }
 
-        $textForm = [
-            'title'=>             $search->getTitle(),
-            'sSize'=>             $search->getSSize(),
-            'withDriver'=>        $search->getWithDriver(),
-            'theType'=>           $search->getTheType(),
-            'secondLanguage'=>    $search->getSecondLanguage(),
-            'iSize'=>             $search->getISize(),
-            /*'languages'=>         $search->getLanguages(),*/
-            'workHours'=>         $search->getWorkHours(),
-            'typeOfContract'=>    $search->getTypeOfContract(),
-            'experience'=>        $search->getExperience(),
-            'levelOfStudy'=>      $search->getLevelOfStudy(),
-            'language'=>          $search->getLanguage(),
-            'typeOfTranslation'=> $search->getTypeOfTranslation(),
+        $textPhraseForm = [
+            //
             'material'=>          $search->getMaterial(),
-            'placeOfLesson'=>     $search->getPlaceOfLesson(),
-            'levelOfStudent'=>    $search->getLevelOfStudent(),
-            'brand'=>             $search->getBrand(),
             'fuelType'=>          $search->getFuelType(),
-            'model'=>             $search->getModel(),
-            'changeGear'=>        $search->getChangeGear(),
-            'manufactureCompany'=>$search->getManufactureCompany(),
-            'generalSituation'=>  $search->getGeneralSituation(),
+
+            // pour confirmer
+            'theType'=>           $search->getTheType(),
+            'placeOfLesson'=>     $search->getPlaceOfLesson(),
             'printingType'=>      $search->getPrintingType(),
             'printingColor'=>     $search->getPrintingColor(),
-            'analogDigital'=>     $search->getAnalogDigital(),
-            'animalSpecies'=>     $search->getAnimalSpecies(),
-            'dvdCd'=>             $search->getDvdCd(),
-            'originCountry'=>     $search->getOriginCountry(),
             'coverMaterial'=>     $search->getCoverMaterial(),
-            'shape'=>             $search->getShape(),
-            'heating'=>           $search->getHeating(),
-            'heatingType'=>       $search->getHeatingType(),
-            'eventType'=>         $search->getEventType(),
-            'subjectName'=>       $search->getSubjectName(),
+
+        ];
+
+        foreach ($textPhraseForm as $key=>$value){
+            if ($value != null && $value != '') {
+                $match = new Query\MatchPhrase();
+                $match->setFieldQuery($key, $value);
+                $bool->addMust($match);
+            }
+        }
+
+        $textForm = [
+            //checkbox
+            'donate'=>            $search->getDonate(),
+            'withDriver'=>        $search->getWithDriver(),
             'hdmi'=>              $search->getHdmi(),
             'cdRoom'=>            $search->getCdRoom(),
             'wifi'=>              $search->getWifi(),
@@ -391,8 +420,28 @@ class AdsRepository extends Repository
             'withGarden'=>        $search->getWithGarden(),
             'withVerandah'=>      $search->getWithVerandah(),
             'withElevator'=>      $search->getWithElevator(),
-            'city'=>              $search->getCity(),
-            'donate'=>            $search->getDonate(),
+            // other
+            'dvdCd'=>             $search->getDvdCd(),
+            'title'=>             $search->getTitle(),
+            'sSize'=>             $search->getSSize(),
+            'language'=>          $search->getLanguage(),
+            'secondLanguage'=>    $search->getSecondLanguage(),
+            'iSize'=>             $search->getISize(),
+            'workHours'=>         $search->getWorkHours(),
+            'typeOfContract'=>    $search->getTypeOfContract(),
+            'levelOfStudy'=>      $search->getLevelOfStudy(),
+            'brand'=>             $search->getBrand(),
+            'model'=>             $search->getModel(),
+            'changeGear'=>        $search->getChangeGear(),
+            'manufactureCompany'=>$search->getManufactureCompany(),
+            'analogDigital'=>     $search->getAnalogDigital(),
+            'animalSpecies'=>     $search->getAnimalSpecies(),
+            'originCountry'=>     $search->getOriginCountry(),
+            'shape'=>             $search->getShape(),
+            'heating'=>           $search->getHeating(),
+            'heatingType'=>       $search->getHeatingType(),
+            'eventType'=>         $search->getEventType(),
+            'subjectName'=>       $search->getSubjectName(),
             'acitvityArea'=>      $search->getAcitvityArea()
 
         ];
@@ -405,15 +454,15 @@ class AdsRepository extends Repository
             }
         }
 
+
         $rangeForm = [
             'manufacturingYear'=>['max'=> $search->getMaxManufacturingYear(),'min'=> $search->getMinManufacturingYear()],
             'kilometer'=>['max'=> $search->getMaxKilometer(),'min'=> $search->getMinKilometer()],
             'capacity'=>['max'=> $search->getMaxCapacity(),'min'=> $search->getMinCapacity()],
             'area'=>['max'=> $search->getMaxArea(),'min'=> $search->getMinArea()],
             'numberOfRooms'=>['max'=> null,'min'=> $search->getNumberOfRooms()],
-            'price'=>['max'=> $search->getPrice(),'min'=> null],
             'age'=> ['max'=> $search->getAge(),'min'=> null],
-            'paperSize'=> ['max'=> $search->getPaperSize(),'min'=> $search->getPaperSize()],
+            'paperSize'=> ['max'=> $search->getPaperSize(),'min'=> null],
             'salary'=> ['max'=> null,'min'=> $search->getSalary()],
             'numberOfPassengers'=> ['max'=> null,'min'=> $search->getNumberOfPassengers()],
             'numberOfDoors'=> ['max'=> null,'min'=> $search->getNumberOfDoors()],
@@ -427,6 +476,9 @@ class AdsRepository extends Repository
             'classEnergie'=>  ['max'=>  $search->getClassEnergie(),'min'=> null],
             'ges'=>           ['max'=>  $search->getGes(),'min'=> null],
             'weight'=>           ['max'=>  $search->getWeight(),'min'=> null],
+            'experience'=>           ['max'=>  $search->getExperience(),'min'=> null],
+            'levelOfStudent'=>           ['max'=>  null,'min'=> $search->getLevelOfStudent()],
+            'generalSituation'=>           ['max'=>  $search->getGeneralSituation(),'min'=> null],
 
         ];
 
@@ -438,8 +490,52 @@ class AdsRepository extends Repository
             }
         }
 
+        if ($search->getLanguages() != null && $search->getLanguages() != ''){
+            $languages = $search->getLanguages();
+            foreach ($languages as $language){
+                $match = new Match();
+                $match->setFieldQuery('languages', $language);
+                $bool->addMust($match);
+            }
+        }
+
+        if ($search->getTypeOfTranslation() != null && $search->getTypeOfTranslation() != '' ){
+            // pour afficher all type de traduir en n'amport qelle type
+            $shold = new BoolQuery();
+
+            $match = new Match();
+            $match->setFieldQuery('typeOfTranslation', $search->getTypeOfTranslation());
+            $shold->addShould($match) ;
+
+            $allmatch = new Match();
+            $allmatch->setFieldQuery('typeOfTranslation', 'All');
+            $shold->addShould($allmatch) ;
+
+            $bool->addMust($shold);
+
+        }
+        if ($search->getPrice() != null && $search->getPrice() != '' ){
+            // pour afficher all type de traduir en n'amport qelle type
+            $shold = new BoolQuery();
+
+            $match = new Query\Range();
+            $match->addField('price',["gte" => null,"lte" => $search->getPrice()]);
+            $shold->addShould($match);
 
 
+
+            $matchDonat = new Match();
+            $matchDonat->setFieldQuery('donate', true);
+            $shold->addShould($matchDonat) ;
+
+            $matchPrice = new BoolQuery();
+            $existPrice = new Exists('price');
+            $matchPrice->addMustNot($existPrice);
+            $shold->addShould($matchPrice) ;
+
+            $bool->addMust($shold);
+
+        }
         $query = Query::create($bool);
         return $this->find($query,3000);
 

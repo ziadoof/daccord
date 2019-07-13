@@ -16,6 +16,7 @@ use App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber;
 use App\Form\EventListener\AddSearchSpecificationFieldSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -122,16 +123,27 @@ class DemandSearchType extends  AbstractType
         );
         $form->add($builder->getForm());
     }
-
+    /**
+     * @param FormInterface $form
+     * @param Department|null $department
+     */
     private function addVilleField(FormInterface $form, ?Department $department)
     {
-        $form->add('ville', EntityType::class, [
-            'class'       => 'App\Entity\City',
-            'label' =>false,
-            'required' => false,
-            'placeholder' => $department ? 'City' : 'Select Department',
-            'choices'     => $department ? $department->getCitys() : []
+        $choice =[];
+        $citys =[];
+        if($department){
+            $citys = $department->getCitys();
+        }
+        foreach ($citys as $city){
+            $choice[$city->getName().' '.$city->getZipCode()]= $city;
+        }
+        $form->add('ville', ChoiceType::class, [
 
+            'label' => false,
+            'required' => false,
+            'expanded' => false,
+            'multiple'=> true,
+            'choices'     => $choice,
         ]);
     }
 

@@ -518,7 +518,6 @@
                                                             {{ form_row(demandForm.ville) }}
                                                         </div>
                                                     </div>
-
                                                     <div class="col-md-2 border-search-category mt-4">
                                                         <div class="">
                                                             {{ form_row(demandForm.generalcategory) }}
@@ -533,9 +532,11 @@
                                                                 {{ form_row(demandForm.title) }}
                                                             </div>
                                                         </div>
-                                                        <div id="demand_dynamic_form">
-                                                            <div class="">
-                                                                <div class="row">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div id="demand_dynamic_form">
+                                                                    <div class="">
+                                                                        <div class="row">
                                                                     {% if demandForm.manufactureCompany is defined %}
                                                                         <div class="col-md-3">
                                                                             {{ form_row(demandForm.manufactureCompany) }}
@@ -1010,8 +1011,8 @@
                                                                         </div>
                                                                     {% endif %}
                                                                 </div>
-                                                                <hr>
-                                                                <div class="row">
+                                                                        <hr>
+                                                                        <div class="row">
                                                                     {% if demandForm.donate is defined %}
                                                                         <div class="col-md-3 ">
                                                                             {{ form_row(demandForm.donate, {'attr': {'data-toggle':'toggle' ,'data-on':'Donate', 'data-off':'For sale', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
@@ -1028,8 +1029,10 @@
                                                                         </div>
                                                                     {% endif %}
                                                                 </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                         </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row justify-content-center mb-2">
@@ -1040,8 +1043,10 @@
                                             </div>
                                         </div>
                                      </div>
-                                    {{ form_end(demandForm) }}
                                 </div>
+                                {{ form_end(demandForm) }}
+                                <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+                                <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
                             </div>
                         </div>
                     </div>
@@ -1050,10 +1055,4 @@
         </div>
     {% endif %}
 {% endblock %}
-{#
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-#}
 
-<script>
-
-</script>

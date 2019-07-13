@@ -1,4 +1,5 @@
 
+@import "~select2/dist/css/select2.css";
 @import "bottstrap-reset";
 @import "variables";
 @import "jqueryui";
@@ -10,7 +11,6 @@
 @import "offer";
 @import "~bootstrap4-toggle/css/bootstrap4-toggle.css";
 @import "~bootstrap/scss/bootstrap";
-@import "~select2/dist/css/select2.css";
 
 
 
@@ -45,16 +45,6 @@ body .welcome-text {
   font-size: 85%;
   color: $noird;
 }
-.select2-container--default
-.select2-results__option--highlighted[aria-selected] {
-  font-size: 85%;
-  background-color: $blued;
-  color: white;
-}
-.select2-selection--multiple {
-  padding-bottom: 4vh;
-}
-
 .border-search{
   border-right: solid;
   border-right-width: 1px;
@@ -68,6 +58,31 @@ body .welcome-text {
   border-right-color: #000;
   height: 40%;
   margin-bottom: 1%;
+}
+// select2 over read
+.select2-container{
+  font-size: 85%;
+  padding: 0;
+}
+.select2-container--default
+.select2-results__option--highlighted[aria-selected] {
+  font-size: 85%;
+  background-color: $blued;
+  color: white;
+}
+.select2-selection--multiple {
+  padding-bottom: 4vh;
+}
+.select2-selection--single {
+  height: 100% !important;
+}
+.select2-selection__rendered{
+  word-wrap: break-word !important;
+  text-overflow: inherit !important;
+  white-space: normal !important;
+}
+.select2-results__option[aria-selected=true] {
+  display: none;
 }
 /*-----------------end--------------*/
 

@@ -9,18 +9,14 @@
 namespace App\Form;
 
 
-use App\Entity\City;
 use App\Entity\Department;
 use App\Entity\Region;
 use App\Form\EventListener\AddSearchCategoryFieldSubscriber;
 use App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber;
 use App\Form\EventListener\AddSearchSpecificationFieldSubscriber;
-use Doctrine\Common\Collections\ArrayCollection;
-use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
