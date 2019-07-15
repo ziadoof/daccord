@@ -277,6 +277,10 @@ class AdsRepository extends Repository
 
         }
 
+        $offerMatch = new Match();
+        $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+        $bool->addMust($offerMatch);
+
 
         $query = Query::create($bool);
         return $this->find($query,3000);
@@ -536,6 +540,11 @@ class AdsRepository extends Repository
             $bool->addMust($shold);
 
         }
+
+        $demandMatch = new Match();
+        $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+        $bool->addMust($demandMatch);
+
         $query = Query::create($bool);
         return $this->find($query,3000);
 
@@ -549,4 +558,5 @@ class AdsRepository extends Repository
             return in_array($generalCategory, $listCity);
         }
     }
+
 }

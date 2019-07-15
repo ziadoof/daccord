@@ -50,6 +50,7 @@ fos_elastica:
             experience:
               type: integer
             levelOfStudy: ~
+            typeOfAd: ~
             language: ~
             typeOfTranslation: ~
             material:
