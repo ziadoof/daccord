@@ -2335,7 +2335,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Perfumes'],
             // Wine
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Wine'],
-            ['name'=>'capacity', 'label'=>'MAX Capacity (ml)', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'NumericOptions', 'choice'=>[100,187,375,750,1000,1500,3000]],
+            ['name'=>'capacity', 'label'=>'MIN Capacity (ml)', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'NumericOptions', 'choice'=>[100,187,375,750,1000,1500,3000]],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Wine','choice'=>['min'=>1890,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Wine','choice'=>['min'=>1891,'max'=>$thisYear]],
             ['name'=>'originCountry', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'TextOptions', 'choice'=>['France','Italy','Spain','Chile','Australia','United States','Germany','New zealand','Portugal','Argentina','Croatia','Switzerland','Other']],
@@ -3962,7 +3962,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Cards and reservations
 
-            ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel']],
             ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>10]],
@@ -4501,7 +4500,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Wine
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Wine'],
-            ['name'=>'capacity', 'label'=>'Capacity (ml)', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'NumericOptions', 'choice'=>[100,187,375,750,1000,1500,3000]],
+            ['name'=>'minCapacity', 'label'=>'Capacity (ml)', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'NumericOptions', 'choice'=>[100,187,375,750,1000,1500,3000]],
             ['name'=>'manufacturingYear', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1890,'max'=>$thisYear]],
             ['name'=>'originCountry', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'TextOptions', 'choice'=>['France','Italy','Spain','Chile','Australia','United States','Germany','New zealand','Portugal','Argentina','Croatia','Switzerland','Other']],
 
@@ -4792,7 +4791,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel']],
             ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
             ['name'=>'number', 'label'=>'Number (unit)', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>10]],
-            ['name'=>'dateOfEvent', 'type'=>'DateType', 'category'=>'Cards and reservations'],
 
 
             // holiday_Other

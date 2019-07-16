@@ -422,8 +422,6 @@ class AdModel
 
     protected $withElevator;
 
-    protected $dateOfEvent;
-
     protected $city;
 
     protected $donate;
@@ -1889,21 +1887,6 @@ class AdModel
         $this->withElevator = $withElevator;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateOfEvent()
-    {
-        return $this->dateOfEvent;
-    }
-
-    /**
-     * @param mixed $dateOfEvent
-     */
-    public function setDateOfEvent($dateOfEvent): void
-    {
-        $this->dateOfEvent = $dateOfEvent;
-    }
 
     /**
      * @return mixed

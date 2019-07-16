@@ -125,7 +125,9 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                                 'multiple'  => true,
                             );
                         }
-                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'|| $name === 'generalSituation'|| $name === 'minCapacity'|| $name === 'numberOfPersson'){
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize'
+                            || $name==='levelOfStudent'|| $name === 'generalSituation'|| $name === 'minCapacity'
+                            || $name === 'numberOfPersson'|| $name === 'capacity'){
                             $options = array('label' => false, 'required' => false,
                                 'choices' => $textOptions,
                                 'placeholder' => $label,

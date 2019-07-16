@@ -141,7 +141,59 @@ class AdsRepository extends Repository
                 $bool->addMust($match);
             }
         }
+        //  Language exchange  il faut charch à la contrair de les first and second languages
+        //  if category is language exchange => the offer is same as the demand
+        if($search->getLanguage()!= null && $search->getLanguage() != ''){
+            if($search->getCategory()->getName() === 'Language exchange'){
+                if($search->getSecondLanguage() != null && $search->getSecondLanguage()!=''){
+                    $firstMatch = new Match();
+                    $firstMatch->setFieldQuery('language', $search->getSecondLanguage());
+                    $bool->addMust($firstMatch);
 
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $search->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+                else{
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $search->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+            }
+            else{
+                $firstMatch = new Match();
+                $firstMatch->setFieldQuery('language', $search->getLanguage());
+                $bool->addMust($firstMatch);
+
+                $offerMatch = new Match();
+                $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                $bool->addMust($offerMatch);
+            }
+        }
+        else{
+            $offerMatch = new Match();
+            $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+            $bool->addMust($offerMatch);
+        }
+        // end Language exchange
         $textForm = [
             //checkbox
             'donate'=>            $search->getDonate(),
@@ -164,8 +216,6 @@ class AdsRepository extends Repository
             'dvdCd'=>             $search->getDvdCd(),
             'title'=>             $search->getTitle(),
             'sSize'=>             $search->getSSize(),
-            'language'=>          $search->getLanguage(),
-            'secondLanguage'=>    $search->getSecondLanguage(),
             'iSize'=>             $search->getISize(),
             'workHours'=>         $search->getWorkHours(),
             'typeOfContract'=>    $search->getTypeOfContract(),
@@ -277,9 +327,7 @@ class AdsRepository extends Repository
 
         }
 
-        $offerMatch = new Match();
-        $offerMatch->setFieldQuery('typeOfAd', 'Offer');
-        $bool->addMust($offerMatch);
+
 
 
         $query = Query::create($bool);
@@ -405,7 +453,59 @@ class AdsRepository extends Repository
                 $bool->addMust($match);
             }
         }
+        //  Language exchange  il faut charch à la contrair de les first and second languages
+        //  if category is language exchange => the offer is same as the demand
+        if($search->getLanguage()!= null && $search->getLanguage() != ''){
+            if($search->getCategory()->getName() === 'Language exchange'){
+                if($search->getSecondLanguage() != null && $search->getSecondLanguage()!=''){
+                    $firstMatch = new Match();
+                    $firstMatch->setFieldQuery('language', $search->getSecondLanguage());
+                    $bool->addMust($firstMatch);
 
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $search->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+                else{
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $search->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+            }
+            else{
+                $firstMatch = new Match();
+                $firstMatch->setFieldQuery('language', $search->getLanguage());
+                $bool->addMust($firstMatch);
+
+                $offerMatch = new Match();
+                $offerMatch->setFieldQuery('typeOfAd', 'Demand');
+                $bool->addMust($offerMatch);
+            }
+        }
+        else{
+            $offerMatch = new Match();
+            $offerMatch->setFieldQuery('typeOfAd', 'Demand');
+            $bool->addMust($offerMatch);
+        }
+        // end Language exchange
         $textForm = [
             //checkbox
             'donate'=>            $search->getDonate(),
@@ -428,8 +528,6 @@ class AdsRepository extends Repository
             'dvdCd'=>             $search->getDvdCd(),
             'title'=>             $search->getTitle(),
             'sSize'=>             $search->getSSize(),
-            'language'=>          $search->getLanguage(),
-            'secondLanguage'=>    $search->getSecondLanguage(),
             'iSize'=>             $search->getISize(),
             'workHours'=>         $search->getWorkHours(),
             'typeOfContract'=>    $search->getTypeOfContract(),
@@ -457,31 +555,48 @@ class AdsRepository extends Repository
                 $bool->addMust($match);
             }
         }
+        /*for search to mor than the field and less than the same field*/
+        $moreLessForm = [
+            'manufacturingYear'  => ['field' => $search->getManufacturingYear(), 'max'   => 'maxManufacturingYear', 'min'   => 'minManufacturingYear'],
+            'kilometer'  => ['field' => $search->getKilometer(), 'max'   => 'maxKilometer', 'min'   => 'minKilometer'],
+            'capacity'  => ['field' => $search->getCapacity(), 'max'   => 'maxCapacity', 'min'   => 'minCapacity'],
+            'area'  => ['field' => $search->getArea(), 'max'   => 'maxArea', 'min'   => 'minArea'],
+        ];
 
+
+            foreach ($moreLessForm as $key => $value){
+                if($value['field'] != null && $value['field'] !=''){
+                    $maxMatch = new Query\Range();
+                    $maxMatch->addField($value['max'],["gte" =>  $value['field'],"lte" => null]);
+                    $bool->addMust($maxMatch);
+
+                    $minMatch = new Query\Range();
+                    $minMatch->addField($value['min'],["gte" => null,"lte" => $value['field']]);
+                    $bool->addMust($minMatch);
+                }
+            }
+        /*end */
 
         $rangeForm = [
-            'manufacturingYear'=>['max'=> $search->getMaxManufacturingYear(),'min'=> $search->getMinManufacturingYear()],
-            'kilometer'=>['max'=> $search->getMaxKilometer(),'min'=> $search->getMinKilometer()],
-            'capacity'=>['max'=> $search->getMaxCapacity(),'min'=> $search->getMinCapacity()],
-            'area'=>['max'=> $search->getMaxArea(),'min'=> $search->getMinArea()],
-            'numberOfRooms'=>['max'=> null,'min'=> $search->getNumberOfRooms()],
-            'age'=> ['max'=> $search->getAge(),'min'=> null],
-            'paperSize'=> ['max'=> $search->getPaperSize(),'min'=> null],
+            'numberOfRooms'=>['max'=> $search->getNumberOfRooms(),'min'=> null],
+            'age'=> ['max'=> null,'min'=> $search->getAge()],
+            'paperSize'=> ['max'=> null,'min'=> $search->getPaperSize()],
             'salary'=> ['max'=> null,'min'=> $search->getSalary()],
             'numberOfPassengers'=> ['max'=> null,'min'=> $search->getNumberOfPassengers()],
-            'numberOfDoors'=> ['max'=> null,'min'=> $search->getNumberOfDoors()],
-            'ram'=> ['max'=> null,'min'=> $search->getRam()],
+            'numberOfDoors'=> ['max'=> $search->getNumberOfDoors(),'min'=> null],
+            'ram'=> ['max'=> $search->getRam(),'min'=> null],
             'accuracy'=> ['max'=> null,'min'=> $search->getAccuracy()],
-            'number'=> ['max'=> null,'min'=> $search->getNumber()],
-            'numberOfPersson'=> ['max'=> null,'min'=> $search->getNumberOfPersson()],
-            'numberOfDrawer'=> ['max'=> null,'min'=> $search->getNumberOfDrawer()],
-            'numberOfStaging'=> ['max'=> null,'min'=> $search->getNumberOfStaging()],
-            'numberOfHead'=> ['max'=> null,'min'=> $search->getNumberOfHead()],
+            'number'=> ['max'=> $search->getNumber(),'min'=> null],
+            'numberOfPersson'=> ['max'=> $search->getNumberOfPersson(),'min'=> null],
+            'numberOfDrawer'=> ['max'=> $search->getNumberOfDrawer(),'min'=> null],
+            'numberOfStaging'=> ['max'=> $search->getNumberOfStaging(),'min'=> null],
+            'numberOfHead'=> ['max'=> $search->getNumberOfHead(),'min'=> null],
             'classEnergie'=>  ['max'=>  $search->getClassEnergie(),'min'=> null],
             'ges'=>           ['max'=>  $search->getGes(),'min'=> null],
             'weight'=>           ['max'=>  $search->getWeight(),'min'=> null],
-            'experience'=>           ['max'=>  $search->getExperience(),'min'=> null],
+            'experience'=>           ['max'=>  null,'min'=> $search->getExperience()],
             'levelOfStudent'=>           ['max'=>  null,'min'=> $search->getLevelOfStudent()],
+            'capacity'=>           ['max'=>  $search->getMinCapacity(),'min'=> null],
             'generalSituation'=>           ['max'=>  $search->getGeneralSituation(),'min'=> null],
 
         ];
@@ -540,10 +655,6 @@ class AdsRepository extends Repository
             $bool->addMust($shold);
 
         }
-
-        $demandMatch = new Match();
-        $demandMatch->setFieldQuery('typeOfAd', 'Demand');
-        $bool->addMust($demandMatch);
 
         $query = Query::create($bool);
         return $this->find($query,3000);

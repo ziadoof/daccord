@@ -118,7 +118,9 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                                 'multiple'  => true,
                             );
                         }
-                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'|| $name === 'generalSituation'|| $name === 'minCapacity'|| $name === 'numberOfPersson'){
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize'
+                            || $name==='levelOfStudent'|| $name === 'generalSituation'|| $name === 'minCapacity'
+                            || $name === 'numberOfPersson'|| $name === 'capacity'){
                             $options = array('label' => $label, 'required' => false,
                                 'choices' => $textOptions,
                                 'placeholder' => 'Select'.' '.$label,
