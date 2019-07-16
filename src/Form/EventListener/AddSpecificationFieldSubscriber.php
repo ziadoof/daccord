@@ -114,7 +114,6 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             $options = array('label' => $label, 'required' => false,
                                 'choices' => $choiceOptions,
                                 'placeholder' => 'Select'.' '.$label,
-                                /*'expanded'  => true,*/
                                 'multiple'  => true,
                             );
                         }

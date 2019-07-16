@@ -17,6 +17,13 @@ $(document).on('change', '#offer_category', function () {
             });
             $('#dynamic_form').replaceWith($dynamicForm);
             addBootstrapToggle('offer');
+            $('#offer_languages').select2({
+                placeholder: " Select languages",
+                tage: true,
+                maximumSelectionLength: 4,
+                dropdownAutoWidth: true,
+                width: '100%',
+            });
         }
     });
 });
@@ -39,6 +46,13 @@ $(document).on('change', '#demand_category', function () {
             });
             $('#dynamic_form').replaceWith($dynamicForm);
             addBootstrapToggle('demand');
+            $('#demand_languages').select2({
+                placeholder: " Select languages",
+                tage: true,
+                maximumSelectionLength: 4,
+                dropdownAutoWidth: true,
+                width: '100%',
+            });
         }
     });
 });
@@ -62,7 +76,13 @@ $(document).on('change', '#demand_search_category', function () {
             });
             $('#demand_dynamic_form').replaceWith($dynamicForm);
             addBootstrapToggle('demand_search');
-
+            $('#demand_search_languages').select2({
+                placeholder: " Select languages",
+                tage: true,
+                maximumSelectionLength: 4,
+                dropdownAutoWidth: true,
+                width: '100%',
+            });
         }
     });
 });
@@ -86,7 +106,13 @@ $(document).on('change', '#offer_search_category', function () {
             });
             $('#dynamic_form').replaceWith($dynamicForm);
             addBootstrapToggle('offer_search');
-
+            $('#offer_search_languages').select2({
+                placeholder: " Select languages",
+                tage: true,
+                maximumSelectionLength: 4,
+                dropdownAutoWidth: true,
+                width: '100%',
+            });
         }
     });
 });
@@ -109,4 +135,20 @@ function donate($type) {
         document.getElementById($type+'_price').disabled = this.checked;
     });
 }
+
+$(document).ready(function () {
+    $('#offer_search_languages').select2({
+        placeholder: " Select languages",
+    });
+    $('#demand_search_languages').select2({
+        placeholder: " Select languages",
+    });
+    $('#offer_languages').select2({
+        placeholder: " Select languages",
+    });
+    $('#demand_languages').select2({
+        placeholder: " Select languages",
+    });
+    $('.select2-search__field').css('width', '100%');
+});
 

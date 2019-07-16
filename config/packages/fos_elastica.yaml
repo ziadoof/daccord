@@ -208,7 +208,6 @@ fos_elastica:
               type: boolean
             donate:
               type: boolean
-            dateOfEvent: ~
             city:
               type: nested
               properties:
