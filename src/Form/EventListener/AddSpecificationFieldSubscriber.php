@@ -95,7 +95,7 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'EntityType'){
-                    $options = array('label' => $label, 'required' => false,'class' => City::class);
+                    $options = array('label' => $label, 'required' => true,'class' => City::class);
                     $form->add($name, AutocompleteType::class, $options);
                 }
                 elseif($type === 'DateType'){
@@ -114,11 +114,12 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             $options = array('label' => $label, 'required' => false,
                                 'choices' => $choiceOptions,
                                 'placeholder' => 'Select'.' '.$label,
-                                /*'expanded'  => true,*/
                                 'multiple'  => true,
                             );
                         }
-                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'){
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize'
+                            || $name==='levelOfStudent'|| $name === 'generalSituation'|| $name === 'minCapacity'
+                            || $name === 'numberOfPersson'|| $name === 'capacity'){
                             $options = array('label' => $label, 'required' => false,
                                 'choices' => $textOptions,
                                 'placeholder' => 'Select'.' '.$label,
@@ -149,9 +150,16 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                         $min = $specification->getMinOption();
                         $max = $specification->getMaxOption();
                         $choiceOptions = [];
+                        if ($name ==='manufacturingYear'||$name ==='minManufacturingYear'||$name ==='maxManufacturingYear'){
+                            for ($i=$max;$i>=$min;$i--){
+                                $choiceOptions [$i]= $i;
+                            }
+                        }
+                        else {
                             for ($i=$min;$i<=$max;$i++){
                                 $choiceOptions [$i]= $i;
                             }
+                        }
                         $options = array('label' => $label, 'required' => false,
                             'choices' => $choiceOptions,
                             'placeholder' => 'Select'.' '.$label

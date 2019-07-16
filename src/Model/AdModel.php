@@ -341,10 +341,6 @@ class AdModel
 
     protected $ram;
 
-    protected $screenSizeCm;
-
-    protected $screenSizeInch;
-
     protected $capacity;
     
     protected $minCapacity;
@@ -399,6 +395,9 @@ class AdModel
 
     protected $cdRoom;
 
+    /**
+     * @var boolean
+     */
     protected $wifi;
 
     protected $usb;
@@ -422,8 +421,6 @@ class AdModel
     protected $withVerandah;
 
     protected $withElevator;
-
-    protected $dateOfEvent;
 
     protected $city;
 
@@ -1263,37 +1260,6 @@ class AdModel
         $this->ram = $ram;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getScreenSizeCm()
-    {
-        return $this->screenSizeCm;
-    }
-
-    /**
-     * @param mixed $screenSizeCm
-     */
-    public function setScreenSizeCm($screenSizeCm): void
-    {
-        $this->screenSizeCm = $screenSizeCm;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScreenSizeInch()
-    {
-        return $this->screenSizeInch;
-    }
-
-    /**
-     * @param mixed $screenSizeInch
-     */
-    public function setScreenSizeInch($screenSizeInch): void
-    {
-        $this->screenSizeInch = $screenSizeInch;
-    }
 
     /**
      * @return mixed
@@ -1743,6 +1709,8 @@ class AdModel
         $this->wifi = $wifi;
     }
 
+
+
     /**
      * @return mixed
      */
@@ -1919,21 +1887,6 @@ class AdModel
         $this->withElevator = $withElevator;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateOfEvent()
-    {
-        return $this->dateOfEvent;
-    }
-
-    /**
-     * @param mixed $dateOfEvent
-     */
-    public function setDateOfEvent($dateOfEvent): void
-    {
-        $this->dateOfEvent = $dateOfEvent;
-    }
 
     /**
      * @return mixed

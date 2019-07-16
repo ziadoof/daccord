@@ -25,25 +25,32 @@ fos_elastica:
       types:
         ad:
           properties:
+            fuelType: ~
             title:
               type: text
               search_analyzer: custom_search_analyzer
               analyzer: custom_index_analyzer
               boost: 10
-            price: ~
-            withDriver: ~
+            price:
+              type: integer
+            withDriver:
+              type: boolean
             mission: ~
             theType: ~
             secondLanguage: ~
-            age: ~
+            age:
+              type: integer
             iSize: ~
             sSize: ~
-            languages: ~
+            languages:
+              type: ~
             acitvityArea: ~
             workHours: ~
             typeOfContract: ~
-            experience: ~
+            experience:
+              type: integer
             levelOfStudy: ~
+            typeOfAd: ~
             language: ~
             typeOfTranslation: ~
             material:
@@ -52,7 +59,8 @@ fos_elastica:
               analyzer: custom_index_analyzer
               boost: 10
             placeOfLesson: ~
-            levelOfStudent: ~
+            levelOfStudent:
+              type: integer
             brand:
               type: text
               search_analyzer: custom_search_analyzer
@@ -63,7 +71,6 @@ fos_elastica:
               search_analyzer: custom_search_analyzer
               analyzer: custom_index_analyzer
               boost: 10
-            fuelType: ~
             model:
               type: text
               search_analyzer: custom_search_analyzer
@@ -75,8 +82,10 @@ fos_elastica:
               search_analyzer: custom_search_analyzer
               analyzer: custom_index_analyzer
               boost: 10
-            generalSituation: ~
-            paperSize: ~
+            generalSituation:
+              type: integer
+            paperSize:
+              type: integer
             printingType: ~
             printingColor: ~
             analogDigital: ~
@@ -91,74 +100,132 @@ fos_elastica:
             shape: ~
             heating: ~
             heatingType: ~
-            classEnergie: ~
-            ges: ~
+            classEnergie:
+              type: integer
+            ges:
+              type: integer
             eventType: ~
             subjectName:
               type: text
               search_analyzer: custom_search_analyzer
               analyzer: custom_index_analyzer
               boost: 10
-            salary: ~
+            salary:
+              type: integer
             durationOfLesson: ~
-            maxDistance: ~
-            manufacturingYear: ~
-            maxManufacturingYear: ~
-            minManufacturingYear: ~
-            numberOfPassengers: ~
-            numberOfDoors: ~
-            kilometer: ~
-            maxKilometer: ~
-            minKilometer: ~
+            maxDistance:
+              type: integer
+            manufacturingYear:
+              type: integer
+            maxManufacturingYear:
+              type: integer
+            minManufacturingYear:
+              type: integer
+            numberOfPassengers:
+              type: integer
+            numberOfDoors:
+              type: integer
+            kilometer:
+              type: integer
+            maxKilometer:
+              type: integer
+            minKilometer:
+              type: integer
             processor:
               type: text
               search_analyzer: custom_search_analyzer
               analyzer: custom_index_analyzer
               boost: 10
-            ram: ~
-            screenSizeCm: ~
-            screenSizeInch: ~
-            capacity: ~
-            minCapacity: ~
-            maxCapacity: ~
-            accuracy: ~
+            ram:
+              type: integer
+            capacity:
+              type: integer
+            minCapacity:
+              type: integer
+            maxCapacity:
+              type: integer
+            accuracy:
+              type: integer
             weight: ~
             caliber: ~
             maxCaliber: ~
             minCaliber: ~
-            number: ~
+            number:
+              type: integer
             width: ~
             height: ~
-            numberOfPersson: ~
+            numberOfPersson:
+              type: float
             length: ~
-            numberOfDrawer: ~
-            numberOfStaging: ~
-            numberOfHead: ~
+            numberOfDrawer:
+              type: integer
+            numberOfStaging:
+              type: integer
+            numberOfHead:
+              type: integer
             ability: ~
             floor: ~
-            area: ~
-            minArea: ~
-            maxArea: ~
-            numberOfRooms: ~
-            minNumberOfRooms: ~
-            maxNumberOfRooms: ~
+            area:
+              type: integer
+            minArea:
+              type: integer
+            maxArea:
+              type: integer
+            numberOfRooms:
+              type: integer
+            minNumberOfRooms:
+              type: integer
+            maxNumberOfRooms:
+              type: integer
             numberOfFloors: ~
-            hdmi: ~
-            cdRoom: ~
-            wifi: ~
-            usb: ~
-            threeInOne: ~
-            accessories: ~
-            withFreezer: ~
-            electricHead: ~
-            withOven: ~
-            covered: ~
-            withFurniture: ~
-            withGarden: ~
-            withVerandah: ~
-            withElevator: ~
-            dateOfEvent: ~
-            city: ~
+            hdmi:
+              type: boolean
+            cdRoom:
+              type: boolean
+            wifi:
+              type: boolean
+            usb:
+              type: boolean
+            threeInOne:
+              type: boolean
+            accessories:
+              type: boolean
+            withFreezer:
+              type: boolean
+            electricHead:
+              type: boolean
+            withOven:
+              type: boolean
+            covered:
+              type: boolean
+            withFurniture:
+              type: boolean
+            withGarden:
+              type: boolean
+            withVerandah:
+              type: boolean
+            withElevator:
+              type: boolean
+            donate:
+              type: boolean
+            city:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+                department:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
+                    name: ~
+                    region:
+                      type: nested
+                      properties:
+                        id:
+                          type: integer
+                        name: ~
             ville:
               type: nested
               properties:

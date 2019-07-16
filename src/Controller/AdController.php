@@ -73,25 +73,29 @@ class AdController extends AbstractController
                 'entity_manager' => $entityManager,
             ]);
             $offerForm->handleRequest($request);
-            $offerSearch = $offerForm->getData();
-
 
             $demandForm = $this->createForm(DemandSearchType::class, $demandSearch,[
                 'entity_manager' => $entityManager,
             ]);
             $demandForm->handleRequest($request);
-            $demandSearch = $demandForm->getData();
 
-/*            $elasticaManager = $this->get('fos_elastica.manager');*/
-            $offerResults = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
-            $demandResults = $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
+            if ($offerForm->isSubmitted() && $offerForm->isValid()){
+                $offerSearch = $offerForm->getData();
+                $result = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
+            }
+
+            elseif ($demandForm->isSubmitted() && $demandForm->isValid()){
+                $demandSearch = $demandForm->getData();
+                $result= $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
+            }
+            else{
+                $result = $adRepository->findAll();
+            }
 
             return $this->render('ad/index.html.twig', [
-                'ads' => $adRepository->findAll(),
                 'offerForm' => $offerForm->createView(),
                 'demandForm' => $demandForm->createView(),
-                'offerADS' => $offerResults,
-                'demandADS' => $demandResults,
+                'ads' => $result
             ]);
 
         }
@@ -173,7 +177,14 @@ class AdController extends AbstractController
 
                 $ad->setUser($this->getUser());
                 $ad->setCategory($category);
+                $ad->setGeneralCategory($category->getParent());
 
+                $ville = $this->getUser()->getCity();
+                $department = $this->getUser()->getCity()->getDepartment();
+                $region = $this->getUser()->getCity()->getDepartment()->getRegion();
+                $ad->setVille($ville);
+                $ad->setDepartment($department);
+                $ad->setRegion($region);
 
 
                 $entityManager->persist($ad);

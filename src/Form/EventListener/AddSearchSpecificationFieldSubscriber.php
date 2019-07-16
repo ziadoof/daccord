@@ -89,9 +89,6 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                         'data-validation-optional'=>"true",
                         'data-validation'=>"alphanumeric",
                         'data-validation-allowing'=>"-_",
-
-
-
                     ));
                     $form->add($name, TextType::class, $options);
                 }
@@ -125,11 +122,12 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                             $options = array('label' => false, 'required' => false,
                                 'choices' => $choiceOptions,
                                 'placeholder' => $label,
-                                /*'expanded'  => true,*/
                                 'multiple'  => true,
                             );
                         }
-                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize' || $name==='levelOfStudent'){
+                        elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize'
+                            || $name==='levelOfStudent'|| $name === 'generalSituation'|| $name === 'minCapacity'
+                            || $name === 'numberOfPersson'|| $name === 'capacity'){
                             $options = array('label' => false, 'required' => false,
                                 'choices' => $textOptions,
                                 'placeholder' => $label,
@@ -160,9 +158,17 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                         $min = $specification->getMinOption();
                         $max = $specification->getMaxOption();
                         $choiceOptions = [];
+                        if ($name ==='manufacturingYear'||$name ==='minManufacturingYear'||$name ==='maxManufacturingYear'){
+                            for ($i=$max;$i>=$min;$i--){
+                                $choiceOptions [$i]= $i;
+                            }
+                        }
+                        else {
                             for ($i=$min;$i<=$max;$i++){
                                 $choiceOptions [$i]= $i;
                             }
+                        }
+
                         $options = array('label' => false, 'required' => false,
                             'choices' => $choiceOptions,
                             'placeholder' => $label
