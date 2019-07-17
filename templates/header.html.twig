@@ -29,7 +29,7 @@
                   {% if app.user==null %}
                   <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
                       <form class="form-inline my-2 my-lg-0 float-right">
-                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="/*searchbar();*/" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample">Search</a>
+                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="/*searchbar();*/" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button">Search</a>
                           <a class="btn btn-info my-2 my-sm-0" data-toggle="modal" data-target="#Registration">Register</a>
                           <a class="btn btn-info my-2 my-sm-0 ml-2" data-toggle="modal" data-target="#login">Login</a>
                       </form>
@@ -70,6 +70,7 @@
                       </div>
 
                       <div class="mt-2">
+                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="searchbar();" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample">Search</a>
                           <a class="btn btn-info " href="{{ path('ad_new',{'type': 'Offer'}) }}">Add offre</a>
                           <a class="btn btn-info" href="{{ path('ad_new',{'type': 'Demand'}) }}">Add demend</a>
                       </div>
@@ -119,6 +120,4 @@
         </div>
     </div>
     <!-- Modal end-->
-
-
 

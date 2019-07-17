@@ -24,7 +24,7 @@ class AdType extends AbstractType
             ->add('typeOfAd')*/
             /*->add('mission')
             ->add('acitvityArea')
-            ->add('fullPartial')
+            ->add('WorkHours')
             ->add('typeOfContract')
             ->add('experience')
             ->add('levelOfStudy')
@@ -130,11 +130,12 @@ class AdType extends AbstractType
             ->add('date')
             ->add('category')
             ->add('user')
-            ->add('city')*/
-            ->add('title')
-            ->add('description')
+            ->add('city')
             ->add('donate')
             ->add('withDriver')
+            */
+            ->add('title')
+            ->add('description')
             ->add('price')
         ;
     }
