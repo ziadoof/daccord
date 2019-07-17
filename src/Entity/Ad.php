@@ -2577,7 +2577,7 @@ class Ad
     public function getAllSpecifications(){
        $vars  = get_object_vars($this);
        $all = [];
-       $exp = ['id','title','imageOne','imageTow','imageThree','donate','price','dateOfAd','typeOfAd','category','user','description'];
+       $exp = ['id','title','imageOne','imageTow','imageThree','donate','price','dateOfAd','typeOfAd','user','description'];
        foreach ($vars as $key=>$value){
            if(!in_array($key,$exp)){
                if($value !== null){

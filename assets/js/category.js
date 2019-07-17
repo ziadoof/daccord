@@ -46,7 +46,7 @@ $(function(){
 
 $(function(){
     $("#offer_search_generalcategory").change(function(){
-
+        $('#dynamic_form').hide();
         var data = {
             generalcategory_id: $(this).val()
         };
@@ -70,6 +70,7 @@ $(function(){
 });
 $(function(){
     $("#demand_search_generalcategory").change(function(){
+        $('#demand_dynamic_form').hide();
         var data = {
             generalcategory_id: $(this).val()
         };

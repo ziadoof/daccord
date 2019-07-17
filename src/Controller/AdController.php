@@ -49,6 +49,32 @@ class AdController extends AbstractController
     {
         $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
+
+        $offerSearch = new AdModel();
+        $demandSearch = new AdModel();
+
+        $offerForm = $this->createForm(OfferSearchType::class, $offerSearch,[
+            'entity_manager' => $entityManager,
+        ]);
+        $offerForm->handleRequest($request);
+
+        $demandForm = $this->createForm(DemandSearchType::class, $demandSearch,[
+            'entity_manager' => $entityManager,
+        ]);
+        $demandForm->handleRequest($request);
+
+        if ($offerForm->isSubmitted() && $offerForm->isValid()){
+            $offerSearch = $offerForm->getData();
+            $result = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
+        }
+
+        elseif ($demandForm->isSubmitted() && $demandForm->isValid()){
+            $demandSearch = $demandForm->getData();
+            $result= $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
+        }
+        else{
+            $result = $adRepository->findAll();
+        }
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();
@@ -63,34 +89,15 @@ class AdController extends AbstractController
 
             $ad_area = $adRepository->findByArea($min_x,$max_x,$min_y,$max_y);
 
-            return $this->render('ad/index.html.twig', ['ads' => $adRepository->findAll(),'ad_area'=>$ad_area]);
+            return $this->render('ad/index.html.twig', [
+                'ad_area'=>$ad_area,
+                'offerForm' => $offerForm->createView(),
+                'demandForm' => $demandForm->createView(),
+                'ads' => $result
+
+            ]);
         }
         else{
-            $offerSearch = new AdModel();
-            $demandSearch = new AdModel();
-
-            $offerForm = $this->createForm(OfferSearchType::class, $offerSearch,[
-                'entity_manager' => $entityManager,
-            ]);
-            $offerForm->handleRequest($request);
-
-            $demandForm = $this->createForm(DemandSearchType::class, $demandSearch,[
-                'entity_manager' => $entityManager,
-            ]);
-            $demandForm->handleRequest($request);
-
-            if ($offerForm->isSubmitted() && $offerForm->isValid()){
-                $offerSearch = $offerForm->getData();
-                $result = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
-            }
-
-            elseif ($demandForm->isSubmitted() && $demandForm->isValid()){
-                $demandSearch = $demandForm->getData();
-                $result= $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
-            }
-            else{
-                $result = $adRepository->findAll();
-            }
 
             return $this->render('ad/index.html.twig', [
                 'offerForm' => $offerForm->createView(),
@@ -208,31 +215,8 @@ class AdController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $categoryParent = $ad->getCategory()->getParent()->getName();
-        $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),'Demand', $categoryParent);
-        $allSpecifications = $ad->getAllSpecifications();
-        $classEnergieAndGes=[1=>'A',2=>'B',3=>'C',4=>'D',5=>'E',6=>'F',7=>'G'];
-        $paperSize=[1=>'4A0',2=>'2A0',3=>'A0',4=>'A1',5=>'A2',6=>'A3',7=>'A4',8=>'A5',9=>'A6',10>'A7',11=>'A8',12=>'A9',13=>'A10'];
-        $experience=[0=>'Not required',1=>'1 YEAR',2=>'2 YEARS' ,3=>'3 YEARS' ,4=>'4 YEARS' ,5=>'5 YEARS' ,6=>'+ 5 YEARS'];
-        $levelOfStudent=[1=>'Maternal school',2=>'Middle school',3=>'High school',4=>'Universities',5=>'Professional'];
-        foreach ($allSpecifications as $key=>$value){
-            switch ($key){
-                case 'ges':
-                    $allSpecifications[$key] = $classEnergieAndGes[$value];
-                    break;
-                case 'classEnergie':
-                    $allSpecifications[$key] = $classEnergieAndGes[$value];
-                    break;
-                case 'experience':
-                    $allSpecifications[$key] = $experience[$value];
-                    break;
-                case 'paperSize':
-                    $allSpecifications[$key] = $paperSize[$value];
-                    break;
-                case 'levelOfStudent':
-                    $allSpecifications[$key] = $levelOfStudent[$value];
-                    break;
-            }
-        }
+        $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),$ad->getTypeOfAd(), $categoryParent);
+        $allSpecifications = $this->fixSpecifications($ad->getAllSpecifications());
         return $this->render('ad/show.html.twig', [
             'ad' => $ad,
             'realCategory'=> $realCategory,
@@ -245,8 +229,12 @@ class AdController extends AbstractController
      */
     public function edit(Request $request, Ad $ad): Response
     {
+        $em = $this->getDoctrine()->getManager();
         $allSpecifications = $ad->getAllSpecifications();
         $price = $ad->getPrice();
+        $categoryParent = $ad->getCategory()->getParent()->getName();
+        $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),$ad->getTypeOfAd(), $categoryParent);
+
         $form = $this->createForm(AdType::class, $ad);
         $form->handleRequest($request);
 
@@ -259,6 +247,7 @@ class AdController extends AbstractController
 
         return $this->render('ad/edit.html.twig', [
             'specifications'=>$allSpecifications,
+            'realCategory'=> $realCategory,
             'ad' => $ad,
             'form' => $form->createView(),
         ]);
@@ -296,5 +285,48 @@ class AdController extends AbstractController
         return $this->render('ad/myAds.html.twig', [
             'my_ads' => $my_ads,
         ]);
+    }
+
+    public function fixSpecifications ($allSpecifications){
+        $classEnergieAndGes=[1=>'A',2=>'B',3=>'C',4=>'D',5=>'E',6=>'F',7=>'G'];
+        $paperSize=[1=>'4A0',2=>'2A0',3=>'A0',4=>'A1',5=>'A2',6=>'A3',7=>'A4',8=>'A5',9=>'A6',10>'A7',11=>'A8',12=>'A9',13=>'A10'];
+        $experience=[0=>'Not required',1=>'1 YEAR',2=>'2 YEARS' ,3=>'3 YEARS' ,4=>'4 YEARS' ,5=>'5 YEARS' ,6=>'+ 5 YEARS'];
+        $levelOfStudent=[1=>'Maternal school',2=>'Middle school',3=>'High school',4=>'Universities',5=>'Professional'];
+        $capacityLitre = [1=>'Less than 50 Liters',2 =>'50-80 Liters',3 =>'80-150 Liters',4 =>'150-250 Liters',5 =>'250-330 Liters',6 =>'330-490 Liters',7 =>'More than 50 Liters'];
+        $boolean = [0=>'No',1=>'Yes'];
+        $generalSituation = [1=>'Damaged' ,2 =>'Medium' , 3 =>'Good' ,4 => 'Semi-new',5=> 'Totally new'];
+        $checkbox = ['withDriver','hdmi','cdRoom', 'wifi', 'usb', 'threeInOne', 'accessories', 'withFreezer', 'electricHead',
+            'withOven', 'covered', 'withFurniture', 'withGarden', 'withVerandah', 'withElevator'];
+        $category = $allSpecifications['category']->getName();
+
+        foreach ($allSpecifications as $key=>$value){
+            switch ($key){
+                case 'ges':
+                    $allSpecifications[$key] = $classEnergieAndGes[$value];
+                    break;
+                case 'classEnergie':
+                    $allSpecifications[$key] = $classEnergieAndGes[$value];
+                    break;
+                case 'experience':
+                    $allSpecifications[$key] = $experience[$value];
+                    break;
+                case 'paperSize':
+                    $allSpecifications[$key] = $paperSize[$value];
+                    break;
+                case 'levelOfStudent':
+                    $allSpecifications[$key] = $levelOfStudent[$value];
+                    break;
+                case 'generalSituation':
+                    $allSpecifications[$key] = $generalSituation[$value];
+                    break;
+            }
+            if(in_array($key,$checkbox)){
+                $allSpecifications[$key] = $boolean[$value];
+            }
+            if($key === 'capacity' && $category === 'Refrigerator'){
+                        $allSpecifications[$key] = $capacityLitre[$value];
+            }
+        }
+        return $allSpecifications;
     }
 }

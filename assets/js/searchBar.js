@@ -79,6 +79,8 @@ $(document).ready(function () {
                 'offer[maxKilometer]':         {plusDe: '#offer_minKilometer'},
                 'offer[minArea]':              {moinDe: '#offer_maxArea'},
                 'offer[maxArea]':              {plusDe: '#offer_minArea'},
+                'offer[numberOfFloors]':       {plusFloor: '#offer_floor'},
+                'offer[floor]':                {moinFloors: '#offer_numberOfFloors'},
                 'offer[price]':                { regex: /^([0-9]{0,8})$/},
                 'offer[model]':                { regex: /^\s*[a-zA-Z0-9,\s]+\s*$/},
                 'offer[brand]':                { regex: /^\s*[a-zA-Z,\s]+\s*$/},
@@ -319,6 +321,37 @@ $.validator.addMethod(
     },"erreur expression reguliere"
 );
 
+$.validator.addMethod( "moinFloors", function( value, element, param ) {
+    var target = $( param );
+    if ( this.settings.onfocusout && target.not( ".validate-lessThanEqual-blur" ).length ) {
+        target.addClass( "validate-lessThanEqual-blur" ).on( "blur.validate-lessThanEqual", function() {
+            $( element ).valid();
+        } );
+    }
+
+    if(target.val()=== ''){
+        return true;
+    }
+    else {
+        return this.optional(element) || parseInt(value) <= parseInt(target.val()) ;
+    }
+}, "The floor must be less than number of floors." );
+
+$.validator.addMethod( "plusFloor", function( value, element, param ) {
+    var target = $( param );
+    if ( this.settings.onfocusout && target.not( ".validate-lessThanEqual-blur" ).length ) {
+        target.addClass( "validate-lessThanEqual-blur" ).on( "blur.validate-lessThanEqual", function() {
+            $( element ).valid();
+        } );
+    }
+    if(target.val() === ''){
+        return true;
+    }
+    else {
+        return this.optional(element) || parseInt(value) >= parseInt(target.val()) ;
+    }
+}, "The number of floors must be more than the floor." );
+
 // activ tab search bar
 $(document).ready(function(){
     $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
@@ -329,3 +362,5 @@ $(document).ready(function(){
         $('#myTab a[href="' + activeTab + '"]').tab('show');
     }
 });
+
+

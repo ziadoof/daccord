@@ -633,28 +633,7 @@ class AdsRepository extends Repository
             $bool->addMust($shold);
 
         }
-        if ($search->getPrice() != null && $search->getPrice() != '' ){
-            // pour afficher all type de traduir en n'amport qelle type
-            $shold = new BoolQuery();
 
-            $match = new Query\Range();
-            $match->addField('price',["gte" => null,"lte" => $search->getPrice()]);
-            $shold->addShould($match);
-
-
-
-            $matchDonat = new Match();
-            $matchDonat->setFieldQuery('donate', true);
-            $shold->addShould($matchDonat) ;
-
-            $matchPrice = new BoolQuery();
-            $existPrice = new Exists('price');
-            $matchPrice->addMustNot($existPrice);
-            $shold->addShould($matchPrice) ;
-
-            $bool->addMust($shold);
-
-        }
 
         $query = Query::create($bool);
         return $this->find($query,3000);
