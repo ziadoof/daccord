@@ -69,7 +69,6 @@ services:
             $entityManager:
             $type:
 
-
     App\Form\EventListener\AddSearchCategoryFieldSubscriber:
         arguments:
             $factory:
