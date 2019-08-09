@@ -14,6 +14,7 @@ use App\Entity\Region;
 use App\Form\EventListener\AddSearchCategoryFieldSubscriber;
 use App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber;
 use App\Form\EventListener\AddSearchSpecificationFieldSubscriber;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,6 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 class OfferSearchType extends  AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 

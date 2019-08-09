@@ -3,30 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
-use App\Form\DemandSearchType;
-use App\Model\AdModel;
-use App\Form\OfferSearchType;
-use App\Entity\City;
-use App\Entity\User;
 use App\Entity\Category;
 use App\Form\OfferType;
 use App\Form\DemandType;
 use App\Form\AdType;
-use App\Form\UserType;
 use App\Repository\AdRepository;
 use App\Service\FileUploader;
-use FOS\ElasticaBundle\FOSElasticaBundle;
-use FOS\ElasticaBundle\Repository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
-use App\Entity\AdsRepository;
 
 
 
@@ -48,33 +35,9 @@ class AdController extends AbstractController
     public function index(Request $request, AdRepository $adRepository): Response
     {
         $user = $this->getUser();
-        $entityManager = $this->getDoctrine()->getManager();
 
-        $offerSearch = new AdModel();
-        $demandSearch = new AdModel();
+        $result = $adRepository->findAll();
 
-        $offerForm = $this->createForm(OfferSearchType::class, $offerSearch,[
-            'entity_manager' => $entityManager,
-        ]);
-        $offerForm->handleRequest($request);
-
-        $demandForm = $this->createForm(DemandSearchType::class, $demandSearch,[
-            'entity_manager' => $entityManager,
-        ]);
-        $demandForm->handleRequest($request);
-
-        if ($offerForm->isSubmitted() && $offerForm->isValid()){
-            $offerSearch = $offerForm->getData();
-            $result = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
-        }
-
-        elseif ($demandForm->isSubmitted() && $demandForm->isValid()){
-            $demandSearch = $demandForm->getData();
-            $result= $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
-        }
-        else{
-            $result = $adRepository->findAll();
-        }
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();
@@ -91,21 +54,14 @@ class AdController extends AbstractController
 
             return $this->render('ad/index.html.twig', [
                 'ad_area'=>$ad_area,
-                'offerForm' => $offerForm->createView(),
-                'demandForm' => $demandForm->createView(),
                 'ads' => $result
 
             ]);
         }
-        else{
 
-            return $this->render('ad/index.html.twig', [
-                'offerForm' => $offerForm->createView(),
-                'demandForm' => $demandForm->createView(),
-                'ads' => $result
-            ]);
-
-        }
+        return $this->render('ad/index.html.twig', [
+            'ads' => $result
+        ]);
     }
 
     /**

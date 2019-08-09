@@ -3,10 +3,6 @@
 {% block title %}Ad index{% endblock %}
 
 {% block content %}
-    {# search#}
-    {% block searchbar_content %}
-        {% include "ad/view/searchbar.html.twig" %}
-    {% endblock searchbar_content %}
     <div class="text-center">
     {% if app.user is same as (null) %}
         {% if ads is empty %}
@@ -29,6 +25,6 @@
             {% block user_ads_content %}
                 {% include "ad/view/ads.html.twig" %}
             {% endblock user_ads_content %}
-        {% endif %}
+        {% endif %}#}
     {% endif %}
 {% endblock %}

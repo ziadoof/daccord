@@ -35,7 +35,7 @@
                       </form>
                   </div>
                   {% else %}
-                  <div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6  col-xs-2 col-xs-offset-6 float-right">
+                  <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-right">
                  <!-- user login dropdown start-->
                       <div class="user-profile">
                          <a data-toggle="dropdown"  href="#">
@@ -70,7 +70,7 @@
                       </div>
 
                       <div class="mt-2">
-                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="searchbar();" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample">Search</a>
+                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample">Search</a>
                           <a class="btn btn-info " href="{{ path('ad_new',{'type': 'Offer'}) }}">Add offre</a>
                           <a class="btn btn-info" href="{{ path('ad_new',{'type': 'Demand'}) }}">Add demend</a>
                       </div>
@@ -81,6 +81,7 @@
         </div>
     </nav>
 </header>
+
     <!-- Modal start-->
     <div class="modal fade bd-example-modal-lg" id="Registration" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" style="z-index: 9999;">

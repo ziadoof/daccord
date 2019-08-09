@@ -65,6 +65,7 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT     => 'preSubmit'
+
         );
     }
 

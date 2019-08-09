@@ -8,6 +8,9 @@
         <section class="container-fluid ">
             <div class="wrapper">
                 <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-4">
+                    {% block searchbar_content %}
+                        {% include "ad/view/searchbar.html.twig" %}
+                    {% endblock searchbar_content %}
                     {% block content %}
                         {% for label, messages in app.flashes %}
                             {% for message in messages %}
@@ -22,6 +25,7 @@
                             {% endfor %}
                         {% endfor %}
                     {% endblock %}
+
                 </div>
             </div>
         </section>
