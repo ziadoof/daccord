@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityRepository;
-use App\Entity\Category;
+use App\Entity\Ads\Category;
 class AddCategoryFieldSubscriber implements EventSubscriberInterface
 
 {

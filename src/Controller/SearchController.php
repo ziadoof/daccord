@@ -2,8 +2,8 @@
 namespace App\Controller;
 
 
-use App\Service\FormOfferType;
-use App\Service\FormDemandType;
+use App\Service\Search\FormOfferType;
+use App\Service\Search\FormDemandType;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,14 +37,14 @@ class SearchController extends AbstractController
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offerSearch = $offerForm->getData();
-            $result = $this->manager->getRepository('App:Ad')->searchOffer($offerSearch);
+            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch);
 
-            return $this->render('ad/results/offer.html.twig', [
+            return $this->render('Ads/ad/results/offer.html.twig', [
                 'ads' => $result
             ]);
         }
 
-        return $this->render('ad/results/offer.html.twig', [
+        return $this->render('Ads/ad/results/offer.html.twig', [
         ]);
     }
 
@@ -62,13 +62,13 @@ class SearchController extends AbstractController
 
         if ($demandForm->isSubmitted() && $demandForm->isValid()) {
             $demandSearch = $demandForm->getData();
-            $result = $this->manager->getRepository('App:Ad')->searchDemand($demandSearch);
-            return $this->render('ad/results/demand.html.twig', [
+            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch);
+            return $this->render('Ads/ad/results/demand.html.twig', [
                 'ads' => $result
             ]);
         }
 
-        return $this->render('ad/results/demand.html.twig', [
+        return $this->render('Ads/ad/results/demand.html.twig', [
         ]);
     }
 }

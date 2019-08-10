@@ -4,8 +4,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        form_offerSearchType: '@App\Service\FormOfferType'
-        form_demandSearchType: '@App\Service\FormDemandType'
+        form_offerSearchType: '@App\Service\Search\FormOfferType'
+        form_demandSearchType: '@App\Service\Search\FormDemandType'
 
 
 

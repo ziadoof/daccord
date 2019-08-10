@@ -363,4 +363,24 @@ $(document).ready(function(){
     }
 });
 
+// active search bar
+$(document).ready(function(){
+
+        $('#search-bar').on('shown.bs.collapse', function () {
+            localStorage.setItem('activeCollapse', 'active');
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        });
+        $('#search-bar').on('hidden.bs.collapse', function () {
+        localStorage.setItem('activeCollapse', 'disactive');
+        });
+
+    var activeCollapse = localStorage.getItem('activeCollapse');
+    if(activeCollapse === 'active'){
+        $('.collapse').addClass('show');
+    }
+    else{
+        $('.collapse').removeClass('show');
+    }
+});
+
 

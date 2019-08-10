@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Ads\Ad;
+use App\Entity\Location\City;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -48,7 +50,7 @@ class User  extends BaseUser
     private $postalCode;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\City", inversedBy="users")
      *
      */
     private $city;
@@ -141,7 +143,7 @@ class User  extends BaseUser
     private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Ads\Ad", mappedBy="user", orphanRemoval=true)
      */
     private $ads;
 
