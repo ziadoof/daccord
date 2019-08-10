@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityRepository;
-use App\Entity\Category;
+use App\Entity\Ads\Category;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
 

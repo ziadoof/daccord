@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                        {{ render(controller('App\\Controller\\RegistrationController::registerAction')) }}
+                        {{ render(controller('App\\Controller\\User\\RegistrationController::registerAction')) }}
                     <div class="modal-footer mt-2">
                         <button  type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 <div class="modal-body ">
-                    {{ render(controller('App\\Controller\\SecurityController::login')) }}
+                    {{ render(controller('App\\Controller\\User\\SecurityController::login')) }}
                 </div>
                 <div class="modal-footer mt-2">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

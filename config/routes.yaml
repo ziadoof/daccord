@@ -1,17 +1,17 @@
 index:
     path: /
-    controller: App\Controller\AdController::index
+    controller: App\Controller\Ads\AdController::index
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 fos_user_registration_register:
     path: /register
-    controller: AppBundle\Controller\RegistrationController::registerAction
+    controller: AppBundle\Controller\User\RegistrationController::registerAction
 
 fos_user_resetting_request:
     path: /resetting/request
-    controller: AppBundle\Controller\ResettingController::requestAction
+    controller: AppBundle\Controller\User\ResettingController::requestAction
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
@@ -19,10 +19,10 @@ fos_user_resetting:
 
 fos_user_profile_edit:
     path: /profile/edit
-    controller: App\Controller\ProfileController::editAction
+    controller: App\Controller\User\ProfileController::editAction
 fos_user_profile_show:
     path: /profile
-    controller: App\Controller\ProfileController::showAction
+    controller: App\Controller\User\ProfileController::showAction
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -258,8 +258,8 @@ fos_elastica:
                 name: ~
           persistence:
             driver: orm
-            model: App\Entity\Ad
+            model: App\Entity\Ads\Ad
             provider: ~
             listener: ~
             finder: ~
-            repository: App\Entity\AdsRepository
+            repository: App\Entity\Search\AdsRepository

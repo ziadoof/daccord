@@ -9,9 +9,9 @@
 namespace App\Model;
 
 use App\Entity\User;
-use App\Entity\City;
-use App\Entity\Department;
-use App\Entity\Region;
+use App\Entity\Location\City;
+use App\Entity\Location\Department;
+use App\Entity\Location\Region;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 class AdModel
@@ -24,7 +24,7 @@ class AdModel
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="ads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ads\Category", inversedBy="ads")
      * @ORM\Column(type="string", nullable=true)
      */
     protected $category;
@@ -53,19 +53,19 @@ class AdModel
     protected $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\City")
      *
      */
     protected $ville;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Department")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\Department")
      *
      */
     protected $department;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Region")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\Region")
      *
      */
     protected $region;
