@@ -29,6 +29,7 @@ require('./ad-images');
 require('bootstrap');
 require('./sidebar');
 require('./category');
+require('./gps_location');
 
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');

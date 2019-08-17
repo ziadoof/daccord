@@ -48,6 +48,67 @@ class AdModel
         $this->generalCategory = $generalCategory;
     }
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $lng;
+
+    protected $distance;
+
+    /**
+     * @return mixed
+     */
+    public function getDistance()
+    {
+        return $this->distance;
+    }
+
+    /**
+     * @param mixed $distance
+     */
+    public function setDistance($distance): void
+    {
+        $this->distance = $distance;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param mixed $lat
+     */
+    public function setLat($lat): void
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * @param mixed $lng
+     */
+    public function setLng($lng): void
+    {
+        $this->lng = $lng;
+    }
+
+
     protected $title;
 
     protected $price;
@@ -69,6 +130,30 @@ class AdModel
      *
      */
     protected $region;
+
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $nearme;
+
+
+    /**
+     * @return mixed
+     */
+    public function getNearme()
+    {
+        return $this->nearme;
+    }
+
+    /**
+     * @param mixed $nearme
+     */
+    public function setNearme($nearme): void
+    {
+        $this->nearme = $nearme;
+    }
+
 
     /**
      * @return mixed
