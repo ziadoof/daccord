@@ -37,7 +37,6 @@ class AdController extends AbstractController
         $user = $this->getUser();
 
         $result = $adRepository->findAll();
-
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();
@@ -51,14 +50,12 @@ class AdController extends AbstractController
 
 
             $ad_area = $adRepository->findByArea($min_x,$max_x,$min_y,$max_y);
-
             return $this->render('Ads/ad/index.html.twig', [
                 'ad_area'=>$ad_area,
                 'ads' => $result
 
             ]);
         }
-
         return $this->render('Ads/ad/index.html.twig', [
             'ads' => $result
         ]);
@@ -105,6 +102,22 @@ class AdController extends AbstractController
                 $ad->setDepartment($department);
                 $ad->setRegion($region);
 
+                $categoryName = $category->getName();
+                if($this->isHaveCity($categoryName)){
+
+                $city = $form->get('city')->getData();
+                    $lat = $city->getGpsLat();
+                    $lng= $city->getGpsLng();
+                    $ad->setGpsLat($lat);
+                    $ad->setGpsLng($lng);
+                }
+                else{
+                    $lat = $ville->getGpsLat();
+                    $lng= $ville->getGpsLng();
+                    $ad->setGpsLat($lat);
+                    $ad->setGpsLng($lng);
+                }
+
 
                 $entityManager->persist($ad);
                 $entityManager->flush();
@@ -148,6 +161,23 @@ class AdController extends AbstractController
                 $ad->setVille($ville);
                 $ad->setDepartment($department);
                 $ad->setRegion($region);
+
+
+                $categoryName = $category->getName();
+                if($this->isHaveCity($categoryName)){
+
+                    $city = $form->get('city')->getData();
+                    $lat = $city->getGpsLat();
+                    $lng= $city->getGpsLng();
+                    $ad->setGpsLat($lat);
+                    $ad->setGpsLng($lng);
+                }
+                else{
+                    $lat = $ville->getGpsLat();
+                    $lng= $ville->getGpsLng();
+                    $ad->setGpsLat($lat);
+                    $ad->setGpsLng($lng);
+                }
 
 
                 $entityManager->persist($ad);
@@ -285,4 +315,41 @@ class AdController extends AbstractController
         }
         return $allSpecifications;
     }
+
+    public function isHaveCity(string $generalCategory=null ){
+
+        $listCity = ['Jobs and services','Residence','Holidays'];
+        if($generalCategory !== null) {
+            return in_array($generalCategory, $listCity);
+        }
+    }
+
+
+    /**
+     * @Route("/sss", name="sss", methods={"GET"})
+     * for add lat and lng to the ads------------------------------------------------------------------
+     */
+  /*  public function geo (AdRepository $adRepository){
+        $ads = $adRepository->findAll();
+        $entityManager = $this->getDoctrine()->getManager();
+        foreach ($ads as $ad ){
+
+            if (($ad->getCity())!= null){
+                $city = $ad->getCity();
+                $lat = $city->getGpsLat();
+                $lng= $city->getGpsLng();
+                $ad->setGpsLat($lat);
+                $ad->setGpsLng($lng);
+            }
+            else{
+                $ville= $ad->getVille();
+                $lat = $ville->getGpsLat();
+                $lng= $ville->getGpsLng();
+                $ad->setGpsLat($lat);
+                $ad->setGpsLng($lng);
+            }
+            $entityManager->flush();
+        }
+        return false;
+    }*/
 }

@@ -9,13 +9,13 @@ $(document).on('change', '#offer_category', function () {
         type: $form.attr('method'),
         data : data,
         success: function(html) {
-            var $dynamicForm = $(html).find('#dynamic_form');
+            var $dynamicForm = $(html).find('#new_form_dynamic');
             $dynamicForm.children(".form-group").each(function (index, item){
                 var $item = $(item)
                 $item.removeClass('has-error');
                 $item.find(".help-block").remove();
             });
-            $('#dynamic_form').replaceWith($dynamicForm);
+            $('#new_form_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('offer');
             $('#offer_languages').select2({
                 placeholder: " Select languages",
@@ -38,13 +38,13 @@ $(document).on('change', '#demand_category', function () {
         type: $form.attr('method'),
         data : data,
         success: function(html) {
-            var $dynamicForm = $(html).find('#dynamic_form');
+            var $dynamicForm = $(html).find('#new_form_dynamic');
             $dynamicForm.children(".form-group").each(function (index, item){
                 var $item = $(item)
                 $item.removeClass('has-error');
                 $item.find(".help-block").remove();
             });
-            $('#dynamic_form').replaceWith($dynamicForm);
+            $('#new_form_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('demand');
             $('#demand_languages').select2({
                 placeholder: " Select languages",
@@ -68,13 +68,13 @@ $(document).on('change', '#demand_search_category', function () {
         type: $form.attr('method'),
         data : data,
         success: function(html) {
-            var $dynamicForm = $(html).find('#demand_dynamic_form');
+            var $dynamicForm = $(html).find('#search_demand_dynamic');
             $dynamicForm.children(".form-group").each(function (index, item){
                 var $item = $(item);
                 $item.removeClass('has-error');
                 $item.find(".help-block").remove();
             });
-            $('#demand_dynamic_form').replaceWith($dynamicForm);
+            $('#search_demand_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('demand_search');
             $('#demand_search_languages').select2({
                 placeholder: " Select languages",
@@ -98,13 +98,13 @@ $(document).on('change', '#offer_search_category', function () {
         type: $form.attr('method'),
         data : data,
         success: function(html) {
-            var $dynamicForm = $(html).find('#dynamic_form');
+            var $dynamicForm = $(html).find('#search_offer_dynamic');
             $dynamicForm.children(".form-group").each(function (index, item){
                 var $item = $(item);
                 $item.removeClass('has-error');
                 $item.find(".help-block").remove();
             });
-            $('#dynamic_form').replaceWith($dynamicForm);
+            $('#search_offer_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('offer_search');
             $('#offer_search_languages').select2({
                 placeholder: " Select languages",

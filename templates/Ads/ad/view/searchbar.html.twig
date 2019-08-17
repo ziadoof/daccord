@@ -35,6 +35,14 @@
                                             <div class="text-center ">
                                                 <div class="row">
                                                     <div class="col-md-2 border-search">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mt-2">
+                                                                {{ form_row(offerForm.nearme,{'attr':{'id':'offer_location'}}) }}
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                {{ form_row(offerForm.distance) }}
+                                                            </div>
+                                                        </div>
                                                         <div class="">
                                                             {{ form_row(offerForm.region) }}
                                                         </div>
@@ -57,11 +65,13 @@
                                                         <div class="row">
                                                             <div class="col-md-12 ">
                                                                 {{ form_row(offerForm.title) }}
+                                                                {{ form_row(offerForm.lat) }}
+                                                                {{ form_row(offerForm.lng) }}
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div id="dynamic_form">
+                                                                <div id="search_offer_dynamic">
                                                                     <div class="">
                                                                         <div class="row">
                                                                             {% if offerForm.manufactureCompany is defined %}
@@ -523,6 +533,14 @@
                                             <div class="text-center ">
                                                 <div class="row">
                                                     <div class="col-md-2 border-search">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mt-2">
+                                                                {{ form_row(demandForm.nearme,{'attr':{'id':'demand_location'}}) }}
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                {{ form_row(demandForm.distance) }}
+                                                            </div>
+                                                        </div>
                                                         <div class="">
                                                             {{ form_row(demandForm.region) }}
                                                         </div>
@@ -545,11 +563,13 @@
                                                         <div class="row">
                                                             <div class="col-md-12 ">
                                                                 {{ form_row(demandForm.title) }}
+                                                                {{ form_row(demandForm.lat) }}
+                                                                {{ form_row(demandForm.lng) }}
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div id="demand_dynamic_form">
+                                                                <div id="search_demand_dynamic">
                                                                     <div class="">
                                                                         <div class="row">
                                                                     {% if demandForm.manufactureCompany is defined %}
@@ -1070,5 +1090,7 @@
                 </div>
             </div>
         </div>
-{% endblock %}
+    <div>
 
+    </div>
+{% endblock %}

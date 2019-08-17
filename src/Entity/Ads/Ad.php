@@ -56,6 +56,50 @@ class Ad
      */
     private $imageThree;
 
+//-------------------------
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $gpsLat;
+    /**
+    * @ORM\Column(type="float", nullable=true)
+    */
+    private $gpsLng;
+
+    /**
+     * @return mixed
+     */
+    public function getGpsLat()
+    {
+        return $this->gpsLat;
+    }
+
+    /**
+     * @param mixed $gpsLat
+     */
+    public function setGpsLat($gpsLat): void
+    {
+        $this->gpsLat = $gpsLat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGpsLng()
+    {
+        return $this->gpsLng;
+    }
+
+    /**
+     * @param mixed $gpsLng
+     */
+    public function setGpsLng($gpsLng): void
+    {
+        $this->gpsLng = $gpsLng;
+    }
+
+//-------------------------
+
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Assert\Type(

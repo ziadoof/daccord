@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 
 
@@ -20,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SearchController extends AbstractController
 {
     private $manager;
+
     public function __construct(RepositoryManagerInterface $manager)
     {
         $this->manager = $manager;
@@ -37,10 +40,11 @@ class SearchController extends AbstractController
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offerSearch = $offerForm->getData();
+
             $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch);
 
             return $this->render('Ads/ad/results/offer.html.twig', [
-                'ads' => $result
+                'ads' => $result,
             ]);
         }
 
@@ -59,7 +63,7 @@ class SearchController extends AbstractController
         $demandForm = $formDemandType->getForm();
 
         $demandForm->handleRequest($request);
-
+        dump($_POST);
         if ($demandForm->isSubmitted() && $demandForm->isValid()) {
             $demandSearch = $demandForm->getData();
             $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch);
@@ -70,5 +74,15 @@ class SearchController extends AbstractController
 
         return $this->render('Ads/ad/results/demand.html.twig', [
         ]);
+    }
+
+    /**
+     * @Route("/ajax_request", name="ajax_request", methods="POST", options={"expose"=true})
+     */
+    public function search(Request $request) {
+        $lat = $request->request->get('lat');
+        $lng =  $request->request->get('lng');
+        $params = [$lat,$lng];
+        return new JsonResponse($params);
     }
 }

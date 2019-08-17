@@ -9,12 +9,17 @@
 namespace App\Entity\Search;
 
 
+use App\Repository\Ads\AdRepository;
 use FOS\ElasticaBundle\Repository;
 use App\Model\AdModel;
 use Elastica\Query\BoolQuery;
 use Elastica\Query;
 use Elastica\Query\Match;
 use Elastica\Query\Exists;
+use phpDocumentor\Reflection\Types\Parent_;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 class AdsRepository extends Repository
@@ -22,6 +27,8 @@ class AdsRepository extends Repository
 
     private $generalCategory;
     // This searchOffer function will build the elasticsearch query to get a list of ad that match our criterias
+
+
     public function searchOffer(AdModel $search)
     {
         $bool = new BoolQuery();
@@ -46,7 +53,36 @@ class AdsRepository extends Repository
             $bool->addMust($nested);
         }
 
+//=================lat and lon==============
 
+        if($search->getNearme()){
+            $lat = $search->getLat();
+            $lng = $search->getLng();
+            $distance = $search->getDistance();
+            if($distance === null){
+                $total = 0.012626*10;
+            }
+            else{
+                $total = 0.012626*$distance;
+            }
+            $minLat= $lat - $total;
+            $maxLat= $lat + $total;
+            $minLng= $lng - $total;
+            $maxLng= $lng + $total;
+            if(($lat != null) && ($lng != null)){
+                dump($lat);
+                dump($lng);
+                $latMatch = new Query\Range();
+                $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
+                $bool->addMust($latMatch);
+
+                $lonMatch = new Query\Range();
+                $lonMatch->addField('gpsLng',["gte" => $minLng,"lte" => $maxLng]);
+                $bool->addMust($lonMatch);
+            }
+        }
+
+//==================end test=============
         if($this->isHaveCity($this->generalCategory)){
             if ($search->getRegion() != null && $search->getRegion() != '') {
                 $nested = new Query\Nested();
@@ -341,6 +377,36 @@ class AdsRepository extends Repository
     {
         $bool = new BoolQuery();
 
+        //=================lat and lon==============
+
+        if($search->getNearme()){
+            $lat = $search->getLat();
+            $lng = $search->getLng();
+            $distance = $search->getDistance();
+            if($distance === null){
+                $total = 0.012626*10;
+            }
+            else{
+                $total = 0.012626*$distance;
+            }
+            $minLat= $lat - $total;
+            $maxLat= $lat + $total;
+            $minLng= $lng - $total;
+            $maxLng= $lng + $total;
+            if(($lat != null) && ($lng != null)){
+                dump($lat);
+                dump($lng);
+                $latMatch = new Query\Range();
+                $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
+                $bool->addMust($latMatch);
+
+                $lonMatch = new Query\Range();
+                $lonMatch->addField('gpsLng',["gte" => $minLng,"lte" => $maxLng]);
+                $bool->addMust($lonMatch);
+            }
+        }
+
+//==================end test=============
         if($this->isHaveCity($this->generalCategory)){
             if ($search->getRegion() != null && $search->getRegion() != '') {
                 $nested = new Query\Nested();
@@ -413,6 +479,8 @@ class AdsRepository extends Repository
                 }
             }
         }
+
+
 
         if ($search->getGeneralCategory() != null && $search->getGeneralCategory() !=''){
             $nested = new Query\Nested();
@@ -648,5 +716,6 @@ class AdsRepository extends Repository
             return in_array($generalCategory, $listCity);
         }
     }
+
 
 }

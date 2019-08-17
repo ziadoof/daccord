@@ -16,6 +16,7 @@ use App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber;
 use App\Form\EventListener\AddSearchSpecificationFieldSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -27,6 +28,34 @@ class DemandSearchType extends  AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('nearme', CheckboxType::class, [
+            'label'    => 'Near me',
+            'required' => false,
+        ])
+            ->add('lat', TextType::class, [
+                'required' => false,
+                'label' => false,
+            ])
+            ->add('lng', TextType::class, [
+                'label' => false,
+                'required' => false,
+            ])
+            ->add('distance', ChoiceType::class, [
+                'label' => false,
+                'required' => false,
+                'placeholder' => '10 Km',
+                'choices'   => array(
+                    '20 Km' => 20,
+                    '30 Km' => 30,
+                    '40 Km' => 40,
+                    '50 Km' => 50,
+                    '75 Km' => 75,
+                    '100 Km' => 100,
+                    '125 Km' => 125,
+                    '150 Km' => 150
+                ),
+            ]);
+
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Location\Region',
