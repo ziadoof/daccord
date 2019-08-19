@@ -21,7 +21,7 @@ require('./specification');
 require('bootstrap-fileinput');
 require('../../node_modules/bootstrap-fileinput/js/locales/fr');
 require('../../node_modules/bootstrap-fileinput/js/locales/ar');
-require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle');
+require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min');
 require('./rdcity');
 
 

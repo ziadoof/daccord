@@ -26,11 +26,14 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+
 class OfferSearchType extends  AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
 
         $builder->add('nearme', CheckboxType::class, [
                     'label'    => 'Near me',
@@ -59,6 +62,13 @@ class OfferSearchType extends  AbstractType
                             '150 Km' => 150
                     ),
                     ]);
+
+        $builder->add('myArea', CheckboxType::class, [
+            'label'    => 'My area',
+            'required' => false,
+        ]);
+
+
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Location\Region',

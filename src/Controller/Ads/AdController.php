@@ -32,7 +32,7 @@ class AdController extends AbstractController
     /**
      * @Route("/", name="ad_index", methods={"GET"})
      */
-    public function index(Request $request, AdRepository $adRepository): Response
+    public function index(Request $request, AdRepository $adRepository ): Response
     {
         $user = $this->getUser();
 

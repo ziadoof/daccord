@@ -9,6 +9,7 @@
 namespace App\Entity\Search;
 
 
+use App\Entity\User;
 use App\Repository\Ads\AdRepository;
 use FOS\ElasticaBundle\Repository;
 use App\Model\AdModel;
@@ -16,6 +17,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query;
 use Elastica\Query\Match;
 use Elastica\Query\Exists;
+use phpDocumentor\Reflection\Types\Integer;
 use phpDocumentor\Reflection\Types\Parent_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +31,7 @@ class AdsRepository extends Repository
     // This searchOffer function will build the elasticsearch query to get a list of ad that match our criterias
 
 
-    public function searchOffer(AdModel $search)
+    public function searchOffer(AdModel $search, User $user=null)
     {
         $bool = new BoolQuery();
 
@@ -52,7 +54,31 @@ class AdsRepository extends Repository
             $nested->setQuery($userBool);
             $bool->addMust($nested);
         }
+//=================my area==============
 
+        if($search->getMyArea()){
+            if($user != null){
+                $distance = $user->getMaxDistance();
+                $lat = $user->getMapY();
+                $lng = $user->getMapX();
+
+                $total = 0.012626*$distance;
+                $minLat= $lat - $total;
+                $maxLat= $lat + $total;
+                $minLng= $lng - $total;
+                $maxLng= $lng + $total;
+
+                $latMatch = new Query\Range();
+                $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
+                $bool->addMust($latMatch);
+
+                $lonMatch = new Query\Range();
+                $lonMatch->addField('gpsLng',["gte" => $minLng,"lte" => $maxLng]);
+                $bool->addMust($lonMatch);
+            }
+        }
+
+//==================end my area=============
 //=================lat and lon==============
 
         if($search->getNearme()){
@@ -373,11 +399,11 @@ class AdsRepository extends Repository
     }
 
     // This searchDemand function will build the elasticsearch query to get a list of ad that match our criterias
-    public function searchDemand(AdModel $search)
+    public function searchDemand(AdModel $search, User $user=null)
     {
         $bool = new BoolQuery();
 
-        //=================lat and lon==============
+        //=================lat and lng==============
 
         if($search->getNearme()){
             $lat = $search->getLat();
@@ -406,7 +432,33 @@ class AdsRepository extends Repository
             }
         }
 
-//==================end test=============
+//==================end near me=============
+
+        //=================my area==============
+
+        if($search->getMyArea()){
+            if($user != null){
+                $distance = $user->getMaxDistance();
+                $lat = $user->getMapY();
+                $lng = $user->getMapX();
+
+                $total = 0.012626*$distance;
+                $minLat= $lat - $total;
+                $maxLat= $lat + $total;
+                $minLng= $lng - $total;
+                $maxLng= $lng + $total;
+
+                $latMatch = new Query\Range();
+                $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
+                $bool->addMust($latMatch);
+
+                $lonMatch = new Query\Range();
+                $lonMatch->addField('gpsLng',["gte" => $minLng,"lte" => $maxLng]);
+                $bool->addMust($lonMatch);
+            }
+        }
+
+//==================end my area=============
         if($this->isHaveCity($this->generalCategory)){
             if ($search->getRegion() != null && $search->getRegion() != '') {
                 $nested = new Query\Nested();

@@ -59,6 +59,8 @@
                                 <div class="col-md-4">
                                     {% if ad.city is not null %}
                                     <span class="float-right mt-3">{{ ad.city.name }}</span>
+                                    {% else %}
+                                    <span class="float-right mt-3">{{ ad.ville.name }}</span>
                                     {% endif %}
                                 </div>
                             </div>

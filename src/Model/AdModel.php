@@ -107,7 +107,23 @@ class AdModel
     {
         $this->lng = $lng;
     }
+    protected $myArea;
 
+    /**
+     * @return mixed
+     */
+    public function getMyArea()
+    {
+        return $this->myArea;
+    }
+
+    /**
+     * @param mixed $myArea
+     */
+    public function setMyArea($myArea): void
+    {
+        $this->myArea = $myArea;
+    }
 
     protected $title;
 

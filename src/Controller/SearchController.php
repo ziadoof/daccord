@@ -34,22 +34,38 @@ class SearchController extends AbstractController
     public function formOffer(FormOfferType $formOfferType, Request $request)
     {
         $user = $this->getUser();
-
         $offerForm = $formOfferType->getForm();
         $offerForm->handleRequest($request);
+// test
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offerSearch = $offerForm->getData();
+            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch,$user);
+            $message = "saccses";
+        }else{
+            $message = "invalid form data";
+        }
 
-            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch);
+        $response = array(
+            'result' => $result,
+            'message' => $message
+        );
 
+        return new JsonResponse($response);
+
+
+//test
+
+        /*if ($offerForm->isSubmitted() && $offerForm->isValid()) {
+            $offerSearch = $offerForm->getData();
+            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch,$user);
             return $this->render('Ads/ad/results/offer.html.twig', [
                 'ads' => $result,
             ]);
-        }
+        }*/
 
-        return $this->render('Ads/ad/results/offer.html.twig', [
-        ]);
+       /* return $this->render('Ads/ad/results/offer.html.twig', [
+        ]);*/
     }
 
 
@@ -61,12 +77,11 @@ class SearchController extends AbstractController
     {
         $user = $this->getUser();
         $demandForm = $formDemandType->getForm();
-
         $demandForm->handleRequest($request);
-        dump($_POST);
+
         if ($demandForm->isSubmitted() && $demandForm->isValid()) {
             $demandSearch = $demandForm->getData();
-            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch);
+            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch, $user);
             return $this->render('Ads/ad/results/demand.html.twig', [
                 'ads' => $result
             ]);

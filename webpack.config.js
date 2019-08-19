@@ -26,19 +26,17 @@ Encore
 
     });
 
-    let config = Encore.getWebpackConfig();
+let config = Encore.getWebpackConfig();
 
 
-    config.resolve.alias = {
+config.resolve.alias = {
 
-        'router': __dirname + '/assets/js/router.js'
+    'router': __dirname + '/assets/js/router.js'
 
-    };
+};
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-
-
-    module.exports = config;
+// uncomment if you're having problems with a jQuery plugin
+//.autoProvidejQuery()
 
 
+module.exports = config;

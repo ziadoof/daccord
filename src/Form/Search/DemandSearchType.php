@@ -55,7 +55,10 @@ class DemandSearchType extends  AbstractType
                     '150 Km' => 150
                 ),
             ]);
-
+        $builder->add('myArea', CheckboxType::class, [
+            'label'    => 'My area',
+            'required' => false,
+        ]);
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Location\Region',

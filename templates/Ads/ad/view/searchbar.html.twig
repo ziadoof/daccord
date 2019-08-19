@@ -35,9 +35,12 @@
                                             <div class="text-center ">
                                                 <div class="row">
                                                     <div class="col-md-2 border-search">
-                                                        <div class="row">
+                                                        <div class="row nearme">
                                                             <div class="col-md-6 mt-2">
                                                                 {{ form_row(offerForm.nearme,{'attr':{'id':'offer_location'}}) }}
+                                                                <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %} ">
+                                                                {{ form_row(offerForm.myArea) }}
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 {{ form_row(offerForm.distance) }}
@@ -531,11 +534,14 @@
                                         <div class="col-md-12 mt-4">
                                             {{ form_start(demandForm, {'attr': {'id': 'search-demand'}}) }}
                                             <div class="text-center ">
-                                                <div class="row">
+                                                <div class="row ">
                                                     <div class="col-md-2 border-search">
-                                                        <div class="row">
+                                                        <div class="row nearme">
                                                             <div class="col-md-6 mt-2">
                                                                 {{ form_row(demandForm.nearme,{'attr':{'id':'demand_location'}}) }}
+                                                                <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %} ">
+                                                                    {{ form_row(demandForm.myArea) }}
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 {{ form_row(demandForm.distance) }}
@@ -1094,3 +1100,39 @@
 
     </div>
 {% endblock %}
+
+{#<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+
+</script>#}
+
+<script>
+/*
+
+$('#search-offer').submit( function(e) {
+    // il est impératif de commencer avec cette méthode qui va empêcher le navigateur d'envoyer le formulaire lui-même
+    e.preventDefault();
+    var url = "{{path('add-offerType')}}";
+    var formSerialize = $(this).serialize();
+
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        url: url,
+        async: true,
+        data:formSerialize,
+    }).done( function(response) {
+       console.log(response['message']);
+
+
+    }).fail(function(jxh,textmsg,errorThrown){
+        alert(textmsg);
+        alert(errorThrown);
+    });
+});
+
+*/
+
+</script>

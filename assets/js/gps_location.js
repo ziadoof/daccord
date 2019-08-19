@@ -9,7 +9,9 @@ $(document).ready(function() {
     $("#offer_search_nearme").click(function() {
 
         if ($('#offer_search_nearme').is(":checked")) {
-
+            if ($('#offer_search_myArea').is(":checked")) {
+                $("#offer_search_myArea").prop("checked", false);
+            }
             $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
             $("#offer_search_distance").attr("disabled", false);
             localStorage.setItem('offer_nearme', 'active');
@@ -29,6 +31,9 @@ $(document).ready(function() {
         if ($('#offer_search_nearme').is(":checked")) {
             $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
             $("#offer_search_distance").attr("disabled", false);
+            if ($('#offer_search_myArea').is(":checked")) {
+                $("#offer_search_myArea").prop("checked", false);
+            }
         }
         else{
             $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
@@ -74,6 +79,9 @@ $(document).ready(function() {
 
         if ($('#demand_search_nearme').is(":checked")) {
 
+            if ($('#demand_search_myArea').is(":checked")) {
+                $("#demand_search_myArea").prop("checked", false);
+            }
             $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", true);
             $("#demand_search_distance").attr("disabled", false);
             localStorage.setItem('demand_nearme', 'active');
@@ -93,6 +101,9 @@ $(document).ready(function() {
         if ($('#demand_search_nearme').is(":checked")) {
             $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", true);
             $("#demand_search_distance").attr("disabled", false);
+            if ($('#demand_search_myArea').is(":checked")) {
+                $("#demand_search_myArea").prop("checked", false);
+            }
         }
         else{
             $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", false);
@@ -122,3 +133,87 @@ function demand_showLocation(position){
         alert(errorThrown);
     });
 }
+
+
+
+// search offer my area
+$(document).ready(function() {
+    var my_area = localStorage.getItem('offer_my_area');
+
+    $("#offer_search_myArea").click(function() {
+
+        if ($('#offer_search_myArea').is(":checked")) {
+
+            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
+            $("#offer_search_distance").attr("disabled", true);
+            localStorage.setItem('offer_my_area', 'active');
+
+            if ($('#offer_search_nearme').is(":checked")) {
+                $("#offer_search_nearme").prop("checked", false);
+            }
+
+        } else {
+            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
+            $("#offer_search_distance").attr("disabled", true);
+            localStorage.setItem('offer_my_area', 'active');
+        }
+    });
+    if (my_area === 'active') {
+        if ($('#offer_search_myArea').is(":checked")) {
+
+            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
+            $("#offer_search_distance").attr("disabled", true);
+
+            if ($('#offer_search_nearme').is(":checked")) {
+                $("#offer_search_nearme").prop("checked", false);
+            }
+
+        }
+        else{
+            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
+            $("#offer_search_distance").attr("disabled", true);
+            localStorage.setItem('offer_my_area', 'desactive');
+        }
+    }
+});
+
+// search demand my area
+$(document).ready(function() {
+    var my_area = localStorage.getItem('demand_my_area');
+
+    $("#demand_search_myArea").click(function() {
+
+        if ($('#demand_search_myArea').is(":checked")) {
+
+            $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", true);
+            $("#demand_search_distance").attr("disabled", true);
+            localStorage.setItem('demand_my_area', 'active');
+
+            if ($('#demand_search_nearme').is(":checked")) {
+                $("#demand_search_nearme").prop("checked", false);
+            }
+
+        } else {
+            $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", false);
+            $("#demand_search_distance").attr("disabled", true);
+            localStorage.setItem('demand_my_area', 'active');
+        }
+    });
+    if (my_area === 'active') {
+        if ($('#demand_search_myArea').is(":checked")) {
+
+            $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", true);
+            $("#demand_search_distance").attr("disabled", true);
+
+            if ($('#demand_search_nearme').is(":checked")) {
+                $("#demand_search_nearme").prop("checked", false);
+            }
+
+        }
+        else{
+            $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", false);
+            $("#demand_search_distance").attr("disabled", true);
+            localStorage.setItem('demand_my_area', 'desactive');
+        }
+    }
+});

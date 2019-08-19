@@ -24,7 +24,6 @@ class FormOfferType
         $this->formFactory = $formFactory;
 
         $offerSearch = new AdModel();
-
         $this->form = $this->formFactory->create(OfferSearchType::class, $offerSearch,
             array(
                 'attr' =>
