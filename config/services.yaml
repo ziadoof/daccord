@@ -21,15 +21,6 @@ services:
         class: App\Service\AfterLoginRedirection
         arguments: ['@router']
 
-    get_set_method_normalizer:
-        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
-        public: false
-        tags: [serializer.normalizer]
-
-    serializer.normalizer.datetime:
-        class: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
-        arguments: ['Y-m-d H:i:s']
-
     app.form.registration:
         class: App\Form\User\RegistrationType
         tags:
