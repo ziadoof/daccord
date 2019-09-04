@@ -4,28 +4,36 @@
     {% if app.user != null%}
         {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
     {% endif %}
+    <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-4">
+    {% block searchbar_content %}
+            {% include "Ads/ad/view/searchbar.html.twig" %}
+        {% endblock searchbar_content %}
+    </div>
     <section id="main-content">
         <section class="container-fluid ">
             <div class="wrapper">
-                <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-4">
-                    {% block searchbar_content %}
-                        {% include "Ads/ad/view/searchbar.html.twig" %}
-                    {% endblock searchbar_content %}
-                    {% block content %}
-                        {% for label, messages in app.flashes %}
-                            {% for message in messages %}
-                                {% if label != 'comment' %}
-                                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
-                                        {{ message }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                {% endif %}
+                <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-2">
+                    <div id="all">
+                        {% block content %}
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    {% if label != 'comment' %}
+                                        <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
+                                            {{ message }}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
-                    {% endblock %}
+                        {% endblock %}
+                    </div>
+                    <div id="searching">
+                            {% block content_search %}
 
+                            {% endblock %}
+                    </div>
                 </div>
             </div>
         </section>

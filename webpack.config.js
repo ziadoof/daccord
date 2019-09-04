@@ -13,11 +13,13 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-
+    .enableReactPreset()
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableSassLoader()
+
+
     .autoProvideVariables({
         "Routing": "router"
     })
@@ -25,6 +27,7 @@ Encore
         test: /jsrouting-bundle\/Resources\/public\/js\/router.js$/,
 
     });
+
 
 let config = Encore.getWebpackConfig();
 

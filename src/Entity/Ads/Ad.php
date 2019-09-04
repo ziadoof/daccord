@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Elastica\Processor\Date;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -2633,4 +2634,75 @@ class Ad
        }
         return $all;
     }
+
+    public function serialize():array
+    {
+        if($this->getCity() !== null){
+            $city = $this->getCity()->getName();
+        }
+        else{
+            $city = null;
+        }
+        $url = 'assets/images/annonce/';
+        return [
+            'id'=> $this->id,
+            'generalCategory'=> $this->getGeneralCategory()->getName(),
+            'category'=> $this->getCategory()->getName(),
+            'imageOne'=> $this->imageOne ?$url.$this->imageOne:null,
+            'imageTow'=> $this->imageTow ?$url.$this->imageTow:null,
+            'imageThree'=> $this->imageThree ?$url.$this->imageThree:null,
+            'price'=> $this->price,
+            'pPrice'=> $this->pPrice,
+            'city'=> $city,
+            'ville'=> $this->getVille()->getName(),
+            'dateOfAd'=> $this->date_format($this->getDateOfAd()),
+            'typeOfAd'=> $this->getTypeOfAd()
+        ];
+    }
+
+    public function date_format(\DateTime $date): string
+    {
+        $now  = new \DateTime('now');
+        $interval = date_diff($date, $now)->days;
+        $dateString = $date->format('d-m-Y');
+        switch (true) {
+            case $interval === 0:
+                return 'Today';
+                break;
+            case $interval === 1:
+                return 'Yesterday';
+                break;
+            case ($interval >1 && $interval< 7):
+                return $interval.'Days ago';
+                break;
+            case $interval === 7:
+                return '1 Week ago';
+                break;
+            case ($interval >7 && $interval< 15):
+                return 'Last week';
+                break;
+            case ($interval >15 && $interval< 21):
+                return 'About َ3 Week ago';
+                break;
+            case ($interval >21 && $interval< 30):
+                return 'About 4 Week ago';
+                break;
+            case ($interval > 30 && $interval< 60):
+                return 'Last month';
+                break;
+            case ( $interval> 60):
+                return $dateString;
+                break;
+            case 15:
+                return '2 Week ago';
+                break;
+            case 21:
+                return '3 Week ago';
+                break;
+            case 30:
+                return '1 Month ago';
+                break;
+        }
+    }
+
 }

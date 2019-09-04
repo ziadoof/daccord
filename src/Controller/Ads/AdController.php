@@ -195,7 +195,7 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ad_show", methods={"GET"})
+     * @Route("/{id}", name="ad_show", methods={"GET"}, options={"expose"=true})
      */
     public function show(Ad $ad): Response
     {

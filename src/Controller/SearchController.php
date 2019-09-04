@@ -2,14 +2,32 @@
 namespace App\Controller;
 
 
+use App\Controller\Location\RegionController;
+use App\Entity\Ads\Ad;
+use App\Entity\Ads\Category;
+use App\Entity\Location\City;
+use App\Entity\Location\Department;
+use App\Entity\Location\Region;
+use App\Entity\User;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
+use Doctrine\Common\Annotations\AnnotationReader;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
+use App\Service\SerializerManager;
+
 
 
 
@@ -28,7 +46,7 @@ class SearchController extends AbstractController
         $this->manager = $manager;
     }
     /**
-     * @Route("/offers", name="add-offerType",methods={"POST"})
+     * @Route("/offers", name="add-offerType",methods={"POST"}, options={"expose"=true})
      *
      */
     public function formOffer(FormOfferType $formOfferType, Request $request)
@@ -36,23 +54,28 @@ class SearchController extends AbstractController
         $user = $this->getUser();
         $offerForm = $formOfferType->getForm();
         $offerForm->handleRequest($request);
+
+
 // test
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offerSearch = $offerForm->getData();
             $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch,$user);
-            $message = "saccses";
-        }else{
-            $message = "invalid form data";
+            $serializedResult= [];
+
+            foreach ($result as $ad){
+                $serializedResult []= $ad->serialize();
+            }
         }
 
         $response = array(
-            'result' => $result,
-            'message' => $message
+            'result' => $serializedResult,
         );
 
         return new JsonResponse($response);
-
+       /* return $this->render('Ads/ad/results/offer.html.twig', [
+            'ads' => array($nan),
+        ]);*/
 
 //test
 

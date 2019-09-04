@@ -30,6 +30,10 @@ require('bootstrap');
 require('./sidebar');
 require('./category');
 require('./gps_location');
+require('./result_search');
+
+//-----------React.js
+//require('./React/startup/result_offer_search');
 
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
@@ -38,6 +42,7 @@ require('./gps_location');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
 
 
 
