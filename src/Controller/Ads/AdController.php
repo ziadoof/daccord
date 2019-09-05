@@ -323,33 +323,4 @@ class AdController extends AbstractController
             return in_array($generalCategory, $listCity);
         }
     }
-
-
-    /**
-     * @Route("/sss", name="sss", methods={"GET"})
-     * for add lat and lng to the ads------------------------------------------------------------------
-     */
-  /*  public function geo (AdRepository $adRepository){
-        $ads = $adRepository->findAll();
-        $entityManager = $this->getDoctrine()->getManager();
-        foreach ($ads as $ad ){
-
-            if (($ad->getCity())!= null){
-                $city = $ad->getCity();
-                $lat = $city->getGpsLat();
-                $lng= $city->getGpsLng();
-                $ad->setGpsLat($lat);
-                $ad->setGpsLng($lng);
-            }
-            else{
-                $ville= $ad->getVille();
-                $lat = $ville->getGpsLat();
-                $lng= $ville->getGpsLng();
-                $ad->setGpsLat($lat);
-                $ad->setGpsLng($lng);
-            }
-            $entityManager->flush();
-        }
-        return false;
-    }*/
 }

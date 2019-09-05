@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 $('#search-offer').submit( function(e) {
     e.preventDefault();
 
@@ -13,16 +14,35 @@ $('#search-offer').submit( function(e) {
         async: true,
         data:formSerialize,
     }).done( function(response) {
-
         $('#all').hide();
-        console.log(response['result']);
+        ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
+    }).fail(function(jxh,textmsg,errorThrown){
+/*
+         alert('Please fill in the mandatory cells in the search table!');
+*/
+    });
+});
 
+$('#search-demand').submit( function(e) {
+    e.preventDefault();
+
+    var url = Routing.generate('add-DemandType');
+    var formSerialize = $(this).serialize();
+
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        url: url,
+        async: true,
+        data:formSerialize,
+    }).done( function(response) {
+        $('#all').hide();
         ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
 
-
     }).fail(function(jxh,textmsg,errorThrown){
-        /* alert(textmsg);
-         alert(errorThrown);*/
+        /*
+                 alert('Please fill in the mandatory cells in the search table!');
+        */
     });
 });
 

@@ -11,22 +11,14 @@ use App\Entity\Location\Region;
 use App\Entity\User;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
-use Doctrine\Common\Annotations\AnnotationReader;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
-use App\Service\SerializerManager;
+
+
 
 
 
@@ -54,46 +46,39 @@ class SearchController extends AbstractController
         $user = $this->getUser();
         $offerForm = $formOfferType->getForm();
         $offerForm->handleRequest($request);
-
-
-// test
+        $serializedResult = [];
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offerSearch = $offerForm->getData();
-            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch,$user);
-            $serializedResult= [];
+            $generalCategory = $offerSearch->getGeneralCategory();
+            $region = $offerSearch->getRegion();
+            $nearme = $offerSearch->getNearme();
+            $myArea = $offerSearch->getMyArea();
+            if($generalCategory !== null){
+                if($region !==  null || $nearme  || $myArea ){
+                    $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch, $user);
 
-            foreach ($result as $ad){
-                $serializedResult []= $ad->serialize();
+                    foreach ($result as $ad) {
+                        $serializedResult [] = $ad->serialize();
+                    }
+                    $response = array(
+                        'result' => $serializedResult,
+                        'message' => 'succese',
+                    );
+
+                    return new JsonResponse($response);
+                }
+                    return $this->render('Ads/ad/results/offer.html.twig');
             }
+            return $this->render('Ads/ad/results/offer.html.twig');
         }
-
-        $response = array(
-            'result' => $serializedResult,
-        );
-
-        return new JsonResponse($response);
-       /* return $this->render('Ads/ad/results/offer.html.twig', [
-            'ads' => array($nan),
-        ]);*/
-
-//test
-
-        /*if ($offerForm->isSubmitted() && $offerForm->isValid()) {
-            $offerSearch = $offerForm->getData();
-            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch,$user);
-            return $this->render('Ads/ad/results/offer.html.twig', [
-                'ads' => $result,
-            ]);
-        }*/
-
-       /* return $this->render('Ads/ad/results/offer.html.twig', [
-        ]);*/
+        return $this->render('Ads/ad/results/offer.html.twig', [
+        ]);
     }
 
 
     /**
-     * @Route("/demands", name="add-DemandType",methods={"POST"})
+     * @Route("/demands", name="add-DemandType",methods={"POST"}, options={"expose"=true})
      *
      */
     public function formDemand(FormDemandType $formDemandType, Request $request)
@@ -101,15 +86,32 @@ class SearchController extends AbstractController
         $user = $this->getUser();
         $demandForm = $formDemandType->getForm();
         $demandForm->handleRequest($request);
+        $serializedResult = [];
 
         if ($demandForm->isSubmitted() && $demandForm->isValid()) {
             $demandSearch = $demandForm->getData();
-            $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch, $user);
-            return $this->render('Ads/ad/results/demand.html.twig', [
-                'ads' => $result
-            ]);
-        }
+            $generalCategory = $demandSearch->getGeneralCategory();
+            $region = $demandSearch->getRegion();
+            $nearme = $demandSearch->getNearme();
+            $myArea = $demandSearch->getMyArea();
+            if($generalCategory !== null){
+                if($region !==  null || $nearme  || $myArea ){
+                    $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch, $user);
 
+                    foreach ($result as $ad) {
+                        $serializedResult [] = $ad->serialize();
+                    }
+                    $response = array(
+                        'result' => $serializedResult,
+                        'message' => 'succese',
+                    );
+
+                    return new JsonResponse($response);
+                }
+                return $this->render('Ads/ad/results/demand.html.twig');
+            }
+            return $this->render('Ads/ad/results/demand.html.twig');
+        }
         return $this->render('Ads/ad/results/demand.html.twig', [
         ]);
     }
