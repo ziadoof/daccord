@@ -382,27 +382,13 @@ $(document).ready(function(){
         $('.collapse').removeClass('show');
     }
 });
-// near me active
-/*$(document).ready(function() {
-    var nearme = localStorage.getItem('nearme');
-    $("#offer_search_nearme").click(function() {
-        if ($('#offer_search_nearme').is(":checked")) {
-            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
-            localStorage.setItem('nearme', 'active');
-        } else {
-            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
-            localStorage.setItem('nearme', 'desactive');
-        }
-    });
-    if (nearme === 'active') {
-        if ($('#offer_search_nearme').is(":checked")) {
-            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
-        }
-        else{
-            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
-            localStorage.setItem('nearme', 'desactive');
-        }
+// hide the search bar win path out of the welcome page
+$(document).ready(function(){
+    var chemin = window.location.pathname;
+    if (chemin !== '/'){
+        localStorage.setItem('activeCollapse', 'disactive');
+        $('.collapse').removeClass('show');
     }
-});*/
+});
 
 

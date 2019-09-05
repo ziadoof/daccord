@@ -81,11 +81,11 @@ class Ads_result extends React.Component {
                             offerImage = imageThree
                         }
                         else{
-                            offerImage = "assets/images/icons/sansphoto.jpeg";
+                            offerImage = "/assets/images/icons/sansphoto.jpeg";
                         }
                     }
                 }
-                var demandImage = "assets/images/icons/search.jpg";
+                var demandImage = "/assets/images/icons/search.jpg";
                 var image;
                 if(typeOfAd === 'Offer'){
                     image = offerImage;
