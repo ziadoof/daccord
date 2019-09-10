@@ -18,6 +18,8 @@ Encore
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableSassLoader()
+    .enableLessLoader()
+
 
 
     .autoProvideVariables({
@@ -26,6 +28,10 @@ Encore
     .addLoader({
         test: /jsrouting-bundle\/Resources\/public\/js\/router.js$/,
 
+    })
+
+    .configureBabel(function(babelConfig) {
+        babelConfig.plugins.push('transform-class-properties');
     });
 
 

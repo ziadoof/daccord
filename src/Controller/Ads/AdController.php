@@ -9,6 +9,7 @@ use App\Form\Ads\DemandType;
 use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
 use App\Service\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,11 +33,19 @@ class AdController extends AbstractController
     /**
      * @Route("/", name="ad_index", methods={"GET"})
      */
-    public function index(Request $request, AdRepository $adRepository ): Response
+    public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
 
         $result = $adRepository->findAll();
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $result,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();
@@ -50,14 +59,22 @@ class AdController extends AbstractController
 
 
             $ad_area = $adRepository->findByArea($min_x,$max_x,$min_y,$max_y);
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $ad_area,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
             return $this->render('Ads/ad/index.html.twig', [
-                'ad_area'=>$ad_area,
-                'ads' => $result
+                'ad_area'=>$results,
+                'ads' => $results
 
             ]);
         }
         return $this->render('Ads/ad/index.html.twig', [
-            'ads' => $result
+            'ads' => $results
         ]);
     }
 
@@ -257,7 +274,7 @@ class AdController extends AbstractController
      * @Route("/my/{type}", name="my_ads", methods={"GET"})
      *
      */
-    public function myads(string $type): Response
+    public function myads(string $type,  PaginatorInterface $paginator, Request $request): Response
     {
         $user = $this->getUser();
         $ads=$user->getAds();
@@ -268,8 +285,18 @@ class AdController extends AbstractController
              $my_ads []= $ad;
           }
         }
+
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $my_ads,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+
         return $this->render('Ads/ad/myAds.html.twig', [
-            'my_ads' => $my_ads,
+            'my_ads' => $results,
         ]);
     }
 
