@@ -47,6 +47,40 @@ $('#search-demand').submit( function(e) {
     });
 });
 
+$(document).on('click', '#my_offer', function () {
+    let url = Routing.generate('my_ads', {'type': 'Offer'});
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        url: url,
+        async: true,
+    }).done( function(response) {
+        $('#all').hide();
+                ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
+    }).fail(function(jxh,textmsg,errorThrown){
+        /*
+                 alert('Please fill in the mandatory cells in the search table!');
+        */
+    });
+
+});
+$(document).on('click', '#my_demand', function () {
+    let url = Routing.generate('my_ads', {'type': 'Demand'});
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        url: url,
+        async: true,
+    }).done( function(response) {
+        $('#all').hide();
+        ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
+    }).fail(function(jxh,textmsg,errorThrown){
+        /*
+                 alert('Please fill in the mandatory cells in the search table!');
+        */
+    });
+
+});
 
 class Ads_result extends React.Component {
     constructor(props) {

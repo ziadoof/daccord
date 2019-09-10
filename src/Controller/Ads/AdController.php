@@ -11,6 +11,7 @@ use App\Repository\Ads\AdRepository;
 use App\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -271,7 +272,7 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/my/{type}", name="my_ads", methods={"GET"})
+     * @Route("/my/{type}", name="my_ads",methods={"POST"}, options={"expose"=true})
      *
      */
     public function myads(string $type,  PaginatorInterface $paginator, Request $request): Response
@@ -282,22 +283,14 @@ class AdController extends AbstractController
         foreach ($ads as $ad){
         $typeOfAd = $ad->getTypeOfAd();
           if($typeOfAd === $type){
-             $my_ads []= $ad;
+              $serializedResult []= $ad->serialize();
           }
         }
-
-        $results = $paginator->paginate(
-        // Doctrine Query, not results
-            $my_ads,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            20
+        $response = array(
+            'result' => $serializedResult,
+            'message' => 'succese',
         );
-
-        return $this->render('Ads/ad/myAds.html.twig', [
-            'my_ads' => $results,
-        ]);
+        return new JsonResponse($response);
     }
 
     public function fixSpecifications ($allSpecifications){
