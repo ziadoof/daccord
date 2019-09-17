@@ -74,8 +74,10 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="navigation">
-                {{ knp_pagination_render(my_ads) }}
+            <div class="pagination-search row justify-content-center mt-4">
+                <div class="navigation">
+                    {{ knp_pagination_render(my_ads) }}
+                </div>
             </div>
         {% else %}
             <h1 class="text-center title-blue">You have not ads</h1>

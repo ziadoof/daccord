@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="col-md-12 pt-2">
                                     <div class=" ">
-                                        <b class="title-blue float-left">{#{{ ad.typeOfAd }}#}{{ ad.category.parent }}{{ '/' }}{{ ad.category }}</b>
+                                        <b class="title-blue float-left">{{ ad.category }}</b>
                                         {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
                                             <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
                                         {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
@@ -74,5 +74,9 @@
         {% endfor %}
         {% endif %}
     </div>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(ads) }}
+        </div>
+    </div>
 {% endblock %}
-

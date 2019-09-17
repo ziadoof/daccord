@@ -2643,7 +2643,7 @@ class Ad
         else{
             $city = null;
         }
-        $url = 'assets/images/annonce/';
+        $url = '../../assets/images/annonce/';
         return [
             'id'=> $this->id,
             'generalCategory'=> $this->getGeneralCategory()->getName(),

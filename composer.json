@@ -14,6 +14,7 @@
         "pugx/autocompleter-bundle": "^1.4",
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
         "symfony/dependency-injection": "4.2.*",

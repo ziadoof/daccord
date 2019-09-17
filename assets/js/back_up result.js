@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Switch, Router, Route, BrowserRouter } from 'react-router-dom';
-import { createBrowserHistory } from 'history'
 
-const history = createBrowserHistory();
+
 $('#search-offer').submit( function(e) {
     e.preventDefault();
     var url = Routing.generate('add-offerType');
@@ -17,12 +15,15 @@ $('#search-offer').submit( function(e) {
         data:formSerialize,
     }).done( function(response) {
         $('#all').hide();
-        history.push(`/${'search/offers'}`);
-        ReactDOM.render(<Ads_result result={response['result']}/>, document.getElementById('searching'));
+
+        ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
+
+
+
     }).fail(function(jxh,textmsg,errorThrown){
-/*
-         alert('Please fill in the mandatory cells in the search table!');
-*/
+        /*
+                 alert('Please fill in the mandatory cells in the search table!');
+        */
     });
 });
 
@@ -40,8 +41,6 @@ $('#search-demand').submit( function(e) {
         data:formSerialize,
     }).done( function(response) {
         $('#all').hide();
-        history.push(`/${'search/demands'}`);
-
         ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
 
     }).fail(function(jxh,textmsg,errorThrown){
@@ -52,21 +51,16 @@ $('#search-demand').submit( function(e) {
 });
 
 $(document).on('click', '#my_offer', function () {
-    let url = Routing.generate('my_offers');
+    let url = Routing.generate('my_ads', {'type': 'Offer'});
     $.ajax({
         method: "post",
         dataType: "json",
         url: url,
-        data:{'type':'Offer'},
         async: true,
     }).done( function(response) {
         $('#all').hide();
-        history.push(`/${'my_ads/offers'}`);
         ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
-
     }).fail(function(jxh,textmsg,errorThrown){
-        console.log('failer');
-
         /*
                  alert('Please fill in the mandatory cells in the search table!');
         */
@@ -74,16 +68,14 @@ $(document).on('click', '#my_offer', function () {
 
 });
 $(document).on('click', '#my_demand', function () {
-    let url = Routing.generate('my_demands');
+    let url = Routing.generate('my_ads', {'type': 'Demand'});
     $.ajax({
         method: "post",
         dataType: "json",
         url: url,
         async: true,
-        data:{'type':'Demand'},
     }).done( function(response) {
         $('#all').hide();
-        history.push(`/${'my_ads/demands'}`);
         ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
     }).fail(function(jxh,textmsg,errorThrown){
         /*
@@ -104,9 +96,11 @@ class Ads_result extends React.Component {
         };
         this.state.totalPage = Math.ceil(props.result.length / this.state.itemPerPage);
         this.handleClick = this.handleClick.bind(this);
+
+
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         let newProps = this.props.result.length;
         let oldProps = prevProps.result.length;
         // reset page if items array has changed
@@ -116,16 +110,19 @@ class Ads_result extends React.Component {
                 currentPage: Number(1)
             });
         }
+
     }
 
     handleClick(event) {
         if(event.target.id < 1 || event.target.id >this.state.totalPage || this.state.totalPage ===1){
             return;
         }
-       this.setState({
+        this.setState({
             currentPage: Number(event.target.id)
         });
     }
+
+
 
     renderResult(items){
 
@@ -154,11 +151,11 @@ class Ads_result extends React.Component {
                     if (imageThree !== null) {
                         offerImage = imageThree
                     } else {
-                        offerImage = "../../assets/images/icons/sansphoto.jpeg";
+                        offerImage = "../assets/images/icons/sansphoto.jpeg";
                     }
                 }
             }
-            let demandImage = "../../assets/images/icons/search.jpg";
+            let demandImage = "../assets/images/icons/search.jpg";
             let image;
             if (typeOfAd === 'Offer') {
                 image = offerImage;
@@ -238,11 +235,11 @@ class Ads_result extends React.Component {
 
             const renderPageNumbers = pageNumbers.map(number => {
                 return (
-                        <li className={this.state.currentPage === number ? 'active page-item' : 'page-item'}key={number}>
-                            <a  id={number} onClick={this.handleClick} className="page-link ">
-                                {number}
-                            </a>
-                        </li>
+                    <li className={this.state.currentPage === number ? 'active page-item' : 'page-item'}key={number}>
+                        <a  id={number} onClick={this.handleClick} className="page-link ">
+                            {number}
+                        </a>
+                    </li>
                 );
             });
 
@@ -281,12 +278,3 @@ class Ads_result extends React.Component {
         }
     }
 }
-
-
-
-
-
-
-
-
-

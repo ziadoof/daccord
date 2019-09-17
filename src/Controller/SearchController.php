@@ -17,13 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-
-
-
-
-
-
+use Symfony\Component\HttpFoundation\Session\Session;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 /**
@@ -38,11 +33,12 @@ class SearchController extends AbstractController
         $this->manager = $manager;
     }
     /**
-     * @Route("/offers", name="add-offerType",methods={"POST"}, options={"expose"=true})
+     * @Route("/offers", name="add-offerType",methods={"POST","GET"}, options={"expose"=true})
      *
      */
-    public function formOffer(FormOfferType $formOfferType, Request $request)
+    public function formOffer(FormOfferType $formOfferType, Request $request, PaginatorInterface $paginator)
     {
+        $session = new Session();
         $user = $this->getUser();
         $offerForm = $formOfferType->getForm();
         $offerForm->handleRequest($request);
@@ -65,6 +61,7 @@ class SearchController extends AbstractController
                         'result' => $serializedResult,
                         'message' => 'succese',
                     );
+                    $session->set('offerResults', $result);
 
                     return new JsonResponse($response);
                 }
@@ -72,17 +69,28 @@ class SearchController extends AbstractController
             }
             return $this->render('Ads/ad/results/offer.html.twig');
         }
+        $result =$session->get('offerResults');
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $result,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('Ads/ad/results/offer.html.twig', [
+            'ads' => $results
         ]);
     }
 
 
     /**
-     * @Route("/demands", name="add-DemandType",methods={"POST"}, options={"expose"=true})
+     * @Route("/demands", name="add-DemandType",methods={"POST","GET"}, options={"expose"=true})
      *
      */
-    public function formDemand(FormDemandType $formDemandType, Request $request)
+    public function formDemand(FormDemandType $formDemandType, Request $request, PaginatorInterface $paginator)
     {
+        $session = new Session();
         $user = $this->getUser();
         $demandForm = $formDemandType->getForm();
         $demandForm->handleRequest($request);
@@ -105,6 +113,7 @@ class SearchController extends AbstractController
                         'result' => $serializedResult,
                         'message' => 'succese',
                     );
+                    $session->set('demandResults', $result);
 
                     return new JsonResponse($response);
                 }
@@ -112,7 +121,17 @@ class SearchController extends AbstractController
             }
             return $this->render('Ads/ad/results/demand.html.twig');
         }
+        $result =$session->get('demandResults');
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $result,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('Ads/ad/results/demand.html.twig', [
+            'ads' => $results
         ]);
     }
 
@@ -125,4 +144,6 @@ class SearchController extends AbstractController
         $params = [$lat,$lng];
         return new JsonResponse($params);
     }
+
+
 }

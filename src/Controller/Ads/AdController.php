@@ -20,7 +20,7 @@ use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 
 
 /**
- * @Route("/ad")
+ * @Route("/")
  */
 class AdController extends AbstractController
 {
@@ -33,6 +33,10 @@ class AdController extends AbstractController
 
     /**
      * @Route("/", name="ad_index", methods={"GET"})
+     * @param Request $request
+     * @param AdRepository $adRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
     public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator): Response
     {
@@ -80,7 +84,11 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/new/{type}", name="ad_new", methods={"GET","POST"})
+     * @Route("ad//new/{type}", name="ad_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @param string $type
+     * @return Response
      */
     public function new(Request $request, FileUploader $fileUploader, string $type): Response
     {
@@ -213,7 +221,9 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ad_show", methods={"GET"}, options={"expose"=true})
+     * @Route("ad/{id}", name="ad_show", methods={"GET"}, options={"expose"=true})
+     * @param Ad $ad
+     * @return Response
      */
     public function show(Ad $ad): Response
     {
@@ -229,7 +239,10 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="ad_edit", methods={"GET","POST"})
+     * @Route("ad/{id}/edit", name="ad_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Ad $ad
+     * @return Response
      */
     public function edit(Request $request, Ad $ad): Response
     {
@@ -258,7 +271,10 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ad_delete", methods={"DELETE"})
+     * @Route("ad/{id}", name="ad_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Ad $ad
+     * @return Response
      */
     public function delete(Request $request, Ad $ad): Response
     {
@@ -271,26 +287,86 @@ class AdController extends AbstractController
         return $this->redirectToRoute('ad_index');
     }
 
+
     /**
-     * @Route("/my/{type}", name="my_ads",methods={"POST"}, options={"expose"=true})
-     *
+     * @Route("/my_ads/offers", name="my_offers",methods={"POST","GET"}, options={"expose"=true})
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
      */
-    public function myads(string $type,  PaginatorInterface $paginator, Request $request): Response
+    public function my_offers(PaginatorInterface $paginator, Request $request): Response
     {
         $user = $this->getUser();
-        $ads=$user->getAds();
+        $ads  = $user->getAds();
+        $data = $request->get('type');
         $my_ads =[];
+
         foreach ($ads as $ad){
-        $typeOfAd = $ad->getTypeOfAd();
-          if($typeOfAd === $type){
-              $serializedResult []= $ad->serialize();
-          }
+            $typeOfAd = $ad->getTypeOfAd();
+            if($typeOfAd === 'Offer'){
+                $serializedResult []= $ad->serialize();
+                $my_ads []= $ad;
+            }
         }
         $response = array(
             'result' => $serializedResult,
             'message' => 'succese',
         );
-        return new JsonResponse($response);
+        if($data === 'Offer'){
+            return new JsonResponse($response);
+        }
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $my_ads,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+        return $this->render('Ads/ad/myAds.html.twig', [
+            'my_ads' => $results,
+        ]);
+
+    }
+
+    /**
+     * @Route("/my_ads/demands", name="my_demands",methods={"POST","GET"}, options={"expose"=true})
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    public function my_demands(PaginatorInterface $paginator, Request $request): Response
+    {
+        $user = $this->getUser();
+        $ads  = $user->getAds();
+        $data = $request->get('type');
+        $my_ads =[];
+
+        foreach ($ads as $ad){
+            $typeOfAd = $ad->getTypeOfAd();
+            if($typeOfAd === 'Demand'){
+                $serializedResult []= $ad->serialize();
+                $my_ads []= $ad;
+            }
+        }
+        $response = array(
+            'result' => $serializedResult,
+            'message' => 'succese',
+        );
+        if($data === 'Demand'){
+            return new JsonResponse($response);
+        }
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $my_ads,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+        return $this->render('Ads/ad/myAds.html.twig', [
+            'my_ads' => $results,
+        ]);
     }
 
     public function fixSpecifications ($allSpecifications){
