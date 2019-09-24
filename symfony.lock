@@ -173,9 +173,6 @@
     "pugx/autocompleter-bundle": {
         "version": "v1.4.2"
     },
-    "ramsey/uuid": {
-        "version": "3.8.0"
-    },
     "react/promise": {
         "version": "v2.7.1"
     },

@@ -1,106 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Router, Route, BrowserRouter } from 'react-router-dom';
-import { createBrowserHistory } from 'history'
 
-const history = createBrowserHistory();
-$('#search-offer').submit( function(e) {
-    e.preventDefault();
-    var url = Routing.generate('add-offerType');
-    var formSerialize = $(this).serialize();
-
-    $.ajax({
-        method: "post",
-        dataType: "json",
-        url: url,
-        async: true,
-        data:formSerialize,
-    }).done( function(response) {
-        $('#all').hide();
-        history.push(`/${'search/offers'}`);
-        ReactDOM.render(<Ads_result result={response['result']}/>, document.getElementById('searching'));
-    }).fail(function(jxh,textmsg,errorThrown){
-/*
-         alert('Please fill in the mandatory cells in the search table!');
-*/
-    });
-});
-
-$('#search-demand').submit( function(e) {
-    e.preventDefault();
-
-    var url = Routing.generate('add-DemandType');
-    var formSerialize = $(this).serialize();
-
-    $.ajax({
-        method: "post",
-        dataType: "json",
-        url: url,
-        async: true,
-        data:formSerialize,
-    }).done( function(response) {
-        $('#all').hide();
-        history.push(`/${'search/demands'}`);
-
-        ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
-
-    }).fail(function(jxh,textmsg,errorThrown){
-        /*
-                 alert('Please fill in the mandatory cells in the search table!');
-        */
-    });
-});
-
-$(document).on('click', '#my_offer', function () {
-    let url = Routing.generate('my_offers');
-    $.ajax({
-        method: "post",
-        dataType: "json",
-        url: url,
-        data:{'type':'Offer'},
-        async: true,
-    }).done( function(response) {
-        $('#all').hide();
-        history.push(`/${'my_ads/offers'}`);
-        ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
-
-    }).fail(function(jxh,textmsg,errorThrown){
-        console.log('failer');
-
-        /*
-                 alert('Please fill in the mandatory cells in the search table!');
-        */
-    });
-
-});
-$(document).on('click', '#my_demand', function () {
-    let url = Routing.generate('my_demands');
-    $.ajax({
-        method: "post",
-        dataType: "json",
-        url: url,
-        async: true,
-        data:{'type':'Demand'},
-    }).done( function(response) {
-        $('#all').hide();
-        history.push(`/${'my_ads/demands'}`);
-        ReactDOM.render(<Ads_result  result={response['result']}/>, document.getElementById('searching'));
-    }).fail(function(jxh,textmsg,errorThrown){
-        /*
-                 alert('Please fill in the mandatory cells in the search table!');
-        */
-    });
-
-});
-
-class Ads_result extends React.Component {
+class ListsAds extends React.Component {
     constructor(props) {
         super();
         this.state = {
             currentPage: 1,
             itemPerPage: 20,
             totalPage :1,
-
         };
         this.state.totalPage = Math.ceil(props.result.length / this.state.itemPerPage);
         this.handleClick = this.handleClick.bind(this);
@@ -280,13 +186,4 @@ class Ads_result extends React.Component {
             );
         }
     }
-}
-
-
-
-
-
-
-
-
-
+}export default ListsAds;

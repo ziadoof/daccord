@@ -1098,24 +1098,3 @@
 
     </div>
 {% endblock %}
-
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-
-<script>
-
-function getPath(){
-    return ;
-}
-    $(window).on('hashchange', setTimeout( function(e){
-        let executed = false;
-        let path = location.pathname;
-        console.log(path ? path:'vide');
-        /*location.hash.replace( /^#/, '' );
-        if (!executed && path === "/" ) {
-            executed = true;
-            location.replace("/");
-        }*/
-    }),2000);
-</script>

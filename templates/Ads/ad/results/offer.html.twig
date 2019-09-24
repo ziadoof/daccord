@@ -1,4 +1,5 @@
 {% extends "layout_user.html.twig" %}
+
 {% block content_search %}
     <div class="row">
         {% if ads is defined %}
@@ -72,11 +73,20 @@
                 </div>
             </div>
         {% endfor %}
+            <div class="pagination-search row justify-content-center mt-4">
+                <div class="navigation">
+                    {{ knp_pagination_render(ads) }}
+                </div>
+            </div>
+        {% else %}
+    </div>
+            <div class=" ">
+                <div class="">
+                    <div class="text-center title-blue">
+                         {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+                        <h1> There is no results</h1>
+                    </div>
+                </div>
+            </div>
         {% endif %}
-    </div>
-    <div class="pagination-search row justify-content-center mt-4">
-        <div class="navigation">
-            {{ knp_pagination_render(ads) }}
-        </div>
-    </div>
 {% endblock %}

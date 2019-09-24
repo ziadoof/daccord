@@ -31,7 +31,7 @@ require('bootstrap');
 require('./sidebar');
 require('./category');
 require('./gps_location');
-require('./result_search');
+require('./React/Startup/Search_myAds');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

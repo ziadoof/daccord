@@ -12,6 +12,7 @@ use App\Entity\User;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,12 +33,21 @@ class SearchController extends AbstractController
     {
         $this->manager = $manager;
     }
+
     /**
-     * @Route("/offers", name="add-offerType",methods={"POST","GET"}, options={"expose"=true})
-     *
+     * @Route("/offers/{id}", name="add-offerType",methods={"POST","GET"}, options={"expose"=true})
+     * @param FormOfferType $formOfferType
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param String $id
+     * @return JsonResponse|Response
+     * @throws \Exception
      */
-    public function formOffer(FormOfferType $formOfferType, Request $request, PaginatorInterface $paginator)
+    public function formOffer(FormOfferType $formOfferType, Request $request, PaginatorInterface $paginator,String $id=null)
     {
+
+        $random = random_int(9999,99999);
+
         $session = new Session();
         $user = $this->getUser();
         $offerForm = $formOfferType->getForm();
@@ -59,9 +69,10 @@ class SearchController extends AbstractController
                     }
                     $response = array(
                         'result' => $serializedResult,
+                        'random' => $random,
                         'message' => 'succese',
                     );
-                    $session->set('offerResults', $result);
+                    $session->set($random, $result);
 
                     return new JsonResponse($response);
                 }
@@ -69,27 +80,41 @@ class SearchController extends AbstractController
             }
             return $this->render('Ads/ad/results/offer.html.twig');
         }
-        $result =$session->get('offerResults');
-        $results = $paginator->paginate(
-        // Doctrine Query, not results
-            $result,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            20
-        );
+        $result =$session->get($id);
+
+        if(isset($result)){
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $result,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
+            return $this->render('Ads/ad/results/offer.html.twig', [
+                'ads' => $results
+            ]);
+        }
         return $this->render('Ads/ad/results/offer.html.twig', [
-            'ads' => $results
+
         ]);
+
+
     }
 
 
     /**
-     * @Route("/demands", name="add-DemandType",methods={"POST","GET"}, options={"expose"=true})
-     *
+     * @Route("/demands/{id}", name="add-DemandType",methods={"POST","GET"}, options={"expose"=true})
+     * @param FormDemandType $formDemandType
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param String $id
+     * @return JsonResponse|Response
+     * @throws \Exception
      */
-    public function formDemand(FormDemandType $formDemandType, Request $request, PaginatorInterface $paginator)
+    public function formDemand(FormDemandType $formDemandType, Request $request, PaginatorInterface $paginator, String $id=null)
     {
+        $random = random_int(9999,99999);
         $session = new Session();
         $user = $this->getUser();
         $demandForm = $formDemandType->getForm();
@@ -111,9 +136,10 @@ class SearchController extends AbstractController
                     }
                     $response = array(
                         'result' => $serializedResult,
+                        'random' => $random,
                         'message' => 'succese',
                     );
-                    $session->set('demandResults', $result);
+                    $session->set($random, $result);
 
                     return new JsonResponse($response);
                 }
@@ -121,17 +147,22 @@ class SearchController extends AbstractController
             }
             return $this->render('Ads/ad/results/demand.html.twig');
         }
-        $result =$session->get('demandResults');
-        $results = $paginator->paginate(
-        // Doctrine Query, not results
-            $result,
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            20
-        );
+        $result =$session->get($id);
+        if(isset($result)){
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $result,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
+            return $this->render('Ads/ad/results/demand.html.twig', [
+                'ads' => $results
+            ]);
+        }
         return $this->render('Ads/ad/results/demand.html.twig', [
-            'ads' => $results
+
         ]);
     }
 
@@ -144,6 +175,5 @@ class SearchController extends AbstractController
         $params = [$lat,$lng];
         return new JsonResponse($params);
     }
-
 
 }
