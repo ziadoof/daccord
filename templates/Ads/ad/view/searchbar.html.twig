@@ -35,9 +35,12 @@
                                             <div class="text-center ">
                                                 <div class="row">
                                                     <div class="col-md-2 border-search">
-                                                        <div class="row">
+                                                        <div class="row nearme">
                                                             <div class="col-md-6 mt-2">
                                                                 {{ form_row(offerForm.nearme,{'attr':{'id':'offer_location'}}) }}
+                                                                <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %} ">
+                                                                {{ form_row(offerForm.myArea) }}
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 {{ form_row(offerForm.distance) }}
@@ -46,9 +49,9 @@
                                                         <div class="">
                                                             {{ form_row(offerForm.region) }}
                                                         </div>
-                                                        <div class="">
-                                                            {{ form_row(offerForm.department) }}
-                                                        </div>
+                                                            <div class="">
+                                                                {{ form_row(offerForm.department) }}
+                                                            </div>
                                                         <div class="">
                                                             {{ form_row(offerForm.ville) }}
                                                         </div>
@@ -531,11 +534,14 @@
                                         <div class="col-md-12 mt-4">
                                             {{ form_start(demandForm, {'attr': {'id': 'search-demand'}}) }}
                                             <div class="text-center ">
-                                                <div class="row">
+                                                <div class="row ">
                                                     <div class="col-md-2 border-search">
-                                                        <div class="row">
+                                                        <div class="row nearme">
                                                             <div class="col-md-6 mt-2">
                                                                 {{ form_row(demandForm.nearme,{'attr':{'id':'demand_location'}}) }}
+                                                                <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %} ">
+                                                                    {{ form_row(demandForm.myArea) }}
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 {{ form_row(demandForm.distance) }}
@@ -1082,8 +1088,6 @@
                                 {{ form_end(demandForm) }}
                                 <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
                                 <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-
-
                             </div>
                         </div>
                     </div>

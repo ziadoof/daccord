@@ -9,7 +9,9 @@ use App\Form\Ads\DemandType;
 use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
 use App\Service\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +20,7 @@ use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 
 
 /**
- * @Route("/ad")
+ * @Route("/")
  */
 class AdController extends AbstractController
 {
@@ -31,12 +33,24 @@ class AdController extends AbstractController
 
     /**
      * @Route("/", name="ad_index", methods={"GET"})
+     * @param Request $request
+     * @param AdRepository $adRepository
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
-    public function index(Request $request, AdRepository $adRepository): Response
+    public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
 
         $result = $adRepository->findAll();
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $result,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();
@@ -50,19 +64,31 @@ class AdController extends AbstractController
 
 
             $ad_area = $adRepository->findByArea($min_x,$max_x,$min_y,$max_y);
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $ad_area,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
             return $this->render('Ads/ad/index.html.twig', [
-                'ad_area'=>$ad_area,
-                'ads' => $result
+                'ad_area'=>$results,
+                'ads' => $results
 
             ]);
         }
         return $this->render('Ads/ad/index.html.twig', [
-            'ads' => $result
+            'ads' => $results
         ]);
     }
 
     /**
-     * @Route("/new/{type}", name="ad_new", methods={"GET","POST"})
+     * @Route("ad//new/{type}", name="ad_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @param string $type
+     * @return Response
      */
     public function new(Request $request, FileUploader $fileUploader, string $type): Response
     {
@@ -195,7 +221,9 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ad_show", methods={"GET"})
+     * @Route("ad/{id}", name="ad_show", methods={"GET"}, options={"expose"=true})
+     * @param Ad $ad
+     * @return Response
      */
     public function show(Ad $ad): Response
     {
@@ -211,7 +239,10 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="ad_edit", methods={"GET","POST"})
+     * @Route("ad/{id}/edit", name="ad_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Ad $ad
+     * @return Response
      */
     public function edit(Request $request, Ad $ad): Response
     {
@@ -240,7 +271,10 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="ad_delete", methods={"DELETE"})
+     * @Route("ad/{id}", name="ad_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Ad $ad
+     * @return Response
      */
     public function delete(Request $request, Ad $ad): Response
     {
@@ -253,23 +287,85 @@ class AdController extends AbstractController
         return $this->redirectToRoute('ad_index');
     }
 
+
     /**
-     * @Route("/my/{type}", name="my_ads", methods={"GET"})
-     *
+     * @Route("/my_ads/offers", name="my_offers",methods={"POST","GET"}, options={"expose"=true})
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
      */
-    public function myads(string $type): Response
+    public function my_offers(PaginatorInterface $paginator, Request $request): Response
     {
         $user = $this->getUser();
-        $ads=$user->getAds();
+        $ads  = $user->getAds();
+        $data = $request->get('type');
         $my_ads =[];
+
         foreach ($ads as $ad){
-        $typeOfAd = $ad->getTypeOfAd();
-          if($typeOfAd === $type){
-             $my_ads []= $ad;
-          }
+            $typeOfAd = $ad->getTypeOfAd();
+            if($typeOfAd === 'Offer'){
+                $serializedResult []= $ad->serialize();
+                $my_ads []= $ad;
+            }
         }
+        $response = array(
+            'result' => $serializedResult,
+            'message' => 'succese',
+        );
+        if($data === 'Offer'){
+            return new JsonResponse($response);
+        }
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $my_ads,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('Ads/ad/myAds.html.twig', [
-            'my_ads' => $my_ads,
+            'my_ads' => $results,
+        ]);
+
+    }
+
+    /**
+     * @Route("/my_ads/demands", name="my_demands",methods={"POST","GET"}, options={"expose"=true})
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    public function my_demands(PaginatorInterface $paginator, Request $request): Response
+    {
+        $user = $this->getUser();
+        $ads  = $user->getAds();
+        $data = $request->get('type');
+        $my_ads =[];
+
+        foreach ($ads as $ad){
+            $typeOfAd = $ad->getTypeOfAd();
+            if($typeOfAd === 'Demand'){
+                $serializedResult []= $ad->serialize();
+                $my_ads []= $ad;
+            }
+        }
+        $response = array(
+            'result' => $serializedResult,
+            'message' => 'succese',
+        );
+        if($data === 'Demand'){
+            return new JsonResponse($response);
+        }
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $my_ads,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
+        return $this->render('Ads/ad/myAds.html.twig', [
+            'my_ads' => $results,
         ]);
     }
 
@@ -323,33 +419,4 @@ class AdController extends AbstractController
             return in_array($generalCategory, $listCity);
         }
     }
-
-
-    /**
-     * @Route("/sss", name="sss", methods={"GET"})
-     * for add lat and lng to the ads------------------------------------------------------------------
-     */
-  /*  public function geo (AdRepository $adRepository){
-        $ads = $adRepository->findAll();
-        $entityManager = $this->getDoctrine()->getManager();
-        foreach ($ads as $ad ){
-
-            if (($ad->getCity())!= null){
-                $city = $ad->getCity();
-                $lat = $city->getGpsLat();
-                $lng= $city->getGpsLng();
-                $ad->setGpsLat($lat);
-                $ad->setGpsLng($lng);
-            }
-            else{
-                $ville= $ad->getVille();
-                $lat = $ville->getGpsLat();
-                $lng= $ville->getGpsLng();
-                $ad->setGpsLat($lat);
-                $ad->setGpsLng($lng);
-            }
-            $entityManager->flush();
-        }
-        return false;
-    }*/
 }

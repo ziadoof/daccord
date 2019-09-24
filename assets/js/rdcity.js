@@ -71,10 +71,12 @@ $(document).on('change', '#demand_search_department', function () {
 
 //ad_ search offer
 $(document).on('change', '#offer_search_region', function () {
-    let $field = $(this)
+    let $field = $(this)// #offer_search_region
     let $regionField = $('#offer_search_region')
-    let $form = $field.closest('form')
+    let $form = $field.closest('form')//form #search-offer
+
     let target = '#' + $field.attr('id').replace('region', 'department')
+
     // Les données à envoyer en Ajax
     let data = {}
     data[$regionField.attr('name')] = $regionField.val()

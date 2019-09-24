@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\Collection;
  * @UniqueEntity(fields="email", message="Email déjà pris")
  * @UniqueEntity(fields="username", message="Username déjà pris")
  */
-class User  extends BaseUser
+class User  extends BaseUser implements UserInterface
 {
     /**
      * @ORM\Id()

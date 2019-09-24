@@ -9,9 +9,9 @@
 @import "fileinput";
 @import "fileinput-rtl";
 @import "offer";
-@import "~bootstrap4-toggle/css/bootstrap4-toggle.css";
+@import "~bootstrap4-toggle/css/bootstrap4-toggle.min.css";
 @import "~bootstrap/scss/bootstrap";
-
+@import "~semantic-ui-css/semantic.min.css";
 
 
 
@@ -102,3 +102,25 @@ body .welcome-text {
   color: orangered;
   font-size: 85%;
 }
+
+/*______ nearme  */
+
+
+.nearme .form-group{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: whitesmoke;
+}
+.nearme{
+  margin-bottom: 1rem;
+}
+#offer_search_distance{
+  margin-top: 0.5rem;
+}
+#demand_search_distance{
+  margin-top: 0.5rem;
+}
+.my-area-hidden{
+  display: none;
+}
+

@@ -21,7 +21,8 @@ require('./specification');
 require('bootstrap-fileinput');
 require('../../node_modules/bootstrap-fileinput/js/locales/fr');
 require('../../node_modules/bootstrap-fileinput/js/locales/ar');
-require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle');
+require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min');
+
 require('./rdcity');
 
 
@@ -30,6 +31,10 @@ require('bootstrap');
 require('./sidebar');
 require('./category');
 require('./gps_location');
+require('./React/Startup/Search_myAds');
+
+//-----------React.js
+//require('./React/startup/result_offer_search');
 
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
@@ -38,6 +43,7 @@ require('./gps_location');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
 
 
 

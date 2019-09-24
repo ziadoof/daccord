@@ -57,7 +57,11 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-md-4">
-                                    <span class="float-right mt-3">{{ ad.user.city.name }}</span>
+                                    {% if ad.city is not null %}
+                                        <span class="float-right mt-3">{{ ad.city.name }}</span>
+                                    {% else %}
+                                        <span class="float-right mt-3">{{ ad.ville.name }}</span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -69,6 +73,11 @@
             </div>
         {% endfor %}
         {% endif %}
+    </div>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(ads) }}
+        </div>
     </div>
 {% endblock %}
 
