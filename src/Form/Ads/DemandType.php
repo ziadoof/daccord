@@ -19,6 +19,7 @@ class DemandType extends AbstractType
         $category = 'category';
         $entityManager = $options['entity_manager'];
         $builder
+            // all the ads category in the data base is from type offer for easy search
             ->addEventSubscriber(new AddGeneralcategoryFieldSubscriber($category, 'Offer'))
             ->addEventSubscriber(new AddCategoryFieldSubscriber($category))
             ->addEventSubscriber(new AddSpecificationFieldSubscriber($category, $entityManager, 'Demand'));

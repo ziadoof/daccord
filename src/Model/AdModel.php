@@ -319,7 +319,6 @@ class AdModel
 
     /////   specification
     
-    protected $withDriver;
 
     protected $mission;
 
@@ -545,21 +544,6 @@ class AdModel
 
 // end search spécifications
 
-    /**
-     * @return mixed
-     */
-    public function getWithDriver()
-    {
-        return $this->withDriver;
-    }
-
-    /**
-     * @param mixed $withDriver
-     */
-    public function setWithDriver($withDriver): void
-    {
-        $this->withDriver = $withDriver;
-    }
 
     /**
      * @return mixed

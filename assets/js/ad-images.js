@@ -12,4 +12,6 @@ $("#demand_imageOne").fileinput({'showUpload':false, 'previewFileType':'any', sh
 $("#demand_imageTow").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
 $("#demand_imageThree").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
 
+$("#driver_carImage").fileinput({'showUpload':false, 'previewFileType':'any', showCaption: false, showCancel: false, browseOnZoneClick: true ,showBrowse: false , showRemove: false});
+
 //---------------------------------------------------------------------------

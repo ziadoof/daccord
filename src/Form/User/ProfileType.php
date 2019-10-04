@@ -3,6 +3,7 @@
 namespace App\Form\User;
 
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -80,17 +81,10 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'label'    => 'Votre email est disponible au public ?',
             ])
-            ->add('car', TextType::class, [
-                'label' => 'voiteur',
-                'attr' => array('rows' => '4', 'cols' => '10'),
-                 'required' => false,
-            ])
-            ->add('color', ColorType::class, [
-                'label' => 'Couleur',
-                'attr' => [
-                    'class' => 'picker-size',
-                ],
-                 'required' => false,
+            ->add('profileImage', FileType::class, [
+                'required' => false,
+                'label'    => 'New image',
+                'data_class' => null,
             ])
             ->add('maxDistance', ChoiceType::class, [
                 'label' => 'Max distance',
@@ -114,10 +108,6 @@ class ProfileType extends AbstractType
                     '140 KM' => 140,
                     '150 KM' => 150,
                 ]
-            ])
-            ->add('carImage', TextType::class, [
-                'label' => 'image de voiteur',
-                'required' => false,
             ]);
     }
 

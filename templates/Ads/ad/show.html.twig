@@ -123,11 +123,9 @@
                             <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
                         </div>
                         <div class="p-2 border-respo mt-2 mb-2 pt-4">
-                            {% if(ad.withDriver is same as (true)) %}
-                                <span class="font-weight-bold ">With Driver</span>
-                            {% else %}
-                                <span class="font-weight-bold ">With out Driver</span>
-                            {% endif %}
+
+                                <span class="font-weight-bold ">With Driver must delete whene front end endded</span>
+
                         </div>
                         <div class="p-2 border-respo mt-2 mb-2 pt-4">
                             {% if(ad.donate is same as (true)) %}
@@ -179,11 +177,7 @@
                         <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
                     </div>
                     <div class="p-2 border-respo mt-2 mb-2 pt-4">
-                        {% if(ad.withDriver) %}
-                            <span class="font-weight-bold ">With Driver</span>
-                        {% else %}
-                            <span class="font-weight-bold ">With out Driver</span>
-                        {% endif %}
+                            <span class="font-weight-bold ">With Driver must delete front end</span>
                     </div>
                     <div class="p-2 border-respo mt-2 mb-2 pt-4">
                         {% if(ad.donate) %}
@@ -239,7 +233,11 @@
                     <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
                     <a data-toggle="dropdown"  href="{{ path('fos_user_profile_show') }}">
                              <span class="profile-ava">
-                                 <img alt="" src="/assets/images/icons/avatar.jpeg" id="avatar-small" class="mt-2 mb-2 mr-3">
+                                 {% if ad.user.profileImage %}
+                                     <img alt="" src="{{ asset('/assets/images/profile/'~ad.user.profileImage) }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                                 {% else %}
+                                     <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                                 {% endif %}
                              </span>
                     </a>
             {% endif %}

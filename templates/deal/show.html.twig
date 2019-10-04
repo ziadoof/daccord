@@ -1,0 +1,140 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}Deal{% endblock %}
+
+{% block content %}
+    <div class="">
+        <div class="deal-show col-md-12 ">
+            <div class="row border-deal pt-2">
+                <div class=" col-md-2 offset-3 ">
+                        {% if deal.offerUser.profileImage  %}
+                            <img src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" class="float-right" >
+                        {% else %}
+                            <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-right">
+                        {% endif %}
+                    <div class=" row col justify-content-center">
+                        <b class="">{{ deal.offerUser.firstname }}</b>
+                    </div>
+                    <div class=" row col justify-content-center">
+                        <b class="">{{ deal.offerUser.city }}</b>
+                    </div>
+                </div>
+                <div class=" col-md-2 text-center  ">
+                    <div class="col">
+                        <i class="fas fa-handshake deal-show-photo mt-0"></i>
+                    </div>
+                    <div class=" row col justify-content-center">
+                        <b class="title-rose">{{ deal.category}}</b>
+                    </div>
+                </div>
+                <div class="col-md-2 ">
+                    {% if deal.demandUser.profileImage  %}
+                            <img  src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="float-left" >
+                    {% else %}
+                        <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-left">
+                    {% endif %}
+                    <div class=" row col justify-content-center">
+                        <b class="">{{ deal.demandUser.firstname }}</b>
+                    </div>
+                    <div class=" row col justify-content-center">
+                        <b class="">{{ deal.demandUser.city }}</b>
+                    </div>
+                </div>
+            </div>
+            <div class= "row ">
+                <div class="deal-show col-md-12 py-1 ">
+                    <div class="row">
+                        <div class= "col-md-2 border-deal text-center  ">
+                            <div class="deal-show col-md-12 py-1 ">
+                                <h3 class="title-blue">tools</h3>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">Refuse</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">message</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">offer</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">demand</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">info</a>
+                            </div>
+                        </div>
+                        <div class="col-md-8 ">
+                            <table class="table table-striped border-deal  ">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Specification</th>
+                                    <th scope="col">
+                                        {% if deal.offerUser.id is same as(app.user.id) %}
+                                        Your offer
+                                        {% else %}
+                                        {{ deal.demandUser.firstname }}{{ ' offer '}}
+                                        {% endif %}
+                                    </th>
+                                    <th scope="col">
+                                        {% if deal.demandUser.id is same as(app.user.id) %}
+                                            Your demand
+                                        {% else %}
+                                            {{ deal.demandUser.firstname }}{{ ' demand '}}
+                                        {% endif %}
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{ dump(specification) }}
+                                {% for key, value in specification %}
+                                    {% if key is same as ('Date Of Event')  %}
+                                        <tr>
+                                            <th scope="row">{{ key  }}</th>
+                                            <td>{{ value['offer']|date("m/d/Y") }}</td>
+                                                <td>{{ value['demand'] }}</td>
+                                        </tr>
+                                    {% elseif key is same as ('Languages')  %}
+                                        <tr>
+                                            <th scope="row">{{ key }}</th>
+                                            <td>
+                                                {% for cont in value['offer'] %}
+                                                    {#for show - befor all languages without the first#}
+                                                    {% if cont is same as(value['offer'][0]) %}
+                                                        {{cont}}
+                                                    {% else %}
+                                                        {{ ' - ' }}{{cont}}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {% for cont in value['demand'] %}
+                                                    {#for show - befor all languages without the first#}
+                                                    {% if cont is same as(value['demand'][0]) %}
+                                                        {{cont}}
+                                                    {% else %}
+                                                        {{ ' - ' }}{{cont}}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr class="{#{% if value['offer'] is same as(value['demand'])  %}{{ 'bg-success' }}{% endif %}#}">
+                                            <th scope="row">{{ key }}</th>
+                                            <td>{{ value['offer'] }}</td>
+                                            <td>{{ value['demand'] }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class= "col-md-2 border-deal text-center  ">
+                            <div class="deal-show col-md-12 py-1 ">
+                                <h3 class="title-blue">drivers</h3>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">Refuse</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">message</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">offer</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">demand</a>
+                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('deal_index') }}">back to list</a>
+
+    {{ include('deal/_delete_form.html.twig') }}
+{% endblock %}

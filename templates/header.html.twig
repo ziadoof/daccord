@@ -40,7 +40,11 @@
                       <div class="user-profile">
                          <a data-toggle="dropdown"  href="#">
                              <span class="profile-ava">
-                                 <img alt="" src="/assets/images/icons/avatar.jpeg" id="avatar-small">
+                                 {% if app.user.profileImage != "" or app.user.profileImage != null %}
+                                 <img alt="" src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" id="avatar-small">
+                                 {% else %}
+                                 <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" id="avatar-small">
+                                 {% endif %}
                              </span>
                          </a>
                          <ul class="dropdown-menu extended logout">

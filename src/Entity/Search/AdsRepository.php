@@ -258,7 +258,6 @@ class AdsRepository extends Repository
         $textForm = [
             //checkbox
             'donate'=>            $search->getDonate(),
-            'withDriver'=>        $search->getWithDriver(),
             'hdmi'=>              $search->getHdmi(),
             'cdRoom'=>            $search->getCdRoom(),
             'wifi'=>              $search->getWifi(),
@@ -628,7 +627,6 @@ class AdsRepository extends Repository
         $textForm = [
             //checkbox
             'donate'=>            $search->getDonate(),
-            'withDriver'=>        $search->getWithDriver(),
             'hdmi'=>              $search->getHdmi(),
             'cdRoom'=>            $search->getCdRoom(),
             'wifi'=>              $search->getWifi(),

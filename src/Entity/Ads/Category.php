@@ -2,6 +2,8 @@
 
 namespace App\Entity\Ads;
 
+use App\Entity\Deal\Deal;
+use App\Entity\Deal\DoneDeal;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -50,12 +52,24 @@ class Category
      */
     private $specifications;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\Deal", mappedBy="category")
+     */
+    private $deals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\DoneDeal", mappedBy="category")
+     */
+    private $doneDeals;
+
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->ads = new ArrayCollection();
         $this->specifications = new ArrayCollection();
+        $this->deals = new ArrayCollection();
+        $this->doneDeals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +209,68 @@ class Category
             // set the owning side to null (unless already changed)
             if ($specification->getCategory() === $this) {
                 $specification->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getDeals(): Collection
+    {
+        return $this->deals;
+    }
+
+    public function addDeal(Deal $deal): self
+    {
+        if (!$this->deals->contains($deal)) {
+            $this->deals[] = $deal;
+            $deal->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDeal(Deal $deal): self
+    {
+        if ($this->deals->contains($deal)) {
+            $this->deals->removeElement($deal);
+            // set the owning side to null (unless already changed)
+            if ($deal->getCategory() === $this) {
+                $deal->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DoneDeal[]
+     */
+    public function getDoneDeals(): Collection
+    {
+        return $this->doneDeals;
+    }
+
+    public function addDoneDeal(DoneDeal $doneDeal): self
+    {
+        if (!$this->doneDeals->contains($doneDeal)) {
+            $this->doneDeals[] = $doneDeal;
+            $doneDeal->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoneDeal(DoneDeal $doneDeal): self
+    {
+        if ($this->doneDeals->contains($doneDeal)) {
+            $this->doneDeals->removeElement($doneDeal);
+            // set the owning side to null (unless already changed)
+            if ($doneDeal->getCategory() === $this) {
+                $doneDeal->setCategory(null);
             }
         }
 

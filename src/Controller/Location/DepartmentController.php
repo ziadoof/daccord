@@ -68,7 +68,7 @@ class DepartmentController extends AbstractController
             return $this->redirectToRoute('department_index', ['id' => $department->getId()]);
         }
 
-        return $this->render('Location/department/edit.html.twig', [
+        return $this->render('Location/department/driver_edit.html.twig', [
             'department' => $department,
             'form' => $form->createView(),
         ]);

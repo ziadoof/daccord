@@ -1,16 +1,22 @@
 <?php
 namespace App\Controller\User;
 
+use App\Entity\Driver;
+use App\Form\DriverType;
+use App\Service\FileUploader;
+use App\Service\FormDriverType;
 use FOS\UserBundle\Controller\ProfileController as BaseProController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\Location\City;
-use App\Entity\Ad;
+use App\Entity\Ads\Ad;
 use Doctrine\ORM\Mapping as ORM;
 use App\Form\User\UserType;
 use App\Form\User\UserCityType;
 use App\Form\User\ProfileType;
 use App\Form\Location\CityType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\Location\CityRepository;
 
@@ -131,4 +137,44 @@ class ProfileController extends BaseProController
             'demand' => $demand,
         ]);
     }
+
+    //test driver
+
+    /**
+     * @Route("/driver",  name="new_driver", methods={"GET","POST"})
+     * @param Request $request
+     * @param FormDriverType $formDriverType
+     * @param FileUploader $fileUploader
+     * @return RedirectResponse|Response
+     */
+    public function new_driver(Request $request, FormDriverType $formDriverType/*, FileUploader $fileUploader*/)
+    {
+        $user = $this->getUser();
+            $DriverForm = $formDriverType->getForm();
+        $DriverForm->handleRequest($request);
+            if ($DriverForm->isSubmitted() && $DriverForm->isValid()) {
+                $driver = $DriverForm->getData();
+
+                $carImage = $DriverForm->get('carImage')->getData();
+                $fileUploader = new FileUploader('assets/images/car_driver/');
+                $driver->setCarImage($fileUploader->upload($carImage));
+
+                $driver->setUser($user);
+                $driver->setCity($user->getCity());
+                $driver->setGpsLat($user->getMapY());
+                $driver->setGpsLng($user->getMapX());
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($driver);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('fos_user_profile_show');
+            }
+
+        return $this->render('user/Profile/driver_edit_form.html.twig', [
+
+        ]);
+
+    }
+
 }
