@@ -8,6 +8,8 @@ use App\Entity\Ads\Specification;
 use App\Entity\Deal\Deal;
 use App\Form\Deal\DealType;
 use App\Repository\Deal\DealRepository;
+use App\Repository\DriverRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,6 +40,8 @@ class DealController extends AbstractController
 
     /**
      * @Route("/new", name="deal_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -64,18 +68,22 @@ class DealController extends AbstractController
      * @param Deal $deal
      * @return Response
      */
-    public function show(Deal $deal): Response
+    public function show(Deal $deal, DriverRepository $driverRepository): Response
     {
         $specification = $this->specificationDeal($deal->getOffer(), $deal->getDemand());
-
+        $drivers = $this->getDriversArea($deal,$driverRepository);
         return $this->render('deal/show.html.twig', [
             'specification'=>$specification,
+            'drivers'=> $drivers,
             'deal' => $deal,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="deal_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Deal $deal
+     * @return Response
      */
     public function edit(Request $request, Deal $deal): Response
     {
@@ -121,19 +129,17 @@ class DealController extends AbstractController
         $offerSpecifications = $offer->getCategory()->getSpecifications();
 
         $offerDealSpecification = $offer->getDealSpecifications();
-        $demandDealSpecification = $this->fixDemandDealSpecification($demand->getDealSpecifications());
+        $demandDealSpecification = $demand->getDealSpecifications();
+
+        $offerFixed = $this->fixSpecifications($offerDealSpecification,$offer->getCategory()->getName());
+        $demandFixed = $this->fixSpecifications($demandDealSpecification, $demand->getCategory()->getName());
+
+        $demandDealSpecificationFixed = $this->fixDemandDealSpecification($demandFixed);
 
         foreach ($offerSpecifications as $specification){
-            if($specification->getType() === 'CheckboxType'){
                 $result[$specification->getLabel()]=[
-                    'offer' =>  $offerDealSpecification[$specification->getName()]  ? 'Yes':'No',
-                    'demand'=>  $demandDealSpecification[$specification->getName()] ? 'Yes':'No',
-                ];
-            }
-            else
-                $result[$specification->getLabel()]=[
-                    'offer' =>  $offerDealSpecification[$specification->getName()]  ? $offerDealSpecification[$specification->getName()]:'Undefined',
-                    'demand'=>  $demandDealSpecification[$specification->getName()] ? $demandDealSpecification[$specification->getName()]:'Undefined',
+                    'offer' =>  $offerFixed[$specification->getName()]  ? $offerFixed[$specification->getName()]:'Undefined',
+                    'demand'=>  $demandDealSpecificationFixed[$specification->getName()] ? $demandDealSpecificationFixed[$specification->getName()]:'Undefined',
                 ];
         }
         return $result;
@@ -169,6 +175,9 @@ class DealController extends AbstractController
                 elseif ($min && !$max){
                     $item = $min.'(Min)';
                 }
+                elseif ($ar[$key]){
+                    $item = $ar[$key];
+                }
                 else{
                     $item = 'Undefined';
                 }
@@ -195,5 +204,67 @@ class DealController extends AbstractController
             }
         }
         return $fixed;
+    }
+
+    public function fixSpecifications ($allSpecifications, string $category){
+        $classEnergieAndGes=[1=>'A',2=>'B',3=>'C',4=>'D',5=>'E',6=>'F',7=>'G'];
+        $paperSize=[1=>'4A0',2=>'2A0',3=>'A0',4=>'A1',5=>'A2',6=>'A3',7=>'A4',8=>'A5',9=>'A6',10>'A7',11=>'A8',12=>'A9',13=>'A10'];
+        $experience=[0=>'Not required',1=>'1 YEAR',2=>'2 YEARS' ,3=>'3 YEARS' ,4=>'4 YEARS' ,5=>'5 YEARS' ,6=>'+ 5 YEARS'];
+        $levelOfStudent=[1=>'Maternal school',2=>'Middle school',3=>'High school',4=>'Universities',5=>'Professional'];
+        $capacityLitre = [1=>'Less than 50 Liters',2 =>'50-80 Liters',3 =>'80-150 Liters',4 =>'150-250 Liters',5 =>'250-330 Liters',6 =>'330-490 Liters',7 =>'More than 50 Liters'];
+        $boolean = [0=>'No',1=>'Yes'];
+        $generalSituation = [1=>'Damaged' ,2 =>'Medium' , 3 =>'Good' ,4 => 'Semi-new',5=> 'Totally new'];
+        $checkbox = ['hdmi','cdRoom', 'wifi', 'usb', 'threeInOne', 'accessories', 'withFreezer', 'electricHead',
+            'withOven', 'covered', 'withFurniture', 'withGarden', 'withVerandah', 'withElevator'];
+/*        $category = $allSpecifications['category']->getName();*/
+
+        foreach ($allSpecifications as $key=>$value){
+            if($key === 'donate') {
+                if (true === $value) {
+                    $allSpecifications[$key] = 'Yes';
+                } else {
+                    $allSpecifications[$key] = 'No';
+                }
+            }
+            if($value){
+            switch ($key){
+                case 'ges':
+                    $allSpecifications[$key] = $classEnergieAndGes[$value];
+                    break;
+                case 'classEnergie':
+                    $allSpecifications[$key] = $classEnergieAndGes[$value];
+                    break;
+                case 'experience':
+                    $allSpecifications[$key] = $experience[$value];
+                    break;
+                case 'paperSize':
+                    $allSpecifications[$key] = $paperSize[$value];
+                    break;
+                case 'levelOfStudent':
+                    $allSpecifications[$key] = $levelOfStudent[$value];
+                    break;
+                case 'generalSituation':
+                    $allSpecifications[$key] = $generalSituation[$value];
+                    break;
+            }
+            if(in_array($key,$checkbox)){
+                $allSpecifications[$key] = $boolean[$value];
+            }
+            if($key === 'capacity' && $category === 'Refrigerator'){
+                $allSpecifications[$key] = $capacityLitre[$value];
+            }}
+        }
+        return $allSpecifications;
+    }
+
+    public function getDriversArea(Deal $deal, $driverRepo){
+        $latOffer = $deal->getOfferUser()->getMapY();
+        $lngOffer = $deal->getOfferUser()->getMapX();
+        $latDemand = $deal->getDemandUser()->getMapY();
+        $lngDemand = $deal->getDemandUser()->getMapX();
+
+        $drivers = $driverRepo->findByArea($latOffer, $lngOffer, $latDemand, $lngDemand);
+       dump($drivers);
+       return $drivers;
     }
 }

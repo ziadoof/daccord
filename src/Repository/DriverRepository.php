@@ -19,6 +19,34 @@ class DriverRepository extends ServiceEntityRepository
         parent::__construct($registry, Driver::class);
     }
 
+     /**
+      * @return Driver[] Returns an array of Driver objects
+      */
+    public function findByArea($latOffer, $lngOffer, $latDemand, $lngDemand): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.gpsLat + 0.012626 * d.maxDistance > :latOffer')
+            ->andWhere('d.gpsLat + 0.012626 * d.maxDistance > :latDemand')
+            ->andWhere('d.gpsLat - 0.012626 * d.maxDistance < :latOffer')
+            ->andWhere('d.gpsLat - 0.012626 * d.maxDistance < :latDemand')
+            ->andWhere('d.gpsLng + 0.012626 * d.maxDistance > :lngOffer')
+            ->andWhere('d.gpsLng + 0.012626 * d.maxDistance > :lngDemand')
+            ->andWhere('d.gpsLng - 0.012626 * d.maxDistance < :lngOffer')
+            ->andWhere('d.gpsLng - 0.012626 * d.maxDistance < :lngDemand')
+            ->andWhere('d.active = :true')
+            ->setParameter('latOffer', $latOffer)
+            ->setParameter('latDemand', $latDemand)
+            ->setParameter('lngOffer', $lngOffer)
+            ->setParameter('lngDemand', $lngDemand)
+           /* ->setParameter('km', $km)*/
+            ->setParameter('true', true)
+            ->orderBy('d.point', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Driver[] Returns an array of Driver objects
     //  */

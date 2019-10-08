@@ -153,7 +153,7 @@ class AdController extends AbstractController
                 $entityManager->persist($ad);
                 $entityManager->flush();
 
-                //On déclenche l'event   testttttttttttttttttttttttttttttttttttttttttttt
+                //On déclenche l'event create deal in max 8
                 $event = new GenericEvent($ad);
                 $eventDispatcher->dispatch(Events::AD_ADD, $event);
                 return $this->redirectToRoute('ad_index');
@@ -213,6 +213,9 @@ class AdController extends AbstractController
                 $entityManager->persist($ad);
                 $entityManager->flush();
 
+                //On déclenche l'event create deals in max 8
+                $event = new GenericEvent($ad);
+                $eventDispatcher->dispatch(Events::AD_ADD, $event);
                 return $this->redirectToRoute('ad_index');
             }
 

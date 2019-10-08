@@ -54,7 +54,7 @@ class ProfileController extends BaseProController
 
         $formCity = $this->createForm(UserType::class, $user);
         $formCity->handleRequest($request);
-
+        dump($user->getDriver());
                 if($formCity->isSubmitted() && $formCity->isValid()) {
                     $entityManager = $this->getDoctrine()->getManager();
                     $data = $formCity->getData();
@@ -66,12 +66,19 @@ class ProfileController extends BaseProController
                     $user->setPostalCode($postalCode);
                     $user->setMapX($gpsLng);
                     $user->setMapY($gpsLat);
+                    $driver = $user->getDriver();
+                    if($driver){
+                      $driver->setCity($data->getCity());
+                      $driver->setGpsLat($gpsLat);
+                      $driver->setGpsLng($gpsLng);
+                        $entityManager->persist($user);
+                    }
                     $entityManager->persist($user);
                     $entityManager->flush();
 
                     $this->addFlash(
                         'success',
-                        'Votre ville a été bien ajouté!'
+                        'Votre ville pour User et Driver a été bien ajouté!'
                     );
                     return $this->redirectToRoute('fos_user_profile_show');
                 }

@@ -9,6 +9,7 @@
 namespace App\Entity\Search;
 
 
+use App\Entity\Ads\Ad;
 use App\Entity\User;
 use App\Repository\Ads\AdRepository;
 use FOS\ElasticaBundle\Repository;
@@ -767,4 +768,590 @@ class AdsRepository extends Repository
     }
 
 
+    public function getDealDemand(Ad $ad): array
+    {
+        $user = $ad->getUser();
+        $bool = new BoolQuery();
+
+        //search in category
+            $categoryNested = new Query\Nested();
+            $categoryBool = new BoolQuery();
+            $categoryMatch = new Match();
+
+            $categoryMatch->setFieldQuery('category.id', $ad->getCategory()->getId());
+            $categoryBool->addMust($categoryMatch);
+            $categoryNested->setPath('category');
+
+            $categoryNested->setQuery($categoryBool);
+            $bool->addMust($categoryNested);
+
+        //search in area and city
+
+            if($this->isHaveCity($ad->getGeneralCategory())){
+
+                $villeNested = new Query\Nested();
+                $villeBool = new BoolQuery();
+                $villeMatch = new Match();
+
+                $villeMatch->setFieldQuery('city.id', $ad->getCity()->getId());
+                $villeBool->addMust($villeMatch);
+                $villeNested->setPath('city');
+
+                $villeNested->setQuery($villeBool);
+                $bool->addMust($villeNested);
+            }
+            else{
+                $distance = $user->getMaxDistance();
+                $lat = $user->getMapY();
+                $lng = $user->getMapX();
+
+                $total = 0.012626*$distance;
+                $minLat= $lat - $total;
+                $maxLat= $lat + $total;
+                $minLng= $lng - $total;
+                $maxLng= $lng + $total;
+
+                $latMatch = new Query\Range();
+                $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
+                $bool->addMust($latMatch);
+
+                $lonMatch = new Query\Range();
+                $lonMatch->addField('gpsLng',["gte" => $minLng,"lte" => $maxLng]);
+                $bool->addMust($lonMatch);
+            }
+
+        //search text phrase
+            $textPhraseForm = [
+                //
+                'material'=>          $ad->getMaterial(),
+                'fuelType'=>          $ad->getFuelType(),
+
+                // pour confirmer
+                'theType'=>           $ad->getTheType(),
+                'placeOfLesson'=>     $ad->getPlaceOfLesson(),
+                'printingType'=>      $ad->getPrintingType(),
+                'printingColor'=>     $ad->getPrintingColor(),
+                'coverMaterial'=>     $ad->getCoverMaterial(),
+
+            ];
+
+            foreach ($textPhraseForm as $key=>$value){
+                if ($value != null && $value != '') {
+                    $match = new Query\MatchPhrase();
+                    $match->setFieldQuery($key, $value);
+                    $bool->addMust($match);
+                }
+            }
+
+        //  Language exchange  il faut charche à la contrair de les first and second languages
+        // if demand ad not defined secand language the deal is not complete
+        if($ad->getLanguage()!= null && $ad->getLanguage() != ''){
+            if($ad->getCategory()->getName() === 'Language exchange'){
+                if($ad->getSecondLanguage() != null && $ad->getSecondLanguage()!=''){
+
+                    $firstMatch = new Match();
+                    $firstMatch->setFieldQuery('language', $ad->getSecondLanguage());
+                    $bool->addMust($firstMatch);
+
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $ad->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+                else{
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $ad->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+            }
+            else{
+                $firstMatch = new Match();
+                $firstMatch->setFieldQuery('language', $ad->getLanguage());
+                $bool->addMust($firstMatch);
+
+                $offerMatch = new Match();
+                $offerMatch->setFieldQuery('typeOfAd', 'Demand');
+                $bool->addMust($offerMatch);
+            }
+        }
+        else{
+            // in all status search for demand only
+            $offerMatch = new Match();
+            $offerMatch->setFieldQuery('typeOfAd', 'Demand');
+            $bool->addMust($offerMatch);
+        }
+    // search for checkbox and list of th choices
+        $textForm = [
+            //checkbox
+            'donate'=>            $ad->getDonate(),
+            'hdmi'=>              $ad->getHdmi(),
+            'cdRoom'=>            $ad->getCdRoom(),
+            'wifi'=>              $ad->getWifi(),
+            'usb'=>               $ad->getUsb(),
+            'threeInOne'=>        $ad->getThreeInOne(),
+            'accessories'=>       $ad->getAccessories(),
+            'withFreezer'=>       $ad->getWithFreezer(),
+            'electricHead'=>      $ad->getElectricHead(),
+            'withOven'=>          $ad->getWithOven(),
+            'covered'=>           $ad->getCovered(),
+            'withFurniture'=>     $ad->getWithFurniture(),
+            'withGarden'=>        $ad->getWithGarden(),
+            'withVerandah'=>      $ad->getWithVerandah(),
+            'withElevator'=>      $ad->getWithElevator(),
+            // other
+            'dvdCd'=>             $ad->getDvdCd(),
+            'title'=>             $ad->getTitle(),
+            'sSize'=>             $ad->getSSize(),
+            'iSize'=>             $ad->getISize(),
+            'workHours'=>         $ad->getWorkHours(),
+            'typeOfContract'=>    $ad->getTypeOfContract(),
+            'levelOfStudy'=>      $ad->getLevelOfStudy(),
+            'brand'=>             $ad->getBrand(),
+            'model'=>             $ad->getModel(),
+            'changeGear'=>        $ad->getChangeGear(),
+            'manufactureCompany'=>$ad->getManufactureCompany(),
+            'analogDigital'=>     $ad->getAnalogDigital(),
+            'animalSpecies'=>     $ad->getAnimalSpecies(),
+            'originCountry'=>     $ad->getOriginCountry(),
+            'shape'=>             $ad->getShape(),
+            'heating'=>           $ad->getHeating(),
+            'heatingType'=>       $ad->getHeatingType(),
+            'eventType'=>         $ad->getEventType(),
+            'subjectName'=>       $ad->getSubjectName(),
+            'acitvityArea'=>      $ad->getAcitvityArea(),
+
+        ];
+
+        foreach ($textForm as $key=>$value){
+            if ($value != null && $value != '') {
+                $match = new Match();
+                $match->setFieldQuery($key, $value);
+                $bool->addMust($match);
+            }
+        }
+        //for manager of capacity and min and max capacity in same category
+        $capacityCategory = ['Wine','Perfumes','Electric generator','Washing machine','Refrigerator','Speaker','Headphones'];
+
+
+        //for search to mor than the field and less than the same field
+        $moreLessForm = [
+            'manufacturingYear' => ['field' => $ad->getManufacturingYear(), 'max' => 'maxManufacturingYear', 'min' => 'minManufacturingYear'],
+            'kilometer' => ['field' => $ad->getKilometer(), 'max' => 'maxKilometer', 'min' => 'minKilometer'],
+            'capacity'  => ['field' => $ad->getCapacity(), 'max'   => 'maxCapacity', 'min'   => 'minCapacity'],
+            'area' => ['field' => $ad->getArea(), 'max' => 'maxArea', 'min'   => 'minArea'],
+        ];
+
+        foreach ($moreLessForm as $key => $value){
+            if($value['field'] != null && $value['field'] !=''){
+                if(in_array($ad->getCategory()->getName(),$capacityCategory)){
+                    if($ad->getCategory()->getName() === 'Perfumes') {
+                        // Perfumes category use the maxCapacity
+                        $match = new Query\Range();
+                        $match->addField('maxCapacity',["gte" => null,"lte" => $ad->getCapacity()]);
+                        $bool->addMust($match);
+                    }
+                    else{
+                        // all the rest use capacity
+                        $match = new Query\Range();
+                        $match->addField('capacity',["gte" => null,"lte" => $ad->getCapacity()]);
+                        $bool->addMust($match);
+                    }
+                }
+                else{
+                    $maxMatch = new Query\Range();
+                    $maxMatch->addField($value['max'],["gte" =>  $value['field'],"lte" => null]);
+                    $bool->addMust($maxMatch);
+
+                    $minMatch = new Query\Range();
+                    $minMatch->addField($value['min'],["gte" => null,"lte" => $value['field']]);
+                    $bool->addMust($minMatch);
+                }
+            }
+        }
+
+    //search for range
+        $rangeForm = [
+            //like demand normal
+            'paperSize'=> ['max'=> null,'min'=> $ad->getPaperSize()],
+            'age'=> ['max'=> null,'min'=> $ad->getAge()],
+            'numberOfRooms'=>['max'=> $ad->getNumberOfRooms(),'min'=> null],
+            'numberOfPassengers'=> ['max'=> null,'min'=> $ad->getNumberOfPassengers()],
+            'ram'=> ['max'=> $ad->getRam(),'min'=> null],
+            'number'=> ['max'=> $ad->getNumber(),'min'=> null],
+            'numberOfPersson'=> ['max'=> $ad->getNumberOfPersson(),'min'=> null],
+            'numberOfDrawer'=> ['max'=> $ad->getNumberOfDrawer(),'min'=> null],
+            'numberOfStaging'=> ['max'=> $ad->getNumberOfStaging(),'min'=> null],
+            'numberOfHead'=> ['max'=> $ad->getNumberOfHead(),'min'=> null],
+            'experience'=>           ['max'=>  null,'min'=> $ad->getExperience()],
+            'generalSituation'=>           ['max'=>  $ad->getGeneralSituation(),'min'=> null],
+
+            // oppiset off demand normal
+            'salary'=> ['max'=> $ad->getSalary(),'min'=> null],
+            'numberOfDoors'=> ['max'=> $ad->getNumberOfDoors(),'min'=> null ],
+            'accuracy'=> ['max'=> $ad->getAccuracy(),'min'=> null],
+            'classEnergie'=>  ['max'=>  null,'min'=> $ad->getClassEnergie()],
+            'ges'=>           ['max'=>  null,'min'=> $ad->getGes()],
+            'weight'=>           ['max'=>  null,'min'=> $ad->getWeight()],
+            'levelOfStudent'=>           ['max'=>  $ad->getLevelOfStudent(),'min'=> null ],
+        ];
+
+        foreach ($rangeForm as $key=>$value){
+            if(($value['max'] != null && $value['max'] !='')|| ($value['min'] != null && $value['min'] !='')){
+                $match = new Query\Range();
+                $match->addField($key,["gte" => $value['min'],"lte" => $value['max']]);
+                $bool->addMust($match);
+            }
+        }
+        // search Languages array
+        if ($ad->getLanguages() !== null && $ad->getLanguages() !== ''){
+            $languages = $ad->getLanguages();
+            foreach ($languages as $language){
+                $match = new Match();
+                $match->setFieldQuery('languages', $language);
+                $bool->addMust($match);
+            }
+        }
+
+        // search type of translation
+        if ($ad->getTypeOfTranslation() != null && $ad->getTypeOfTranslation() != '' ){
+            // pour show all type of translation in any type
+            $shold = new BoolQuery();
+            // where the typeOfTranslation is all it is main than must search in all type or non search in type
+            if($ad->getTypeOfTranslation() !== 'All'){
+                $match = new Match();
+                $match->setFieldQuery('typeOfTranslation', $ad->getTypeOfTranslation());
+                $shold->addShould($match) ;
+
+                $allmatch = new Match();
+                $allmatch->setFieldQuery('typeOfTranslation', 'All');
+                $shold->addShould($allmatch) ;
+
+                $bool->addMust($shold);
+            }
+        }
+        $query = Query::create($bool);
+        return $this->find($query,8);
+    }
+
+    public function getDealOffer(Ad $ad): array
+    {
+        $user = $ad->getUser();
+        $bool = new BoolQuery();
+
+        //search in category
+        $categoryNested = new Query\Nested();
+        $categoryBool = new BoolQuery();
+        $categoryMatch = new Match();
+
+        $categoryMatch->setFieldQuery('category.id', $ad->getCategory()->getId());
+        $categoryBool->addMust($categoryMatch);
+        $categoryNested->setPath('category');
+
+        $categoryNested->setQuery($categoryBool);
+        $bool->addMust($categoryNested);
+
+        //search in area and city
+
+        if($this->isHaveCity($ad->getGeneralCategory())){
+
+            $villeNested = new Query\Nested();
+            $villeBool = new BoolQuery();
+            $villeMatch = new Match();
+
+            $villeMatch->setFieldQuery('city.id', $ad->getCity()->getId());
+            $villeBool->addMust($villeMatch);
+            $villeNested->setPath('city');
+
+            $villeNested->setQuery($villeBool);
+            $bool->addMust($villeNested);
+        }
+        else{
+            $distance = $user->getMaxDistance();
+            $lat = $user->getMapY();
+            $lng = $user->getMapX();
+
+            $total = 0.012626*$distance;
+            $minLat= $lat - $total;
+            $maxLat= $lat + $total;
+            $minLng= $lng - $total;
+            $maxLng= $lng + $total;
+
+            $latMatch = new Query\Range();
+            $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
+            $bool->addMust($latMatch);
+
+            $lonMatch = new Query\Range();
+            $lonMatch->addField('gpsLng',["gte" => $minLng,"lte" => $maxLng]);
+            $bool->addMust($lonMatch);
+        }
+
+        //search text phrase
+        $textPhraseForm = [
+            //
+            'material'=>          $ad->getMaterial(),
+            'fuelType'=>          $ad->getFuelType(),
+
+            // pour confirmer
+            'theType'=>           $ad->getTheType(),
+            'placeOfLesson'=>     $ad->getPlaceOfLesson(),
+            'printingType'=>      $ad->getPrintingType(),
+            'printingColor'=>     $ad->getPrintingColor(),
+            'coverMaterial'=>     $ad->getCoverMaterial(),
+
+        ];
+
+        foreach ($textPhraseForm as $key=>$value){
+            if ($value != null && $value != '') {
+                $match = new Query\MatchPhrase();
+                $match->setFieldQuery($key, $value);
+                $bool->addMust($match);
+            }
+        }
+
+        //  Language exchange  il faut charche à la contrair de les first and second languages
+        // if demand ad not defined secand language the deal is not complete
+        if($ad->getLanguage()!= null && $ad->getLanguage() != ''){
+            if($ad->getCategory()->getName() === 'Language exchange'){
+                if($ad->getSecondLanguage() != null && $ad->getSecondLanguage()!=''){
+
+                    $firstMatch = new Match();
+                    $firstMatch->setFieldQuery('language', $ad->getSecondLanguage());
+                    $bool->addMust($firstMatch);
+
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $ad->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+                else{
+                    $secondMatch = new Match();
+                    $secondMatch->setFieldQuery('secondLanguage', $ad->getLanguage());
+                    $bool->addMust($secondMatch);
+
+                    $shold = new BoolQuery();
+                    $demandMatch = new Match();
+                    $demandMatch->setFieldQuery('typeOfAd', 'Demand');
+                    $offerMatch = new Match();
+                    $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                    $shold->addShould($demandMatch);
+                    $shold->addShould($offerMatch);
+                    $bool->addShould($shold);
+                }
+            }
+            else{
+                $firstMatch = new Match();
+                $firstMatch->setFieldQuery('language', $ad->getLanguage());
+                $bool->addMust($firstMatch);
+
+                $offerMatch = new Match();
+                $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+                $bool->addMust($offerMatch);
+            }
+        }
+        else{
+            // in all status search for demand only
+            $offerMatch = new Match();
+            $offerMatch->setFieldQuery('typeOfAd', 'Offer');
+            $bool->addMust($offerMatch);
+        }
+        // search for checkbox and list of th choices
+        $textForm = [
+            //checkbox
+            'donate'=>            $ad->getDonate(),
+            'hdmi'=>              $ad->getHdmi(),
+            'cdRoom'=>            $ad->getCdRoom(),
+            'wifi'=>              $ad->getWifi(),
+            'usb'=>               $ad->getUsb(),
+            'threeInOne'=>        $ad->getThreeInOne(),
+            'accessories'=>       $ad->getAccessories(),
+            'withFreezer'=>       $ad->getWithFreezer(),
+            'electricHead'=>      $ad->getElectricHead(),
+            'withOven'=>          $ad->getWithOven(),
+            'covered'=>           $ad->getCovered(),
+            'withFurniture'=>     $ad->getWithFurniture(),
+            'withGarden'=>        $ad->getWithGarden(),
+            'withVerandah'=>      $ad->getWithVerandah(),
+            'withElevator'=>      $ad->getWithElevator(),
+            // other
+            'dvdCd'=>             $ad->getDvdCd(),
+            'title'=>             $ad->getTitle(),
+            'sSize'=>             $ad->getSSize(),
+            'iSize'=>             $ad->getISize(),
+            'workHours'=>         $ad->getWorkHours(),
+            'typeOfContract'=>    $ad->getTypeOfContract(),
+            'levelOfStudy'=>      $ad->getLevelOfStudy(),
+            'brand'=>             $ad->getBrand(),
+            'model'=>             $ad->getModel(),
+            'changeGear'=>        $ad->getChangeGear(),
+            'manufactureCompany'=>$ad->getManufactureCompany(),
+            'analogDigital'=>     $ad->getAnalogDigital(),
+            'animalSpecies'=>     $ad->getAnimalSpecies(),
+            'originCountry'=>     $ad->getOriginCountry(),
+            'shape'=>             $ad->getShape(),
+            'heating'=>           $ad->getHeating(),
+            'heatingType'=>       $ad->getHeatingType(),
+            'eventType'=>         $ad->getEventType(),
+            'subjectName'=>       $ad->getSubjectName(),
+            'acitvityArea'=>      $ad->getAcitvityArea(),
+
+        ];
+
+        foreach ($textForm as $key=>$value){
+            if ($value != null && $value != '') {
+                $match = new Match();
+                $match->setFieldQuery($key, $value);
+                $bool->addMust($match);
+            }
+        }
+        //for manager of capacity and min and max capacity in same category
+        $capacityCategory = ['Wine','Perfumes','Electric generator','Washing machine','Refrigerator','Speaker','Headphones'];
+
+        //for search to mor than the field and less than the same field
+        $moreLessForm = [
+            'manufacturingYear' => ['field' => $ad->getManufacturingYear(), 'max' => 'maxManufacturingYear', 'min' => 'minManufacturingYear'],
+            'kilometer' => ['field' => $ad->getKilometer(), 'max' => 'maxKilometer', 'min' => 'minKilometer'],
+            'capacity'  => ['field' => $ad->getCapacity(), 'max'   => 'maxCapacity', 'min'   => 'minCapacity'],
+            'area' => ['field' => $ad->getArea(), 'max' => 'maxArea', 'min'   => 'minArea'],
+        ];
+
+        foreach ($moreLessForm as $key => $value){
+            if($value['field'] != null && $value['field'] !=''){
+                if(in_array($ad->getCategory()->getName(),$capacityCategory)){
+                    if($ad->getCategory()->getName() === 'Perfumes') {
+                        // Perfumes category use the maxCapacity
+                        $match = new Query\Range();
+                        $match->addField('maxCapacity',["gte" => null,"lte" => $ad->getCapacity()]);
+                        $bool->addMust($match);
+                    }
+                    else{
+                        // all the rest use capacity
+                        $match = new Query\Range();
+                        $match->addField('capacity',["gte" => $ad->getCapacity(),"lte" => null]);
+                        $bool->addMust($match);
+                    }
+                }
+                else{
+                    $maxMatch = new Query\Range();
+                    $maxMatch->addField($value['max'],["gte" =>  $value['field'],"lte" => null]);
+                    $bool->addMust($maxMatch);
+
+                    $minMatch = new Query\Range();
+                    $minMatch->addField($value['min'],["gte" => null,"lte" => $value['field']]);
+                    $bool->addMust($minMatch);
+                }
+            }
+        }
+
+        //search for range
+        $rangeForm = [
+            //like demand normal
+            'paperSize'=> ['max'=> $ad->getPaperSize(),'min'=> null],
+            'age'=> ['max'=> $ad->getAge(),'min'=> null],
+            'numberOfRooms'=>['max'=> null,'min'=> $ad->getNumberOfRooms()],
+            'numberOfPassengers'=> ['max'=> $ad->getNumberOfPassengers(),'min'=> null],
+            'ram'=> ['max'=> null,'min'=> $ad->getRam()],
+            'number'=> ['max'=> null,'min'=> $ad->getNumber()],
+            'numberOfPersson'=> ['max'=> null,'min'=> $ad->getNumberOfPersson()],
+            'numberOfDrawer'=> ['max'=> null,'min'=> $ad->getNumberOfDrawer()],
+            'numberOfStaging'=> ['max'=> null,'min'=> $ad->getNumberOfStaging()],
+            'numberOfHead'=> ['max'=> null,'min'=> $ad->getNumberOfHead()],
+            'experience'=>  ['max'=>  $ad->getExperience(),'min'=> null],
+            'generalSituation'=>  ['max'=>  null,'min'=> $ad->getGeneralSituation()],
+            'classEnergie'=>  ['max'=>  null,'min'=> $ad->getClassEnergie()],
+            'ges'=>  ['max'=>  null,'min'=> $ad->getGes()],
+            'salary'=> ['max'=> null,'min'=> $ad->getSalary()],
+
+            // oppiset off demand normal
+            'numberOfDoors'=> ['max'=> $ad->getNumberOfDoors() ,'min'=> null],
+            'accuracy'=> ['max'=> null,'min'=> $ad->getAccuracy()],
+            'weight'=>  ['max'=>  $ad->getWeight(),'min'=> null],
+            'levelOfStudent'=> ['max'=>  null,'min'=> $ad->getLevelOfStudent() ],
+        ];
+
+        foreach ($rangeForm as $key=>$value){
+            if(($value['max'] != null && $value['max'] !='')|| ($value['min'] != null && $value['min'] !='')){
+                $match = new Query\Range();
+                $match->addField($key,["gte" => $value['min'],"lte" => $value['max']]);
+                $bool->addMust($match);
+            }
+        }
+        // search Languages array
+        if ($ad->getLanguages() !== null && $ad->getLanguages() !== ''){
+            $languages = $ad->getLanguages();
+            foreach ($languages as $language){
+                $match = new Match();
+                $match->setFieldQuery('languages', $language);
+                $bool->addMust($match);
+            }
+        }
+
+        // search type of translation
+        if ($ad->getTypeOfTranslation() != null && $ad->getTypeOfTranslation() != '' ){
+            // pour show all type of translation in any type
+            $shold = new BoolQuery();
+            // where the typeOfTranslation is all it is main than must search in all type or non search in type
+            if($ad->getTypeOfTranslation() !== 'All'){
+                $match = new Match();
+                $match->setFieldQuery('typeOfTranslation', $ad->getTypeOfTranslation());
+                $shold->addShould($match) ;
+
+                $allmatch = new Match();
+                $allmatch->setFieldQuery('typeOfTranslation', 'All');
+                $shold->addShould($allmatch) ;
+
+                $bool->addMust($shold);
+            }
+        }
+
+        if ($ad->getPrice() != null && $ad->getPrice() != '' ){
+            // pour afficher all type de traduir en n'amport qelle type
+            $shold = new BoolQuery();
+
+            $match = new Query\Range();
+            $match->addField('price',["gte" => null,"lte" => $ad->getPrice()]);
+            $shold->addShould($match);
+
+
+
+            $matchDonat = new Match();
+            $matchDonat->setFieldQuery('donate', true);
+            $shold->addShould($matchDonat) ;
+
+            $matchPrice = new BoolQuery();
+            $existPrice = new Exists('price');
+            $matchPrice->addMustNot($existPrice);
+            $shold->addShould($matchPrice) ;
+
+            $bool->addMust($shold);
+
+        }
+
+        $query = Query::create($bool);
+        return $this->find($query,8);
+    }
 }

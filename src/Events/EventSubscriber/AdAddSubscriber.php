@@ -5,7 +5,9 @@ namespace App\Events\EventSubscriber;
 
 use App\Entity\Ads\Ad;
 use App\Events\Events;
+use App\Model\AdModel;
 use Doctrine\ORM\EntityManager;
+use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use App\Entity\Deal\Deal;
@@ -13,13 +15,16 @@ class AdAddSubscriber implements EventSubscriberInterface
 {
     private $em;
 
+    private $manager;
+
     /**
      * AdAddSubscriber constructor.
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, RepositoryManagerInterface $manager)
     {
         $this->em = $em;
+        $this->manager = $manager;
     }
 
     /**
@@ -52,8 +57,27 @@ class AdAddSubscriber implements EventSubscriberInterface
     {
         /** @var Ad $ad */
         $ad = $event->getSubject();
-        $category = $ad->getCategory();
         $typeOfAd = $ad->getTypeOfAd();
+        if($typeOfAd === 'Demand'){
+            // search for offer symmetric with this demand
+            $results = $this->manager->getRepository('App\Entity\Ads\Ad')->getDealOffer($ad);
+            foreach ($results as $result){
+                if($result->getUser() != $ad->getUser()){
+                    $this->createDeal($result, $ad);
+                }
+            }
+        }
+        else{
+            // search for demand symmetric with this offer
+            $results = $this->manager->getRepository('App\Entity\Ads\Ad')->getDealDemand($ad);
+            foreach ($results as $result){
+                if($result->getUser() != $ad->getUser()){
+                    $this->createDeal($ad, $result);
+                }
+            }
+        }
+
+
 
     }
 

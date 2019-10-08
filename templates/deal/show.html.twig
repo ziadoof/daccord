@@ -4,20 +4,35 @@
 
 {% block content %}
     <div class="">
-        <div class="deal-show col-md-12 ">
-            <div class="row border-deal pt-2">
+        <div class="deal-show ">
+            <div class="row  pt-2">
                 <div class=" col-md-2 offset-3 ">
+                    {% if deal.offerUser.id is same as(app.user.id) %}
                         {% if deal.offerUser.profileImage  %}
                             <img src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" class="float-right" >
                         {% else %}
                             <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-right">
                         {% endif %}
-                    <div class=" row col justify-content-center">
-                        <b class="">{{ deal.offerUser.firstname }}</b>
-                    </div>
-                    <div class=" row col justify-content-center">
-                        <b class="">{{ deal.offerUser.city }}</b>
-                    </div>
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.offerUser.firstname }}</b>
+                        </div>
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.offerUser.city }}</b>
+                        </div>
+                    {% else %}
+                        {% if deal.demandUser.profileImage  %}
+                            <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="float-right" >
+                        {% else %}
+                            <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-right">
+                        {% endif %}
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.demandUser.firstname }}</b>
+                        </div>
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.demandUser.city }}</b>
+                        </div>
+                    {% endif %}
+
                 </div>
                 <div class=" col-md-2 text-center  ">
                     <div class="col">
@@ -28,33 +43,37 @@
                     </div>
                 </div>
                 <div class="col-md-2 ">
-                    {% if deal.demandUser.profileImage  %}
-                            <img  src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="float-left" >
+                    {% if deal.offerUser.id is not same as(app.user.id) %}
+                        {% if deal.offerUser.profileImage  %}
+                            <img src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" class="" >
+                        {% else %}
+                            <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="">
+                        {% endif %}
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.offerUser.firstname }}</b>
+                        </div>
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.offerUser.city }}</b>
+                        </div>
                     {% else %}
-                        <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-left">
+                        {% if deal.demandUser.profileImage  %}
+                            <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="" >
+                        {% else %}
+                            <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="">
+                        {% endif %}
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.demandUser.firstname }}</b>
+                        </div>
+                        <div class=" row col justify-content-center">
+                            <b class="">{{ deal.demandUser.city }}</b>
+                        </div>
                     {% endif %}
-                    <div class=" row col justify-content-center">
-                        <b class="">{{ deal.demandUser.firstname }}</b>
-                    </div>
-                    <div class=" row col justify-content-center">
-                        <b class="">{{ deal.demandUser.city }}</b>
-                    </div>
                 </div>
             </div>
             <div class= "row ">
                 <div class="deal-show col-md-12 py-1 ">
                     <div class="row">
-                        <div class= "col-md-2 border-deal text-center  ">
-                            <div class="deal-show col-md-12 py-1 ">
-                                <h3 class="title-blue">tools</h3>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">Refuse</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">message</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">offer</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">demand</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">info</a>
-                            </div>
-                        </div>
-                        <div class="col-md-8 ">
+                        <div class="col-md-8 offset-2">
                             <table class="table table-striped border-deal  ">
                                 <thead>
                                 <tr>
@@ -63,12 +82,12 @@
                                         {% if deal.offerUser.id is same as(app.user.id) %}
                                         Your offer
                                         {% else %}
-                                        {{ deal.demandUser.firstname }}{{ ' offer '}}
+                                        Your demand
                                         {% endif %}
                                     </th>
                                     <th scope="col">
                                         {% if deal.demandUser.id is same as(app.user.id) %}
-                                            Your demand
+                                            {{ deal.offerUser.firstname }}{{ ' offer '}}
                                         {% else %}
                                             {{ deal.demandUser.firstname }}{{ ' demand '}}
                                         {% endif %}
@@ -76,57 +95,203 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{ dump(specification) }}
                                 {% for key, value in specification %}
-                                    {% if key is same as ('Date Of Event')  %}
-                                        <tr>
-                                            <th scope="row">{{ key  }}</th>
-                                            <td>{{ value['offer']|date("m/d/Y") }}</td>
+                                    {% if deal.offerUser.id is same as(app.user.id) %}
+                                        {% if key is same as ('Date Of Event')  %}
+                                            <tr>
+                                                <th scope="row">{{ key  }}</th>
+                                                <td>{{ value['offer']|date("m/d/Y") }}</td>
                                                 <td>{{ value['demand'] }}</td>
-                                        </tr>
-                                    {% elseif key is same as ('Languages')  %}
-                                        <tr>
-                                            <th scope="row">{{ key }}</th>
-                                            <td>
-                                                {% for cont in value['offer'] %}
-                                                    {#for show - befor all languages without the first#}
-                                                    {% if cont is same as(value['offer'][0]) %}
-                                                        {{cont}}
-                                                    {% else %}
-                                                        {{ ' - ' }}{{cont}}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </td>
-                                            <td>
-                                                {% for cont in value['demand'] %}
-                                                    {#for show - befor all languages without the first#}
-                                                    {% if cont is same as(value['demand'][0]) %}
-                                                        {{cont}}
-                                                    {% else %}
-                                                        {{ ' - ' }}{{cont}}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </td>
-                                        </tr>
+                                            </tr>
+                                        {% elseif key is same as ('Languages')  %}
+                                            <tr>
+                                                <th scope="row">{{ key }}</th>
+                                                <td>
+                                                    {% for cont in value['offer'] %}
+                                                        {#for show - befor all languages without the first#}
+                                                        {% if cont is same as(value['offer'][0]) %}
+                                                            {{cont}}
+                                                        {% else %}
+                                                            {{ ' - ' }}{{cont}}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+                                                    {% for cont in value['demand'] %}
+                                                        {#for show - befor all languages without the first#}
+                                                        {% if cont is same as(value['demand'][0]) %}
+                                                            {{cont}}
+                                                        {% else %}
+                                                            {{ ' - ' }}{{cont}}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr class="{#{% if value['offer'] is same as(value['demand'])  %}{{ 'bg-success' }}{% endif %}#}">
+                                                <th scope="row">{{ key }}</th>
+                                                <td>{{ value['offer'] }}</td>
+                                                <td>{{ value['demand'] }}</td>
+                                            </tr>
+                                        {% endif %}
                                     {% else %}
-                                        <tr class="{#{% if value['offer'] is same as(value['demand'])  %}{{ 'bg-success' }}{% endif %}#}">
-                                            <th scope="row">{{ key }}</th>
-                                            <td>{{ value['offer'] }}</td>
-                                            <td>{{ value['demand'] }}</td>
-                                        </tr>
+                                        {% if key is same as ('Date Of Event')  %}
+                                            <tr>
+                                                <th scope="row">{{ key  }}</th>
+                                                <td>{{ value['demand'] }}</td>
+                                                <td>{{ value['offer']|date("m/d/Y") }}</td>
+                                            </tr>
+                                        {% elseif key is same as ('Languages')  %}
+                                            <tr>
+                                                <th scope="row">{{ key }}</th>
+                                                <td>
+                                                    {% for cont in value['demand'] %}
+                                                        {#for show - befor all languages without the first#}
+                                                        {% if cont is same as(value['demand'][0]) %}
+                                                            {{cont}}
+                                                        {% else %}
+                                                            {{ ' - ' }}{{cont}}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+                                                    {% for cont in value['offer'] %}
+                                                        {#for show - befor all languages without the first#}
+                                                        {% if cont is same as(value['offer'][0]) %}
+                                                            {{cont}}
+                                                        {% else %}
+                                                            {{ ' - ' }}{{cont}}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr class="{#{% if value['offer'] is same as(value['demand'])  %}{{ 'bg-success' }}{% endif %}#}">
+                                                <th scope="row">{{ key }}</th>
+                                                <td>{{ value['demand'] }}</td>
+                                                <td>{{ value['offer'] }}</td>
+                                            </tr>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
                         </div>
-                        <div class= "col-md-2 border-deal text-center  ">
-                            <div class="deal-show col-md-12 py-1 ">
-                                <h3 class="title-blue">drivers</h3>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">Refuse</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">message</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">offer</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">demand</a>
-                                <a class="btn btn-info btn-block my-md-2 my-sm-0" data-toggle="modal" data-target="#Registration">info</a>
+                    </div>
+                    <div class="">
+                        <div class= "col-md-8 offset-2 border-deal ">
+                            <div class="deal-show row">
+                                <div class="btn-group">
+                                    {% if deal.offerUser.id is same as(app.user.id) %}
+                                        <form >
+                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.offer.id}) }}">
+                                                <img  src="{{ asset('/assets/images/icons/offer.png') }}" alt="offerUser" class="">
+                                                <p class="mt-2">Your offer</p>
+                                            </a>
+                                        </form>
+                                    {% else %}
+                                        <form >
+                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.demand.id}) }}">
+                                                <img  src="{{ asset('/assets/images/icons/demand.jpg') }}" alt="offerUser" class="">
+                                                <p class="mt-1">Your demand</p>
+                                            </a>
+                                        </form>
+                                    {% endif %}
+                                    {% if deal.offerUser.id is same as(app.user.id) %}
+                                        <form>
+                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.demand.id}) }}">
+                                                <img  src="{{ asset('/assets/images/icons/demand.jpg') }}" alt="offerUser" class="">
+                                                <p class="mt-1"> {{deal.demandUser.firstname}} demand </p>
+                                            </a>
+                                        </form>
+                                    {% else %}
+                                        <form>
+                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.offer.id}) }}">
+                                                <img  src="{{ asset('/assets/images/icons/offer.png') }}" alt="offerUser" class="">
+                                                <p class="mt-1"> {{deal.offerUser.firstname}} offer </p>
+                                            </a>
+                                        </form>
+                                    {% endif %}
+                                    {% if deal.offerUser.id is same as(app.user.id) %}
+                                        <form>
+                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.demandUser.id}) }}">
+                                                <img  src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" class="">
+                                                <p class="mt-1">{{deal.demandUser.firstname}} profile</p>
+                                            </a>
+                                        </form>
+                                    {% else %}
+                                        <form>
+                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
+                                                <img  src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" class="">
+                                                <p class="mt-1">{{deal.offerUser.firstname}} profile</p>
+                                            </a>
+                                        </form>
+                                    {% endif %}
+                                    {% if deal.offerUser.id is same as(app.user.id) %}
+                                        <form action="">
+                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
+                                                <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="offerUser" class="">
+                                                <p class="mt-1"> Message to {{deal.demandUser.firstname}}</p>                                        </p>
+                                            </a>
+                                        </form>
+                                    {% else %}
+                                        <form action="">
+                                            <a class="btn btn-info mx-1" href="">
+                                                <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="message" class="">
+                                                <p class="mt-1"> Message to {{deal.offerUser.firstname}}</p>                                       </p>
+                                            </a>
+                                        </form>
+                                    {% endif %}
+                                    <form >
+                                        <button class="btn btn-info mx-1" href="#">
+                                            <img  src="{{ asset('/assets/images/icons/report.png') }}" alt="report" class="">
+                                            <p class="mt-1">Report the deal</p>
+                                        </button>
+                                    </form>
+                                    <form >
+                                        <button class="btn btn-info mx-1" href="#">
+                                            <img  src="{{ asset('/assets/images/icons/dealdone.png') }}" alt="dealdone" class="">
+                                            <p class="mt-1">Deal done</p>
+                                        </button>
+                                    </form>
+                                    <form method="post" action="{{ path('deal_delete', {'id': deal.id}) }}" onsubmit="return confirm('Are you sure you want to delete this Deal?');">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deal.id) }}">
+                                        <button class="btn btn-info mx-1">
+                                            <img  src="{{ asset('/assets/images/icons/cancel.jpg') }}" alt="offerUser" class="">
+                                            <p class="mt-1">Cancel the deal</p>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class= "col-md-8 offset-2  ">
+                            <div class="deal-show row py-1 ">
+                                <div class="btn-group driver ">
+                                    {% if drivers is not empty %}
+                                        {% for driver in drivers %}
+                                            <a class="text-center mx-2 px-2 py-2 border-deal ">
+                                                <img  src="{{ asset('/assets/images/profile/'~driver.user.profileImage) }}" alt="offerUser" class="">
+                                                <p class="mt-1">{{driver.user.firstname}}</p>
+                                                <p class="mt-1">{{ driver.point }}{{ ' Points' }}</p>
+                                                <p class="mt-1">{{ driver.feedback }}</p>
+                                                <button class="btn btn-info my-1 btn-block">Message to {{driver.user.firstname}}</button>
+                                                <button class="btn btn-info my-1 btn-block">Application for accession</button>
+                                                <button class="btn btn-info my-1 btn-block">Add to the deal </button>
+                                            </a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="col-md-12">
+                                            <div class="border-deal px-4">
+                                                <a class="text-center  px-2">
+                                                    <h2>There is no Drivers in this area</h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,7 +299,4 @@
             </div>
         </div>
     </div>
-    <a href="{{ path('deal_index') }}">back to list</a>
-
-    {{ include('deal/_delete_form.html.twig') }}
 {% endblock %}

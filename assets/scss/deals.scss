@@ -99,3 +99,22 @@
   margin-top: 1%;
   margin-bottom: 1%;
 }
+
+.btn-group{
+  justify-content: center;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+.btn-group form{
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+.btn-group form button{
+  border-radius: 25% 10%;
+}
+.btn-group a.btn{
+  border-radius: 25% 10%;
+
+}
