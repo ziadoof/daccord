@@ -19,32 +19,25 @@ class DoneDealRepository extends ServiceEntityRepository
         parent::__construct($registry, DoneDeal::class);
     }
 
-    // /**
-    //  * @return DoneDeal[] Returns an array of DoneDeal objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findByDriver($driver)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
+        ->andWhere('d.driverUser = :driver')
+        ->setParameter('driver', $driver)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    public function findByUser($user)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.offerUser = :user')
+            ->orWhere('d.demandUser = :user')
+            ->setParameter('user', $user)
+            ->orderBy('d.date', 'DESC')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?DoneDeal
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

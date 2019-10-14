@@ -1,0 +1,178 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}Driver Request{% endblock %}
+
+{% block content %}
+    <h1 class="title-blue text-center">Driver Request</h1>
+    <div class="driver-request">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="title-rose text-center mb-4">Driver Request in waiting</h1>
+                        {% if driver_requests is not empty %}
+                            {% for driver_request in driver_requests %}
+                                <div class="border-deal {{ driver_request.status }}">
+                                    <div class=" pt-2 mx-4">
+                                        <b>Requested at : {{ driver_request.date|date("m/d/Y") }}</b>
+                                        <b class="float-right">Suggested price : <span class="title-blue">{{ driver_request.price }}</span>{{ ' €' }}</b>
+                                    </div>
+                                    <hr>
+                                    <div class="row mx-4 justify-content-center">
+                                        <b class=" pb-2"> <span class="title-blue">{{ driver_request.user.firstname }}</span> has sent you driver request for transfair <span class="title-blue">{{ driver_request.deal.category }} </span>
+                                            from <span class="title-blue">{{ driver_request.deal.offer.ville }}</span>
+                                            to <span class="title-blue">{{ driver_request.deal.demand.ville }}</span></b>
+                                    </div>
+                                    <div class="btn-group driver deal-show">
+                                        <a class="text-center mx-2 px-2 py-2  ">
+                                            <img  src="{{ asset('/assets/images/profile/'~driver_request.deal.offerUser.profileImage) }}" alt="offerUser" class="">
+                                            <button class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.offerUser.firstname}}</button>
+                                        </a>
+                                        <a class="mt-5 mx-5">
+                                            <i class="fas fa-handshake deal-show-photo mt-0"></i>
+                                        </a>
+                                        <a class="text-center mx-2 px-2 py-2  ">
+                                            <img  src="{{ asset('/assets/images/profile/'~driver_request.deal.demandUser.profileImage) }}" alt="offerUser" class="">
+                                            <button class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.demandUser.firstname}}</button>
+                                        </a>
+                                    </div>
+                                    <hr>
+                                    <div class="px-4 py-1">
+                                        <p class="font-weight-bold">Message</p>
+                                        {{ driver_request.description }}
+                                    </div>
+                                    <hr>
+                                    <div class=" btn-group pb-2">
+                                        <form>
+                                            <a class="btn btn-info my-1 mx-2 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.offer.id}) }}">{{driver_request.deal.offerUser.firstname}}{{ ' offer' }}</a>
+                                        </form>
+                                        <form >
+                                            <a class="btn btn-info my-1 mx-2 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.demand.id}) }}">{{driver_request.deal.demandUser.firstname}}{{ ' demand' }}</a>
+                                        </form>
+                                        <form>
+                                            <a class="btn btn-danger my-1 mx-2 btn-block"
+                                               href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id, 'type': 'rejected'}) }}"
+                                               onclick="return confirm('Are you sure you want to reject this Deal?');">Reject the request</a>
+                                        </form>
+                                        <form>
+                                            <a class="btn btn-success my-1 mx-2 btn-block"
+                                               href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id,'type': 'accepted'}) }}"
+                                               onclick="return confirm('Are you sure you want to accept this Deal?');">Accept the request</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <h2 class="title-blue text-center">There is no driver request</h2>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 class="title-rose text-center mb-4">Done drivers</h1>
+                {% if deals is not empty or doneDeals is not empty %}
+                {% for deal in deals %}
+                <div class="border-respo done-deal">
+                    <div class="col-md-12">
+                        <div class="row border-bottom {% if deal.offerUserStatus and deal.demandUserStatus and deal.driverStatus %}accepted {% else %}pending{% endif %}">
+                            <div class="col-md-6">
+                                <p class=" my-2">Category : <span>{{ deal.category }}</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="float-right my-2">Deal status : <span>Pending</span></p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="row mt-2 pb-1 justify-content-center">
+                                <div class="">
+                                    <div class="btn-group driver deal-show">
+                                        <a class="text-center mx-2 px-2 py-2  ">
+                                            <img  src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" class=""><br>
+                                            <b class="deal-terminate">{{deal.offerUser.firstname}}
+                                                {% if deal.offerUserStatus %}
+                                                    <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                {% else %}
+                                                    <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                {% endif %}</b><br>
+                                            <b class="deal-terminate">Offer</b>
+                                        </a>
+
+                                            <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
+                                            <a class="text-center mx-2 px-2 py-2  ">
+                                                <img  src="{{ asset('/assets/images/profile/'~deal.driverUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                <b class="deal-terminate">{{deal.driverUser.firstname}}
+                                                    {% if deal.driverStatus %}
+                                                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                    {% else %}
+                                                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                    {% endif %}</b><br>
+                                                <i class="fas fa-truck-moving button-left" title="Driver request"></i>
+                                                <b class="deal-terminate">Driver</b>
+                                            </a>
+                                            <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
+
+                                        <a class="text-center mx-2 px-2 py-2  ">
+                                            <img  src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" class=""><br>
+                                            <b class="deal-terminate">{{deal.demandUser.firstname}}
+                                                {% if deal.demandUserStatus %}
+                                                    <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                {% else %}
+                                                    <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                {% endif %}</b><br>
+                                            <b class="deal-terminate">Demand</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row border-top">
+                                <div class="col-md-9">
+                                    <p class="my-2  ">Suggested at <span>{{ deal.date_format(deal.suggestionDate) }}</span></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row my-2 ">
+                                        <div class="col text-center">
+                                            {% if not deal.driverStatus %}
+                                                <form method="post" action="{{ path('deal_done', {'id': deal.id}) }}"
+                                                      onsubmit="return confirm('Are you sure you want to finish this deal?');">
+                                                    <button class="btn btn-info" href="">Finish this deal</button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for deal in doneDeals %}
+                <div class="done-deal">
+                    <div class="border-respo">
+                        <div class="col-md-12">
+                            <div class="row border-bottom justify-content-center accepted">
+                                <b class="title-rose">DONE DEAL</b>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 mx-2 my-2">
+                                    <p>You have cooperated in a deal on <a class="title-blue">{{deal.date|date("m/d/Y")}}</a> for <span>{{deal.category}}</span> with
+                                        {{deal.demandUser.firstname}} and {{ deal.offerUser.firstname }} and you get <span>Seven</span> extra  points.</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="badge badge-pill my-4 badge-points">7 POINTS</span>
+                                </div>
+                            </div>
+                            <div class="row border-top justify-content-center">
+                                <p class="my-2 mx-2">Based on this deal,
+                                    The associated ads and all possible deals for these ads have been deleted.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <h2 class="title-blue text-center">There is no done drivers</h2>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -124,4 +124,10 @@ body .welcome-text {
 .my-area-hidden{
   display: none;
 }
-
+/* messag alert */
+.message-flash{
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 20em;
+}

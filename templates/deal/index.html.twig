@@ -8,6 +8,7 @@
         <div class="col-md-5">
             <h1 class="text-center title-rose"> Suggested Deals</h1>
             <div>
+                {% if suggestedDeals is not empty %}
                 {% for deal in suggestedDeals %}
                     <div class="deal">
                         <div class="border-respo">
@@ -121,132 +122,188 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% else %}
+                        <h2 class="title-blue text-center">There is no suggested deals</h2>
+                {% endif %}
             </div>
         </div>
         <div class="col-md-5 offset-2 ">
             <h1 class="text-center title-rose"> Done Deals</h1>
             <div>
-                {% for deal in doneDeals %}
+                {% if pendingDeals is not empty or doneDeals is not empty %}
+                {% for pendingDeal in pendingDeals %}
                     <div class="done-deal">
                         <div class="border-respo">
                             <div class="col-md-12">
-                                <div class="row border-bottom">
+                                <div class="row border-bottom pending">
                                     <div class="col-md-6">
-                                        <p class="my-2 "><span>Ended at</span> {{ deal.date_format(deal.date) }}</p>
+                                        <p class=" my-2">Category : <span>{{ pendingDeal.category }}</span></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p class="float-right my-2"><span>Category : </span>{{ deal.category }}</p>
+                                        <p class="float-right my-2">Deal status : <span>Pending</span></p>
                                     </div>
                                 </div>
-                                {% if deal.offerUser.id is same as(app.user.id) %}
-                                        <div class="row mt-2 pb-1">
-                                            <div class="col-md-4">
-                                                <div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-4 offset-4">
-                                                            {% if deal.offerUser.profileImage  %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" >
+                                {% if pendingDeal.offerUser.id is same as(app.user.id) %}
+                                    <div class="row mt-2 pb-1 justify-content-center">
+                                        <div class="">
+                                            <div class="btn-group driver deal-show">
+                                                <a class="text-center mx-2 px-2 py-2  ">
+                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.offerUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <b class="deal-terminate">{{pendingDeal.offerUser.firstname}}
+                                                        {% if pendingDeal.offerUserStatus %}
+                                                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                        {% else %}
+                                                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                        {% endif %}</b><br>
+                                                    <b class="deal-terminate">Offer</b>
+                                                </a>
+                                                {% if pendingDeal.driverUser %}
+                                                    <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
+                                                    <a class="text-center mx-2 px-2 py-2  ">
+                                                        <img  src="{{ asset('/assets/images/profile/'~pendingDeal.driverUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                        <b class="deal-terminate">{{pendingDeal.driverUser.firstname}}
+                                                            {% if pendingDeal.driverStatus %}
+                                                                <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
                                                             {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="col text-center">
-                                                            <b class="ml-2">{{ 'Your offer '}}</b>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col text-center done-deal-photo">
-                                                <i class="fas fa-handshake"></i>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-4 offset-4">
-                                                            {% if deal.demandUser.profileImage  %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" >
-                                                            {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="col text-center">
-                                                            <b class="ml-2">{{ deal.demandUser.firstname }}{{ ' demand '}}</b>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                                <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                            {% endif %}</b><br>
+                                                        <i class="fas fa-truck-moving button-left" title="Driver request"></i>
+                                                        <b class="deal-terminate">Driver</b>
+                                                    </a>
+                                                    <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
+                                                {% else %}
+                                                    <i class="fas fa-handshake deal-show-photo mt-4"></i>
+                                                {% endif %}
+                                                <a class="text-center mx-2 px-2 py-2  ">
+                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.demandUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <b class="deal-terminate">{{pendingDeal.demandUser.firstname}}
+                                                        {% if pendingDeal.demandUserStatus %}
+                                                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                        {% else %}
+                                                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                        {% endif %}</b><br>
+                                                    <b class="deal-terminate">Demand</b>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="row border-top">
-                                            <div class="col-md-12">
-                                                <p class="my-2 ">Based on this deal,
-                                                    The associated ads and all possible deals for these ads have been deleted.</p>
-                                            </div>
+                                    </div>
+                                    <div class="row border-top">
+                                        <div class="col-md-12 ">
+                                            <p class="my-1  ">Suggested at <span>{{ pendingDeal.date_format(pendingDeal.suggestionDate) }}</span></p>
                                         </div>
+                                    </div>
                                 {% else %}
-                                        <div class="row mt-2 pb-4">
-                                            <div class="col-md-4">
-                                                <div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-4 offset-4">
-                                                            {% if deal.demandUser.profileImage  %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" >
-                                                            {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="col text-center">
-                                                            <b class="ml-2">{{ 'Your demand '}}</b>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col text-center done-deal-photo">
-                                                <i class="fas fa-handshake"></i>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="row ">
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-4 offset-4">
-                                                            {% if deal.offerUser.profileImage  %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" >
-                                                            {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser">
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="col text-center">
-                                                            <b class="ml-2">{{ deal.offerUser.firstname }}{{ ' offer '}}</b>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-top">
-                                                <div class="col-md-12">
-                                                    <p class="my-2 ">Based on this deal,
-                                                        The associated ads and all possible deals for these ads have been deleted.</p>
-                                                </div>
+                                    <div class="row mt-2 pb-1 justify-content-center">
+                                        <div class="">
+                                            <div class="btn-group driver deal-show">
+                                                <a class="text-center mx-2 px-2 py-2  ">
+                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.demandUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <b class="deal-terminate">{{pendingDeal.demandUser.firstname}}
+                                                        {% if pendingDeal.demandUserStatus %}
+                                                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                        {% else %}
+                                                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                        {% endif %}</b><br>
+                                                    <b class="deal-terminate">Demand</b>
+                                                </a>
+                                                {% if pendingDeal.driverUser %}
+                                                    <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
+                                                    <a class="text-center mx-2 px-2 py-2  ">
+                                                        <img  src="{{ asset('/assets/images/profile/'~pendingDeal.driverUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                        <b class="deal-terminate">{{pendingDeal.driverUser.firstname}}
+                                                        {% if pendingDeal.driverStatus %}
+                                                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                        {% else %}
+                                                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                        {% endif %}</b><br>
+                                                        <i class="fas fa-truck-moving button-left" title="Driver request"></i>
+                                                        <b class="deal-terminate">Driver</b>
+                                                    </a>
+                                                    <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
+                                                {% else %}
+                                                    <i class="fas fa-handshake deal-show-photo mt-4"></i>
+                                                {% endif %}
+                                                <a class="text-center mx-2 px-2 py-2  ">
+                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.OfferUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <b class="deal-terminate">{{pendingDeal.OfferUser.firstname}}
+                                                        {% if pendingDeal.OfferUserStatus %}
+                                                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                        {% else %}
+                                                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                        {% endif %}</b><br>
+                                                    <b class="deal-terminate">Offer</b>
+                                                </a>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row border-top">
+                                        <div class="col-md-12 ">
+                                            <p class="my-1  ">Suggested at <span>{{ pendingDeal.date_format(pendingDeal.suggestionDate) }}</span></p>
+                                        </div>
+                                    </div>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 {% endfor %}
+                {% for deal in doneDeals %}
+                <div class="done-deal">
+                    <div class="border-respo">
+                        <div class="col-md-12">
+                            <div class="row border-bottom justify-content-center accepted">
+                                <b class="title-rose">DONE DEAL</b>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 mx-2 my-2">
+                                    <p>
+                                    You have completed a deal on <a class="title-blue">{{deal.date|date("m/d/Y")}}</a> for <span>{{deal.category}}</span> with
+                                        {% if deal.offerUser is same as (app.user)  %}
+                                            {% if deal.demandUser.firstname %}
+                                                {{deal.demandUser.firstname}}
+                                            {% else %}
+                                                {{ deal.demandUserName }}
+                                            {% endif %}
+                                        {% else %}
+                                            {% if deal.offerUser.firstname %}
+                                                {{deal.offerUser.firstname}}
+                                            {% else %}
+                                                {{ deal.offerUserName }}
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if deal.driverUser %}
+                                            and in cooperation with the driver
+                                            {% if deal.driverUser.firstname %}
+                                                {{deal.driverUser.firstname}}
+                                            {% else %}
+                                                {{ deal.driverUserName }}
+                                            {% endif %}
+                                        {% endif %}
+                                    and you get <span>Five</span> extra  points.
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="badge badge-pill my-4 badge-points">5 POINTS</span>
+                                </div>
+                            </div>
+                            <div class="row border-top">
+                                <p class="my-2 mx-2  text-center">Based on this deal,
+                                    The associated ads and all possible deals for these ads have been deleted.</p>
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="col-md-12 my-1">
+                                {# TO DO add 5 star evaluate and comment for driver in his driver proffile#}
+                                <b class="ml-2">Evaluate the driver: </b>
+                                <button class="btn btn-info mb-1">choisir 5 star</button>
+                                <button class="btn btn-info mb-1">Add comment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <h2 class="title-blue text-center">There is no done deals</h2>
+                {% endif %}
             </div>
         </div>
     </div>

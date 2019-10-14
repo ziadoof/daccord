@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3d9f85700f018586fc8c4800c9dbad9",
+    "content-hash": "c65909fca9ad3b730fd08d84abe9f672",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3272,16 +3272,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.3.3",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "527887c3858a2462b0137662c74837288b998ee3"
+                "reference": "f832ecacfb00688b498eedf9b10784e401d969a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/527887c3858a2462b0137662c74837288b998ee3",
-                "reference": "527887c3858a2462b0137662c74837288b998ee3",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/f832ecacfb00688b498eedf9b10784e401d969a6",
+                "reference": "f832ecacfb00688b498eedf9b10784e401d969a6",
                 "shasum": ""
             },
             "require": {
@@ -3297,7 +3297,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.2-dev"
                 }
             },
             "autoload": {
@@ -3324,7 +3324,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2019-07-23T11:21:36+00:00"
+            "time": "2019-07-23T09:50:15+00:00"
         },
         {
             "name": "symfony/dependency-injection",

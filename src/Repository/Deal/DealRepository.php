@@ -2,6 +2,7 @@
 
 namespace App\Repository\Deal;
 
+use App\Entity\Ads\Ad;
 use App\Entity\Deal\Deal;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -19,32 +20,45 @@ class DealRepository extends ServiceEntityRepository
         parent::__construct($registry, Deal::class);
     }
 
-    // /**
-    //  * @return Deal[] Returns an array of Deal objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOneById($id): ?Deal
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Deal
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('d.id = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-    */
+    public function findByDriver($driver)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.driverUser = :driver')
+            ->setParameter('driver', $driver)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByOfferDemand(?Ad $offer, ?Ad $demand)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.offer = :offer')
+            ->orWhere('d.demand = :demand')
+            ->setParameter('offer', $offer)
+            ->setParameter('demand', $demand)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByAd(Ad $ad)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.offer = :ad')
+            ->orWhere('d.demand = :ad')
+            ->setParameter('ad', $ad)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

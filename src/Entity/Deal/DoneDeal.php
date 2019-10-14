@@ -5,6 +5,7 @@ namespace App\Entity\Deal;
 use App\Entity\Ads\Category;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Deal\DoneDealRepository")
@@ -25,16 +26,108 @@ class DoneDeal
     private $offerUser;
 
     /**
+     * @var string $offerUserName
+     * @ORM\Column(type="string", length=255)
+     */
+    private $offerUserName;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="demandDoneDeals")
      * @ORM\JoinColumn(nullable=false)
      */
     private $demandUser;
 
     /**
+     * @return string
+     */
+    public function getOfferUserName(): string
+    {
+        return $this->offerUserName;
+    }
+
+    /**
+     * @param string $offerUserName
+     */
+    public function setOfferUserName(string $offerUserName): void
+    {
+        $this->offerUserName = $offerUserName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDemandUserName(): string
+    {
+        return $this->demandUserName;
+    }
+
+    /**
+     * @param string $demandUserName
+     */
+    public function setDemandUserName(string $demandUserName): void
+    {
+        $this->demandUserName = $demandUserName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDriverUserName(): string
+    {
+        return $this->driverUserName;
+    }
+
+    /**
+     * @param string $driverUserName
+     */
+    public function setDriverUserName(string $driverUserName): void
+    {
+        $this->driverUserName = $driverUserName;
+    }
+
+    /**
+     * @var string $demandUserName
+     * @ORM\Column(type="string", length=255)
+     */
+    private $demandUserName;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
     private $driverUser;
+
+    /**
+     * @var string $driverUserName
+     * @ORM\Column(type="string", length=255)
+     *
+     */
+    private $driverUserName;
+
+    /**
+     * DoneDeal constructor.
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDriverUser()
+    {
+        return $this->driverUser;
+    }
+
+    /**
+     * @param mixed $driverUser
+     */
+    public function setDriverUser($driverUser): void
+    {
+        $this->driverUser = $driverUser;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Ads\Category", inversedBy="doneDeals")
@@ -143,4 +236,5 @@ class DoneDeal
                 break;
         }
     }
+
 }

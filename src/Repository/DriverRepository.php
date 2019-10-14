@@ -19,10 +19,16 @@ class DriverRepository extends ServiceEntityRepository
         parent::__construct($registry, Driver::class);
     }
 
-     /**
-      * @return Driver[] Returns an array of Driver objects
-      */
-    public function findByArea($latOffer, $lngOffer, $latDemand, $lngDemand): array
+    /**
+     * @param $latOffer
+     * @param $lngOffer
+     * @param $latDemand
+     * @param $lngDemand
+     * @param $offerUser
+     * @param $demandUser
+     * @return Driver[] Returns an array of Driver objects
+     */
+    public function findByArea($latOffer, $lngOffer, $latDemand, $lngDemand, $offerUser, $demandUser): array
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.gpsLat + 0.012626 * d.maxDistance > :latOffer')
@@ -34,10 +40,14 @@ class DriverRepository extends ServiceEntityRepository
             ->andWhere('d.gpsLng - 0.012626 * d.maxDistance < :lngOffer')
             ->andWhere('d.gpsLng - 0.012626 * d.maxDistance < :lngDemand')
             ->andWhere('d.active = :true')
+            ->andWhere('d.user != :offerUser')
+            ->andWhere('d.user != :demandUser')
             ->setParameter('latOffer', $latOffer)
             ->setParameter('latDemand', $latDemand)
             ->setParameter('lngOffer', $lngOffer)
             ->setParameter('lngDemand', $lngDemand)
+            ->setParameter('offerUser', $offerUser)
+            ->setParameter('demandUser', $demandUser)
            /* ->setParameter('km', $km)*/
             ->setParameter('true', true)
             ->orderBy('d.point', 'DESC')
@@ -47,32 +57,13 @@ class DriverRepository extends ServiceEntityRepository
         ;
     }
 
-    // /**
-    //  * @return Driver[] Returns an array of Driver objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOneById($id): ?Driver
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Driver
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('d.id = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-    */
 }

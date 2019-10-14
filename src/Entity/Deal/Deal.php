@@ -4,7 +4,10 @@ namespace App\Entity\Deal;
 
 use App\Entity\Ads\Ad;
 use App\Entity\Ads\Category;
+use App\Entity\DriverRequest;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -75,6 +78,11 @@ class Deal
      */
     private $driverStatus;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DriverRequest", mappedBy="deal")
+     */
+    private $driverRequests;
+
 
     /**
      * Deal constructor.
@@ -85,6 +93,7 @@ class Deal
         $this->offerUserStatus = false;
         $this->demandUserStatus = false;
         $this->driverStatus = false;
+        $this->driverRequests = new ArrayCollection();
     }
 
 
@@ -260,5 +269,36 @@ class Deal
     public function setDriverUser($driverUser): void
     {
         $this->driverUser = $driverUser;
+    }
+
+    /**
+     * @return Collection|DriverRequest[]
+     */
+    public function getDriverRequests(): Collection
+    {
+        return $this->driverRequests;
+    }
+
+    public function addDriverRequest(DriverRequest $driverRequest): self
+    {
+        if (!$this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests[] = $driverRequest;
+            $driverRequest->setDeal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDriverRequest(DriverRequest $driverRequest): self
+    {
+        if ($this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests->removeElement($driverRequest);
+            // set the owning side to null (unless already changed)
+            if ($driverRequest->getDeal() === $this) {
+                $driverRequest->setDeal(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -2,7 +2,14 @@
     <div  class="main"  >
         <div class="sidebar left">
             <ul class="list-sidebar bg-defoult">
-
+                {% if app.user.driver %}
+                    <li class="icon">
+                        <a  href="{{path('driver_request_index')}}" id="my_driver_request">
+                            <i class="fas fa-truck-moving button-left" title="Driver request"></i>
+                            <span class="nav-label">My driver request</span>
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="icon">
                     <a  href="javascript:void(0)" id="my_offer">
                         <i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Location\City;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -79,12 +81,18 @@ class Driver
     private $feedback;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DriverRequest", mappedBy="driver")
+     */
+    private $driverRequests;
+
+    /**
      * Driver constructor.
      */
     public function __construct()
     {
         $this->point = 10;
         $this->active = true;
+        $this->driverRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,6 +228,37 @@ class Driver
     public function setFeedback(?float $feedback): self
     {
         $this->feedback = $feedback;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DriverRequest[]
+     */
+    public function getDriverRequests(): Collection
+    {
+        return $this->driverRequests;
+    }
+
+    public function addDriverRequest(DriverRequest $driverRequest): self
+    {
+        if (!$this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests[] = $driverRequest;
+            $driverRequest->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDriverRequest(DriverRequest $driverRequest): self
+    {
+        if ($this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests->removeElement($driverRequest);
+            // set the owning side to null (unless already changed)
+            if ($driverRequest->getDriver() === $this) {
+                $driverRequest->setDriver(null);
+            }
+        }
 
         return $this;
     }

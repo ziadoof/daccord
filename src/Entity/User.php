@@ -154,6 +154,11 @@ class User  extends BaseUser implements UserInterface
      */
     private $demandDoneDeals;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DriverRequest", mappedBy="user")
+     */
+    private $driverRequests;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -389,6 +394,7 @@ class User  extends BaseUser implements UserInterface
         $this->setPhonNumberStatus(false);
         $this->setPoint(10);
         $this->setBirthdayStatus(false);
+        // first name obligatoir
         $this->setFirstname('Utilisateur');
         $this->setLastname( (string) $this->getId());
         $this->setUsername("onadaccordUser" );
@@ -398,6 +404,7 @@ class User  extends BaseUser implements UserInterface
         $this->demandDeals = new ArrayCollection();
         $this->offerDoneDeals = new ArrayCollection();
         $this->demandDoneDeals = new ArrayCollection();
+        $this->driverRequests = new ArrayCollection();
         // your own logic
     }
 
@@ -502,6 +509,10 @@ class User  extends BaseUser implements UserInterface
         return $deals;
     }
 
+    /**
+     * @return ArrayCollection
+     *
+     */
     public function getDoneDeals(){
         $deals = new ArrayCollection(
             array_merge($this->getOfferDoneDeals()->toArray(), $this->getDemandDoneDeals()->toArray())
@@ -582,6 +593,37 @@ class User  extends BaseUser implements UserInterface
             // set the owning side to null (unless already changed)
             if ($demandDoneDeal->getDemandUser() === $this) {
                 $demandDoneDeal->setDemandUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DriverRequest[]
+     */
+    public function getDriverRequests(): Collection
+    {
+        return $this->driverRequests;
+    }
+
+    public function addDriverRequest(DriverRequest $driverRequest): self
+    {
+        if (!$this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests[] = $driverRequest;
+            $driverRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDriverRequest(DriverRequest $driverRequest): self
+    {
+        if ($this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests->removeElement($driverRequest);
+            // set the owning side to null (unless already changed)
+            if ($driverRequest->getUser() === $this) {
+                $driverRequest->setUser(null);
             }
         }
 

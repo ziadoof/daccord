@@ -10,6 +10,7 @@ use App\Form\Ads\OfferType;
 use App\Form\Ads\DemandType;
 use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
+use App\Repository\Deal\DealRepository;
 use App\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -88,7 +89,7 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("ad//new/{type}", name="ad_new", methods={"GET","POST"})
+     * @Route("ad/new/{type}", name="ad_new", methods={"GET","POST"})
      * @param Request $request
      * @param FileUploader $fileUploader
      * @param string $type
@@ -234,6 +235,9 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad): Response
     {
+        if (!$ad) {
+            throw $this->createNotFoundException('This ad has been removed');
+        }
         $em = $this->getDoctrine()->getManager();
         $categoryParent = $ad->getCategory()->getParent()->getName();
         $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),$ad->getTypeOfAd(), $categoryParent);
@@ -281,14 +285,28 @@ class AdController extends AbstractController
      * @Route("ad/{id}", name="ad_delete", methods={"DELETE"})
      * @param Request $request
      * @param Ad $ad
+     * @param DealRepository $dealRepository
      * @return Response
      */
-    public function delete(Request $request, Ad $ad): Response
+    public function delete(Request $request, Ad $ad, DealRepository $dealRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ad->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $dealsContact = $dealRepository->findByAd($ad);
+            foreach ($dealsContact as $dealContact){
+                $driverRequests = $dealContact->getDriverRequests();
+                foreach ($driverRequests as $driverRequest){
+                    $entityManager->remove($driverRequest);
+                }
+                $entityManager->remove($dealContact);
+            }
             $entityManager->remove($ad);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Your ad and all the deals related to it has been removed successfully!'
+            );
         }
 
         return $this->redirectToRoute('ad_index');
