@@ -68,7 +68,7 @@ class RegionController extends AbstractController
             return $this->redirectToRoute('region_index', ['id' => $region->getId()]);
         }
 
-        return $this->render('Location/region/edit.html.twig', [
+        return $this->render('Location/region/driver_edit.html.twig', [
             'region' => $region,
             'form' => $form->createView(),
         ]);

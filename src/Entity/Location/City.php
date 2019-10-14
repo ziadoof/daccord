@@ -2,6 +2,7 @@
 
 namespace App\Entity\Location;
 
+use App\Entity\Driver;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -61,9 +62,15 @@ class City
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Driver", mappedBy="city")
+     */
+    private $drivers;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->drivers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,6 +195,37 @@ class City
     public function __toString()
     {
         return $this->name .' '. $this->getZipCode();
+    }
+
+    /**
+     * @return Collection|Driver[]
+     */
+    public function getDrivers(): Collection
+    {
+        return $this->drivers;
+    }
+
+    public function addDriver(Driver $driver): self
+    {
+        if (!$this->drivers->contains($driver)) {
+            $this->drivers[] = $driver;
+            $driver->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDriver(Driver $driver): self
+    {
+        if ($this->drivers->contains($driver)) {
+            $this->drivers->removeElement($driver);
+            // set the owning side to null (unless already changed)
+            if ($driver->getCity() === $this) {
+                $driver->setCity(null);
+            }
+        }
+
+        return $this;
     }
 
 }

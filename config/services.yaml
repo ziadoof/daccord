@@ -82,6 +82,6 @@ services:
             $factory:
             $entityManager:
             $type:
-
-
+    App\Events\EventSubscriber\AdAddSubscriber:
+        arguments: ["@doctrine.orm.entity_manager"]
 

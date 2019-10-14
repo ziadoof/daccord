@@ -2,6 +2,7 @@
 
 namespace App\Entity\Ads;
 
+use App\Entity\Deal\Deal;
 use App\Entity\Location\City;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -191,10 +192,6 @@ class Ad
 
 /*-------------------start specification -------------------*/
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $withDriver;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -918,6 +915,16 @@ class Ad
     private $region;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\Deal", mappedBy="offer", orphanRemoval=true)
+     */
+    private $offerDeals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\Deal", mappedBy="demand", orphanRemoval=true)
+     */
+    private $demandDeals;
+
+    /**
      * @return mixed
      */
     public function getVille()
@@ -1156,21 +1163,6 @@ class Ad
         $this->typeOfAd = $typeOfAd;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWithDriver()
-    {
-        return $this->withDriver;
-    }
-
-    /**
-     * @param mixed $withDriver
-     */
-    public function setWithDriver($withDriver): void
-    {
-        $this->withDriver = $withDriver;
-    }
 
     /**
      * @return mixed
@@ -2615,13 +2607,16 @@ class Ad
     public function __construct()
     {
         $this->dateOfAd = new \DateTime('now');
+        $this->offerDeals = new ArrayCollection();
+        $this->demandDeals = new ArrayCollection();
     }
     public function __toString()
     {
         return $this->title;
     }
 
-    public function getAllSpecifications(){
+    public function getAllSpecifications(): array
+    {
        $vars  = get_object_vars($this);
        $all = [];
        $exp = ['id','title','imageOne','imageTow','imageThree','donate','price','dateOfAd','typeOfAd','user','description'];
@@ -2633,6 +2628,21 @@ class Ad
            }
        }
         return $all;
+    }
+
+    public function getDealSpecifications(): array
+    {
+        // all specification with null
+        $vars  = get_object_vars($this);
+        $dealSpecifications = [];
+        $exp = ['id','title','imageOne','imageTow','imageThree','category','generalCategory','ville','typeOfAd'
+                ,'user','description','department', 'region', 'offerDeals', 'demandDeals','gpsLat', 'gpsLng', '__isInitialized__'];
+        foreach ($vars as $key=>$value){
+            if(!in_array($key,$exp)){
+                    $dealSpecifications[$key]=$value;
+            }
+        }
+        return $dealSpecifications;
     }
 
     public function serialize():array
@@ -2703,6 +2713,68 @@ class Ad
                 return '1 Month ago';
                 break;
         }
+    }
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getOfferDeals(): Collection
+    {
+        return $this->offerDeals;
+    }
+
+    public function addOfferDeal(Deal $offerDeal): self
+    {
+        if (!$this->offerDeals->contains($offerDeal)) {
+            $this->offerDeals[] = $offerDeal;
+            $offerDeal->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOfferDeal(Deal $offerDeal): self
+    {
+        if ($this->offerDeals->contains($offerDeal)) {
+            $this->offerDeals->removeElement($offerDeal);
+            // set the owning side to null (unless already changed)
+            if ($offerDeal->getOffer() === $this) {
+                $offerDeal->setOffer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getDemandDeals(): Collection
+    {
+        return $this->demandDeals;
+    }
+
+    public function addDemandDeal(Deal $demandDeal): self
+    {
+        if (!$this->demandDeals->contains($demandDeal)) {
+            $this->demandDeals[] = $demandDeal;
+            $demandDeal->setDemand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandDeal(Deal $demandDeal): self
+    {
+        if ($this->demandDeals->contains($demandDeal)) {
+            $this->demandDeals->removeElement($demandDeal);
+            // set the owning side to null (unless already changed)
+            if ($demandDeal->getDemand() === $this) {
+                $demandDeal->setDemand(null);
+            }
+        }
+
+        return $this;
     }
 
 }

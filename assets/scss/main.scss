@@ -12,6 +12,7 @@
 @import "~bootstrap4-toggle/css/bootstrap4-toggle.min.css";
 @import "~bootstrap/scss/bootstrap";
 @import "~semantic-ui-css/semantic.min.css";
+@import "deals";
 
 
 
@@ -123,4 +124,10 @@ body .welcome-text {
 .my-area-hidden{
   display: none;
 }
-
+/* messag alert */
+.message-flash{
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 20em;
+}

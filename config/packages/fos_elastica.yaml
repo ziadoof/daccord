@@ -33,8 +33,6 @@ fos_elastica:
               boost: 10
             price:
               type: integer
-            withDriver:
-              type: boolean
             mission: ~
             theType: ~
             secondLanguage: ~

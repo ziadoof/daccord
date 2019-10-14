@@ -4,10 +4,13 @@ namespace App\Controller\Ads;
 
 use App\Entity\Ads\Ad;
 use App\Entity\Ads\Category;
+use App\Entity\Deal\Deal;
+use App\Events\Events;
 use App\Form\Ads\OfferType;
 use App\Form\Ads\DemandType;
 use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
+use App\Repository\Deal\DealRepository;
 use App\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +19,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 
 
@@ -84,13 +89,14 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route("ad//new/{type}", name="ad_new", methods={"GET","POST"})
+     * @Route("ad/new/{type}", name="ad_new", methods={"GET","POST"})
      * @param Request $request
      * @param FileUploader $fileUploader
      * @param string $type
+     * @param EventDispatcherInterface $eventDispatcher
      * @return Response
      */
-    public function new(Request $request, FileUploader $fileUploader, string $type): Response
+    public function new(Request $request, FileUploader $fileUploader, string $type, EventDispatcherInterface $eventDispatcher): Response
     {
         if ($type === 'Offer'){
 
@@ -148,9 +154,11 @@ class AdController extends AbstractController
                 $entityManager->persist($ad);
                 $entityManager->flush();
 
+                //On déclenche l'event create deal in max 8
+                $event = new GenericEvent($ad);
+                $eventDispatcher->dispatch(Events::AD_ADD, $event);
                 return $this->redirectToRoute('ad_index');
             }
-
 
             return $this->render('Ads/ad/new.html.twig', [
                 'ad' => $ad,
@@ -167,9 +175,6 @@ class AdController extends AbstractController
                 'entity_manager' => $entityManager,
             ]);
             $form->handleRequest($request);
-
-
-
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
@@ -209,6 +214,9 @@ class AdController extends AbstractController
                 $entityManager->persist($ad);
                 $entityManager->flush();
 
+                //On déclenche l'event create deals in max 8
+                $event = new GenericEvent($ad);
+                $eventDispatcher->dispatch(Events::AD_ADD, $event);
                 return $this->redirectToRoute('ad_index');
             }
 
@@ -227,6 +235,9 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad): Response
     {
+        if (!$ad) {
+            throw $this->createNotFoundException('This ad has been removed');
+        }
         $em = $this->getDoctrine()->getManager();
         $categoryParent = $ad->getCategory()->getParent()->getName();
         $realCategory = $em->getRepository(Category::class)->findCategoryByName($ad->getCategory()->getName(),$ad->getTypeOfAd(), $categoryParent);
@@ -274,14 +285,28 @@ class AdController extends AbstractController
      * @Route("ad/{id}", name="ad_delete", methods={"DELETE"})
      * @param Request $request
      * @param Ad $ad
+     * @param DealRepository $dealRepository
      * @return Response
      */
-    public function delete(Request $request, Ad $ad): Response
+    public function delete(Request $request, Ad $ad, DealRepository $dealRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ad->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $dealsContact = $dealRepository->findByAd($ad);
+            foreach ($dealsContact as $dealContact){
+                $driverRequests = $dealContact->getDriverRequests();
+                foreach ($driverRequests as $driverRequest){
+                    $entityManager->remove($driverRequest);
+                }
+                $entityManager->remove($dealContact);
+            }
             $entityManager->remove($ad);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Your ad and all the deals related to it has been removed successfully!'
+            );
         }
 
         return $this->redirectToRoute('ad_index');
@@ -377,7 +402,7 @@ class AdController extends AbstractController
         $capacityLitre = [1=>'Less than 50 Liters',2 =>'50-80 Liters',3 =>'80-150 Liters',4 =>'150-250 Liters',5 =>'250-330 Liters',6 =>'330-490 Liters',7 =>'More than 50 Liters'];
         $boolean = [0=>'No',1=>'Yes'];
         $generalSituation = [1=>'Damaged' ,2 =>'Medium' , 3 =>'Good' ,4 => 'Semi-new',5=> 'Totally new'];
-        $checkbox = ['withDriver','hdmi','cdRoom', 'wifi', 'usb', 'threeInOne', 'accessories', 'withFreezer', 'electricHead',
+        $checkbox = ['hdmi','cdRoom', 'wifi', 'usb', 'threeInOne', 'accessories', 'withFreezer', 'electricHead',
             'withOven', 'covered', 'withFurniture', 'withGarden', 'withVerandah', 'withElevator'];
         $category = $allSpecifications['category']->getName();
 
@@ -419,4 +444,5 @@ class AdController extends AbstractController
             return in_array($generalCategory, $listCity);
         }
     }
+
 }

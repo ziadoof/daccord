@@ -72,7 +72,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index', ['id' => $user->getId()]);
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('user/show.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);

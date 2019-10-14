@@ -43,8 +43,12 @@ require('./React/Startup/Search_myAds');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
-
-
+//message flash fide out
+window.setTimeout(function() {
+    $(".message-flash").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove();
+    });
+}, 5000);
 
 
 

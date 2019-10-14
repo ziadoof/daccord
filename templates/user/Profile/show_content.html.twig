@@ -1,20 +1,6 @@
 {% extends "layout_user.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
-    <div class="row">
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                {% if label != 'comment' %}
-                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    </div>
 <div class="fos_user_user_show">
     <div class="row border-accord">
         <div class="col-md-2 user_avatar">
@@ -92,10 +78,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="col">
-                        <h6 class="d-inline font-weight-bold">Voiteur :  </h6><span>  {{ user.car }}</span>
                     </div>
                     <div class="col">
-                        <h6 class="d-inline font-weight-bold">Color :  </h6><span style="background-color:{{ user.color }};color:{{ user.color }}">____</span>
                     </div>
                     <div class="col">
                         <h6 class="d-inline font-weight-bold">Max distance :  </h6><span>  {{ user.point }} <span class="font-weight-bold">Km</span></span>

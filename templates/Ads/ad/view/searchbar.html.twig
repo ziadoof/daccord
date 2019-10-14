@@ -498,11 +498,6 @@
                                                                                     {{ form_row(offerForm.donate, {'attr': {'data-toggle':'toggle' ,'data-on':'Just donate', 'data-off':'Donat', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
                                                                                 </div>
                                                                             {% endif %}
-                                                                            {% if offerForm.withDriver is defined %}
-                                                                                <div class="col-md-3  text-center">
-                                                                                    {{ form_row(offerForm.withDriver, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with driver', 'data-off':'Driver', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                                                                </div>
-                                                                            {% endif %}
                                                                             {% if offerForm.price is defined %}
                                                                                 <div class="col-md-3  ">
                                                                                     {{ form_row(offerForm.price) }}
@@ -1057,11 +1052,6 @@
                                                                     {% if demandForm.donate is defined %}
                                                                         <div class="col-md-3 ">
                                                                             {{ form_row(demandForm.donate, {'attr': {'data-toggle':'toggle' ,'data-on':'Donate', 'data-off':'For sale', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                                                        </div>
-                                                                    {% endif %}
-                                                                    {% if demandForm.withDriver is defined %}
-                                                                        <div class="col-md-3  text-center">
-                                                                            {{ form_row(demandForm.withDriver, {'attr': {'data-toggle':'toggle' ,'data-on':'With driver', 'data-off':'With out driver', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
                                                                         </div>
                                                                     {% endif %}
                                                                     {% if demandForm.price is defined %}
