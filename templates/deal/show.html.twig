@@ -56,9 +56,9 @@
                                 <b class="">{{ deal.offerUser.city }}</b>
                         {% else %}
                             {% if deal.demandUser.profileImage  %}
-                                <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="" ><br>
+                                <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}"  ><br>
                             {% else %}
-                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class=""><br>
+                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" ><br>
                             {% endif %}
                                 <b class="">{{ deal.demandUser.firstname }}</b><br>
                                 <b class="">{{ deal.demandUser.city }}</b>

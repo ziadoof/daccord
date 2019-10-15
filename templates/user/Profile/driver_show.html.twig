@@ -1,0 +1,47 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+    <div class="fos_user_user_show px-4 py-4">
+        <div class="row">
+            <div class="col-md-2 offset-5 btn-group ">
+                <div class=" profile-edit ml-2  ">
+                    <a class="">
+                        {% if app.user.driver.carImage %}
+                            <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/car_driver/'~app.user.driver.carImage) }}" alt="User" >
+                        {% else %}
+                            <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/default-car.jpeg') }}" alt="User">
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
+            <h1 class="pt-3 bdg-accord ">{{ user.driver.point }} <span>Points</span></h1>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+
+                <h6 class="d-inline font-weight-bold">Active :  </h6>
+                <b class="deal-terminate">
+                    {% if app.user.driver.active %}
+                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                    {% else %}
+                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                    {% endif %}</b>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">Car brand :  </h6><span>  {{ user.driver.carBrand }}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">Car color :  </h6><span>  {{ user.driver.carColor }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">City  :  </h6><span>  {{ user.driver.city}}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold"> Max distance:  </h6><span>  {{ user.driver.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

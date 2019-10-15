@@ -84,4 +84,9 @@ services:
             $type:
     App\Events\EventSubscriber\AdAddSubscriber:
         arguments: ["@doctrine.orm.entity_manager"]
+    app_user.activity_listener:
+        class: App\Events\ActivityListener
+        arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
 

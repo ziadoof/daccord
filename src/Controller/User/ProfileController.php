@@ -157,10 +157,11 @@ class ProfileController extends BaseProController
     public function new_driver(Request $request, FormDriverType $formDriverType/*, FileUploader $fileUploader*/)
     {
         $user = $this->getUser();
-            $DriverForm = $formDriverType->getForm();
+        $DriverForm = $formDriverType->getForm();
         $DriverForm->handleRequest($request);
             if ($DriverForm->isSubmitted() && $DriverForm->isValid()) {
                 $driver = $DriverForm->getData();
+                /*$driverOldPhoto = $user*/
 
                 $carImage = $DriverForm->get('carImage')->getData();
                 $fileUploader = new FileUploader('assets/images/car_driver/');

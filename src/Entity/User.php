@@ -398,7 +398,8 @@ class User  extends BaseUser implements UserInterface
         $this->setFirstname('Utilisateur');
         $this->setLastname( (string) $this->getId());
         $this->setUsername("onadaccordUser" );
-        $this->setgenderStatus(false );
+        $this->setGenderStatus(false );
+        $this->lastActivityAt = new \DateTime('now');
         $this->ads = new ArrayCollection();
         $this->offerDeals = new ArrayCollection();
         $this->demandDeals = new ArrayCollection();
@@ -630,4 +631,37 @@ class User  extends BaseUser implements UserInterface
         return $this;
     }
 
+
+    /**
+     * @ORM\Column(name="last_activity_at", type="datetime", nullable=true)
+     */
+    protected $lastActivityAt;
+
+    /**
+     * @return mixed
+     */
+    public function getLastActivityAt()
+    {
+        return $this->lastActivityAt;
+    }
+
+    /**
+     * @param mixed $lastActivityAt
+     */
+    public function setLastActivityAt($lastActivityAt): void
+    {
+        $this->lastActivityAt = $lastActivityAt;
+    }
+
+    /**
+     * @return Bool Whether the user is active or not
+     * @throws \Exception
+     */
+    public function isActiveNow():bool
+    {
+        // Delay during wich the user will be considered as still active
+        $delay = new \DateTime('2 minutes ago');
+
+        return ($this->getLastActivityAt() > $delay);
+    }
 }
