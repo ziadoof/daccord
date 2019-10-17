@@ -2,7 +2,8 @@
 
 namespace App\Form\Location;
 
-use App\Entity\City;
+
+use App\Entity\Location\City;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -4,6 +4,7 @@ namespace App\Form\User;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,7 +29,11 @@ class UserCityType extends AbstractType
                 'placeholder' => 'Sélectionnez votre région',
                 'mapped'      => false,
                 'required'    => false
-            ]);
+            ])
+            ->add('change', CheckboxType::class,[
+                'label'=>'Chang your ads area',
+                'mapped'=> false
+            ]);;
 
         $builder->get('region')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -45,7 +50,12 @@ class UserCityType extends AbstractType
                 $data = $event->getData();
 
                 // @var $city City
-                $city = $data->getCity();
+                if($data){
+                    $city = $data->getCity();
+                }
+                else{
+                    $city = null;
+                }
                 $form = $event->getForm();
                 if ($city) {
                     // On récupère le département et la région

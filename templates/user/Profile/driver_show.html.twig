@@ -1,14 +1,22 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
+    {% if app.user.driver %}
     <div class="fos_user_user_show px-4 py-4">
         <div class="row">
             <div class="col-md-2 offset-5 btn-group ">
                 <div class=" profile-edit ml-2  ">
                     <a class="">
                         {% if app.user.driver.carImage %}
-                            <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/car_driver/'~app.user.driver.carImage) }}" alt="User" >
+                            {% if app.user.driver.carImage is same as ('with out photo') %}
+                                <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                     src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="User">
+                            {% else %}
+                                <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                     src="{{ asset('/assets/images/car_driver/'~app.user.driver.carImage) }}" alt="User" >
+                            {% endif %}
                         {% else %}
-                            <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/default-car.jpeg') }}" alt="User">
+                            <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                 src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="User">
                         {% endif %}
                     </a>
                 </div>
@@ -43,5 +51,20 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <div class="col-md-4 offset-4 mt-5">
+        <div class="row border-driver">
+            <div class="col my-4 mx-2 text-center">
+                <h4 class="title-blue my-1 mx-1">Be a driver in simple steps</h4>
+                <p>Registering yourself as a driver enables you to see the deals taking place in your area and you can also receive notifications of potential deals and your profile is displayed as a potential driver within these deals.
+                    If one of the parties wishes to transfer his purchases through you, you will receive a notification and you will be able to talk to the owner of the transaction.
+                    At any moment you can stop or reset your account as a driver</p>
+            </div>
+        </div>
+        <div class="row text-center ">
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">Be a driver</a>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
 

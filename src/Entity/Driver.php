@@ -40,7 +40,7 @@ class Driver
 
     /**
      * @var string $carImage
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $carImage;
 
@@ -141,7 +141,7 @@ class Driver
         return $this->carImage;
     }
 
-    public function setCarImage(string $carImage): self
+    public function setCarImage(?string $carImage): self
     {
         $this->carImage = $carImage;
 

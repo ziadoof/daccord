@@ -1,120 +1,90 @@
 {% set DriverForm = form_DriverType.getForm().createView() %}
     {{ form_start(DriverForm, {'attr': {'id': 'driver_user_edit'}}) }}
         {% if app.user.driver %}
-            <div class="col-md-12 ">
-                <div class="row border-driver">
-                    <div class="col-md-6">
-                        <h4 class="title-blue mt-4 mx-4">Your status as a driver now : </h4>
-                    </div>
-                    <div class="col-md-2 offset-4 mt-4">
-                        {{ form_row(DriverForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"120"}}) }}
-                    </div>
-                </div>
-                <div class="row border-driver pt-2">
-                        <div class="col-md-6 driver-img pt-4 ">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="{{ asset('assets/images/car_driver/'~ app.user.driver.carImage) }}" alt="Car">
-                                    <p class="text-center mt-5"> Your current car photo </p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ form_row(DriverForm.carImage) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{ form_row(DriverForm.carBrand) }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{ form_row(DriverForm.carColor) }}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{ form_row(DriverForm.maxDistance) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="row">
-                                <h5 class="title-rose  my-4"> Your point : <span class="title-blue">{{ app.user.driver.point }} </span> </h5>
-                            </div>
-                            <div class="row">
-                                <h5 class="title-rose  my-4"> Your city : <span class="title-blue">{{ app.user.city.name }} </span> </h5>
-                            </div>
-                            <div class="row">
-                                <h5 class="title-rose  mt-4">postal : <span class="title-blue">{{ app.user.postalCode }} </span> </h5>
-                            </div>
-                        </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-4 offset-4">
-                        <input type="submit" id="valide-driver" class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
-                    </div>
-                </div>
-            </div>
-            {{ form_end(DriverForm) }}
-        {% else %}
-            <div class="col-md-12">
-                <div class="row border-driver">
-                    <div class="col-md-9 my-2 mx-2">
-                        <h4 class="title-blue my-1 mx-1">Be a driver in simple steps</h4>
-                        <p>Registering yourself as a driver enables you to see the deals taking place in your area and you can also receive notifications of potential deals and your profile is displayed as a potential driver within these deals.
-                            If one of the parties wishes to transfer his purchases through you, you will receive a notification and you will be able to talk to the owner of the transaction.
-                            At any moment you can stop or reset your account as a driver</p>
-                    </div>
-                    <div class="col-md-2 mt-4 text-center ">
-                        {{ form_row(DriverForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                    </div>
-                </div>
-                <div class="row border-driver pt-2">
-                    <div class="col-md-6 driver-img ml-4 ">
-                        <div class="row text-center mt-4">
-                            <div class="col-md-12">
+            <div class="fos_user_user_show px-4 py-4">
+                <div class="row ">
+                    <div class="col-md-2 offset-5 btn-group ">
+                        <div class=" profile-edit ml-2  ">
+                            <a class="">
                                 {{ form_row(DriverForm.carImage) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ form_row(DriverForm.carBrand) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ form_row(DriverForm.carColor) }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ form_row(DriverForm.maxDistance) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="row">
-{#
-                            <h5 class="title-rose ml-4 my-4"> Your point : <span class="title-blue">{{ app.user.driver.point }} </span> </h5>
-#}
-                        </div>
-                        <div class="row">
-                            <h5 class="title-rose ml-4 my-4"> Your city : <span class="title-blue">{{ app.user.city.name }} </span> </h5>
-                        </div>
-                        <div class="row">
-                            <h5 class="title-rose ml-4 mt-4">postal : <span class="title-blue">{{ app.user.postalCode }} </span> </h5>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-4">
+                <div class="">
+                    <div class="col-md-4 offset-4 text-center">
+                        {{ form_row(DriverForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
+                    </div>
+                </div>
+                <div class="row ">
                     <div class="col-md-4 offset-4">
-                        <input type="submit" id="valide-driver" class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                        {{ form_row(DriverForm.carBrand) }}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(DriverForm.carColor) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(DriverForm.maxDistance) }}
+                        <hr>
+                    </div>
+                </div>
+                <div class="row col-md-4 offset-4 justify-content-center">
+                    <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                </div>
+                {{ form_end(DriverForm) }}
+            </div>
+        {% else %}
+            <div class="fos_user_user_show px-4 py-4">
+                <div class="row ">
+                    <div class="col-md-4 offset-4 mt-5">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h4 class="title-blue my-1 mx-1">Be a driver in simple steps</h4>
+                                <p>Registering yourself as a driver enables you to see the deals taking place in your area and you can also receive notifications of potential deals and your profile is displayed as a potential driver within these deals.
+                                    If one of the parties wishes to transfer his purchases through you, you will receive a notification and you will be able to talk to the owner of the transaction.
+                                    At any moment you can stop or reset your account as a driver</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-2 offset-5 btn-group ">
+                        <div class=" profile-edit ml-2  ">
+                            <a class="">
+                                {{ form_row(DriverForm.carImage) }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="col-md-4 offset-4 text-center">
+                        {{ form_row(DriverForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(DriverForm.carBrand) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(DriverForm.carColor) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(DriverForm.maxDistance) }}
+                        <hr>
+                    </div>
+                </div>
+                <div class="row col-md-4 offset-4 justify-content-center">
+                    <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                </div>
+                {{ form_end(DriverForm) }}
             </div>
             {{ form_end(DriverForm) }}
         {% endif %}

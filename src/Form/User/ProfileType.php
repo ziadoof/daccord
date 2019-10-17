@@ -2,6 +2,7 @@
 
 namespace App\Form\User;
 
+use App\Form\PhotoType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -81,10 +82,15 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'label'    => 'Public ?',
             ])
-            ->add('profileImage', FileType::class, [
-                'required' => false,
-                'label'    => 'Modification',
+            ->add('profileImage', PhotoType::class, [
                 'data_class' => null,
+                'label' => false,
+                'required'=> false,
+                'attr' => array(
+                    'new_form' => false,
+                    'profileImage'=> true,
+                    'onchange'=>'window.viewProfileImage(this);'
+                )
             ])
             ->add('maxDistance', ChoiceType::class, [
                 'label' => 'Max distance',

@@ -1,34 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
     {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
     <div class="fos_user_user_show px-4 py-4">
         <div class="row ">
-            {#<div class="col-md-4 offset-4 btn-group ">
-                <div class="col-md-2 profile-edit ml-2  ">
-                    <input type="file" id="fos_user_profile_form_profileImage" name="fos_user_profile_form[profileImage]"
-                           class="custom-file-input" onchange="readURL(this);">
-                    <label for="fos_user_profile_form_profileImage" class="mx-4 " >
-                        {% if app.user.profileImage %}
-                            <img id="previewImge" class="mb-3" src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" alt="User" >
-                        {% else %}
-                            <img id="previewImge" class="mb-3" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
-                        {% endif %}
-                        <span class="middle">Modification</span>
-                    </label>
-                </div>
-            </div>#}
-            {#for edit#}
             <div class="col-md-2 offset-5 btn-group ">
                 <div class=" profile-edit ml-2  ">
                     <a class="">
-                        {% if app.user.profileImage %}
-                            <img id="previewImge" class="mb-3 " src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" alt="User" >
-                        {% else %}
-                            <img id="previewImge" class="mb-3" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
-                        {% endif %}
-                        <div class=" py-0 ml-4">
-                            {{ form_row(form.profileImage, {'attr':{'onchange':'readURL(this);'}}) }}
-                        </div>
+                        {{ form_row(form.profileImage) }}
                     </a>
                 </div>
             </div>
@@ -101,29 +78,8 @@
                     {{ form_row(form.maxDistance) }}
             </div>
             <div class="row col-md-4 offset-4 justify-content-center">
-                <input type="submit" class="btn btn-primary btn-block" value="{{ 'profile.edit.submit'|trans }}" />
+                <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update' }}" />
             </div>
         </div>
         {{ form_end(form) }}
     </div>
-
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-
-<script>
-
-function readURL(input) {
-
-if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-        $('#previewImge')
-            .attr('src', e.target.result)
-    }
-reader.readAsDataURL(input.files[0]);
-}
-}
- </script>
-
-

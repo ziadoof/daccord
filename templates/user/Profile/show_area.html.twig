@@ -1,0 +1,11 @@
+<div class="fos_user_user_show  px-4 py-4">
+    <div class="border-respo px-4 py-4">
+        <h6 class="text-center pt-0 title-blue">Your current area</h6>
+        {% if app.user.ville != null %}
+        <h5 class="text-center pt-0 title-rose">{{ app.user.ville }}</h5>
+        <h2 class="text-center pt-0 ">{{ app.user.postalCode }}</h2>
+        {% else %}
+            <h5 class="text-center pt-0 title-rose">You did not choose a city</h5>
+        {% endif %}
+    </div>
+</div>

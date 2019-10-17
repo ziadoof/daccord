@@ -32,6 +32,8 @@ require('./sidebar');
 require('./category');
 require('./gps_location');
 require('./React/Startup/Search_myAds');
+require('./viewImage');
+require('./user_tab');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');
@@ -49,6 +51,7 @@ window.setTimeout(function() {
         $(this).remove();
     });
 }, 5000);
+
 
 
 

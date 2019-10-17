@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use App\Form\PhotoType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,13 +19,20 @@ class DriverType extends AbstractType
         $builder
             ->add('carBrand')
             ->add('carColor')
-            ->add('carImage',FileType::class, array(
+            ->add('carImage',PhotoType::class, array(
                 'data_class' => null,
-                'label'=>false
+                'label' => false,
+                'required'=> false,
+                'attr' => array(
+                    'new_form' => false,
+                    'profileImage'=> false,
+                    'onchange'=>'window.viewCarImage(this);'
+                )
             ))
             ->add('maxDistance', ChoiceType::class, [
-                'placeholder' => '10 Km',
+                'placeholder' => 'Select max distance',
                 'choices'   => array(
+                    '10 Km' => 10,
                     '20 Km' => 20,
                     '30 Km' => 30,
                     '40 Km' => 40,
@@ -37,6 +45,7 @@ class DriverType extends AbstractType
             ])
             ->add('active', CheckboxType::class, [
                 'label'    => false,
+                'required' => false
             ])
         ;
     }

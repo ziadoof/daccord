@@ -6,6 +6,7 @@ use App\Form\DriverType;
 use App\Service\FileUploader;
 use App\Service\FormDriverType;
 use FOS\UserBundle\Controller\ProfileController as BaseProController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
@@ -43,25 +44,26 @@ class ProfileController extends BaseProController
     }
 
     /**
-     * @Route("/area", name="set_area", methods={"GET","POST"})
+     * @Route( name="set_area", methods={"GET","POST"})
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function areaAction(Request $request)
     {
         $user = $this->getUser();
-
+        $entityManager = $this->getDoctrine()->getManager();
         $formRegion = $this->createForm(UserCityType::class, $user);
         $formRegion->handleRequest($request);
 
         $formCity = $this->createForm(UserType::class, $user);
         $formCity->handleRequest($request);
-        dump($user->getDriver());
                 if($formCity->isSubmitted() && $formCity->isValid()) {
-                    $entityManager = $this->getDoctrine()->getManager();
                     $data = $formCity->getData();
                     $ville=$data->getCity()->getName();
                     $postalCode=$data->getCity()->getZipCode();
                     $gpsLat=$data->getCity()->getGpsLat();
                     $gpsLng=$data->getCity()->getGpsLng();
+                    $change = $formCity->get('change')->getData();
                     $user->setVille($ville);
                     $user->setPostalCode($postalCode);
                     $user->setMapX($gpsLng);
@@ -73,18 +75,29 @@ class ProfileController extends BaseProController
                       $driver->setGpsLng($gpsLng);
                         $entityManager->persist($user);
                     }
+                    if($change){
+                        $userAds = $user->getAds();
+                        $ads = 0;
+                        foreach ($userAds as $ad){
+                            $ad->setVille($data->getCity());
+                            $ad->setDepartment($data->getCity()->getDepartment());
+                            $ad->setRegion($data->getCity()->getDepartment()->getRegion());
+                            $entityManager->persist($ad);
+                            $ads +=1;
+                            }
+                    }
+
                     $entityManager->persist($user);
                     $entityManager->flush();
 
                     $this->addFlash(
                         'success',
-                        'Votre ville pour User et Driver a été bien ajouté!'
+                        'Your city for your account and driver has been successfully changed, and there are '.$ads. ' ads that have been changed'
                     );
                     return $this->redirectToRoute('fos_user_profile_show');
                 }
 
                 elseif ($formRegion->isSubmitted() && $formRegion->isValid()) {
-                    $entityManager = $this->getDoctrine()->getManager();
                     $data = $formRegion->getData();
                     $ville=$data->getCity()->getName();
                     $postalCode=$data->getCity()->getZipCode();
@@ -94,78 +107,58 @@ class ProfileController extends BaseProController
                     $user->setPostalCode($postalCode);
                     $user->setMapX($gpsLng);
                     $user->setMapY($gpsLat);
+                    $change = $formRegion->get('change')->getData();
+                    if($change){
+                        $userAds = $user->getAds();
+                        $ads = 0;
+                        foreach ($userAds as $ad){
+                            $ad->setVille($data->getCity());
+                            $ad->setDepartment($data->getCity()->getDepartment());
+                            $ad->setRegion($data->getCity()->getDepartment()->getRegion());
+                            $entityManager->persist($ad);
+                            $ads +=1;
+                        }
+                    }
+
                     $entityManager->persist($user);
                     $entityManager->flush();
 
                     $this->addFlash(
                         'success',
-                        'Votre ville a été bien ajouté!'
-                    );
+                        'Your city for your account and driver has been successfully changed, and there are '.$ads. ' ads that have been changed'                    );
                     return $this->redirectToRoute('fos_user_profile_show');
                 }
 
         return $this->render('user/Profile/area.html.twig', [
-            'user' => $user,
-            'formRegion' => $formRegion->createView(),
-            'formCity' => $formCity->createView(),
             ]);
     }
-
-    /**
-     * @Route("/changeAdsArea", name="chang_ads_area", methods={"GET","POST"})
-     */
-    public function changeAdsArea(Request $request){
-        $user = $this->getUser();
-        $city = $user->getCity();
-        $userAds = $user->getAds();
-        $entityManager = $this->getDoctrine()->getManager();
-        $ads = 0;
-        $offer = 0;
-        $demand=0;
-        foreach ($userAds as $ad){
-            $ad->setVille($city);
-            $ad->setDepartment($city->getDepartment());
-            $ad->setRegion($city->getDepartment()->getRegion());
-            $entityManager->persist($ad);
-            if($ad->getTypeOfAd() === 'Offer'){
-                $offer +=1;
-                $ads +=1;
-            }
-            else{
-                $demand +=1;
-                $ads+=1;
-            }
-        }
-        $entityManager->flush();
-        return $this->render('user/Profile/changeAdsArea.html.twig', [
-            'user' => $user,
-            'ads' => $ads,
-            'offer' => $offer,
-            'demand' => $demand,
-        ]);
-    }
-
-    //test driver
 
     /**
      * @Route("/driver",  name="new_driver", methods={"GET","POST"})
      * @param Request $request
      * @param FormDriverType $formDriverType
-     * @param FileUploader $fileUploader
      * @return RedirectResponse|Response
      */
-    public function new_driver(Request $request, FormDriverType $formDriverType/*, FileUploader $fileUploader*/)
+    public function new_driver(Request $request, FormDriverType $formDriverType)
     {
         $user = $this->getUser();
+        $driverOldPhoto = null;
+        if ($user->getDriver()){
+            $driverOldPhoto = $user->getDriver()->getCarImage();
+        }
+
         $DriverForm = $formDriverType->getForm();
         $DriverForm->handleRequest($request);
             if ($DriverForm->isSubmitted() && $DriverForm->isValid()) {
                 $driver = $DriverForm->getData();
-                /*$driverOldPhoto = $user*/
-
+                $filesystem = new Filesystem();
                 $carImage = $DriverForm->get('carImage')->getData();
                 $fileUploader = new FileUploader('assets/images/car_driver/');
-                $driver->setCarImage($fileUploader->upload($carImage));
+
+                //delet old photo
+                $driverOldPhoto && $carImage ?$filesystem->remove('assets/images/car_driver/'.$driverOldPhoto):null;
+                // upload new photo
+                $carImage ? $driver->setCarImage($fileUploader->upload($carImage)):$driver->setCarImage($driverOldPhoto?:'with out photo');
 
                 $driver->setUser($user);
                 $driver->setCity($user->getCity());
