@@ -24,17 +24,29 @@
                                             to <span class="title-blue">{{ driver_request.deal.demand.ville }}</span></b>
                                     </div>
                                     <div class="btn-group driver deal-show">
-                                        <a class="text-center mx-2 px-2 py-2  ">
-                                            <img  src="{{ asset('/assets/images/profile/'~driver_request.deal.offerUser.profileImage) }}" alt="offerUser" class="">
-                                            <button class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.offerUser.firstname}}</button>
-                                        </a>
+                                        <div class="justify-content-center">
+                                            <a href="{{ path('user_show',{'id':driver_request.deal.offerUser.id}) }}" class="btn-group">
+                                                {% if driver_request.deal.offerUser.profileImage %}
+                                                    <img alt="" src="{{ asset('/assets/images/profile/'~driver_request.deal.offerUser.profileImage) }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                                {% else %}
+                                                    <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                                {% endif %}
+                                            </a>
+                                            <a class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.offerUser.firstname}}</a>
+                                        </div>
                                         <a class="mt-5 mx-5">
                                             <i class="fas fa-handshake deal-show-photo mt-0"></i>
                                         </a>
-                                        <a class="text-center mx-2 px-2 py-2  ">
-                                            <img  src="{{ asset('/assets/images/profile/'~driver_request.deal.demandUser.profileImage) }}" alt="offerUser" class="">
-                                            <button class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.demandUser.firstname}}</button>
-                                        </a>
+                                        <div class="justify-content-center">
+                                            <a href="{{ path('user_show',{'id':driver_request.deal.demandUser.id}) }}" class="btn-group">
+                                                {% if driver_request.deal.demandUser.profileImage %}
+                                                    <img alt="" src="{{ asset('/assets/images/profile/'~driver_request.deal.demandUser.profileImage) }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                                {% else %}
+                                                    <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                                {% endif %}
+                                            </a>
+                                            <a class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.demandUser.firstname}}</a>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="px-4 py-1">
