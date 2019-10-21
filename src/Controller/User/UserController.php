@@ -2,6 +2,7 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Driver;
 use App\Entity\User;
 use App\Entity\Location\City;
 use App\Form\User\AutoAreaType;
@@ -60,6 +61,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
+
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
