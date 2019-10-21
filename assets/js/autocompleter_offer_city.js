@@ -34,9 +34,9 @@ $(document).on('click', "#demand_city",function () {
         $('#demand_city').autocompleter(options);
     }());
 });
-/*$(document).on('click', "#offer_search_city",function () {
+$(document).on('click', "#offer_search_city",function () {
     'use strict';
-    /!* autocomplete city on new user (this is the main feature) *!/
+    /* autocomplete city on new user (this is the main feature) */
     (function () {
         var options = {
             url_list: $('#url-list').attr('href'),
@@ -51,7 +51,7 @@ $(document).on('click', "#demand_city",function () {
         };
         $('#offer_search_city').autocompleter(options);
     }());
-});*/
+});
 
 $(document).on('click', "#demand_search_city",function () {
     'use strict';

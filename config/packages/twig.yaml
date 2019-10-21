@@ -1,5 +1,7 @@
 twig:
-    form_themes: ['bootstrap_4_layout.html.twig']
+    form_themes:
+        - 'bootstrap_4_layout.html.twig'
+        - 'PhotoType.html.twig'
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
@@ -7,6 +9,8 @@ twig:
         form_offerSearchType: '@App\Service\Search\FormOfferType'
         form_demandSearchType: '@App\Service\Search\FormDemandType'
         form_DriverType: '@App\Service\FormDriverType'
+        form_CityAreaType: '@App\Service\City\CityAreaType'
+        form_CityAutoAreaType: '@App\Service\City\CityAutoAreaType'
 
 
 

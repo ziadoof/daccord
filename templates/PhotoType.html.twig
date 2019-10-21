@@ -1,0 +1,55 @@
+
+{# Widgets #}
+{% block photo_widget -%}
+    <{{ element|default('div') }} class="custom-fileg">
+    {%- set type = type|default('file') -%}
+    {{- block('form_widget_simple') -}}
+    <label for="{{ form.vars.id }}" class="custom-file-labelg">
+        {%- if attr.new_form is defined -%}
+            {% if attr.new_form %}
+                {# view for new photo ad offer#}
+            {% else %}
+                {#view for profile image and car image #}
+                {% if attr.profileImage %}{# view for profile image#}
+                    {% if app.user.profileImage %}
+                        <div class="profile-edit">
+                            <img id="previewProfileImge" class="{% if app.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                 src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" alt="User profile" >
+                        </div>
+                    {% else %}
+                        <div class="profile-edit">
+                            <img id="previewProfileImge" class="{% if app.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                 src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User profile">
+                        </div>
+                    {% endif %}
+                {% else %}{# view for car image#}
+                    {% if app.user.driver %} {# if the user is driver#}
+                        {% if app.user.driver.carImage %}
+                            {% if app.user.driver.carImage is same as ('with out photo') %}
+                                <div class="profile-edit">
+                                    <img id="previewCarImge" class=" {% if app.user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                         src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="driver car">
+                                </div>
+                            {% else %}
+                                <img id="previewCarImge" class="{% if app.user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                     src="{{ asset('/assets/images/car_driver/'~app.user.driver.carImage) }}" alt="driver car" >
+                            {% endif %}
+                        {% else %}
+                            <div class="profile-edit">
+                                <img id="previewCarImge" class="{% if app.user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                     src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="driver car">
+                            </div>
+                        {% endif %}
+                    {% else %}{#if user not driver#}
+                        <div class="profile-edit">
+                            <img id="previewCarImge" class="offline-status"
+                                 src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="driver car">
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {%- endif -%}
+
+    </label>
+    </{{ element|default('div') }}>
+{% endblock %}

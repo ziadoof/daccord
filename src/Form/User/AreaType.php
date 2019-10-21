@@ -18,13 +18,13 @@ use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityRepository;
 
 
-class UserCityType extends AbstractType
+class AreaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('region', EntityType::class, [
-                'class'       => 'App\Entity\Location\Region',
+                'class'       => Region::class,
                 'placeholder' => 'Sélectionnez votre région',
                 'mapped'      => false,
                 'required'    => false
@@ -45,7 +45,12 @@ class UserCityType extends AbstractType
                 $data = $event->getData();
 
                 // @var $city City
-                $city = $data->getCity();
+                if($data){
+                    $city = $data->getCity();
+                }
+                else{
+                    $city = null;
+                }
                 $form = $event->getForm();
                 if ($city) {
                     // On récupère le département et la région
@@ -79,7 +84,7 @@ class UserCityType extends AbstractType
             EntityType::class,
             null,
             [
-                'class'           => 'App\Entity\Location\Department',
+                'class'           => Department::class,
                 'placeholder'     => $region ? 'Sélectionnez votre département' : 'Sélectionnez votre région',
                 'mapped'          => false,
                 'required'        => false,
@@ -101,7 +106,7 @@ class UserCityType extends AbstractType
     private function addVilleField(FormInterface $form, ?Department $department)
     {
         $form->add('city', EntityType::class, [
-            'class'       => 'App\Entity\Location\City',
+            'class'       => City::class,
             'label' =>'Ville',
             'placeholder' => $department ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
             'choices'     => $department ? $department->getCitys() : []

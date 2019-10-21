@@ -14,7 +14,7 @@ $(document).ready(function () {
                 formatInputTooShort: 'Insert at least 2 character'
             }
         };
-        $('#user_city').autocompleter(options);
+        $('#auto_area_city').autocompleter(options);
     }());
 });
 

@@ -231,15 +231,16 @@
                         <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Report</button>
                     </div>
                     <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
-                    <a data-toggle="dropdown"  href="{{ path('fos_user_profile_show') }}">
-                             <span class="profile-ava">
-                                 {% if ad.user.profileImage %}
-                                     <img alt="" src="{{ asset('/assets/images/profile/'~ad.user.profileImage) }}" id="avatar-small" class="mt-2 mb-2 mr-3">
-                                 {% else %}
-                                     <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" id="avatar-small" class="mt-2 mb-2 mr-3">
-                                 {% endif %}
-                             </span>
-                    </a>
+
+                    <span class="profile-ava">
+                        <a href="{{ path('user_show',{'id':ad.user.id}) }}">
+                        {% if ad.user.profileImage %}
+                           <img alt="" src="{{ asset('/assets/images/profile/'~ad.user.profileImage) }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                        {% else %}
+                           <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                        {% endif %}
+                        </a>
+                    </span>
             {% endif %}
         </div>
 {% endblock %}

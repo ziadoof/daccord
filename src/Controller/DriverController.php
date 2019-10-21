@@ -16,11 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DriverController extends AbstractController
 {
     /**
-     * @Route("/", name="driver_index", methods={"GET"})
+     * @Route("/admin/", name="driver_index", methods={"GET"})
      */
     public function index(DriverRepository $driverRepository): Response
     {
-        return $this->render('driver/index.html.twig', [
+        return $this->render('user/Driver/index.html.twig', [
             'drivers' => $driverRepository->findAll(),
         ]);
     }
@@ -50,16 +50,19 @@ class DriverController extends AbstractController
 
     /**
      * @Route("/{id}", name="driver_show", methods={"GET"})
+     * @param Driver $driver
+     * @return Response
      */
     public function show(Driver $driver): Response
     {
-        return $this->render('driver/show.html.twig', [
+        return $this->render('user/Driver/show.html.twig', [
             'driver' => $driver,
         ]);
     }
 
+
     /**
-     * @Route("/{id}/edit", name="driver_edit", methods={"GET","POST"})
+     * @Route("/admin/{id}/edit", name="driver_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Driver $driver): Response
     {
@@ -79,7 +82,7 @@ class DriverController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="driver_delete", methods={"DELETE"})
+     * @Route("/admin/{id}", name="driver_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Driver $driver): Response
     {

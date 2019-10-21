@@ -56,9 +56,9 @@
                                 <b class="">{{ deal.offerUser.city }}</b>
                         {% else %}
                             {% if deal.demandUser.profileImage  %}
-                                <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="" ><br>
+                                <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}"  ><br>
                             {% else %}
-                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class=""><br>
+                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" ><br>
                             {% endif %}
                                 <b class="">{{ deal.demandUser.firstname }}</b><br>
                                 <b class="">{{ deal.demandUser.city }}</b>
@@ -317,7 +317,13 @@
                                         <hr class="my-1">
                                         <div class="row ">
                                             <div class="col-md-2 px-4 pb-2">
-                                                <img  src="{{ asset('/assets/images/profile/'~driverRequest.driver.user.profileImage) }}" alt="offerUser" class="">
+                                                <a href="{{ path('driver_show',{'id': driverRequest.driver.id}) }}">
+                                                    {% if driverRequest.driver.user.profileImage %}
+                                                        <img class="mb-3 {% if driverRequest.driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~driverRequest.driver.user.profileImage) }}" alt="User" >
+                                                    {% else %}
+                                                        <img class="mb-3 {% if driverRequest.driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
+                                                    {% endif %}
+                                                </a>
                                             </div>
                                             <div class="col-md-7 pt-2">
                                                 <b>{{ 'Driver : ' }}{{ driverRequest.driver.user.firstname }} {{ driverRequest.driver.user.lastname }}</b><br>
@@ -373,8 +379,14 @@
                                     <div class="btn-group driver ">
                                         {% if drivers is not empty %}
                                             {% for driver in drivers %}
-                                                <a class="text-center mx-2 px-2 py-2 border-deal ">
-                                                    <img  src="{{ asset('/assets/images/profile/'~driver.user.profileImage) }}" alt="offerUser" class="">
+                                                <div class="text-center mx-2 px-2 py-2 border-deal ">
+                                                    <a href="{{ path('driver_show',{'id': driver.id}) }}">
+                                                        {% if driver.user.profileImage %}
+                                                            <img class="mb-3 {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~driver.user.profileImage) }}" alt="User" >
+                                                        {% else %}
+                                                            <img class="mb-3 {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
+                                                        {% endif %}
+                                                    </a>
                                                     <p class="mt-1">{{driver.user.firstname}}</p>
                                                     <p class="mt-1">{{ driver.point }}{{ ' Points' }}</p>
                                                     <p class="mt-1">{{ driver.feedback }}</p>
@@ -390,7 +402,7 @@
                                                             Driver request
                                                         </button>
                                                     </form>
-                                                </a>
+                                                </div>
                                             {% endfor %}
                                         {% else %}
                                             <div class="col-md-12">
@@ -432,5 +444,4 @@
         </div>
     </div>
     <!-- modal end-->
-
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Form\User;
 
+use App\Form\PhotoType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,24 +34,24 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Votre prénom',
+                'label' => 'First name',
                 'attr' => array('rows' => '4', 'cols' => '10'),
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Votre nom',
+                'label' => 'Last name',
                 'attr' => array('rows' => '4', 'cols' => '10')
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email de contact',
+                'label' => 'Email',
                 'disabled'=> true
             ])
             ->add('phoneNumber', TextType::class, [
-                'label' => 'nomeru de portable',
+                'label' => 'Phone number',
                 'attr' => array('rows' => '4', 'cols' => '10'),
                  'required' => false,
             ])
             ->add('gender', ChoiceType::class, [
-                'label' => 'gender',
+                'label' => 'Sex',
                 'choices' => [
                     'Male' => 'Male',
                     'Female' => 'Female',
@@ -67,24 +68,29 @@ class ProfileType extends AbstractType
             ])
             ->add('genderStatus', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'Votre genre est disponible au public ?',
+                'label'    => 'Public ?',
             ])
             ->add('birthdayStatus', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'Votre birthday est disponible au public ?',
+                'label'    => 'Public ?',
             ])
             ->add('phonNumberStatus', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'Votre phon number est disponible au public ?',
+                'label'    => 'Public ?',
             ])
             ->add('emailStatus', CheckboxType::class, [
                 'required' => false,
-                'label'    => 'Votre email est disponible au public ?',
+                'label'    => 'Public ?',
             ])
-            ->add('profileImage', FileType::class, [
-                'required' => false,
-                'label'    => 'New image',
+            ->add('profileImage', PhotoType::class, [
                 'data_class' => null,
+                'label' => false,
+                'required'=> false,
+                'attr' => array(
+                    'new_form' => false,
+                    'profileImage'=> true,
+                    'onchange'=>'window.viewProfileImage(this);'
+                )
             ])
             ->add('maxDistance', ChoiceType::class, [
                 'label' => 'Max distance',

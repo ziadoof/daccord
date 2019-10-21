@@ -1,66 +1,85 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
     {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-
-    <div class="fos_user_user_show border-respo px-4 py-4">
-        <h5 class="text-center pt-0 title-blue">Nom de l'utilisateur</h5>
+    <div class="fos_user_user_show px-4 py-4">
         <div class="row ">
-            <div class="col-md-2 editer_utilisateur ml-2">
-                {% if app.user.profileImage %}
-                    <img alt="logo" class="mb-3 " src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" alt="offerUser" >
-                {% else %}
-                    <img alt="logo" class="mb-3 " src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser">
-                {% endif %}
-                {{ form_row(form.profileImage) }}
-            </div>
-            <div class="col-md-3 offset-1">
-                {{ form_row(form.firstname) }}
-            </div>
-            <div class="col-md-3 offset-1">
-                {{ form_row(form.lastname) }}
-            </div>
-        </div>
-        <hr>
-        <h5 class="text-center pt-0 title-blue">L'information de l'utilisateur</h5>
-        <div class="row ">
-            <div class="col-md-3">
-                {{ form_row(form.email) }}
-            </div>
-            <div class="col-md-3 mt-5">
-                {{ form_row(form.emailStatus) }}
-            </div>
-            <div class="col-md-3">
-                {{ form_row(form.phoneNumber) }}
-            </div>
-            <div class="col-md-3 mt-5">
-                {{ form_row(form.phonNumberStatus) }}
-            </div>
-        </div>
-        <div class="row ">
-            <div class="col-md-3">
-                {{ form_row(form.gender) }}
-            </div>
-            <div class="col-md-3 mt-5">
-                {{ form_row(form.genderStatus) }}
-            </div>
-            <div class="col-md-3">
-                {{ form_row(form.birthday) }}
-            </div>
-            <div class="col-md-3 mt-5">
-                {{ form_row(form.birthdayStatus) }}
+            <div class="col-md-2 offset-5 btn-group ">
+                <div class=" profile-edit ml-2  ">
+                    <a class="">
+                        {{ form_row(form.profileImage) }}
+                    </a>
+                </div>
             </div>
         </div>
         <div class="row ">
             <div class="col-md-4 offset-4">
-                {{ form_row(form.maxDistance) }}
+                {{ form_row(form.firstname) }}
             </div>
         </div>
-        <hr>
-        <div class="row justify-content-center">
-            <input type="submit" class="btn btn-primary" value="{{ 'profile.edit.submit'|trans }}" />
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="col-md-4 mt-4 pt-3">
+                        {{ form_row(form.emailStatus) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ form_row(form.phoneNumber) }}
+                    </div>
+                    <div class="col-md-4 mt-4 pt-3">
+                        {{ form_row(form.phonNumberStatus) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ form_row(form.gender) }}
+                    </div>
+                    <div class="col-md-4 mt-4 pt-3">
+                        {{ form_row(form.genderStatus) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <hr>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ form_row(form.birthday) }}
+                    </div>
+                    <div class="col-md-4 mt-4 pt-3">
+                        {{ form_row(form.birthdayStatus) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offset-4">
+                <hr>
+                    {{ form_row(form.maxDistance) }}
+            </div>
+            <div class="row col-md-4 offset-4 justify-content-center">
+                <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update' }}" />
+            </div>
         </div>
         {{ form_end(form) }}
-
     </div>
-
-

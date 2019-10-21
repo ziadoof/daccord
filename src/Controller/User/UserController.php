@@ -2,10 +2,12 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Driver;
 use App\Entity\User;
 use App\Entity\Location\City;
-use App\Form\User\UserType;
+use App\Form\User\AutoAreaType;
 use App\Form\Location\CityType;
+use App\Form\User\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,18 +54,21 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
+     * @param User $user
+     * @return Response
      */
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(AutoAreaType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
