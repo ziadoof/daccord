@@ -169,7 +169,7 @@ class ProfileController extends BaseProController
     }
 
     /**
-     * @Route("/driver",  name="new_driver", methods={"GET","POST"})
+     * @Route("/user_driver",  name="new_driver", methods={"POST"})
      * @param Request $request
      * @param FormDriverType $formDriverType
      * @return RedirectResponse|Response

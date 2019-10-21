@@ -398,7 +398,7 @@ class AdsRepository extends Repository
     }
 
     // This searchDemand function will build the elasticsearch query to get a list of ad that match our criterias
-    public function searchDemand(AdModel $search, User $user=null)
+    public function searchDemand(AdModel $search, User $user=null): array
     {
         $bool = new BoolQuery();
 
@@ -533,7 +533,7 @@ class AdsRepository extends Repository
 
 
 
-        if ($search->getGeneralCategory() != null && $search->getGeneralCategory() !=''){
+        if ($search->getGeneralCategory() !== null && $search->getGeneralCategory() !==''){
             $nested = new Query\Nested();
             $userBool = new BoolQuery();
             $match = new Match();
@@ -832,6 +832,8 @@ class AdsRepository extends Repository
                 'printingType'=>      $ad->getPrintingType(),
                 'printingColor'=>     $ad->getPrintingColor(),
                 'coverMaterial'=>     $ad->getCoverMaterial(),
+                'subjectName'=>       $ad->getSubjectName(),
+
 
             ];
 
@@ -934,7 +936,6 @@ class AdsRepository extends Repository
             'heating'=>           $ad->getHeating(),
             'heatingType'=>       $ad->getHeatingType(),
             'eventType'=>         $ad->getEventType(),
-            'subjectName'=>       $ad->getSubjectName(),
             'acitvityArea'=>      $ad->getAcitvityArea(),
 
         ];
@@ -1114,6 +1115,8 @@ class AdsRepository extends Repository
             'printingType'=>      $ad->getPrintingType(),
             'printingColor'=>     $ad->getPrintingColor(),
             'coverMaterial'=>     $ad->getCoverMaterial(),
+            'subjectName'=>       $ad->getSubjectName(),
+
 
         ];
 
@@ -1216,7 +1219,6 @@ class AdsRepository extends Repository
             'heating'=>           $ad->getHeating(),
             'heatingType'=>       $ad->getHeatingType(),
             'eventType'=>         $ad->getEventType(),
-            'subjectName'=>       $ad->getSubjectName(),
             'acitvityArea'=>      $ad->getAcitvityArea(),
 
         ];
