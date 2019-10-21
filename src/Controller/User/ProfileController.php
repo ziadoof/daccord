@@ -2,10 +2,16 @@
 namespace App\Controller\User;
 
 use App\Entity\Driver;
+use App\Events\Events;
 use App\Form\DriverType;
+use App\Repository\Deal\DealRepository;
+use App\Repository\DriverRequestRepository;
+use App\Service\City\CityAreaType;
 use App\Service\FileUploader;
 use App\Service\FormDriverType;
 use FOS\UserBundle\Controller\ProfileController as BaseProController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,8 +19,6 @@ use App\Entity\User;
 use App\Entity\Location\City;
 use App\Entity\Ads\Ad;
 use Doctrine\ORM\Mapping as ORM;
-use App\Form\User\UserType;
-use App\Form\User\UserCityType;
 use App\Form\User\ProfileType;
 use App\Form\Location\CityType;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,92 +48,123 @@ class ProfileController extends BaseProController
     }
 
     /**
-     * @Route( name="set_area", methods={"GET","POST"})
+     * @Route( "/set_area",name="set_area", methods={"GET","POST"})
      * @param Request $request
+     * @param DriverRequestRepository $driverRequestRepository
+     * @param DealRepository $dealRepository
+     * @param EventDispatcherInterface $eventDispatcher
      * @return RedirectResponse|Response
      */
-    public function areaAction(Request $request)
+    public function areaAction(Request $request, DriverRequestRepository $driverRequestRepository,
+                               DealRepository $dealRepository , EventDispatcherInterface $eventDispatcher,
+                               \App\Service\City\CityAutoAreaType $cityType, CityAreaType $regionType )
     {
         $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
-        $formRegion = $this->createForm(UserCityType::class, $user);
+
+        $formRegion = $regionType->getForm();
+        $formCity = $cityType->getForm();
+
         $formRegion->handleRequest($request);
-
-        $formCity = $this->createForm(UserType::class, $user);
         $formCity->handleRequest($request);
-                if($formCity->isSubmitted() && $formCity->isValid()) {
-                    $data = $formCity->getData();
-                    $ville=$data->getCity()->getName();
-                    $postalCode=$data->getCity()->getZipCode();
-                    $gpsLat=$data->getCity()->getGpsLat();
-                    $gpsLng=$data->getCity()->getGpsLng();
-                    $change = $formCity->get('change')->getData();
-                    $user->setVille($ville);
-                    $user->setPostalCode($postalCode);
-                    $user->setMapX($gpsLng);
-                    $user->setMapY($gpsLat);
-                    $driver = $user->getDriver();
-                    if($driver){
-                      $driver->setCity($data->getCity());
-                      $driver->setGpsLat($gpsLat);
-                      $driver->setGpsLng($gpsLng);
-                        $entityManager->persist($user);
-                    }
-                    if($change){
-                        $userAds = $user->getAds();
-                        $ads = 0;
-                        foreach ($userAds as $ad){
-                            $ad->setVille($data->getCity());
-                            $ad->setDepartment($data->getCity()->getDepartment());
-                            $ad->setRegion($data->getCity()->getDepartment()->getRegion());
-                            $entityManager->persist($ad);
-                            $ads +=1;
-                            }
-                    }
 
-                    $entityManager->persist($user);
-                    $entityManager->flush();
+        if ($formCity->isSubmitted() && $formCity->isValid()) {
 
-                    $this->addFlash(
-                        'success',
-                        'Your city for your account and driver has been successfully changed, and there are '.$ads. ' ads that have been changed'
-                    );
-                    return $this->redirectToRoute('fos_user_profile_show');
-                }
+            $data = $formCity->getData();
+            $ville=$data->getCity()->getName();
+            $postalCode=$data->getCity()->getZipCode();
+            $gpsLat=$data->getCity()->getGpsLat();
+            $gpsLng=$data->getCity()->getGpsLng();
 
-                elseif ($formRegion->isSubmitted() && $formRegion->isValid()) {
-                    $data = $formRegion->getData();
-                    $ville=$data->getCity()->getName();
-                    $postalCode=$data->getCity()->getZipCode();
-                    $gpsLat=$data->getCity()->getGpsLat();
-                    $gpsLng=$data->getCity()->getGpsLng();
-                    $user->setVille($ville);
-                    $user->setPostalCode($postalCode);
-                    $user->setMapX($gpsLng);
-                    $user->setMapY($gpsLat);
-                    $change = $formRegion->get('change')->getData();
-                    if($change){
-                        $userAds = $user->getAds();
-                        $ads = 0;
-                        foreach ($userAds as $ad){
-                            $ad->setVille($data->getCity());
-                            $ad->setDepartment($data->getCity()->getDepartment());
-                            $ad->setRegion($data->getCity()->getDepartment()->getRegion());
-                            $entityManager->persist($ad);
-                            $ads +=1;
-                        }
-                    }
+            $user->setVille($ville);
+            $user->setPostalCode($postalCode);
+            $user->setMapX($gpsLng);
+            $user->setMapY($gpsLat);
+            $driver = $user->getDriver();
+            if($driver){
+              $driver->setCity($data->getCity());
+              $driver->setGpsLat($gpsLat);
+              $driver->setGpsLng($gpsLng);
+                $entityManager->persist($user);
+            }
 
-                    $entityManager->persist($user);
-                    $entityManager->flush();
 
-                    $this->addFlash(
-                        'success',
-                        'Your city for your account and driver has been successfully changed, and there are '.$ads. ' ads that have been changed'                    );
-                    return $this->redirectToRoute('fos_user_profile_show');
-                }
+            $userAds = $user->getAds();
+            $ads = 0;
+            $countDriverRequests=0;
+            $countDeals=0;
+            foreach ($userAds as $ad){
+                $count = $this->deleteAdDeals($ad, $dealRepository, $driverRequestRepository);
+                $countDriverRequests = $count['countDriverRequests'];
+                $countDeals = $count['countDeals'];
+                $ad->setVille($data->getCity());
+                $ad->setDepartment($data->getCity()->getDepartment());
+                $ad->setRegion($data->getCity()->getDepartment()->getRegion());
+                $entityManager->persist($ad);
+                   $event = new GenericEvent($ad);
+                   $eventDispatcher->dispatch(Events::AD_ADD, $event);
+                $ads +=1;
+            }
 
-        return $this->render('user/Profile/area.html.twig', [
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Your city for your account and driver has been successfully changed, and there are ('
+                .$ads. ') ads that have been changed('
+                .$countDriverRequests.') Driver requests has been deleted('
+                .$countDeals.') Deals has been deleted'
+
+            );
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        if($formRegion->isSubmitted() && $formRegion->isValid()) {
+            $data = $formRegion->getData();
+            $ville=$data->getCity()->getName();
+            $postalCode=$data->getCity()->getZipCode();
+            $gpsLat=$data->getCity()->getGpsLat();
+            $gpsLng=$data->getCity()->getGpsLng();
+            $user->setVille($ville);
+            $user->setPostalCode($postalCode);
+            $user->setMapX($gpsLng);
+            $user->setMapY($gpsLat);
+
+            $userAds = $user->getAds();
+            $ads = 0;
+            $countDriverRequests=0;
+            $countDeals=0;
+            foreach ($userAds as $ad){
+                $count = $this->deleteAdDeals($ad, $dealRepository, $driverRequestRepository);
+                $countDriverRequests = $count['countDriverRequests'];
+                $countDeals = $count['countDeals'];
+                $ad->setVille($data->getCity());
+                $ad->setDepartment($data->getCity()->getDepartment());
+                $ad->setRegion($data->getCity()->getDepartment()->getRegion());
+                $entityManager->persist($ad);
+
+                $event = new GenericEvent($ad);
+                $eventDispatcher->dispatch(Events::AD_ADD, $event);
+
+                $ads +=1;
+            }
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Your city for your account and driver has been successfully changed, and there are ('
+                .$ads. ') ads that have been changed('
+                .$countDriverRequests.') Driver requests has been deleted('
+                .$countDeals.') Deals has been deleted'
+            );
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('user/Profile/edit_area.html.twig', [
             ]);
     }
 
@@ -178,4 +213,29 @@ class ProfileController extends BaseProController
 
     }
 
+    //delete all the driver request and deal contact with this ad
+    public function deleteAdDeals(Ad $ad, DealRepository $dealRepository, DriverRequestRepository $driverRequestRepository): array
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $deals = $dealRepository->findByAd($ad);
+        $countDriverRequests = 0;
+        $countDeals =0;
+        dump($deals);
+        if(!empty($deals)){
+            foreach ($deals as $deal){
+                $driverRequests = $driverRequestRepository->findByDeal($deal);
+                if(!empty($driverRequests)){
+                    foreach ($driverRequests as $driverRequest){
+                        $entityManager->remove($driverRequest);
+                        ++$countDriverRequests;
+                    }
+                    $entityManager->flush();
+                }
+                $entityManager->remove($deal);
+                ++$countDeals;
+            }
+            $entityManager->flush();
+        }
+        return array('countDriverRequests' => $countDriverRequests, 'countDeals' => $countDeals);
+    }
 }

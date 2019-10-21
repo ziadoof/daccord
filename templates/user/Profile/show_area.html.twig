@@ -1,11 +1,25 @@
 <div class="fos_user_user_show  px-4 py-4">
-    <div class="border-respo px-4 py-4">
-        <h6 class="text-center pt-0 title-blue">Your current area</h6>
-        {% if app.user.ville != null %}
-        <h5 class="text-center pt-0 title-rose">{{ app.user.ville }}</h5>
-        <h2 class="text-center pt-0 ">{{ app.user.postalCode }}</h2>
-        {% else %}
-            <h5 class="text-center pt-0 title-rose">You did not choose a city</h5>
-        {% endif %}
+    <div class="row">
+        <div class="col-md-4 offset-4">
+            <div class=" px-4 py-4">
+                <h6 class="text-center pt-0 title-blue">Your current area</h6>
+                {% if app.user.ville != null %}
+                    <h5 class="text-center pt-0 title-rose">{{ app.user.ville }}</h5>
+                    <h2 class="text-center pt-0 ">{{ app.user.postalCode }}</h2>
+                {% else %}
+                    <h5 class="text-center pt-0 title-rose">You did not choose a city</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div style="width: 700px;position: relative;">
+                <iframe width="700" height="440" src="https://maps.google.com/maps?width=700&amp;height=440&amp;hl=en&amp;q={{app.user.mapY}},{{app.user.mapX}}
+                        &amp;ie=UTF8&amp;t=&amp;z=13&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                </iframe>
+            </div>
+            <br />
+        </div>
     </div>
 </div>

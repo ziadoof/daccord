@@ -4,7 +4,6 @@ namespace App\Form\User;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,21 +18,17 @@ use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityRepository;
 
 
-class UserCityType extends AbstractType
+class AreaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('region', EntityType::class, [
-                'class'       => 'App\Entity\Location\Region',
+                'class'       => Region::class,
                 'placeholder' => 'Sélectionnez votre région',
                 'mapped'      => false,
                 'required'    => false
-            ])
-            ->add('change', CheckboxType::class,[
-                'label'=>'Chang your ads area',
-                'mapped'=> false
-            ]);;
+            ]);
 
         $builder->get('region')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -89,7 +84,7 @@ class UserCityType extends AbstractType
             EntityType::class,
             null,
             [
-                'class'           => 'App\Entity\Location\Department',
+                'class'           => Department::class,
                 'placeholder'     => $region ? 'Sélectionnez votre département' : 'Sélectionnez votre région',
                 'mapped'          => false,
                 'required'        => false,
@@ -111,7 +106,7 @@ class UserCityType extends AbstractType
     private function addVilleField(FormInterface $form, ?Department $department)
     {
         $form->add('city', EntityType::class, [
-            'class'       => 'App\Entity\Location\City',
+            'class'       => City::class,
             'label' =>'Ville',
             'placeholder' => $department ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
             'choices'     => $department ? $department->getCitys() : []

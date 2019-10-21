@@ -1,7 +1,7 @@
 
-$(document).on('change', '#user_city_region, #user_city_department', function () {
+$(document).on('change', '#area_region, #area_department', function () {
     let $field = $(this)
-    let $regionField = $('#user_city_region')
+    let $regionField = $('#area_region')
     let $form = $field.closest('form')
     let target = '#' + $field.attr('id').replace('department', 'city').replace('region', 'department')
     // Les données à envoyer en Ajax
@@ -17,6 +17,8 @@ $(document).on('change', '#user_city_region, #user_city_department', function ()
     })
 
 });
+
+
 // ad_search demand
 $(document).on('change', '#demand_search_region', function () {
     let $field = $(this)

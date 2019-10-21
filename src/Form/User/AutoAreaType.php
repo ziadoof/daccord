@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Form\User;
 
 use App\Entity\User;
@@ -9,13 +8,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Location\City;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
-class UserType extends AbstractType
+use function Sodium\add;
+
+class AutoAreaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('city', AutocompleteType::class, ['class' => City::class]);
-        // TO DO add user admin
     }
 
 
@@ -25,5 +25,6 @@ class UserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
+
 
 }

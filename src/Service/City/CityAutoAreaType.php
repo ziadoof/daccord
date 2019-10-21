@@ -2,13 +2,14 @@
 
 namespace App\Service\City;
 
-use App\Form\User\UserCityType;
+use App\Entity\Location\City;
+use App\Form\User\AutoAreaType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
-class RegionType
+class CityAutoAreaType
 {
 
     private $form;
@@ -29,7 +30,7 @@ class RegionType
 
         $user = !$tokenStorage->getToken() || is_string($tokenStorage->getToken()->getUser()) ? null : $tokenStorage->getToken()->getUser();
 
-        $this->form = $this->formFactory->create(UserCityType::class, $user,
+        $this->form = $this->formFactory->create(AutoAreaType::class, $user,
             array(
                 'attr' =>
                     array(
@@ -39,8 +40,10 @@ class RegionType
         );
     }
 
-    public function getForm() {
+    public function getForm(): \Symfony\Component\Form\FormInterface
+    {
         return $this->form;
     }
+
 
 }

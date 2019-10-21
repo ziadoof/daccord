@@ -4,8 +4,9 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Entity\Location\City;
-use App\Form\User\UserType;
+use App\Form\User\AutoAreaType;
 use App\Form\Location\CityType;
+use App\Form\User\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +64,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(AutoAreaType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

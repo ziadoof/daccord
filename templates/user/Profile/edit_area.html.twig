@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
-    {% set formCity = form_CityType.getForm().createView() %}
-    {% set formRegion = form_RegionType.getForm().createView() %}
+    {% set formCity = form_CityAutoAreaType.getForm().createView() %}
+    {% set formRegion = form_CityAreaType.getForm().createView() %}
         <div class="fos_user_user_show  px-4 py-4">
             <div class="border-respo px-4 py-4">
                 <h6 class="text-center pt-0 title-blue">Your current area</h6>
@@ -19,12 +19,9 @@
                                 <h6 class="text-center pt-0 title-blue">Enter your city name</h6>
                                 {{ form_start(formCity) }}
                                 {{ form_row(formCity.city, { 'label': 'City' }) }}
-                                <div class="row ml-2">
-                                    {{ form_row(formCity.change) }}
-                                </div>
                                 <div class="row">
                                     <img src="{{ asset('/assets/images/icons/warning.png') }}" alt="warning" class="warning ml-4">
-                                    <b class="ml-2 mb-2">This option will change the city for all your ads and deals</b>
+                                    <b class="ml-2 mb-2">This will change the city for all your ads, deals, driver requests</b>
                                 </div>
                                 <div class="row justify-content-center">
                                     <input type="submit" class="btn btn-primary" value="{{ 'Update'|trans }}" />
@@ -56,12 +53,9 @@
                                 {{ form_row(formRegion.city) }}
                             </div>
                         </div>
-                        <div class="row ml-2">
-                            {{ form_row(formRegion.change) }}
-                        </div>
                         <div class="row">
                             <img src="{{ asset('/assets/images/icons/warning.png') }}" alt="warning" class="warning ml-4">
-                            <b class="ml-2 mb-2">This option will change the city for all your ads and deals</b>
+                            <b class="ml-2 mb-2">This will change the city for all your ads, deals, driver requests</b>
                         </div>
                         <div class="row justify-content-center">
                             <input type="submit" class="btn btn-primary" value="{{ 'Update'|trans }}" />
@@ -71,6 +65,3 @@
                 </div>
             </div>
         </div>
-
-
-

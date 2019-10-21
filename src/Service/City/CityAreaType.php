@@ -2,14 +2,13 @@
 
 namespace App\Service\City;
 
-use App\Entity\Location\City;
-use App\Form\User\UserType;
+use App\Form\User\AreaType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
-class CityType
+class CityAreaType
 {
 
     private $form;
@@ -30,7 +29,7 @@ class CityType
 
         $user = !$tokenStorage->getToken() || is_string($tokenStorage->getToken()->getUser()) ? null : $tokenStorage->getToken()->getUser();
 
-        $this->form = $this->formFactory->create(UserType::class, $user,
+        $this->form = $this->formFactory->create(AreaType::class, $user,
             array(
                 'attr' =>
                     array(

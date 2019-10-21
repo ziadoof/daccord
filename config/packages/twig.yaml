@@ -9,8 +9,8 @@ twig:
         form_offerSearchType: '@App\Service\Search\FormOfferType'
         form_demandSearchType: '@App\Service\Search\FormDemandType'
         form_DriverType: '@App\Service\FormDriverType'
-        form_CityType: '@App\Service\City\CityType'
-        form_RegionType: '@App\Service\City\RegionType'
+        form_CityAreaType: '@App\Service\City\CityAreaType'
+        form_CityAutoAreaType: '@App\Service\City\CityAutoAreaType'
 
 
 
