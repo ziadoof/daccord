@@ -1,0 +1,70 @@
+<div class="general-notification">
+
+
+{% if mgilet_notification_unseen_count(app.user) > 0 %}
+    <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+       aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span><i class="fas fa-bell"></i>
+    </a>
+    <li class="active-notification">
+{% else %}
+    <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+       aria-haspopup="true"><i class="fas fa-bell"></i>
+    </a>
+    <li >
+{% endif %}
+        <div class="bell-icon header__notification ">
+            <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
+            <ul class="notification__list dropdown " >
+                    <h4 class="notification__list__name py-3">
+                        Notification
+                        <span class="notification-number large-number">{{mgilet_notification_count(app.user)}}</span>
+                        Unseen
+                        <span class="notification-number large-number" id="unseen-large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
+                        {% if notificationList|length > 0 %}
+                            {% if mgilet_notification_unseen_count(app.user) > 0 %}
+                                <li style="padding: 10px;">
+                                    <b class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
+                                    <a id="notification-MarkAllAsSeen" href="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </h4>
+                {% for notification in notificationList %}
+                    <section class="one-note">
+                        <li class="list__item">
+                            {% if notification.seen %}
+                            <div class="row-content seen">
+                            {% else %}
+                            <div class="row-content">
+                                <a href="{{ mgilet_notification_generate_path('notification_mark_as_seen', notification.notifiableEntity, notification.notification) }}" class="ajax-notification action-secondary text-muted btn btn-xs">as seen</a>
+                            {% endif %}
+                                <a href="{{ notification.notification.link }}" class="list__item--link my-0">
+                                    <img src="{{asset('/assets/images/profile/'~senders[notification.notification.id]['user'].profileImage)}}" alt="" class="user-image mx-2 mt-1" />
+                                    <span class="messages mx-2">
+                                        <p class="font-weight-bold mb-0">
+                                            {% if senders[notification.notification.id]['type'] is same as ('deal') %}
+                                                <span ><i class="fas fa-handshake"></i></span>
+                                            {% elseif senders[notification.notification.id]['type'] is same as ('caffe') %}
+                                                <span ><i class="">caffe</i></span>
+                                            {% endif %}
+                                            {{ notification.notification.subject }}
+                                        </p>
+                                        <p>{{ notification.notification.message }}</p>
+                                    </span>
+                                </a>
+                                <div class="row">
+                                    <div class="col-md-4 offset-7 mb-0 mt-2">
+                                        <b class="float-right all-as-seen">
+                                            {{ notification.notification.date|date('d M Y') }}
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </section>
+                {% endfor %}
+            </ul>
+            </div>
+        </div> <!-- bell-icon-->
+    </li>
+</div>

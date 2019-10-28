@@ -77,16 +77,28 @@ services:
         arguments:
             $factory:
             $type:
+
     App\Form\EventListener\AddSearchSpecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:
             $type:
+
     App\Events\EventSubscriber\AdAddSubscriber:
-        arguments: ["@doctrine.orm.entity_manager"]
+        class: App\Events\EventSubscriber\AdAddSubscriber
+        arguments: ['@doctrine.orm.entity_manager']
+
     app_user.activity_listener:
         class: App\Events\ActivityListener
         arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
 
+    Mgilet\NotificationBundle\Manager\NotificationManager: '@mgilet.notification'
+
+    App\Twig\NotificationExtension:
+        class: App\Twig\NotificationExtension
+
+    natification:
+        class: App\Service\Natification
+        arguments: ['@doctrine.orm.entity_manager','@mgiletNotificationManager','@security.token_storage', ]

@@ -8,6 +8,8 @@ use App\Entity\Deal\DoneDeal;
 use App\Entity\Location\City;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Mgilet\NotificationBundle\NotifiableInterface;
+use Mgilet\NotificationBundle\Annotation\Notifiable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,8 +23,10 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Table(name="user")
  * @UniqueEntity(fields="email", message="Email déjà pris")
  * @UniqueEntity(fields="username", message="Username déjà pris")
+ * @ORM\Table(name="user")
+ * @Notifiable(name="user")
  */
-class User  extends BaseUser implements UserInterface
+class User  extends BaseUser implements UserInterface,NotifiableInterface
 {
     /**
      * @ORM\Id()

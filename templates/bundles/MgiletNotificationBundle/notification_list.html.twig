@@ -1,0 +1,135 @@
+ Notifications :
+{% for item in notificationList %}
+    {{ item.notification }}
+{% endfor %}
+
+{#<div class="baba">
+    <div class="header__notification">
+        <div class="bell-icon ">
+            <i class="fas fa-bell"><span class="notification-number bell-number">{{ mgilet_notification_unseen_count(app.user) }}</span></i>
+            <ul class="notification__list dropdown hide">
+                <h3 class="notification__list__name">Notifications
+                    <span class="notification-number large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
+                </h3>
+                {% for notification in notificationList %}
+                    <li class="list__item ">
+                        <a href="{{ notification.notification.link }}" class="list__item--link my-2">
+                            <img src="https://cdn.tutsplus.com/net/uploads/legacy/213_chris/ChrisThumbnail.jpg" alt="" class="user-image mx-2" />
+                            <span class="messages mx-2">
+                                <p class="font-weight-bold mb-0">
+                                    {{ notification.notification.subject }}
+                                </p>
+                                <p>{{ notification.notification.message }}</p>
+                                <span class="float-right">
+                                {{ notification.notification.date|date('d/m/Y') }}
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div> <!-- bell-icon-->
+    </div> <!--  header__notification -->
+</div>#}
+
+{#
+
+<div class="notfi">
+
+{% if mgilet_notification_unseen_count(app.user) > 0 %}
+<li class="active">
+    {% else %}
+<li>
+    {% endif %}
+    <a href="#!" id="notificationDropdown" data-toggle="collapse" data-target="#notification-menu"
+       aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span> <i class=" fas fa-bell"></i></a>
+    <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
+        <ul class="well no-padding list-unstyled">
+            <li style="padding: 10px;"><b
+                        class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
+                <a id="notification-MarkAllAsSeen" href="#}
+{#{{ path('notification_mark_all_as_seen') }}#}{#
+" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
+            </li>
+            <hr class="no-margin">
+            <div class="scrollable-menu">
+                <div class="list-group no-margin">
+                    {% for notification in notificationList %}
+                        <li class="list-group-item notification">
+                            {% if notification.seen %}
+                            <div class="row-content seen">
+                                {% else %}
+                                <div class="row-content">
+                                    <a href="#}
+{#{{ path('notification_mark_as_seen', {'notification': notification.notification.id}) }}#}{#
+" class="ajax-notification action-secondary text-muted btn btn-xs">x</a>
+                                    {% endif %}
+                                    <a href="{{ notification.notification.link }}">
+                                        <h4><b>{{ notification.notification.subject }}</b></h4>
+                                        <p class="list-group-item-text">{{ notification.notification.message }}</p>
+                                        <small class="list-group-item-text">{{ notification.notification.date|date('H:m:s - d/m/Y') }}</small>
+                                    </a>
+                                </div>
+                        </li>
+                    {% endfor %}
+                </div>
+                {% if notificationList|length < 1 %}
+                    <div class="well-lg text-muted text-center">
+                        <b>{{ 'no_new_notification'|trans({},'MgiletNotificationBundle') }}</b></div>
+                {% endif %}
+            </div>
+            <li class="text-center">
+                <hr class="no-margin">
+                <a class="no-margin btn btn-sm btn-block" href="#}
+{#{{ path('notifications_list') }}#}{#
+">{{ 'all_notifications'|trans({},'MgiletNotificationBundle') }}</a>
+            </li>
+        </ul>
+    </div>
+</li>
+</div>
+#}
+{#
+<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+<script>
+    var bellIcon = document.querySelector('.bell-icon');
+    var dropdownMenu = document.querySelector('.dropdown');
+    var notificationNumber = document.getElementsByClassName('notification-number');
+    var timeDelay = [1000,2000,3000,4000,5000,6000];
+    /*function randomNumber(){
+        var random = Math.floor(Math.random() * 6);
+        for(var i = 0; i < notificationNumber.length;i++){
+            notificationNumber[i].textContent = random;
+        }
+    }*/
+    function randomRange(data) {
+        var newTime = data[Math.floor(data.length * Math.random())];
+        return newTime;
+    }
+    function bellCheck(event){
+        var isClickInside = bellIcon.contains(event.target);
+        if (isClickInside) {
+            dropdownMenu.classList.toggle('hide');
+            if(dropdownMenu.classList.contains('hide')){
+                /*clearInterval(notificationInterval);
+                notificationInterval = setInterval(randomNumber, 2000);*/
+            }
+            else{
+                for(var i = 0; i < notificationNumber.length;i++){
+                    notificationNumber[i].textContent = 0;
+                    /*clearInterval(notificationInterval);*/
+                }
+            }
+        }
+        else {
+            dropdownMenu.classList.add('hide');
+           /* clearInterval(notificationInterval);
+            notificationInterval = setInterval(randomNumber, randomRange(timeDelay));*/
+        }
+    }
+    /*var notificationInterval = setInterval(randomNumber, randomRange(timeDelay));*/
+    window.addEventListener('click', bellCheck);
+</script>#}

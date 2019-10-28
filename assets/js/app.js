@@ -34,6 +34,7 @@ require('./gps_location');
 require('./React/Startup/Search_myAds');
 require('./viewImage');
 require('./user_tab');
+require('./notification');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

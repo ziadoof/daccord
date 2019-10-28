@@ -35,7 +35,9 @@
                       </form>
                   </div>
                   {% else %}
-                  <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-right">
+
+
+                  <div class="col-md-3  col-sm-3   col-xs-3  float-right">
                  <!-- user login dropdown start-->
                       <div class="user-profile">
                          <a data-toggle="dropdown"  href="#">
@@ -72,6 +74,9 @@
                           <a class="btn btn-info " href="{{ path('ad_new',{'type': 'Offer'}) }}">Add offre</a>
                           <a class="btn btn-info" href="{{ path('ad_new',{'type': 'Demand'}) }}">Add demend</a>
                       </div>
+                      </div>
+                      <div class="col-md-3 float-right">
+                          {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
                       </div>
                   {% endif %}
                   </div>
