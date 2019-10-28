@@ -35,7 +35,7 @@ require('./React/Startup/Search_myAds');
 require('./viewImage');
 require('./user_tab');
 require('./notification');
-
+require('./markAsVisited');
 //-----------React.js
 //require('./React/startup/result_offer_search');
 
@@ -52,6 +52,7 @@ window.setTimeout(function() {
         $(this).remove();
     });
 }, 5000);
+
 
 
 

@@ -24,6 +24,7 @@
   left: 95%;
   width: auto;
 }
+
 /*.notification-number {
       font-size: 0.8em;
       border-radius: 20%;
@@ -48,7 +49,7 @@
   animation: fadeIn 0.3s;
   overflow-y: auto;
   overflow-x: hidden;
-
+  margin-top: 3em;
 }
 .notification__list::-webkit-scrollbar {
   width: 2px;
@@ -139,7 +140,13 @@
   font-size: 80%;
 }
 .all-as-seen.mark-as:hover{
-  color: orangered;
+  color: $rosed;
+}
+.mark-as a:hover{
+  color: $rosed;
+}
+.mark-as a{
+  color: #0c5460;
 }
 .one-note a:hover{
   text-decoration: none;

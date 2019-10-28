@@ -65,7 +65,6 @@
                 markAsSeen(e);
             });
         }
-
         // mark all as seen button handler
         if(document.getElementById('notification-MarkAllAsSeen')!==null){
             document.getElementById('notification-MarkAllAsSeen').addEventListener('click',function (e) {
@@ -73,6 +72,5 @@
                 markAllAsSeen(e);
             });
         }
-
-
     })();
+
