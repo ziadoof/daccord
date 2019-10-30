@@ -19,7 +19,9 @@
                                     </div>
                                     <hr>
                                     <div class="row mx-4 justify-content-center">
-                                        <b class=" pb-2"> <span class="title-blue">{{ driver_request.user.firstname }}</span> has sent you driver request for transfair <span class="title-blue">{{ driver_request.deal.category }} </span>
+                                        <b class=" pb-2"> <span class="title-blue">{{ driver_request.user.firstname }}</span> has sent you driver request for transfair
+                                            <span class="title-blue">{% if driver_request.deal.category.name is same as('Other') %}{{ driver_request.deal.offer.subjectName }}
+                                            {% else %}{{ driver_request.deal.category}}{% endif %}</span>
                                             from <span class="title-blue">{{ driver_request.deal.offer.ville }}</span>
                                             to <span class="title-blue">{{ driver_request.deal.demand.ville }}</span></b>
                                     </div>

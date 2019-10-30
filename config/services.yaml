@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'fr'
+    locale: 'en'
     adsimages: '%kernel.project_dir%/public/assets/images/annonce/'
     profileimages: '%kernel.project_dir%/public/assets/images/profile/'
 
@@ -77,16 +77,28 @@ services:
         arguments:
             $factory:
             $type:
+
     App\Form\EventListener\AddSearchSpecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:
             $type:
+
     App\Events\EventSubscriber\AdAddSubscriber:
-        arguments: ["@doctrine.orm.entity_manager"]
+        class: App\Events\EventSubscriber\AdAddSubscriber
+        arguments: ['@doctrine.orm.entity_manager']
+
     app_user.activity_listener:
         class: App\Events\ActivityListener
         arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
 
+    Mgilet\NotificationBundle\Manager\NotificationManager: '@mgilet.notification'
+
+    App\Twig\NotificationExtension:
+        class: App\Twig\NotificationExtension
+
+    natification:
+        class: App\Service\Natification
+        arguments: ['@doctrine.orm.entity_manager','@mgiletNotificationManager' ]

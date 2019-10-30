@@ -12,9 +12,13 @@ use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
 use App\Repository\Deal\DealRepository;
 use App\Service\FileUploader;
+use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\PaginatorInterface;
+use Mgilet\NotificationBundle\Manager\NotificationManager;
+use Mgilet\NotificationBundle\NotifiableInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,6 +87,7 @@ class AdController extends AbstractController
 
             ]);
         }
+
         return $this->render('Ads/ad/index.html.twig', [
             'ads' => $results
         ]);
@@ -94,10 +99,13 @@ class AdController extends AbstractController
      * @param FileUploader $fileUploader
      * @param string $type
      * @param EventDispatcherInterface $eventDispatcher
+     * @param NotificationManager $manager
      * @return Response
+     * @throws OptimisticLockException
      */
-    public function new(Request $request, FileUploader $fileUploader, string $type, EventDispatcherInterface $eventDispatcher): Response
+    public function new(Request $request, FileUploader $fileUploader, string $type, EventDispatcherInterface $eventDispatcher, NotificationManager $manager): Response
     {
+
         if ($type === 'Offer'){
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -443,6 +451,28 @@ class AdController extends AbstractController
         if($generalCategory !== null) {
             return in_array($generalCategory, $listCity);
         }
+    }
+
+    /**
+     * @Route("/send-notification", name="send_notification")
+     * @param NotificationManager $manager
+     * @return RedirectResponse
+     * @throws OptimisticLockException
+     */
+    public function sendNotification(NotificationManager $manager): RedirectResponse
+    {
+
+        $notif = $manager->createNotification('Hello world !');
+        $notif->setMessage('Compellingly formulate worldwide methods of empowerment with quality infrastructures. Quickly facilitate just in time customer service rather ');
+        $notif->setLink('http://symfony.com/');
+        // or the one-line method :
+        // $manager->createNotification('Notification subject','Some random text','http://google.fr');
+
+        // you can add a notification to a list of entities
+        // the third parameter ``$flush`` allows you to directly flush the entities
+        $manager->addNotification(array($this->getUser()), $notif, true);
+
+        return $this->redirectToRoute('ad_index');
     }
 
 }

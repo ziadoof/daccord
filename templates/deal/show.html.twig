@@ -28,7 +28,7 @@
                     </a>
                     <a class="mt-3 mx-3 text-center">
                         <i class="fas fa-handshake deal-show-photo mt-0"></i><br>
-                        <b class="title-rose ">{{ deal.category}}</b>
+                        <b class="title-rose ">{% if deal.category.name is same as('Other') %}{{ deal.offer.subjectName }}{% else %}{{ deal.category}}{% endif %}</b>
                         {% if deal.driverUser %}
                             <div class="row ">
                                 <div class="deal-show col-md-12 ">

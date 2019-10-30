@@ -14,6 +14,7 @@ use App\Repository\Deal\DealRepository;
 use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
+use App\Service\Notification;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -297,9 +298,10 @@ class DealController extends AbstractController
      * @param DriverRequest $driverRequest
      * @param Deal $deal
      * @param DriverRequestRepository $driverRequestRepository
+     * @param Notification $notification
      * @return RedirectResponse
      */
-    public function add_driver_to_deal(DriverRequest $driverRequest, Deal $deal, DriverRequestRepository $driverRequestRepository): RedirectResponse
+    public function add_driver_to_deal(DriverRequest $driverRequest, Deal $deal, DriverRequestRepository $driverRequestRepository, Notification $notification): RedirectResponse
     {
         $driver = $driverRequest->getDriver();
         if($deal->getDriverUser()){
@@ -327,6 +329,7 @@ class DealController extends AbstractController
                 'success',
                 'The driver has been add to your deal successfully!'
             );
+            $notification->addNotification(['type'=>'addDriverToDeal','object'=>$driverRequest]);
         }
 
 
@@ -335,13 +338,12 @@ class DealController extends AbstractController
 
     /**
      * @Route("/done/{id}/deal", name="deal_done", methods={"GET","POST"})
-     * @param Request $request
      * @param Deal $deal
      * @param DealRepository $dealRepository
+     * @param Notification $notification
      * @return RedirectResponse
-     * @throws \Exception
      */
-    public function dealDone(Request $request, Deal $deal, DealRepository $dealRepository): RedirectResponse
+    public function dealDone(Deal $deal, DealRepository $dealRepository, Notification $notification): RedirectResponse
     {
         $user = $this->getUser();
         $offerUserStatus = $deal->getOfferUserStatus();
@@ -363,9 +365,11 @@ class DealController extends AbstractController
                     'info',
                     'You won 5 points!'
                 );
+                //done deal notification
+                $notification->addNotification(['type'=>'doneDeal', 'object'=>$deal, 'status'=>'offer']);
+                $this->addPointsNotification($deal,$notification);
 
                 return $this->redirectToRoute('deal_index');
-
             }
             $deal->setOfferUserStatus(true);
             $entityManager->persist($deal);
@@ -375,7 +379,8 @@ class DealController extends AbstractController
                 'success',
                 'Your deal has been finished!'
             );
-
+            // semi done deal
+            $notification->addNotification(['type'=>'semiDoneDeal','object'=>$deal, 'status'=>'offer']);
             return $this->redirectToRoute('deal_index');
         }
 
@@ -387,6 +392,10 @@ class DealController extends AbstractController
                     'info',
                     'You won 5 points!'
                 );
+                //done deal notification
+                $notification->addNotification(['type'=>'doneDeal','object'=>$deal, 'status'=>'demand']);
+                $this->addPointsNotification($deal,$notification);
+
                 return $this->redirectToRoute('deal_index');
 
             }
@@ -398,6 +407,7 @@ class DealController extends AbstractController
                 'success',
                 'Your deal has been finished!'
             );
+            $notification->addNotification(['type'=>'semiDoneDeal','object'=>$deal, 'status'=>'demand']);
 
             return $this->redirectToRoute('deal_index');
         }
@@ -409,6 +419,9 @@ class DealController extends AbstractController
                 'info',
                 'You won 7 points!'
             );
+            $notification->addNotification(['type'=>'doneDeal','object'=>$deal, 'status'=>'driver']);
+            $this->addPointsNotification($deal,$notification);
+
             return $this->redirectToRoute('driver_request_index');
 
         }
@@ -420,9 +433,11 @@ class DealController extends AbstractController
             'success',
             'Your deal has been finished!'
         );
+        $notification->addNotification(['type'=>'semiDoneDeal','object'=>$deal, 'status'=>'driver']);
 
         return $this->redirectToRoute('driver_request_index');
     }
+
 
     public function cleanDeal(Deal $deal, DealRepository $dealRepository): void
     {
@@ -487,5 +502,13 @@ class DealController extends AbstractController
             'success',
             'DONE DEAL!'
         );
+    }
+    public function addPointsNotification(Deal $deal, Notification $notification): void
+    {
+        $notification->addNotification(['type'=>'points', 'user'=>$deal->getOfferUser() ,'status'=>'user', 'number'=>'Five']);
+        $notification->addNotification(['type'=>'points', 'user'=>$deal->getDemandUser() ,'status'=>'user', 'number'=>'Five']);
+        if($deal->getDriverUser()){
+            $notification->addNotification(['type'=>'points', 'user'=>$deal->getDriverUser() ,'status'=>'driver', 'number'=>'Seven']);
+        }
     }
 }

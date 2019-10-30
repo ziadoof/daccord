@@ -22,9 +22,14 @@ fos_user_resetting:
 fos_user_profile_edit:
     path: /profile/edit
     controller: App\Controller\User\ProfileController::editAction
+
 fos_user_profile_show:
     path: /profile
     controller: App\Controller\User\ProfileController::showAction
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+mgilet_notification:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
