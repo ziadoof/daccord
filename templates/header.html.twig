@@ -54,30 +54,32 @@
                                  <h6 >{{ app.user.firstName }} {{ app.user.lastname }}</h6>
                              </li>
                              <li >
-                                 <a href="{{ path('fos_user_profile_show') }}">Mon profile</a>
+                                 <a href="{{ path('ad_new',{'type': 'Offer'}) }}">New offer</a>
                              </li>
                              <li >
-                               <a href="{{ path('fos_user_profile_edit') }}">Modifier mon profile</a>
+                                 <a href="{{ path('ad_new',{'type': 'Demand'}) }}">New demand</a>
+                             </li>
+                             <li >
+                                 <a href="{{ path('fos_user_profile_show') }}">My profile</a>
+                             </li>
+                             <li >
+                               <a href="{{ path('fos_user_profile_edit') }}">Edit my profile</a>
                              </li>
                              <li>
-                                 <a href="{{ path('fos_user_change_password') }}">Modifier ma mot de passe</a>
+                                 <a href="{{ path('fos_user_change_password') }}">change my password</a>
                              </li>
                              <li>
-                                 <a href="{{ path('security_logout') }}">Se déconnecter</a>
+                                 <a href="{{ path('security_logout') }}">Log out</a>
                              </li>
                          </ul>
                     <!-- user login dropdown end -->
                       </div>
-
-                      <div class="mt-2">
-                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample">Search</a>
-                          <a class="btn btn-info " href="{{ path('ad_new',{'type': 'Offer'}) }}">Add offre</a>
-                          <a class="btn btn-info" href="{{ path('ad_new',{'type': 'Demand'}) }}">Add demend</a>
-                      </div>
-                      </div>
-                      <div class="col-md-3 float-right">
+                      <div class="col-md-4 float-right mr-3 mt-1 justify-content-center btn-group mr-4">
+                          <i class="fas fa-envelope search-icon"></i>
+                          <a class="justify-content-center mx-4 mt-1" onclick="" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-search search-icon"></i></a>
                           {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
                       </div>
+                  </div>
                   {% endif %}
                   </div>
               </div>

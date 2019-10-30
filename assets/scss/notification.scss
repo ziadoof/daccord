@@ -21,7 +21,7 @@
   color: #FFFFFF;
   position: absolute;
   top: 50%;
-  left: 95%;
+  left: 80%;
   width: auto;
 }
 
@@ -42,7 +42,7 @@
   max-height: 55vh;
   list-style-type: none;
   text-align: center;
-  left: 50%;
+  left: -140%;
   top: 0.5em;
   border-radius: 7px;
   -webkit-animation: fadeIn 0.3s;
@@ -160,4 +160,10 @@
 }
 .general-notification li{
   list-style: none;
+}
+
+.search-icon{
+  color:white;
+  font-size:2.6em;
+  cursor: pointer;
 }
