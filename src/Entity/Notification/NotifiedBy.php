@@ -34,9 +34,9 @@ class NotifiedBy
     private $notification;
 
     /**
-     * @var $sender
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $sender;
 
@@ -47,12 +47,36 @@ class NotifiedBy
      */
     private $receiver;
 
+
+
+    /**
+     * @var $category
+     * @ORM\Column(type="string", length=255)
+     */
+    private $category;
+
     /**
      * @return mixed
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
     }
 
     /**
@@ -70,13 +94,14 @@ class NotifiedBy
      * @param User $receiver
      * @throws \Exception
      */
-    public function __construct(Notification $notification,User $sender, User $receiver, string $type)
+    public function __construct(Notification $notification,User $sender, User $receiver, string $type, string $category)
     {
         $this->notification = $notification;
         $this->sender = $sender;
         $this->receiver = $receiver;
         $this->type = $type;
         $this->date = new \DateTime('now');
+        $this->category=$category;
     }
 
     /**

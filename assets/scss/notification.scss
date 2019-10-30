@@ -98,13 +98,13 @@
 }
 .messages {
   padding-left: 10px;
-  color: #909DA8;
+  color: $gray-600;
 }
 .messages b {
-  color: #727F8C;
+  color: $gray-600;
 }
 .list__item {
-  border-bottom: 1px solid #9BB7C5;
+  border-bottom: 1px solid lightgrey;
   transition: all 0.2s ease-in-out;
 }
 /*.list__item--link:hover {

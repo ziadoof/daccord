@@ -112,17 +112,19 @@ class NotificationExtension extends \Mgilet\NotificationBundle\Twig\Notification
         }
 
         $notifiedBy= $this->notifiedByRepository->findByReceiver($notifiable);
-        $senders = [];
+        $data = [];
         foreach ($notifiedBy as $item){
-            $senders[$item->getNotification()->getId()]['user']= $item->getSender();
-            $senders[$item->getNotification()->getId()]['type']= $item->getType();
+            $data[$item->getNotification()->getId()]['sender']= $item->getSender();
+            $data[$item->getNotification()->getId()]['type']= $item->getType();
+            $data[$item->getNotification()->getId()]['category']= $item->getCategory();
         }
         // if the template option is set, use custom template
         $template = array_key_exists('template', $options) ? $options['template'] : '@MgiletNotification/notification_list.html.twig';
         return $this->twig->render($template,
             array(
                 'notificationList' => $notifications,
-                'senders' => $senders
+                'data' => $data,
+                'notifiedBy'=>$notifiedBy[0]
             )
         );
     }

@@ -11,6 +11,7 @@ use App\Repository\Deal\DealRepository;
 use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
+use App\Service\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,9 +51,10 @@ class DriverRequestController extends AbstractController
      * @param Request $request
      * @param Driver $driver
      * @param Deal $deal
+     * @param Notification $notification
      * @return Response
      */
-    public function new(Request $request, Driver $driver, Deal $deal): Response
+    public function new(Request $request, Driver $driver, Deal $deal, Notification $notification): Response
     {
         $driverRequest = new DriverRequest();
         $user = $this->getUser();
@@ -71,6 +73,7 @@ class DriverRequestController extends AbstractController
                 'success',
                 'Your driver request has bin sent!'
             );
+            $notification->addNotification(['type'=>'driverRequest','object'=>$driverRequest]);
             return $this->redirectToRoute('deal_show', array('id' => $deal->getId()));
         }
 
@@ -110,9 +113,10 @@ class DriverRequestController extends AbstractController
      * @Route( "/{driverRequest}/{type}",name="driver_request_treatment", methods={"GET","POST"})
      * @param DriverRequest $driverRequest
      * @param string $type
+     * @param Notification $notification
      * @return RedirectResponse
      */
-    public function request_treatment(DriverRequest $driverRequest, string $type): RedirectResponse
+    public function request_treatment(DriverRequest $driverRequest, string $type, Notification $notification): RedirectResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $driverRequest->setStatus($type);
@@ -123,6 +127,7 @@ class DriverRequestController extends AbstractController
             'success',
             'The driver request has bin '.$type.' ..!'
         );
+        $notification->addNotification(['type'=>'treatmentDriverRequest','object'=>$driverRequest,'treatment'=>$type]);
 
         return $this->redirectToRoute('driver_request_index');
     }

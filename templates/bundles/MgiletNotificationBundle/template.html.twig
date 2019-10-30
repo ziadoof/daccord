@@ -1,78 +1,168 @@
-<div class="general-notification">
-{% if mgilet_notification_unseen_count(app.user) > 0 %}
-    <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-       aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span><i class="fas fa-bell"></i>
-    </a>
-    <li class="active-notification">
-{% else %}
+{% if not mgilet_notification_count(app.user)  %}
     <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
        aria-haspopup="true"><i class="fas fa-bell"></i>
     </a>
     <li >
-{% endif %}
         <div class="bell-icon header__notification ">
             <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
-            <ul class="notification__list dropdown " >
+                <ul class="notification__list dropdown " >
                     <h4 class="notification__list__name py-3">
                         Notification
                         <span class="notification-number large-number">{{mgilet_notification_count(app.user)}}</span>
                         Unseen
                         <span class="notification-number large-number" id="unseen-large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
-                        {% if notificationList|length > 0 %}
-                            {% if mgilet_notification_unseen_count(app.user) > 0 %}
-                                <li style="padding: 10px;">
-                                    <b class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
-                                    <a id="notification-MarkAllAsSeen" href="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
-                                </li>
-                            {% endif %}
-                        {% endif %}
                     </h4>
-                {% for notification in notificationList %}
-                    <section class="one-note">
-                        <li class="list__item">
-                                <a href="{{ notification.notification.link }}" class="list__item--link my-0" {% if not notification.seen %}notifiable="{{notification.notifiableEntity.id}}" notification="{{ notification.notification.id }}"{% endif %}>
-                                    {#onclick="markAsVisited({{ notification.notifiableEntity.id}}, {{ notification.notification.id }} );"#}
-                                    <img src="{{asset('/assets/images/profile/'~senders[notification.notification.id]['user'].profileImage)}}" alt="" class="user-image mx-2 mt-1" />
-                                    <span class="messages mx-2">
-                                        <p class="font-weight-bold mb-0">
-                                            {% if senders[notification.notification.id]['type'] is same as ('deal') %}
-                                                <span ><i class="fas fa-handshake"></i></span>
-                                            {% elseif senders[notification.notification.id]['type'] is same as ('caffe') %}
-                                                <span ><i class="">caffe</i></span>
-                                            {% endif %}
-                                            {{ notification.notification.subject }}
-                                        </p>
-                                        <p>{{ notification.notification.message }}</p>
-                                    </span>
-                                </a>
-                            <div class="row">
-                                <div class="col btn-group">
-                                    <div class="col-md-6 ">
-                                        {% if notification.seen %}
-                                        <div class=" seen">
+                    <h6 class="text-center mt-2"> There is no notification found!</h6>
+                </ul>
+            </div>
+        </div> <!-- bell-icon-->
+    </li>
+{% else %}
+    <div class="general-notification">
+    {% if mgilet_notification_unseen_count(app.user) > 0 %}
+        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span><i class="fas fa-bell"></i>
+        </a>
+        <li class="active-notification">
+    {% else %}
+        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true"><i class="fas fa-bell"></i>
+        </a>
+        <li >
+    {% endif %}
+            <div class="bell-icon header__notification ">
+                <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
+                <ul class="notification__list dropdown " >
+                        <h4 class="notification__list__name py-3">
+                            Notification
+                            <span class="notification-number large-number">{{mgilet_notification_count(app.user)}}</span>
+                            Unseen
+                            <span class="notification-number large-number" id="unseen-large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
+                            {% if notificationList|length > 0 %}
+                                {% if mgilet_notification_unseen_count(app.user) > 0 %}
+                                    <li style="padding: 10px;">
+                                        <b class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
+                                        <a id="notification-MarkAllAsSeen" href="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        </h4>
+                    {% for notification in notificationList %}
+                        <section class="one-note">
+                            <li class="list__item {% if notification.seen %}{{ 'seen' }}{% endif %}">
+                                    <a href="{{ notification.notification.link }}"
+                                       class="list__item--link my-0{% if notification.notification.subject is same as ('profilePoints') %}{{" profilePoints"}}
+                                       {% elseif notification.notification.subject is same as ('driverPoints') %}{{" driverPoints"}} {% endif %}"
+                                       {% if not notification.seen %}notifiable="{{notification.notifiableEntity.id}}"
+                                       notification="{{ notification.notification.id }}"
+                                        {% endif %}>
+                                        {% if notification.notification.subject is same as ('profilePoints') or notification.notification.subject is same as ('driverPoints') %}
+                                            <img src="{{asset('/assets/images/icons/tam.png')}}" alt="" class="user-image mx-2 mt-1" />
                                         {% else %}
-                                        <div class="all-as-seen mark-as">
-                                            <a href="{{ mgilet_notification_generate_path('notification_mark_as_seen', notification.notifiableEntity, notification.notification) }}" class="ajax-notification action-secondary">Mark as seen</a>
+                                            {% if data[notification.notification.id]['sender'].profileImage %}
+                                                <img src="{{asset('/assets/images/profile/'~data[notification.notification.id]['sender'].profileImage)}}" alt="" class="user-image mx-2 mt-1" />
+                                            {% else %}
+                                                <img src="{{asset('/assets/images/icons/avatar.jpeg')}}" alt="" class="user-image mx-2 mt-1" />
+                                            {% endif %}
                                         {% endif %}
+                                        <span class="messages mx-2">
+
+                                                {% if data[notification.notification.id]['type'] is same as ('deal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-handshake"></i></span>
+                                                    {{ 'New suggested deal !' }}</p>
+                                                    <p>There is a proposed deal with <span class="blued">{{ data[notification.notification.id]['sender'] }}</span>
+                                                        regarding your AD from category <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('driverRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fas fa-truck-moving"></i></span>
+                                                    {{ 'New driver request !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> had been sent you a new driver request
+                                                        about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('treatmentDriverRequest') %}
+                                                    {% if notification.notification.subject is same as ('rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {{ 'Treatment driver request !' }}</p>
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> rejected the driver's
+                                                            request that you had previously sent him about the catigory
+                                                            <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {{ 'Treatment driver request !' }}</p>
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> accepted the driver's
+                                                            request that you had previously sent him about the catigory
+                                                            <span class="blued">{{data[notification.notification.id]['category']}}</span></p>
+                                                    {% endif %}
+                                                {% elseif data[notification.notification.id]['type'] is same as ('addDriverToDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-check"></i>{{ ' ' }}<i class="fas fas fa-truck-moving"></i></span>
+                                                    {{ 'Add to Deal !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> has added you to a deal that will be executed soon
+                                                        about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('semiDoneDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-handshake"></i></span>
+                                                    {{ 'Semi done Deal !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> has ended a deal
+                                                        about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span> that you are a member of,
+                                                        Waiting for other members to finish the deal
+
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('doneDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="fas fa-handshake"></i></span>
+                                                    {{ 'DONE DEAL !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> has ended a deal
+                                                        about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span> that you are a member of,
+                                                        <span>The deal was terminated</span>
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('profilePoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {{ 'POINTS !' }}</p>
+                                                    <p><span>Congratulations ... Five extra points have been added to you</span></p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('driverPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {{ 'POINTS !' }}</p>
+                                                    <p><span>Congratulations ... Seven extra points have been added to you</span></p>
+                                                {% endif %}
+                                        </span>
+                                    </a>
+                                <div class="row">
+                                    <div class="col btn-group">
+                                        <div class="col-md-6 ">
+                                            {% if notification.seen %}
+                                            <div class=" seen">
+                                            {% else %}
+                                            <div class="all-as-seen mark-as">
+                                                <a href="{{ mgilet_notification_generate_path('notification_mark_as_seen', notification.notifiableEntity, notification.notification) }}" class="ajax-notification action-secondary">Mark as seen</a>
+                                            {% endif %}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3 offset-3">
-                                        <div class="row">
-                                            <div class=" mb-0 mt-2 float-right">
-                                                <b class=" all-as-seen">
-                                                    {{ notification.notification.date|date('d M Y') }}
-                                                </b>
+                                        <div class="col-md-2 offset-4">
+                                            <div class="row">
+                                                <div class=" mb-1 mt-0 float-right">
+                                                    <b class=" all-as-seen">
+                                                        {{ notifiedBy.date_format(notification.notification.date ) }}
+                                                    </b>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </section>
-                {% endfor %}
-            </ul>
-            </div>
-        </div> <!-- bell-icon-->
-    </li>
-</div>
-
+                            </li>
+                        </section>
+                    {% endfor %}
+                </ul>
+                </div>
+            </div> <!-- bell-icon-->
+        </li>
+    </div>
+{% endif %}
