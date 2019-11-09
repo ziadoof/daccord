@@ -21,4 +21,11 @@ fos_user:
     profile:
         form:
             type: App\Form\User\ProfileType
-
+fos_message:
+    db_driver: orm
+    thread_class: App\Entity\Message\Thread
+    message_class: App\Entity\Message\Message
+    new_thread_form:
+        type:               App\Form\Message\NewThreadMessageFormType
+        handler:            app_message.new_thread_form.handler # See FormHandler\NewThreadMessageFormHandler
+        model:              App\Form\Message\NewThreadMessage

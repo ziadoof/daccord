@@ -7,6 +7,8 @@ use App\Entity\Deal\Deal;
 use App\Entity\Deal\DoneDeal;
 use App\Entity\Location\City;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\MessageBundle\Model\ParticipantInterface;
+use FOS\MessageBundle\Security\ParticipantProvider;
 use FOS\UserBundle\Model\User as BaseUser;
 use Mgilet\NotificationBundle\NotifiableInterface;
 use Mgilet\NotificationBundle\Annotation\Notifiable;
@@ -26,7 +28,7 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Table(name="user")
  * @Notifiable(name="user")
  */
-class User  extends BaseUser implements UserInterface,NotifiableInterface
+class User  extends BaseUser implements UserInterface, NotifiableInterface, ParticipantInterface
 {
     /**
      * @ORM\Id()
@@ -667,5 +669,12 @@ class User  extends BaseUser implements UserInterface,NotifiableInterface
         $delay = new \DateTime('2 minutes ago');
 
         return ($this->getLastActivityAt() > $delay);
+    }
+
+    public function photoProfile(){
+        if($this->profileImage){
+            return '/assets/images/profile/'.$this->getProfileImage();
+        }
+        return '/assets/images/profile/avatar.jpeg';
     }
 }

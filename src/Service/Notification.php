@@ -27,7 +27,7 @@ class Notification
         $this->security = $security;
     }
 
-    protected function addNotification(array $options): void
+    public function addNotification(array $options): void
     {
         $type = $options['type'];
         $object = $options['object']??null;

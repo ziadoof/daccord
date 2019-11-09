@@ -111,7 +111,7 @@ class AdAddSubscriber implements EventSubscriberInterface
         } catch (OptimisticLockException $e) {
         } catch (ORMException $e) {
         }
-        $this->notification->addNotification(['type'=>'deal','object'=>$deal]);
+        $this->notification->addNotification(['type' => 'deal', 'object' => $deal]);
     }
 
 }

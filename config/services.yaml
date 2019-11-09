@@ -102,3 +102,23 @@ services:
     natification:
         class: App\Service\Natification
         arguments: ['@doctrine.orm.entity_manager','@mgiletNotificationManager' ]
+
+    FOS\MessageBundle\Composer\ComposerInterface : '@fos_message.composer'
+    FOS\MessageBundle\Sender\SenderInterface : '@fos_message.sender'
+    FOS\MessageBundle\Security\ParticipantProviderInterface: '@fos_message.participant_provider'
+    FOS\MessageBundle\ModelManager\MessageManagerInterface: '@fos_message.message_manager'
+
+    app_message.new_thread_form.handler:
+        class: App\Form\Message\NewThreadMessageFormHandler
+        arguments: ['@request_stack', '@fos_message.composer', '@fos_message.sender', '@fos_message.participant_provider']
+        public: true
+
+    message_send_listener:
+        class: App\Events\EventSubscriber\MessageSendSubscriber
+        arguments: ['@fos_message.message_manager']
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+
+

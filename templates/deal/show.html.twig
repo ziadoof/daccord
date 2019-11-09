@@ -248,18 +248,32 @@
                                         </form>
                                     {% endif %}
                                     {% if deal.offerUser.id is same as(app.user.id) %}
-                                        <form action="">
-                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
+                                        {#<form action="">
+                                            <a class="btn btn-info mx-1" href="#">
                                                 <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="offerUser" class="">
-                                                <p class="mt-1"> Message to {{deal.demandUser.firstname}}</p>                                        </p>
+                                                <a href="{{ path('new_conversation',{'user':deal.demandUser.id}) }}"><p class="mt-1"> Message to {{deal.demandUser.firstname}}</p></a>
+                                                </p>
                                             </a>
+                                        </form>#}
+                                        <form action="{{ url('new_conversation') }}" method="post" >
+                                            <span>Messageo to {{deal.offerUser.firstname}}</span>
+                                            <input type="hidden" name="user" value="{{ deal.demandUser.id }}">
+                                            <input type="submit"  />
                                         </form>
                                     {% else %}
-                                        <form action="">
-                                            <a class="btn btn-info mx-1" href="">
+                                        {#<form action="">
+                                            <a class="btn btn-info mx-1" href="#">
                                                 <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="message" class="">
-                                                <p class="mt-1"> Message to {{deal.offerUser.firstname}}</p>                                       </p>
+                                                <a href="{{ path('new_conversation',{'user':deal.offerUser.id}) }}"><p class="mt-1"> Message to {{deal.demandUser.firstname}}</p></a>
+                                                </p>
+
+                                                </p>
                                             </a>
+                                        </form>#}
+                                        <form action="{{ url('new_conversation') }}" method="post"  >
+                                            <input type="hidden" name="user" value="{{ deal.offerUser.id }}">
+                                            <span>Messageo to {{deal.demandUser.firstname}}</span>
+                                            <input type="submit"  />
                                         </form>
                                     {% endif %}
                                     <form >

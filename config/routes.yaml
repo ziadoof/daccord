@@ -33,3 +33,11 @@ fos_js_routing:
 mgilet_notification:
     resource: "@MgiletNotificationBundle/Controller/"
     prefix: /notifications
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /message
+
+fos_message_thread_view:
+    path: /message
+    controller: App\Controller\Message\MessageController::newThreadAction
+
