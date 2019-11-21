@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -50,7 +51,6 @@ class AdController extends AbstractController
     public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
-
         $result = $adRepository->findAll();
         $results = $paginator->paginate(
         // Doctrine Query, not results
@@ -473,6 +473,15 @@ class AdController extends AbstractController
         $manager->addNotification(array($this->getUser()), $notif, true);
 
         return $this->redirectToRoute('ad_index');
+    }
+
+    /**
+     * @Route( name="getCurrentUserId",methods={"POST"})
+     *
+     */
+    public function getCurrentUserId(): JsonResponse
+    {
+        return new JsonResponse([$this->getUser()->getId()]);
     }
 
 }

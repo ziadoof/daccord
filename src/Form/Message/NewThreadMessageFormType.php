@@ -33,6 +33,7 @@ class NewThreadMessageFormType extends BaseType
             ->add('recipient',HiddenType::class)
             ->add('body', TextType::class, array(
                 'label' => false,
+                'attr' => array('class'=>'message-text'),
             ));
         $builder->get('recipient')
             ->addModelTransformer($this->transformer);

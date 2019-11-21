@@ -1,9 +1,3 @@
-            {#<th>{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}starter{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}startdate{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}messages{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}last_message{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}actions{% endtrans %}</th>#}
 <div id="message-center">
     {% if form is defined or threads is not empty %}
     <div class="row">
@@ -19,7 +13,7 @@
                 {% endif %}
                 {% if threads%}
                 {% for thread in threads %}
-                        <a class="nav-link {% if thread.id is same as (threads[0].id) and form is not defined %}{{ ' active ' }}{% endif %} mb-1" id="v-pills-home-tab" data-toggle="pill" href="#user-{{thread.getOtherParticipants(app.user)[0].id}}" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <a class="nav-link {% if thread.id is same as (threads[0].id) and form is not defined %}{{ ' active ' }}{% endif %} mb-1 thread-link" id="v-pills-home-tab" data-toggle="pill" href="#user-{{thread.getOtherParticipants(app.user)[0].id}}" role="tab" aria-controls="v-pills-home" aria-selected="true" data-idOfThread="{{ thread.id }}">
                             <div class="btn-group message-link">
                                 {% if thread.createdBy is not same as (app.user) %}
                                     <img src="{{ thread.createdBy.photoProfile() }}" class="user-image mr-2" ><br>
@@ -29,24 +23,13 @@
                                 <span class="ml-2 mt-4 float-right ">{{ thread.getOtherParticipants(app.user)[0].firstname|title }}{{ ' ' }}{{ thread.getOtherParticipants(app.user)[0].lastname }}</span>
                             </div>
                             <div class="btn-group float-right">
-                                <div class="">
-                                    <p class="">{{ thread.messages|length }}<i class="fas fa-envelope"></i></p>
-                                </div>
-                                {% if fos_message_can_delete_thread(thread) %}
-                                    {% if fos_message_deleted_by_participant(thread) %}
-                                        {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
-                                        {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
-                                    {% else %}
-                                        {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
-                                        {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
+                                <div id="first-message-{{ thread.id }}">
+                                    {% if unReadMessages[thread.id] %}
+                                        <p id="new-message-{{ thread.id }}" class=" ml-2 mt-4 float-right new-message ">
+                                            {{ unReadMessages[thread.id] }}
+                                        </p>
                                     {% endif %}
-                                    <div class="ml-2">
-                                        <form action="{{ formAction }}" method="post">
-                                             {#<input type="submit" value="{{ submitValue }}"/>#}
-                                            <i class="fas fa-trash-alt"></i>
-                                        </form>
-                                    </div>
-                                {% endif %}
+                                </div>
                             </div>
                             <br>
                         </a>
@@ -57,48 +40,10 @@
         <div class="col-md-9">
             <div class="tab-content" id="v-pills-tabContent">
                 {% if form is defined %}
-                <div class="tab-pane fade show active chat" id="user-{{ recipient.id }}" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                    <div class="chat-messages" id="messages-chat">
-                      {#here new message for new recipient#}
-                    </div>
-                    <form action="{{ url('fos_message_thread_new') }}" method="post" class="mt-5">
-                        {{ form_widget(form) }}
-                        <input type="submit" class="send-message-chat btn btn-info mb-" onClick=" localStorage.setItem('message', null);"/>
-                    </form>
-                </div>
+                    {% include '@FOSMessageBundle/Message/thread_form.html.twig' with {'recipient': recipient} %}
                 {% endif %}
                 {% if threads%}
-                {% for thread in threads %}
-                    <div class="tab-pane fade chat{% if thread.id is same as (threads[0].id) and form is not defined %}{{ ' show active ' }}{% endif %}" id="user-{{thread.getOtherParticipants(app.user)[0].id}}" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <div class="chat-messages" id="messages-chat">
-                            {% for message in thread.messages %}
-                                <br>
-                                <div class=" my-2 py-2 messenger_thread_message d-inline-block col-md-6 {% if message.sender is not same as (app.user) %}{{ 'offset-6 box-clint ' }}{% else %}{{ ' box-user ' }}{% endif %}" id="message_{{ message.id }}">
-                                    <div class="messenger_thread_message_body d-block" >
-                                       <p class=" {% if message.sender is same as (app.user) %}{{ ' user-message  ' }}{% else %}{{ ' clint-message ' }}{% endif %}">
-                                           {{ message.body }}
-                                       </p>
-                                    </div>
-                                    <div class="messenger_thread_message_info d-block" id="{{ message.id }}">
-                                        <small class=" {% if message.sender is same as (app.user) %}{{ ' user-message  float-right ' }}{% else %}{{ ' clint-message float-right ' }}{% endif %}">
-                                           {{ message.dateFormat(message.createdAt) }}
-                                        </small>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            <span id="message_recept"></span>
-                        </div>
-                        {#<form action="{{ url('message_send', {'conversation': thread.id}) }}" method="post">
-                            {{ form_widget(forms[thread.id]) }}
-                            <input type="submit" />
-                        </form>#}
-                        <form id="send" action="{{ url('message_send') }}" method="post" class="mt-5" {#data-conversation="{{ thread.id }}"#}>
-                            <input  type="hidden" name="conversation" value="{{ thread.id}}">
-                            {{ form_widget(forms[thread.id]) }}
-                            <input  type="submit" class="send-message-chat btn btn-info mb-2"/>
-                        </form>
-                    </div>
-                {% endfor %}
+                    {% include '@FOSMessageBundle/Message/thread_content.html.twig' with {'threads': threads} %}
                 {% endif %}
             </div>
         </div>
@@ -109,74 +54,3 @@
         </div>
     {% endif %}
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-<script>
-
-    //test send message without reload page
-    /*$("#send").submit(function(e) {
-        e.preventDefault();
-        let encode_message = $('#message_body');
-        let message = encodeURIComponent(encode_message.val());
-        message = message.trim();
-        encode_message.val(null);
-
-        let conversation = $('#send').data('conversation');
-        let data = {};
-        data['conversation'] = conversation;
-        data['message'] = message;
-        let url = "send message rout";
-       if(message !== ""){
-           $.ajax({
-               method: "post",
-               dataType: "html",
-               url: url,
-               async: true,
-               data:data,
-           }).done( function(response) {
-               $('#message_recept').append(data['message']);
-
-           }).fail(function(jxh,textmsg,errorThrown){
-               alert('filer');
-           });
-        }
-    });
-*/
-
-    $(document).ready(function () {
-       /* var lastID = $('#messages-chat div:last').attr('id');
-        alert(lastID);*/
-        // for new conversation cancel the show for threads
-        var newConversations = document.getElementsByClassName('new-conversation');
-        if (newConversations.length > 0) {
-            localStorage.setItem('message', null);
-        }
-
-        $('a[data-toggle="pill"]').on('show.bs.tab', function(e) {
-            localStorage.setItem('message', $(e.target).attr('href'));
-
-
-        });
-        var activeMessage = localStorage.getItem('message');
-        if(activeMessage){
-            $('#v-pills-tab a[href="' + activeMessage + '"]').tab('show');
-
-        }
-
-        // scroll chat
-      /*  var height = 0;
-        $('.messenger_thread_message').each(function(i, value){
-            height += parseInt($(this).height());
-        });
-
-        height += 9999;
-
-        $('.chat-messages').animate({scrollTop: height});*/
-
-        // scroll chat
-        document.getElementById('messages-chat').scrollTop = document.getElementById('messages-chat').scrollHeight;
-    });
-
-</script>
-
-

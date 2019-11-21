@@ -47,4 +47,54 @@ class MessageRepository extends ServiceEntityRepository
             ;
     }
 
+    public function countUnreadMessageByUser($user_id,$thread_id)
+    {
+        $builder = $this->createQueryBuilder('m')
+                        ->where('m.thread = :thread_id')
+        ;
+        return (int) $builder
+        ->select($builder->expr()->count('mm.id'))
+        ->innerJoin('m.metadata','mm')
+        ->andWhere('mm.message = m.id')
+        ->andWhere('mm.participant = :user_id')
+        ->andWhere('mm.isRead = :isRead')
+        ->setParameter('thread_id', $thread_id)
+        ->setParameter('user_id', $user_id)
+        ->setParameter('isRead', false, \PDO::PARAM_BOOL)
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
+
+    public function findUnreadMessageByUser($user_id,$thread_id)
+    {
+        $builder = $this->createQueryBuilder('m')
+            ->where('m.thread = :thread_id')
+        ;
+        return  $builder
+            ->innerJoin('m.metadata','mm')
+            ->andWhere('mm.message = m.id')
+            ->andWhere('mm.participant = :user_id')
+            ->andWhere('mm.isRead = :isRead')
+            ->setParameter('thread_id', $thread_id)
+            ->setParameter('user_id', $user_id)
+            ->setParameter('isRead', false, \PDO::PARAM_BOOL)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllUnreadMessage($user_id)
+    {
+        $builder = $this->createQueryBuilder('m');
+        return (int) $builder
+            ->select($builder->expr()->count('mm.id'))
+            ->innerJoin('m.metadata','mm')
+            ->andWhere('mm.message = m.id')
+            ->andWhere('mm.participant = :user_id')
+            ->andWhere('mm.isRead = :isRead')
+            ->setParameter('user_id', $user_id)
+            ->setParameter('isRead', false, \PDO::PARAM_BOOL)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

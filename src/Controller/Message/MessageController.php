@@ -3,23 +3,14 @@
 
 namespace App\Controller\Message;
 
-use App\Entity\Message\Message;
-use App\Entity\Message\Thread;
-use App\Entity\Message\ThreadMetadata;
-use App\Entity\User;
-use App\Events\Events;
+
 use App\Form\Message\NewThreadMessageFormHandler;
-use App\Form\Message\NewThreadMessageFormType;
 use App\Repository\Message\MessageRepository;
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Elastica\Request;
 use FOS\MessageBundle\Controller\MessageController as BaseController;
 use FOS\MessageBundle\Sender\SenderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,6 +49,7 @@ class MessageController extends BaseController
     {
         $threads = $this->getFormsTreads()['threads'];
         $forms =  $this->getFormsTreads()['forms'];
+        $unReadMessages =  $this->getFormsTreads()['unReadMessages'];
 
         foreach ($threads as $thread){
             $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
@@ -65,7 +57,8 @@ class MessageController extends BaseController
             if ($message = $formHandler->process($form)) {
                 return $this->render('@FOSMessage/Message/inbox.html.twig', array(
                     'threads' => $threads,
-                    'forms' => $forms
+                    'forms' => $forms,
+                    'unReadMessages'=>$unReadMessages
                 ));
             }
 
@@ -73,19 +66,23 @@ class MessageController extends BaseController
         return $this->render('@FOSMessage/Message/inbox.html.twig', array(
             'threads' => $threads,
             'forms' => $forms,
+            'unReadMessages'=>$unReadMessages
+
         ));
     }
 
     /**
      *
-     * @Route("conversation",name="message_send", methods={"POST"})
+     * @Route("/conversation",name="message_send", methods={"POST"})
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param EventDispatcherInterface $eventDispatcher
      * @return Response
      */
     public function sendMessage(\Symfony\Component\HttpFoundation\Request $request, EventDispatcherInterface $eventDispatcher): Response
     {
-        //test
-        /*$threadtext = $request->request->get('conversation');
+        $threadtext = $request->request->get('conversation');
         $messagetext = $request->request->get('message');
+        $recipient = $request->request->get('recipient');
 
         $composer = $this->container->get('fos_message.composer');
         $thread = $this->getProvider()->getThread($threadtext);
@@ -99,49 +96,9 @@ class MessageController extends BaseController
         $sender = $this->container->get('fos_message.sender');
         $sender->send($message);
 
-        $data = [$thread , $messagetext];
-        return new JsonResponse($data);*/
-        //endtest
 
-
-        if(isset($_POST['conversation'])){
-            $conversation = $_POST['conversation'];
-        }
-        else{
-            $conversation = false;
-        }
-
-        $threads = $this->getFormsTreads()['threads'];
-        $forms =  $this->getFormsTreads()['forms'];
-
-        if($conversation){
-            $thread = $this->getProvider()->getThread($conversation);
-            $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
-            $formHandler = $this->container->get('fos_message.reply_form.handler');
-
-            if ($message = $formHandler->process($form)) {
-                //test
-                $event = new GenericEvent($message);
-                $eventDispatcher->dispatch(Events::POST_SEND, $event);
-                //test
-                return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
-                    'thread' => $message->getThread()->getId(),
-                    'threads' => $threads,
-                    'forms' => $forms,
-                )));
-            }
-            return $this->render('@FOSMessage/Message/inbox.html.twig', array(
-                'form' => $form->createView(),
-                'thread' => $conversation,
-                'threads' => $threads,
-                'forms' => $forms,
-
-            ));
-        }
-        return $this->render('@FOSMessage/Message/inbox.html.twig', array(
-            'threads' => $threads,
-            'forms' => $forms,
-        ));
+        $data = [$messagetext ,$thread->getId(),$recipient];
+        return new JsonResponse($data);
     }
 
     /**
@@ -154,6 +111,8 @@ class MessageController extends BaseController
     {
         $threads = $this->getFormsTreads()['threads'];
         $forms =  $this->getFormsTreads()['forms'];
+        $unReadMessages =  $this->getFormsTreads()['unReadMessages'];
+
         $recipient = null;
         $haveConversation = false;
         $form = $this->container->get('fos_message.new_thread_form.factory')->create();
@@ -173,7 +132,9 @@ class MessageController extends BaseController
             if($haveConversation){
                 return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
                     'threads' => $threads,
-                    'forms' => $forms
+                    'forms' => $forms,
+                    'unReadMessages'=>$unReadMessages
+
                 )));
             }
             $form->get('recipient')->setData($user);
@@ -183,7 +144,9 @@ class MessageController extends BaseController
                 'data' => $form->getData(),
                 'recipient'=>$recipient,
                 'threads' => $threads,
-                'forms' => $forms
+                'forms' => $forms,
+                'unReadMessages'=>$unReadMessages
+
             ));
         }
         if ($message = $this->formHandler->process($form)) {
@@ -191,12 +154,14 @@ class MessageController extends BaseController
             return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
                 'threadId' => $message->getThread()->getId(),
                 'threads' => $threads,
-                'forms' => $forms
+                'forms' => $forms,
+                'unReadMessages'=>$unReadMessages
             )));
         }
         return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
             'threads' => $threads,
-            'forms' => $forms
+            'forms' => $forms,
+            'unReadMessages'=>$unReadMessages
         )));
     }
 
@@ -205,6 +170,7 @@ class MessageController extends BaseController
 
         $threads = $this->getFormsTreads()['threads'];
         $forms =  $this->getFormsTreads()['forms'];
+        $unReadMessages =  $this->getFormsTreads()['unReadMessages'];
 
         $form = $this->container->get('fos_message.new_thread_form.factory')->create();
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
@@ -214,6 +180,7 @@ class MessageController extends BaseController
                 'threadId' => $message->getThread()->getId(),
                 'forms' => $forms,
                 'threads' => $threads,
+                'unReadMessages'=>$unReadMessages
             )));
         }
 
@@ -222,7 +189,32 @@ class MessageController extends BaseController
             'data' => $form->getData(),
             'forms' => $forms,
             'threads' => $threads,
+            'unReadMessages'=>$unReadMessages
         ));
+    }
+
+    /**
+     * select Unseen Messages To Seen.
+     * @Route("/statu", name="unseen_to_seen", methods={"POST"})
+     * @return Response
+     *
+     */
+    public function selectUnseenMessagesToSeen(\Symfony\Component\HttpFoundation\Request $request){
+        $threadId = $request->request->get('thread');
+        $unSeenMessages = $this->messageRepository->findUnreadMessageByUser($this->getUser(),$threadId);
+        $thread = $this->getProvider()->getThread($threadId);
+        $recipient = $thread->getOtherParticipants($this->getUser())[0];
+
+        $em = $this->getDoctrine()->getManager();
+        $messagesIds = [];
+        foreach ($unSeenMessages as $message){
+            $message->setIsReadByParticipant($this->getUser(),true);
+            $messagesIds[]=$message->getId();
+            $em->persist($message);
+        }
+        $em->flush();
+        return new JsonResponse([$threadId,$messagesIds,$recipient->getId()]);
+
     }
 
     public function getFormsTreads()
@@ -262,10 +254,15 @@ class MessageController extends BaseController
         //end sort
 
         $forms = [];
+        $unReadMessages =[];
         foreach ($threads as $thread){
             $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
             $forms [$thread->getId()]= $form->createView();
+            /*$participant = $thread->getOtherParticipants($this->getUser())[0];*/
+            /*$messages = $this->get('fos_message.message_manager')->getNbUnreadMessageByParticipant($this->getUser());*/
+            $messages = $this->messageRepository->countUnreadMessageByUser($this->getUser()->getId(),$thread->getId());
+            $unReadMessages[$thread->getId()]=$messages;
         }
-        return ['threads'=>$sortThread,'forms'=>$forms];
+        return ['threads'=>$sortThread,'forms'=>$forms, 'unReadMessages'=>$unReadMessages];
     }
 }
