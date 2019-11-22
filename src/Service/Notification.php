@@ -8,23 +8,26 @@ use App\Entity\Deal\Deal;
 use App\Entity\DriverRequest;
 use App\Entity\Notification\NotifiedBy;
 use App\Entity\User;
+use App\Server\Chat;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Mgilet\NotificationBundle\Manager\NotificationManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Security;
 
 class Notification
 {
     private $em;
     private $notificationManager;
-
     private $security;
+    private $chat;
 
-    public function __construct(EntityManagerInterface $em, NotificationManager $notificationManager,Security $security)
+    public function __construct(EntityManagerInterface $em, NotificationManager $notificationManager,Security $security,Chat $chat)
     {
         $this->em = $em;
         $this->notificationManager = $notificationManager;
         $this->security = $security;
+        $this->chat = $chat;
     }
 
     public function addNotification(array $options): void
@@ -69,6 +72,7 @@ class Notification
         $this->em->persist($offerNotifiedBy);
         $this->em->persist($demandNotifiedBy);
         $this->em->flush();
+
     }
 
     protected function addDriverRequestNotification(DriverRequest $driverRequest): void

@@ -81,20 +81,6 @@ class Chat implements MessageComponentInterface
                         echo "\n";
                     }
                 }
-                /*if(!empty($messages)){
-                    foreach ($messages as $mess){
-                        if(isset($this->users[$recipient])){
-                            $this->users[$recipient]->send(json_encode([
-                                'message' => $mess,
-                                'thread' => $thread,
-                                'type'=> 'seen',
-                                'recipient'=>$recipient
-                            ]));
-                            echo 'kokooooooooooo';
-                            echo "\n";
-                        }
-                    }
-                }*/
             }
           return false;
         }
@@ -115,5 +101,6 @@ class Chat implements MessageComponentInterface
         return false;
 
     }
+
 
 }

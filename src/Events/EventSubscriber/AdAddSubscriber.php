@@ -23,7 +23,6 @@ class AdAddSubscriber implements EventSubscriberInterface
     private $manager;
     protected $notification;
 
-
     /**
      * AdAddSubscriber constructor.
      * @param EntityManager $em
@@ -35,7 +34,6 @@ class AdAddSubscriber implements EventSubscriberInterface
         $this->em = $em;
         $this->manager = $manager;
         $this->notification = $notification;
-
     }
 
     /**

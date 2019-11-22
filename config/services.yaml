@@ -119,13 +119,10 @@ services:
         arguments: ['@request_stack', '@fos_message.composer', '@fos_message.sender', '@fos_message.participant_provider']
         public: true
 
-    message_send_listener:
-        class: App\Events\EventSubscriber\MessageSendSubscriber
-        arguments: ['@fos_message.message_manager']
-        tags:
-            - { name: kernel.event_subscriber }
-
     App\Service\Message\Message:
         class: App\Service\Message\Message
+
+    App\Server\Chat:
+        class: App\Server\Chat
 
 
