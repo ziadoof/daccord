@@ -239,14 +239,16 @@
                     data:data,
                 }).done( function(response) {
                     removePadge(response[0]);
-                    if(response[1].length >0){
-                        ws.send(JSON.stringify({
-                            thread: response[0],
-                            messages : response[1],
-                            recipient: response[2],
-                            message: 'seen',
-                            type:'seen'
-                        }));
+                    if(response[3]){
+                        for(var message of response[1]){
+                            ws.send(JSON.stringify({
+                                thread: response[0],
+                                messages : message,
+                                recipient: response[2],
+                                message: 'seen',
+                                type:'seen'
+                            }));
+                        }
                     }
                     for (var mess of response[1]){
                         loseAllUnReadMessage();
@@ -305,7 +307,14 @@
                 if(parent){
                     let newMessage = parent.querySelector('.new_chat');
                     if(newMessage ===null){
-                        let active = parent.querySelector('.active.show');
+                        var href = localStorage.getItem('message-tap');
+                        let active;
+                        if(href){
+                             active = parent.querySelector(href);
+                        }
+                        else {
+                             active = parent.querySelector('.active .show');
+                        }
                         let thread = active.getAttribute('data-thread');
                         markMessagesToSeen(thread);
                     }
@@ -319,7 +328,45 @@
     <script>
         $(document).ready(function () {
             $(".chat-messages").animate({ scrollTop: 20000000 }, "slow");
+
+            //for save the tab and return to it
+            $('a[data-toggle="pill"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('message-tap', $(e.target).attr('href'));
+            });
+            var message = localStorage.getItem('message-tap');
+            if(message){
+                $('#v-pills-tab a[href="' + message + '"]').tab('show');
+            }
+
+            var offerUser = document.getElementById('offerUser-message');
+            var demandUser = document.getElementById('demandUser-message');
+
+            if(offerUser){
+                offerUser.addEventListener('click',function () {
+                    let offerUserId = this.children[0].children[0].getAttribute('value');
+                    if(offerUserId){
+                        localStorage.setItem('message-tap', '#user-'+offerUserId);
+                    }
+                    else {
+                        localStorage.setItem('message-tap', null);
+                    }
+
+                });
+            }
+            if(demandUser){
+                demandUser.addEventListener('click',function () {
+                    let demandUserId = this.children[0].children[0].getAttribute('value');
+                    if (demandUserId){
+                        localStorage.setItem('message-tap', '#user-'+demandUserId);
+                    }
+                    else {
+                        localStorage.setItem('message-tap', null);
+                    }
+
+                });
+            }
         });
+
         // زر سيند وتحسس زر انتر
         /*textSender.onclick = sendTextInputContent;
         _textInput.onkeyup = function(e) {

@@ -69,7 +69,19 @@ class Chat implements MessageComponentInterface
                 $messages = $messageData['messages'];
                 $recipient = $messageData['recipient'];
                 $thread = $messageData['thread'];
-                if(!empty($messages)){
+                if($messages){
+                    if(isset($this->users[$recipient])){
+                        $this->users[$recipient]->send(json_encode([
+                            'message' => $messages,
+                            'thread' => $thread,
+                            'type'=> 'seen',
+                            'recipient'=>$recipient
+                        ]));
+                        echo 'kokooooooooooo';
+                        echo "\n";
+                    }
+                }
+                /*if(!empty($messages)){
                     foreach ($messages as $mess){
                         if(isset($this->users[$recipient])){
                             $this->users[$recipient]->send(json_encode([
@@ -82,7 +94,7 @@ class Chat implements MessageComponentInterface
                             echo "\n";
                         }
                     }
-                }
+                }*/
             }
           return false;
         }

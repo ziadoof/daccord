@@ -120,8 +120,10 @@ class MessageController extends BaseController
         {
             $recipient= $user= $this->userRepository->findOneById($_POST['user']);
             foreach ($threads as $thread){
-                if(($thread->getCreatedBy()=== $this->getUser() && $thread->getOtherParticipants($this->getUser())[0]=== $recipient)
-                    || ($thread->getCreatedBy()=== $recipient && $thread->getOtherParticipants($this->getUser())[0]=== $this->getUser()))
+                $participants = $thread->getParticipants($this->getUser());
+                if(($participants[0] === $this->getUser() && $participants[1] === $recipient) ||
+                    ($participants[0]  === $recipient && $participants[1]  === $this->getUser())
+                    )
                 {
                     $haveConversation = true;
                 }
@@ -201,7 +203,11 @@ class MessageController extends BaseController
      */
     public function selectUnseenMessagesToSeen(\Symfony\Component\HttpFoundation\Request $request){
         $threadId = $request->request->get('thread');
+        $status = false;
         $unSeenMessages = $this->messageRepository->findUnreadMessageByUser($this->getUser(),$threadId);
+        if(!empty($unSeenMessages)){
+            $status = true;
+        }
         $thread = $this->getProvider()->getThread($threadId);
         $recipient = $thread->getOtherParticipants($this->getUser())[0];
 
@@ -213,7 +219,7 @@ class MessageController extends BaseController
             $em->persist($message);
         }
         $em->flush();
-        return new JsonResponse([$threadId,$messagesIds,$recipient->getId()]);
+        return new JsonResponse([$threadId,$messagesIds,$recipient->getId(),$status]);
 
     }
 

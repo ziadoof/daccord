@@ -44,7 +44,11 @@
     overflow-y: auto;
     padding-right: 1em;
 }
-
+.chat-messages::-webkit-scrollbar {
+    width: 2px;
+    height: 4px;
+    background-color: #00B5CE; /* or add it to the track */
+}
 .user-message{
     overflow-wrap: break-word;
     color: white;
