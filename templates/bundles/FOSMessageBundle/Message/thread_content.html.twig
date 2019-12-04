@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-3">
                 <div class="row bord-thread">
-                    <div class="col-md-5 offset-4 number-messages-thread" >
+                    <div class="col-md-5 offset-3 number-messages-thread" >
                         <div class="row">
                             <div class="col-md-4 pt-2 ">
                                 <div id="numberMessagesThread-{{ thread.id }}">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 delete-thread">
+                    <div class="col-md-3 delete-thread mb-2">
                         {% if fos_message_can_delete_thread(thread) %}
                             {% if fos_message_deleted_by_participant(thread) %}
                                 {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
@@ -38,10 +38,14 @@
                                 {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
                                 {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
                             {% endif %}
-                            <div class="ml-2">
+                            <div class=" mr-5">
                                 <form action="{{ formAction }}" method="post">
-                                    {#<input type="submit" value="{{ submitValue }}"/>#}
-                                    <i class="fas fa-trash-alt"></i>
+                                    {#<input type="submit" value="{{ submitValue }}"/>
+                                    <i class="fas fa-trash-alt"></i>#}
+                                    <button class="btn btn-outline-danger mx-1" >
+                                        <input type="hidden" name="user" value="{{ submitValue }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </form>
                             </div>
                         {% endif %}
