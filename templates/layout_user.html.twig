@@ -45,14 +45,16 @@
             </div>
         </section>
     </section>
-
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <script>
 
-        (function() {
-            var ws = new WebSocket('ws://localhost:8080');
+        (function()
+        {
+
+            var ws = new WebSocket('ws://127.0.0.1:8080');
             let url_user_id = "{{path('getCurrentUserId')}}";
+
             ws.onopen = function () {
                 $.ajax({
                     method: "post",
@@ -61,11 +63,10 @@
                 }).done( function(response) {
                     ws.send(JSON.stringify({
                         message: 'open',
-                        userId : response,
+                        userId : response[0],
                         recipient: 0
                     }));
                 }).fail(function(){
-
                     alert('filer');
                 });
             };
@@ -97,24 +98,179 @@
                     messageCounter.innerText = messageNumber.toString() ;
                 }
             }
-            function addMessage(data) {
-                let messageData = JSON.parse(data);
-                if(messageData['type']){
-                    if(messageData['type']==='seen'){
-                        let messageId = parseInt(messageData['message']);
-                        let message = document.getElementById('message-info-'+messageId);
-                        let thread = messageData['thread'];
-                        if(message){
-                            $("#message-info-"+messageId).find("i").removeClass('far fa-clock').addClass('fas fa-check');
-                        }
-                        else {
-                            let thread_messages = document.getElementById('messages-chat-'+thread);
-                            let temporary_messages = thread_messages.getElementsByClassName('temporary-message');
-                            $(temporary_messages).removeClass('far fa-clock temporary-message').addClass('fas fa-check');
-                        }
+            function sendSeen(messageData) {
+                let messageId = parseInt(messageData['message']);
+                let message = document.getElementById('message-info-'+messageId);
+                let thread = messageData['thread'];
+                if($('#message-center').length > 0 ){
+                    if(message){
+                        $("#message-info-"+messageId).find("i").removeClass('far fa-clock').addClass('fas fa-check');
+                    }
+                    else {
+                        let thread_messages = document.getElementById('messages-chat-'+thread);
+                        let temporary_messages = thread_messages.getElementsByClassName('temporary-message');
+                        $(temporary_messages).removeClass('far fa-clock temporary-message').addClass('fas fa-check');
                     }
                 }
-                else {
+            }
+            function getNotificationText(messageData) {
+                var type = messageData['typeOfNotification'];
+                var text = null;
+                switch (type) {
+                    case 'deal':
+                        text=
+                        '<p class="font-weight-bold mb-0">'+
+                        '<span class="blued"><i class="fas fa-handshake"></i></span>'+
+                        ' New suggested deal ! '+'</p>'+
+                        '<p>There is a proposed deal with <span class="blued">'+messageData['sender']+'</span>'+
+                        ' regarding your AD from category <span class="blued">'+messageData['category']+'</span>'+
+                        '</p>';
+                        break;
+                    case 'driverRequest':
+                        text =
+                        '<p class="font-weight-bold mb-0">'+
+                        '<span class="blued"><i class="fas fas fa-truck-moving"></i></span>'+
+                        ' New driver request ! '+ '</p>'+
+                        '<p><span class="blued">'+messageData['sender']+'</span> had been sent you a new driver request about the catigory ' +
+                        ' <span class="blued">'+messageData['category']+'</span>'+
+                        '</p>';
+                        break;
+                    case 'treatmentDriverRequest':
+                        if (messageData['subject']=== 'rejected'){
+                            text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="fas fa-times"></i></span>'+
+                            ' Treatment driver request ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' rejected the driver\'s request that you had previously sent him about the catigory '+
+                            '<span class="blued">'+messageData['category']+'</span>'+
+                            '</p>';
+                        }
+                        else{
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="rosed"><i class="fas fa-check"></i></span>'+
+                                ' Treatment driver request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' accepted the driver\'s request that you had previously sent him about the catigory '+
+                                '<span class="blued">'+messageData['category']+'</span>'+
+                                '</p>';
+                        }
+                        break;
+                    case 'addDriverToDeal':
+                        text=
+                        '<p class="font-weight-bold mb-0">'+
+                        '<span class="blued"><i class="fas fa-check"></i> '+' '+ ' <i class="fas fas fa-truck-moving"></i></span>'+
+                        ' Add to Deal ! '+'</p>'+
+                        '<p><span class="blued">'+messageData['sender']+'</span>'+
+                        ' has added you to a deal that will be executed soon about the catigory '+
+                        '<span class="blued">'+messageData['category']+'</span>'+
+                        '</p>';
+                        break;
+                    case 'semiDoneDeal':
+                        text=
+                        '<p class="font-weight-bold mb-0">'+
+                        '<span class="blued"><i class="fas fa-handshake"></i></span>'+
+                        ' Semi done Deal ! '+'</p>'+
+                        '<p><span class="blued">'+messageData['sender']+'</span>'+
+                        ' has ended a deal about the catigory '+
+                        '<span class="blued">'+messageData['category']+'</span>'+
+                        ' that you are a member of, Waiting for other members to finish the deal '+
+                        '</p>';
+                        break;
+                    case 'doneDeal':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="fas fa-handshake"></i></span>'+
+                            ' DONE DEAL ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' has ended a deal about the catigory '+
+                            '<span class="blued">'+messageData['category']+'</span>'+
+                            ' that you are a member of, '+
+                            '<span>The deal was terminated</span>'+
+                            '</p>';
+                        break;
+                    case'profilePoints':
+                        text=
+                        '<p class="font-weight-bold mb-0">'+
+                        '<span class="rosed"><i class="far fa-star"></i></span>'+
+                        ' POINTS ! '+'</p>'+
+                        '<p><span> Congratulations ... Five extra points have been added to you </span></p>';
+                        break;
+
+                    case'driverPoints':
+                        text=
+                        '<p class="font-weight-bold mb-0">'+
+                        '<span class="rosed"><i class="far fa-star"></i></span>'+
+                        ' POINTS ! '+'</p>'+
+                        '<p><span> Congratulations ... Seven extra points have been added to you </span></p>';
+                        break;
+                }
+                return text;
+            }
+            function sendNotification(messageData) {
+                let notif = document.getElementById('new-notification');
+
+                    let link = messageData['link'];
+                    let notifiableId = messageData['notifiableId'];
+                    let notificationId = messageData['notificationId'];
+                    let senderUserImage = messageData['senderImage'];
+                    let notification_text = getNotificationText(messageData);
+                    let markAsSeenHref = '/notifications/'+notifiableId+'/mark_as_seen/'+notificationId;
+                    /*let markAsSeenHref =  Routing.generate('notification_mark_as_seen',{notifiable:notifiable_id,notification:notification_id});*/
+
+                    let now = new Date().toLocaleTimeString('en-US', { hour12: false,
+                        hour: "numeric",
+                        minute: "numeric"});
+                    let image;
+                    let elemantA;
+                    if(messageData['typeOfNotification']==='profilePoints'){
+                        elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                        image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    }
+                    else if(messageData['typeOfNotification']==='driverPoints'){
+                        elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                        image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    }
+                    else {
+                       elemantA = '<a href="'+link+'" class="list__item--link my-0" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                       image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                    }
+
+                    let notification =
+                        '<section class="one-note">'+
+                        '<li class="list__item ">'+
+                        elemantA+
+                        image+
+                        '<span class="messages mx-2">'
+                        +notification_text+
+                        '</span>'+
+                        '</a>'+
+                        '<div class="row">'+
+                        '<div class="col btn-group">'+
+                        '<div class="col-md-6 ">'+
+                        '<div class="all-as-seen mark-as">'+
+                        '<a href="'+markAsSeenHref+'" class="ajax-notification action-secondary">'+'Mark as seen'+'</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="col-md-2 offset-4">'+
+                        '<div class="row">'+
+                        '<div class=" mb-1 mt-0 float-right">'+
+                        '<b class=" all-as-seen">'+
+                        now+
+                        '</b>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>'+
+                        '</section>';
+                    notif.insertAdjacentHTML('afterbegin',notification);
+
+            }
+            function sendMessage(messageData) {
+                if($('#message-center').length > 0 ){
                     let message = messageData['message'];
                     let thread = messageData['thread'];
                     let date = new Date();
@@ -146,7 +302,6 @@
                         if(null === messageCounter){
                             firstMessageCounter.innerHTML =
                                 '<p id= '+id+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
-
                         }
                         else{
 
@@ -166,6 +321,25 @@
                         markMessagesToSeen(thread);
                     }
                     plusNumberMessagesThread(thread);
+                }
+                else{
+                    plusAllUnReadMessage();
+                }
+
+            }
+            function messagePreparation(data) {
+                let messageData = JSON.parse(data);
+                if(messageData['type'])
+                {
+                    if(messageData['type']==='seen'){
+                       sendSeen(messageData);
+                    }
+                    if (messageData['type']==='notification') {
+                        sendNotification(messageData);
+                    }
+                }
+                else {
+                    sendMessage(messageData);
                 }
             }
             function addMessageToCurrentUser(message, thread) {
@@ -282,15 +456,10 @@
             }
 
             ws.onmessage = function (event) {
-                if($('#message-center').length > 0 ){
-                    addMessage(event.data);
-                }
-                else{
-                    plusAllUnReadMessage();
-                }
+                messagePreparation(event.data);
             };
             ws.onerror = function () {
-                 addMessage('An error occured!');
+                addMessage('An error occured!');
             };
 
 
@@ -311,10 +480,10 @@
                         var href = localStorage.getItem('message-tap');
                         let active;
                         if(href){
-                             active = parent.querySelector(href);
+                            active = parent.querySelector(href);
                         }
                         else {
-                             active = parent.querySelector('.active .show');
+                            active = parent.querySelector('.active .show');
                         }
                         let thread = active.getAttribute('data-thread');
                         markMessagesToSeen(thread);
@@ -325,6 +494,7 @@
         })();
 
     </script>
+
 
     <script>
         $(document).ready(function () {
@@ -378,5 +548,11 @@
         };*/
 
     </script>
+
+
+
+    {#<script src="https://gist.githubusercontent.com/cboden/fcae978cfc016d506639c5241f94e772/raw/e974ce895df527c83b8e010124a034cfcf6c9f4b/autobahn.js">
+
+    </script>#}
 {% endblock %}
 

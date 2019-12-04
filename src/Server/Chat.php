@@ -5,8 +5,7 @@ namespace App\Server;
 
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
-use Ratchet\Wamp\Topic;
-use Ratchet\Wamp\WampServerInterface;
+
 
 class Chat implements MessageComponentInterface
 {
@@ -51,17 +50,28 @@ class Chat implements MessageComponentInterface
         $recipient = $messageData['recipient'];
         $msg = $messageData['message'];
         if($recipient === 0 ){
-            $this->users[$messageData['userId'][0]]=$conn;
-            /*echo 'Message connexion from '.$recipient.' in the thread '.$thread.'|';*/
-            foreach ($this->users as $key=>$value){
-                if($value === $conn){
-                    $id = $key;
+            if($messageData['message']==='open'){
+                $this->users[$messageData['userId']]=$conn;
+                /*echo 'Message connexion from '.$recipient.' in the thread '.$thread.'|';*/
+                foreach ($this->users as $key=>$value){
+                    if($value === $conn){
+                        $id = $key;
+                    }
                 }
+                echo 'Message connexion user id save at users ['.$id.'] |';
+                echo "\n";
+                return false;
             }
-            echo 'Message connexion user id save at users ['.$id.'] |';
-            echo "\n";
-            return false;
+            if ($messageData['message']=== 'close'){
+                $this->clients->detach($conn);
+                unset($this->users[$messageData['userId']]);
+
+                echo 'Message disconnexion user id save at users ['.$messageData['userId'].'] |';
+                echo "\n";
+                return false;
+            }
         }
+
         echo 'Message sent to user '.$recipient.' msg is  '.$msg.'|';
         echo "\n";
         if(isset($messageData['type'])){
@@ -88,7 +98,8 @@ class Chat implements MessageComponentInterface
     }
 
 
-    public function msgToUser($msg, $id, $thread) {
+    public function msgToUser($msg, $id, $thread): bool
+    {
         if(isset($this->users[$id])){
 
             $this->users[$id]->send(json_encode([
@@ -102,5 +113,24 @@ class Chat implements MessageComponentInterface
 
     }
 
+    /** Trimmed for clarity
+     * @param $message
+     * @return bool
+     */
+    public function handleZmqMessage($message)
+    {
+        echo 'handle Zmq Message';
+        echo "\n";
+        $messageData = json_decode($message, true);
+        $id = $messageData['recipient'];
+        if ($this->users[$id]){
+            echo 'notification to user is sent';
+            echo "\n";
+            return $this->users[$id]->send($message);
+        }
+        echo 'notification NOT sent';
+        echo "\n";
+        return false;
+    }
 
 }

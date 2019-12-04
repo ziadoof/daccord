@@ -6,7 +6,9 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "ext-memcache": "*",
         "ext-pdo": "*",
+        "ext-zmq": "*",
         "cboden/ratchet": "^0.4.1",
         "doctrine/annotations": "^1.6",
         "friendsofsymfony/elastica-bundle": "^5.0",
@@ -44,9 +46,7 @@
         "symfony/web-profiler-bundle": "4.2.*",
         "symfony/webpack-encore-bundle": "^1.1",
         "symfony/yaml": "4.2.*",
-        "twig/extensions": "^1.5",
-        "ext-zmq": "*",
-      "ext-memcache": "*"
+        "twig/extensions": "^1.5"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",

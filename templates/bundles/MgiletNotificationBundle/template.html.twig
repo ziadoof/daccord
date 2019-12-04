@@ -47,6 +47,9 @@
                                 {% endif %}
                             {% endif %}
                         </h4>
+                    <div id="new-notification">
+                        {#new notification here#}
+                    </div>
                     {% for notification in notificationList %}
                         <section class="one-note">
                             <li class="list__item {% if notification.seen %}{{ 'seen' }}{% endif %}">
@@ -66,7 +69,6 @@
                                             {% endif %}
                                         {% endif %}
                                         <span class="messages mx-2">
-
                                                 {% if data[notification.notification.id]['type'] is same as ('deal') %}
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="fas fa-handshake"></i></span>

@@ -14,6 +14,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Mgilet\NotificationBundle\Manager\NotificationManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Security;
+use ZMQ;
+use ZMQContext;
+use ZMQSocket;
 
 class Notification
 {
@@ -62,16 +65,38 @@ class Notification
         $demandUser = $deal->getDemandUser();
 
         $category = $deal->getCategory()->getName()==='Other'?$deal->getOffer()->getSubjectName():$deal->getCategory()->getName();
-        $notification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
+        $offerNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
+        $demandNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
 
-        $this->notificationManager->addNotification(array($offerUser), $notification, true);
-        $this->notificationManager->addNotification(array($demandUser), $notification, true);
+        $this->notificationManager->addNotification(array($offerUser), $offerNotification, true);
+        $this->notificationManager->addNotification(array($demandUser), $demandNotification, true);
 
-        $offerNotifiedBy = new NotifiedBy($notification, $demandUser, $offerUser, 'deal',$category);
-        $demandNotifiedBy = new NotifiedBy($notification, $offerUser, $demandUser,'deal',$category);
+        $offerNotifiedBy = new NotifiedBy($offerNotification, $demandUser, $offerUser, 'deal',$category);
+        $demandNotifiedBy = new NotifiedBy($demandNotification, $offerUser, $demandUser,'deal',$category);
         $this->em->persist($offerNotifiedBy);
         $this->em->persist($demandNotifiedBy);
         $this->em->flush();
+
+        $thisUser = $this->security->getUser();
+        $recipient = $thisUser===$offerUser?$demandUser:$offerUser;
+        $sender = $thisUser===$offerUser?$offerUser:$demandUser;
+        $notificationId = $thisUser===$offerUser?$demandNotification->getId():$offerNotification->getId();
+        $notifiableId = $thisUser===$offerUser ?$demandNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId()
+                                               :$offerNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'deal',
+            'recipient'=>$recipient->getId(),
+            'category'=>$category,
+            'sender'=>$sender->getFirstname(),
+            'link' =>'/deal/' . $deal->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage()
+        );
+
+            $this->pushNotification($pushedNotification);
 
     }
 
@@ -89,6 +114,22 @@ class Notification
         $notifiedBy = new NotifiedBy($notification, $sender, $driver, 'driverRequest',$category);
         $this->em->persist($notifiedBy);
         $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'driverRequest',
+            'recipient'=>$driver->getId(),
+            'category'=>$category,
+            'sender'=>$sender->getFirstname(),
+            'link' =>'/driver_request/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage()
+        );
+
+        $this->pushNotification($pushedNotification);
     }
 
     protected function addRequestTreatmentNotification(DriverRequest $driverRequest, string $type): void
@@ -105,6 +146,23 @@ class Notification
         $notifiedBy = new NotifiedBy($notification, $sender, $user, 'treatmentDriverRequest',$category);
         $this->em->persist($notifiedBy);
         $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'treatmentDriverRequest',
+            'recipient'=>$user->getId(),
+            'category'=>$category,
+            'sender'=>$sender->getFirstname(),
+            'link' =>'/deal/'.$driverRequest->getDeal()->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+            'subject' =>$type
+        );
+
+        $this->pushNotification($pushedNotification);
     }
 
     protected function addAddDriverToDealNotification(DriverRequest $driverRequest): void
@@ -121,84 +179,246 @@ class Notification
         $notifiedBy = new NotifiedBy($notification, $sender, $driver, 'addDriverToDeal',$category);
         $this->em->persist($notifiedBy);
         $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'addDriverToDeal',
+            'recipient'=>$driver->getId(),
+            'category'=>$category,
+            'sender'=>$sender->getFirstname(),
+            'link' =>'/driver_request/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+
+        $this->pushNotification($pushedNotification);
     }
 
     protected function addDoneDealNotification(Deal $deal, string $type, string $status): void
     {
         $category = $deal->getCategory()->getName()==='Other'?$deal->getOffer()->getSubjectName()
             :$deal->getCategory()->getName();
-        $doneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+      /*  $doneDealNotification = $this->notificationManager->createNotification('','','/deal/');
         $semiDoneDealNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
-        $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
+        $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');*/
+
+        $typeOfNotification = null;
+        $sender = null;
+
+        $firstNotificationId = null;
+        $secondNotificationId = null;
+        $firstNotifiableId = null;
+        $secondNotifiableId = null;
+        $firstRecipient = null;
+        $secondRecipient = null;
+        $firstLink= null;
+        $secondLink= null;
 
         if($type === 'doneDeal'){
+            $typeOfNotification = 'doneDeal';
             if($status ==='offer'){
+                $sender = $deal->getOfferUser();
+
+                $doneDealNotification = $this->notificationManager->createNotification('','','/deal/');
                 $this->notificationManager->addNotification(array($deal->getDemandUser()), $doneDealNotification, true);
                 $demandNotifiedBy = new NotifiedBy($doneDealNotification, $deal->getOfferUser(), $deal->getDemandUser(), 'doneDeal',$category);
                 $this->em->persist($demandNotifiedBy);
 
+                //variable realtime notification
+                $firstNotificationId = $doneDealNotification->getId();
+                $firstNotifiableId = $doneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $firstRecipient = $deal->getDemandUser();
+                $firstLink= '/deal/';
+
                 if($deal->getDriverUser()){
+                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getOfferUser(), $deal->getDriverUser(), 'doneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
+
+                    //variable realtime notification
+                    $secondNotificationId = $driverNotification->getId();
+                    $secondNotifiableId = $driverNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                    $secondRecipient = $deal->getDriverUser();
+                    $secondLink= '/driver_request/';
                 }
             }
             elseif ($status === 'demand'){
+                $sender = $deal->getDemandUser();
+
+                $doneDealNotification = $this->notificationManager->createNotification('','','/deal/');
                 $this->notificationManager->addNotification(array($deal->getOfferUser()), $doneDealNotification, true);
                 $offerNotifiedBy = new NotifiedBy($doneDealNotification, $deal->getDemandUser(), $deal->getOfferUser(), 'doneDeal',$category);
                 $this->em->persist($offerNotifiedBy);
 
+                //variable realtime notification
+                $firstNotificationId = $doneDealNotification->getId();
+                $firstNotifiableId = $doneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $firstRecipient = $deal->getOfferUser();
+                $firstLink= '/deal/';
+
                 if($deal->getDriverUser()){
+
+                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getDemandUser(), $deal->getDriverUser(), 'doneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
+
+                    //variable realtime notification
+                    $secondNotificationId = $driverNotification->getId();
+                    $secondNotifiableId = $driverNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                    $secondRecipient = $deal->getDriverUser();
+                    $secondLink= '/driver_request/';
                 }
             }
             else{//driver
-                $this->notificationManager->addNotification(array($deal->getOfferUser()), $doneDealNotification, true);
-                $offerNotifiedBy = new NotifiedBy($doneDealNotification, $deal->getDriverUser(), $deal->getOfferUser(), 'doneDeal',$category);
+                $sender = $deal->getDriverUser();
+
+                $firstDoneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+                $this->notificationManager->addNotification(array($deal->getOfferUser()), $firstDoneDealNotification, true);
+                $offerNotifiedBy = new NotifiedBy($firstDoneDealNotification, $deal->getDriverUser(), $deal->getOfferUser(), 'doneDeal',$category);
                 $this->em->persist($offerNotifiedBy);
 
-                $this->notificationManager->addNotification(array($deal->getDemandUser()), $doneDealNotification, true);
-                $demandNotifiedBy = new NotifiedBy($doneDealNotification, $deal->getDriverUser(), $deal->getDemandUser(), 'doneDeal',$category);
+                //variable realtime notification
+                $firstNotificationId = $firstDoneDealNotification->getId();
+                $firstNotifiableId = $firstDoneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $firstRecipient = $deal->getOfferUser();
+                $firstLink= '/deal/';
+
+                $secondDoneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+                $this->notificationManager->addNotification(array($deal->getDemandUser()), $secondDoneDealNotification, true);
+                $demandNotifiedBy = new NotifiedBy($secondDoneDealNotification, $deal->getDriverUser(), $deal->getDemandUser(), 'doneDeal',$category);
                 $this->em->persist($demandNotifiedBy);
+
+                //variable realtime notification
+                $secondNotificationId = $secondDoneDealNotification->getId();
+                $secondNotifiableId = $secondDoneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $secondRecipient = $deal->getDemandUser();
+                $secondLink= '/deal/';
 
             }
         }
         else{
+            $typeOfNotification = 'semiDoneDeal';
+
             if($status ==='offer'){
+                $sender = $deal->getOfferUser();
+
+                $semiDoneDealNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
                 $this->notificationManager->addNotification(array($deal->getDemandUser()), $semiDoneDealNotification, true);
                 $demandNotifiedBy = new NotifiedBy($semiDoneDealNotification, $deal->getOfferUser(), $deal->getDemandUser(), 'semiDoneDeal',$category);
                 $this->em->persist($demandNotifiedBy);
 
+                //variable realtime notification
+                $firstNotificationId = $semiDoneDealNotification->getId();
+                $firstNotifiableId = $semiDoneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $firstRecipient = $deal->getDemandUser();
+                $firstLink= '/deal/'.$deal->getId();
+
                 if($deal->getDriverUser()){
+                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getOfferUser(), $deal->getDriverUser(), 'semiDoneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
+
+                    //variable realtime notification
+                    $secondNotificationId = $driverNotification->getId();
+                    $secondNotifiableId = $driverNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                    $secondRecipient = $deal->getDriverUser();
+                    $secondLink= '/driver_request/';
                 }
             }
             elseif ($status === 'demand'){
+                $sender = $deal->getDemandUser();
+
+                $semiDoneDealNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
                 $this->notificationManager->addNotification(array($deal->getOfferUser()), $semiDoneDealNotification, true);
                 $offerNotifiedBy = new NotifiedBy($semiDoneDealNotification, $deal->getDemandUser(), $deal->getOfferUser(), 'semiDoneDeal',$category);
                 $this->em->persist($offerNotifiedBy);
 
+                //variable realtime notification
+                $firstNotificationId = $semiDoneDealNotification->getId();
+                $firstNotifiableId = $semiDoneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $firstRecipient = $deal->getOfferUser();
+                $firstLink= '/deal/'.$deal->getId();
+
                 if($deal->getDriverUser()){
+                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getDemandUser(), $deal->getDriverUser(), 'semiDoneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
+
+                    //variable realtime notification
+                    $secondNotificationId = $driverNotification->getId();
+                    $secondNotifiableId = $driverNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                    $secondRecipient = $deal->getDriverUser();
+                    $secondLink= '/driver_request/';
                 }
             }
             else{//driver
-                $this->notificationManager->addNotification(array($deal->getOfferUser()), $semiDoneDealNotification, true);
-                $offerNotifiedBy = new NotifiedBy($semiDoneDealNotification, $deal->getDriverUser(), $deal->getOfferUser(), 'semiDoneDeal',$category);
+                $sender = $deal->getDriverUser();
+
+
+                $firstSemiDoneDealNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
+                $this->notificationManager->addNotification(array($deal->getOfferUser()), $firstSemiDoneDealNotification, true);
+                $offerNotifiedBy = new NotifiedBy($firstSemiDoneDealNotification, $deal->getDriverUser(), $deal->getOfferUser(), 'semiDoneDeal',$category);
                 $this->em->persist($offerNotifiedBy);
 
-                $this->notificationManager->addNotification(array($deal->getDemandUser()), $semiDoneDealNotification, true);
-                $demandNotifiedBy = new NotifiedBy($semiDoneDealNotification, $deal->getDriverUser(), $deal->getDemandUser(), 'semiDoneDeal',$category);
+                //variable realtime notification
+                $firstNotificationId = $firstSemiDoneDealNotification->getId();
+                $firstNotifiableId = $firstSemiDoneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $firstRecipient = $deal->getOfferUser();
+                $firstLink= '/deal/'.$deal->getId();
+
+
+                $secondSemiDoneDealNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
+                $this->notificationManager->addNotification(array($deal->getDemandUser()), $secondSemiDoneDealNotification, true);
+                $demandNotifiedBy = new NotifiedBy($secondSemiDoneDealNotification, $deal->getDriverUser(), $deal->getDemandUser(), 'semiDoneDeal',$category);
                 $this->em->persist($demandNotifiedBy);
+
+                //variable realtime notification
+                $secondNotificationId = $secondSemiDoneDealNotification->getId();
+                $secondNotifiableId = $secondSemiDoneDealNotification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+                $secondRecipient = $deal->getDemandUser();
+                $secondLink= '/deal/'.$deal->getId();
             }
         }
         $this->em->flush();
+
+        //send realTime notification
+
+        $firstNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>$typeOfNotification,
+            'recipient'=>$firstRecipient->getId(),
+            'category'=>$category,
+            'sender'=>$sender->getFirstname(),
+            'link' =>$firstLink,
+            'notificationId'=>$firstNotificationId,
+            'notifiableId'=>$firstNotifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+
+
+        $this->pushNotification($firstNotification);
+
+        if($secondRecipient && $secondNotificationId){
+            $secondNotification = array(
+                'type'=>'notification',
+                'typeOfNotification'=>$typeOfNotification,
+                'recipient'=>$secondRecipient->getId(),
+                'category'=>$category,
+                'sender'=>$sender->getFirstname(),
+                'link' =>$secondLink,
+                'notificationId'=>$secondNotificationId,
+                'notifiableId'=>$secondNotifiableId,
+                'senderImage'=>$sender->getProfileImage(),
+            );
+            $this->pushNotification($secondNotification);
+        }
     }
 
     protected function addPointsNotification(User $user,string $status, string $point): void
@@ -212,7 +432,49 @@ class Notification
         $notifiedBy = new NotifiedBy($notification, $user, $user, $type,'Points');
         $this->em->persist($notifiedBy);
         $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>$type,
+            'recipient'=>$user->getId(),
+            'category'=>'Points',
+            'sender'=>null,
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>null,
+        );
+
+
+        $this->pushNotification($pushNotification);
     }
 
 
+    /**
+     * send realtime notification
+     * @param $recipient
+     * @param $type
+     * @param $sender
+     * @param $link
+     * @param $category
+     * @throws \ZMQSocketException
+     */
+    public function pushNotification($pushedNotification): void
+    {
+
+        $dsn = 'tcp://127.0.0.1:5555';
+        /* Create a socket */
+        $socket = new ZMQSocket(new ZMQContext(1), ZMQ::SOCKET_PUSH);
+        /* Get list of connected endpoints */
+        $endpoints = $socket->getEndpoints();
+        /* Check if the socket is connected */
+        if (!in_array($dsn, $endpoints['connect'])) {
+            $socket->connect($dsn);
+            $socket->send(json_encode($pushedNotification));
+        } else {
+            $socket->send(json_encode($pushedNotification));
+        }
+    }
 }

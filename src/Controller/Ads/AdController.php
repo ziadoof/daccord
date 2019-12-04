@@ -26,7 +26,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-
+use ZMQ;
+use ZMQContext;
 
 
 /**
@@ -477,11 +478,14 @@ class AdController extends AbstractController
 
     /**
      * @Route( name="getCurrentUserId",methods={"POST"})
-     *
      */
-    public function getCurrentUserId(): JsonResponse
+    public function getCurrentUserId()
     {
-        return new JsonResponse([$this->getUser()->getId()]);
+            if($this->getUser()->getId()){
+                return new JsonResponse([$this->getUser()->getId()]);
+            }
+        return false;
     }
+
 
 }
