@@ -118,3 +118,9 @@
 .hide-padge{
     display: none;
 }
+
+
+/*notification*/
+.active-notification{
+    list-style: none;
+}

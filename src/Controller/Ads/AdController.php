@@ -477,7 +477,7 @@ class AdController extends AbstractController
     }
 
     /**
-     * @Route( name="getCurrentUserId",methods={"POST"})
+     * @Route( name="getCurrentUserId",methods={"POST"},options = { "expose" = true })
      */
     public function getCurrentUserId()
     {

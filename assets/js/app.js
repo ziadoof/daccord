@@ -36,6 +36,8 @@ require('./viewImage');
 require('./user_tab');
 require('./notification');
 require('./markAsVisited');
+require('./Messages/webSocketServer');
+require('./Messages/scrollMessage');
 //-----------React.js
 //require('./React/startup/result_offer_search');
 

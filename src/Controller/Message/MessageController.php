@@ -80,7 +80,7 @@ class MessageController extends BaseController
 
     /**
      *
-     * @Route("/conversation",name="message_send", methods={"POST"})
+     * @Route("/conversation",name="message_send", methods={"POST"},options = { "expose" = true })
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param EventDispatcherInterface $eventDispatcher
      * @return Response
@@ -204,7 +204,7 @@ class MessageController extends BaseController
 
     /**
      * select Unseen Messages To Seen.
-     * @Route("/statu", name="unseen_to_seen", methods={"POST"})
+     * @Route("/statu", name="unseen_to_seen", methods={"POST"},options = { "expose" = true })
      * @return Response
      *
      */

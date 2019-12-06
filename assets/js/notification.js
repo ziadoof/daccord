@@ -6,8 +6,10 @@
             xhttp.onreadystatechange = function () {
                 // on success
                 if (xhttp.readyState === 4 && xhttp.status === 200) {
+                    console.log(element);
                     // mark notification as seen
-                    element.parentNode.classList+= ' seen';
+                    element.parentNode.parentNode.parentNode.parentNode.parentNode.classList+='seen';
+
                     // remove button
                     element.remove();
                     // decrease notification count
@@ -17,11 +19,13 @@
                     var unseen_large_Counter = document.getElementById('unseen-large-number');
                     var unseen_large_Number = parseInt(unseen_large_Counter.innerHTML);
                     unseen_large_Number--;
-                    notificationCounter.innerHTML = notificationNumber.toString();
-                    unseen_large_Counter.innerHTML = unseen_large_Number.toString();
-                    if (notificationNumber === 0){
-                        notificationCounter.parentNode.parentNode.classList = '';
+                    if (notificationNumber ===0){
+                        notificationCounter.remove();
                     }
+                    else {
+                        notificationCounter.innerHTML = notificationNumber.toString();
+                    }
+                    unseen_large_Counter.innerHTML = unseen_large_Number.toString();
                 }
             };
             xhttp.open("POST", element.toString(), true);
@@ -46,7 +50,7 @@
                     }
                     // set notification count to 0
                     var notificationCount = document.getElementById('notificationCount');
-                    notificationCount.innerHTML = '0';
+                    notificationCount.remove();
                     var unseen_large_number = document.getElementById('unseen-large-number');
                     unseen_large_number.innerHTML = '0';
                     var active = document.getElementsByClassName('active-notification');
