@@ -2,6 +2,7 @@
 namespace App\Controller\User;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;

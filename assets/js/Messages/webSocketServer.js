@@ -1,26 +1,24 @@
+$(document).ready(function() {
+    let user = document.getElementById('socket_identifier');
+    let id = parseInt(user.getAttribute('data-value'));
 
+    if (id >0){
+        wsConnect(id)
+    }
+});
 
-var url_user_id =  Routing.generate('getCurrentUserId');
-
-$.ajax({
-    method: "post",
-    dataType: "json",
-    url: url_user_id,
-      })
-    .done( function(response) {
+function wsConnect(id) {
 
         (function() {
-
             var ws = new WebSocket('ws://127.0.0.1:8080');
-
             ws.onopen = function () {
                 ws.send(JSON.stringify({
                     message: 'open',
-                    userId : response[0],
+                    userId : id,
                     recipient: 0
                 }));
-            };
 
+            };
 
             function getNotificationText(messageData) {
                 var type = messageData['typeOfNotification'];
@@ -117,7 +115,6 @@ $.ajax({
                 }
                 return text;
             }
-
             function plusCountNotification() {
                 let notificationCounter = document.getElementById('notificationCount');
                 if($('#notificationCount').length >0){
@@ -193,7 +190,6 @@ $.ajax({
                 notif.insertAdjacentHTML('afterbegin',notification);
                 var btns = document.getElementsByClassName('ajax-notification');
                 function markAsSeen(e) {
-                    console.log(e.target);
                     var xhttp = new XMLHttpRequest();
                     var element = e.target;
                     xhttp.onreadystatechange = function () {
@@ -231,7 +227,6 @@ $.ajax({
                 }
                 plusCountNotification();
             }
-
             function loseAllUnReadMessage() {
                 let messageCounter = document.getElementById('messagesCount');
                 let firstMessageCounter = document.getElementById('centerOfMessages');
@@ -246,7 +241,6 @@ $.ajax({
                     messageCounter.innerText = messageNumber.toString() ;
                 }
             }
-
             function plusAllUnReadMessage() {
                 let messageCounter = document.getElementById('messagesCount');
                 let firstMessageCounter = document.getElementById('centerOfMessages');
@@ -261,8 +255,6 @@ $.ajax({
                     messageCounter.innerText = messageNumber.toString() ;
                 }
             }
-
-
             function sendSeen(messageData) {
                 let messageId = parseInt(messageData['message']);
                 let message = document.getElementById('message-info-'+messageId);
@@ -278,8 +270,6 @@ $.ajax({
                     }
                 }
             }
-
-
             function sendMessage(messageData) {
                 if($('#message-center').length > 0 ){
                     let message = messageData['message'];
@@ -338,7 +328,6 @@ $.ajax({
                 }
 
             }
-
             function addMessageToCurrentUser(message, thread) {
                 let now = new Date().toLocaleTimeString('en-US', { hour12: false,
                     hour: "numeric",
@@ -359,7 +348,6 @@ $.ajax({
                 plusNumberMessagesThread(thread);
 
             }
-
             function plusNumberMessagesThread(thread){
                 let number = document.getElementById('numberMessagesThread-'+thread);
                 let text_value = $('#numberMessagesThread-'+thread).text();
@@ -368,7 +356,6 @@ $.ajax({
                 number.innerHTML = '<b class="title-blue" id="numberMessagesThread-'+thread+'">'+value+'</b>';
 
             }
-
             function removePadge(thread) {
                 let n = $('#new-message-'+thread).text();
                 if(n>0){
@@ -377,7 +364,6 @@ $.ajax({
                     firstMessageCounter.innerHTML = '<p id= '+id+' class="hide-padge"></p>';
                 }
             }
-
             function messagePreparation(data) {
                 let messageData = JSON.parse(data);
                 if(messageData['type'])
@@ -393,7 +379,6 @@ $.ajax({
                     sendMessage(messageData);
                 }
             }
-
             function markMessagesToSeen(thread){
                 let url = Routing.generate('unseen_to_seen');
                 let data = {'thread':thread};
@@ -424,7 +409,6 @@ $.ajax({
                     alert('filer');
                 });
             }
-
             function sendMessageToUser(data){
                 let url = Routing.generate('message_send');
 
@@ -449,11 +433,15 @@ $.ajax({
                 }
 
             }
-
             let threads = document.getElementsByClassName('chat');
 
             for (var thread of threads ){
-
+                //for button enter to send message
+                /*thread.querySelector('textarea').keyup(function(event) {
+                    if (event.keyCode === 13) {
+                        thread.querySelector('#send').children[1].click();
+                    }
+                });*/
                 thread.querySelector('#send').children[1].addEventListener('click', function (e) {
                     e.preventDefault();
 
@@ -477,7 +465,6 @@ $.ajax({
             ws.onerror = function () {
                 addMessage('An error occured!');
             };
-
 
             let element = document.getElementsByClassName('thread-link');
             for (var link of element){
@@ -509,7 +496,5 @@ $.ajax({
 
         })();
 
-    });
-
-
+}
 

@@ -475,17 +475,4 @@ class AdController extends AbstractController
 
         return $this->redirectToRoute('ad_index');
     }
-
-    /**
-     * @Route( name="getCurrentUserId",methods={"POST"},options = { "expose" = true })
-     */
-    public function getCurrentUserId()
-    {
-            if($this->getUser()->getId()){
-                return new JsonResponse([$this->getUser()->getId()]);
-            }
-        return false;
-    }
-
-
 }
