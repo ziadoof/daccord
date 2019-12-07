@@ -248,18 +248,20 @@
                                         </form>
                                     {% endif %}
                                     {% if deal.offerUser.id is same as(app.user.id) %}
-                                        <form action="">
-                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
-                                                <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="offerUser" class="">
-                                                <p class="mt-1"> Message to {{deal.demandUser.firstname}}</p>                                        </p>
-                                            </a>
+                                        <form method="post" action="{{ url('new_conversation') }}"id="demandUser-message">
+                                            <button class="btn btn-info mx-1" >
+                                                <input type="hidden" name="user" value="{{ deal.demandUser.id }}">
+                                                <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="message" class="">
+                                                <p class="mt-1">Message to {{deal.demandUser.firstname}}</p>
+                                            </button>
                                         </form>
                                     {% else %}
-                                        <form action="">
-                                            <a class="btn btn-info mx-1" href="">
+                                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                            <button class="btn btn-info mx-1" >
+                                                <input type="hidden" name="user" value="{{ deal.offerUser.id }}">
                                                 <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="message" class="">
-                                                <p class="mt-1"> Message to {{deal.offerUser.firstname}}</p>                                       </p>
-                                            </a>
+                                                <p class="mt-1">Message to {{deal.offerUser.firstname}}</p>
+                                            </button>
                                         </form>
                                     {% endif %}
                                     <form >
@@ -390,8 +392,12 @@
                                                     <p class="mt-1">{{driver.user.firstname}}</p>
                                                     <p class="mt-1">{{ driver.point }}{{ ' Points' }}</p>
                                                     <p class="mt-1">{{ driver.feedback }}</p>
-                                                    <button class="btn btn-info my-1 btn-block">Message to {{driver.user.firstname}}</button>
-                                                    <form action="" method="post">
+                                                    <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                        <button class="btn btn-info mx-1" >
+                                                            <input type="hidden" name="user" value="{{ driver.user.id }}">
+                                                            <p class="mt-1">Message to {{driver.user.firstname}}</p>
+                                                        </button>
+                                                    </form>                                                    <form action="" method="post">
                                                         <button type="submit" value="{{ driver.id }}" name="driver_request"
                                                                 id="driver_request_js" data-toggle="modal"
                                                                 class="btn btn-info my-1 btn-block "

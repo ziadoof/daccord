@@ -3,6 +3,8 @@ twig:
         - 'bootstrap_4_layout.html.twig'
         - 'PhotoType.html.twig'
     default_path: '%kernel.project_dir%/templates'
+    paths:
+        '%kernel.project_dir%/templates/bundles/FOSMessageBundle': FOSMessageBundle
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
@@ -11,6 +13,8 @@ twig:
         form_DriverType: '@App\Service\FormDriverType'
         form_CityAreaType: '@App\Service\City\CityAreaType'
         form_CityAutoAreaType: '@App\Service\City\CityAutoAreaType'
+        MessageCount: '@App\Service\Message\Message'
+
 
 
 

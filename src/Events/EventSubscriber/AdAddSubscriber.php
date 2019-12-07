@@ -23,7 +23,6 @@ class AdAddSubscriber implements EventSubscriberInterface
     private $manager;
     protected $notification;
 
-
     /**
      * AdAddSubscriber constructor.
      * @param EntityManager $em
@@ -35,7 +34,6 @@ class AdAddSubscriber implements EventSubscriberInterface
         $this->em = $em;
         $this->manager = $manager;
         $this->notification = $notification;
-
     }
 
     /**
@@ -111,7 +109,7 @@ class AdAddSubscriber implements EventSubscriberInterface
         } catch (OptimisticLockException $e) {
         } catch (ORMException $e) {
         }
-        $this->notification->addNotification(['type'=>'deal','object'=>$deal]);
+        $this->notification->addNotification(['type' => 'deal', 'object' => $deal]);
     }
 
 }

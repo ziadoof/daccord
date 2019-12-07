@@ -119,12 +119,13 @@ class NotificationExtension extends \Mgilet\NotificationBundle\Twig\Notification
             $data[$item->getNotification()->getId()]['category']= $item->getCategory();
         }
         // if the template option is set, use custom template
+        $notif = $notifiedBy?$notifiedBy[0]:null;
         $template = array_key_exists('template', $options) ? $options['template'] : '@MgiletNotification/notification_list.html.twig';
         return $this->twig->render($template,
             array(
                 'notificationList' => $notifications,
                 'data' => $data,
-                'notifiedBy'=>$notifiedBy[0]
+                'notifiedBy'=>$notif
             )
         );
     }

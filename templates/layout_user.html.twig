@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-{% block header %}{% include "header.html.twig" %}{% endblock %}
+    {% block header %}
+        <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
+        {% include "header.html.twig" %}
+    {% endblock %}
     {% if app.user != null%}
         {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
     {% endif %}

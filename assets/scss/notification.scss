@@ -86,7 +86,7 @@
   color: #FFFFFF;
 }
 .header__notification {
-  height: 2em;
+  /*height: 2em;*/
   /* justify-content: space-around;*/
 }
 .user-image {
@@ -166,4 +166,9 @@
   color:white;
   font-size:2.6em;
   cursor: pointer;
+}
+
+/*notification*/
+.active-notification{
+  list-style: none;
 }

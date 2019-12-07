@@ -5,7 +5,7 @@
               <div class=" col-md-12">
                   <div class="logo py-2">
                       <a href="{{ path('index') }}">
-                          <img src="{{ asset('assets/images/icons/4.png') }}" alt="" onclick="dashboard();">
+                          <img src="{{ asset('assets/images/icons/4.png') }}" alt="" >
                       </a>
                   </div>
                  {# <div class="logo2 py-2">
@@ -20,7 +20,7 @@
                               </div>
                           </div>
                           <div class="sidebar-toggle-box">
-                              <div class="float-left"> <a href="#" class="button-left ml-2"><span class="fa fa-fw fa-bars"></span></a> </div>
+                              <div class="float-left"> <a  class="button-left ml-2"><span class="fa fa-fw fa-bars"></span></a> </div>
                           </div>
                       </div>
                   </div>
@@ -74,9 +74,17 @@
                          </ul>
                     <!-- user login dropdown end -->
                       </div>
+                      {% set messageCount = MessageCount.getNbUnreadMessage(app.user) %}
                       <div class="col-md-4 float-right mr-3 mt-1 justify-content-center btn-group mr-4">
-                          <i class="fas fa-envelope search-icon"></i>
-                          <a class="justify-content-center mx-4 mt-1" onclick="" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-search search-icon"></i></a>
+                          <a  href="{{path('message_index')}}">
+                              <div id="centerOfMessages">
+                                  <p id="messagesCount" class="{% if messageCount is same as (0) %}{{ 'hide-padge' }}{% endif %}">
+                                      {{ messageCount }}
+                                  </p>
+                              </div>
+                              <i class="fas fa-envelope search-icon"></i>
+                          </a>
+                          <a class="justify-content-center mx-4 mt-1"  data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-search search-icon"></i></a>
                           {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
                       </div>
                   </div>

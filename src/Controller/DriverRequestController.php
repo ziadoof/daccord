@@ -73,7 +73,7 @@ class DriverRequestController extends AbstractController
                 'success',
                 'Your driver request has bin sent!'
             );
-            $notification->addNotification(['type'=>'driverRequest','object'=>$driverRequest]);
+            $notification->addNotification(['type' => 'driverRequest', 'object' => $driverRequest]);
             return $this->redirectToRoute('deal_show', array('id' => $deal->getId()));
         }
 
@@ -127,7 +127,7 @@ class DriverRequestController extends AbstractController
             'success',
             'The driver request has bin '.$type.' ..!'
         );
-        $notification->addNotification(['type'=>'treatmentDriverRequest','object'=>$driverRequest,'treatment'=>$type]);
+        $notification->addNotification(['type' => 'treatmentDriverRequest', 'object' => $driverRequest, 'treatment' => $type]);
 
         return $this->redirectToRoute('driver_request_index');
     }
