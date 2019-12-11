@@ -290,14 +290,40 @@
                                     The associated ads and all possible deals for these ads have been deleted.</p>
                             </div>
                         </div>
-                        <div class="border-top">
-                            <div class="col-md-12 my-1">
-                                {# TO DO add 5 star evaluate and comment for driver in his driver proffile#}
-                                <b class="ml-2">Evaluate the driver: </b>
-                                <button class="btn btn-info mb-1">choisir 5 star</button>
-                                <button class="btn btn-info mb-1">Add comment</button>
+                        {% if deal.driverUser %}
+                        <div class="border-top py-2">
+                            <div class="col-md-12 ">
+                                {# TO DO add 5 star evaluate and comment for driver in his driver profile#}
+                                {% if votesDriver[deal.driverUser.id] is defined %}
+                                <p class="blued">  Your rating for this driver :
+                                    {% set reste = 5 - votesDriver[deal.driverUser.id]%}
+                                    {% if  votesDriver[deal.driverUser.id] is not same as(null)%}
+                                        {% for  i in votesDriver[deal.driverUser.id] ..1%}
+                                            <i class="fas fa-star"></i>
+                                        {% endfor %}
+                                        {% if reste>0 %}
+                                        {% for  i in reste..1%}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                        {% endif %}
+                                    {% else %}
+                                        {% for  i in 5..1%}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                                {% else %}
+                                <form action="" method="post">
+                                    <button type="submit" value="{{ deal.driverUser.id }}" name="driver_candidate"
+                                            id="driver_vote_js" data-toggle="modal"
+                                            class="btn btn-outline-info btn-block ">
+                                        Vote this driver
+                                    </button>
+                                </form>
+                                {% endif %}
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -307,5 +333,25 @@
             </div>
         </div>
     </div>
-
+    <!-- modal start-->
+    <div class="modal fade bd-example-modal-lg mt-4" id="driver_vote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    {% if driver_vote_js is defined %}
+                        {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': driver_vote_js, 'type':'driver' })) }}
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end-->
 {% endblock %}

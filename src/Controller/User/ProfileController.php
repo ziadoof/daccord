@@ -6,6 +6,7 @@ use App\Events\Events;
 use App\Form\DriverType;
 use App\Repository\Deal\DealRepository;
 use App\Repository\DriverRequestRepository;
+use App\Repository\Rating\RatingRepository;
 use App\Service\City\CityAreaType;
 use App\Service\FileUploader;
 use App\Service\FormDriverType;
@@ -220,7 +221,6 @@ class ProfileController extends BaseProController
         $deals = $dealRepository->findByAd($ad);
         $countDriverRequests = 0;
         $countDeals =0;
-        dump($deals);
         if(!empty($deals)){
             foreach ($deals as $deal){
                 $driverRequests = $driverRequestRepository->findByDeal($deal);
@@ -237,5 +237,19 @@ class ProfileController extends BaseProController
             $entityManager->flush();
         }
         return array('countDriverRequests' => $countDriverRequests, 'countDeals' => $countDeals);
+    }
+
+    /**
+     * @Route( name="rating_driver")
+     * @param User $user
+     * @param RatingRepository $ratingRepository
+     * @return Response
+     */
+    public function ratingDriver(User $user, RatingRepository $ratingRepository)
+    {
+        $rating = $ratingRepository->findByTypeAndCandidate('driver',$user->getId());
+        return $this->render('user/Driver/rating.html.twig', [
+            'rating'=>$rating,
+        ]);
     }
 }

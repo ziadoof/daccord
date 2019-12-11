@@ -14,6 +14,8 @@ use App\Repository\Deal\DealRepository;
 use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
+use App\Repository\Rating\VoteRepository;
+use App\Repository\UserRepository;
 use App\Service\Notification;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpParser\Node\Expr\Array_;
@@ -30,11 +32,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class DealController extends AbstractController
 {
     /**
-     * @Route("/", name="deal_index", methods={"GET"})
+     * @Route("/", name="deal_index", methods={"GET","POST"})
      * @param DoneDealRepository $doneDealRepository
+     * @param UserRepository $userRepository
+     * @param VoteRepository $voteRepository
      * @return Response
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function index(DoneDealRepository $doneDealRepository): Response
+    public function index(DoneDealRepository $doneDealRepository, UserRepository $userRepository, VoteRepository $voteRepository): Response
     {
         $user = $this->getUser();
         $deals = $user->getDeals();
@@ -53,7 +58,31 @@ class DealController extends AbstractController
             }
         }
 
+        $voteDriversByThisUser = $voteRepository->findByVoter($this->getUser()->getId());
+        $votesDrivers =[];
+        foreach ($voteDriversByThisUser as $vote){
+            $votesDrivers[$vote->getCandidate()->getId()]=$vote->getValue();
+        }
+
+        //code for select driver id for rating
+        if (!empty($_POST['driver_candidate']) && $_POST['driver_candidate'] > 0) {
+
+            $driver_id = $_POST['driver_candidate'];
+            $driver_vote_js = $userRepository->findOneById($driver_id);
+            echo '<script type="text/javascript">  setTimeout(function(){ $(\'#driver_vote\').modal(\'show\'); }, 1000);  </script>';
+
+            return $this->render('deal/index.html.twig', array(
+                'driver_vote_js'=> $driver_vote_js,
+                'votesDriver'=> $votesDrivers,
+                'suggestedDeals' => $suggestedDeals,
+                'pendingDeals' => $pendingDeals,
+                'doneDeals' => $doneDeals,
+            ));
+
+        }
+
         return $this->render('deal/index.html.twig', [
+            'votesDriver'=> $votesDrivers,
             'suggestedDeals' => $suggestedDeals,
             'pendingDeals' => $pendingDeals,
             'doneDeals' => $doneDeals,

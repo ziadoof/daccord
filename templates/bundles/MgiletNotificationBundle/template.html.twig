@@ -134,6 +134,13 @@
                                                     <span class="rosed"><i class="far fa-star"></i></span>
                                                     {{ 'POINTS !' }}</p>
                                                     <p><span>Congratulations ... Seven extra points have been added to you</span></p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('ratingDriver') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-star"></i></span>
+                                                    {{ 'Rating !' }}</p>
+                                                    <span>{{ data[notification.notification.id]['sender'] }}</span>
+                                                    has added a rating for you as a driver, based on your latest deal.
+                                                    </p>
                                                 {% endif %}
                                         </span>
                                     </a>

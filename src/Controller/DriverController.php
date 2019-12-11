@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Driver;
 use App\Form\DriverType;
 use App\Repository\DriverRepository;
+use App\Repository\Rating\RatingRepository;
+use App\Repository\Rating\VoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,10 +55,13 @@ class DriverController extends AbstractController
      * @param Driver $driver
      * @return Response
      */
-    public function show(Driver $driver): Response
+    public function show(Driver $driver, RatingRepository $ratingRepository): Response
     {
+        $rating = $ratingRepository->findByTypeAndCandidate('driver', $driver->getUser()->getId());
+
         return $this->render('user/Driver/show.html.twig', [
             'driver' => $driver,
+            'rating' => $rating
         ]);
     }
 

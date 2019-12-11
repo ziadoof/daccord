@@ -41,3 +41,4 @@ fos_message_thread_view:
     path: /message
     controller: App\Controller\Message\MessageController::newThreadAction
 
+

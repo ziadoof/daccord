@@ -50,6 +50,8 @@
                 </div>
             </div>
         </div>
+        {# render rating of driver#}
+        {{ render(controller('App\\Controller\\User\\ProfileController::ratingDriver',{ 'user': user })) }}
     </div>
     {% else %}
     <div class="col-md-4 offset-4 mt-5">
