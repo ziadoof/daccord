@@ -41,6 +41,7 @@ class DealController extends AbstractController
      */
     public function index(DoneDealRepository $doneDealRepository, UserRepository $userRepository, VoteRepository $voteRepository): Response
     {
+
         $user = $this->getUser();
         $deals = $user->getDeals();
         $doneDeals = $doneDealRepository->findByUser($user);
@@ -63,26 +64,19 @@ class DealController extends AbstractController
         foreach ($voteDriversByThisUser as $vote){
             $votesDrivers[$vote->getCandidate()->getId()]=$vote->getValue();
         }
-
-        //code for select driver id for rating
-        if (!empty($_POST['driver_candidate']) && $_POST['driver_candidate'] > 0) {
-
-            $driver_id = $_POST['driver_candidate'];
-            $driver_vote_js = $userRepository->findOneById($driver_id);
-            echo '<script type="text/javascript">  setTimeout(function(){ $(\'#driver_vote\').modal(\'show\'); }, 1000);  </script>';
-
-            return $this->render('deal/index.html.twig', array(
-                'driver_vote_js'=> $driver_vote_js,
-                'votesDriver'=> $votesDrivers,
-                'suggestedDeals' => $suggestedDeals,
-                'pendingDeals' => $pendingDeals,
-                'doneDeals' => $doneDeals,
-            ));
-
+        // for select all the driver id where who the user is not rating them for create the modals
+        $listDriverModel =[];
+        foreach ($doneDeals as $doneDeal){
+            if($doneDeal->getDriverUser()){
+                if(!in_array($doneDeal->getDriverUser()->getId(), $listDriverModel, true)){
+                    $listDriverModel[]= $doneDeal->getDriverUser()->getId();
+                }
+            }
         }
 
         return $this->render('deal/index.html.twig', [
             'votesDriver'=> $votesDrivers,
+            'listDriverModel'=>$listDriverModel,
             'suggestedDeals' => $suggestedDeals,
             'pendingDeals' => $pendingDeals,
             'doneDeals' => $doneDeals,
@@ -107,21 +101,6 @@ class DealController extends AbstractController
 
         if(in_array($deal->getCategory()->getParent()->getName(),$withOutDrivers,true ) ){
             $drivers = null;
-        }
-
-        if (!empty($_POST['driver_request']) && $_POST['driver_request'] > 0) {
-
-            $driver_id = $_POST['driver_request'];
-            $driver_js = $driverRepository->findOneById($driver_id);
-            echo '<script type="text/javascript">  setTimeout(function(){ $(\'#driverRequest\').modal(\'show\'); }, 500);  </script>';
-
-            return $this->render('deal/show.html.twig', array(
-                'driver_js'=> $driver_js,
-                'specification'=>$specification,
-                'drivers'=> $drivers,
-                'deal' => $deal,
-            ));
-
         }
 
         return $this->render('deal/show.html.twig', [
@@ -540,4 +519,5 @@ class DealController extends AbstractController
             $notification->addNotification(['type' => 'points', 'user' => $deal->getDriverUser(), 'status' => 'driver', 'number' => 'Seven']);
         }
     }
+
 }

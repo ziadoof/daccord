@@ -1,7 +1,6 @@
 {% extends "layout_user.html.twig" %}
 
 {% block title %}Deal index{% endblock %}
-
 {% block content %}
     <h1 class="text-center title-blue"> My Deals</h1>
     <div class="row">
@@ -313,13 +312,10 @@
                                     {% endif %}
                                 </p>
                                 {% else %}
-                                <form action="" method="post">
-                                    <button type="submit" value="{{ deal.driverUser.id }}" name="driver_candidate"
-                                            id="driver_vote_js" data-toggle="modal"
-                                            class="btn btn-outline-info btn-block ">
-                                        Vote this driver
+                                    <button  data-toggle="modal" class="btn btn-outline-info btn-block "
+                                             data-target="#driver_vote-{{ deal.driverUser.id }}">
+                                        Rate this driver
                                     </button>
-                                </form>
                                 {% endif %}
                             </div>
                         </div>
@@ -334,24 +330,26 @@
         </div>
     </div>
     <!-- modal start-->
-    <div class="modal fade bd-example-modal-lg mt-4" id="driver_vote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body">
-                    {% if driver_vote_js is defined %}
-                        {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': driver_vote_js, 'type':'driver' })) }}
-                    {% endif %}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+    {% for driverId in listDriverModel %}
+        {% if votesDriver[driverId] is not defined %}
+            <div class="modal fade bd-example-modal-lg mt-4" id="driver_vote-{{ driverId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': driverId, 'type':'driver' })) }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        {% endif %}
+    {% endfor %}
     <!-- modal end-->
 {% endblock %}

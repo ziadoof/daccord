@@ -398,17 +398,13 @@
                                                             <p class="mt-1">Message to {{driver.user.firstname}}</p>
                                                         </button>
                                                     </form>
-                                                    <form action="" method="post">
-                                                        <button type="submit" value="{{ driver.id }}" name="driver_request"
-                                                                id="driver_request_js" data-toggle="modal"
-                                                                class="btn btn-info my-1 btn-block "
-                                                                {% if deal.driverUser %}
+                                                    <button id="driver_request_js" data-toggle="modal" class="btn btn-info my-1 btn-block"
+                                                            data-target="#driverRequest-{{ driver.id }}"
+                                                            {% if deal.driverUser %}
                                                                 disabled
-                                                                {% endif %}
-                                                                >
-                                                            Driver request
-                                                        </button>
-                                                    </form>
+                                                            {% endif %}>
+                                                        Driver request
+                                                    </button>
                                                 </div>
                                             {% endfor %}
                                         {% else %}
@@ -431,7 +427,8 @@
         </div>
     </div>
     <!-- modal start-->
-    <div class="modal fade bd-example-modal-lg mt-4" id="driverRequest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+    {% for driver in drivers %}
+    <div class="modal fade bd-example-modal-lg mt-4" id="driverRequest-{{ driver.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -440,9 +437,7 @@
                     <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    {% if driver_js is defined %}
-                        {{ render(controller('App\\Controller\\DriverRequestController::new',{ 'driver': driver_js, 'deal':deal.id })) }}
-                    {% endif %}
+                        {{ render(controller('App\\Controller\\DriverRequestController::new',{ 'driver': driver.id , 'deal':deal.id })) }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
@@ -450,5 +445,6 @@
             </div>
         </div>
     </div>
+    {% endfor %}
     <!-- modal end-->
 {% endblock %}
