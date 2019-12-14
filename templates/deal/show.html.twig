@@ -7,63 +7,67 @@
         <div class="deal-show ">
             <div class="row col-md-8 offset-2 pt-2 border-deal">
                 <div class="btn-group driver deal-show ">
-                    <a class="text-center mx-4 px-2 py-2  ">
+                    <div class="text-center mx-4 px-2 py-2  ">
                         {% if deal.offerUser.id is same as(app.user.id) %}
-                            {% if deal.offerUser.profileImage  %}
-                                <img src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" class="float-right" ><br>
-                            {% else %}
-                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-right"><br>
-                            {% endif %}
-                            <b class="">{{ deal.offerUser.firstname }}</b><br>
-                            <b class="">{{ deal.offerUser.city }}</b>
+                            <div class=" d-block text-center">
+                                <a class="d-block" href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
+                                    <img  src="{{ asset( deal.offerUser.photoProfile()) }}" alt="offerUser" class="float-right">
+                                </a>
+                                <b class="d-block ">{{ deal.offerUser.firstname }}</b>
+                                <b class="d-block ">{{ deal.offerUser.city.name }}</b>
+                            </div>
                         {% else %}
-                            {% if deal.demandUser.profileImage  %}
-                                <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" class="float-right" ><br>
-                            {% else %}
-                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class="float-right"><br>
-                            {% endif %}
-                                <b class="">{{ deal.demandUser.firstname }}</b><br>
-                                <b class="">{{ deal.demandUser.city }}</b>
+                            <div class="d-block text-center">
+                                <a href="{{ path('user_show', {'id': deal.demandUser.id}) }}">
+                                    <img  src="{{ asset( deal.demandUser.photoProfile()) }}" class="float-right">
+                                </a>
+                                <b class="d-block">{{ deal.demandUser.firstname }}</b>
+                                <b class="d-block">{{ deal.demandUser.city.name }}</b>
+                            </div>
                         {% endif %}
-                    </a>
-                    <a class="mt-3 mx-3 text-center">
+                    </div>
+                    <div class="mt-3 mx-3 text-center">
                         <i class="fas fa-handshake deal-show-photo mt-0"></i><br>
                         <b class="title-rose ">{% if deal.category.name is same as('Other') %}{{ deal.offer.subjectName }}{% else %}{{ deal.category}}{% endif %}</b>
                         {% if deal.driverUser %}
+                            {% set driverId =null %}
+                            {% for driver in drivers %}
+                                {% if driver.user.id is same as (deal.driverUser.id) %}
+                                    {% set driverId = driver.id %}
+                                {% endif %}
+                            {% endfor %}
                             <div class="row ">
                                 <div class="deal-show col-md-12 ">
                                     <div class="mb-2">
-                                        {% if deal.driverUser.profileImage  %}
-                                            <img src="{{ asset('/assets/images/profile/'~deal.driverUser.profileImage) }}" ><br>
-                                        {% else %}
-                                            <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}"  ><br>
-                                        {% endif %}
+                                        <a href="{{ path('driver_show',{'id': driverId}) }}">
+                                            <img src="{{ asset(deal.driverUser.photoProfile()) }}" ><br>
+                                        </a>
                                         <i class="fas fa-truck-moving button-left" title="Driver request"></i>
                                         {{ deal.driverUser.firstname }}
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
-                    </a>
-                    <a class="text-center mx-4 px-2 py-2  ">
+                    </div>
+                    <div class="text-center mx-4 px-2 py-2  sasa">
                         {% if deal.offerUser.id is not same as(app.user.id) %}
-                            {% if deal.offerUser.profileImage  %}
-                                <img src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" class="" ><br>
-                            {% else %}
-                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" class=""><br>
-                            {% endif %}
-                                <b class="">{{ deal.offerUser.firstname }}</b><br>
-                                <b class="">{{ deal.offerUser.city }}</b>
+                            <div class="d-block text-center float-right">
+                                <a href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
+                                    <img  src="{{ asset( deal.offerUser.photoProfile()) }}" >
+                                </a>
+                                <b class="d-block">{{ deal.offerUser.firstname }}</b>
+                                <b class="d-block">{{ deal.offerUser.city.name }}</b>
+                            </div>
                         {% else %}
-                            {% if deal.demandUser.profileImage  %}
-                                <img src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}"  ><br>
-                            {% else %}
-                                <img  src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="offerUser" ><br>
-                            {% endif %}
-                                <b class="">{{ deal.demandUser.firstname }}</b><br>
-                                <b class="">{{ deal.demandUser.city }}</b>
+                            <div class="d-block text-center">
+                                <a href="{{ path('user_show', {'id': deal.demandUser.id}) }}">
+                                    <img  src="{{ asset( deal.demandUser.photoProfile()) }}" >
+                                </a>
+                                <b class="d-block">{{ deal.demandUser.firstname }}</b>
+                                <b class="d-block">{{ deal.demandUser.city.name }}</b>
+                            </div>
                         {% endif %}
-                    </a>
+                    </div>
                 </div>
             </div>
             {% if deal.offerUser is same as (app.user) and deal.demandUserStatus %}
@@ -100,16 +104,24 @@
                                     <th scope="col">Specification</th>
                                     <th scope="col">
                                         {% if deal.offerUser.id is same as(app.user.id) %}
-                                        Your offer
+                                            <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
+                                               <i class="fab fa-adversal"></i> Your offer
+                                            </a>
                                         {% else %}
-                                        Your demand
+                                            <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
+                                                <i class="fab fa-affiliatetheme"></i>  Your demand
+                                            </a>
                                         {% endif %}
                                     </th>
                                     <th scope="col">
                                         {% if deal.demandUser.id is same as(app.user.id) %}
-                                            {{ deal.offerUser.firstname }}{{ ' offer '}}
+                                            <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
+                                                <i class="fab fa-adversal"></i> {{ deal.offerUser.firstname }}{{ ' offer '}}
+                                            </a>
                                         {% else %}
-                                            {{ deal.demandUser.firstname }}{{ ' demand '}}
+                                            <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
+                                                <i class="fab fa-affiliatetheme"></i>  {{ deal.demandUser.firstname }}{{ ' demand '}}
+                                            </a>
                                         {% endif %}
                                     </th>
                                 </tr>
@@ -199,89 +211,39 @@
                         </div>
                     </div>
                     <div class="">
-                        <div class= "col-md-8 offset-2 border-deal ">
-                            <div class="deal-show row">
-                                <div class="btn-group">
-                                    {% if deal.offerUser.id is same as(app.user.id) %}
-                                        <form >
-                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                                <img  src="{{ asset('/assets/images/icons/offer.png') }}" alt="offerUser" class="">
-                                                <p class="mt-2">Your offer</p>
-                                            </a>
-                                        </form>
-                                    {% else %}
-                                        <form >
-                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                <img  src="{{ asset('/assets/images/icons/demand.jpg') }}" alt="offerUser" class="">
-                                                <p class="mt-1">Your demand</p>
-                                            </a>
-                                        </form>
-                                    {% endif %}
-                                    {% if deal.offerUser.id is same as(app.user.id) %}
-                                        <form>
-                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                <img  src="{{ asset('/assets/images/icons/demand.jpg') }}" alt="offerUser" class="">
-                                                <p class="mt-1"> {{deal.demandUser.firstname}} demand </p>
-                                            </a>
-                                        </form>
-                                    {% else %}
-                                        <form>
-                                            <a class="btn btn-info mx-1" href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                                <img  src="{{ asset('/assets/images/icons/offer.png') }}" alt="offerUser" class="">
-                                                <p class="mt-1"> {{deal.offerUser.firstname}} offer </p>
-                                            </a>
-                                        </form>
-                                    {% endif %}
-                                    {% if deal.offerUser.id is same as(app.user.id) %}
-                                        <form>
-                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.demandUser.id}) }}">
-                                                <img  src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" class="">
-                                                <p class="mt-1">{{deal.demandUser.firstname}} profile</p>
-                                            </a>
-                                        </form>
-                                    {% else %}
-                                        <form>
-                                            <a class="btn btn-info mx-1" href="{{ path('user_show', {'id': deal.offerUser.id}) }}">
-                                                <img  src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" class="">
-                                                <p class="mt-1">{{deal.offerUser.firstname}} profile</p>
-                                            </a>
-                                        </form>
-                                    {% endif %}
+                        <div class="col-md-8 offset-2 border-deal ">
+                            <div class="row py-1 ">
+                                <div class="btn-group  ">
                                     {% if deal.offerUser.id is same as(app.user.id) %}
                                         <form method="post" action="{{ url('new_conversation') }}"id="demandUser-message">
-                                            <button class="btn btn-info mx-1" >
+                                            <button class="btn btn-outline-info btn-block mx-1 " >
                                                 <input type="hidden" name="user" value="{{ deal.demandUser.id }}">
-                                                <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="message" class="">
-                                                <p class="mt-1">Message to {{deal.demandUser.firstname}}</p>
+                                                <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.demandUser.firstname}}</p>
                                             </button>
                                         </form>
                                     {% else %}
                                         <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
-                                            <button class="btn btn-info mx-1" >
+                                            <button class="btn btn-outline-info btn-block mx-1" >
                                                 <input type="hidden" name="user" value="{{ deal.offerUser.id }}">
-                                                <img  src="{{ asset('/assets/images/icons/message.png') }}" alt="message" class="">
-                                                <p class="mt-1">Message to {{deal.offerUser.firstname}}</p>
+                                                <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.offerUser.firstname}}</p>
                                             </button>
                                         </form>
                                     {% endif %}
                                     <form >
-                                        <button class="btn btn-info mx-1" href="#">
-                                            <img  src="{{ asset('/assets/images/icons/report.png') }}" alt="report" class="">
-                                            <p class="mt-1">Report the deal</p>
+                                        <button class="btn btn-outline-dark btn-block mx-1 " href="#">
+                                            <p class="mt-1"><i class="fas fa-flag"></i> Report the deal</p>
                                         </button>
                                     </form>
                                     <form method="post" action="{{ path('deal_done', {'id': deal.id}) }}" onsubmit="return confirm('Are you sure you want to finish this Deal?');">
-                                        <button class="btn btn-info mx-1">
-                                            <img  src="{{ asset('/assets/images/icons/dealdone.png') }}" alt="dealdone" >
-                                            <p class="mt-1">Deal done</p>
+                                        <button class="btn btn-outline-success btn-block mx-1 ">
+                                            <p class="mt-1"><i class="fas fa-check-circle"></i> Deal done</p>
                                         </button>
                                     </form>
                                     <form method="post" action="{{ path('deal_delete', {'id': deal.id}) }}" onsubmit="return confirm('Are you sure you want to delete this Deal?');">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deal.id) }}">
-                                        <button class="btn btn-info mx-1">
-                                            <img  src="{{ asset('/assets/images/icons/cancel.jpg') }}" alt="cancel" class="">
-                                            <p class="mt-1">Cancel the deal</p>
+                                        <button class="btn btn-outline-danger btn-block mx-1">
+                                            <p class="mt-1"><i class="fas fa-window-close"></i> Cancel the deal</p>
                                         </button>
                                     </form>
                                 </div>
