@@ -112,6 +112,15 @@ function wsConnect(id) {
                             ' POINTS ! '+'</p>'+
                             '<p><span> Congratulations ... Seven extra points have been added to you </span></p>';
                         break;
+                    case'ratingDriver':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="far fa-star"></i></span>'+
+                            ' Rating ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' has added a rating for you as a driver, based on your latest deal. '+
+                            '</p>';
+                        break;
                 }
                 return text;
             }
@@ -225,6 +234,32 @@ function wsConnect(id) {
                         markAsSeen(e);
                     });
                 }
+                // for add code mark as visited after send new notification
+                function markAsVisited(e) {
+                    const link = e.target;
+                    const notifiable_id = link.parentNode.parentNode.getAttribute('notifiable');
+                    const notification_id = link.parentNode.parentNode.getAttribute('notification');
+
+                    if (notification_id !==null && notifiable_id !== null){
+                        var url = Routing.generate('notification_mark_as_seen',{notifiable:notifiable_id,notification:notification_id});
+                        $.ajax({
+                            url: url,
+                            async: true,
+                            type: "POST",
+                            success: function (response) {
+                            }
+                        });
+                    }
+                }
+
+                const links = document.getElementsByClassName('list__item--link');
+                for(const link of links){
+                    link.addEventListener('click', function (e)
+                    {
+                        markAsVisited(e)
+                    });
+                }
+                // end mark as visited
                 plusCountNotification();
             }
             function loseAllUnReadMessage() {

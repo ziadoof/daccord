@@ -6,7 +6,6 @@
             xhttp.onreadystatechange = function () {
                 // on success
                 if (xhttp.readyState === 4 && xhttp.status === 200) {
-                    console.log(element);
                     // mark notification as seen
                     element.parentNode.parentNode.parentNode.parentNode.parentNode.classList+='seen';
 

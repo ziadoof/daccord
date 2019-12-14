@@ -1,7 +1,6 @@
 {% extends "layout_user.html.twig" %}
 
 {% block title %}Deal index{% endblock %}
-
 {% block content %}
     <h1 class="text-center title-blue"> My Deals</h1>
     <div class="row">
@@ -290,14 +289,37 @@
                                     The associated ads and all possible deals for these ads have been deleted.</p>
                             </div>
                         </div>
-                        <div class="border-top">
-                            <div class="col-md-12 my-1">
-                                {# TO DO add 5 star evaluate and comment for driver in his driver proffile#}
-                                <b class="ml-2">Evaluate the driver: </b>
-                                <button class="btn btn-info mb-1">choisir 5 star</button>
-                                <button class="btn btn-info mb-1">Add comment</button>
+                        {% if deal.driverUser %}
+                        <div class="border-top py-2">
+                            <div class="col-md-12 ">
+                                {# TO DO add 5 star evaluate and comment for driver in his driver profile#}
+                                {% if votesDriver[deal.driverUser.id] is defined %}
+                                <p class="blued">  Your rating for this driver :
+                                    {% set reste = 5 - votesDriver[deal.driverUser.id]%}
+                                    {% if  votesDriver[deal.driverUser.id] is not same as(null)%}
+                                        {% for  i in votesDriver[deal.driverUser.id] ..1%}
+                                            <i class="fas fa-star"></i>
+                                        {% endfor %}
+                                        {% if reste>0 %}
+                                        {% for  i in reste..1%}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                        {% endif %}
+                                    {% else %}
+                                        {% for  i in 5..1%}
+                                            <i class="far fa-star"></i>
+                                        {% endfor %}
+                                    {% endif %}
+                                </p>
+                                {% else %}
+                                    <button  data-toggle="modal" class="btn btn-outline-info btn-block "
+                                             data-target="#driver_vote-{{ deal.driverUser.id }}">
+                                        Rate this driver
+                                    </button>
+                                {% endif %}
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -307,5 +329,27 @@
             </div>
         </div>
     </div>
-
+    <!-- modal start-->
+    {% for driverId in listDriverModel %}
+        {% if votesDriver[driverId] is not defined %}
+            <div class="modal fade bd-example-modal-lg mt-4" id="driver_vote-{{ driverId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': driverId, 'type':'driver' })) }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <!-- modal end-->
 {% endblock %}

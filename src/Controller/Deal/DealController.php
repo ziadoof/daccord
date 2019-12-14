@@ -14,6 +14,8 @@ use App\Repository\Deal\DealRepository;
 use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
+use App\Repository\Rating\VoteRepository;
+use App\Repository\UserRepository;
 use App\Service\Notification;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpParser\Node\Expr\Array_;
@@ -30,12 +32,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class DealController extends AbstractController
 {
     /**
-     * @Route("/", name="deal_index", methods={"GET"})
+     * @Route("/", name="deal_index", methods={"GET","POST"})
      * @param DoneDealRepository $doneDealRepository
+     * @param UserRepository $userRepository
+     * @param VoteRepository $voteRepository
      * @return Response
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function index(DoneDealRepository $doneDealRepository): Response
+    public function index(DoneDealRepository $doneDealRepository, UserRepository $userRepository, VoteRepository $voteRepository): Response
     {
+
         $user = $this->getUser();
         $deals = $user->getDeals();
         $doneDeals = $doneDealRepository->findByUser($user);
@@ -53,7 +59,24 @@ class DealController extends AbstractController
             }
         }
 
+        $voteDriversByThisUser = $voteRepository->findByVoter($this->getUser()->getId());
+        $votesDrivers =[];
+        foreach ($voteDriversByThisUser as $vote){
+            $votesDrivers[$vote->getCandidate()->getId()]=$vote->getValue();
+        }
+        // for select all the driver id where who the user is not rating them for create the modals
+        $listDriverModel =[];
+        foreach ($doneDeals as $doneDeal){
+            if($doneDeal->getDriverUser()){
+                if(!in_array($doneDeal->getDriverUser()->getId(), $listDriverModel, true)){
+                    $listDriverModel[]= $doneDeal->getDriverUser()->getId();
+                }
+            }
+        }
+
         return $this->render('deal/index.html.twig', [
+            'votesDriver'=> $votesDrivers,
+            'listDriverModel'=>$listDriverModel,
             'suggestedDeals' => $suggestedDeals,
             'pendingDeals' => $pendingDeals,
             'doneDeals' => $doneDeals,
@@ -78,21 +101,6 @@ class DealController extends AbstractController
 
         if(in_array($deal->getCategory()->getParent()->getName(),$withOutDrivers,true ) ){
             $drivers = null;
-        }
-
-        if (!empty($_POST['driver_request']) && $_POST['driver_request'] > 0) {
-
-            $driver_id = $_POST['driver_request'];
-            $driver_js = $driverRepository->findOneById($driver_id);
-            echo '<script type="text/javascript">  setTimeout(function(){ $(\'#driverRequest\').modal(\'show\'); }, 500);  </script>';
-
-            return $this->render('deal/show.html.twig', array(
-                'driver_js'=> $driver_js,
-                'specification'=>$specification,
-                'drivers'=> $drivers,
-                'deal' => $deal,
-            ));
-
         }
 
         return $this->render('deal/show.html.twig', [
@@ -511,4 +519,5 @@ class DealController extends AbstractController
             $notification->addNotification(['type' => 'points', 'user' => $deal->getDriverUser(), 'status' => 'driver', 'number' => 'Seven']);
         }
     }
+
 }

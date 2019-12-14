@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Entity\Deal\Deal;
 use App\Entity\DriverRequest;
 use App\Entity\Notification\NotifiedBy;
+use App\Entity\Rating\Vote;
 use App\Entity\User;
 use App\Server\Chat;
 use Doctrine\ORM\EntityManager;
@@ -55,6 +56,9 @@ class Notification
         }
         if($type === 'points'){
             $this->addPointsNotification($options['user'], $options['status'],$options['number']);
+        }
+        if ($type === 'ratingDriver'){
+            $this->addRatingDriver($object);
         }
 
     }
@@ -476,5 +480,32 @@ class Notification
         } else {
             $socket->send(json_encode($pushedNotification));
         }
+    }
+
+    public function addRatingDriver(Vote $vote){
+        $notification = $this->notificationManager->createNotification('','','/profile/');
+        $this->notificationManager->addNotification(array($vote->getCandidate()), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $vote->getVoter(), $vote->getCandidate(), 'ratingDriver','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'ratingDriver',
+            'recipient'=>$vote->getCandidate()->getId(),
+            'category'=>'',
+            'sender'=>$vote->getVoter()->getFirstname(),
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$vote->getVoter()->getProfileImage(),
+        );
+
+
+        $this->pushNotification($pushNotification);
+
     }
 }
