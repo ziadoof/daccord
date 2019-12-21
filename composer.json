@@ -15,16 +15,17 @@
         "friendsofsymfony/jsrouting-bundle": "^2.3",
         "friendsofsymfony/message-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0",
+        "jms/job-queue-bundle": "^2.0.1",
         "kartik-v/bootstrap-fileinput": "@dev",
         "knplabs/knp-paginator-bundle": "^4.0",
         "mgilet/notification-bundle": "^3.1",
         "pugx/autocompleter-bundle": "^1.4",
+        "ramsey/uuid": "^3.9",
         "react/zmq": "^0.4.0",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
-        "symfony/debug": "4.2.*",
         "symfony/dependency-injection": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/expression-language": "4.2.*",
@@ -50,13 +51,15 @@
         "twig/extensions": "^1.5"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "swiftmailer/swiftmailer": "^4.3 || ^5.0 || ^6.0",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.11",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "4.2.*"
+        "symfony/web-server-bundle": "4.2.*",
+        "symfony/debug": "4.2.*"
     },
     "config": {
         "preferred-install": {

@@ -39,6 +39,7 @@ require('./Messages/webSocketServer');
 require('./Messages/scrollMessage');
 require('./rating');
 require('./markAsVisited');
+require('./invitations');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

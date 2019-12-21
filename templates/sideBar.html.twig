@@ -26,10 +26,15 @@
                         <span class="nav-label">My deals</span>
                     </a>
                 </li>
-                <li> <a href="javascript:void(0)">
-                        <i class="fas fa-coffee" class="button-left" title="Café"></i>
-                        <span class="nav-label">Café</span>
-                    </a>
+                <li class="icon ">
+                    <form method="post" action="{{path('cafe_index')}}" id="cafe-gps">
+                        <a class="" id="btn-cafe-gps" >
+                            <input type="hidden" name="lat" id="cafe_gps_lat">
+                            <input type="hidden" name="lng" id="cafe_gps_lng">
+                            <i class="fas fa-coffee" class="button-left" title="Café"></i>
+                            <span class="nav-label">Cafe</span>
+                        </a>
+                    </form>
                 </li>
                 <li> <a href="javascript:void(0)">
                         <i class="fas fa-bed" class="button-left" title="Hébergement"></i>

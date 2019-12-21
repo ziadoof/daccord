@@ -23,13 +23,4 @@ final class Events
      */
     const AD_ADD = 'ad.add';
 
-    /**
-     * For the event naming conventions, see:
-     * https://symfony.com/doc/current/components/event_dispatcher.html#naming-conventions.
-     *
-     * @Event("Symfony\Component\EventDispatcher\GenericEvent")
-     *
-     * @var string
-     */
-    const POST_SEND = 'post.send';
 }

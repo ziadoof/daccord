@@ -23,4 +23,7 @@ return [
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Mgilet\NotificationBundle\MgiletNotificationBundle::class => ['all' => true],
     FOS\MessageBundle\FOSMessageBundle::class => ['all' => true],
+    JMS\JobQueueBundle\JMSJobQueueBundle::class => ['all' => true],
 ];
+
+
