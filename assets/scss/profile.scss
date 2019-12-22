@@ -70,9 +70,13 @@
 
 .profile-edit:hover img {
   opacity: 0.6;
+  cursor: pointer;
+
 }
 .profile-edit:hover .middle {
   opacity: 0.8;
+  cursor: pointer;
+
 }
 .middle {
   transition: .5s ease;

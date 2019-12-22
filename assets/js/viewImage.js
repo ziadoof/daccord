@@ -25,4 +25,18 @@ function viewCarImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-window.viewCarImage = viewCarImage;
+window.viewHostingImage = viewCarImage;
+
+function viewHostingImage(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#previewHostingImge')
+                .attr('src', e.target.result)
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+window.viewHostingImage = viewHostingImage;

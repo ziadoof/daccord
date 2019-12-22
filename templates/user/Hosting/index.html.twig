@@ -1,0 +1,9 @@
+{% block content %}
+    <h1>hosting index</h1>
+{% for hosting in hostings %}
+    <a href="{{ path('hosting_show',{'id':hosting.id}) }}">
+        {{ hosting.id }}<br>
+    </a>
+{% endfor %}
+{% endblock %}
+

@@ -24,8 +24,7 @@ class DriverType extends AbstractType
                 'label' => false,
                 'required'=> false,
                 'attr' => array(
-                    'new_form' => false,
-                    'profileImage'=> false,
+                    'driverImage'=> true,
                     'onchange'=>'window.viewCarImage(this);'
                 )
             ))

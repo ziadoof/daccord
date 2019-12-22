@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Ads\Ad;
 use App\Entity\Deal\Deal;
 use App\Entity\Deal\DoneDeal;
+use App\Entity\Hosting\Hosting;
 use App\Entity\Location\City;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
@@ -28,7 +29,7 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Table(name="user")
  * @Notifiable(name="user")
  */
-class User  extends BaseUser implements UserInterface, NotifiableInterface, ParticipantInterface
+class User  extends BaseUser implements NotifiableInterface, ParticipantInterface
 {
     /**
      * @ORM\Id()
@@ -644,6 +645,11 @@ class User  extends BaseUser implements UserInterface, NotifiableInterface, Part
     protected $lastActivityAt;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Hosting\Hosting", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $hosting;
+
+    /**
      * @return mixed
      */
     public function getLastActivityAt()
@@ -676,5 +682,22 @@ class User  extends BaseUser implements UserInterface, NotifiableInterface, Part
             return '/assets/images/profile/'.$this->getProfileImage();
         }
         return '/assets/images/profile/avatar.jpeg';
+    }
+
+    public function getHosting(): ?Hosting
+    {
+        return $this->hosting;
+    }
+
+    public function setHosting(Hosting $hosting): self
+    {
+        $this->hosting = $hosting;
+
+        // set the owning side of the relation if necessary
+        if ($hosting->getUser() !== $this) {
+            $hosting->setUser($this);
+        }
+
+        return $this;
     }
 }

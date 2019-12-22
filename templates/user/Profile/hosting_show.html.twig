@@ -1,0 +1,96 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+    {% if app.user.hosting %}
+    <div class="fos_user_user_show px-4 py-4">
+        <div class="row">
+            <div class="col-md-4 offset-4 btn-group ">
+                <div class=" hosting-edit ml-2  ">
+                    <a class="">
+                        <img class="mb-3" src="{{ app.user.hosting.photoHosting() }}" alt="User">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
+            <h1 class="pt-3 bdg-accord ">{{ user.hosting.point }} <span>Points</span></h1>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+
+                <h6 class="d-inline font-weight-bold blued">Active :  </h6>
+                <b class="deal-terminate">
+                    {% if app.user.hosting.active %}
+                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                    {% else %}
+                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                    {% endif %}
+                </b>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold blued">Sex  :  </h6><span>  {{ user.hosting.sex}}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold blued"> Age:  </h6><span>  {{ user.hosting.age }} <span class="font-weight-bold">Years</span></span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold blued">Number of persons :  </h6><span>  {{ user.hosting.numberOfPersons }}</span>
+                </div>
+
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold blued">Number of days :  </h6><span>  {{ user.hosting.numberOfDays }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold blued">City  :  </h6><span>  {{ user.hosting.city}}</span>
+                </div>
+                <div class="col-md-4 offset-4 my-2 ">
+                    <h6 class="d-inline font-weight-bold blued">About me  :  </h6><span>  {{ user.hosting.aboutMe}}</span>
+                </div>
+                <div class="col-md-4 offset-4 my-2">
+                    <h6 class="d-inline font-weight-bold blued">Hosting for  :  </h6><span>  {{ user.hosting.hostingFor}}</span>
+                </div>
+                <div class="col mb-2">
+                    <h6 class="d-inline font-weight-bold blued">Languages  :  </h6>
+                    {% for language in user.hosting.languages %}
+                    <span> {{language}} </span>
+                    {% endfor %}
+                </div>
+                {% if user.hosting.getPossibility() %}
+                    <h6 class="blued">I have the possibility to host</h6>
+                    <div class="col my-2">
+                        {% for possible in user.hosting.getPossibility() %}
+                            <span class="badge badge-primary"><h5>{{ possible }}</h5></span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if user.hosting.getShare() %}
+                    <h6 class="blued">I can share with the guest</h6>
+                    <div class="col my-2">
+                        {% for share in user.hosting.getShare() %}
+                            <span class="badge badge-info"><h5>{{ share }}</h5></span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {# render rating of hosting#}
+{#
+        {{ render(controller('App\\Controller\\User\\ProfileController::ratingHosting',{ 'user': user })) }}
+#}
+    </div>
+    {% else %}
+    <div class="col-md-4 offset-4 mt-5">
+        <div class="row border-driver">
+            <div class="col my-4 mx-2 text-center">
+                <h4 class="title-blue my-1 mx-1">Be a host in simple steps</h4>
+                <p>By registering as a host, you can meet new people, host them in your home, and share your hobbies and activities.
+                    Hosting people will increase your chances in the future to be hosted by other people in other cities.
+                    At any moment you can stop or reset your account as  a host</p>
+            </div>
+        </div>
+        <div class="row text-center ">
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">Be a host</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+

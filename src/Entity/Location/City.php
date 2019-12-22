@@ -3,6 +3,7 @@
 namespace App\Entity\Location;
 
 use App\Entity\Driver;
+use App\Entity\Hosting\Hosting;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -67,10 +68,16 @@ class City
      */
     private $drivers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\Hosting", mappedBy="city")
+     */
+    private $hostings;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->drivers = new ArrayCollection();
+        $this->hostings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +229,37 @@ class City
             // set the owning side to null (unless already changed)
             if ($driver->getCity() === $this) {
                 $driver->setCity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hosting[]
+     */
+    public function getHostings(): Collection
+    {
+        return $this->hostings;
+    }
+
+    public function addHosting(Hosting $hosting): self
+    {
+        if (!$this->hostings->contains($hosting)) {
+            $this->hostings[] = $hosting;
+            $hosting->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHosting(Hosting $hosting): self
+    {
+        if ($this->hostings->contains($hosting)) {
+            $this->hostings->removeElement($hosting);
+            // set the owning side to null (unless already changed)
+            if ($hosting->getCity() === $this) {
+                $hosting->setCity(null);
             }
         }
 
