@@ -9,6 +9,7 @@ use App\Entity\Location\City;
 use App\Entity\Location\Department;
 use App\Entity\Location\Region;
 use App\Entity\User;
+use App\Service\Search\FormHostingSearchType;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
@@ -162,6 +163,69 @@ class SearchController extends AbstractController
             ]);
         }
         return $this->render('Ads/ad/results/demand.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/hosting/{id}", name="add-hostingType",methods={"POST","GET"}, options={"expose"=true})
+     * @param FormHostingSearchType $formHostingSearchType
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param String $id
+     * @return JsonResponse|Response
+     * @throws \Exception
+     */
+    public function formHosting(FormHostingSearchType $formHostingSearchType, Request $request, PaginatorInterface $paginator, String $id=null)
+    {
+        $random = random_int(9999,99999);
+        $session = new Session();
+        $hostingForm = $formHostingSearchType->getForm();
+        $hostingForm->handleRequest($request);
+        $serializedResult = [];
+
+        if ($hostingForm->isSubmitted() && $hostingForm->isValid()) {
+            $hostingSearch = $hostingForm->getData();
+            $region = $hostingSearch->getRegion();
+            if($hostingSearch->getNumberOfPersons() !== null) {
+                if ($region !== null) {
+
+                    $result = $this->manager->getRepository('App\Entity\Hosting\Hosting')->searchHosting($hostingSearch);
+
+                    foreach ($result as $hosting) {
+                        $serializedResult [] = $hosting->serialize();
+                    }
+                    $response = array(
+                        'result' => $serializedResult,
+                        'random' => $random,
+                        'message' => 'succese',
+                    );
+                    //Unlike the demands and offers, they were saved rerializedResult in  session instead of result to get the name on the show page
+                    $session->set($random, $serializedResult);
+
+                    return new JsonResponse($response);
+                }
+                return $this->render('search/results/hosting.html.twig');
+            }
+            return $this->render('search/results/hosting.html.twig');
+
+        }
+
+        $result =$session->get($id);
+        if(isset($result)){
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $result,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
+            return $this->render('search/results/hosting.html.twig', [
+                'hostings' => $results
+            ]);
+        }
+        return $this->render('search/results/hosting.html.twig', [
 
         ]);
     }

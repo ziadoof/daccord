@@ -52,7 +52,7 @@ class HostingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="hosting_show", methods={"GET","POST"})
+     * @Route("/{id}", name="hosting_show", methods={"GET","POST"}, options={"expose"=true})
      * @param Hosting $hosting
      * @return Response
      */

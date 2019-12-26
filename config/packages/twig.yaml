@@ -11,6 +11,7 @@ twig:
     globals:
         form_offerSearchType: '@App\Service\Search\FormOfferType'
         form_demandSearchType: '@App\Service\Search\FormDemandType'
+        form_hostingSearchType: '@App\Service\Search\FormHostingSearchType'
         form_DriverType: '@App\Service\FormDriverType'
         form_HostingType: '@App\Service\FormHostingType'
         form_CityAreaType: '@App\Service\City\CityAreaType'

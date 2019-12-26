@@ -25,10 +25,70 @@ class Hosting
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\Department")
+     */
+    private $department;
+
+    /**
+     * @return mixed
+     */
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    /**
+     * @param mixed $department
+     */
+    public function setDepartment($department): void
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param mixed $region
+     */
+    public function setRegion($region): void
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\Region")
+     */
+    private $region;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location\City", inversedBy="hostings")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $city;
+    private $ville;
+
+    /**
+     * @return mixed
+     */
+    public function getVille()
+    {
+        return $this->ville;
+    }
+
+    /**
+     * @param mixed $ville
+     */
+    public function setVille($ville): void
+    {
+        $this->ville = $ville;
+    }
+
+
 
     /**
      * @ORM\Column(type="integer")
@@ -190,17 +250,6 @@ class Hosting
         return $this;
     }
 
-    public function getCity(): ?City
-    {
-        return $this->city;
-    }
-
-    public function setCity(?City $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
 
     public function getNumberOfPersons(): ?int
     {
@@ -470,4 +519,23 @@ class Hosting
          return false;
      }
 
+    public function serialize():array
+    {
+
+        $url = '../../assets/images/Hosting/';
+        if($this->image === 'with out photo'|| $this->image === null){
+            $image = $url.'hosting_avatar.png';
+        }
+        else{
+            $image = $url.$this->getImage();
+        }
+        $firstname = ucfirst($this->getUser()->getFirstname());
+        return [
+            'id'=> $this->id,
+            'user'=> $firstname,
+            'city'=> $this->getVille()->getName(),
+            'image'=> $image,
+            'userImage'=>$this->getUser()->photoProfile()
+        ];
+    }
 }

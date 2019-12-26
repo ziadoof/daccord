@@ -282,7 +282,9 @@ class ProfileController extends BaseProController
             $hostingImage ? $hosting->setImage($fileUploader->upload($hostingImage)):$hosting->setImage($hostingOldPhoto?:'with out photo');
 
             $hosting->setUser($user);
-            $hosting->setCity($user->getCity());
+            $hosting->setVille($user->getCity());
+            $hosting->setDepartment($user->getCity()->getDepartment());
+            $hosting->setRegion($user->getCity()->getDepartment()->getRegion());
 
 
             $entityManager = $this->getDoctrine()->getManager();

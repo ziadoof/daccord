@@ -22,3 +22,31 @@
   resize: none;
   height: 20vh;
 }
+#hosting-specifications{
+  color: aliceblue;
+}
+
+.image_hosting {
+  height: 20vh;
+  max-width:100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
+#hosting_index a{
+  text-decoration:none;
+  color:black;
+}
+.hosting_index:hover{
+  -webkit-box-shadow: 0px 0px 10px #00B5CE;
+  -moz-box-shadow: 0px 0px 10px #00B5CE;
+  box-shadow: 0px 0px 10px #00B5CE;
+  text-decoration:none;
+  color:black;
+  font-weight: lighter;
+}

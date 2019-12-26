@@ -69,7 +69,7 @@ class City
     private $drivers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\Hosting", mappedBy="city")
+     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\Hosting", mappedBy="ville")
      */
     private $hostings;
 

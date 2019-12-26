@@ -3,7 +3,7 @@ fos_elastica:
   clients:
     default: { host: localhost, port: 9200 }
   indexes:
-    app:
+    app_ad:
       settings:
         index:
           analysis:
@@ -263,3 +263,76 @@ fos_elastica:
             listener: ~
             finder: ~
             repository: App\Entity\Search\AdsRepository
+    app_hosting:
+      types:
+        hosting:
+          properties:
+            age:
+              type: integer
+            sex:
+              type: ~
+            languages:
+              type: ~
+            numberOfPersons:
+              type: integer
+            numberOfDays:
+              type: integer
+            animal:
+              type: boolean
+            child:
+              type: boolean
+            handicapped:
+              type: boolean
+            food:
+              type: boolean
+            conversation:
+              type: boolean
+            cityTour:
+              type: boolean
+            videoGame:
+              type: boolean
+            movie:
+              type: boolean
+            television:
+              type: boolean
+            music:
+              type: boolean
+            active:
+              type: boolean
+            ville:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+                department:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
+                    name: ~
+                    region:
+                      type: nested
+                      properties:
+                        id:
+                          type: integer
+                        name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Hosting\Hosting
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\HostingsRepository
