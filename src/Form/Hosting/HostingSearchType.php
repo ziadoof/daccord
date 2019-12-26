@@ -55,7 +55,7 @@ class HostingSearchType extends  AbstractType
                 ),
             ])
             ->add('numberOfDays', ChoiceType::class, [
-                'placeholder' => 'Max number of days',
+                'placeholder' => 'Number of days',
                 'label' => false,
                 'required'=>false,
                 'choices'   => array(
