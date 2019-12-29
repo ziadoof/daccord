@@ -1,0 +1,66 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}Hosting{% endblock %}
+
+{% block content %}
+    <h1 class="title-blue text-center">Hosting</h1>
+    {% if hosting_requests is not empty %}
+        <div class="col-md-6 offset-3 my-2">
+            {% for hosting in hosting_requests %}
+                <div class="border-respo px-2 py-2 ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ hosting.date|date('d M Y') }}
+                        </div>
+                        <div class="col-md-4 offset-4 ">
+                            <span class="float-right py-2 px-2 badge
+                                    {% if hosting.treatment is same as('pending') %}
+                                    pending
+                                    {% elseif hosting.treatment is same as('rejected') %}
+                                    rejected
+                                    {% else %}
+                                    accepted
+                                    {% endif %}">{{ hosting.treatment }}</span>
+                        </div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="row">
+                        <div class="col text-center ">
+                            <h6 class="blued ">Your request pending processing by <span class="rosed">{{hosting.hosting.firstname|title}}</span></h6>
+                        </div>
+                    </div>
+                    <div class="row mx-2 ">
+                        <div class="col-md-6 d-block hosting-request-specifications">
+                            <h6 class="blued d-block">Date of arrival : <span>{{ hosting.startDate|date('d/m/Y') }}</span></h6>
+                            <h6 class="blued d-block">Date of departure : <span>{{ hosting.endDate|date('d/m/Y') }}</span></h6>
+                            <h6 class="blued d-block">Number of persons : <span>{{ hosting.numberOfPersons }}</span></h6>  
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ hosting.hosting.hosting.photoHosting() }}" alt="hosting photo" class="image_hosting_request">
+                        </div>
+                    </div>
+                    {% if hosting.treatment is same as('rejected') %}
+                    <hr class="my-1">
+                    <div class="row">
+                        <a href="" class="btn btn-outline-danger btn-block mx-4">Delete</a>
+                    </div>
+                    {% elseif hosting.treatment is same as('accepted') %}
+                        <hr class="my-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="" class="btn btn-outline-info  btn-block">Message to {{ hosting.hosting.firstname }}</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="" class="btn btn-outline-success  btn-block">Done Hosting</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h6 class="blued text-center">There is no hosting requests</h6>
+    {% endif %}
+{% endblock %}

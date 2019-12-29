@@ -47,4 +47,13 @@ class HostingRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findOneById($hostingId)
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.id = :id')
+            ->setParameter('id', $hostingId)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

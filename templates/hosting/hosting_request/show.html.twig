@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HostingRequest{% endblock %}
+
+{% block body %}
+    <h1>HostingRequest</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ hosting_request.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ hosting_request.date ? hosting_request.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>StartDate</th>
+                <td>{{ hosting_request.startDate ? hosting_request.startDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndDate</th>
+                <td>{{ hosting_request.endDate ? hosting_request.endDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NumberOfPersons</th>
+                <td>{{ hosting_request.numberOfPersons }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ hosting_request.description }}</td>
+            </tr>
+            <tr>
+                <th>Treatment</th>
+                <td>{{ hosting_request.treatment }}</td>
+            </tr>
+            <tr>
+                <th>SenderStatus</th>
+                <td>{{ hosting_request.senderStatus ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>HostingStatus</th>
+                <td>{{ hosting_request.hostingStatus ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('hosting_hosting_request_index') }}">back to list</a>
+
+    <a href="{{ path('hosting_hosting_request_edit', {'id': hosting_request.id}) }}">edit</a>
+
+    {{ include('hosting_hosting_request/_delete_form.html.twig') }}
+{% endblock %}

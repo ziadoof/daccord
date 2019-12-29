@@ -50,3 +50,27 @@
   color:black;
   font-weight: lighter;
 }
+
+#hosting_request_description{
+  resize: none;
+  height: 20vh;
+}
+
+/*hosting request page */
+
+.hosting-request-specifications span{
+  color: gray;
+}
+.image_hosting_request{
+  height: 8vh;
+  width: auto;
+  float: right;
+}
+
+/*navbar*/
+
+
+
+
+
+

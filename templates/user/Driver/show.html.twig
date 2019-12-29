@@ -42,8 +42,13 @@
             </div>
         </div>
         <div class="justify-content-center">
-            <div class="text-center pt-2 mt-4">
-                <a class="btn btn-info">Message</a>
+            <div class="text-center pt-2">
+                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                    <button class="btn btn-info mx-1" >
+                        <input type="hidden" name="user" value="{{ driver.user.id }}">
+                        <p class="mt-1">Message to {{driver.user.firstname}}</p>
+                    </button>
+                </form>
             </div>
         </div>
         {% if rating  %}

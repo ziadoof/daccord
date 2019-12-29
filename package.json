@@ -2,7 +2,7 @@
     "devDependencies": {
         "@babel/preset-react": "^7.0.0",
         "@fortawesome/fontawesome-free": "^5.11.2",
-        "@symfony/webpack-encore": "^0.22.0",
+        "@symfony/webpack-encore": "^0.28.2",
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-preset-react": "^6.24.1",
         "less-loader": "^4.1.0",

@@ -101,8 +101,8 @@ services:
     App\Twig\NotificationExtension:
         class: App\Twig\NotificationExtension
 
-    natification:
-        class: App\Service\Natification
+    notification:
+        class: App\Service\Notification
         arguments: ['@doctrine.orm.entity_manager','@mgiletNotificationManager' ]
 
     FOS\MessageBundle\Composer\ComposerInterface : '@fos_message.composer'
