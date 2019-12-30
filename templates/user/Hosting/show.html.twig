@@ -14,6 +14,23 @@
             <h1 class="text-center pt-3">{{ hosting.user.firstname|title }} {{ hosting.user.lastname|upper }}</h1>
             <h1 class="pt-3 bdg-accord ">{{ hosting.user.hosting.point }} <span>Points</span></h1>
         </div>
+        {% if app.user is not same as(hosting.user) %}
+            {% if app.user is not same as (null) %}
+                <div class="justify-content-center">
+                    <div class="text-center pt-2">
+                        <button  data-toggle="modal" class="btn btn-success mx-1" data-target="#hostingRequest">
+                            Send hosting request to {{ hosting.user.firstname|title }}
+                        </button>
+                    </div>
+                </div>
+            {% else %}
+                <div class="justify-content-center">
+                    <div class="text-center pt-2">
+                        <a class="btn btn-outline-success text-center" data-toggle="modal" data-target="#login">Login to send hosting request to {{ hosting.user.firstname|title }}</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
         <div class="justify-content-center">
             <div class="text-center pt-2">
 
@@ -71,24 +88,7 @@
                 {% endif %}
             </div>
         </div>
-        {% if app.user is not same as (null) %}
-        <div class="justify-content-center">
-            <div class="text-center pt-2">
-                <hr>
-                <button  data-toggle="modal" class="btn btn-success mx-1" data-target="#hostingRequest">
-                    Send hosting request to {{ hosting.user.firstname }}
-                </button>
-            </div>
-        </div>
-        {% else %}
-            <div class="justify-content-center">
-                <div class="text-center pt-2">
-                    <hr>
-                    <a class="btn btn-outline-success text-center" data-toggle="modal" data-target="#login">Login to send hosting request to {{ hosting.user.firstname }}</a>
-                </div>
-            </div>
-        {% endif %}
-        {#{% if rating  %}
+        {% if rating  %}
         <h4 class="text-center blued mt-4">Rating</h4>
         <div class="text-center">
             {% set range = rating.total/rating.numVotes %}
@@ -100,8 +100,8 @@
             {% set roundReste = reste|round(0,('floor')) %}
             <div class="row justify-content-center">
                 <span class="float-right mt-2 rosed">
-                    {% if  total is not same as(null) and total <=5%}#}{#rating is not null#}{#
-                        {% if  def %} #}{# rating is floot#}{#
+                    {% if  total is not same as(null) and total <=5%}{#rating is not null#}
+                        {% if  def %}  {#rating is floot#}
                             {% if floor %}
                                 {% for  i in floor ..1%}
                                     <i class="fas fa-star"></i>
@@ -113,7 +113,7 @@
                                     <i class="far fa-star"></i>
                                 {% endfor %}
                             {% endif %}
-                        {% else %}#}{#rating is integer#}{#
+                        {% else %}{#rating is integer#}
                         {% if total>0 %}
                             {% for  i in total ..1%}
                                 <i class="fas fa-star"></i>
@@ -123,7 +123,7 @@
                                 <i class="far fa-star"></i>
                             {% endfor %}
                         {% endif %}
-                    {% else %} #}{# rating is 0#}{#
+                    {% else %}  {#rating is 0#}
                         {% for  i in 5..1%}
                             <i class="far fa-star"></i>
                         {% endfor %}
@@ -174,7 +174,7 @@
                 {% endfor %}
             </div>
         </div>
-        {% endif %}#}
+        {% endif %}
     </div>
     <div class="modal fade bd-example-modal-lg mt-4" id="hostingRequest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
         <div class="modal-dialog modal-lg" role="document">

@@ -121,6 +121,61 @@ function wsConnect(id) {
                             ' has added a rating for you as a driver, based on your latest deal. '+
                             '</p>';
                         break;
+                    case'ratingHosting':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="far fa-star"></i></span>'+
+                            ' Rating ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' has added a rating for you as a hosting, based on your latest hosting. '+
+                            '</p>';
+                        break;
+                    case'hostingRequest':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="fas fa-suitcase-rolling ml-0"></i></span>'+
+                            ' New hosting request ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' had been sent you a new hosting request..! '+
+                            '</p>';
+                        break;
+                    case 'treatmentHostingRequest':
+                        if (messageData['subject']=== 'rejected'){
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
+                                ' Treatment hosting request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' rejected the hosting\'s request that you had previously sent him. '+
+                                '</p>';
+                        }
+                        else{
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="rosed"><i class="fas fa-check"></i></span>'+
+                                ' Treatment hosting request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' accepted the hosting\'s request that you had previously sent him. '+
+                                '</p>';
+                        }
+                        break;
+                    case'doneHosting':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="fas fa-suitcase-rolling ml-0"></i></span>'+
+                            ' Done hosting ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' had ended the hosting that you are part of...! '+
+                            '</p>';
+                        break;
+                    case'hostingPoints':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-star"></i></span>'+
+                            ' POINTS ! '+'</p>'+
+                            '<p><span >'+'Congratulations ... Ten extra points have been added to your hosting profile.'+'</span>'+
+                            '</p>';
+                        break;
                 }
                 return text;
             }
@@ -158,6 +213,10 @@ function wsConnect(id) {
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(messageData['typeOfNotification']==='driverPoints'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                }
+                else if(messageData['typeOfNotification']==='hostingPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
                 }

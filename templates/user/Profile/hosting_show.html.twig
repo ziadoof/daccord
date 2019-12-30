@@ -40,7 +40,7 @@
                     <h6 class="d-inline font-weight-bold blued">Number of days :  </h6><span>  {{ user.hosting.numberOfDays }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold blued">City  :  </h6><span>  {{ user.hosting.city}}</span>
+                    <h6 class="d-inline font-weight-bold blued">City  :  </h6><span>  {{ user.hosting.ville}}</span>
                 </div>
                 <div class="col-md-4 offset-4 my-2 ">
                     <h6 class="d-inline font-weight-bold blued">About me  :  </h6><span>  {{ user.hosting.aboutMe}}</span>
@@ -73,9 +73,7 @@
             </div>
         </div>
         {# render rating of hosting#}
-{#
         {{ render(controller('App\\Controller\\User\\ProfileController::ratingHosting',{ 'user': user })) }}
-#}
     </div>
     {% else %}
     <div class="col-md-4 offset-4 mt-5">

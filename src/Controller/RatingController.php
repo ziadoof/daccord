@@ -86,11 +86,13 @@ class RatingController extends AbstractController
                 'Your rating has been recorded successfully!'
             );
 
-            $notification->addNotification(['type' => 'ratingDriver', 'object' => $vote]);
-
-
             if($type === 'driver'){
+                $notification->addNotification(['type' => 'ratingDriver', 'object' => $vote]);
                 return $this->redirectToRoute('deal_index');
+            }
+            if($type === 'hosting'){
+                $notification->addNotification(['type' => 'ratingHosting', 'object' => $vote]);
+                return $this->redirectToRoute('hosting_request_index');
             }
 
             return $this->redirectToRoute('ad_index');

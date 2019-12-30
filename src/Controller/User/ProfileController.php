@@ -255,6 +255,20 @@ class ProfileController extends BaseProController
     }
 
     /**
+     * @Route( name="rating_hosting")
+     * @param User $user
+     * @param RatingRepository $ratingRepository
+     * @return Response
+     */
+    public function ratingHosting(User $user, RatingRepository $ratingRepository)
+    {
+        $rating = $ratingRepository->findByTypeAndCandidate('hosting',$user->getId());
+        return $this->render('user/Hosting/rating.html.twig', [
+            'rating'=>$rating,
+        ]);
+    }
+
+    /**
      * @Route("/user_hosting",  name="new_hosting", methods={"POST"})
      * @param Request $request
      * @param FormHostingType $formHostingType

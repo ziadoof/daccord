@@ -35,4 +35,16 @@ class VoteRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByVoterHosting($userId)
+    {
+        return $this->createQueryBuilder('v')
+            ->Where('v.voter = :id')
+            ->andWhere('v.type = :hosting')
+            ->setParameter('id', $userId)
+            ->setParameter('hosting', 'hosting')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

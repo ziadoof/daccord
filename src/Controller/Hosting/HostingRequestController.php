@@ -7,6 +7,7 @@ use App\Entity\Hosting\HostingRequest;
 use App\Form\Hosting\HostingRequestType;
 use App\Repository\Hosting\HostingRepository;
 use App\Repository\Hosting\HostingRequestRepository;
+use App\Repository\Rating\VoteRepository;
 use App\Repository\UserRepository;
 use App\Service\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,13 +24,29 @@ class HostingRequestController extends AbstractController
     /**
      * @Route("/", name="hosting_request_index", methods={"GET"})
      * @param HostingRequestRepository $hostingRequestRepository
+     * @param VoteRepository $voteRepository
      * @return Response
      */
-    public function index(HostingRequestRepository $hostingRequestRepository): Response
+    public function index(HostingRequestRepository $hostingRequestRepository, VoteRepository $voteRepository): Response
     {
         $hosting_requests = $hostingRequestRepository->findBySender($this->getUser()->getId());
+
+        $voteHostingByThisUser = $voteRepository->findByVoterHosting($this->getUser()->getId());
+        $votesHosting =[];
+        foreach ($voteHostingByThisUser as $vote){
+            $votesHosting[$vote->getCandidate()->getId()]=$vote->getValue();
+        }
+        // for select all the driver id where who the user is not rating them for create the modals
+        $listHosting =[];
+        foreach ($hosting_requests as $hosting){
+            if(!in_array($hosting->getHosting()->getId(), $listHosting, true)){
+                $listHosting[]= $hosting->getHosting()->getId();
+            }
+        }
         return $this->render('hosting/hosting_request/index.html.twig', [
             'hosting_requests' => $hosting_requests,
+            'votesHosting' => $votesHosting,
+            'listHosting' => $listHosting,
         ]);
     }
 
@@ -52,11 +69,14 @@ class HostingRequestController extends AbstractController
      * @param string $type
      * @param Notification $notification
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function request_treatment(HostingRequest $hostingRequest, string $type, Notification $notification): RedirectResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $hostingRequest->setTreatment($type);
+        $hostingRequest->setLastUpdate(new \DateTime('now'));
+
 
         $entityManager->persist($hostingRequest);
         $entityManager->flush();
@@ -64,19 +84,65 @@ class HostingRequestController extends AbstractController
             'success',
             'The hosting request has bin '.$type.' ..!'
         );
-        /*$notification->addNotification(['type' => 'treatmentHostingRequest', 'object' => $hostingRequest, 'treatment' => $type]);*/
+        $notification->addNotification(['type' => 'treatmentHostingRequest', 'object' => $hostingRequest, 'treatment' => $type]);
 
         return $this->redirectToRoute('hosting_request_received');
     }
 
     /**
-     * @Route("/new/{hosting}", name="hosting_request_new", methods={"GET","POST"})
+     * @Route( "/done/hosting/{hosting}",name="done_hosting", methods={"GET","POST"})
+     * @param HostingRequest $hosting
+     * @param Notification $notification
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function doneHosting(HostingRequest $hosting, Notification $notification): RedirectResponse
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if($user === $hosting->getSender()){
+            $hosting->setSenderStatus(true);
+            $return = $this->redirectToRoute('hosting_request_index');
+            if ($hosting->getHostingStatus()){
+                $hosting->getHosting()->getHosting()->setPoint($hosting->getHosting()->getHosting()->getPoint()+10);
+            }
+        }
+        else{
+            $hosting->setHostingStatus(true);
+
+            if ($hosting->getSenderStatus()){
+                $hosting->getHosting()->getHosting()->setPoint($hosting->getHosting()->getHosting()->getPoint()+10);
+            }
+            $return = $this->redirectToRoute('hosting_request_received');
+        }
+
+        $hosting->setLastUpdate(new \DateTime('now'));
+        $entityManager->persist($hosting);
+        $entityManager->flush();
+        $this->addFlash(
+            'success',
+            'The hosting is DONE ..!'
+        );
+
+        $notification->addNotification(['type' => 'doneHosting', 'object' => $hosting]);
+        if($hosting->getSenderStatus() && $hosting->getHostingStatus()){
+            $notification->addNotification(['type' => 'hostingPoints', 'user' => $hosting->getHosting(), 'number' => 'Ten']);
+        }
+
+
+        return $return;
+    }
+
+
+    /**
+     * @Route("/new/hosting/{hosting}", name="hosting_request_new", methods={"GET","POST"})
      * @param Request $request
      * @param Hosting $hosting
+     * @param Notification $notification
      * @return Response
      * @throws \Exception
      */
-    public function new(Request $request,Hosting $hosting): Response
+    public function new(Request $request,Hosting $hosting, Notification $notification): Response
     {
         $hostingRequest = new HostingRequest();
         $user = $this->getUser();
@@ -93,6 +159,7 @@ class HostingRequestController extends AbstractController
                 'success',
                 'Your hosting request has bin sent successfully!'
             );
+            $notification->addNotification(['type' => 'hostingRequest', 'object' => $hostingRequest]);
 
             return $this->redirectToRoute('hosting_request_index');
         }
@@ -101,36 +168,6 @@ class HostingRequestController extends AbstractController
             'hosting_request' => $hostingRequest,
             'form' => $form->createView(),
             'hosting'=>$hosting
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="hosting_hosting_request_show", methods={"GET"})
-     */
-    public function show(HostingRequest $hostingRequest): Response
-    {
-        return $this->render('hosting/hosting_request/show.html.twig', [
-            'hosting_request' => $hostingRequest,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="hosting_hosting_request_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, HostingRequest $hostingRequest): Response
-    {
-        $form = $this->createForm(HostingRequestType::class, $hostingRequest);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('hosting_hosting_request_index');
-        }
-
-        return $this->render('hosting/hosting_request/edit.html.twig', [
-            'hosting_request' => $hostingRequest,
-            'form' => $form->createView(),
         ]);
     }
 
@@ -145,6 +182,7 @@ class HostingRequestController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('hosting_hosting_request_index');
+        return $this->redirectToRoute('hosting_request_index');
     }
+
 }

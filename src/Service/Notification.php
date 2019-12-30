@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Entity\Deal\Deal;
 use App\Entity\DriverRequest;
+use App\Entity\Hosting\HostingRequest;
 use App\Entity\Notification\NotifiedBy;
 use App\Entity\Rating\Vote;
 use App\Entity\User;
@@ -60,7 +61,21 @@ class Notification
         if ($type === 'ratingDriver'){
             $this->addRatingDriver($object);
         }
-
+        if ($type === 'ratingHosting'){
+            $this->addRatingHosting($object);
+        }
+        if ($type === 'hostingRequest'){
+            $this->addHostingRequestNotification($object);
+        }
+        if($type === 'treatmentHostingRequest'){
+            $this->addHostingRequestTreatmentNotification($object,$options['treatment']);
+        }
+        if($type === 'doneHosting'){
+            $this->addDoneHostingNotification($object);
+        }
+        if($type === 'hostingPoints'){
+            $this->addPointsHostingNotification($options['user'],$options['number']);
+        }
     }
 
     protected function addDealNotification(Deal $deal): void
@@ -482,7 +497,8 @@ class Notification
         }
     }
 
-    public function addRatingDriver(Vote $vote){
+    public function addRatingDriver(Vote $vote): void
+    {
         $notification = $this->notificationManager->createNotification('','','/profile/');
         $this->notificationManager->addNotification(array($vote->getCandidate()), $notification, true);
 
@@ -507,5 +523,161 @@ class Notification
 
         $this->pushNotification($pushNotification);
 
+    }
+
+    private function addRatingHosting(Vote $vote): void
+    {
+        $notification = $this->notificationManager->createNotification('','','/profile/');
+        $this->notificationManager->addNotification(array($vote->getCandidate()), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $vote->getVoter(), $vote->getCandidate(), 'ratingHosting','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'ratingHosting',
+            'recipient'=>$vote->getCandidate()->getId(),
+            'category'=>'',
+            'sender'=>$vote->getVoter()->getFirstname(),
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$vote->getVoter()->getProfileImage(),
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addHostingRequestNotification(HostingRequest $hostingRequest): void
+    {
+        $hosting = $hostingRequest->getHosting();
+        $sender = $hostingRequest->getSender();
+
+        $notification = $this->notificationManager->createNotification('','','/hosting_request/received');
+
+        $this->notificationManager->addNotification(array($hosting), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $hosting, 'hostingRequest','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'hostingRequest',
+            'recipient'=>$hosting->getId(),
+            'category'=>'',
+            'sender'=>$sender->getFirstname(),
+            'link' =>'/hosting_request/received',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage()
+        );
+
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addHostingRequestTreatmentNotification(HostingRequest $hostingRequest, string $type): void
+    {
+        $user = $hostingRequest->getSender();
+        $sender = $hostingRequest->getHosting();
+
+        $notification = $this->notificationManager->createNotification($type,'','/hosting_request/');
+
+        $this->notificationManager->addNotification(array($user), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $user, 'treatmentHostingRequest','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'treatmentHostingRequest',
+            'recipient'=>$user->getId(),
+            'category'=>'',
+            'sender'=>$sender->getFirstname(),
+            'link' =>'/hosting_request/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+            'subject' =>$type
+        );
+
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addDoneHostingNotification(HostingRequest $hostingRequest)
+    {
+        $thisUser = $this->security->getUser();
+
+        if ($thisUser === $hostingRequest->getSender()){
+            $user = $hostingRequest->getHosting();
+            $sender =$hostingRequest->getSender();
+            $link = '/hosting_request/received';
+        }
+        else{
+            $user = $hostingRequest->getSender();
+            $sender =$hostingRequest->getHosting();
+            $link = '/hosting_request/';
+        }
+
+        $notification = $this->notificationManager->createNotification('','',$link);
+
+        $this->notificationManager->addNotification(array($user), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $user, 'doneHosting','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'doneHosting',
+            'recipient'=>$user->getId(),
+            'category'=>'',
+            'sender'=>$sender->getFirstname(),
+            'link' =>$link,
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addPointsHostingNotification(User $user, string $point)
+    {
+
+        $notification = $this->notificationManager->createNotification('hostingPoints',$point,'/profile/');
+        $this->notificationManager->addNotification(array($user), $notification, true);
+        // you must make the sender nullable , here no sender but it is any user
+        $notifiedBy = new NotifiedBy($notification, $user, $user, 'hostingPoints','Points');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'hostingPoints',
+            'recipient'=>$user->getId(),
+            'category'=>'Points',
+            'sender'=>null,
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>null,
+        );
+
+
+        $this->pushNotification($pushNotification);
     }
 }
