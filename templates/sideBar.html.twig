@@ -6,7 +6,8 @@
                     <li class="icon">
                         <a  href="{{path('driver_request_index')}}" id="my_driver_request">
                             <i class="fas fa-truck-moving button-left" title="Driver request"></i>
-                            <span class="nav-label">My driver request</span>
+                            {#<i class="fas fa-shuttle-van"></i>#}
+                            <span class="nav-label">Driver request</span>
                         </a>
                     </li>
                 {% endif %}
@@ -36,11 +37,18 @@
                         </a>
                     </form>
                 </li>
-                <li> <a href="javascript:void(0)">
-                        <i class="fas fa-bed" class="button-left" title="Hébergement"></i>
-                        <span class="nav-label">Hébergement</span>
+                <li> <a href="{{path('hosting_request_index')}}">
+                        <i class="fas fa-bed" class="button-left" title="Hosting"></i>
+                        <span class="nav-label">Hosting</span>
                     </a>
                 </li>
+                {% if app.user.hosting %}
+                <li> <a href="{{path('hosting_request_received')}}">
+                        <i class="fas fa-suitcase-rolling"class="button-left" title="Hosting_request"></i>
+                        <span class="nav-label">Hosting request</span>
+                    </a>
+                </li>
+                {% endif %}
                 <li> <a href="javascript:void(0)">
                         <i class="fas fa-car" class="button-left" title="Covoiturage"></i>
                         <span class="nav-label">Covoiturage</span>

@@ -7,7 +7,7 @@ window.jQuery = $;
 // the bootstrap module doesn't export/return anything
 require('./router');
 require('./jquery-ui.min');
-require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui')
+require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui');
 require('./autocompleter');
 require('./autocompleter_offer_city');
 require('jquery-validation');
@@ -40,6 +40,7 @@ require('./Messages/scrollMessage');
 require('./rating');
 require('./markAsVisited');
 require('./invitations');
+require('./hostingDate');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

@@ -59,7 +59,9 @@
                                        {% if not notification.seen %}notifiable="{{notification.notifiableEntity.id}}"
                                        notification="{{ notification.notification.id }}"
                                         {% endif %}>
-                                        {% if notification.notification.subject is same as ('profilePoints') or notification.notification.subject is same as ('driverPoints') %}
+                                        {% if notification.notification.subject is same as ('profilePoints') or
+                                              notification.notification.subject is same as ('driverPoints') or
+                                              notification.notification.subject is same as ('hostingPoints')%}
                                             <img src="{{asset('/assets/images/icons/tam.png')}}" alt="" class="user-image mx-2 mt-1" />
                                         {% else %}
                                             {% if data[notification.notification.id]['sender'].profileImage %}
@@ -73,14 +75,14 @@
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="fas fa-handshake"></i></span>
                                                     {{ 'New suggested deal !' }}</p>
-                                                    <p>There is a proposed deal with <span class="blued">{{ data[notification.notification.id]['sender'] }}</span>
+                                                    <p>There is a proposed deal with <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
                                                         regarding your AD from category <span class="blued">{{data[notification.notification.id]['category']}}</span>
                                                     </p>
                                                 {% elseif data[notification.notification.id]['type'] is same as ('driverRequest') %}
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="fas fas fa-truck-moving"></i></span>
                                                     {{ 'New driver request !' }}</p>
-                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> had been sent you a new driver request
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> had been sent you a new driver request
                                                         about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span>
                                                     </p>
                                                 {% elseif data[notification.notification.id]['type'] is same as ('treatmentDriverRequest') %}
@@ -88,7 +90,7 @@
                                                         <p class="font-weight-bold mb-0">
                                                         <span class="rosed"><i class="fas fa-times"></i></span>
                                                         {{ 'Treatment driver request !' }}</p>
-                                                        <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> rejected the driver's
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> rejected the driver's
                                                             request that you had previously sent him about the catigory
                                                             <span class="blued">{{data[notification.notification.id]['category']}}</span>
                                                         </p>
@@ -96,7 +98,7 @@
                                                         <p class="font-weight-bold mb-0">
                                                             <span class="blued"><i class="fas fa-check"></i></span>
                                                         {{ 'Treatment driver request !' }}</p>
-                                                        <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> accepted the driver's
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> accepted the driver's
                                                             request that you had previously sent him about the catigory
                                                             <span class="blued">{{data[notification.notification.id]['category']}}</span></p>
                                                     {% endif %}
@@ -104,14 +106,14 @@
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="fas fa-check"></i>{{ ' ' }}<i class="fas fas fa-truck-moving"></i></span>
                                                     {{ 'Add to Deal !' }}</p>
-                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> has added you to a deal that will be executed soon
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> has added you to a deal that will be executed soon
                                                         about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span>
                                                     </p>
                                                 {% elseif data[notification.notification.id]['type'] is same as ('semiDoneDeal') %}
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="fas fa-handshake"></i></span>
                                                     {{ 'Semi done Deal !' }}</p>
-                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> has ended a deal
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> has ended a deal
                                                         about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span> that you are a member of,
                                                         Waiting for other members to finish the deal
 
@@ -120,7 +122,7 @@
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="rosed"><i class="fas fa-handshake"></i></span>
                                                     {{ 'DONE DEAL !' }}</p>
-                                                    <p><span class="blued">{{ data[notification.notification.id]['sender'] }}</span> has ended a deal
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> has ended a deal
                                                         about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span> that you are a member of,
                                                         <span>The deal was terminated</span>
                                                     </p>
@@ -138,9 +140,49 @@
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="far fa-star"></i></span>
                                                     {{ 'Rating !' }}</p>
-                                                    <span>{{ data[notification.notification.id]['sender'] }}</span>
+                                                    <span>{{ data[notification.notification.id]['sender']|title }}</span>
                                                     has added a rating for you as a driver, based on your latest deal.
                                                     </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('ratingHosting') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-star"></i></span>
+                                                    {{ 'Rating !' }}</p>
+                                                    <span>{{ data[notification.notification.id]['sender']|title }}</span>
+                                                    has added a rating for you as a hosting, based on your latest hosting.
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('hostingRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-suitcase-rolling ml-0"></i></span>
+                                                    {{ ' New hosting request !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> had been sent you a new hosting request..!</p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('treatmentHostingRequest') %}
+                                                    {% if notification.notification.subject is same as ('rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {{ 'Treatment hosting request !' }}</p>
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> rejected the hosting's
+                                                            request that you had previously sent him.
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {{ 'Treatment hosting request !' }}</p>
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> accepted the hosting's
+                                                            request that you had previously sent him.
+                                                        </p>
+                                                    {% endif %}
+                                                {% elseif data[notification.notification.id]['type'] is same as ('doneHosting') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="fas fa-suitcase-rolling ml-0"></i></span>
+                                                    {{ 'Done Hosting !' }}</p>
+                                                    <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                    had ended the hosting that you are part of...!
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('hostingPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {{ 'POINTS !' }}</p>
+                                                    <p><span>Congratulations ... Ten extra points have been added to your hosting profile.</span></p>
                                                 {% endif %}
                                         </span>
                                     </a>

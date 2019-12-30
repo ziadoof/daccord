@@ -10,6 +10,7 @@ use App\Repository\Rating\RatingRepository;
 use App\Service\City\CityAreaType;
 use App\Service\FileUploader;
 use App\Service\FormDriverType;
+use App\Service\FormHostingType;
 use FOS\UserBundle\Controller\ProfileController as BaseProController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -251,5 +252,65 @@ class ProfileController extends BaseProController
         return $this->render('user/Driver/rating.html.twig', [
             'rating'=>$rating,
         ]);
+    }
+
+    /**
+     * @Route( name="rating_hosting")
+     * @param User $user
+     * @param RatingRepository $ratingRepository
+     * @return Response
+     */
+    public function ratingHosting(User $user, RatingRepository $ratingRepository)
+    {
+        $rating = $ratingRepository->findByTypeAndCandidate('hosting',$user->getId());
+        return $this->render('user/Hosting/rating.html.twig', [
+            'rating'=>$rating,
+        ]);
+    }
+
+    /**
+     * @Route("/user_hosting",  name="new_hosting", methods={"POST"})
+     * @param Request $request
+     * @param FormHostingType $formHostingType
+     * @return RedirectResponse|Response
+     */
+    public function new_hosting(Request $request, FormHostingType $formHostingType)
+    {
+        $user = $this->getUser();
+        $hostingOldPhoto = null;
+        if ($user->getHosting()){
+            $hostingOldPhoto = $user->getHosting()->getImage();
+        }
+
+        $HostingForm = $formHostingType->getForm();
+        $HostingForm->handleRequest($request);
+        if ($HostingForm->isSubmitted() && $HostingForm->isValid()) {
+            $hosting = $HostingForm->getData();
+            $filesystem = new Filesystem();
+            $hostingImage = $HostingForm->get('image')->getData();
+            $fileUploader = new FileUploader('assets/images/Hosting/');
+
+            //delet old photo
+            $hostingOldPhoto && $hostingImage ?$filesystem->remove('assets/images/car_driver/'.$hostingOldPhoto):null;
+            // upload new photo
+            $hostingImage ? $hosting->setImage($fileUploader->upload($hostingImage)):$hosting->setImage($hostingOldPhoto?:'with out photo');
+
+            $hosting->setUser($user);
+            $hosting->setVille($user->getCity());
+            $hosting->setDepartment($user->getCity()->getDepartment());
+            $hosting->setRegion($user->getCity()->getDepartment()->getRegion());
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($hosting);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('user/Profile/hosting_edit_form.html.twig', [
+
+        ]);
+
     }
 }

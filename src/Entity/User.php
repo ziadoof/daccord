@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Ads\Ad;
 use App\Entity\Deal\Deal;
 use App\Entity\Deal\DoneDeal;
+use App\Entity\Hosting\Hosting;
+use App\Entity\Hosting\HostingRequest;
 use App\Entity\Location\City;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
@@ -28,7 +30,7 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Table(name="user")
  * @Notifiable(name="user")
  */
-class User  extends BaseUser implements UserInterface, NotifiableInterface, ParticipantInterface
+class User  extends BaseUser implements NotifiableInterface, ParticipantInterface
 {
     /**
      * @ORM\Id()
@@ -412,6 +414,8 @@ class User  extends BaseUser implements UserInterface, NotifiableInterface, Part
         $this->offerDoneDeals = new ArrayCollection();
         $this->demandDoneDeals = new ArrayCollection();
         $this->driverRequests = new ArrayCollection();
+        $this->hostingRequests = new ArrayCollection();
+        $this->hostingRequestsReceived = new ArrayCollection();
         // your own logic
     }
 
@@ -644,6 +648,21 @@ class User  extends BaseUser implements UserInterface, NotifiableInterface, Part
     protected $lastActivityAt;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Hosting\Hosting", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $hosting;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\HostingRequest", mappedBy="sender", orphanRemoval=true)
+     */
+    private $hostingRequests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\HostingRequest", mappedBy="hosting", orphanRemoval=true)
+     */
+    private $hostingRequestsReceived;
+
+    /**
      * @return mixed
      */
     public function getLastActivityAt()
@@ -676,5 +695,84 @@ class User  extends BaseUser implements UserInterface, NotifiableInterface, Part
             return '/assets/images/profile/'.$this->getProfileImage();
         }
         return '/assets/images/profile/avatar.jpeg';
+    }
+
+    public function getHosting(): ?Hosting
+    {
+        return $this->hosting;
+    }
+
+    public function setHosting(Hosting $hosting): self
+    {
+        $this->hosting = $hosting;
+
+        // set the owning side of the relation if necessary
+        if ($hosting->getUser() !== $this) {
+            $hosting->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HostingRequest[]
+     */
+    public function getHostingRequests(): Collection
+    {
+        return $this->hostingRequests;
+    }
+
+    public function addHostingRequest(HostingRequest $hostingRequest): self
+    {
+        if (!$this->hostingRequests->contains($hostingRequest)) {
+            $this->hostingRequests[] = $hostingRequest;
+            $hostingRequest->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHostingRequest(HostingRequest $hostingRequest): self
+    {
+        if ($this->hostingRequests->contains($hostingRequest)) {
+            $this->hostingRequests->removeElement($hostingRequest);
+            // set the owning side to null (unless already changed)
+            if ($hostingRequest->getSender() === $this) {
+                $hostingRequest->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HostingRequest[]
+     */
+    public function getHostingRequestsReceived(): Collection
+    {
+        return $this->hostingRequestsReceived;
+    }
+
+    public function addHostingRequestsReceived(HostingRequest $hostingRequestsReceived): self
+    {
+        if (!$this->hostingRequestsReceived->contains($hostingRequestsReceived)) {
+            $this->hostingRequestsReceived[] = $hostingRequestsReceived;
+            $hostingRequestsReceived->setHosting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHostingRequestsReceived(HostingRequest $hostingRequestsReceived): self
+    {
+        if ($this->hostingRequestsReceived->contains($hostingRequestsReceived)) {
+            $this->hostingRequestsReceived->removeElement($hostingRequestsReceived);
+            // set the owning side to null (unless already changed)
+            if ($hostingRequestsReceived->getHosting() === $this) {
+                $hostingRequestsReceived->setHosting(null);
+            }
+        }
+
+        return $this;
     }
 }

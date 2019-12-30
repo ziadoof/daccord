@@ -57,29 +57,6 @@
                 </div>
             </div>
         </div>
-        <div class="justify-content-center  ">
-            {% if user.driver %}
-                <div class="row text-center btn-group mt-4">
-                    <b class="rosed">Driver</b><br>
-                </div>
-                <div class="row btn-group profile-edit">
-                    <a href="#">
-                        {% if user.driver.carImage %}
-                            {% if user.driver.carImage is same as ('with out photo') %}
-                                <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
-                                     src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="car-avatar">
-                            {% else %}
-                                <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
-                                     src="{{ asset('/assets/images/car_driver/'~user.driver.carImage) }}" alt="car-adriver" >
-                            {% endif %}
-                        {% else %}
-                            <img class="mb-3 {% if user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
-                                 src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="User">
-                        {% endif %}
-                    </a>
-                </div>
-            {% endif %}
-        </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
                 <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">

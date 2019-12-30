@@ -13,7 +13,7 @@
                 <a class="nav-link" id="area-tab" data-toggle="tab" href="#edit_area" role="tab" aria-controls="contact" aria-selected="false">My area</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#edit_hebergement" role="tab" aria-controls="contact" aria-selected="false">Share a car</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#edit_hosting" role="tab" aria-controls="contact" aria-selected="false">Hosting</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -26,7 +26,9 @@
             <div class="tab-pane fade" id="edit_area" role="tabpanel" aria-labelledby="profile-tab">
                 {%  include'user/Profile/show_area.html.twig' %}
             </div>
-            <div class="tab-pane fade" id="edit_hebergement" role="tabpanel" aria-labelledby="contact-tab"></div>
+            <div class="tab-pane fade" id="edit_hosting" role="tabpanel" aria-labelledby="contact-tab">
+                {%  include'user/Profile/hosting_show.html.twig' %}
+            </div>
         </div>
     </div>
 {% endblock fos_user_content %}
