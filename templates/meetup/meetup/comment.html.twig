@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h4 class="text-center blued">Comments</h4>
+        {% if app.user is not same as(null) %}
+        <div class="row">
+            <div class="col-md-6 offset-3 border-deal pt-2">
+                {{ include('meetup/meetup/comment_form.html.twig') }}
+            </div>
+        </div>
+        {% endif %}
+        {% for comment in meetup.comments|sort|reverse %}
+            <div class="row">
+                <div class="col-md-6 offset-3 border-deal border-comment">
+                    <div class="row border-comment-head pt-1">
+                        <div class="col-md-4">
+                            <img src="{{ comment.sender.photoProfile() }}" alt="" class="vote-avatar">
+                            <div class="mt-2">
+                                <span class="ml-1">{{ comment.sender.firstname|title }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-4 mt-1">
+                            <div class="float-right pt-1">
+                                {{   comment.date_format(comment.createdAt) }}
+                            </div>
+                            {% if app.user is same as(comment.sender) or app.user is same as(comment.meetup.creator) %}
+                                <div class="float-right">
+                                    <div class="delete-comment">
+                                        <form method="post" action="{{ path('meetup_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Do you really want to remove this comment ?');">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                            <button class="btn float-right"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="minimize mx-4 my-2">{{ comment.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

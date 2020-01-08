@@ -50,6 +50,14 @@
                 {% endif %}
             {% endif %}
         {% endif %}
+        {%- if attr.meetup is defined -%}{# view for hosting image#}
+            {% if attr.meetup %}{# if the form has hosting attr#}
+                <div class="meetup-form-image">
+                    <img id="previewMeetupImge"
+                         src="{{ asset('/assets/images/meetup/meetup.png') }}" alt="Meetup photo">
+                </div>
+            {% endif %}
+        {% endif %}
     </label>
     </{{ element|default('div') }}>
 {% endblock %}

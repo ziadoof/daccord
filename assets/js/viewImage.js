@@ -40,3 +40,17 @@ function viewHostingImage(input) {
     }
 }
 window.viewHostingImage = viewHostingImage;
+
+function viewMeetupImage(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#previewMeetupImge')
+                .attr('src', e.target.result)
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+window.viewMeetupImage = viewMeetupImage;

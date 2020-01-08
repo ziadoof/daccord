@@ -41,10 +41,9 @@ class Vote
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255 , nullable=true)
-     * this variable change when create sortir
+     * @ORM\ManyToOne(targetEntity="App\Entity\Meetup\Meetup")
      */
-    private $event;
+    private $meetup;
 
     /**
      * @ORM\Column(type="text", length=255, nullable=true)
@@ -88,6 +87,22 @@ class Vote
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeetup()
+    {
+        return $this->meetup;
+    }
+
+    /**
+     * @param mixed $meetup
+     */
+    public function setMeetup($meetup): void
+    {
+        $this->meetup = $meetup;
     }
 
     /**

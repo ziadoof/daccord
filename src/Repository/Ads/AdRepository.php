@@ -37,7 +37,7 @@ class AdRepository extends ServiceEntityRepository
             ->setParameter('min_x', $min_x)
             ->setParameter('max_y', $max_y)
             ->setParameter('min_y', $min_y)
-            ->orderBy('a.dateOfAd', 'ASC')
+            ->orderBy('a.dateOfAd', 'DESC')
             ->getQuery()
             ->getResult()
         ;

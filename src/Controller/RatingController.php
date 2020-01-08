@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Meetup\Meetup;
 use App\Entity\Rating\Rating;
 use App\Entity\Rating\Vote;
 use App\Entity\User;
@@ -105,4 +106,59 @@ class RatingController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/meetupvote/{meetup}/{type}" ,name="new_meetup_vote", methods={"POST"})
+     * @param Request $request
+     * @param Meetup $meetup
+     * @param string $type
+     * @param Notification $notification
+     * @return RedirectResponse|Response
+     * @throws \Exception
+     */
+    public function createMeetupVote(Request $request,  Meetup $meetup, string $type, Notification $notification){
+
+        $BDrating = $this->ratingRepository->findByTypeAndMeetup($type,$meetup->getId());
+        $newRating = new Rating();
+        $newRating->setMeetup($meetup);
+        $newRating->setType($type);
+        $rating = $BDrating?:$newRating;
+
+        $vote = new Vote();
+        $vote->setRating($rating);
+        $vote->setMeetup($meetup);
+        $vote->setType($type);
+
+
+        $form = $this->createForm(VoteType::class, $vote);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $rating->setTotal($rating->getTotal()+$form->get('value')->getData());
+            $rating->setNumVotes($rating->getNumVotes()+1);
+            $vote->setVoter($this->getUser());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($vote);
+            $entityManager->persist($rating);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Your rating has been recorded successfully!'
+            );
+
+            return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
+        }
+
+        return $this->render('Rating/meetup_vote.html.twig', [
+            'meetup' => $meetup,
+            'type' => $type,
+            'form' => $form->createView()
+        ]);
+
+    }
+
+
 }

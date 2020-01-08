@@ -4,6 +4,7 @@ namespace App\Entity\Location;
 
 use App\Entity\Driver;
 use App\Entity\Hosting\Hosting;
+use App\Entity\Meetup\Meetup;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -73,11 +74,17 @@ class City
      */
     private $hostings;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Meetup\Meetup", mappedBy="city")
+     */
+    private $meetups;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->drivers = new ArrayCollection();
         $this->hostings = new ArrayCollection();
+        $this->meetups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -260,6 +267,37 @@ class City
             // set the owning side to null (unless already changed)
             if ($hosting->getCity() === $this) {
                 $hosting->setCity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Meetup[]
+     */
+    public function getMeetups(): Collection
+    {
+        return $this->meetups;
+    }
+
+    public function addMeetup(Meetup $meetup): self
+    {
+        if (!$this->meetups->contains($meetup)) {
+            $this->meetups[] = $meetup;
+            $meetup->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeetup(Meetup $meetup): self
+    {
+        if ($this->meetups->contains($meetup)) {
+            $this->meetups->removeElement($meetup);
+            // set the owning side to null (unless already changed)
+            if ($meetup->getCity() === $this) {
+                $meetup->setCity(null);
             }
         }
 

@@ -8,6 +8,8 @@ use App\Entity\Deal\DoneDeal;
 use App\Entity\Hosting\Hosting;
 use App\Entity\Hosting\HostingRequest;
 use App\Entity\Location\City;
+use App\Entity\Meetup\JoinRequest;
+use App\Entity\Meetup\Meetup;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\MessageBundle\Security\ParticipantProvider;
@@ -416,7 +418,8 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
         $this->driverRequests = new ArrayCollection();
         $this->hostingRequests = new ArrayCollection();
         $this->hostingRequestsReceived = new ArrayCollection();
-        // your own logic
+        $this->meetups = new ArrayCollection();
+        $this->joinRequests = new ArrayCollection();
     }
 
     /**
@@ -663,6 +666,18 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
     private $hostingRequestsReceived;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Meetup\Meetup", mappedBy="creator")
+     */
+    private $meetups;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Meetup\JoinRequest", mappedBy="user", orphanRemoval=true)
+     */
+    private $joinRequests;
+
+
+
+    /**
      * @return mixed
      */
     public function getLastActivityAt()
@@ -775,4 +790,67 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
 
         return $this;
     }
+
+    /**
+     * @return Collection|Meetup[]
+     */
+    public function getMeetups(): Collection
+    {
+        return $this->meetups;
+    }
+
+    public function addMeetup(Meetup $meetup): self
+    {
+        if (!$this->meetups->contains($meetup)) {
+            $this->meetups[] = $meetup;
+            $meetup->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeetup(Meetup $meetup): self
+    {
+        if ($this->meetups->contains($meetup)) {
+            $this->meetups->removeElement($meetup);
+            // set the owning side to null (unless already changed)
+            if ($meetup->getCreator() === $this) {
+                $meetup->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JoinRequest[]
+     */
+    public function getJoinRequests(): Collection
+    {
+        return $this->joinRequests;
+    }
+
+    public function addJoinRequest(JoinRequest $joinRequest): self
+    {
+        if (!$this->joinRequests->contains($joinRequest)) {
+            $this->joinRequests[] = $joinRequest;
+            $joinRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJoinRequest(JoinRequest $joinRequest): self
+    {
+        if ($this->joinRequests->contains($joinRequest)) {
+            $this->joinRequests->removeElement($joinRequest);
+            // set the owning side to null (unless already changed)
+            if ($joinRequest->getUser() === $this) {
+                $joinRequest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

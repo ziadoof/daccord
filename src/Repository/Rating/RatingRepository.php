@@ -25,4 +25,16 @@ class RatingRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByTypeAndMeetup($type, $meetup_id)
+    {
+        return $this->createQueryBuilder('r')
+            ->Where('r.type = :type')
+            ->andWhere('r.meetup = :meetup_id')
+            ->setParameter('type', $type)
+            ->setParameter('meetup_id', $meetup_id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 }

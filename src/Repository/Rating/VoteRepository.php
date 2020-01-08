@@ -47,4 +47,16 @@ class VoteRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByVoterMeetup($userId)
+    {
+        return $this->createQueryBuilder('v')
+            ->Where('v.voter = :id')
+            ->andWhere('v.type = :type')
+            ->setParameter('id', $userId)
+            ->setParameter('type', 'meetup')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }
