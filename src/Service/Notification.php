@@ -40,6 +40,46 @@ class Notification
         $type = $options['type'];
         $object = $options['object']??null;
 
+        switch ($type){
+            case 'deal':
+                $this->addDealNotification($object);
+                break;
+            case 'driverRequest':
+                $this->addDriverRequestNotification($object);
+                break;
+            case 'treatmentDriverRequest':
+                $this->addRequestTreatmentNotification($object,$options['treatment']);
+                break;
+            case 'addDriverToDeal':
+                $this->addAddDriverToDealNotification($object);
+                break;
+            case 'doneDeal'||'semiDoneDeal':
+                $this->addDoneDealNotification($object,$type,$options['status']);
+                break;
+            case 'points':
+                $this->addPointsNotification($options['user'], $options['status'],$options['number']);
+                break;
+            case 'ratingDriver':
+                $this->addRatingDriver($object);
+                break;
+            case 'ratingHosting':
+                $this->addRatingHosting($object);
+                break;
+            case 'hostingRequest':
+                $this->addHostingRequestNotification($object);
+                break;
+            case 'treatmentHostingRequest':
+                $this->addHostingRequestTreatmentNotification($object,$options['treatment']);
+                break;
+            case 'doneHosting':
+                $this->addDoneHostingNotification($object);
+                break;
+            case 'hostingPoints':
+                $this->addPointsHostingNotification($options['user'],$options['number']);
+                break;
+
+        }
+/*
         if($type === 'deal'){
             $this->addDealNotification($object);
         }
@@ -75,7 +115,7 @@ class Notification
         }
         if($type === 'hostingPoints'){
             $this->addPointsHostingNotification($options['user'],$options['number']);
-        }
+        }*/
     }
 
     protected function addDealNotification(Deal $deal): void
