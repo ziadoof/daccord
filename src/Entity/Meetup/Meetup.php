@@ -116,6 +116,7 @@ class Meetup
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Meetup\Comment", mappedBy="meetup", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $comments;
 

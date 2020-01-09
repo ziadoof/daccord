@@ -135,7 +135,7 @@ class MeetupController extends AbstractController
             return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
         }
 
-        //bug orderby asc
+
         $results = $paginator->paginate(
         // Doctrine Query, not results
             $meetup->getComments(),
