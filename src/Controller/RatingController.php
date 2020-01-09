@@ -148,6 +148,7 @@ class RatingController extends AbstractController
                 'success',
                 'Your rating has been recorded successfully!'
             );
+            $notification->addNotification(['type' => 'ratingMeetup', 'object' => $vote, 'meetup'=>$meetup]);
 
             return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
         }

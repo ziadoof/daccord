@@ -55,7 +55,11 @@
                             <li class="list__item {% if notification.seen %}{{ 'seen' }}{% endif %}">
                                     <a href="{{ notification.notification.link }}"
                                        class="list__item--link my-0{% if notification.notification.subject is same as ('profilePoints') %}{{" profilePoints"}}
-                                       {% elseif notification.notification.subject is same as ('driverPoints') %}{{" driverPoints"}} {% endif %}"
+                                       {% elseif notification.notification.subject is same as ('driverPoints') %}{{" driverPoints"}}
+                                        {% elseif notification.notification.subject is same as ('ratingMeetup') %}{{" ratingMeetup"}}
+                                        {% elseif notification.notification.subject is same as ('meetupComment') %}{{" meetupComment"}}
+                                        {% endif %}
+                                        {% if notification.notification.message is same as ('meetupParticipant') %}{{" meetupParticipant"}}{% endif %}"
                                        {% if not notification.seen %}notifiable="{{notification.notifiableEntity.id}}"
                                        notification="{{ notification.notification.id }}"
                                         {% endif %}>
@@ -140,14 +144,14 @@
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="far fa-star"></i></span>
                                                     {{ 'Rating !' }}</p>
-                                                    <span>{{ data[notification.notification.id]['sender']|title }}</span>
+                                                    <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
                                                     has added a rating for you as a driver, based on your latest deal.
                                                     </p>
                                                 {% elseif data[notification.notification.id]['type'] is same as ('ratingHosting') %}
                                                     <p class="font-weight-bold mb-0">
                                                     <span class="blued"><i class="far fa-star"></i></span>
                                                     {{ 'Rating !' }}</p>
-                                                    <span>{{ data[notification.notification.id]['sender']|title }}</span>
+                                                    <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
                                                     has added a rating for you as a hosting, based on your latest hosting.
                                                     </p>
                                                 {% elseif data[notification.notification.id]['type'] is same as ('hostingRequest') %}
@@ -183,6 +187,71 @@
                                                     <span class="rosed"><i class="far fa-star"></i></span>
                                                     {{ 'POINTS !' }}</p>
                                                     <p><span>Congratulations ... Ten extra points have been added to your hosting profile.</span></p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('meetupRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-user-friends"></i></span>
+                                                    {{ ' New meetup join request !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> had been sent you a new meetup join request..!</p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('treatmentMeetupRequest') %}
+                                                    {% if notification.notification.subject is same as ('Rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {{ 'Treatment meetup join request !' }}</p>
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> rejected the meetup join
+                                                            request that you had previously sent him.
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {{ 'Treatment meetup join request !' }}</p>
+                                                        <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> accepted the meetup join
+                                                            request that you had previously sent him.
+                                                        </p>
+                                                    {% endif %}
+                                                {% elseif data[notification.notification.id]['type'] is same as ('cancelJoinParticipant') %}
+                                                <p class="font-weight-bold mb-0">
+                                                <span class="rosed"><i class="far fa-calendar-times"></i></span>
+                                                {{ 'Cancel meetup join !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% if notification.notification.subject is same as ('removed')  %}
+                                                            had canceled your participation in his meetup.
+                                                        {% else %}
+                                                            had canceled his participation in your meetup.
+                                                        {% endif %}
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('cancelJoinWaiting') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                <span class="rosed"><i class="far fa-calendar-times"></i></span>
+                                                {{ 'Cancel meetup join !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% if notification.notification.subject is same as ('removed')  %}
+                                                            had canceled your subscription to the waiting list
+                                                            in his meetup.
+                                                        {% else %}
+                                                            had canceled his subscription to the waiting list in your meetup.
+                                                        {% endif %}
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('transferToParticipant') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                <span class="blued"><i class="fas fa-exchange-alt"></i></span>
+                                                {{ 'Transfer to participants list !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                     transferred you from the waiting list to the participants in his meetup !.
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('meetupComment') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                <span class="blued"><i class="far fa-comment-alt"></i></span>
+                                                {{ 'New comment !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                     added a comment to an meetup where you are a member..!
+                                                    </p>
+                                                {% elseif data[notification.notification.id]['type'] is same as ('ratingMeetup') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-star"></i></span>
+                                                    {{ 'Rating !' }}</p>
+                                                    <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                    has added a rating for your meetup.
+                                                    </p>
                                                 {% endif %}
                                         </span>
                                     </a>

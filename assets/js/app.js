@@ -36,6 +36,7 @@ require('./category');
 require('./gps_location');
 require('./React/Startup/Search_myAds');
 require('./viewImage');
+require('./meetup/meetup_tab');
 require('./user_tab');
 require('./notification');
 require('./Messages/webSocketServer');

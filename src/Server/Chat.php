@@ -123,7 +123,7 @@ class Chat implements MessageComponentInterface
         echo "\n";
         $messageData = json_decode($message, true);
         $id = $messageData['recipient'];
-        if ($this->users[$id]){
+        if (/*$this->users[$id]*/ array_key_exists($id,$this->users)){
             echo 'notification to user is sent';
             echo "\n";
             return $this->users[$id]->send($message);

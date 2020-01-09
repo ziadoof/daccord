@@ -176,6 +176,94 @@ function wsConnect(id) {
                             '<p><span >'+'Congratulations ... Ten extra points have been added to your hosting profile.'+'</span>'+
                             '</p>';
                         break;
+                    case'meetupRequest':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="fas fa-user-friends"></i></span>'+
+                            ' New Meetup join request ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' had been sent you a new meetup join request..! '+
+                            '</p>';
+                        break;
+                    case 'treatmentMeetupRequest':
+                        if (messageData['subject']=== 'Rejected'){
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
+                                ' Treatment meetup join request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' rejected the meetup join request that you had previously sent him. '+
+                                '</p>';
+                        }
+                        else{
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="rosed"><i class="fas fa-check"></i></span>'+
+                                ' Treatment meetup join request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' accepted the meetup join request that you had previously sent him. '+
+                                '</p>';
+                        }
+                        break;
+                    case'cancelJoinParticipant':
+                        let statusParticipant = '';
+                        if(messageData['subject']=== 'removed'){
+                            statusParticipant = ' had canceled your participation in his meetup. ';
+                        }
+                        else{
+                            statusParticipant = ' had canceled his participation in your meetup. ';
+                        }
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
+                            ' Cancel meetup join ! ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            statusParticipant
+                            +'</p>';
+                        break;
+                    case'cancelJoinWaiting':
+                        let statusWaiting = '';
+                        if(messageData['subject']=== 'removed'){
+                            statusWaiting = ' had canceled your subscription to the waiting list in his meetup. ';
+                        }
+                        else{
+                            statusWaiting = ' had canceled his subscription to the waiting list in your meetup. ';
+                        }
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
+                            ' Cancel meetup join ! ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            statusWaiting
+                            +'</p>';
+                        break;
+                    case'transferToParticipant':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="fas fa-exchange-alt"></i></span>'+
+                            ' Transfer to participants list ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' transferred you from the waiting list to the participants in his meetup ..! '+
+                            '</p>';
+                        break;
+                    case'meetupComment':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="far fa-comment-alt"></i></span>'+
+                            ' New comment ! ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' added a comment to an meetup where you are a member..! '+
+                            '</p>';
+                        break;
+                    case'ratingMeetup':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="far fa-star"></i></span>'+
+                            ' Rating ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' has added a rating for your meetup. '+
+                            '</p>';
+                        break;
                 }
                 return text;
             }
@@ -208,17 +296,30 @@ function wsConnect(id) {
                     minute: "numeric"});
                 let image;
                 let elemantA;
-                if(messageData['typeOfNotification']==='profilePoints'){
+                let typeON = messageData['typeOfNotification'];
+                if(typeON==='profilePoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
                 }
-                else if(messageData['typeOfNotification']==='driverPoints'){
+                else if(typeON==='driverPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
                 }
-                else if(messageData['typeOfNotification']==='hostingPoints'){
+                else if(typeON==='hostingPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                }
+                else if(typeON==='ratingMeetup'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 ratingMeetup" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                }
+                else if(typeON==='meetupComment'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 meetupComment" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                }
+                else if(typeON==='meetupRequest'||typeON ==='treatmentMeetupRequest'||typeON ==='cancelJoinParticipant'||typeON ==='cancelJoinWaiting'||typeON ==='transferToParticipant'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 meetupParticipant" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
                 else {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
@@ -256,6 +357,40 @@ function wsConnect(id) {
                     '</section>';
 
                 notif.insertAdjacentHTML('afterbegin',notification);
+                // reload function for fix link to comment and rating with realtime notifications
+                const participants = document.getElementsByClassName('meetupParticipant');
+                for(const participant of participants){
+                    participant.addEventListener('click', function () {
+                        localStorage.setItem('meetup_tab','#meetupParticipant' );
+                    });
+                }
+                const linksComments = document.getElementsByClassName('meetupComment');
+                for(const comment of linksComments){
+                    comment.addEventListener('click', function () {
+                        localStorage.setItem('meetup_tab','#meetupComment' );
+
+                    });
+                }
+                const linksMeets = document.getElementsByClassName('ratingMeetup');
+                for(const meetup of linksMeets){
+                    meetup.addEventListener('click', function () {
+                        localStorage.setItem('meetup_tab','#meetupRating' );
+                    });
+                }
+                // for the points notifications link (show profile or driver)
+                var linksProfiles = document.getElementsByClassName('profilePoints');
+                for(var linkP of linksProfiles){
+                    linkP.addEventListener('click', function (e) {
+                        localStorage.setItem('profile_tap','#edit_personal' );
+                    });
+                }
+                var linksDrivers = document.getElementsByClassName('driverPoints');
+                for(var driverP of linksDrivers){
+                    driverP.addEventListener('click', function (e) {
+                        localStorage.setItem('profile_tap','#edit_driver' );
+                    });
+                }
+
                 var btns = document.getElementsByClassName('ajax-notification');
                 function markAsSeen(e) {
                     var xhttp = new XMLHttpRequest();

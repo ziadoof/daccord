@@ -1,14 +1,20 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h4 class="text-center blued">Comments</h4>
         {% if app.user is not same as(null) %}
+        <h4 class="text-center blued">Comments</h4>
         <div class="row">
             <div class="col-md-6 offset-3 border-deal pt-2">
                 {{ include('meetup/meetup/comment_form.html.twig') }}
             </div>
         </div>
+        {% else %}
+            <div class="row">
+                <div class="col-md-4 offset-4">
+                    <a class="btn btn-outline-info btn-block my-4 my-sm-0 ml-2" data-toggle="modal" data-target="#login">Login for add a comment</a>
+                </div>
+            </div>
         {% endif %}
-        {% for comment in meetup.comments|sort|reverse %}
+        {% for comment in comments|sort|reverse %}
             <div class="row">
                 <div class="col-md-6 offset-3 border-deal border-comment">
                     <div class="row border-comment-head pt-1">
@@ -36,10 +42,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p class="minimize mx-4 my-2">{{ comment.description }}</p>
+                        <div class="col mx-1 ">
+                            <p class="minimize mx-2 my-2 meetup-text">{{ comment.description }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
+    </div>
+</div>
+<div class="pagination-search row justify-content-center mt-4">
+    <div class="navigation">
+        {{ knp_pagination_render(comments) }}
     </div>
 </div>

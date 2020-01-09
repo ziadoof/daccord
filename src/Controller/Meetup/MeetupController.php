@@ -11,6 +11,8 @@ use App\Form\Meetup\MeetupType;
 use App\Repository\Meetup\MeetupRepository;
 use App\Repository\Rating\RatingRepository;
 use App\Repository\Rating\VoteRepository;
+use App\Service\FileUploader;
+use App\Service\Notification;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -48,6 +50,9 @@ class MeetupController extends AbstractController
 
     /**
      * @Route("/new", name="meetup_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -58,12 +63,19 @@ class MeetupController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $fileUploader = new FileUploader('assets/images/meetup/');
+            $image = $form->get('image')->getData();
+            $image ?$meetup->setImage($fileUploader->upload($image)):$meetup->setImage(null);
+
             $meetup->setDepartment($meetup->getCity()->getDepartment());
             $meetup->setRegion($meetup->getCity()->getDepartment()->getRegion());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($meetup);
             $entityManager->flush();
-
+            $this->addFlash(
+                'success',
+                'Your new meetup was successfully added!'
+            );
             return $this->redirectToRoute('meetup_index');
         }
 
@@ -79,10 +91,12 @@ class MeetupController extends AbstractController
      * @param Meetup $meetup
      * @param RatingRepository $ratingRepository
      * @param VoteRepository $voteRepository
+     * @param Notification $notification
+     * @param PaginatorInterface $paginator
      * @return Response
      * @throws \Exception
      */
-    public function show(Request $request, Meetup $meetup, RatingRepository $ratingRepository, VoteRepository $voteRepository): Response
+    public function show(Request $request, Meetup $meetup, RatingRepository $ratingRepository, VoteRepository $voteRepository, Notification $notification, PaginatorInterface $paginator): Response
     {
         $comment = new Comment();
         $comment->setMeetup($meetup);
@@ -98,6 +112,7 @@ class MeetupController extends AbstractController
             }
         }
 
+
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
@@ -106,9 +121,29 @@ class MeetupController extends AbstractController
                 'success',
                 'Your comment was successfully added!'
             );
+            $comments = $meetup->getComments();
+            $commentators =[];
+            foreach ($comments as $comment){
+                if(!in_array($comment->getSender(),$commentators) && $this->getUser() !== $comment->getSender()){
+                    $commentators[]=$comment->getSender();
+                }
+            }
+            if(!empty($commentators)){
+                $notification->addNotification(['type' => 'meetupComment', 'object' => $meetup,'recipients'=>$commentators,'sender'=>$this->getUser()]);
+            }
 
             return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
         }
+
+        //bug orderby asc
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $meetup->getComments(),
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
 
 
         return $this->render('meetup/meetup/show.html.twig', [
@@ -116,29 +151,11 @@ class MeetupController extends AbstractController
             'rating' => $rating,
             'votesMeetup' => $votesMeetup,
             'comment' => $comment,
+            'comments' => $results,
             'commentForm' => $commentForm->createView(),
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="meetup_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Meetup $meetup): Response
-    {
-        $form = $this->createForm(MeetupType::class, $meetup);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('meetup_index');
-        }
-
-        return $this->render('meetup/meetup/edit.html.twig', [
-            'meetup' => $meetup,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="meetup_delete", methods={"DELETE"})
@@ -157,9 +174,10 @@ class MeetupController extends AbstractController
     /**
      * @Route( "/{meetup}/join",name="meetup_join_request", methods={"GET","POST"})
      * @param Meetup $meetup
+     * @param Notification $notification
      * @return RedirectResponse|null
      */
-    public function joinRequest (Meetup $meetup): ?RedirectResponse
+    public function joinRequest (Meetup $meetup, Notification $notification): ?RedirectResponse
     {
 
         $joinRequest = new JoinRequest();
@@ -173,6 +191,7 @@ class MeetupController extends AbstractController
             'success',
             'Your join request has bin sent successfully!'
         );
+        $notification->addNotification(['type' => 'meetupRequest', 'object' => $joinRequest]);
         return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
 
     }
@@ -181,9 +200,10 @@ class MeetupController extends AbstractController
      * @Route( "/{joinRequest}/{status}",name="join_treatment", methods={"GET","POST"})
      * @param JoinRequest $joinRequest
      * @param string $status
+     * @param Notification $notification
      * @return RedirectResponse
      */
-    public function joinTreatment (JoinRequest $joinRequest, string $status): ?RedirectResponse
+    public function joinTreatment (JoinRequest $joinRequest, string $status, Notification $notification): ?RedirectResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $meetup = $joinRequest->getMeetup();
@@ -196,6 +216,8 @@ class MeetupController extends AbstractController
                 'success',
                 'This request was successfully rejected!'
             );
+            $notification->addNotification(['type' => 'treatmentMeetupRequest', 'object' => $joinRequest, 'treatment' => $status]);
+
             return $this->redirectToRoute('meetup_show',['id'=>$joinRequest->getMeetup()->getId()]);
         }
         $maxP = $meetup->getMaxParticipants();
@@ -217,36 +239,55 @@ class MeetupController extends AbstractController
             'success',
             'This request was successfully rejected!'
         );
+        $notification->addNotification(['type' => 'treatmentMeetupRequest', 'object' => $joinRequest, 'treatment' => $status]);
+
         return $this->redirectToRoute('meetup_show',['id'=>$joinRequest->getMeetup()->getId()]);
 
     }
+
     /**
      * @Route( "/{meetup}/{user}/cancel",name="cancel_joining", methods={"GET","POST"})
      * @param Meetup $meetup
      * @param User $user
+     * @param Notification $notification
      * @return RedirectResponse
      */
-    public function cancelJoining (Meetup $meetup , User $user): ?RedirectResponse
+    public function cancelJoining (Meetup $meetup , User $user, Notification $notification): ?RedirectResponse
     {
+        $recipient = $this->getUser() === $user?$meetup->getCreator():$user;
+        $sender = $this->getUser() === $user?$user:$meetup->getCreator();
+
+        $status = $recipient===$user?'removed':'retreat';
+
         $entityManager = $this->getDoctrine()->getManager();
         $meetup->removeParticipant($user);
+
         $entityManager->persist($meetup);
         $entityManager->flush();
         $this->addFlash(
             'success',
             'The user was successfully removed!'
         );
+        $notification->addNotification(['type' => 'cancelJoinParticipant', 'object' => $meetup, 'recipient' => $recipient,'sender'=>$sender,'status'=>$status]);
+
         return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
 
     }
+
     /**
      * @Route( "/{meetup}/{user}/cancelwaiting",name="cancel_joining_waiting", methods={"GET","POST"})
      * @param Meetup $meetup
      * @param User $user
+     * @param Notification $notification
      * @return RedirectResponse
      */
-    public function cancelJoiningWaiting (Meetup $meetup , User $user): ?RedirectResponse
+    public function cancelJoiningWaiting (Meetup $meetup , User $user, Notification $notification): ?RedirectResponse
     {
+        $recipient = $this->getUser() === $user?$meetup->getCreator():$user;
+        $sender = $this->getUser() === $user?$user:$meetup->getCreator();
+
+        $status = $recipient===$user?'removed':'retreat';
+
         $entityManager = $this->getDoctrine()->getManager();
         $meetup->removeWaitlist($user);
         $entityManager->persist($meetup);
@@ -255,6 +296,8 @@ class MeetupController extends AbstractController
             'success',
             'The user was successfully removed!'
         );
+        $notification->addNotification(['type' => 'cancelJoinWaiting', 'object' => $meetup, 'recipient' => $recipient,'sender'=>$sender,'status'=>$status]);
+
         return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
 
     }
@@ -265,7 +308,7 @@ class MeetupController extends AbstractController
      * @param User $user
      * @return RedirectResponse
      */
-    public function addJoiningWaiting (Meetup $meetup , User $user): ?RedirectResponse
+    public function addJoiningWaiting (Meetup $meetup , User $user, Notification $notification): ?RedirectResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $meetup->addParticipant($user);
@@ -276,6 +319,8 @@ class MeetupController extends AbstractController
             'success',
             'The user was successfully added!'
         );
+        $notification->addNotification(['type' => 'transferToParticipant', 'object' => $meetup,'recipient'=>$user]);
+
         return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
 
     }
@@ -327,7 +372,6 @@ class MeetupController extends AbstractController
         $minLng = $session->get('meetup_lng')-0.101008;//8KM
 
         $meetupNearMe = $meetupRepository->findMeetupNearMe($maxLat,$minLat,$maxLng,$minLng);
-        dump($meetupNearMe);
         $results = $paginator->paginate(
         // Doctrine Query, not results
             $meetupNearMe,

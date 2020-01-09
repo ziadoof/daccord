@@ -7,6 +7,7 @@
 <div class="row my-4 participants">
     <div class="col-md-{{col}} border-meetup">
         <h5 class="rosed text-center">Participants</h5>
+        {% if meetup.participants is not empty %}
         {% for user in meetup.participants %}
             <div class=" border-deal user-link">
                 <div class="row">
@@ -39,6 +40,13 @@
                 </div>
             </div>
         {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <span class="blued "><i class="far fa-clock"></i> There is no participant in this meetup</span>
+                </div>
+            </div>
+        {% endif %}
         {% if app.user is not same as(null) %}
             {% if app.user is not same as(meetup.creator) and not meetup.isParticipant(app.user)
                             and not meetup.isWaitlists(app.user) and not meetup.haveJoinRequest(app.user) %}
@@ -93,6 +101,7 @@
     </div>
     <div class="col-md-{{col}}  border-meetup">
         <h5 class="rosed text-center">Waiting list</h5>
+        {% if meetup.waitlists is not empty %}
         {% for user in meetup.waitlists %}
             <div class="border-deal user-link">
                 <div class="row">
@@ -126,15 +135,21 @@
                     {% endif %}
                     {% if app.user is same as(user) %}
                         <div class="col-md-4 cancel-joining-user">
-                            <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Do you really want to leave this meetup ?');">
+                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Do you really want to leave this meetup ?');">
                                 <button class="btn float-right"><i class="fas fa-user-slash mt-1"></i></button>
                             </form>
                         </div>
                     {% endif %}
                 </div>
             </div>
-
         {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <span class="blued "><i class="far fa-clock"></i> There is no participant in the wait list</span>
+                </div>
+            </div>
+        {% endif %}
     </div>
     {% if app.user is same as(meetup.creator) %}
     <div class="col-md-{{col}} border-meetup ">
@@ -148,6 +163,7 @@
                 </div>
             </div>
         {% endif %}
+        {% if meetup.getJoinRequests is not empty %}
         {% for request in meetup.getJoinRequests %}
             <div class="row border-deal mx-2 {% if request.treatment is same as('Pending') %}{{ 'pending' }}{% else %}{{ 'rejected' }}{% endif %}">
                 <div class="col-md-6">
@@ -191,6 +207,13 @@
                 {% endif %}
             </div>
         {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <span class="blued "> <i class="far fa-clock"></i> There is no join requests in this meetup</span>
+                </div>
+            </div>
+        {% endif %}
     </div>
     {% endif %}
 </div>
