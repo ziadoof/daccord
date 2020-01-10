@@ -88,7 +88,8 @@ class MeetupType extends AbstractType
                     'Movies'       => 'Movies',
                     'Informatics'  => 'Informatics',
                     'Lecture'      => 'Lecture',
-                    'Travel'       => 'Travel'
+                    'Travel'       => 'Travel',
+                    'Other'       => 'Other',
                 ),
             ])
             ->add('image',PhotoType::class, array(
