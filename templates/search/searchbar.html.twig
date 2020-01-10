@@ -15,10 +15,10 @@
                                     <a class="nav-link" id="hebergement-tab" data-toggle="tab" href="#hosting" role="tab" aria-controls="hebergement" aria-selected="false">Hosting</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="convoiturage-tab" data-toggle="tab" href="#convoiturage" role="tab" aria-controls="convoiturage" aria-selected="false">Convoiturage</a>
+                                    <a class="nav-link" id="meetup-tab" data-toggle="tab" href="#meetup" role="tab" aria-controls="meetup" aria-selected="false">Meetup</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="sortie-tab" data-toggle="tab" href="#sortie" role="tab" aria-controls="sortie" aria-selected="false">Sortie</a>
+                                    <a class="nav-link" id="convoiturage-tab" data-toggle="tab" href="#convoiturage" role="tab" aria-controls="convoiturage" aria-selected="false">Convoiturage</a>
                                 </li>
                             </ul>
                             <div class="tab-content " id="myTabContent">
@@ -30,6 +30,9 @@
                                 </div>
                                 <div class="tab-pane fade show text-align form-new " id="hosting" role="tabpanel" aria-labelledby="hosting-tab">
                                     {% include "search/templates/hostingSearch.html.twig" %}
+                                </div>
+                                <div class="tab-pane fade show text-align form-new " id="meetup" role="tabpanel" aria-labelledby="meetup-tab">
+                                    {% include "search/templates/meetupSearch.html.twig" %}
                                 </div>
                             </div>
                         </div>

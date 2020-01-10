@@ -336,3 +336,72 @@ fos_elastica:
             listener: ~
             finder: ~
             repository: App\Entity\Search\HostingsRepository
+    app_meetup:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              custom_search_analyzer:
+                type:    custom
+                tokenizer:    standard
+                filter:    [lowercase, asciifolding,standard]
+              custom_index_analyzer:
+                tokenizer:    standard
+                type:    custom
+                filter:    [lowercase, asciifolding,standard,custom_filter]
+            filter:
+              custom_filter:
+                type: edgeNGram
+                side: front
+                min_gram: 2
+                max_gram: 20
+      types:
+        meetup:
+          properties:
+            maxParticipants:
+              type: integer
+            finish:
+              type: boolean
+            title:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            type: ~
+            city:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+                department:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
+                    name: ~
+                    region:
+                      type: nested
+                      properties:
+                        id:
+                          type: integer
+                        name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Meetup\Meetup
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\MeetupRepository

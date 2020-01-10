@@ -61,6 +61,7 @@ class AdController extends AbstractController
             // Items per page
             20
         );
+
         if($user !== null){
             $maxDistance = $user->getMaxDistance();
             $mapx = $user->getMapX();

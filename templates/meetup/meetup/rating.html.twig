@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-md-12 mt-3">
+        {% if rating  %}
+        <h4 class="text-center blued">Rating</h4>
+            <div class="text-center">
+                {% set range = rating.total/rating.numVotes %}
+                {% set total = range|round(2, 'ceil')  %}
+                {% set ceil = total|round(0,('ceil'))  %}
+                {% set floor = total|round(0,('floor'))  %}
+                {% set def =  ceil-floor %}
+                {% set reste = 5 - total %}
+                {% set roundReste = reste|round(0,('floor')) %}
+                <div class="row justify-content-center">
+                    <span class="float-right mt-2 rosed">
+                        {% if  total is not same as(null) and total <=5%}{#rating is not null#}
+                            {% if  def %} {# rating is floot#}
+                                {% if floor %}
+                                    {% for  i in floor ..1%}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                {% endif %}
+                                <i class="fas fa-star-half-alt"></i>
+                                {% if roundReste %}
+                                {% for  i in roundReste..1%}
+                                    <i class="far fa-star"></i>
+                                {% endfor %}
+                            {% endif %}
+                            {% else %}{#rating is integer#}
+                                {% if total>0 %}
+                                    {% for  i in total ..1%}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    {% if reste>0 %}
+                                    {% for  i in reste..1%}
+                                        <i class="far fa-star"></i>
+                                    {% endfor %}
+                                {% endif %}
+                                {% else %} {# rating is 0#}
+                                    {% for  i in 5..1%}
+                                        <i class="far fa-star"></i>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="">
+                <h6 class="text-center blued mt-4" >Comments</h6>
+                <div>
+                    {% for vote in rating.votes %}
+                        <div class="row">
+                            <div class="col-md-6 offset-3 border-respo">
+                                <div class="row border-bottom">
+                                    <div class="col-md-6 my-1">
+                                        <img class="vote-avatar"  src="{{ asset(vote.voter.photoProfile()) }}" alt="voter-image">
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% set reste = 5 - vote.value%}
+                                        <span class="float-right mt-2 blued">
+                               {% if  vote.value is not same as(null)%}
+                                   {% for  i in vote.value ..1%}
+                                       <i class="fas fa-star"></i>
+                                   {% endfor %}
+                                   {% if reste>0 %}
+                                   {% for  i in reste..1%}
+                                       <i class="far fa-star"></i>
+                                   {% endfor %}
+                               {% endif %}
+                               {% else %}
+                                   {% for  i in 5..1%}
+                                       <i class="far fa-star"></i>
+                                   {% endfor %}
+                               {% endif %}
+                            </span>
+                                    </div>
+                                </div>
+                                <div class="row border-bottom">
+                                    <div class="col">
+                                        <p class="my-2 mx-2 meetup-text"> <span class="rosed">Comment : </span>{{ vote.comment }}</p>
+                                    </div>
+                                </div>
+                                <div class="row border-bottom float-right">
+                                    <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <h4 class="text-center blued">There is no rating for this event</h4>
+        {% endif %}
+    </div>
+</div>

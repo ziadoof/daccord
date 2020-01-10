@@ -7,6 +7,8 @@ namespace App\Service;
 use App\Entity\Deal\Deal;
 use App\Entity\DriverRequest;
 use App\Entity\Hosting\HostingRequest;
+use App\Entity\Meetup\JoinRequest;
+use App\Entity\Meetup\Meetup;
 use App\Entity\Notification\NotifiedBy;
 use App\Entity\Rating\Vote;
 use App\Entity\User;
@@ -40,6 +42,67 @@ class Notification
         $type = $options['type'];
         $object = $options['object']??null;
 
+        switch ($type){
+            case 'deal':
+                $this->addDealNotification($object);
+                break;
+            case 'driverRequest':
+                $this->addDriverRequestNotification($object);
+                break;
+            case 'treatmentDriverRequest':
+                $this->addRequestTreatmentNotification($object,$options['treatment']);
+                break;
+            case 'addDriverToDeal':
+                $this->addAddDriverToDealNotification($object);
+                break;
+            case 'semiDoneDeal':
+            case 'doneDeal':
+                $this->addDoneDealNotification($object,$type,$options['status']);
+                break;
+            case 'points':
+                $this->addPointsNotification($options['user'], $options['status'],$options['number']);
+                break;
+            case 'ratingDriver':
+                $this->addRatingDriver($object);
+                break;
+            case 'ratingHosting':
+                $this->addRatingHosting($object);
+                break;
+            case 'hostingRequest':
+                $this->addHostingRequestNotification($object);
+                break;
+            case 'treatmentHostingRequest':
+                $this->addHostingRequestTreatmentNotification($object,$options['treatment']);
+                break;
+            case 'doneHosting':
+                $this->addDoneHostingNotification($object);
+                break;
+            case 'hostingPoints':
+                $this->addPointsHostingNotification($options['user'],$options['number']);
+                break;
+            case 'meetupRequest':
+                $this->addMeetupRequestNotification($object);
+                break;
+            case 'treatmentMeetupRequest':
+                $this->addMeetupRequestTreatmentNotification($object,$options['treatment']);
+                break;
+            case 'cancelJoinParticipant':
+                $this->addMeetupCancelJoinParticipantNotification($object,$options);
+                break;
+            case 'cancelJoinWaiting':
+                $this->addMeetupCancelJoinWaitingNotification($object,$options);
+                break;
+            case 'transferToParticipant':
+                $this->addMeetupTransferToParticipantNotification($object,$options['recipient']);
+                break;
+            case 'meetupComment':
+                $this->addMeetupCommentNotification($object,$options);
+                break;
+            case 'ratingMeetup':
+                $this->addRatingMeetup($object,$options);
+                break;
+        }
+/*
         if($type === 'deal'){
             $this->addDealNotification($object);
         }
@@ -75,7 +138,7 @@ class Notification
         }
         if($type === 'hostingPoints'){
             $this->addPointsHostingNotification($options['user'],$options['number']);
-        }
+        }*/
     }
 
     protected function addDealNotification(Deal $deal): void
@@ -108,7 +171,7 @@ class Notification
             'typeOfNotification'=>'deal',
             'recipient'=>$recipient->getId(),
             'category'=>$category,
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>'/deal/' . $deal->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -141,7 +204,7 @@ class Notification
             'typeOfNotification'=>'driverRequest',
             'recipient'=>$driver->getId(),
             'category'=>$category,
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>'/driver_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -173,7 +236,7 @@ class Notification
             'typeOfNotification'=>'treatmentDriverRequest',
             'recipient'=>$user->getId(),
             'category'=>$category,
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>'/deal/'.$driverRequest->getDeal()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -206,7 +269,7 @@ class Notification
             'typeOfNotification'=>'addDriverToDeal',
             'recipient'=>$driver->getId(),
             'category'=>$category,
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>'/driver_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -414,7 +477,7 @@ class Notification
             'typeOfNotification'=>$typeOfNotification,
             'recipient'=>$firstRecipient->getId(),
             'category'=>$category,
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>$firstLink,
             'notificationId'=>$firstNotificationId,
             'notifiableId'=>$firstNotifiableId,
@@ -430,7 +493,7 @@ class Notification
                 'typeOfNotification'=>$typeOfNotification,
                 'recipient'=>$secondRecipient->getId(),
                 'category'=>$category,
-                'sender'=>$sender->getFirstname(),
+                'sender'=>ucfirst($sender->getFirstname()),
                 'link' =>$secondLink,
                 'notificationId'=>$secondNotificationId,
                 'notifiableId'=>$secondNotifiableId,
@@ -513,7 +576,7 @@ class Notification
             'typeOfNotification'=>'ratingDriver',
             'recipient'=>$vote->getCandidate()->getId(),
             'category'=>'',
-            'sender'=>$vote->getVoter()->getFirstname(),
+            'sender'=>ucfirst($vote->getVoter()->getFirstname()),
             'link' =>'/profile/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -541,7 +604,7 @@ class Notification
             'typeOfNotification'=>'ratingHosting',
             'recipient'=>$vote->getCandidate()->getId(),
             'category'=>'',
-            'sender'=>$vote->getVoter()->getFirstname(),
+            'sender'=>ucfirst($vote->getVoter()->getFirstname()),
             'link' =>'/profile/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -572,7 +635,7 @@ class Notification
             'typeOfNotification'=>'hostingRequest',
             'recipient'=>$hosting->getId(),
             'category'=>'',
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>'/hosting_request/received',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -602,7 +665,7 @@ class Notification
             'typeOfNotification'=>'treatmentHostingRequest',
             'recipient'=>$user->getId(),
             'category'=>'',
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>'/hosting_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -643,7 +706,7 @@ class Notification
             'typeOfNotification'=>'doneHosting',
             'recipient'=>$user->getId(),
             'category'=>'',
-            'sender'=>$sender->getFirstname(),
+            'sender'=>ucfirst($sender->getFirstname()),
             'link' =>$link,
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
@@ -675,6 +738,221 @@ class Notification
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>null,
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addMeetupRequestNotification(JoinRequest $joinRequest)
+    {
+        $recipient = $joinRequest->getMeetup()->getCreator();
+        $sender = $joinRequest->getUser();
+
+        $notification = $this->notificationManager->createNotification('','meetupParticipant','/meetup/'.$joinRequest->getMeetup()->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'meetupRequest','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'meetupRequest',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/meetup/'.$joinRequest->getMeetup()->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage()
+        );
+
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addMeetupRequestTreatmentNotification(JoinRequest $joinRequest,string $treatment)
+    {
+        $recipient = $joinRequest->getUser();
+        $sender = $joinRequest->getMeetup()->getCreator();
+
+        $notification = $this->notificationManager->createNotification($treatment,'meetupParticipant','/meetup/'.$joinRequest->getMeetup()->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'treatmentMeetupRequest','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'treatmentMeetupRequest',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/meetup/'.$joinRequest->getMeetup()->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+            'subject' =>$treatment
+        );
+
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addMeetupCancelJoinParticipantNotification(Meetup $meetup, array $options): void
+    {
+        $recipient = $options['recipient'];
+        $sender = $options['sender'];
+
+        $notification = $this->notificationManager->createNotification($options['status'],'meetupParticipant','/meetup/'.$meetup->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'cancelJoinParticipant','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'cancelJoinParticipant',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/meetup/'.$meetup->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+            'subject' =>$options['status']
+        );
+        $this->pushNotification($pushedNotification);
+
+    }
+
+    private function addMeetupCancelJoinWaitingNotification(Meetup $meetup, array $options): void
+    {
+        $recipient = $options['recipient'];
+        $sender = $options['sender'];
+
+        $notification = $this->notificationManager->createNotification($options['status'],'meetupParticipant','/meetup/'.$meetup->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'cancelJoinWaiting','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'cancelJoinWaiting',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/meetup/'.$meetup->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+            'subject' =>$options['status']
+        );
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addMeetupTransferToParticipantNotification(Meetup $meetup, $recipient)
+    {
+
+        $sender = $meetup->getCreator();
+
+        $notification = $this->notificationManager->createNotification('','participant','/meetup/'.$meetup->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'transferToParticipant','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'transferToParticipant',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/meetup/'.$meetup->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addMeetupCommentNotification(Meetup $meetup, $options): void
+    {
+        $recipients = $options['recipients'];
+        $sender = $options['sender'];
+
+        $notification = $this->notificationManager->createNotification('meetupComment','','/meetup/'.$meetup->getId());
+
+        $this->notificationManager->addNotification($recipients, $notification, true);
+
+        foreach ($recipients as $recipient){
+            $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'meetupComment','');
+            $this->em->persist($notifiedBy);
+        }
+        $this->em->flush();
+
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        foreach ($recipients as $recipient){
+            $pushedNotification = array(
+                'type'=>'notification',
+                'typeOfNotification'=>'meetupComment',
+                'recipient'=>$recipient->getId(),
+                'category'=>'',
+                'sender'=>ucfirst($sender->getFirstname()),
+                'link' =>'/meetup/'.$meetup->getId(),
+                'notificationId'=>$notificationId,
+                'notifiableId'=>$notifiableId,
+                'senderImage'=>$sender->getProfileImage(),
+            );
+            $this->pushNotification($pushedNotification);
+        }
+
+    }
+
+    private function addRatingMeetup(Vote $vote, $options)
+    {
+        $meetup = $options['meetup'];
+
+        $notification = $this->notificationManager->createNotification('ratingMeetup','','/meetup/'.$meetup->getId());
+        $this->notificationManager->addNotification(array($meetup->getCreator()), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $vote->getVoter(), $meetup->getCreator(), 'ratingMeetup','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'ratingMeetup',
+            'recipient'=>$meetup->getCreator()->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($vote->getVoter()->getFirstname()),
+            'link' =>'/meetup/'.$meetup->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$vote->getVoter()->getProfileImage(),
         );
 
 

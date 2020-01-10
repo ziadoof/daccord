@@ -35,10 +35,9 @@ class Rating
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * this variable change when create sortir
+     * @ORM\ManyToOne(targetEntity="App\Entity\Meetup\Meetup")
      */
-    private $event;
+    private $meetup;
 
     /**
      * @ORM\Column(type="float", nullable=false)
@@ -117,17 +116,17 @@ class Rating
     /**
      * @return mixed
      */
-    public function getEvent()
+    public function getMeetup()
     {
-        return $this->event;
+        return $this->meetup;
     }
 
     /**
-     * @param mixed $event
+     * @param mixed $meetup
      */
-    public function setEvent($event): void
+    public function setMeetup($meetup): void
     {
-        $this->event = $event;
+        $this->meetup = $meetup;
     }
 
     /**

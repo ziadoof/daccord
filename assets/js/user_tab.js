@@ -12,10 +12,13 @@ $(document).ready(function(){
             localStorage.setItem('profile_tap','#edit_driver' );
         });
     }
+
     //for save the tab and return to it
     $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
         localStorage.setItem('profile_tap', $(e.target).attr('href'));
     });
+    //
+
     var activeTab = localStorage.getItem('profile_tap');
     if(activeTab){
         $('#user-show a[href="' + activeTab + '"]').tab('show');

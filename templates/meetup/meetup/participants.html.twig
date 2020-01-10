@@ -1,0 +1,311 @@
+{% if not meetup.isFinish() %}
+{% if app.user is same as(meetup.creator) %}
+    {% set col = '4' %}
+ {% else %}
+    {% set col = '6' %}
+ {% endif %}
+<div class="row my-4 participants">
+    <div class="col-md-{{col}} border-meetup">
+        <h5 class="rosed text-center">Participants</h5>
+        {% if meetup.participants is not empty %}
+        {% for user in meetup.participants %}
+            <div class=" border-deal user-link">
+                <div class="row">
+                    <div class="col-md-10">
+                        <a href="{{ path('user_show',{'id':user.id}) }}" >
+                            <div class="row ">
+                                <div class="col  mx-2">
+                                    <img src="{{ user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                    <div class="mt-3 ">
+                                        <span class="blued ml-1">{{ user.firstname|title }} {{ user.lastname|upper }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% if app.user is same as(meetup.creator) %}
+                    <div class="col-md-2 cancel-joining-user">
+                        <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Are you sure you want to remove this user ?');">
+                            <button class="btn"><i class="fas fa-user-slash mt-1"></i></button>
+                        </form>
+                    </div>
+                    {% endif %}
+                    {% if app.user is same as(user) %}
+                        <div class="col-md-2 cancel-joining-user">
+                            <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Do you really want to leave this meetup ?');">
+                                <button class="btn float-right"><i class="fas fa-user-slash mt-1"></i></button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <span class="blued "><i class="far fa-clock"></i> There is no participant in this meetup</span>
+                </div>
+            </div>
+        {% endif %}
+        {% if app.user is not same as(null) %}
+            {% if app.user is not same as(meetup.creator) and not meetup.isParticipant(app.user)
+                            and not meetup.isWaitlists(app.user) and not meetup.haveJoinRequest(app.user) %}
+                {% if meetup.isFull() %}
+                    <div class="row ">
+                        <div class="col-md-8 offset-2">
+                            <div class="mt-3 ">
+                                <a  class="btn btn-warning btn-block disabled" >This meetup is full</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                <div class="row ">
+                    <div class="col-md-8 offset-2">
+                        <div class="mt-3 ">
+                            <a href="" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#joinToMeetup">Join to this meetup</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        {% if app.user is not same as(null) %}
+            {% if  meetup.haveJoinRequest(app.user) %}
+                {% if meetup.isFull() %}
+                    <div class="row ">
+                        <div class="col-md-8 offset-2">
+                            <div class="mt-3 ">
+                                <a  class="btn btn-warning btn-block disabled" >This meetup is full</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if meetup.getJoinRequestStatus(app.user) is same as('Pending') %}
+                    {% set status = 'pending' %}
+                    {% set class = 'warning' %}
+                {% else %}
+                    {% set status = 'rejected' %}
+                    {% set class = 'danger' %}
+                {% endif %}
+                <div class="row ">
+                    <div class="col-md-8 offset-2  border-deal pending-meetup-request  {{ status }}">
+                        <img src="{{ app.user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                        <div class="mt-3 ">
+                            <span class="blued ml-1">{{ app.user.firstname|title }} {{ app.user.lastname|upper }}</span>
+                            <span class="badge badge-{{class}} float-right py-2 px-2">{{ meetup.getJoinRequestStatus(app.user) }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="col-md-{{col}}  border-meetup">
+        <h5 class="rosed text-center">Waiting list</h5>
+        {% if meetup.waitlists is not empty %}
+        {% for user in meetup.waitlists %}
+            <div class="border-deal user-link">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a href="{{ path('user_show',{'id':user.id}) }}" >
+                            <div class="row ">
+                                <div class="col mx-2">
+                                    <img src="{{ user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                    <div class="mt-3 ">
+                                        <span class="blued ml-1">{{ user.firstname|title }} {{ user.lastname|upper }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% if app.user is same as(meetup.creator) %}
+                        {% if  not meetup.participantFull() %}
+                        <div class="col-md-2 joining-user ">
+                            <form method="post" action="{{ path('add_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Are you sure you want to add this user ?');">
+                                <div class="col">
+                                    <button class="btn"><i class="fas fa-user-plus mt-1 float-right"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        {% endif %}
+                        <div class="col-md-2 cancel-joining-user">
+                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Are you sure you want to remove this user ?');">
+                                <button class="btn"><i class="fas fa-user-slash mt-1 "></i></button>
+                            </form>
+                        </div>
+                    {% endif %}
+                    {% if app.user is same as(user) %}
+                        <div class="col-md-4 cancel-joining-user">
+                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Do you really want to leave this meetup ?');">
+                                <button class="btn float-right"><i class="fas fa-user-slash mt-1"></i></button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <span class="blued "><i class="far fa-clock"></i> There is no participant in the wait list</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% if app.user is same as(meetup.creator) %}
+    <div class="col-md-{{col}} border-meetup ">
+        <h5 class="rosed text-center">Requests to join</h5>
+        {% if meetup.isFull() %}
+            <div class="row ">
+                <div class="col-md-8 offset-2">
+                    <div class="my-2 ">
+                        <a  class="btn btn-warning btn-block disabled" >This meetup is full</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if meetup.getJoinRequests is not empty %}
+        {% for request in meetup.getJoinRequests %}
+            <div class="row border-deal mx-2 {% if request.treatment is same as('Pending') %}{{ 'pending' }}{% else %}{{ 'rejected' }}{% endif %}">
+                <div class="col-md-6">
+                    <a href="{{ path('user_show',{'id':request.user.id}) }}" class="user-link">
+                        <div class="row user-link">
+                            <div class="col-md-8">
+                                <img src="{{ request.user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                <div class="mt-3 ">
+                                    <span class="blued ml-1">{{ request.user.firstname|title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% if not request.meetup.isFull() %}
+                    {% if request.treatment is same as('Pending')  %}
+                    <div class="col-md-3 mt-2">
+                        <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Accept'}) }}" onsubmit="return confirm('Are you sure you want to accept this request ?');">
+                            <button class="btn btn-success btn-block">Accept</button>
+                        </form>                </div>
+                    <div class="col-md-3 mt-2">
+                        <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                            <button class="btn btn-danger btn-block">Reject</button>
+                        </form>
+                    </div>
+                    {% else %}
+                        <div class="col-md-6 mt-3">
+                            <span class="badge badge-danger float-right py-2 px-2">Rejected</span>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    {% if request.treatment is same as('Pending')  %}
+                        <div class="col-md-6 mt-3">
+                            <span class="badge badge-warning float-right py-2 px-2">Pending</span>
+                        </div>
+                    {% else %}
+                        <div class="col-md-6 mt-3">
+                            <span class="badge badge-danger float-right py-2 px-2">Rejected</span>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <span class="blued "> <i class="far fa-clock"></i> There is no join requests in this meetup</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% else %}
+    <div class="row my-4 participants">
+        <div class="col-md-6 border-meetup">
+            <h5 class="rosed text-center">Participants</h5>
+            {% for user in meetup.participants %}
+                <div class=" border-deal user-link">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <a href="{{ path('user_show',{'id':user.id}) }}" >
+                                <div class="row ">
+                                    <div class="col  mx-2">
+                                        <img src="{{ user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                        <div class="mt-3 ">
+                                            <span class="blued ml-1">{{ user.firstname|title }} {{ user.lastname|upper }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-6  border-meetup">
+            <h5 class="rosed text-center">Waiting list</h5>
+            {% for user in meetup.waitlists %}
+                <div class="border-deal user-link">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <a href="{{ path('user_show',{'id':user.id}) }}" >
+                                <div class="row ">
+                                    <div class="col mx-2">
+                                        <img src="{{ user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                        <div class="mt-3 ">
+                                            <span class="blued ml-1">{{ user.firstname|title }} {{ user.lastname|upper }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+ <!-- Modal start-->
+ <div class="modal fade bd-example-modal-lg" id="joinToMeetup" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" style="z-index: 9999;">
+     <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <div class="row ml-2">
+                     <h4 class="modal-title " id="myModalLabel">Join to this meetup</h4>
+                 </div>
+             </div>
+             <div class="modal-body">
+                 <div>
+                     <div class="row">
+                         <div class="col-md-4 meetup-form-image">
+                             <img src="{{ meetup.meetupImage()}}" alt="">
+                         </div>
+                         <div class="col-md-6 offset-2">
+                             <div class="">
+                                 <span class="blued">{{ meetup.title }}</span>
+                             </div>
+                             <div class="">
+                                 {{ meetup.place }}
+                             </div>
+                             <div class="">
+                                 {{ meetup.address }}
+                             </div>
+                             <div>
+                                {{ meetup.city.name  }}{{ ' ' }}{{ meetup.city.zipCode}}
+                             </div>
+                         </div>
+                     </div>
+                     <div class="row float-right">
+                         <div class=" ">
+                             <a href="{{ path('meetup_join_request',{'meetup':meetup.id}) }}" class="btn btn-info float-right mb-2 mx-4">Send join request to this meetup</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="">
+                 <div class="modal-footer">
+                     <button  type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
