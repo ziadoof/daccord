@@ -76,7 +76,7 @@ class MeetupController extends AbstractController
                 'success',
                 'Your new meetup was successfully added!'
             );
-            return $this->redirectToRoute('meetup_index');
+            return $this->redirectToRoute('meetup_show',['id'=>$meetup->getId()]);
         }
 
         return $this->render('meetup/meetup/new.html.twig', [
@@ -86,7 +86,7 @@ class MeetupController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="meetup_show", methods={"GET","POST"})
+     * @Route("/{id}", name="meetup_show", methods={"GET","POST"}, options={"expose"=true})
      * @param Request $request
      * @param Meetup $meetup
      * @param RatingRepository $ratingRepository

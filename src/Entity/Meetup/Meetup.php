@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Meetup\MeetupRepository")
+ *
  */
 class Meetup
 {
@@ -483,6 +484,26 @@ class Meetup
     {
         $nP = count($this->getParticipants());
         return $nP === $this->getMaxParticipants();
+    }
+
+    public function serialize():array
+    {
+        $url = '../../assets/images/meetup/';
+        if($this->image === ''|| $this->image === null){
+            $image = $url.'meetup.png';
+        }
+        else{
+            $image = $url.$this->getImage();
+        }
+        return [
+            'id'=> $this->getId(),
+            'title'=> $this->getTitle(),
+            'type'=> $this->getType(),
+            'city'=> $this->getCity()->getName(),
+            'image'=> $image,
+            'finish'=>$this->isFinish(),
+            'start'=>$this->getStartAt()->format('d M Y H:i')
+        ];
     }
 
 }

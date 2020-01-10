@@ -70,10 +70,25 @@ class MeetupType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'required'=>true,
+                'placeholder' => 'Select type of meetup',
                 'choices'   => array(
-                    'Sortir' => 'Sortir',
-                    'Balad' => 'Balad',
-                    'Carde' => 'Carde',
+                    'Sport'        => 'Sport',
+                    'Dance'        => 'Dance',
+                    'Visit'        => 'Visit',
+                    'City tour'    => 'City tour',
+                    'Playing cards'=> 'Playing cards' ,
+                    'Cup'          => 'Cup',
+                    'Hang around'  => 'Hang around',
+                    'Bicycle'      => 'Bicycle',
+                    'Picnic'       => 'Picnic',
+                    'Museum'       => 'Museum',
+                    'Cinema'       => 'Cinema',
+                    'Cooking'      => 'Cooking',
+                    'Music'        => 'Music',
+                    'Movies'       => 'Movies',
+                    'Informatics'  => 'Informatics',
+                    'Lecture'      => 'Lecture',
+                    'Travel'       => 'Travel'
                 ),
             ])
             ->add('image',PhotoType::class, array(

@@ -198,6 +198,55 @@ $(document).on('change', '#hosting_search_department', function () {
     });
 });
 
+$(document).on('change', '#meetup_search_region', function () {
+    let $field = $(this)
+    let $regionField = $('#meetup_search_region')
+    let $form = $field.closest('form')
+    let target = '#' + $field.attr('id').replace('region', 'department')
+    // Les données à envoyer en Ajax
+    let data = {}
+    data[$regionField.attr('name')] = $regionField.val()
+    data[$field.attr('name')] = $field.val()
+    // On soumet les données
+
+    $.post($form.attr('action'), data).then(function (data) {
+        // On récupère le nouveau <select>
+        let $input = $(data).find(target)
+        // On remplace notre <select> actuel
+        $(target).replaceWith($input)
+        $('#meetup_search_city').select2({
+            placeholder: " Select department",
+        });
+    });
+});
+$(document).on('change', '#meetup_search_department', function () {
+    let $field = $(this)
+    let $regionField = $('#meetup_search_region')
+    let $form = $field.closest('form')
+    let target = '#' + $field.attr('id').replace('department', 'city')
+    // Les données à envoyer en Ajax
+    let data = {}
+    data[$regionField.attr('name')] = $regionField.val()
+    data[$field.attr('name')] = $field.val()
+    // On soumet les données
+
+    $.post($form.attr('action'), data).then(function (data) {
+        // On récupère le nouveau <select>
+        let $input = $(data).find(target)
+        // On remplace notre <select> actuel
+        $(target).replaceWith($input)
+        $(target).select2({
+            placeholder: "City or zip code",
+            tage: true,
+            selectOnClose: true,
+            maximumSelectionLength: 8,
+            minimumResultsForSearch: 1,
+            minimumInputLength: 2,
+            selectOnBlur: true
+        });
+    });
+});
+
 $('#hosting_search_languages').select2({
     placeholder: "Languages",
     tage: true,

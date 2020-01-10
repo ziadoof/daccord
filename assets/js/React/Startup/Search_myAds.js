@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ListsAds from "../Components/ListsAds";
 import ListsHosting from "../Components/ListsHosting";
+import ListsMeetup from "../Components/ListsMeetup";
 
 $('#search-offer').submit( function(e) {
     e.preventDefault();
@@ -104,6 +105,28 @@ $('#search-hosting').submit( function(e) {
         window.history.pushState( "","",'/search/hosting/'+ext);
         $('#all').hide();
         ReactDOM.render(<ListsHosting result={response['result']}/>, document.getElementById('searching'));
+
+    }).fail(function(jxh,textmsg,errorThrown){
+        alert('Something went wrong during processing search for hosting!');
+    });
+});
+
+$('#search-meetup').submit( function(e) {
+    e.preventDefault();
+    var url = Routing.generate('add-meetupType');
+    var formSerialize = $(this).serialize();
+
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        url: url,
+        async: true,
+        data:formSerialize,
+    }).done( function(response) {
+        let ext = response['random'];
+        window.history.pushState( "","",'/search/meetup/'+ext);
+        $('#all').hide();
+        ReactDOM.render(<ListsMeetup result={response['result']}/>, document.getElementById('searching'));
 
     }).fail(function(jxh,textmsg,errorThrown){
         alert('Something went wrong during processing search for hosting!');

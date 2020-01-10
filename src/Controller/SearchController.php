@@ -10,6 +10,7 @@ use App\Entity\Location\Department;
 use App\Entity\Location\Region;
 use App\Entity\User;
 use App\Service\Search\FormHostingSearchType;
+use App\Service\Search\FormMeetupSearchType;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
@@ -226,6 +227,75 @@ class SearchController extends AbstractController
             ]);
         }
         return $this->render('search/results/hosting.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/meetup/{id}", name="add-meetupType",methods={"POST","GET"}, options={"expose"=true})
+     * @param FormMeetupSearchType $formMeetupSearchType
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param String $id
+     * @return JsonResponse|Response
+     * @throws \Exception
+     */
+    public function formMeetup(FormMeetupSearchType $formMeetupSearchType, Request $request, PaginatorInterface $paginator, String $id=null)
+    {
+        $random = random_int(9999,99999);
+        $session = new Session();
+        $meetupForm = $formMeetupSearchType->getForm();
+        $meetupForm->handleRequest($request);
+        $serializedResult = [];
+
+        if ($meetupForm->isSubmitted() && $meetupForm->isValid()) {
+            $meetupSearch = $meetupForm->getData();
+            $region = $meetupSearch->getRegion();
+            if($meetupSearch->getType() !== null) {
+                if ($region !== null) {
+
+                    $result = $this->manager->getRepository('App\Entity\Meetup\Meetup')->searchMeetup($meetupSearch);
+
+
+                    foreach ($result as $meetup) {
+                        $serializedResult [] = $meetup->serialize();
+                    }
+                    usort($serializedResult, function($a1, $a2) {
+                        $v1 = strtotime($a2['start']);
+                        $v2 = strtotime($a1['start']);
+                        return $v1 - $v2; // $v2 - $v1 to reverse direction
+                    });
+                    $response = array(
+                        'result' => $serializedResult,
+                        'random' => $random,
+                        'message' => 'succese',
+                    );
+                    //Unlike the demands and offers, they were saved serializedResult in  session instead of result to get the name on the show page
+                    $session->set($random, $serializedResult);
+
+                    return new JsonResponse($response);
+                }
+                return $this->render('search/results/meetup.html.twig');
+            }
+            return $this->render('search/results/meetup.html.twig');
+
+        }
+
+        $result =$session->get($id);
+        if(isset($result)){
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $result,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
+            return $this->render('search/results/meetup.html.twig', [
+                'meetups' => $results
+            ]);
+        }
+        return $this->render('search/results/meetup.html.twig', [
 
         ]);
     }
