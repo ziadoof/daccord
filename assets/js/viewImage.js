@@ -54,3 +54,17 @@ function viewMeetupImage(input) {
     }
 }
 window.viewMeetupImage = viewMeetupImage;
+
+function viewCarpoolImage(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#previewCarpoolImge')
+                .attr('src', e.target.result)
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+window.viewCarpoolImage = viewCarpoolImage;

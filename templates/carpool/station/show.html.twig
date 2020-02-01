@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Station{% endblock %}
+
+{% block body %}
+    <h1>Station</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ station.id }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ station.duration ? station.duration|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Sort</th>
+                <td>{{ station.sort }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('carpool_station_index') }}">back to list</a>
+
+    <a href="{{ path('carpool_station_edit', {'id': station.id}) }}">edit</a>
+
+    {{ include('carpool_station/_delete_form.html.twig') }}
+{% endblock %}

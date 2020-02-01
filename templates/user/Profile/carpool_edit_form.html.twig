@@ -1,0 +1,146 @@
+{% set CarpoolForm = form_CarpoolType.getForm().createView() %}
+    {{ form_start(CarpoolForm, {'attr': {'id': 'carpool_user_edit'}}) }}
+        {% if app.user.carpool %}
+            <div class="fos_user_user_show px-4 py-4">
+                <div class="row ">
+                    <div class="col-md-4 offset-4 btn-group ">
+                        <div class=" carpool-edit ml-2  ">
+                            <a class="">
+                                {{ form_row(CarpoolForm.carImage) }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(CarpoolForm.carBrand) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(CarpoolForm.carColor) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(CarpoolForm.numberOfPassengers) }}
+                        <hr>
+                    </div>
+                </div>
+                <h6 class="text-center blued mb-4">Possibility to</h6>
+                <div class="row ">
+                    <div class="col-md-2 offset-4">
+                        <div class="">
+                            {{ form_row(CarpoolForm.bag) }}
+                        </div>
+                        <div class="">
+                            {{ form_row(CarpoolForm.animal) }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="">
+                            {{ form_row(CarpoolForm.baby) }}
+                        </div>
+                        <div class="">
+                            {{ form_row(CarpoolForm.bankCard) }}
+                        </div>
+                    </div>
+                </div>
+                <h6 class="text-center blued mb-4">I can share</h6>
+                <div class="row">
+                    <div class="col-md-2 offset-4">
+                        <div class="">
+                            {{ form_row(CarpoolForm.conversation) }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="">
+                            {{ form_row(CarpoolForm.music) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-4 offset-4 justify-content-center">
+                    <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                </div>
+                {{ form_end(CarpoolForm) }}
+            </div>
+        {% else %}
+            <div class="fos_user_user_show px-4 py-4">
+                <div class="row ">
+                    <div class="col-md-4 offset-4 mt-5">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h4 class="title-blue my-1 mx-1">Share your car in simple steps</h4>
+                                <p>Registering yourself with the Carpool service will allow you to share your car
+                                    with other people to get them to your same destination
+                                    You can get subscribers if your prices are competitive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4 btn-group ">
+                        <div class=" carpool-edit ml-2  ">
+                            <a class="">
+                                {{ form_row(CarpoolForm.carImage) }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(CarpoolForm.carBrand) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(CarpoolForm.carColor) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(CarpoolForm.numberOfPassengers) }}
+                    </div>
+                </div>
+                <h6 class="text-center blued mb-4">Possibility to</h6>
+                <div class="row ">
+                    <div class="col-md-2 offset-4">
+                        <div class="">
+                            {{ form_row(CarpoolForm.bag) }}
+                        </div>
+                        <div class="">
+                            {{ form_row(CarpoolForm.animal) }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="">
+                            {{ form_row(CarpoolForm.baby) }}
+                        </div>
+                        <div class="">
+                            {{ form_row(CarpoolForm.bankCard) }}
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <h6 class="text-center blued mb-4">I can share</h6>
+                <div class="row">
+                    <div class="col-md-2 offset-4">
+                        <div class="">
+                            {{ form_row(CarpoolForm.conversation) }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="">
+                            {{ form_row(CarpoolForm.music) }}
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="row col-md-4 offset-4 justify-content-center">
+                    <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                </div>
+                {{ form_end(CarpoolForm) }}
+            </div>
+            {{ form_end(CarpoolForm) }}
+        {% endif %}
+

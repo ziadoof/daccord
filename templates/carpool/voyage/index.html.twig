@@ -1,0 +1,61 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}My Voyage{% endblock %}
+
+{% block content %}
+    <h5 class="text-center blued">My voyage</h5>
+<div class="voyag-index">
+     <div class="row">
+         <div class="col-md-2 offset-10 mb-4">
+             <a class="btn btn-block btn-info" href="{{ path('voyage_new',{'type':'first'}) }}">New voyage</a>
+         </div>
+     </div>
+</div>
+    <table class="table small">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>main departure</th>
+                <th>place Main Departure</th>
+                <th>Main arrival</th>
+                <th>place Main Arrival</th>
+                <th>Station departure</th>
+                <th>Station arrival</th>
+                <th>Station price</th>
+                <th> station distance</th>
+                <th> station duration</th>
+                <th> time departure</th>
+                <th> time arrival</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voyage in voyages %}
+            <tr>
+                <td>{{ voyage.date ? voyage.date|date('Y-m-d') : '' }}</td>
+                <td>{{ voyage.time ? voyage.time|date('H:i') : '' }}</td>
+                <td>{{ voyage.mainDeparture }}</td>
+                <td>{{ voyage.placeMainDeparture }}</td>
+                <td>{{ voyage.mainArrival }}</td>
+                <td>{{ voyage.placeMainArrival }}</td>
+                <td>{{ voyage.stationDeparture }}</td>
+                <td>{{ voyage.stationArrival }}</td>
+                <td>{{ voyage.stationPrice }}</td>
+                <td>{{ voyage.stationDistance }}{{ ' Km' }}</td>
+                <td>{{ voyage.fixDuration(voyage.stationDuration ) }}</td>
+                <td>{{ voyage.timeDeparture|date('Y-m-d  H:i') }}</td>
+                <td>{{ voyage.timeArrival|date('Y-m-d  H:i') }}</td>
+
+                <td>
+                    {#<a href="{{ path('carpool_voyage_show', {'id': voyage.id}) }}">show</a>
+                    <a href="{{ path('carpool_voyage_edit', {'id': voyage.id}) }}">edit</a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -58,6 +58,7 @@ class CityRepository extends ServiceEntityRepository
         return $this
             ->createQueryBuilder('c')
             ->where('c.name LIKE :city')
+            ->orWhere('c.zipCode LIKE :city')
             ->setParameter( 'city', "%$city%")
             ->orderBy('c.name')
             ->setMaxResults(20)
@@ -71,7 +72,7 @@ class CityRepository extends ServiceEntityRepository
             ->createQueryBuilder('c')
             ->select('c')
             ->where('c = :id')
-            ->setParameter('id',$$id)
+            ->setParameter('id',$id)
             ->getQuery()
             ->getOneOrNullResult();
     }

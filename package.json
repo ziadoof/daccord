@@ -48,6 +48,9 @@
         "select2": "^4.0.7",
         "semantic-ui-css": "^2.4.1",
         "semantic-ui-react": "^0.88.0",
-        "tail.datetime": "^0.4.13"
+        "symfony-collection": "github:ninsuo/symfony-collection",
+        "tail.datetime": "^0.4.13",
+        "ymaps": "^0.2.1",
+        "ymaps-regionmap": "git+https://github.com/yandex-shri-fx-team/ymaps-regionmap.git"
     }
 }

@@ -18,7 +18,9 @@ final class CityController extends AbstractController
 
     /**
      * @Route("/search-city", name="search_city", defaults={"_format"="json"}, methods={"GET"})
-     *
+     * @param CityRepository $repo
+     * @param Request $request
+     * @return Response
      */
     public function searchAction(CityRepository $repo, Request $request): Response
     {
@@ -40,6 +42,23 @@ final class CityController extends AbstractController
         }
 
         return $this->json($city->getName());
+    }
+
+    /**
+     * @Route("/city-pine/", name="city_pine", methods={"POST"}, options={"expose"=true})
+     * @param CityRepository $repo
+     * @return Response
+     */
+    public function getCityPine(CityRepository $repo): Response
+    {
+
+        if(isset($_POST['id'], $_POST['type'])){
+            if (null === $city = $repo->find($_POST['id'])) {
+                throw $this->createNotFoundException();
+            }
+            return $this->json([$city->getGpsLat(),$city->getGpsLng(),$_POST['type']]);
+        }
+        return $this->json([0,0,'unknown']);
     }
 
 

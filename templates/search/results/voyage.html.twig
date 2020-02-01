@@ -1,0 +1,48 @@
+{% extends "layout_user.html.twig" %}
+{% block content %}
+    {% if voyages is defined %}
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Highway</th>
+            <th>Price</th>
+            <th>Station</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for voyage in voyages %}
+            <tr>
+                <td>{{ voyage.id }}</td>
+                <td>{{ voyage.date ? voyage.date|date('Y-m-d') : '' }}</td>
+                <td>{{ voyage.time ? voyage.time|date('H:i:s') : '' }}</td>
+                <td>{{ voyage.highway ? 'Yes' : 'No' }}</td>
+                <td>{{ voyage.price }}</td>
+                <td>
+                    {% for station in voyage.stations %}
+                        <div class="row">
+                            <span class="blued mr-4">{{ station.city }}{{ '  ==>  ' }}</span>
+
+                            <h6 class="rosed mr-2">arrival</h6>
+                            {% for arrival in station.arrivals %}
+                                {{ arrival.name }}{{ ' , ' }}
+                            {% endfor %}
+                            <h5 class="rosed mr-2">departure</h5>
+                            {% for departure in station.departures %}
+                                {{ departure.name }}{{ ' , ' }}
+                            {% endfor %}
+                            <br>
+                        </div>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        {#<div class="pagination-search row justify-content-center mt-4">
+            <div class="navigation">
+                {{ knp_pagination_render(voyages) }}
+            </div>
+        </div>#}
+    {% endif %}
+{% endblock %}

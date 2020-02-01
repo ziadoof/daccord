@@ -13,6 +13,7 @@ use App\Service\Search\FormHostingSearchType;
 use App\Service\Search\FormMeetupSearchType;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
+use App\Service\Search\FormVoyageSearchType;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -296,6 +297,69 @@ class SearchController extends AbstractController
             ]);
         }
         return $this->render('search/results/meetup.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/carpooling/{id}", name="add-voyageType",methods={"POST","GET"}, options={"expose"=true})
+     * @param FormVoyageSearchType $formVoyageSearchType
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param String $id
+     * @return JsonResponse|Response
+     * @throws \Exception
+     */
+    public function formCarpooling(FormVoyageSearchType $formVoyageSearchType, Request $request, PaginatorInterface $paginator, String $id=null)
+    {
+        $random = random_int(9999,99999);
+        $session = new Session();
+        $voyageForm = $formVoyageSearchType->getForm();
+        $voyageForm->handleRequest($request);
+        $serializedResult = [];
+
+        if ($voyageForm->isSubmitted() && $voyageForm->isValid()) {
+            $voyageSearch = $voyageForm->getData();
+            if($voyageSearch->getDeparture() !== null) {
+
+                    $result = $this->manager->getRepository('App\Entity\Carpool\Voyage')->searchCarpooling($voyageSearch);
+
+                    /*foreach ($result as $hosting) {
+                        $serializedResult [] = $hosting->serialize();
+                    }
+                    $response = array(
+                        'result' => $serializedResult,
+                        'random' => $random,
+                        'message' => 'succese',
+                    );*/
+                    //Unlike the demands and offers, they were saved rerializedResult in  session instead of result to get the name on the show page
+                    /*$session->set($random, $serializedResult);
+
+                    return new JsonResponse($response);*/
+                    return $this->render('search/results/voyage.html.twig', [
+                        'voyages' => $result
+                    ]);
+
+            }
+            return $this->render('search/results/voyage.html.twig');
+
+        }
+
+        /*$result =$session->get($id);
+        if(isset($result)){
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $result,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
+            return $this->render('search/results/hosting.html.twig', [
+                'hostings' => $results
+            ]);
+        }*/
+        return $this->render('search/results/voyage.html.twig', [
 
         ]);
     }

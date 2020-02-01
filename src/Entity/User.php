@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Ads\Ad;
+use App\Entity\Carpool\Carpool;
 use App\Entity\Deal\Deal;
 use App\Entity\Deal\DoneDeal;
 use App\Entity\Hosting\Hosting;
@@ -675,6 +676,11 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
      */
     private $joinRequests;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Carpool\Carpool", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $carpool;
+
 
 
     /**
@@ -848,6 +854,23 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
             if ($joinRequest->getUser() === $this) {
                 $joinRequest->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getCarpool(): ?Carpool
+    {
+        return $this->carpool;
+    }
+
+    public function setCarpool(Carpool $carpool): self
+    {
+        $this->carpool = $carpool;
+
+        // set the owning side of the relation if necessary
+        if ($carpool->getUser() !== $this) {
+            $carpool->setUser($this);
         }
 
         return $this;

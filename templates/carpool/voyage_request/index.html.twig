@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VoyageRequest index{% endblock %}
+
+{% block body %}
+    <h1>VoyageRequest index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voyage_request in voyage_requests %}
+            <tr>
+                <td>{{ voyage_request.id }}</td>
+                <td>{{ voyage_request.status }}</td>
+                <td>{{ voyage_request.description }}</td>
+                <td>
+                    <a href="{{ path('carpool_voyage_request_show', {'id': voyage_request.id}) }}">show</a>
+                    <a href="{{ path('carpool_voyage_request_edit', {'id': voyage_request.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('carpool_voyage_request_new') }}">Create new</a>
+{% endblock %}
