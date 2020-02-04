@@ -35,40 +35,46 @@ class VoyageModel
     private $date;
 
     /**
-     * @ORM\Column(type="time")
-     */
-    private $time;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $highway;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Location\City", inversedBy="voyages")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\City")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $stationDeparture;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location\City")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $stationArrival;
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $mainPrice;
+
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="integer", nullable=true)
+     *
      */
-    private $stationPrice;
+    private $numberOfPlaces;
+
+    private $parent;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     * @return mixed
      */
-    private $passenger;
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent): void
+    {
+        $this->parent = $parent;
+    }
 
     /**
      * @return mixed
@@ -137,22 +143,6 @@ class VoyageModel
     /**
      * @return mixed
      */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param mixed $time
-     */
-    public function setTime($time): void
-    {
-        $this->time = $time;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getHighway()
     {
         return $this->highway;
@@ -201,53 +191,18 @@ class VoyageModel
     /**
      * @return mixed
      */
-    public function getMainPrice()
+    public function getNumberOfPlaces()
     {
-        return $this->mainPrice;
+        return $this->numberOfPlaces;
     }
 
     /**
-     * @param mixed $mainPrice
+     * @param mixed $numberOfPlaces
      */
-    public function setMainPrice($mainPrice): void
+    public function setNumberOfPlaces($numberOfPlaces): void
     {
-        $this->mainPrice = $mainPrice;
+        $this->numberOfPlaces = $numberOfPlaces;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getStationPrice()
-    {
-        return $this->stationPrice;
-    }
-
-    /**
-     * @param mixed $stationPrice
-     */
-    public function setStationPrice($stationPrice): void
-    {
-        $this->stationPrice = $stationPrice;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassenger()
-    {
-        return $this->passenger;
-    }
-
-    /**
-     * @param mixed $passenger
-     */
-    public function setPassenger($passenger): void
-    {
-        $this->passenger = $passenger;
-    }
-
-
-
 
 
 }

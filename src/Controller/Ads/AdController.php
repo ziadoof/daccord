@@ -11,6 +11,7 @@ use App\Form\Ads\DemandType;
 use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
 use App\Repository\Deal\DealRepository;
+use App\Repository\Location\CityRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\PaginatorInterface;
@@ -49,7 +50,7 @@ class AdController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator): Response
+    public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator, CityRepository $cityRepository): Response
     {
         $user = $this->getUser();
         $result = $adRepository->findAll();
@@ -91,7 +92,7 @@ class AdController extends AbstractController
         }
 
         return $this->render('Ads/ad/index.html.twig', [
-            'ads' => $results
+            'ads' => $results,
         ]);
     }
 

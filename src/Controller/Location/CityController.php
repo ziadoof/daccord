@@ -45,6 +45,21 @@ final class CityController extends AbstractController
     }
 
     /**
+     * @Route("/search-one-city", name="search_one_city", defaults={"_format"="json"}, methods={"GET"})
+     * @param CityRepository $repo
+     * @param Request $request
+     * @return Response
+     */
+    public function searchOneAction(CityRepository $repo, Request $request): Response
+    {
+        $qs = $request->query->get('q', $request->query->get('term', ''));
+        $citys = $repo->findOneLike($qs);
+
+
+        return $this->render('user/Profile/searchOne.json.twig', ['citys' => $citys]);
+    }
+
+    /**
      * @Route("/city-pine/", name="city_pine", methods={"POST"}, options={"expose"=true})
      * @param CityRepository $repo
      * @return Response

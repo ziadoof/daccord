@@ -203,7 +203,7 @@ ymaps
             $fakeInput.attr('name', 'fake_' + $fakeInput.attr('name'));
             $this.hide().after($fakeInput);
             $fakeInput.autocomplete({
-                source: $('#url-list').attr('href'),
+                source: $('#url-one-list').attr('href'),
                 autoFocus: true,
                 minLength:2,
                 theme: 'bootstrap',

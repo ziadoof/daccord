@@ -1,48 +1,98 @@
 {% extends "layout_user.html.twig" %}
 {% block content %}
     {% if voyages is defined %}
-        <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Highway</th>
-            <th>Price</th>
-            <th>Station</th>
-        </tr>
-        </thead>
-        <tbody>
+        <div class="row">
         {% for voyage in voyages %}
-            <tr>
-                <td>{{ voyage.id }}</td>
-                <td>{{ voyage.date ? voyage.date|date('Y-m-d') : '' }}</td>
-                <td>{{ voyage.time ? voyage.time|date('H:i:s') : '' }}</td>
-                <td>{{ voyage.highway ? 'Yes' : 'No' }}</td>
-                <td>{{ voyage.price }}</td>
-                <td>
-                    {% for station in voyage.stations %}
+        <div class=" col-md-3 px-md-2 my-2 ad_show">
+            <div id="ad_index" class="ad_index">
+                <a href="{{ path('voyage_show', {'id': voyage['id']}) }}"class="">
+                    <div class="px-2 border-ad">
                         <div class="row">
-                            <span class="blued mr-4">{{ station.city }}{{ '  ==>  ' }}</span>
-
-                            <h6 class="rosed mr-2">arrival</h6>
-                            {% for arrival in station.arrivals %}
-                                {{ arrival.name }}{{ ' , ' }}
-                            {% endfor %}
-                            <h5 class="rosed mr-2">departure</h5>
-                            {% for departure in station.departures %}
-                                {{ departure.name }}{{ ' , ' }}
-                            {% endfor %}
-                            <br>
+                            <div class="col-md-2 mt-1">
+                                <img src="{{ voyage['creatorImage'] }}" alt="" class="cafe-avatar">
+                            </div>
+                            <div class="col-md-7 mt-1">
+                                <span class="d-block rosed small">{{ voyage['creatorName'] }}</span>
+                                <span class="d-block blued small">{{ voyage['creatorPoint'] }}{{ ' Points' }}</span>
+                                <span class="d-block blued small">{{ voyage['creatorPoint'] }} <i class="far fa-star"></i></span>
+                            </div>
+                            <div class="col-md-3 mt-2">
+                                <span class="blued mt-2 mr-4 ">{% if voyage['highway'] %}<i class="fas fa-road"></i>{% endif %}</span>
+                            </div>
                         </div>
-                    {% endfor %}
-                </td>
-            </tr>
+                        <div class="row">
+                            <div class="col my-4">
+                                <div class="row">
+                                    <div class="col-md-2 offset-3 ">
+                                        <span class="float-right mb-1 city-time">{{ voyage['timeDeparture'] }}</span>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <span class="point-departre pl-0"><i class="fas fa-car"></i></span>
+                                        <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical"></i></span>
+                                        <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical"></i></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="rosed city-time">
+                                            {{voyage['departure']}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 offset-5 text-center">
+                                        <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical"></i></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 offset-3 ">
+                                        <span class="float-right mb-1 city-time">
+                                            {{ voyage['timeArrival'] }}
+                                            {% if voyage['arrivalDate'] is same as('.') %}
+                                                <p class="white very-small text-center">{{voyage['arrivalDate']}}</p>
+                                            {% else %}
+                                                <p class="rosed very-small text-center">{{voyage['arrivalDate']}}</p>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <span class="point-departre d-block mb-0"><i class="far fa-dot-circle"></i></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="rosed city-time">
+                                            {{voyage['arrival']}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-6 mt-4 vertical-center">
+                               <span>{{ voyage['departureDate'] }}</span>
+                            </div>
+                            <div class="col-md-6 mt-4 vertical-center">
+                                <span class="float-right">
+                                    {{voyage['price']}}{{ '€' }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
         {% endfor %}
-        {#<div class="pagination-search row justify-content-center mt-4">
+        </div>
+        <div class="pagination-search row justify-content-center mt-4">
             <div class="navigation">
                 {{ knp_pagination_render(voyages) }}
             </div>
-        </div>#}
+        </div>
+    {% else %}
+        <div class=" ">
+            <div class="">
+                <div class="text-center title-blue">
+                    {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+                    <h1> There is no results</h1>
+                </div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}

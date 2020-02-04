@@ -4,6 +4,8 @@ namespace App\Repository\Location;
 
 use App\Entity\Location\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -55,17 +57,45 @@ class CityRepository extends ServiceEntityRepository
      */
     public function findLike(String $city): ?array
     {
-        return $this
-            ->createQueryBuilder('c')
+         return $this
+          ->createQueryBuilder('c')
             ->where('c.name LIKE :city')
             ->orWhere('c.zipCode LIKE :city')
             ->setParameter( 'city', "%$city%")
             ->orderBy('c.name')
-            ->setMaxResults(20)
+            ->setMaxResults(25)
             ->getQuery()
             ->execute()
             ;
     }
+
+    /**
+     * @param string $city
+     *
+     * @return array
+     */
+    public function findOneLike(String $city): ?array
+    {
+
+        $one =$this->createQueryBuilder('c')
+            ->select ('MIN(c.id)')
+            ->andWhere('c.name LIKE :city')
+            ->setParameter( 'city', "%$city%")
+            ->groupBy('c.name')
+            ->orderBy('c.name')
+            ->setMaxResults(15)
+            ->getQuery()
+            ->execute()
+        ;
+        return $this->createQueryBuilder('c')
+            ->where('c.id IN (:one)')
+            ->setParameter( 'one', $one)
+            ->orderBy('c.name')
+            ->setMaxResults(15)
+            ->getQuery()
+            ->execute();
+    }
+
     public function findById($id)
     {
         return $this

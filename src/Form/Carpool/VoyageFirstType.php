@@ -22,7 +22,7 @@ class VoyageFirstType extends AbstractType
         $builder
             ->add('date',DateType::class,[
                 'widget' => 'single_text',
-                'format' => 'YYYY-mm-dd',
+                'format' => 'YYYY-M-dd',
                 'label'=>'Date',
                 'required'=> true,
                 'attr'=>[

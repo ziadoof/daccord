@@ -129,6 +129,80 @@ class Voyage
     private $timeArrival;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $stationPrice;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     */
+    private $passenger;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Carpool\Voyage", inversedBy="children")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\Voyage", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent): void
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getChildren(): ArrayCollection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Voyage $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Voyage $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getTimeDeparture()
@@ -265,20 +339,6 @@ class Voyage
         $this->description = $description;
     }
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $stationPrice;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
-     */
-    private $passenger;
 
 
 
@@ -294,9 +354,12 @@ class Voyage
 
     public function __construct()
     {
+        $this->setParent(null);
         $this->passenger = new ArrayCollection();
         $this->stations = new ArrayCollection();
         $this->voyageRequests = new ArrayCollection();
+        $this->children = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -667,6 +730,46 @@ class Voyage
         } catch (\Exception $e) {
         }
         return $datetime;
+    }
+
+    public function searchSerialize(){
+        if($this->getParent() !== null){
+            $departure = $this->getStationDeparture()->getName();
+            $arrival = $this->getStationArrival()->getName();
+            $price = $this->getStationPrice();
+        }
+        else{
+            $departure = $this->getMainDeparture()->getName();
+            $arrival = $this->getMainArrival()->getName();
+            $price = $this->getMainPrice();
+        }
+
+        if($this->getTimeArrival()->format('d')=== $this->getTimeDeparture()->format('d')){
+            $arrivalDate ='.';
+        }
+        elseif($this->getTimeArrival()->format('d')=== $this->getTimeDeparture()->format('d')+1){
+            $arrivalDate ='Next day';
+        }
+        else{
+            $arrivalDate =$this->getTimeArrival()->format('d-M');
+        }
+
+        return [
+            'id'=>$this->getId(),
+            'creatorName'=>$this->getCreator()->getUser()->getFirstname(),
+            'creatorImage'=>$this->getCreator()->getUser()->photoProfile(),
+            'creatorPoint'=>$this->getCreator()->getPoint(),
+            /*'creatorRating'=>$this->getCreator()->getRating(),*/
+            'highway'=>$this->getHighway(),
+            'timeDeparture'=>$this->getTimeDeparture()->format('H:i'),
+            'timeArrival'=>$this->getTimeArrival()->format('H:i'),
+            'departure'=>$departure,
+            'arrival'=>$arrival,
+            'price'=>$price,
+            'arrivalDate'=>$arrivalDate,
+            'departureDate'=>$this->getTimeDeparture()->format('d M')
+        ];
+
     }
 
 }

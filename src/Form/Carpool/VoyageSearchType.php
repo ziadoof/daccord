@@ -20,30 +20,33 @@ class VoyageSearchType extends AbstractType
         $builder
             ->add('date',DateType::class,[
                 'widget' => 'single_text',
-                'format' => 'YYYY-mm-dd',
+                'format' => 'YYYY-M-dd',
+                'required'=> false,
                 'label'=>'Date',
                 'attr'=>[
                     'autocomplete'=> 'off',
-                    'readonly'=> 'readonly',
+                    /*'readonly'=> 'readonly',*/
                 ]
             ])
             ->add('highway',CheckboxType::class,[
                 'required'=> false,
             ])
-            /*->add('departure', AutocompleteType::class, [
+            ->add('mainDeparture', AutocompleteType::class, [
                 'class' => City::class,
+                'required'=> true,
+                'label'=> 'Departure',
+                'attr'=>[
+                    'autocomplete'=> 'off',
+                ]
+            ])
+            ->add('mainArrival', AutocompleteType::class, [
+                'class' => City::class,
+                'label'=> 'Arrival',
                 'required'=> true,
                 'attr'=>[
                     'autocomplete'=> 'off',
                 ]
             ])
-            ->add('arrival', AutocompleteType::class, [
-                'class' => City::class,
-                'required'=> true,
-                'attr'=>[
-                    'autocomplete'=> 'off',
-                ]
-            ])*/
         ;
     }
 

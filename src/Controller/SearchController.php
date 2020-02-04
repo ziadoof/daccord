@@ -320,32 +320,29 @@ class SearchController extends AbstractController
 
         if ($voyageForm->isSubmitted() && $voyageForm->isValid()) {
             $voyageSearch = $voyageForm->getData();
-            if($voyageSearch->getDeparture() !== null) {
+            if($voyageSearch->getMainDeparture() !== null) {
 
                     $result = $this->manager->getRepository('App\Entity\Carpool\Voyage')->searchCarpooling($voyageSearch);
 
-                    /*foreach ($result as $hosting) {
-                        $serializedResult [] = $hosting->serialize();
+                    foreach ($result as $voyage) {
+                        $serializedResult [] = $voyage->searchSerialize();
                     }
                     $response = array(
                         'result' => $serializedResult,
                         'random' => $random,
                         'message' => 'succese',
-                    );*/
-                    //Unlike the demands and offers, they were saved rerializedResult in  session instead of result to get the name on the show page
-                    /*$session->set($random, $serializedResult);
+                    );
+                //Unlike the demands and offers, they were saved serializedResult in  session instead of result to get the name on the show page
+                    $session->set($random, $serializedResult);
 
-                    return new JsonResponse($response);*/
-                    return $this->render('search/results/voyage.html.twig', [
-                        'voyages' => $result
-                    ]);
+                    return new JsonResponse($response);
 
             }
             return $this->render('search/results/voyage.html.twig');
 
         }
 
-        /*$result =$session->get($id);
+        $result =$session->get($id);
         if(isset($result)){
             $results = $paginator->paginate(
             // Doctrine Query, not results
@@ -355,10 +352,10 @@ class SearchController extends AbstractController
                 // Items per page
                 20
             );
-            return $this->render('search/results/hosting.html.twig', [
-                'hostings' => $results
+            return $this->render('search/results/voyage.html.twig', [
+                'voyages' => $results
             ]);
-        }*/
+        }
         return $this->render('search/results/voyage.html.twig', [
 
         ]);

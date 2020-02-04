@@ -103,8 +103,6 @@ class VoyageController extends AbstractController
             }
             $partialVoyages =$this->createPartialVoyages($newVoyage,$stations);
             $secondForm = $this->createForm(VoyageSecondType::class, $newVoyage);
-            dump($partialVoyages);
-            dump($newVoyage->getStations());
 
             $fields = [];
             foreach ($stations as $i=>$iStation){
@@ -159,6 +157,7 @@ class VoyageController extends AbstractController
                                         $stationVoyage->setHighway($newVoyage->getHighway());
                                         $stationVoyage->setPlaceMainDeparture($newVoyage->getPlaceMainDeparture());
                                         $stationVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
+                                        $stationVoyage->setParent($newVoyage);
 
 
                                         $stationVoyage->setStationDeparture($station->getCity());
@@ -207,6 +206,8 @@ class VoyageController extends AbstractController
                                         $beforeVoyage->setHighway($newVoyage->getHighway());
                                         $beforeVoyage->setPlaceMainDeparture($newVoyage->getPlaceMainDeparture());
                                         $beforeVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
+                                        $beforeVoyage->setParent($newVoyage);
+
 
                                         $beforeVoyage->setStationDeparture($newVoyage->getMainDeparture());
                                         $beforeVoyage->setStationArrival($station->getCity());
@@ -250,6 +251,8 @@ class VoyageController extends AbstractController
                                         $afterVoyage->setHighway($newVoyage->getHighway());
                                         $afterVoyage->setPlaceMainDeparture($newVoyage->getPlaceMainDeparture());
                                         $afterVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
+                                        $afterVoyage->setParent($newVoyage);
+
 
                                         $afterVoyage->setStationDeparture($station->getCity());
                                         $afterVoyage->setStationArrival($newVoyage->getMainArrival());
@@ -367,7 +370,7 @@ class VoyageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="voyage_show", methods={"GET"})
+     * @Route("/{id}", name="voyage_show", methods={"GET"}, options={"expose"=true})
      */
     public function show(Voyage $voyage): Response
     {

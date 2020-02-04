@@ -45,6 +45,11 @@
                 <td>{{ voyage.fixDuration(voyage.stationDuration ) }}</td>
                 <td>{{ voyage.timeDeparture|date('Y-m-d  H:i') }}</td>
                 <td>{{ voyage.timeArrival|date('Y-m-d  H:i') }}</td>
+                <td>
+                    {% if voyage.parent %}
+                    {{ voyage.parent.id }}
+                    {% endif %}
+                </td>
 
                 <td>
                     {#<a href="{{ path('carpool_voyage_show', {'id': voyage.id}) }}">show</a>
