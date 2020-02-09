@@ -26,7 +26,7 @@ class VoyageSecondType extends AbstractType
                 'label'=>false,
                 'attr' => array(
                     'min' => '1',
-                    'max'=>12,
+                    'max'=>5,
                     'placeholder'=>'Number of places'
                 )
             ])

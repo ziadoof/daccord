@@ -3,64 +3,56 @@
 {% block title %}My Voyage{% endblock %}
 
 {% block content %}
-    <h5 class="text-center blued">My voyage</h5>
-<div class="voyag-index">
-     <div class="row">
-         <div class="col-md-2 offset-10 mb-4">
-             <a class="btn btn-block btn-info" href="{{ path('voyage_new',{'type':'first'}) }}">New voyage</a>
-         </div>
-     </div>
-</div>
-    <table class="table small">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>main departure</th>
-                <th>place Main Departure</th>
-                <th>Main arrival</th>
-                <th>place Main Arrival</th>
-                <th>Station departure</th>
-                <th>Station arrival</th>
-                <th>Station price</th>
-                <th> station distance</th>
-                <th> station duration</th>
-                <th> time departure</th>
-                <th> time arrival</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for voyage in voyages %}
-            <tr>
-                <td>{{ voyage.date ? voyage.date|date('Y-m-d') : '' }}</td>
-                <td>{{ voyage.time ? voyage.time|date('H:i') : '' }}</td>
-                <td>{{ voyage.mainDeparture }}</td>
-                <td>{{ voyage.placeMainDeparture }}</td>
-                <td>{{ voyage.mainArrival }}</td>
-                <td>{{ voyage.placeMainArrival }}</td>
-                <td>{{ voyage.stationDeparture }}</td>
-                <td>{{ voyage.stationArrival }}</td>
-                <td>{{ voyage.stationPrice }}</td>
-                <td>{{ voyage.stationDistance }}{{ ' Km' }}</td>
-                <td>{{ voyage.fixDuration(voyage.stationDuration ) }}</td>
-                <td>{{ voyage.timeDeparture|date('Y-m-d  H:i') }}</td>
-                <td>{{ voyage.timeArrival|date('Y-m-d  H:i') }}</td>
-                <td>
-                    {% if voyage.parent %}
-                    {{ voyage.parent.id }}
-                    {% endif %}
-                </td>
-
-                <td>
-                    {#<a href="{{ path('carpool_voyage_show', {'id': voyage.id}) }}">show</a>
-                    <a href="{{ path('carpool_voyage_edit', {'id': voyage.id}) }}">edit</a>#}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <h5 class="text-center blued">My voyage</h5>
+        <div class="voyag-index">
+             <div class="row">
+                 <div class="col-md-2 offset-10 mb-4">
+                     <a class="btn btn-block btn-info" href="{{ path('voyage_new',{'type':'first'}) }}">New voyage</a>
+                 </div>
+             </div>
+            {% if voyages is not empty %}
+                {% for voyage in voyages %}
+                    <div class="row">
+                        <div class="col-md-12 px-2">
+                            <div id="meetup_index" class="meetup_index">
+                                <a href="{{ path('voyage_show', {'id': voyage.id}) }}"class="">
+                                    <div class="px-2 border-deal">
+                                        <div class="row">
+                                            <div class="col-md-3 my-1 image_meetup_index">
+                                                <img class="" src="{{ voyage.creator.photoCarpool() }}" alt="car image"/>
+                                            </div>
+                                            <div class="col-md-8 float-left py-2">
+                                                <div class="">
+                                                    <h4 class="meetup-text blued d-inline">{{ voyage.mainDeparture.name }}</h4>
+                                                    <i class="fas fa-arrow-right rosed d-inline mx-4"></i>
+                                                    <h4 class="meetup-text blued d-inline">{{ voyage.mainArrival.name }}</h4>
+                                                </div>
+                                                <div class="">
+                                                    <span class=" mt-3"><span class="blued">{{ 'Date : ' }}</span>{{ voyage.date|date('d M Y') }}</span>
+                                                </div>
+                                                <div class="">
+                                                    <span class=" mt-3"><span class="blued">{{ 'Time : ' }}</span>{{ voyage.time|date('H:i') }}</span>
+                                                </div>
+                                            </div>
+                                            {% if voyage.isFinish() %}
+                                                <div class="col-md-1">
+                                                    <span class="badge badge-danger float-right mt-2">Finish</span>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="pagination-search row justify-content-center mt-4">
+                    <div class="navigation">
+                        {{ knp_pagination_render(voyages) }}
+                    </div>
+                </div>
+            {% else %}
+                <h1 class="text-center title-blue">You have not voyages</h1>
+            {% endif %}
+        </div>
 {% endblock %}

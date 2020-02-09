@@ -14,5 +14,24 @@
 .white{
     color: white;
 }
+.inf-badge{
+    border-radius: 5px;
+}
+#voyage_request_description{
+    resize: none;
+    height: 9vh;
+}
+.passenger-carpool span i{
+    font-size: 150%;
+}
+.accepted-voyage form i{
+    color: limegreen;
+}
+.rejected-voyage form i{
+    color: red;
+}
+.message-voyage form i{
+    color: deepskyblue;
+}
 
 

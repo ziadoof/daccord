@@ -44,17 +44,22 @@ class VoyageRequest
         return $this->id;
     }
 
-    public function getVoyage(): ?Voyage
+    /**
+     * @return mixed
+     */
+    public function getVoyage()
     {
         return $this->voyage;
     }
 
-    public function setVoyage(?Voyage $voyage): self
+    /**
+     * @param mixed $voyage
+     */
+    public function setVoyage($voyage): void
     {
         $this->voyage = $voyage;
-
-        return $this;
     }
+
 
     public function getSender(): ?User
     {

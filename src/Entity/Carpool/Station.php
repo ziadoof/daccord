@@ -20,7 +20,7 @@ class Station
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Carpool\Voyage")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Carpool\Voyage", inversedBy="stations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $voyage;
@@ -124,16 +124,20 @@ class Station
         return $this;
     }
 
-    public function getCity(): ?City
+    /**
+     * @return mixed
+     */
+    public function getCity()
     {
         return $this->city;
     }
 
-    public function setCity(?City $city): self
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
     {
         $this->city = $city;
-
-        return $this;
     }
 
     /**

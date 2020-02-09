@@ -47,4 +47,15 @@ class VoyageRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findParentByCreator($id)
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.creator = :id')
+            ->andWhere('v.parent is NULL')
+            ->setParameter('id', $id)
+            ->orderBy('v.timeDeparture', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

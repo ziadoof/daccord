@@ -10,6 +10,7 @@ use App\Form\Carpool\VoyageType;
 use App\Repository\Carpool\VoyageRepository;
 use App\Repository\Location\CityRepository;
 use DateInterval;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,12 +34,24 @@ class VoyageController extends AbstractController
     /**
      * @Route("/", name="voyage_index", methods={"GET"})
      * @param VoyageRepository $voyageRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(VoyageRepository $voyageRepository): Response
+    public function index(VoyageRepository $voyageRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $voyages = $voyageRepository->findParentByCreator($this->getUser()->getCarpool()->getId());
+
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $voyages,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            20
+        );
         return $this->render('carpool/voyage/index.html.twig', [
-            'voyages' => $voyageRepository->findAll(),
+            'voyages' => $results,
         ]);
     }
 
@@ -128,6 +141,8 @@ class VoyageController extends AbstractController
                     $dateNewVoyage = $newVoyage->getDate();
                     $newVoyage->setCreator($this->getUser()->getCarpool());
                     $newVoyage->setStationPrice(0);
+                    $newVoyage->setStationDeparture($newVoyage->getMainDeparture());
+                    $newVoyage->setStationArrival($newVoyage->getMainArrival());
                     $newVoyage->setTimeDeparture($this->createTime($dateNewVoyage,$timeNewVoyage,0,0));
                     $newVoyage->setTimeArrival($this->createTime($dateNewVoyage,$timeNewVoyage,$newVoyage->getDuration(),0));
                     $newStations= $newVoyage->getStations()->toArray();
@@ -158,6 +173,7 @@ class VoyageController extends AbstractController
                                         $stationVoyage->setPlaceMainDeparture($newVoyage->getPlaceMainDeparture());
                                         $stationVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
                                         $stationVoyage->setParent($newVoyage);
+                                        $stationVoyage->setNumberOfPlaces($newVoyage->getNumberOfPlaces());
 
 
                                         $stationVoyage->setStationDeparture($station->getCity());
@@ -207,6 +223,8 @@ class VoyageController extends AbstractController
                                         $beforeVoyage->setPlaceMainDeparture($newVoyage->getPlaceMainDeparture());
                                         $beforeVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
                                         $beforeVoyage->setParent($newVoyage);
+                                        $beforeVoyage->setNumberOfPlaces($newVoyage->getNumberOfPlaces());
+
 
 
                                         $beforeVoyage->setStationDeparture($newVoyage->getMainDeparture());
@@ -252,6 +270,8 @@ class VoyageController extends AbstractController
                                         $afterVoyage->setPlaceMainDeparture($newVoyage->getPlaceMainDeparture());
                                         $afterVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
                                         $afterVoyage->setParent($newVoyage);
+                                        $afterVoyage->setNumberOfPlaces($newVoyage->getNumberOfPlaces());
+
 
 
                                         $afterVoyage->setStationDeparture($station->getCity());
@@ -345,7 +365,7 @@ class VoyageController extends AbstractController
         else{
             foreach ($stations as $i => $iValue) {
                 if($i === 0){
-                    $partialVoyages[]= ['from'=>$voyage->getMainDeparture(),'to'=> $iValue->getCity(),
+                    $partialVoyages[]= ['from'=>$voyage->getMainDeparture()->getName(),'to'=> $iValue->getCity()->getName(),
                         'distance'=>$iValue->getDistance(),'duration'=> gmdate('H:i', $iValue->getDuration())];
                 }
                 elseif($i === $count-1){
@@ -355,13 +375,13 @@ class VoyageController extends AbstractController
                         $restDistance+=$stations[$x]->getDistance();
                         $restDuration+=$stations[$x]->getDuration();
                     }
-                    $partialVoyages[]= ['from'=>$stations[$i-1]->getCity(),'to'=> $iValue->getCity(),
+                    $partialVoyages[]= ['from'=>$stations[$i-1]->getCity()->getName(),'to'=> $iValue->getCity()->getName(),
                         'distance'=>$iValue->getDistance(),'duration'=> gmdate('H:i', $iValue->getDuration())];
-                    $partialVoyages[]= ['from'=> $iValue->getCity(),'to'=>$voyage->getMainArrival(),
+                    $partialVoyages[]= ['from'=> $iValue->getCity()->getName(),'to'=>$voyage->getMainArrival()->getName(),
                         'distance'=>$voyage->getDistance()-$restDistance,'duration'=> gmdate('H:i', $voyage->getDuration()-$restDuration)];
                 }
                 else{
-                    $partialVoyages[]= ['from'=>$stations[$i-1]->getCity(),'to'=> $iValue->getCity(),
+                    $partialVoyages[]= ['from'=>$stations[$i-1]->getCity()->getName(),'to'=> $iValue->getCity()->getName(),
                         'distance'=>$iValue->getDistance(),'duration'=> gmdate('H:i', $iValue->getDuration())];
                 }
             }
@@ -374,8 +394,13 @@ class VoyageController extends AbstractController
      */
     public function show(Voyage $voyage): Response
     {
+
+        $smallVoyages = $voyage->getSmallVoyages($voyage->parentVoyage());
+        $availableSeats = $voyage->getAvailableSeats($voyage);
         return $this->render('carpool/voyage/show.html.twig', [
             'voyage' => $voyage,
+            'seats'=>$availableSeats,
+            'smallVoyages'=>$smallVoyages
         ]);
     }
 

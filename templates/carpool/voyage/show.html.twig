@@ -1,38 +1,449 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout_user.html.twig' %}
 
 {% block title %}Voyage{% endblock %}
 
-{% block body %}
-    <h1>Voyage</h1>
+{% block content %}
+    <div class="one-voyage">
+        <div class="row">
+            <div class="col border-deal">
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ path('user_show',{'id':voyage.creator.user.id}) }}">
+                                    <img src="{{ voyage.creator.user.photoProfile() }}" alt="" class="cafe-avatar mr-2">
+                                </a>
+                                <span class="d-block blued small">{{ voyage.creator.user.firstname }}</span>
+                                <span class="d-block blued small">{{ voyage.creator.point }}{{ ' Points' }}</span>
+                                <span class="d-block blued small">{{ voyage.creator.point }}<i class="far fa-star rosed"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <span class="blued float-right mt-3">{{ voyage.timeDeparture|date('d M') }}</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="float-right text-center">
+                                    <span class="blued px-2">{{voyage.stationDeparture.name}}</span>
+                                    {% if voyage.parent %}
+                                    <small class="px-2 d-block">{{voyage.placeStationDeparture}}</small>
+                                    {% else %}
+                                        <small class="px-2 d-block">{{voyage.placeMainDeparture}}</small>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <h3> <i class="fas fa-arrow-right rosed vertical-center"></i></h3>
+                            </div>
+                            <div class="col-md-5">
+                                <h4 class="float-left text-center">
+                                    <span class="blued px-2">{{voyage.stationArrival.name}}</span>
+                                    {% if voyage.parent %}
+                                        <small class="px-2 d-block">{{voyage.placeStationArrival}}</small>
+                                    {% else %}
+                                        <small class="px-2 d-block">{{voyage.placeMainArrival}}</small>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 offset-2  mt-4">
+                                {% if voyage.parent %}
+                                    <h6 class="inf-badge badge-info  py-2 px-2 white d-inline"><i class="fas fa-random"></i> {{ voyage.stationDistance }}{{ ' Km' }}</h6>
+                                    <h6 class="inf-badge badge-info  py-2 px-2 white d-inline"><i class="far fa-clock"></i> {{ voyage.durationToTime(voyage.stationDuration)}}</h6>
+                                    <h6 class="inf-badge badge-warning py-2 px-2 white d-inline"> {{ voyage.stationPrice }} <i class="fas fa-euro-sign"></i></h6>
+                                {% else %}
+                                    <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="fas fa-random"></i> {{ voyage.distance }}{{ ' Km' }}</h6>
+                                    <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="far fa-clock"></i>  {{ voyage.durationToTime(voyage.duration)}}</h6>
+                                    <h6 class="inf-badge badge-warning py-2 px-2 white d-inline"> {{ voyage.mainPrice }}  <i class="fas fa-euro-sign"></i></h6>
+                                {% endif %}
+                                <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="fas fa-running"></i> {{ voyage.timeDeparture|date('H:i') }}</h6>
+                                <h6 class="inf-badge badge-info py-2 px-2 white d-inline"> {{ voyage.timeArrival|date('H:i') }} <i class="fas fa-running"></i></h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 offset-2 mt-4">
+                                <span class="d-block blued">Description</span>
+                                {% if voyage.parent %}
+                                    {{ voyage.parent.description }}
+                                {% else %}
+                                    {{ voyage.description }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 offset-2 mt-4">
+                                <div class="">
+                                    {% if voyage.creator.isPossible %}
+                                        <span class="d-block blued mb-2">Possibility to</span>
+                                        {% if voyage.creator.bag %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-suitcase-rolling"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.animal %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-cat"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.baby %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-baby"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.bankCard %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-money-check-alt"></i></h1></span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="mt-2">
+                                    {% if voyage.creator.isShare %}
+                                        <span class="d-block blued ">We can share</span>
+                                        {% if voyage.creator.conversation %}
+                                            <span class="badge badge-warning py-2 px-2 mr-1"><h1><i class="far fa-comments"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.music %}
+                                            <span class="badge badge-warning py-2 px-2 mr-1"><h1><i class="fas fa-music"></i></h1></span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-5">
+                                <div class="image_meetup_index">
+                                    <img src="{{ voyage.creator.photoCarpool() }}" alt="">
+                                </div>
+                                <div class="mt-1 text-center">
+                                    <h5 class="blued d-inline">{{ voyage.creator.carBrand }}</h5>
+                                    <h5 class="blued d-inline">{{ voyage.creator.carColor }}</h5>
+                                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ voyage.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ voyage.date ? voyage.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Time</th>
-                <td>{{ voyage.time ? voyage.time|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Highway</th>
-                <td>{{ voyage.highway ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ voyage.price }}</td>
-            </tr>
-        </tbody>
-    </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="voyage-map my-4">
+                            {% if voyage.parent %}
+                            {% set parentVoyage = voyage.parent %}
+                            {% else %}
+                            {% set parentVoyage = voyage %}
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-4 offset-4 text-center my-2">
+                                    {% if seats is same as(0) %}
+                                        <h7 class="inf-badge badge-danger py-2 px-2  ">No seats available</h7>
+                                    {% else %}
+                                        <h7 class="inf-badge badge-success py-2 px-2  ">{{ seats }} {{ ' Available seats' }}</h7>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 offset-3 ">
+                                    <span class="float-right mt-1 city-time blued">{{ parentVoyage.timeDeparture|date('H:i') }}</span>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    {% if voyage.mainDeparture is same as(voyage.stationDeparture) %}
+                                    <span class="point-departre pl-0"><i class="fas fa-car rosed"></i></span>
+                                        <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                    {% else %}
+                                        <span class="point-departre pl-0"><i class="far fa-dot-circle blued"></i></span>
+                                        <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical blued"></i></span>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="blued city-time d-block">{{parentVoyage.mainDeparture.name}}</span>
+                                    <div class="mt-2 passenger-carpool">
+                                        {% if smallVoyages %}
+                                            {% for passenger in smallVoyages[0].passenger %}
+                                                {% if passenger is not same as(null) %}
+                                                <span class="rosed"><i class="fas fa-male"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if smallVoyages[0].numberOfPlaces >0 %}
+                                                {% for i in 1..smallVoyages[0].numberOfPlaces %}
+                                                    <span class="blued"><i class="fas fa-male"></i></span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% else %}
+                                            {% for passenger in voyage.passenger %}
+                                                {% if passenger is not same as(null) %}
+                                                    <span class="rosed"><i class="fas fa-male"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                                {% if voyage.numberOfPlaces >0 and (voyage.numberOfPlaces-voyage.passenger|length) is not same as (0)%}
+                                                    {% for i in 1..(voyage.numberOfPlaces-voyage.passenger|length) %}
+                                                        <span class="blued"><i class="fas fa-male"></i></span>
+                                                    {% endfor %}
+                                                {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% set duration = 0 %}
+                            {% for  station in  parentVoyage.stations %}
+                                {%  set duration = duration + station.duration %}
+                                {% set arrivalTime =  parentVoyage.createTime(parentVoyage.date,parentVoyage.time,duration) %}
 
-    <a href="{{ path('carpool_voyage_index') }}">back to list</a>
+                                <div class="row">
+                                    <div class="col-md-2 offset-5 text-center">
+                                        {% if voyage.stationArrival is same as(station.city) %}
+                                            <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                        {% else %}
+                                            {% if arrivalTime <= voyage.timeArrival and  arrivalTime > voyage.timeDeparture %}
+                                                <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                            {% else %}
+                                                <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical blued"></i></span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 offset-3 ">
+                                        <span class="float-right mt-1 city-time blued">
+                            {% if arrivalTime|date('d') is same as (parentVoyage.date|date('d')) %}
+                                {{ arrivalTime|date('H:i') }}<p class="white very-small text-center">.</p>
+                            {% elseif parentVoyage.date|date('d')+1 is same as (arrivalTime|date('d'))%}
+                                {{ arrivalTime|date('H:i') }} <p class="rosed very-small text-center">Next day</p>
+                            {% else %}
+                                {{ arrivalTime|date('H:i') }} <p class="rosed very-small text-center">{{ arrivalTime|date('d M') }}</p>
+                            {% endif %}
+                            </span>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        {% if voyage.stationDeparture is same as(station.city) %}
+                                            <span class="point-departre pl-0"><i class="fas fa-car rosed"></i></span>
+                                        {% elseif voyage.stationArrival is same as(station.city) %}
+                                            <span class="point-departre pl-0"><i class="far fa-dot-circle rosed"></i></span>
+                                        {% else %}
+                                            {% if arrivalTime <= voyage.timeArrival and  arrivalTime > voyage.timeDeparture %}
+                                                <span class="point-departre d-block mb-0"><i class="far fa-dot-circle rosed"></i></span>
+                                            {% else %}
+                                                <span class="point-departre d-block mb-0"><i class="far fa-dot-circle"></i></span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="blued city-time d-block">{{station.city.name}}</span>
+                                        <div class="passenger-carpool mt-2">
+                                            {% for passenger in smallVoyages[station.sort].passenger %}
+                                                {% if passenger is not same as(null) %}
+                                                    <span class="rosed"><i class="fas fa-male"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if smallVoyages[station.sort].numberOfPlaces >0 %}
+                                                {% for i in 1..smallVoyages[station.sort].numberOfPlaces %}
+                                                    <span class="blued"><i class="fas fa-male"></i></span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 offset-5 text-center">
+                                        {% if voyage.stationDeparture is same as(station.city) %}
+                                            <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                        {% else %}
+                                            {% if arrivalTime < voyage.timeArrival and  arrivalTime > voyage.timeDeparture %}
+                                                <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                            {% else %}
+                                                <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical blued"></i></span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="row">
+                                <div class="col-md-2 offset-5 text-center">
+                                    {% if voyage.mainArrival is same as(voyage.stationArrival) %}
+                                        <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                    {% else %}
+                                        <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical blued"></i></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 offset-3 ">
+                                    {% set mainArrivalTime =  parentVoyage.createTime(parentVoyage.date,parentVoyage.time,parentVoyage.duration) %}
+                                    <span class="float-right mt-1 city-time blued">
+                        {% if mainArrivalTime|date('d') is same as (parentVoyage.date|date('d')) %}
+                            {{ mainArrivalTime|date('H:i') }}<p class="white very-small text-center">.</p>
+                        {% elseif parentVoyage.date|date('d')+1  is same as (mainArrivalTime|date('d'))%}
+                            {{ mainArrivalTime|date('H:i') }} <p class="rosed very-small text-center">Next day</p>
+                        {% else %}
+                            {{ mainArrivalTime|date('H:i') }}<p class="rosed very-small text-center">{{ mainArrivalTime|date('d M') }}</p>
+                        {% endif %}
+                        </span>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    {% if voyage.mainArrival is same as(voyage.stationArrival) %}
+                                        <span class="point-departre pl-0"><i class="far fa-dot-circle rosed"></i></span>
+                                    {% else %}
+                                        <span class="point-departre pl-0"><i class="far fa-dot-circle blued"></i></span>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="blued city-time">{{parentVoyage.mainArrival.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if app.user  and app.user is not same as (voyage.creator.user) %}{#and not joined#}
+            <div class="row pt-2 border-deal">
+            {#user not joined#}
+                {% if voyage.isPassenger(app.user) %}
+                    {# Joined #}
+                    <span>Joined</span>
+                {% else %}
+                    {% if voyage.haveRequest(app.user) %}{#pending or rijected#}
+                        <span>have request</span>
+                    {% else %}
+                        {% if not voyage.isClosedVoyage %}
+                            <div class="col text-center my-4 white">
+                                <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">Join request</a>
+                            </div>
+                        {% else %}
+                            <div class="col text-center my-4 white">
+                                <span class="badge badge-danger py-2 px-2"><h6>Close voyage</h6></span>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% elseif not app.user %}
+            <div class="row pt-2 border-deal">
+                {#visitor#}
+                <div class="col text-center my-4 white">
+                    <a data-toggle="modal" data-target="#login" class="btn btn-info ">Log in to Join</a>
+                </div>
+            </div>
+        {% endif %}
 
-    <a href="{{ path('carpool_voyage_edit', {'id': voyage.id}) }}">edit</a>
+        {% if app.user is same as (voyage.creator.user) and  not voyage.parent %}
+        <div class="row pt-2 border-deal">
+            {#creator#}
+            {% if voyage.getAllVoyageRequests() %}
+            <div class="col-md-5  py-2">
+                <h5 class="blued text-center">Passengers</h5>
+                {% for passenger in voyage.getAllVoyageRequests() %}
+                    {% if passenger.status is same as('Accepted') %}
+                        <div class="row">
+                            <div class="col-md-10 offset-1 border-deal">
+                                <div class="row">
+                                    <div class="col-md-3 text-center">
+                                        <a href="{{ path('user_show',{'id': passenger.sender.id}) }}" >
+                                            <div class="btn-group">
+                                                <img src="{{ passenger.sender.photoProfile() }}" alt="profile photo" class="cafe-avatar my-2">
+                                                <span class="blued ml-1 mt-3">{{ passenger.sender.firstname|title }} {{ passenger.sender.lastname|upper }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 text-center my-2">
+                                        <span class="blued">{{ passenger.voyage.stationDeparture.name }}</span>
+                                        <h6> <i class="fas fa-arrow-right rosed"></i></h6>
+                                        <span class="blued">{{ passenger.voyage.stationArrival.name }}</span>
+                                    </div>
+                                    <div class="col-md-3 mt-4">
+                                        <div class="btn-group ">
+                                            <div class=" cancel-joining-user my-1 message-voyage ">
+                                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                    <button class="btn" >
+                                                        <input type="hidden" name="user" value="{{ passenger.sender.id }}">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            {#delete passenger#}
+                                            <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':passenger.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                                                    <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-5 offset-2  py-2">
+                <h5 class="blued text-center">Join requests</h5>
+                {% for request in voyage.getAllVoyageRequests() %}
+                    {% if request.status is same as('Pending') %}
+                        <div class="row">
+                            <div class="col-md-10 offset-1 border-deal">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <a href="{{ path('user_show',{'id': request.sender.id}) }}" >
+                                            <div class="btn-group">
+                                                <img src="{{ request.sender.photoProfile() }}" alt="profile photo" class="cafe-avatar my-2">
+                                                <span class="blued ml-1 mt-3">{{ request.sender.firstname|title }} {{ request.sender.lastname|upper }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5 text-center my-2">
+                                        <span class="blued">{{ request.voyage.stationDeparture.name }}</span>
+                                        <h6> <i class="fas fa-arrow-right rosed"></i></h6>
+                                        <span class="blued">{{ request.voyage.stationArrival.name }}</span>
+                                    </div>
+                                    <div class="col-md-4 mt-4">
+                                        <div class="btn-group ">
+                                            <div class=" cancel-joining-user my-1 message-voyage ">
+                                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                    <button class="btn" >
+                                                        <input type="hidden" name="user" value="{{ request.sender.id }}">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class=" cancel-joining-user my-1 accepted-voyage ">
+                                                <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm('Do you really want to accept this request ?');">
+                                                    <button class="btn "><i class="fas fa-check-circle "></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                                                    <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% else %}
+                <div class="col my-4 mx-2 text-center">
+                    <span class=" blued">There are no requests for this <span class="rosed">voyage</span> yet</span>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
 
-    {{ include('carpool_voyage/_delete_form.html.twig') }}
+
+
+    <div class="modal fade bd-example-modal-lg mt-4" id="voyage-request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    {{ render(controller('App\\Controller\\Carpool\\VoyageRequestController::new',{ 'voyage': voyage.id  })) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {#{{ include('carpool_voyage/_delete_form.html.twig') }}#}
 {% endblock %}

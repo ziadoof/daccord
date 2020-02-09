@@ -277,4 +277,13 @@ class Carpool
         }
         return '/assets/images/carpool/'.$this->getCarImage();
     }
+
+    public function isPossible(): bool
+    {
+        return $this->getAnimal() || $this->getBag() || $this->getBaby() || $this->getBankCard();
+    }
+    public function isShare(): bool
+    {
+        return $this->getMusic()||$this->getConversation();
+    }
 }

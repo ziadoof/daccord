@@ -143,6 +143,15 @@ class Voyage
      */
     private $passenger;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\VoyageRequest", mappedBy="voyage", orphanRemoval=true)
+     */
+    private $voyageRequests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\Station", mappedBy="voyage",cascade={"persist"})
+     */
+    private $stations;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Carpool\Voyage", inversedBy="children")
@@ -154,53 +163,15 @@ class Voyage
      */
     private $children;
 
-    /**
-     * @return mixed
-     */
-    public function getParent()
+
+    public function __construct()
     {
-        return $this->parent;
+        $this->passenger = new ArrayCollection();
+        $this->stations = new ArrayCollection();
+        $this->voyageRequests = new ArrayCollection();
+        $this->children = new ArrayCollection();
+
     }
-
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent): void
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getChildren(): ArrayCollection
-    {
-        return $this->children;
-    }
-
-    public function addChild(Voyage $child): self
-    {
-        if (!$this->children->contains($child)) {
-            $this->children[] = $child;
-            $child->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChild(Voyage $child): self
-    {
-        if ($this->children->contains($child)) {
-            $this->children->removeElement($child);
-            // set the owning side to null (unless already changed)
-            if ($child->getParent() === $this) {
-                $child->setParent(null);
-            }
-        }
-
-        return $this;
-    }
-
 
     /**
      * @return mixed
@@ -339,29 +310,6 @@ class Voyage
         $this->description = $description;
     }
 
-
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\VoyageRequest", mappedBy="voyage", orphanRemoval=true)
-     */
-    private $voyageRequests;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Carpool\Station",cascade={"persist"})
-     */
-    private $stations;
-
-    public function __construct()
-    {
-        $this->setParent(null);
-        $this->passenger = new ArrayCollection();
-        $this->stations = new ArrayCollection();
-        $this->voyageRequests = new ArrayCollection();
-        $this->children = new ArrayCollection();
-
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -432,6 +380,8 @@ class Voyage
         }
 
         return $this;
+        /*$this->passenger[] = $passenger;
+        return $this;*/
     }
 
     public function removePassenger(User $passenger): self
@@ -662,6 +612,57 @@ class Voyage
         $this->placeStationArrival = $placeStationArrival;
     }
 
+    public function parentVoyage()
+    {
+        if($this->parent !== null){
+            return $this->parent;
+        }
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(self $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(self $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function serializer(): array
     {
         $stations = $this->getStations()->toArray();
@@ -771,5 +772,205 @@ class Voyage
         ];
 
     }
+
+    public function durationToTime($duration){
+        if ($duration/60 <60) {
+            return gmdate(('i'),$duration).' Minutes';
+        }
+
+        if($duration/60/60<24) {
+            return gmdate(('H\h i'),$duration).' Minutes';
+        }
+
+        return gmdate(('d \Day H\h i'),$duration).' Minutes';
+    }
+    public function isFinish(){
+        $now = new \DateTime('now');
+        return $now > $this->getTimeArrival();
+    }
+
+    public function getAllVoyageRequests(): array
+    {
+        $requests = $this->getVoyageRequests()->toArray();
+        if($this->getParent() === null){
+            $children = $this->getChildren()->toArray();
+            foreach ($children as $child){
+                if(!empty($child->getVoyageRequests()->toArray())){
+                    foreach ($child->getVoyageRequests() as $voyageRequest){
+                        $requests[]= $voyageRequest;
+                    }
+                }
+            }
+        }
+
+        return $requests;
+    }
+
+
+    public function getAllPassengers(): array
+    {
+        $allPassengers = [];
+        $passengers = $this->getPassenger()->toArray();
+        foreach ($passengers as $passenger){
+            $allPassengers[]=['voyage'=>$this,'passenger'=>$passenger];
+        }
+
+        if($this->getParent() === null){
+            $children = $this->getChildren()->toArray();
+            foreach ($children as $child){
+                if(!empty($child->getPassenger()->toArray())){
+                    foreach ($child->getPassenger()->toArray() as $childPassenger){
+                        $allPassengers[]=['voyage'=>$child,'passenger'=>$childPassenger];
+                    }
+                }
+            }
+        }
+        return $allPassengers;
+    }
+
+    public function isPassenger(User $user): bool
+    {
+        return in_array($user, $this->getPassenger()->toArray(), true);
+    }
+    public function haveRequest(User $user){
+
+        foreach ($this->getVoyageRequests()->toArray() as $request){
+            if($request->getSender()===$user &&($request->getStatus()==='Pending' || $request->getStatus()==='Rejected')){
+                return $request;
+            }
+        }
+        return false;
+    }
+
+    public function isClosedVoyage(): bool
+    {
+        // if one or more small voyage closed return true
+        if($this->parent === null){
+            $children = $this->getChildren()->toArray();
+            if(empty($children)){
+                $numberOfPlaces = $this->getNumberOfPlaces();
+                $passengers = count($this->getPassenger()->toArray());
+                return $passengers === $numberOfPlaces;
+            }
+            foreach ($children as $child){
+                $numberOfPlaces = $this->getNumberOfPlaces();
+                $passengers = count($child->getPassenger()->toArray());
+                if($passengers === $numberOfPlaces){
+                    return true;
+                    break;
+                }
+            }
+            return false;
+        }
+
+        $smallVoyages=$this->getSmallVoyages($this);
+        if(!empty($smallVoyages)){
+            foreach ($smallVoyages as $smallVoyage){
+                $numberOfPlaces = $smallVoyage->getParent()->getNumberOfPlaces();
+                $passengers = count($smallVoyage->getPassenger()->toArray());
+                if($passengers === $numberOfPlaces){
+                    return true;
+                    break;
+                }
+            }
+            return false;
+        }
+
+        $numberOfPlaces = $this->getParent()->getNumberOfPlaces();
+        $passengers = count($this->getPassenger()->toArray());
+        return $passengers === $numberOfPlaces;
+    }
+
+
+    //test
+    //return all small voyage between voyage departure and voyage arrival
+    public function getSmallVoyages(Voyage $voyage): array
+    {
+        $voyageRelated= $this->getVoyageRelated($voyage);
+        $departureCites=[$voyage->getStationDeparture()->getId()];
+        foreach ($voyageRelated as $oneVoyage){
+            $departureCites[]=$oneVoyage;
+        }
+        $children = $voyage->parentVoyage()->getChildren()->toArray();
+        $smallVoyages=[];
+        for($i=0;$i<count($departureCites)-1;$i++){
+            foreach ($children as $child){
+                if($child->getStationDeparture()->getId()===$departureCites[$i] && $child->getStationArrival()->getid() === $departureCites[$i+1]){
+                    $smallVoyages[]=$child;
+                }
+            }
+        }
+        return$smallVoyages;
+    }
+
+    //return all cities id that th voyage well passe
+    public function getVoyageRelated(Voyage $voyage): array
+    {
+
+        $allCity = [$voyage->parentVoyage()->getMainDeparture()->getId()];
+        foreach ($voyage->parentVoyage()->getStations() as $station){
+            $allCity[]=$station->getCity()->getId();
+        }
+        $allCity[]=$voyage->parentVoyage()->getMainArrival()->getId();
+
+        $departure = 0;
+        $arrival = 0;
+        foreach ($allCity as $key=>$city){
+            if($voyage->getStationDeparture()->getId()=== $city){
+                $departure = $key;
+            }
+            if($voyage->getStationArrival()->getId()=== $city){
+                $arrival = $key;
+            }
+        }
+        $citesRelated = [];
+        foreach ($allCity as $key=>$city){
+            if($key >$departure && $key<=$arrival ){
+                $citesRelated []=$city;
+            }
+        }
+        if(!empty($citesRelated)){
+            return $citesRelated;
+        }
+        return [];
+
+    }
+
+    public function getAvailableSeats(Voyage $voyage){
+
+        $smallVoyages = $this->getSmallVoyages($voyage);
+        $numberOfPlaces = $voyage->parentVoyage()->getNumberOfPlaces();
+        $list =[];
+
+        foreach ($smallVoyages as $smallVoyage){
+            $class=[];
+            for($i=1;$i<=$numberOfPlaces;$i++){
+                $class[]= true;
+            }
+            $passengers = $smallVoyage->getPassenger();
+            foreach ($passengers as $passenger){
+                if($passenger){
+                    array_unshift($class,false);
+                    array_pop($class);
+                }
+            }
+            $list[]=$class;
+        }
+        $num=[];
+        foreach ($list as $classes) {
+            $int = 0;
+            foreach ($classes as $item){
+                if($item){
+                    $int++;
+                }
+            }
+            $num[]=$int;
+        }
+        if(!empty($num)){
+            return min($num);
+        }
+        return $voyage->getNumberOfPlaces();
+    }
+    //end test
 
 }
