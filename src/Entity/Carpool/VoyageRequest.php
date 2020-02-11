@@ -35,9 +35,25 @@ class VoyageRequest
     private $status;
 
     /**
+     * @ORM\Column(type="integer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $numberOfSeats;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * VoyageRequest constructor.
+     *
+     */
+    public function __construct()
+    {
+        $this->status = 'Pending';
+        $this->numberOfSeats = 1;
+    }
 
     public function getId(): ?int
     {
@@ -96,4 +112,21 @@ class VoyageRequest
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberOfSeats()
+    {
+        return $this->numberOfSeats;
+    }
+
+    /**
+     * @param mixed $numberOfSeats
+     */
+    public function setNumberOfSeats($numberOfSeats): void
+    {
+        $this->numberOfSeats = $numberOfSeats;
+    }
+
 }

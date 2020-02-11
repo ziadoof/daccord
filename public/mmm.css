@@ -33,5 +33,12 @@
 .message-voyage form i{
     color: deepskyblue;
 }
-
+.voyage-map-time span{
+    position: absolute;
+    right: 0;
+}
+.voyage-map-item{
+    position: absolute;
+    top: auto;
+}
 

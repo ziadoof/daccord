@@ -4,6 +4,7 @@ namespace App\Controller\Carpool;
 
 use App\Entity\Carpool\Voyage;
 use App\Entity\Carpool\VoyageRequest;
+use App\Entity\User;
 use App\Form\Carpool\VoyageRequestType;
 use App\Repository\Carpool\VoyageRepository;
 use App\Repository\Carpool\VoyageRequestRepository;
@@ -19,15 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class VoyageRequestController extends AbstractController
 {
-    /**
-     * @Route("/", name="carpool_voyage_request_index", methods={"GET"})
-     */
-    public function index(VoyageRequestRepository $voyageRequestRepository): Response
-    {
-        return $this->render('carpool/voyage_request/index.html.twig', [
-            'voyage_requests' => $voyageRequestRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new/{voyage}", name="voyage_request_new", methods={"GET","POST"})
@@ -41,7 +33,6 @@ class VoyageRequestController extends AbstractController
         $voyageRequest = new VoyageRequest();
         $voyageRequest->setVoyage($voyage);
         $voyageRequest->setSender($this->getUser());
-        $voyageRequest->setStatus('Pending');
         $form = $this->createForm(VoyageRequestType::class, $voyageRequest);
         $form->handleRequest($request);
 
@@ -73,7 +64,7 @@ class VoyageRequestController extends AbstractController
      *
      * @return RedirectResponse
      */
-    public function voyageTreatment (VoyageRequest $voyageRequest, string $status, VoyageRepository $repository, Notification $notification): RedirectResponse
+    public function voyageTreatment (VoyageRequest $voyageRequest, string $status, Notification $notification): RedirectResponse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $voyage = $voyageRequest->getVoyage();
@@ -91,6 +82,7 @@ class VoyageRequestController extends AbstractController
             return $this->redirectToRoute('voyage_show',['id'=>$voyage->parentVoyage()->getId()]);
         }
 
+        $seats = $voyageRequest->getNumberOfSeats();
         $smallVoyage= $voyage->getSmallVoyages($voyageRequest->getVoyage());
         if(!empty($smallVoyage)){
             foreach ($smallVoyage as $oneVoyage){
@@ -122,7 +114,7 @@ class VoyageRequestController extends AbstractController
             foreach ($voyage->parentVoyage()->getChildren() as $child) {
                 foreach ($voyagesRelated as $cityId) {
                     if ($child->getStationArrival()->getId() === $cityId) {
-                        $child->setNumberOfPlaces($child->getNumberOfPlaces() - 1);
+                        $child->setNumberOfPlaces($child->getNumberOfPlaces() - $seats);
                         $entityManager->persist($child);
                     }
                 }
@@ -143,6 +135,60 @@ class VoyageRequestController extends AbstractController
     }
 
     /**
+     * @Route("/remove/passenger/{voyageRequest}", name="remove_passenger", methods={"POST"})
+     * @param VoyageRequest $voyageRequest
+     * @param User $passenger
+     * @return Response
+     */
+    public function remove_passenger(VoyageRequest $voyageRequest): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $voyage = $voyageRequest->getVoyage();
+        $passenger= $voyageRequest->getSender();
+        $seats = $voyage->getPassengerSeats($passenger);
+        $smallVoyage= $voyage->getSmallVoyages($voyage);
+        if(!empty($smallVoyage)){
+            foreach ($smallVoyage as $oneVoyage){
+                    $oneVoyage->removePassenger($passenger);
+                    $entityManager->persist($oneVoyage);
+            }
+        }
+        //if voyage not small => have minimum 1 station or farther voyage
+        if(!in_array($voyage, $smallVoyage, true)){
+            //have minimum 1 station
+            if ($voyage->getParent()){
+                $voyage->removePassenger($passenger);
+            }
+            //farther voyage
+            else{
+                $voyage->removePassenger($passenger);
+            }
+        }
+
+        $voyagesRelated = $voyage->getVoyageRelated($voyage);
+        if(!empty($voyagesRelated)) {
+            foreach ($voyage->parentVoyage()->getChildren() as $child) {
+                foreach ($voyagesRelated as $cityId) {
+                    if ($child->getStationArrival()->getId() === $cityId) {
+                        $child->setNumberOfPlaces($child->getNumberOfPlaces() +$seats);
+                        $entityManager->persist($child);
+                    }
+                }
+            }
+        }
+
+            $entityManager->remove($voyageRequest);
+            $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'This passenger was successfully removed!'
+            );
+
+
+        return $this->redirectToRoute('voyage_show',['id'=>$voyageRequest->getVoyage()->parentVoyage()->getId()]);
+    }
+
+    /**
      * @Route("/{id}", name="carpool_voyage_request_delete", methods={"DELETE"})
      */
     public function delete(Request $request, VoyageRequest $voyageRequest): Response
@@ -151,8 +197,12 @@ class VoyageRequestController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($voyageRequest);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Your request was successfully deleted!'
+            );
         }
 
-        return $this->redirectToRoute('carpool_voyage_request_index');
+        return $this->redirectToRoute('voyage_show',['id'=>$voyageRequest->getVoyage()->parentVoyage()->getId()]);
     }
 }
