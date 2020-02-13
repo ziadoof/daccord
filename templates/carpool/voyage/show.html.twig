@@ -10,7 +10,7 @@
                     <div class="col-md-6 mt-2">
                         <div class="row">
                             <div class="col-md-4">
-                                <a href="{{ path('user_show',{'id':voyage.creator.user.id}) }}">
+                                <a href="{{ path('carpool_show',{'id':voyage.creator.id}) }}">
                                     <img src="{{ voyage.creator.user.photoProfile() }}" alt="" class="cafe-avatar mr-2">
                                 </a>
                                 <span class="d-block blued small">{{ voyage.creator.user.firstname }}</span>
@@ -76,6 +76,14 @@
                                 {% endif %}
                             </div>
                         </div>
+                        {% if voyage.highway %}
+                        <div class="row">
+                            <div class="col my-2 text-center">
+                                <span class="blued d-block"><i class="fas fa-road"></i></span>
+                                <span class="rosed"> This voyage uses the highway </span>
+                            </div>
+                        </div>
+                        {% endif %}
                         <div class="row">
                             <div class="col-md-6 offset-2 mt-4">
                                 <div class="">
@@ -124,10 +132,10 @@
                             <div class="row">
                                 <div class="col-md-5  text-center my-2">
                                     {% if app.user is not same as(voyage.creator.user) %}
-                                        {% if seats is same as(0) %}
+                                        {% if voyage.availableSeats is same as(0) %}
                                             <h7 class="inf-badge badge-danger py-2 px-2  ">No seats available</h7>
                                         {% else %}
-                                            <h7 class="inf-badge badge-success py-2 px-2  ">{{ seats }}{% if seats >1 %}{{ ' Available seats' }}{% else %}{{ ' Available seat' }}{% endif %}</h7>
+                                            <h7 class="inf-badge badge-success py-2 px-2  ">{{ voyage.availableSeats }}{% if voyage.availableSeats >1 %}{{ ' Available seats' }}{% else %}{{ ' Available seat' }}{% endif %}</h7>
                                         {% endif %}
                                     {% endif %}
                                 </div>
@@ -284,9 +292,15 @@
                         {% endfor %}
                     {% else %}
                         {% if not voyage.isClosedVoyage %}
+                            {% if not voyage.isPartOfAllPassenger(app.user) %}
                             <div class="col text-center my-4 white">
                                 <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">Join request</a>
                             </div>
+                            {% else %}
+                            <div class="col text-center my-4 white">
+                                <span class="badge badge-danger py-2 px-2"><h6>You are a passenger on this or part of this voyage</h6></span>
+                            </div>
+                            {% endif %}
                         {% else %}
                             <div class="col text-center my-4 white">
                                 <span class="badge badge-danger py-2 px-2"><h6>Close voyage</h6></span>
@@ -384,7 +398,7 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                            {% if not request.voyage.isClosedVoyage and  request.numberOfSeats <= request.voyage.getAvailableSeats(request.voyage) %}
+                                            {% if not request.voyage.isClosedVoyage and  request.numberOfSeats <= request.voyage.getAvailableSeats() and not voyage.isPartOfAllPassenger(request.sender)  %}
                                                 <div class=" cancel-joining-user my-1 accepted-voyage ">
                                                     <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm('Do you really want to accept this request ?');">
                                                         <button class="btn "><i class="fas fa-check-circle "></i></button>

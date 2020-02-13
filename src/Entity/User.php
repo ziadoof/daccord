@@ -170,6 +170,28 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
      */
     private $driverRequests;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\VoyageRequest", mappedBy="sender")
+     */
+    private $voyageRequests;
+
+    /**
+     * @return mixed
+     */
+    public function getVoyageRequests()
+    {
+        return $this->voyageRequests;
+    }
+
+    /**
+     * @param mixed $voyageRequests
+     */
+    public function setVoyageRequests($voyageRequests): void
+    {
+        $this->voyageRequests = $voyageRequests;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

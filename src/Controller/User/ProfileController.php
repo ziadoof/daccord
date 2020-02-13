@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\User;
 
+use App\Entity\Carpool\Carpool;
 use App\Entity\Driver;
 use App\Events\Events;
 use App\Form\DriverType;
@@ -355,5 +356,17 @@ class ProfileController extends BaseProController
 
         ]);
 
+    }
+
+    /**
+     * @Route("carpool/{id}", name="carpool_show", methods={"GET"})
+     * @param Carpool $carpool
+     * @return Response
+     */
+    public function showCarpool(Carpool $carpool): Response
+    {
+        return $this->render('user/Carpool/carpool_show.html.twig', [
+            'carpool' => $carpool,
+        ]);
     }
 }

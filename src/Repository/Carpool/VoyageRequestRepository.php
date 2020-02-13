@@ -47,4 +47,15 @@ class VoyageRequestRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findVoyageByUser($userId)
+    {
+        return $this->createQueryBuilder('vr')
+            ->select('(vr.voyage)')
+            ->andWhere('vr.sender = :userId')
+            ->setParameter('userId', $userId)
+            ->orderBy('vr.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

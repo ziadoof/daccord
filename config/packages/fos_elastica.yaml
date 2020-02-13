@@ -413,6 +413,8 @@ fos_elastica:
               type: date
             numberOfPlaces:
               type: integer
+            availableSeats:
+              type: integer
             highway:
               type: boolean
             parent:

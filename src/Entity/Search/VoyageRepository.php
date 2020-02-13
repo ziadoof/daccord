@@ -13,7 +13,8 @@ class VoyageRepository extends Repository
 {
 
 
-    public function searchCarpooling(VoyageModel $search){
+    public function searchCarpooling(VoyageModel $search): array
+    {
 
         $bool = new BoolQuery();
 
@@ -239,6 +240,14 @@ class VoyageRepository extends Repository
                 $gpsStationShold->addMust($dateMatch);
 
             }
+
+            //search in available seats
+            $seatsMatch = new Query\Range();
+            $seatsMatch->addField('availableSeats',['gte' => 1, 'lte' => 12]);
+            $mainShold->addMust($seatsMatch);
+            $stationShold->addMust($seatsMatch);
+            $gpsMainShold->addMust($seatsMatch);
+            $gpsStationShold->addMust($seatsMatch);
 
             $bool->addShould($mainShold);
             $bool->addShould($stationShold);

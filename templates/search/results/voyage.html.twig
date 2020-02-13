@@ -62,13 +62,24 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-8 offset-2">
+                                        <span class="badge badge-info mt-1 btn-block">
+                                            <h7>
+                                                {{voyage['seats']}}
+                                                {% if voyage['seats']>1 %}Seats {% else %} Seat{% endif %}
+                                                available
+                                            </h7>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row ">
-                            <div class="col-md-6 mt-4 vertical-center">
+                            <div class="col-md-6 mt-3 vertical-center">
                                <span>{{ voyage['departureDate'] }}</span>
                             </div>
-                            <div class="col-md-6 mt-4 vertical-center">
+                            <div class="col-md-6 mt-3 vertical-center">
                                 <span class="float-right">
                                     {{voyage['price']}}{{ '€' }}
                                 </span>

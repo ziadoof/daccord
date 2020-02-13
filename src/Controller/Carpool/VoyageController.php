@@ -8,6 +8,7 @@ use App\Form\Carpool\VoyageFirstType;
 use App\Form\Carpool\VoyageSecondType;
 use App\Form\Carpool\VoyageType;
 use App\Repository\Carpool\VoyageRepository;
+use App\Repository\Carpool\VoyageRequestRepository;
 use App\Repository\Location\CityRepository;
 use DateInterval;
 use Knp\Component\Pager\PaginatorInterface;
@@ -40,7 +41,20 @@ class VoyageController extends AbstractController
      */
     public function index(VoyageRepository $voyageRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $voyages = $voyageRepository->findParentByCreator($this->getUser()->getCarpool()->getId());
+        $user = $this->getUser();
+        $voyageRequestsPassenger = $user->getVoyageRequests()->toArray();
+        $voyagesPassenger = [];
+        foreach ($voyageRequestsPassenger as $voyageRequest){
+            $voyagesPassenger[]=$voyageRequest->getVoyage();
+        }
+        dump($voyagesPassenger);
+
+        if($user->getCarpool()){
+            $voyagesOrganized = $voyageRepository->findParentByCreator($this->getUser()->getCarpool()->getId());
+            $voyages = array_merge($voyagesPassenger, $voyagesOrganized);
+        }else{
+            $voyages =  $voyagesPassenger;
+        }
 
         $results = $paginator->paginate(
         // Doctrine Query, not results
@@ -145,6 +159,8 @@ class VoyageController extends AbstractController
                     $newVoyage->setStationArrival($newVoyage->getMainArrival());
                     $newVoyage->setTimeDeparture($this->createTime($dateNewVoyage,$timeNewVoyage,0,0));
                     $newVoyage->setTimeArrival($this->createTime($dateNewVoyage,$timeNewVoyage,$newVoyage->getDuration(),0));
+                    $newVoyage->setAvailableSeats($newVoyage->getNumberOfPlaces());
+
                     $newStations= $newVoyage->getStations()->toArray();
 
                     $priceToArrival = 0;
@@ -174,6 +190,7 @@ class VoyageController extends AbstractController
                                         $stationVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
                                         $stationVoyage->setParent($newVoyage);
                                         $stationVoyage->setNumberOfPlaces($newVoyage->getNumberOfPlaces());
+                                        $stationVoyage->setAvailableSeats($newVoyage->getNumberOfPlaces());
 
 
                                         $stationVoyage->setStationDeparture($station->getCity());
@@ -224,6 +241,7 @@ class VoyageController extends AbstractController
                                         $beforeVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
                                         $beforeVoyage->setParent($newVoyage);
                                         $beforeVoyage->setNumberOfPlaces($newVoyage->getNumberOfPlaces());
+                                        $beforeVoyage->setAvailableSeats($newVoyage->getNumberOfPlaces());
 
 
 
@@ -271,7 +289,7 @@ class VoyageController extends AbstractController
                                         $afterVoyage->setPlaceMainArrival($newVoyage->getPlaceMainArrival());
                                         $afterVoyage->setParent($newVoyage);
                                         $afterVoyage->setNumberOfPlaces($newVoyage->getNumberOfPlaces());
-
+                                        $afterVoyage->setAvailableSeats($newVoyage->getNumberOfPlaces());
 
 
                                         $afterVoyage->setStationDeparture($station->getCity());
@@ -396,10 +414,8 @@ class VoyageController extends AbstractController
     {
 
         $smallVoyages = $voyage->getSmallVoyages($voyage->parentVoyage());
-        $availableSeats = $voyage->getAvailableSeats($voyage);
         return $this->render('carpool/voyage/show.html.twig', [
             'voyage' => $voyage,
-            'seats'=>$availableSeats,
             'smallVoyages'=>$smallVoyages
         ]);
     }
@@ -417,4 +433,6 @@ class VoyageController extends AbstractController
 
         return $this->redirectToRoute('carpool_voyage_index');
     }
+
+
 }

@@ -24,7 +24,7 @@ class VoyageRequest
     private $voyage;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="voyageRequests")
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;

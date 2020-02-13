@@ -93,10 +93,32 @@ class Voyage
     private $mainPrice;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      *
      */
     private $numberOfPlaces;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     *
+     */
+    private $availableSeats;
+
+    /**
+     * @return mixed
+     */
+    public function getAvailableSeats()
+    {
+        return $this->availableSeats;
+    }
+
+    /**
+     * @param mixed $availableSeats
+     */
+    public function setAvailableSeats($availableSeats): void
+    {
+        $this->availableSeats = $availableSeats;
+    }
 
     /**
      *  @ORM\Column(type="integer", nullable=true)
@@ -273,9 +295,6 @@ class Voyage
         $this->stationDuration = $stationDuration;
     }
 
-
-
-
     /**
      * @return mixed
      */
@@ -291,8 +310,6 @@ class Voyage
     {
         $this->numberOfPlaces = $numberOfPlaces;
     }
-
-
 
     /**
      * @return mixed
@@ -768,7 +785,8 @@ class Voyage
             'arrival'=>$arrival,
             'price'=>$price,
             'arrivalDate'=>$arrivalDate,
-            'departureDate'=>$this->getTimeDeparture()->format('d M')
+            'departureDate'=>$this->getTimeDeparture()->format('d M'),
+            'seats'=>$this->getAvailableSeats()
         ];
 
     }
@@ -832,6 +850,18 @@ class Voyage
     {
         return in_array($user, $this->getPassenger()->toArray(), true);
     }
+
+    public function isPartOfAllPassenger(User $user): bool
+    {
+        $allPassenger = [];
+        foreach ($this->parentVoyage()->getChildren() as $child){
+            foreach ($child->getPassenger()->toArray() as $passenger){
+                $allPassenger [] = $passenger;
+            }
+        }
+        return in_array($user, $allPassenger, true);
+    }
+
     public function haveRequest(User $user){
 
         foreach ($this->getVoyageRequests()->toArray() as $request){
@@ -903,8 +933,8 @@ class Voyage
     {
         $voyageRelated= $this->getVoyageRelated($voyage);
         $departureCites=[$voyage->getStationDeparture()->getId()];
-        foreach ($voyageRelated as $oneVoyage){
-            $departureCites[]=$oneVoyage;
+        foreach ($voyageRelated as $cityId){
+            $departureCites[]=$cityId;
         }
         $children = $voyage->parentVoyage()->getChildren()->toArray();
         $smallVoyages=[];
@@ -951,7 +981,7 @@ class Voyage
 
     }
 
-    public function getAvailableSeats(Voyage $voyage){
+/*    public function getAvailableSeats(Voyage $voyage){
 
         $smallVoyages = $this->getSmallVoyages($voyage);
         $numberOfPlaces = $voyage->parentVoyage()->getNumberOfPlaces();
@@ -988,7 +1018,7 @@ class Voyage
             return min($num);
         }
         return $voyage->getNumberOfPlaces();
-    }
+    }*/
 
     public function getVoyageMap(): array
     {
@@ -997,40 +1027,71 @@ class Voyage
         $arrival = array_pop($voyageRelated) ;
         $stations = $parentVoyage->getStations()->toArray();
         $smallVoyages = $this->getSmallVoyages($this->parentVoyage());
+        if(!empty( $smallVoyages)){
+            $firstPassengers = [];
+
+            foreach ($smallVoyages[0]->getPassenger() as $passenger){
+                $firstPassengers [] = ['user' => $passenger->photoProfile(),'seats'=>$this->getPassengerSeats($passenger)];
+            }
+
+            $voyageMap [] = ['time'=>$smallVoyages[0]->getTimeDeparture(),'city'=>$smallVoyages[0]->getStationDeparture()->getName(),
+                'departure'=>($this->getStationDeparture() === $smallVoyages[0]->getStationDeparture()),
+                'arrival'=>false,
+                'station'=>false,
+                'passenger'=>$firstPassengers,
+                'first'=> true,
+                'last'=> false,
+                'availableSeats'=>/*$this->getAvailableSeats($smallVoyages[0])*/$smallVoyages[0]->getAvailableSeats()
+            ];
+
+            foreach ($stations as $station){
+                $listPassengers =[];
+                foreach ($smallVoyages[$station->getSort()]->getPassenger() as $passenger){
+                    $listPassengers [] = ['user' => $passenger->photoProfile(),'seats'=>$this->getPassengerSeats($passenger)];
+                }
+                $voyageMap[] = ['time'=>$smallVoyages[$station->getSort()]->getTimeDeparture(),'city'=>$smallVoyages[$station->getSort()]->getStationDeparture()->getName(),
+                    'departure'=>($this->getStationDeparture() === $smallVoyages[$station->getSort()]->getStationDeparture()),
+                    'arrival'=>($this->getStationArrival() === $station->getCity()),
+                    'station'=>(in_array($station->getCity()->getId(),$voyageRelated,true)),
+                    'passenger'=>$listPassengers,
+                    'first'=>false,
+                    'last'=>false,
+                    'availableSeats'=>/*$this->getAvailableSeats($smallVoyages[$station->getSort()])*/$smallVoyages[$station->getSort()]->getAvailableSeats()
+                ];
+            }
+
+            $voyageMap [] = ['time'=>$parentVoyage->getTimeArrival(),'city'=>$parentVoyage->getStationArrival()->getName(),
+                'departure'=>false,
+                'arrival'=>($this->getStationArrival() === $parentVoyage->getStationArrival()),
+                'station'=>false,
+                'passenger'=>false,
+                'first'=>false,
+                'last'=>true,
+                'availableSeats'=>false
+
+            ];
+            return $voyageMap;
+        }
+
         $firstPassengers = [];
-        foreach ($smallVoyages[0]->getPassenger() as $passenger){
+
+        foreach ($this->getPassenger() as $passenger){
             $firstPassengers [] = ['user' => $passenger->photoProfile(),'seats'=>$this->getPassengerSeats($passenger)];
         }
 
-        $voyageMap [] = ['time'=>$smallVoyages[0]->getTimeDeparture(),'city'=>$smallVoyages[0]->getStationDeparture()->getName(),
-            'departure'=>($this->getStationDeparture() === $smallVoyages[0]->getStationDeparture()),
+        $voyageMap [] = ['time'=>$this->getTimeDeparture(),'city'=>$this->getStationDeparture()->getName(),
+            'departure'=>true,
             'arrival'=>false,
             'station'=>false,
             'passenger'=>$firstPassengers,
             'first'=> true,
             'last'=> false,
-            'availableSeats'=>$this->getAvailableSeats($smallVoyages[0])
+            'availableSeats'=>$this->getAvailableSeats()
         ];
 
-        foreach ($stations as $station){
-            $listPassengers =[];
-            foreach ($smallVoyages[$station->getSort()]->getPassenger() as $passenger){
-                $listPassengers [] = ['user' => $passenger->photoProfile(),'seats'=>$this->getPassengerSeats($passenger)];
-            }
-            $voyageMap[] = ['time'=>$smallVoyages[$station->getSort()]->getTimeDeparture(),'city'=>$smallVoyages[$station->getSort()]->getStationDeparture()->getName(),
-                'departure'=>($this->getStationDeparture() === $smallVoyages[$station->getSort()]->getStationDeparture()),
-                'arrival'=>($this->getStationArrival() === $station->getCity()),
-                'station'=>(in_array($station->getCity()->getId(),$voyageRelated,true)),
-                'passenger'=>$listPassengers,
-                'first'=>false,
-                'last'=>false,
-                'availableSeats'=>$this->getAvailableSeats($smallVoyages[$station->getSort()])
-            ];
-        }
-
-        $voyageMap [] = ['time'=>$parentVoyage->getTimeArrival(),'city'=>$parentVoyage->getStationArrival()->getName(),
+        $voyageMap [] = ['time'=>$this->getTimeArrival(),'city'=>$this->getStationArrival()->getName(),
             'departure'=>false,
-            'arrival'=>($this->getStationArrival() === $parentVoyage->getStationArrival()),
+            'arrival'=>true,
             'station'=>false,
             'passenger'=>false,
             'first'=>false,
@@ -1046,11 +1107,12 @@ class Voyage
         $voyageRequests = $this->parentVoyage()->getAllVoyageRequests();
         $numberOfSeats = 0;
         foreach ($voyageRequests as $request){
-            if ($request->getStatus()==='Accepted' && $request->getSender()===$passenger){
+            if ($request->getStatus()==='Accepted' && $request->getSender()===$passenger ){
                 $numberOfSeats = $request->getNumberOfSeats();
             }
         }
         return $numberOfSeats;
     }
+
 
 }

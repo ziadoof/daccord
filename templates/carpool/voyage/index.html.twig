@@ -1,5 +1,4 @@
 {% extends "layout_user.html.twig" %}
-
 {% block title %}My Voyage{% endblock %}
 
 {% block content %}
@@ -21,24 +20,45 @@
                                             <div class="col-md-3 my-1 image_meetup_index">
                                                 <img class="" src="{{ voyage.creator.photoCarpool() }}" alt="car image"/>
                                             </div>
-                                            <div class="col-md-8 float-left py-2">
-                                                <div class="">
-                                                    <h4 class="meetup-text blued d-inline">{{ voyage.mainDeparture.name }}</h4>
-                                                    <i class="fas fa-arrow-right rosed d-inline mx-4"></i>
-                                                    <h4 class="meetup-text blued d-inline">{{ voyage.mainArrival.name }}</h4>
-                                                </div>
-                                                <div class="">
-                                                    <span class=" mt-3"><span class="blued">{{ 'Date : ' }}</span>{{ voyage.date|date('d M Y') }}</span>
-                                                </div>
-                                                <div class="">
-                                                    <span class=" mt-3"><span class="blued">{{ 'Time : ' }}</span>{{ voyage.time|date('H:i') }}</span>
+                                            <div class="col-md-9  py-2">
+                                                <div class="row">
+                                                    <div class="col-md-11">
+                                                        <div class="">
+                                                            <h4 class="meetup-text blued d-inline">{{ voyage.stationDeparture.name }}</h4>
+                                                            <i class="fas fa-arrow-right rosed d-inline mx-4"></i>
+                                                            <h4 class="meetup-text blued d-inline">{{ voyage.stationArrival.name }}</h4>
+                                                        </div>
+                                                        <div class="">
+                                                            <span class=" mt-3"><span class="blued">{{ 'Date : ' }}</span>{{ voyage.timeDeparture|date('d M Y') }}</span>
+                                                        </div>
+                                                        <div class="">
+                                                            <span class=" mt-3"><span class="blued">{{ 'Time : ' }}</span>{{ voyage.timeDeparture|date('H:i') }}</span>
+                                                        </div>
+                                                        <div class="mt-1">
+                                                            <img src="{{ voyage.creator.user.photoProfile() }}" alt="" class="cafe-avatar mr-2">
+                                                            <span class="d-block blued small">{{ voyage.creator.user.firstname }}</span>
+                                                            <span class="d-block blued small">{{ voyage.creator.point }}{{ ' Points' }}</span>
+                                                            <span class=" blued small">{{ voyage.creator.point }}<i class="far fa-star rosed"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                    {% if  voyage.isFinish() %}
+                                                        <span class="badge badge-danger mt-1 btn-block"><h7>Finish</h7></span>
+                                                    {% endif %}
+                                                    {% if voyage.getAvailableSeats(voyage) > 0 %}
+                                                        <span class="badge badge-info float-right">
+                                                            <h7>
+                                                                {{voyage.getAvailableSeats(voyage) }}
+                                                                {% if voyage.getAvailableSeats(voyage)>1 %}Seats {% else %} Seat{% endif %}
+                                                                available
+                                                            </h7>
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="badge badge-danger float-right"><h7>Closed Voyage</h7></span>
+                                                    {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {% if voyage.isFinish() %}
-                                                <div class="col-md-1">
-                                                    <span class="badge badge-danger float-right mt-2">Finish</span>
-                                                </div>
-                                            {% endif %}
                                         </div>
                                     </div>
                                 </a>

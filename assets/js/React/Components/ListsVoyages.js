@@ -52,6 +52,15 @@ class ListsVoyages extends React.Component {
         return (<p className="rosed very-small text-center">{arrivalDate}</p>);
 
     }
+    getSeats(seats) {
+        if(seats > 1){
+            return (
+                <span className="badge badge-info mt-1 btn-block"><h7>{seats} Seats available</h7></span>
+            );
+        }
+        return (<span className="badge badge-info mt-1 btn-block"><h7>{seats} Seat available</h7></span>);
+
+    }
     renderResult(items){
 
         return items.map((result) => {
@@ -68,6 +77,7 @@ class ListsVoyages extends React.Component {
             const price = result.price;
             const arrivalDate = result.arrivalDate;
             const departureDate = result.departureDate;
+            const seats = result.seats;
 
             let url = Routing.generate('voyage_show', {'id': id});
 
@@ -111,27 +121,32 @@ class ListsVoyages extends React.Component {
                                         </div>
                                         <div className="row">
                                             <div className="col-md-2 offset-3 ">
-                                        <span className="float-right mb-1 city-time">
-                                            {timeArrival}
-                                            {this.isArrivalDate(arrivalDate)}
-                                        </span>
+                                                <span className="float-right mb-1 city-time">
+                                                    {timeArrival}
+                                                    {this.isArrivalDate(arrivalDate)}
+                                                </span>
                                             </div>
                                             <div className="col-md-2 text-center">
                                                 <span className="point-departre d-block mb-0"><i className="far fa-dot-circle"></i></span>
                                             </div>
                                             <div className="col-md-4">
-                                        <span className="rosed city-time">
-                                            {arrival}
-                                        </span>
+                                                <span className="rosed city-time">
+                                                    {arrival}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-8 offset-2">
+                                                {this.getSeats(seats)}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="row ">
-                                    <div className="col-md-6 mt-4 vertical-center">
+                                    <div className="col-md-6 mt-3 vertical-center">
                                         <span>{departureDate}</span>
                                     </div>
-                                    <div className="col-md-6 mt-4 vertical-center">
+                                    <div className="col-md-6 mt-3 vertical-center">
                                 <span className="float-right">
                                     {price} €
                                 </span>

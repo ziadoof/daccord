@@ -59,7 +59,6 @@ class VoyageRequestController extends AbstractController
      *
      * @param VoyageRequest $voyageRequest
      * @param string $status
-     * @param VoyageRepository $repository
      * @param Notification $notification
      *
      * @return RedirectResponse
@@ -86,40 +85,43 @@ class VoyageRequestController extends AbstractController
         $smallVoyage= $voyage->getSmallVoyages($voyageRequest->getVoyage());
         if(!empty($smallVoyage)){
             foreach ($smallVoyage as $oneVoyage){
-                if($oneVoyage->getNumberOfPlaces()>0){
+                if($oneVoyage->getAvailableSeats()>0){
                     $oneVoyage->addPassenger($voyageRequest->getSender());
                     $entityManager->persist($oneVoyage);
                 }
 
             }
         }
-        //if voyage not small => have minimum 1 station or farther voyage
         if(!in_array($voyageRequest->getVoyage(), $smallVoyage, true)){
-            //have minimum 1 station
-            if ($voyageRequest->getVoyage()->getParent()){
-                if($voyageRequest->getVoyage()->getAvailableSeats($voyageRequest->getVoyage()) >0) {
-                    $voyageRequest->getVoyage()->addPassenger($voyageRequest->getSender());
-                }
-            }
-            //farther voyage
-            else{
-                if(count($voyageRequest->getVoyage()->getPassenger())<$voyageRequest->getVoyage()->getNumberOfPlaces()){
-                    $voyageRequest->getVoyage()->addPassenger($voyageRequest->getSender());
-                }
+            if($voyageRequest->getVoyage()->getAvailableSeats() >0) {
+                $voyageRequest->getVoyage()->addPassenger($voyageRequest->getSender());
             }
         }
 
         $voyagesRelated = $voyage->getVoyageRelated($voyage);
         if(!empty($voyagesRelated)) {
-            foreach ($voyage->parentVoyage()->getChildren() as $child) {
-                foreach ($voyagesRelated as $cityId) {
-                    if ($child->getStationArrival()->getId() === $cityId) {
-                        $child->setNumberOfPlaces($child->getNumberOfPlaces() - $seats);
-                        $entityManager->persist($child);
+            $mainSeats =[];
+            if(!empty($voyage->parentVoyage()->getChildren()->toArray())){
+                foreach ($voyage->parentVoyage()->getChildren() as $child) {
+                    foreach ($voyagesRelated as $cityId) {
+                        if ($child->getStationArrival()->getId() === $cityId) {
+                            $child->setAvailableSeats($child->getAvailableSeats() - $seats);
+                            $entityManager->persist($child);
+                        }
                     }
+                    $mainSeats[] = $child->getAvailableSeats();
                 }
             }
+            else{
+                $voyage->parentVoyage()->setAvailableSeats($voyage->parentVoyage()->getAvailableSeats() - $seats);
+                $mainSeats[] = $voyage->parentVoyage()->getAvailableSeats();
+            }
+
+            $main = min($mainSeats);
+            $voyageRequest->getVoyage()->parentVoyage()->setAvailableSeats($main);
+            $entityManager->persist($voyageRequest->getVoyage()->parentVoyage());
         }
+
 
         $voyageRequest->setStatus('Accepted');
         $entityManager->persist($voyageRequest);
@@ -153,28 +155,32 @@ class VoyageRequestController extends AbstractController
                     $entityManager->persist($oneVoyage);
             }
         }
-        //if voyage not small => have minimum 1 station or farther voyage
         if(!in_array($voyage, $smallVoyage, true)){
-            //have minimum 1 station
-            if ($voyage->getParent()){
-                $voyage->removePassenger($passenger);
-            }
-            //farther voyage
-            else{
-                $voyage->removePassenger($passenger);
-            }
+            $voyage->removePassenger($passenger);
         }
 
         $voyagesRelated = $voyage->getVoyageRelated($voyage);
         if(!empty($voyagesRelated)) {
-            foreach ($voyage->parentVoyage()->getChildren() as $child) {
-                foreach ($voyagesRelated as $cityId) {
-                    if ($child->getStationArrival()->getId() === $cityId) {
-                        $child->setNumberOfPlaces($child->getNumberOfPlaces() +$seats);
-                        $entityManager->persist($child);
+            $mainSeats =[];
+            if(!empty($voyage->parentVoyage()->getChildren()->toArray())) {
+                foreach ($voyage->parentVoyage()->getChildren() as $child) {
+                    foreach ($voyagesRelated as $cityId) {
+                        if ($child->getStationArrival()->getId() === $cityId) {
+                            $child->setAvailableSeats($child->getAvailableSeats() +$seats);
+                            $entityManager->persist($child);
+                        }
                     }
+                    $mainSeats[]= $child->getAvailableSeats();
                 }
             }
+            else{
+                $voyage->parentVoyage()->setAvailableSeats($voyage->parentVoyage()->getAvailableSeats() + $seats);
+                $mainSeats[] = $voyage->parentVoyage()->getAvailableSeats();
+            }
+
+            $main = min($mainSeats);
+            $voyageRequest->getVoyage()->parentVoyage()->setAvailableSeats($main);
+            $entityManager->persist($voyageRequest->getVoyage()->parentVoyage());
         }
 
             $entityManager->remove($voyageRequest);

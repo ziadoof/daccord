@@ -1,0 +1,58 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'layout_user.html.twig' %}
+
+{% block content %}
+    <div class="fos_user_user_show px-4 py-4">
+        <div class="row">
+            <div class="col-md-4 offset-4 btn-group ">
+                <div class=" carpool-edit ml-2  ">
+                        <img class="mb-3 " src="{{ carpool.photoCarpool() }}" alt="User">
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <h1 class="text-center pt-3">{{ carpool.user.firstname|title }} {{ carpool.user.lastname|upper }}</h1>
+            <h1 class="pt-3 bdg-accord ">{{ carpool.user.carpool.point }} <span>Points</span></h1>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">Car brand :  </h6><span>  {{ carpool.carBrand }}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">Car color :  </h6><span>  {{ carpool.carColor }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">Number of passengers  :  </h6><span>  {{ carpool.numberOfPassengers}}</span>
+                </div>
+                <h6 class="text-center rosed mt-4">Possibility to</h6>
+                <div class="col">
+                    {% if carpool.bag %}
+                        <span class="badge badge-info py-2 px-2 mr-1">Bag</span>
+                    {% endif %}
+                    {% if carpool.animal %}
+                        <span class="badge badge-info py-2 px-2 mr-1">Animal</span>
+                    {% endif %}
+                    {% if carpool.baby %}
+                        <span class="badge badge-info py-2 px-2 mr-1">Baby</span>
+                    {% endif %}
+                    {% if carpool.bankCard %}
+                        <span class="badge badge-info py-2 px-2 mr-1">bank card</span>
+                    {% endif %}
+                </div>
+                <h6 class="text-center rosed mt-4">I can share</h6>
+                <div class="col">
+                    {% if carpool.conversation %}
+                        <span class="badge badge-warning py-2 px-2 mr-1">Conversation</span>
+                    {% endif %}
+                    {% if carpool.music %}
+                        <span class="badge badge-warning py-2 px-2 mr-1">Music</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {# render rating of driver#}
+        {#{{ render(controller('App\\Controller\\User\\ProfileController::ratingCarpool',{ 'user': user })) }}#}
+    </div>
+{% endblock %}
+

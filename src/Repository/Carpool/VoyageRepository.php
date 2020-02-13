@@ -58,4 +58,5 @@ class VoyageRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
 }
