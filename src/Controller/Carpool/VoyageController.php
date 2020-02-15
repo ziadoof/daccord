@@ -70,8 +70,6 @@ class VoyageController extends AbstractController
         }else{
             $voyages =  $voyagesPassenger;
         }
-        dump($listCarpool);
-        dump($votesVoyage);
 
         $results = $paginator->paginate(
         // Doctrine Query, not results

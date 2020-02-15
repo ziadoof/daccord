@@ -131,11 +131,13 @@
                         <div class=" my-4">
                             <div class="row">
                                 <div class="col-md-5  text-center my-2">
-                                    {% if app.user is not same as(voyage.creator.user) %}
-                                        {% if voyage.availableSeats is same as(0) %}
-                                            <h7 class="inf-badge badge-danger py-2 px-2  ">No seats available</h7>
-                                        {% else %}
-                                            <h7 class="inf-badge badge-success py-2 px-2  ">{{ voyage.availableSeats }}{% if voyage.availableSeats >1 %}{{ ' Available seats' }}{% else %}{{ ' Available seat' }}{% endif %}</h7>
+                                    {% if not voyage.isFinish() %}
+                                        {% if app.user is not same as(voyage.creator.user) %}
+                                            {% if voyage.availableSeats is same as(0) %}
+                                                <h7 class="inf-badge badge-danger py-2 px-2  ">No seats available</h7>
+                                            {% else %}
+                                                <h7 class="inf-badge badge-success py-2 px-2  ">{{ voyage.availableSeats }}{% if voyage.availableSeats >1 %}{{ ' Available seats' }}{% else %}{{ ' Available seat' }}{% endif %}</h7>
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
                                 </div>
@@ -258,52 +260,72 @@
                     {% if voyage.haveRequest(app.user) %}{#pending or rijected#}
                         {% for request in voyage.voyageRequests  %}
                             {% if request.sender is same as(app.user) and request.status is not same as('Accepted')%}
-                                <div class="col-md-6 offset-3 border-deal">
-                                    <div class="row">
-                                        <div class="col ">
-                                            <div class="cancel-joining-user mt-1 rejected-voyage ">
-                                                <form method="post" action="{{ path('carpool_voyage_request_delete', {'id':request.id}) }}" onsubmit="return confirm('Are you sure you want to delete this request?');">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}">
-                                                    <button class="btn float-right mt-2"><i class="fas fa-trash-alt"></i></button>
-                                                </form>
+                                {% if not voyage.isFinish() %}
+                                    <div class="col-md-6 offset-3 border-deal">
+                                        <div class="row">
+                                            <div class="col ">
+                                                <div class="cancel-joining-user mt-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('carpool_voyage_request_delete', {'id':request.id}) }}" onsubmit="return confirm('Are you sure you want to delete this request?');">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}">
+                                                        <button class="btn float-right mt-2"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                                <span class="float-right mt-2 mx-2 badge py-2 px-2 {% if request.status is same as('Pending') %}badge-warning{% else %}badge-danger{% endif %}"><h5>{{request.status}}</h5></span>
                                             </div>
-                                            <span class="float-right mt-2 mx-2 badge py-2 px-2 {% if request.status is same as('Pending') %}badge-warning{% else %}badge-danger{% endif %}"><h5>{{request.status}}</h5></span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                {% if request.status is same as('Pending') %}
+                                                    <span class="blued ">Your request is being processed</span>
+                                                {% else %}
+                                                    <span class="rosed ">Your request has been rejected</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-2 ml-2">
+                                                <span class="rosed  d-block">Number of seats : {{ request.numberOfSeats }}</span>
+                                                <span class="rosed  d-inline">Description :</span>
+                                                <p class="d-inline minimize ml-2">{{ request.description }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            {% if request.status is same as('Pending') %}
-                                                <span class="blued ">Your request is being processed</span>
-                                            {% else %}
-                                                <span class="rosed ">Your request has been rejected</span>
-                                            {% endif %}
+                                {% else %}
+                                    <div class="col-md-6 offset-3 border-deal">
+                                        <div class="row py-2">
+                                            <div class="col text-center">
+                                                <span class="rosed ">This voyage is finish</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col mb-2 ml-2">
-                                            <span class="rosed  d-block">Number of seats : {{ request.numberOfSeats }}</span>
-                                            <span class="rosed  d-inline">Description :</span>
-                                            <p class="d-inline minimize ml-2">{{ request.description }}</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     {% else %}
-                        {% if not voyage.isClosedVoyage %}
-                            {% if not voyage.isPartOfAllPassenger(app.user) %}
-                            <div class="col text-center my-4 white">
-                                <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">Join request</a>
-                            </div>
+                        {% if not voyage.isFinish() %}
+                            {% if not voyage.isClosedVoyage %}
+                                {% if not voyage.isPartOfAllPassenger(app.user) %}
+                                <div class="col text-center my-4 white">
+                                    <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">Join request</a>
+                                </div>
+                                {% else %}
+                                <div class="col text-center my-4 white">
+                                    <span class="badge badge-danger py-2 px-2"><h6>You are a passenger on this or part of this voyage</h6></span>
+                                </div>
+                                {% endif %}
                             {% else %}
                             <div class="col text-center my-4 white">
-                                <span class="badge badge-danger py-2 px-2"><h6>You are a passenger on this or part of this voyage</h6></span>
+                                <span class="badge badge-danger py-2 px-2"><h6>Close voyage</h6></span>
                             </div>
                             {% endif %}
                         {% else %}
-                            <div class="col text-center my-4 white">
-                                <span class="badge badge-danger py-2 px-2"><h6>Close voyage</h6></span>
+                            <div class="col-md-6 offset-3 border-deal">
+                                <div class="row py-2">
+                                    <div class="col text-center">
+                                        <span class="rosed ">This voyage is finish</span>
+                                    </div>
+                                </div>
                             </div>
                         {% endif %}
                     {% endif %}
@@ -347,11 +369,13 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                            <div class="cancel-joining-user my-1 rejected-voyage ">
-                                                <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?');">
-                                                    <button class="btn "><i class="fas fa-trash-alt"></i></button>
-                                                </form>
-                                            </div>
+                                            {% if not voyage.isFinish() %}
+                                                <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?');">
+                                                        <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -398,18 +422,20 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                            {% if not request.voyage.isClosedVoyage and  request.numberOfSeats <= request.voyage.getAvailableSeats() and not voyage.isPartOfAllPassenger(request.sender)  %}
-                                                <div class=" cancel-joining-user my-1 accepted-voyage ">
-                                                    <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm('Do you really want to accept this request ?');">
-                                                        <button class="btn "><i class="fas fa-check-circle "></i></button>
+                                            {% if not voyage.isFinish() %}
+                                                {% if not request.voyage.isClosedVoyage and  request.numberOfSeats <= request.voyage.getAvailableSeats() and not voyage.isPartOfAllPassenger(request.sender)  %}
+                                                    <div class=" cancel-joining-user my-1 accepted-voyage ">
+                                                        <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm('Do you really want to accept this request ?');">
+                                                            <button class="btn "><i class="fas fa-check-circle "></i></button>
+                                                        </form>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                                                        <button class="btn "><i class="fas fa-trash-alt"></i></button>
                                                     </form>
                                                 </div>
                                             {% endif %}
-                                            <div class="cancel-joining-user my-1 rejected-voyage ">
-                                                <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
-                                                    <button class="btn "><i class="fas fa-trash-alt"></i></button>
-                                                </form>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
