@@ -13,9 +13,9 @@
                 {% for voyage in voyages %}
                     <div class="row">
                         <div class="col-md-12 px-2">
-                            <div id="meetup_index" class="meetup_index">
+                            <div id="meetup_index" class="meetup_index border-deal">
                                 <a href="{{ path('voyage_show', {'id': voyage.id}) }}"class="">
-                                    <div class="px-2 border-deal">
+                                    <div class="px-2">
                                         <div class="row">
                                             <div class="col-md-3 my-1 image_meetup_index">
                                                 <img class="" src="{{ voyage.creator.photoCarpool() }}" alt="car image"/>
@@ -44,17 +44,18 @@
                                                     <div class="col-md-1">
                                                     {% if  voyage.isFinish() %}
                                                         <span class="badge badge-danger mt-1 btn-block"><h7>Finish</h7></span>
-                                                    {% endif %}
-                                                    {% if voyage.getAvailableSeats(voyage) > 0 %}
-                                                        <span class="badge badge-info float-right">
+                                                    {% else %}
+                                                        {% if voyage.getAvailableSeats(voyage) > 0 %}
+                                                            <span class="badge badge-info float-right">
                                                             <h7>
                                                                 {{voyage.getAvailableSeats(voyage) }}
                                                                 {% if voyage.getAvailableSeats(voyage)>1 %}Seats {% else %} Seat{% endif %}
                                                                 available
                                                             </h7>
                                                         </span>
-                                                    {% else %}
-                                                        <span class="badge badge-danger float-right"><h7>Closed Voyage</h7></span>
+                                                        {% else %}
+                                                            <span class="badge badge-danger float-right"><h7>Closed Voyage</h7></span>
+                                                        {% endif %}
                                                     {% endif %}
                                                     </div>
                                                 </div>
@@ -62,6 +63,34 @@
                                         </div>
                                     </div>
                                 </a>
+                                {% if  voyage.isFinish() %}
+                                    {% if app.user is not same as(voyage.creator.user) %}
+                                        {% if votesVoyage[voyage.creator.user.id] is defined  %}
+                                            <p class="blued text-center py-1">  Your rating for this voyage :
+                                                {% set reste = 5 - votesVoyage[voyage.creator.user.id]%}
+                                                {% if  votesVoyage[voyage.creator.user.id] is not same as(null)%}
+                                                    {% for  i in votesVoyage[voyage.creator.user.id] ..1%}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endfor %}
+                                                    {% if reste>0 %}
+                                                        {% for  i in reste..1%}
+                                                            <i class="far fa-star"></i>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% for  i in 5..1%}
+                                                        <i class="far fa-star"></i>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </p>
+                                        {% else %}
+                                            <button  data-toggle="modal" class="btn btn-outline-info btn-block mt-0"
+                                                     data-target="#voyage_vote-{{ voyage.creator.user.id }}">
+                                                <i class="far fa-star"></i> Rate this voyage
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -75,4 +104,28 @@
                 <h1 class="text-center title-blue">You have not voyages</h1>
             {% endif %}
         </div>
+
+    {% if listCarpool is not empty %}
+        {% for carpoolId in listCarpool %}
+            {% if votesVoyage[carpoolId] is not defined %}
+                <div class="modal fade bd-example-modal-lg mt-4" id="voyage_vote-{{ carpoolId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                            </div>
+                            <div class="modal-body">
+                                {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': carpoolId, 'type':'carpool' })) }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

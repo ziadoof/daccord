@@ -95,6 +95,10 @@ class RatingController extends AbstractController
                 $notification->addNotification(['type' => 'ratingHosting', 'object' => $vote]);
                 return $this->redirectToRoute('hosting_request_index');
             }
+            if($type === 'carpool'){
+               /* $notification->addNotification(['type' => 'ratingHosting', 'object' => $vote]);*/
+                return $this->redirectToRoute('voyage_index');
+            }
 
             return $this->redirectToRoute('ad_index');
         }

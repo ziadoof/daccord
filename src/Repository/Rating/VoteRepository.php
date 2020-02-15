@@ -59,4 +59,16 @@ class VoteRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByVoterCarpool($userId)
+    {
+        return $this->createQueryBuilder('v')
+            ->Where('v.voter = :id')
+            ->andWhere('v.type = :carpool')
+            ->setParameter('id', $userId)
+            ->setParameter('carpool', 'carpool')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

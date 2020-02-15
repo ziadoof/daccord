@@ -51,9 +51,6 @@ ymaps
         });
 
 
-//center: [47.050661,2.342608],
-
-
         function createRoute(points){
 
             let start;
@@ -113,17 +110,22 @@ ymaps
                 }
             });
 
-            //test
-            /*console.log(points);*/
 
             for(const [key, value] of Object.entries(points)){
                 if(value[2]==='point'){
                     let station = parseInt(key.substr(5));
+                    // this status run when user change city in same field station, remove last station from fixedVia in same index
+                    for(const [fixKey, fixValue] of Object.entries(fixedVia)){
+                        if(fixValue[3]=== station){
+                            fixedVia.splice(parseInt(fixKey),1);
+                        }
+                    }
                     value.push(station);
                     fixedVia.push(value);
                     delete points[key];
                 }
             }
+
             fixedVia.sort(function(a, b){return a[3] - b[3]});
             for(let z=0;z<fixedVia.length;z++){
                 let city = [fixedVia[z][0],fixedVia[z][1]];

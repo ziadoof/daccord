@@ -262,7 +262,7 @@ class ProfileController extends BaseProController
      * @param RatingRepository $ratingRepository
      * @return Response
      */
-    public function ratingHosting(User $user, RatingRepository $ratingRepository)
+    public function ratingHosting(User $user, RatingRepository $ratingRepository): Response
     {
         $rating = $ratingRepository->findByTypeAndCandidate('hosting',$user->getId());
         return $this->render('user/Hosting/rating.html.twig', [
@@ -361,12 +361,29 @@ class ProfileController extends BaseProController
     /**
      * @Route("carpool/{id}", name="carpool_show", methods={"GET"})
      * @param Carpool $carpool
+     * @param RatingRepository $ratingRepository
      * @return Response
      */
-    public function showCarpool(Carpool $carpool): Response
+    public function showCarpool(Carpool $carpool, RatingRepository $ratingRepository): Response
     {
+        $rating = $ratingRepository->findByTypeAndCandidate('carpool', $carpool->getUser()->getId());
         return $this->render('user/Carpool/carpool_show.html.twig', [
             'carpool' => $carpool,
+            'rating' => $rating
+        ]);
+    }
+
+    /**
+     * @Route( name="rating_carpool")
+     * @param User $user
+     * @param RatingRepository $ratingRepository
+     * @return Response
+     */
+    public function ratingCarpool(User $user, RatingRepository $ratingRepository): Response
+    {
+        $rating = $ratingRepository->findByTypeAndCandidate('carpool',$user->getId());
+        return $this->render('user/Carpool/rating.html.twig', [
+            'rating'=>$rating,
         ]);
     }
 }

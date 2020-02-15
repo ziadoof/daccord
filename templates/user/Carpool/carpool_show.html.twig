@@ -51,8 +51,8 @@
                 </div>
             </div>
         </div>
-        {# render rating of driver#}
-        {#{{ render(controller('App\\Controller\\User\\ProfileController::ratingCarpool',{ 'user': user })) }}#}
+        {# render rating of carpool#}
+        {{ render(controller('App\\Controller\\User\\ProfileController::ratingCarpool',{ 'user': carpool.user })) }}
     </div>
 {% endblock %}
 

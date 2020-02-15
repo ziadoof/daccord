@@ -10,6 +10,7 @@ use App\Form\Carpool\VoyageType;
 use App\Repository\Carpool\VoyageRepository;
 use App\Repository\Carpool\VoyageRequestRepository;
 use App\Repository\Location\CityRepository;
+use App\Repository\Rating\VoteRepository;
 use DateInterval;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,19 +36,33 @@ class VoyageController extends AbstractController
     /**
      * @Route("/", name="voyage_index", methods={"GET"})
      * @param VoyageRepository $voyageRepository
+     * @param VoteRepository $voteRepository
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(VoyageRepository $voyageRepository, Request $request, PaginatorInterface $paginator): Response
+    public function index(VoyageRepository $voyageRepository, VoteRepository $voteRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         $voyageRequestsPassenger = $user->getVoyageRequests()->toArray();
         $voyagesPassenger = [];
+        $listCarpool=[];
+
+
+        $voteCarpoolByThisUser = $voteRepository->findByVoterCarpool($this->getUser()->getId());
+        $votesVoyage =[];
+        foreach ($voteCarpoolByThisUser as $vote){
+            $votesVoyage[$vote->getCandidate()->getId()]=$vote->getValue();
+        }
+
         foreach ($voyageRequestsPassenger as $voyageRequest){
             $voyagesPassenger[]=$voyageRequest->getVoyage();
+
+            // for select all the carpool id where who the user is not rating them for create the modals
+            if(!in_array($voyageRequest->getVoyage()->getCreator()->getUser()->getId(), $listCarpool, true)){
+                $listCarpool[]= $voyageRequest->getVoyage()->getCreator()->getUser()->getId();
+            }
         }
-        dump($voyagesPassenger);
 
         if($user->getCarpool()){
             $voyagesOrganized = $voyageRepository->findParentByCreator($this->getUser()->getCarpool()->getId());
@@ -55,6 +70,8 @@ class VoyageController extends AbstractController
         }else{
             $voyages =  $voyagesPassenger;
         }
+        dump($listCarpool);
+        dump($votesVoyage);
 
         $results = $paginator->paginate(
         // Doctrine Query, not results
@@ -66,6 +83,8 @@ class VoyageController extends AbstractController
         );
         return $this->render('carpool/voyage/index.html.twig', [
             'voyages' => $results,
+            'listCarpool'=>$listCarpool,
+            'votesVoyage'=>$votesVoyage
         ]);
     }
 
