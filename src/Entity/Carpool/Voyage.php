@@ -2,12 +2,15 @@
 
 namespace App\Entity\Carpool;
 
+use App\Controller\Carpool\VoyageController;
 use App\Entity\Location\City;
 use App\Entity\User;
 use App\Repository\Location\CityRepository;
+use App\Repository\Rating\RatingRepository;
 use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -751,6 +754,7 @@ class Voyage
     }
 
     public function searchSerialize(){
+
         if($this->getParent() !== null){
             $departure = $this->getStationDeparture()->getName();
             $arrival = $this->getStationArrival()->getName();
@@ -777,7 +781,6 @@ class Voyage
             'creatorName'=>$this->getCreator()->getUser()->getFirstname(),
             'creatorImage'=>$this->getCreator()->getUser()->photoProfile(),
             'creatorPoint'=>$this->getCreator()->getPoint(),
-            /*'creatorRating'=>$this->getCreator()->getRating(),*/
             'highway'=>$this->getHighway(),
             'timeDeparture'=>$this->getTimeDeparture()->format('H:i'),
             'timeArrival'=>$this->getTimeArrival()->format('H:i'),
@@ -981,45 +984,6 @@ class Voyage
 
     }
 
-/*    public function getAvailableSeats(Voyage $voyage){
-
-        $smallVoyages = $this->getSmallVoyages($voyage);
-        $numberOfPlaces = $voyage->parentVoyage()->getNumberOfPlaces();
-        $list =[];
-
-        foreach ($smallVoyages as $smallVoyage){
-            $class=[];
-            for($i=1;$i<=$numberOfPlaces;$i++){
-                $class[]= true;
-            }
-            $passengers = $smallVoyage->getPassenger();
-            foreach ($passengers as $passenger){
-                if($passenger){
-                    $seats = $this->getPassengerSeats($passenger);
-                    for($i=0;$i<$seats;$i++){
-                        array_unshift($class,false);
-                        array_pop($class);
-                    }
-                }
-            }
-            $list[]=$class;
-        }
-        $num=[];
-        foreach ($list as $classes) {
-            $int = 0;
-            foreach ($classes as $item){
-                if($item){
-                    $int++;
-                }
-            }
-            $num[]=$int;
-        }
-        if(!empty($num)){
-            return min($num);
-        }
-        return $voyage->getNumberOfPlaces();
-    }*/
-
     public function getVoyageMap(): array
     {
         $parentVoyage = $this->parentVoyage();
@@ -1113,6 +1077,4 @@ class Voyage
         }
         return $numberOfSeats;
     }
-
-
 }

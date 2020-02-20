@@ -44,6 +44,8 @@ class VoyageRequestController extends AbstractController
                 'success',
                 'Your voyage request has bin sent successfully!'
             );
+            $notification->addNotification(['type' => 'voyageRequest', 'object' => $voyageRequest]);
+
             return $this->redirectToRoute('voyage_show',['id'=>$voyage->getId()]);
         }
 
@@ -76,7 +78,7 @@ class VoyageRequestController extends AbstractController
                 'success',
                 'This request was successfully rejected!'
             );
-            /*$notification->addNotification(['type' => 'treatmentMeetupRequest', 'object' => $joinRequest, 'treatment' => $status]);*/
+            $notification->addNotification(['type' => 'treatmentVoyageRequest', 'object' => $voyageRequest, 'treatment' => $status]);
 
             return $this->redirectToRoute('voyage_show',['id'=>$voyage->parentVoyage()->getId()]);
         }
@@ -130,7 +132,7 @@ class VoyageRequestController extends AbstractController
             'success',
             'This request was successfully Accepted!'
         );
-        /*$notification->addNotification(['type' => 'treatmentMeetupRequest', 'object' => $joinRequest, 'treatment' => $status]);*/
+        $notification->addNotification(['type' => 'treatmentVoyageRequest', 'object' => $voyageRequest, 'treatment' => $status]);
 
         return $this->redirectToRoute('voyage_show',['id'=>$voyage->parentVoyage()->getId()]);
 
@@ -139,10 +141,10 @@ class VoyageRequestController extends AbstractController
     /**
      * @Route("/remove/passenger/{voyageRequest}", name="remove_passenger", methods={"POST"})
      * @param VoyageRequest $voyageRequest
-     * @param User $passenger
+     * @param Notification $notification
      * @return Response
      */
-    public function remove_passenger(VoyageRequest $voyageRequest): Response
+    public function remove_passenger(VoyageRequest $voyageRequest, Notification $notification,string $cancel = null): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $voyage = $voyageRequest->getVoyage();
@@ -183,19 +185,111 @@ class VoyageRequestController extends AbstractController
             $entityManager->persist($voyageRequest->getVoyage()->parentVoyage());
         }
 
-            $entityManager->remove($voyageRequest);
-            $entityManager->flush();
+        if($cancel === null){
+            $carpool = $voyage->getCreator();
+            if($carpool->getPoint()>9){
+                $carpool->setPoint($carpool->getPoint()-10);
+                $this->addFlash(
+                    'danger',
+                    'You lost 10 points as Carpool!'
+                );
+                $notification->addNotification(['type' => 'removeCarpoolPoints', 'user' => $voyage->getCreator()->getUser(), 'point'=> 10]);
+
+            }
+            else{
+                $carpool->setPoint(0);
+                $this->addFlash(
+                    'danger',
+                    'You no longer have points as Carpool!'
+                );
+                $notification->addNotification(['type' => 'removeCarpoolPoints', 'user' => $voyage->getCreator()->getUser(), 'point'=> 0]);
+
+            }
+            $entityManager->persist($carpool);
+        }
+
+        $entityManager->remove($voyageRequest);
+        $entityManager->flush();
+
+        if($cancel === null){
             $this->addFlash(
                 'success',
                 'This passenger was successfully removed!'
             );
+
+            $notification->addNotification([
+                'type' => 'voyageRemovePassenger',
+                'object' => $voyageRequest->getVoyage(),
+                'sender'=>$voyage->getCreator()->getUser(),
+                'recipient'=>$passenger,
+                'status'=>'removed'
+            ]);
+
+        }
 
 
         return $this->redirectToRoute('voyage_show',['id'=>$voyageRequest->getVoyage()->parentVoyage()->getId()]);
     }
 
     /**
+     * @Route("/passenger/retired/{voyage}", name="cancel_joining_passenger", methods={"POST"})
+     * @param Voyage $voyage
+     * @param Notification $notification
+     * @return Response
+     */
+    public function cancel_joining_passenger(Voyage $voyage, Notification $notification): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $allVoyageRequests = $voyage->getAllVoyageRequests();
+
+        foreach ($allVoyageRequests as $voyageRequest){
+            if($voyageRequest->getSender()=== $this->getUser()){
+                $this->remove_passenger($voyageRequest,$notification,'cancel');
+            }
+        }
+
+
+        if($this->getUser()->getPoint()>3){
+            $this->getUser()->setPoint($this->getUser()->getPoint()-3);
+            $this->addFlash(
+                'danger',
+                'You lost 3 points!'
+            );
+            $notification->addNotification(['type' => 'removeUserPoints', 'user' => $this->getUser(), 'point'=> 3]);
+
+        }
+        else{
+            $this->getUser()->setPoint(0);
+            $this->addFlash(
+                'danger',
+                'You no longer have points!'
+            );
+            $notification->addNotification(['type' => 'removeUserPoints', 'user' => $this->getUser(), 'point'=> 0]);
+        }
+        $entityManager->persist($this->getUser());
+        $entityManager->flush();
+        $this->addFlash(
+            'success',
+            'You have successfully retired from this voyage!'
+        );
+
+        $notification->addNotification([
+            'type' => 'voyageRemovePassenger',
+            'object' => $voyage,
+            'sender'=>$this->getUser(),
+            'recipient'=>$voyage->getCreator()->getUser(),
+            'status'=>'retired'
+        ]);
+
+        return $this->redirectToRoute('voyage_show',['id'=>$voyage->getId()]);
+    }
+
+    /**
      * @Route("/{id}", name="carpool_voyage_request_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param VoyageRequest $voyageRequest
+     * @return Response
      */
     public function delete(Request $request, VoyageRequest $voyageRequest): Response
     {

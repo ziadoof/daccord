@@ -10,7 +10,9 @@ use App\Form\Carpool\VoyageType;
 use App\Repository\Carpool\VoyageRepository;
 use App\Repository\Carpool\VoyageRequestRepository;
 use App\Repository\Location\CityRepository;
+use App\Repository\Rating\RatingRepository;
 use App\Repository\Rating\VoteRepository;
+use App\Service\Notification;
 use DateInterval;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,10 +23,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Time;
 
@@ -33,6 +31,12 @@ use Symfony\Component\Validator\Constraints\Time;
  */
 class VoyageController extends AbstractController
 {
+    private $ratingRepository;
+
+    public function __construct(RatingRepository $ratingRepository)
+    {
+        $this->ratingRepository = $ratingRepository;
+    }
     /**
      * @Route("/", name="voyage_index", methods={"GET"})
      * @param VoyageRepository $voyageRepository
@@ -71,6 +75,11 @@ class VoyageController extends AbstractController
             $voyages =  $voyagesPassenger;
         }
 
+        $ratingList = [];
+        foreach ($voyages as $voyage){
+            $ratingList[$voyage->getId()]= $this->getCarpoolRating($voyage);
+        }
+
         $results = $paginator->paginate(
         // Doctrine Query, not results
             $voyages,
@@ -82,7 +91,8 @@ class VoyageController extends AbstractController
         return $this->render('carpool/voyage/index.html.twig', [
             'voyages' => $results,
             'listCarpool'=>$listCarpool,
-            'votesVoyage'=>$votesVoyage
+            'votesVoyage'=>$votesVoyage,
+            'ratingList'=>$ratingList
         ]);
     }
 
@@ -362,6 +372,10 @@ class VoyageController extends AbstractController
 
                             $entityManager->flush();
                             $session->remove('voyage');
+                            $this->addFlash(
+                                'success',
+                                'Your voyage was successfully added!'
+                            );
                     return $this->redirectToRoute('voyage_index');
 
                 }
@@ -426,29 +440,106 @@ class VoyageController extends AbstractController
 
     /**
      * @Route("/{id}", name="voyage_show", methods={"GET"}, options={"expose"=true})
+     * @param Voyage $voyage
+     * @param RatingRepository $repository
+     * @return Response
      */
     public function show(Voyage $voyage): Response
     {
-
+        $rating = $this->getCarpoolRating($voyage);
         $smallVoyages = $voyage->getSmallVoyages($voyage->parentVoyage());
         return $this->render('carpool/voyage/show.html.twig', [
             'voyage' => $voyage,
-            'smallVoyages'=>$smallVoyages
+            'smallVoyages'=>$smallVoyages,
+            'rating'=>$rating
         ]);
     }
 
+    public function getCarpoolRating(Voyage $voyage){
+        $rating = $this->ratingRepository->findByTypeAndCandidate('carpool', $voyage->getCreator()->getUser()->getId());
+        $number = $rating->getTotal()/$rating->getNumVotes();
+        return number_format($number, 1);
+    }
+
     /**
-     * @Route("/{id}", name="carpool_voyage_delete", methods={"DELETE"})
+     * @Route("/{id}", name="voyage_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Voyage $voyage
+     * @param Notification $notification
+     * @return Response
      */
-    public function delete(Request $request, Voyage $voyage): Response
+    public function delete(Request $request, Voyage $voyage, Notification $notification): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$voyage->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($voyage);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $children = $voyage->parentVoyage()->getChildren()->toArray();
+        $passengers = [];
+        foreach ( $children as $child){
+            foreach ($child->getPassenger()->toArray() as $passenger){
+                if(!in_array($passenger,$passengers,true)){
+                    $passengers[] = $passenger;
+                }
+            }
+        }
+        foreach ($voyage->getPassenger()->toArray() as $passenger){
+            if(!in_array($passenger,$passengers,true)){
+                $passengers[] = $passenger;
+            }
         }
 
-        return $this->redirectToRoute('carpool_voyage_index');
+        if ($this->isCsrfTokenValid('delete'.$voyage->getId(), $request->request->get('_token'))) {
+           if(empty($passengers) || $voyage->isFinish() ){
+               $this->removeVoyage($voyage);
+               $this->addFlash(
+                   'success',
+                   'Your voyage was successfully removed!'
+               );
+               return $this->redirectToRoute('voyage_index');
+           }
+
+           foreach ($passengers as $passenger){
+               $notification->addNotification(['type' => 'cancelVoyage', 'object' => $voyage, 'recipient'=>$passenger]);
+               $passenger->setPoint($passenger->getPoint()+5);
+               $entityManager->persist($passenger);
+               $notification->addNotification(['type' => 'pointsVoyageCanceled', 'recipient'=>$passenger, 'points'=>5]);
+           }
+            $carpool = $voyage->getCreator();
+            if($carpool && $carpool->getPoint()>39){
+                $carpool->setPoint($carpool->getPoint()-40);
+                $entityManager->persist($carpool);
+                $notification->addNotification(['type' => 'removeCarpoolPoints', 'user' => $voyage->getCreator()->getUser(), 'point'=> 40]);
+            }
+            else{
+                $carpool->setPoint(0);
+                $entityManager->persist($carpool);
+                $notification->addNotification(['type' => 'removeCarpoolPoints', 'user' => $voyage->getCreator()->getUser(), 'point'=> 0]);
+            }
+            $entityManager->flush();
+            $this->removeVoyage($voyage);
+            $this->addFlash(
+                'success',
+                'Your voyage was successfully removed!'
+            );
+            return $this->redirectToRoute('voyage_index');
+        }
+
+        return $this->redirectToRoute('voyage_index');
+    }
+
+    public function removeVoyage(Voyage $voyage): void
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $stations = $voyage->parentVoyage()->getStations()->toArray();
+        foreach ($stations as $station){
+            $entityManager->remove($station);
+        }
+
+        $children = $voyage->parentVoyage()->getChildren()->toArray();
+        foreach ($children as $child){
+            $entityManager->remove($child);
+        }
+        $entityManager->remove($voyage);
+        $entityManager->flush();
     }
 
 

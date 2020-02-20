@@ -15,7 +15,7 @@
                                 </a>
                                 <span class="d-block blued small">{{ voyage.creator.user.firstname }}</span>
                                 <span class="d-block blued small">{{ voyage.creator.point }}{{ ' Points' }}</span>
-                                <span class="d-block blued small">{{ voyage.creator.point }}<i class="far fa-star rosed"></i></span>
+                                <span class="d-block blued small">{{ rating }} <i class="far fa-star rosed"></i> </span>
                             </div>
                         </div>
                     </div>
@@ -236,8 +236,13 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-5">
                                         <span class="float-right mt-2 mx-2 badge badge-success py-2 px-2"><h5>{{seats }} {% if seats >1 %}Seats{% else %}Seat{% endif %} reserved</h5></span>
+                                    </div>
+                                    <div class="col-md-1 cancel-joining-user my-1 rejected-voyage mt-2">
+                                        <form method="post" action="{{ path('cancel_joining_passenger',{'voyage':voyage.id}) }}" onsubmit="return confirm('Do you really want to withdraw from this voyage ?Three points will be deducted');">
+                                            <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                                 <hr class="my-0">
@@ -371,7 +376,7 @@
                                             </div>
                                             {% if not voyage.isFinish() %}
                                                 <div class="cancel-joining-user my-1 rejected-voyage ">
-                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?');">
+                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?Ten points will be deducted');">
                                                         <button class="btn "><i class="fas fa-trash-alt"></i></button>
                                                     </form>
                                                 </div>
@@ -470,6 +475,15 @@
             {% endif %}
         </div>
         {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border-deal ">
+                <form method="post" action="{{ path('voyage_delete', {'id': voyage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voyage.id) }}">
+                    <button class="btn btn-danger float-right my-3">Cancel this voyage</button>
+                </form>
             </div>
         </div>
     </div>

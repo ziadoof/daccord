@@ -69,6 +69,7 @@ class ListsVoyages extends React.Component {
             const creatorName = result.creatorName;
             const creatorImage = result.creatorImage;
             const creatorPoint = result.creatorPoint;
+            const creatorRating = result.creatorRating;
             const highway = result.highway;
             const timeDeparture = result.timeDeparture;
             const timeArrival = result.timeArrival;
@@ -93,7 +94,7 @@ class ListsVoyages extends React.Component {
                                     <div className="col-md-7 mt-1">
                                         <span className="d-block rosed small">{creatorName}</span>
                                         <span className="d-block blued small">{creatorPoint} Points</span>
-                                        <span className="d-block blued small">{creatorPoint} <i className="far fa-star"></i></span>
+                                        <span className="d-block blued small">{creatorRating} <i className="far fa-star rosed"></i></span>
                                     </div>
                                     <div className="col-md-3 mt-2">
                                         {this.isHighway(highway)}
