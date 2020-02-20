@@ -36,7 +36,7 @@ class HostingRequestController extends AbstractController
         foreach ($voteHostingByThisUser as $vote){
             $votesHosting[$vote->getCandidate()->getId()]=$vote->getValue();
         }
-        // for select all the driver id where who the user is not rating them for create the modals
+        // for select all the hosting id where who the user is not rating them for create the modals
         $listHosting =[];
         foreach ($hosting_requests as $hosting){
             if(!in_array($hosting->getHosting()->getId(), $listHosting, true)){

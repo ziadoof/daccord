@@ -405,3 +405,63 @@ fos_elastica:
             listener: ~
             finder: ~
             repository: App\Entity\Search\MeetupRepository
+    app_voyage:
+      types:
+        voyage:
+          properties:
+            timeDeparture:
+              type: date
+            numberOfPlaces:
+              type: integer
+            availableSeats:
+              type: integer
+            highway:
+              type: boolean
+            parent:
+              type: nested
+              properties:
+                id:
+                  type: integer
+            mainDeparture:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+            mainArrival:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+            stationDeparture:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+            stationArrival:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+          persistence:
+            driver: orm
+            model: App\Entity\Carpool\Voyage
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\VoyageRepository

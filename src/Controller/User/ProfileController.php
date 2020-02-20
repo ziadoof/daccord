@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\User;
 
+use App\Entity\Carpool\Carpool;
 use App\Entity\Driver;
 use App\Events\Events;
 use App\Form\DriverType;
@@ -9,6 +10,7 @@ use App\Repository\DriverRequestRepository;
 use App\Repository\Rating\RatingRepository;
 use App\Service\City\CityAreaType;
 use App\Service\FileUploader;
+use App\Service\FormCarpoolType;
 use App\Service\FormDriverType;
 use App\Service\FormHostingType;
 use FOS\UserBundle\Controller\ProfileController as BaseProController;
@@ -260,7 +262,7 @@ class ProfileController extends BaseProController
      * @param RatingRepository $ratingRepository
      * @return Response
      */
-    public function ratingHosting(User $user, RatingRepository $ratingRepository)
+    public function ratingHosting(User $user, RatingRepository $ratingRepository): Response
     {
         $rating = $ratingRepository->findByTypeAndCandidate('hosting',$user->getId());
         return $this->render('user/Hosting/rating.html.twig', [
@@ -311,6 +313,77 @@ class ProfileController extends BaseProController
         return $this->render('user/Profile/hosting_edit_form.html.twig', [
 
         ]);
+    }
 
+    /**
+     * @Route("/user_carpool",  name="new_carpool", methods={"POST"})
+     * @param Request $request
+     * @param FormCarpoolType $formCarpoolType
+     * @return RedirectResponse|Response
+     */
+    public function new_carpool(Request $request, FormCarpoolType $formCarpoolType)
+    {
+        $user = $this->getUser();
+        $carpoolOldPhoto = null;
+        if ($user->getCarpool()){
+            $carpoolOldPhoto = $user->getCarpool()->getCarImage();
+        }
+
+        $carpoolForm = $formCarpoolType->getForm();
+        $carpoolForm->handleRequest($request);
+        if ($carpoolForm->isSubmitted() && $carpoolForm->isValid()) {
+            $carpool = $carpoolForm->getData();
+            $filesystem = new Filesystem();
+            $carImage = $carpoolForm->get('carImage')->getData();
+            $fileUploader = new FileUploader('assets/images/carpool/');
+
+            //delet old photo
+            $carpoolOldPhoto && $carImage ?$filesystem->remove('assets/images/carpool/'.$carpoolOldPhoto):null;
+            // upload new photo
+            $carImage ? $carpool->setCarImage($fileUploader->upload($carImage)):$carpool->setCarImage($carpoolOldPhoto?:'with out photo');
+
+            $carpool->setUser($user);
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($carpool);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+
+        return $this->render('user/Profile/carpool_edit_form.html.twig', [
+
+        ]);
+
+    }
+
+    /**
+     * @Route("carpool/{id}", name="carpool_show", methods={"GET"})
+     * @param Carpool $carpool
+     * @param RatingRepository $ratingRepository
+     * @return Response
+     */
+    public function showCarpool(Carpool $carpool, RatingRepository $ratingRepository): Response
+    {
+        $rating = $ratingRepository->findByTypeAndCandidate('carpool', $carpool->getUser()->getId());
+        return $this->render('user/Carpool/carpool_show.html.twig', [
+            'carpool' => $carpool,
+            'rating' => $rating
+        ]);
+    }
+
+    /**
+     * @Route( name="rating_carpool")
+     * @param User $user
+     * @param RatingRepository $ratingRepository
+     * @return Response
+     */
+    public function ratingCarpool(User $user, RatingRepository $ratingRepository): Response
+    {
+        $rating = $ratingRepository->findByTypeAndCandidate('carpool',$user->getId());
+        return $this->render('user/Carpool/rating.html.twig', [
+            'rating'=>$rating,
+        ]);
     }
 }

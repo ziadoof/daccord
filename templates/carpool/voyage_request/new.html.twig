@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h4 class="title-blue text-center">Voyage Request</h4>
+        <div class="driver">
+            <div class="row border-deal">
+                <div class="col-md-3 deal-show my-4 text-center">
+                    <img src="{{ voyage.creator.user.photoProfile() }}" alt="">
+                    <span class="blued mt-2">{{ voyage.creator.user.firstname }}</span>
+                </div>
+                <div class="col my-4 justify-content-center ml-3">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="float-right text-center">
+                                <span class="blued px-2">{{voyage.stationDeparture.name}}</span>
+                                {% if voyage.parent %}
+                                    <small class="px-2 d-block">{{voyage.placeStationDeparture}}</small>
+                                {% else %}
+                                    <small class="px-2 d-block">{{voyage.placeMainDeparture}}</small>
+                                {% endif %}
+                            </h4>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h3> <i class="fas fa-arrow-right rosed vertical-center"></i></h3>
+                        </div>
+                        <div class="col-md-5">
+                            <h4 class="float-left text-center">
+                                <span class="blued px-2">{{voyage.stationArrival.name}}</span>
+                                {% if voyage.parent %}
+                                    <small class="px-2 d-block">{{voyage.placeStationArrival}}</small>
+                                {% else %}
+                                    <small class="px-2 d-block">{{voyage.placeMainArrival}}</small>
+                                {% endif %}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center mt-4">
+                            {% if voyage.parent %}
+                                <h6 class="inf-badge badge-info  py-2 px-2 white d-inline"><i class="fas fa-random"></i> {{ voyage.stationDistance }}{{ ' Km' }}</h6>
+                                <h6 class="inf-badge badge-info  py-2 px-2 white d-inline"><i class="far fa-clock"></i> {{ voyage.durationToTime(voyage.stationDuration)}}</h6>
+                                <h6 class="inf-badge badge-warning py-2 px-2 white d-inline"> {{ voyage.stationPrice }} <i class="fas fa-euro-sign"></i></h6>
+                            {% else %}
+                                <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="fas fa-random"></i> {{ voyage.distance }}{{ ' Km' }}</h6>
+                                <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="far fa-clock"></i>  {{ voyage.durationToTime(voyage.duration)}}</h6>
+                                <h6 class="inf-badge badge-warning py-2 px-2 white d-inline"> {{ voyage.mainPrice }}  <i class="fas fa-euro-sign"></i></h6>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 border-deal">
+                {{ include('carpool/voyage_request/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>

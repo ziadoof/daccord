@@ -18,7 +18,7 @@
                                     <a class="nav-link" id="meetup-tab" data-toggle="tab" href="#meetup" role="tab" aria-controls="meetup" aria-selected="false">Meetup</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="convoiturage-tab" data-toggle="tab" href="#convoiturage" role="tab" aria-controls="convoiturage" aria-selected="false">Convoiturage</a>
+                                    <a class="nav-link" id="carpooling-tab" data-toggle="tab" href="#carpooling" role="tab" aria-controls="carpooling" aria-selected="false">Carpooling</a>
                                 </li>
                             </ul>
                             <div class="tab-content " id="myTabContent">
@@ -33,6 +33,9 @@
                                 </div>
                                 <div class="tab-pane fade show text-align form-new " id="meetup" role="tabpanel" aria-labelledby="meetup-tab">
                                     {% include "search/templates/meetupSearch.html.twig" %}
+                                </div>
+                                <div class="tab-pane fade show text-align form-new " id="carpooling" role="tabpanel" aria-labelledby="carpooling-tab">
+                                    {% include "search/templates/voyageSearch.html.twig" %}
                                 </div>
                             </div>
                         </div>

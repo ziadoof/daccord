@@ -58,6 +58,21 @@
                 </div>
             {% endif %}
         {% endif %}
+        {%- if attr.carpool is defined -%}{# view for carpool image#}
+            {% if attr.carpool %}{# if the form has carpool attr#}
+                {% if app.user.carpool %}{# if the user is hosting#}
+                    <div class="carpool-edit">
+                        <img id="previewCarpoolImge"
+                             src="{{ asset(app.user.carpool.photoCarpool()) }}" alt="carpooling photo">
+                    </div>
+                {% else %}{# if the user is not carpool#}
+                    <div class="carpool-edit">
+                        <img id="previewCarpoolImge"
+                             src="{{ asset('/assets/images/carpool/carpool.png') }}" alt="carpool photo">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
     </label>
     </{{ element|default('div') }}>
 {% endblock %}

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ListsAds from "../Components/ListsAds";
 import ListsHosting from "../Components/ListsHosting";
 import ListsMeetup from "../Components/ListsMeetup";
+import ListsVoyages from "../Components/ListsVoyages";
 
 $('#search-offer').submit( function(e) {
     e.preventDefault();
@@ -130,5 +131,27 @@ $('#search-meetup').submit( function(e) {
 
     }).fail(function(jxh,textmsg,errorThrown){
         alert('Something went wrong during processing search for hosting!');
+    });
+});
+
+$('#search-carpooling').submit( function(e) {
+    e.preventDefault();
+    var url = Routing.generate('add-voyageType');
+    var formSerialize = $(this).serialize();
+
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        url: url,
+        async: true,
+        data:formSerialize,
+    }).done( function(response) {
+        let ext = response['random'];
+        window.history.pushState( "","",'/search/carpooling/'+ext);
+        $('#all').hide();
+        ReactDOM.render(<ListsVoyages result={response['result']}/>, document.getElementById('searching'));
+
+    }).fail(function(jxh,textmsg,errorThrown){
+        alert('Something went wrong during processing search for offers!');
     });
 });

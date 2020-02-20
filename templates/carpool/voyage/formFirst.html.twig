@@ -1,0 +1,55 @@
+{% form_theme form 'jquery.collection.html.twig' 'StationCollectionType.html.twig' %}
+{{ form_start(form,{'attr':{'id':'voyage-form-new2'}}) }}
+<div class="new-voyage mt-5">
+    <div class="row">
+        <div class="col-md-6 ">
+            <div class="row">
+                <div class="col-md-5">
+                    {{ form_row(form.date) }}
+                </div>
+                <div class="col-md-7">
+                    {{ form_row(form.time) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    {{ form_row(form.mainDeparture) }}
+                </div>
+                <div class="col-md-7">
+                    {{ form_row(form.placeMainDeparture) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    {{ form_row(form.mainArrival) }}
+                </div>
+                <div class="col-md-7">
+                    {{ form_row(form.placeMainArrival) }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    {{ form_widget(form.stations) }}
+                </div>
+            </div>
+        </div>
+        {{ form_widget(form.duration) }}
+        {{ form_widget(form.distance) }}
+        <div class="col-md-5 offset-1 border-deal my-4 py-4">
+            <div class="row">
+                <div class="col">
+                    <div id="map" style="width:auto; height:50vh"></div>
+                    <div id="viewContainer" class="text-center mt-2"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-5">
+                    <button class="btn btn-info btn-block">{{ button_label|default('Continue') }}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{{ form_end(form) }}

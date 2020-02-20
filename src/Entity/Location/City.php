@@ -2,6 +2,7 @@
 
 namespace App\Entity\Location;
 
+use App\Entity\Carpool\Voyage;
 use App\Entity\Driver;
 use App\Entity\Hosting\Hosting;
 use App\Entity\Meetup\Meetup;
@@ -79,12 +80,18 @@ class City
      */
     private $meetups;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\Voyage", mappedBy="mainDeparture")
+     */
+    private $voyages;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->drivers = new ArrayCollection();
         $this->hostings = new ArrayCollection();
         $this->meetups = new ArrayCollection();
+        $this->voyages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,7 +215,7 @@ class City
     }
     public function __toString()
     {
-        return $this->name .' '. $this->getZipCode();
+        return $this->name .' ('. $this->getZipCode().')';
     }
 
     /**
@@ -298,6 +305,37 @@ class City
             // set the owning side to null (unless already changed)
             if ($meetup->getCity() === $this) {
                 $meetup->setCity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Voyage[]
+     */
+    public function getVoyages(): Collection
+    {
+        return $this->voyages;
+    }
+
+    public function addVoyage(Voyage $voyage): self
+    {
+        if (!$this->voyages->contains($voyage)) {
+            $this->voyages[] = $voyage;
+            $voyage->setMainDeparture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVoyage(Voyage $voyage): self
+    {
+        if ($this->voyages->contains($voyage)) {
+            $this->voyages->removeElement($voyage);
+            // set the owning side to null (unless already changed)
+            if ($voyage->getMainDeparture() === $this) {
+                $voyage->setMainDeparture(null);
             }
         }
 

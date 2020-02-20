@@ -5,14 +5,17 @@ namespace App\Controller;
 use App\Controller\Location\RegionController;
 use App\Entity\Ads\Ad;
 use App\Entity\Ads\Category;
+use App\Entity\Carpool\Voyage;
 use App\Entity\Location\City;
 use App\Entity\Location\Department;
 use App\Entity\Location\Region;
 use App\Entity\User;
+use App\Repository\Rating\RatingRepository;
 use App\Service\Search\FormHostingSearchType;
 use App\Service\Search\FormMeetupSearchType;
 use App\Service\Search\FormOfferType;
 use App\Service\Search\FormDemandType;
+use App\Service\Search\FormVoyageSearchType;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -301,6 +304,69 @@ class SearchController extends AbstractController
     }
 
     /**
+     * @Route("/carpooling/{id}", name="add-voyageType",methods={"POST","GET"}, options={"expose"=true})
+     * @param FormVoyageSearchType $formVoyageSearchType
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param RatingRepository $ratingRepository
+     * @param String $id
+     * @return JsonResponse|Response
+     * @throws \Exception
+     */
+    public function formCarpooling(FormVoyageSearchType $formVoyageSearchType, Request $request, PaginatorInterface $paginator,RatingRepository $ratingRepository, String $id=null)
+    {
+        $random = random_int(9999,99999);
+        $session = new Session();
+        $voyageForm = $formVoyageSearchType->getForm();
+        $voyageForm->handleRequest($request);
+        $serializedResult = [];
+
+        if ($voyageForm->isSubmitted() && $voyageForm->isValid()) {
+            $voyageSearch = $voyageForm->getData();
+            if($voyageSearch->getMainDeparture() !== null) {
+
+                    $result = $this->manager->getRepository('App\Entity\Carpool\Voyage')->searchCarpooling($voyageSearch);
+
+                    foreach ($result as $voyage) {
+                        $serialized = $voyage->searchSerialize();
+                        $serialized['creatorRating'] = $this->getCarpoolRating($voyage,$ratingRepository);
+                        $serializedResult [] = $serialized;
+                    }
+                    $response = array(
+                        'result' => $serializedResult,
+                        'random' => $random,
+                        'message' => 'succese',
+                    );
+                //Unlike the demands and offers, they were saved serializedResult in  session instead of result to get the name on the show page
+                    $session->set($random, $serializedResult);
+
+                    return new JsonResponse($response);
+
+            }
+            return $this->render('search/results/voyage.html.twig');
+
+        }
+
+        $result =$session->get($id);
+        if(isset($result)){
+            $results = $paginator->paginate(
+            // Doctrine Query, not results
+                $result,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                20
+            );
+            return $this->render('search/results/voyage.html.twig', [
+                'voyages' => $results
+            ]);
+        }
+        return $this->render('search/results/voyage.html.twig', [
+
+        ]);
+    }
+
+    /**
      * @Route("/ajax_request", name="ajax_request", methods="POST", options={"expose"=true})
      */
     public function search(Request $request) {
@@ -308,6 +374,12 @@ class SearchController extends AbstractController
         $lng =  $request->request->get('lng');
         $params = [$lat,$lng];
         return new JsonResponse($params);
+    }
+
+    public function getCarpoolRating(Voyage $voyage, RatingRepository $ratingRepository){
+        $rating = $ratingRepository->findByTypeAndCandidate('carpool', $voyage->getCreator()->getUser()->getId());
+        $number = $rating->getTotal()/$rating->getNumVotes();
+        return number_format($number, 1);
     }
 
 }

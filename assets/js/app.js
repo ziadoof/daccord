@@ -4,6 +4,7 @@ window.$ = $;
 window.jQuery = $;
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
+
 require('./router');
 require('./jquery-ui.min');
 require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui');
@@ -46,6 +47,9 @@ require('./markAsVisited');
 require('./invitations');
 require('./hostingDate');
 require('./meetup/meetup_gps');
+require('./voyage/jquery.collection');
+require('./voyage/voyage');
+require('./voyage/searchVoyage');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');
@@ -53,6 +57,7 @@ require('./meetup/meetup_gps');
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
+
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();

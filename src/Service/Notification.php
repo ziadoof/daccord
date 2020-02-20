@@ -4,6 +4,8 @@
 namespace App\Service;
 
 
+use App\Entity\Carpool\Voyage;
+use App\Entity\Carpool\VoyageRequest;
 use App\Entity\Deal\Deal;
 use App\Entity\DriverRequest;
 use App\Entity\Hosting\HostingRequest;
@@ -101,44 +103,35 @@ class Notification
             case 'ratingMeetup':
                 $this->addRatingMeetup($object,$options);
                 break;
+            case 'voyageRequest':
+                $this->addVoyageRequest($object);
+                break;
+            case 'treatmentVoyageRequest':
+                $this->addVoyageRequestTreatmentNotification($object,$options['treatment']);
+                break;
+            case 'voyageRemovePassenger':
+                $this->addVoyageRemovePassengerNotification($object,$options);
+                break;
+            case 'removeUserPoints':
+                $this->addRemoveUserPointsNotification($options);
+                break;
+            case 'removeCarpoolPoints':
+                $this->addRemoveCarpoolPointsNotification($options);
+                break;
+            case 'carpoolAddPoints':
+                $this->addCarpoolPointsNotification($options);
+                break;
+            case 'ratingCarpool':
+                $this->addRatingCarpoolNotification($object);
+                break;
+            case 'cancelVoyage':
+                $this->addCancelVoyageNotification($object,$options);
+                break;
+            case 'pointsVoyageCanceled':
+                $this->addCancelVoyageAddPointNotification($options);
+                break;
         }
-/*
-        if($type === 'deal'){
-            $this->addDealNotification($object);
-        }
-        if ($type === 'driverRequest'){
-            $this->addDriverRequestNotification($object);
-        }
-        if($type === 'treatmentDriverRequest'){
-            $this->addRequestTreatmentNotification($object,$options['treatment']);
-        }
-        if($type === 'addDriverToDeal'){
-            $this->addAddDriverToDealNotification($object);
-        }
-        if($type === 'doneDeal' || $type === 'semiDoneDeal'){
-            $this->addDoneDealNotification($object,$type,$options['status']);
-        }
-        if($type === 'points'){
-            $this->addPointsNotification($options['user'], $options['status'],$options['number']);
-        }
-        if ($type === 'ratingDriver'){
-            $this->addRatingDriver($object);
-        }
-        if ($type === 'ratingHosting'){
-            $this->addRatingHosting($object);
-        }
-        if ($type === 'hostingRequest'){
-            $this->addHostingRequestNotification($object);
-        }
-        if($type === 'treatmentHostingRequest'){
-            $this->addHostingRequestTreatmentNotification($object,$options['treatment']);
-        }
-        if($type === 'doneHosting'){
-            $this->addDoneHostingNotification($object);
-        }
-        if($type === 'hostingPoints'){
-            $this->addPointsHostingNotification($options['user'],$options['number']);
-        }*/
+
     }
 
     protected function addDealNotification(Deal $deal): void
@@ -536,11 +529,7 @@ class Notification
 
     /**
      * send realtime notification
-     * @param $recipient
-     * @param $type
-     * @param $sender
-     * @param $link
-     * @param $category
+     * @param $pushedNotification
      * @throws \ZMQSocketException
      */
     public function pushNotification($pushedNotification): void
@@ -676,7 +665,7 @@ class Notification
         $this->pushNotification($pushedNotification);
     }
 
-    private function addDoneHostingNotification(HostingRequest $hostingRequest)
+    private function addDoneHostingNotification(HostingRequest $hostingRequest): void
     {
         $thisUser = $this->security->getUser();
 
@@ -716,7 +705,7 @@ class Notification
         $this->pushNotification($pushedNotification);
     }
 
-    private function addPointsHostingNotification(User $user, string $point)
+    private function addPointsHostingNotification(User $user, string $point): void
     {
 
         $notification = $this->notificationManager->createNotification('hostingPoints',$point,'/profile/');
@@ -744,7 +733,7 @@ class Notification
         $this->pushNotification($pushNotification);
     }
 
-    private function addMeetupRequestNotification(JoinRequest $joinRequest)
+    private function addMeetupRequestNotification(JoinRequest $joinRequest): void
     {
         $recipient = $joinRequest->getMeetup()->getCreator();
         $sender = $joinRequest->getUser();
@@ -774,7 +763,7 @@ class Notification
         $this->pushNotification($pushedNotification);
     }
 
-    private function addMeetupRequestTreatmentNotification(JoinRequest $joinRequest,string $treatment)
+    private function addMeetupRequestTreatmentNotification(JoinRequest $joinRequest,string $treatment): void
     {
         $recipient = $joinRequest->getUser();
         $sender = $joinRequest->getMeetup()->getCreator();
@@ -866,7 +855,7 @@ class Notification
         $this->pushNotification($pushedNotification);
     }
 
-    private function addMeetupTransferToParticipantNotification(Meetup $meetup, $recipient)
+    private function addMeetupTransferToParticipantNotification(Meetup $meetup, $recipient): void
     {
 
         $sender = $meetup->getCreator();
@@ -930,7 +919,7 @@ class Notification
 
     }
 
-    private function addRatingMeetup(Vote $vote, $options)
+    private function addRatingMeetup(Vote $vote, $options): void
     {
         $meetup = $options['meetup'];
 
@@ -953,6 +942,270 @@ class Notification
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$vote->getVoter()->getProfileImage(),
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addVoyageRequest(VoyageRequest $voyageRequest): void
+    {
+        $recipient = $voyageRequest->getVoyage()->getCreator()->getUser();
+        $sender = $voyageRequest->getSender();
+
+        $notification = $this->notificationManager->createNotification('','','/voyage/'.$voyageRequest->getVoyage()->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'voyageRequest','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'voyageRequest',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/voyage/'.$voyageRequest->getVoyage()->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage()
+        );
+
+        $this->pushNotification($pushedNotification);
+
+    }
+
+    private function addVoyageRequestTreatmentNotification(VoyageRequest $voyageRequest,string $treatment): void
+    {
+        $recipient = $voyageRequest->getSender();
+        $sender = $voyageRequest->getVoyage()->getCreator()->getUser();
+
+        $notification = $this->notificationManager->createNotification($treatment,'voyageTreatment','/voyage/'.$voyageRequest->getVoyage()->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'treatmentVoyageRequest','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'treatmentVoyageRequest',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/voyage/'.$voyageRequest->getVoyage()->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+            'subject' =>$treatment
+        );
+
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addVoyageRemovePassengerNotification(Voyage $voyage,array $options): void
+    {
+        $recipient = $options['recipient'];
+        $sender = $options['sender'];
+        $status = $options['status'];
+
+        $notification = $this->notificationManager->createNotification($status,'','/voyage/'.$voyage->getId());
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'voyageRemovePassenger','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'voyageRemovePassenger',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/voyage/'.$voyage->getId(),
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addRemoveUserPointsNotification(array $options): void
+    {
+        $recipient = $options['user'];
+        $point = $options['point'];
+        $notification = $this->notificationManager->createNotification('removeUserPoints',$point,'/profile/');
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+        // you must make the sender nullable , here no sender but it is any user
+        $notifiedBy = new NotifiedBy($notification, $recipient, $recipient, 'removeUserPoints',$point);
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'removeUserPoints',
+            'recipient'=>$recipient->getId(),
+            'category'=>$point,
+            'sender'=>null,
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>null,
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addRemoveCarpoolPointsNotification(array $options): void
+    {
+        $recipient = $options['user'];
+        $point = $options['point'];
+        $notification = $this->notificationManager->createNotification('removeCarpoolPoints',$point,'/profile/');
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+        // you must make the sender nullable , here no sender but it is any user
+        $notifiedBy = new NotifiedBy($notification, $recipient, $recipient, 'removeCarpoolPoints',$point);
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'removeCarpoolPoints',
+            'recipient'=>$recipient->getId(),
+            'category'=>$point,
+            'sender'=>null,
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>null,
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addCarpoolPointsNotification(array $options): void
+    {
+        $recipient = $options['user'];
+        $point =    $options['point'];
+        $notification = $this->notificationManager->createNotification('carpoolAddPoints',$point,'/profile/');
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+        // you must make the sender nullable , here no sender but it is any user
+        $notifiedBy = new NotifiedBy($notification, $recipient, $recipient, 'carpoolAddPoints',$point);
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'carpoolAddPoints',
+            'recipient'=>$recipient->getId(),
+            'category'=>'Points',
+            'sender'=>null,
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>null,
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addRatingCarpoolNotification(Vote $vote): void
+    {
+        $notification = $this->notificationManager->createNotification('ratingCarpool','','/profile/');
+        $this->notificationManager->addNotification(array($vote->getCandidate()), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $vote->getVoter(), $vote->getCandidate(), 'ratingCarpool','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'ratingCarpool',
+            'recipient'=>$vote->getCandidate()->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($vote->getVoter()->getFirstname()),
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$vote->getVoter()->getProfileImage(),
+        );
+
+
+        $this->pushNotification($pushNotification);
+    }
+
+    private function addCancelVoyageNotification(Voyage $voyage, array $options): void
+    {
+        $recipient = $options['recipient'];
+        $sender = $voyage->getCreator()->getUser();
+
+        $notification = $this->notificationManager->createNotification('cancelVoyage','','/voyage/');
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'cancelVoyage','');
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'cancelVoyage',
+            'recipient'=>$recipient->getId(),
+            'category'=>'',
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/voyage/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+        $this->pushNotification($pushedNotification);
+    }
+
+    private function addCancelVoyageAddPointNotification(array $options): void
+    {
+        $recipient = $options['recipient'];
+        $point =    $options['points'];
+        $notification = $this->notificationManager->createNotification('pointsVoyageCanceled',$point,'/profile/');
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+        // you must make the sender nullable , here no sender but it is any user
+        $notifiedBy = new NotifiedBy($notification, $recipient, $recipient, 'pointsVoyageCanceled',$point);
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'pointsVoyageCanceled',
+            'recipient'=>$recipient->getId(),
+            'category'=>'Points',
+            'sender'=>null,
+            'link' =>'/profile/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>null,
         );
 
 

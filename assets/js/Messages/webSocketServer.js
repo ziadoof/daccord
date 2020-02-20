@@ -216,7 +216,7 @@ function wsConnect(id) {
                         text=
                             '<p class="font-weight-bold mb-0">'+
                             '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
-                            ' Cancel meetup join ! ! '+'</p>'+
+                            ' Cancel meetup join !'+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
                             statusParticipant
                             +'</p>';
@@ -232,7 +232,7 @@ function wsConnect(id) {
                         text=
                             '<p class="font-weight-bold mb-0">'+
                             '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
-                            ' Cancel meetup join ! ! '+'</p>'+
+                            ' Cancel meetup join! '+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
                             statusWaiting
                             +'</p>';
@@ -250,7 +250,7 @@ function wsConnect(id) {
                         text=
                             '<p class="font-weight-bold mb-0">'+
                             '<span class="blued"><i class="far fa-comment-alt"></i></span>'+
-                            ' New comment ! ! '+'</p>'+
+                            ' New comment !'+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
                             ' added a comment to an meetup where you are a member..! '+
                             '</p>';
@@ -262,6 +262,112 @@ function wsConnect(id) {
                             ' Rating ! '+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
                             ' has added a rating for your meetup. '+
+                            '</p>';
+                        break;
+                    case'voyageRequest':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="fas fa-car"></i></span>'+
+                            ' New voyage join request ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' had been sent you a new voyage join request..! '+
+                            '</p>';
+                        break;
+                    case 'treatmentVoyageRequest':
+                        if (messageData['subject']=== 'Rejected'){
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
+                                ' Treatment voyage join request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' rejected the voyage join request that you had previously sent him. '+
+                                '</p>';
+                        }
+                        else{
+                            text=
+                                '<p class="font-weight-bold mb-0">'+
+                                '<span class="blued"><i class="fas fa-check"></i></span>'+
+                                ' Treatment voyage join request ! '+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+'</span>'+
+                                ' accepted the voyage join request that you had previously sent him. '+
+                                '</p>';
+                        }
+                        break;
+                    case'voyageRemovePassenger':
+                        let statusRemovedPassenger = '';
+                        if(messageData['subject']=== 'removed'){
+                            statusRemovedPassenger = ' had canceled your subscription in his voyage. ';
+                        }
+                        else{
+                            statusRemovedPassenger = ' had canceled his subscription in your voyage. ';
+                        }
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
+                            ' Cancel voyage join! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            statusRemovedPassenger
+                            +'</p>';
+                        break;
+                    case'removeUserPoints':
+                        let numberOfPoints = '';
+                        if(messageData['category']=== '0'){
+                            numberOfPoints = ' You have no points left!. ';
+                        }
+                        else{
+                            numberOfPoints = ' You lost '+messageData['category']+' points. ';
+                        }
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-star"></i></span>'+
+                            ' POINTS ! '+'</p>'+
+                            '<p><span>'+ numberOfPoints +'</span></p>';
+                        break;
+                    case'removeCarpoolPoints':
+                        let carpoolPoints = '';
+                        if(messageData['category']=== '0'){
+                            carpoolPoints = ' You have no points left as carpool!. ';
+                        }
+                        else{
+                            carpoolPoints = ' You lost '+messageData['category']+' points as carpool!. ';
+                        }
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-star"></i></span>'+
+                            ' POINTS ! '+'</p>'+
+                            '<p><span>'+ carpoolPoints +'</span></p>';
+                        break;
+                    case'carpoolAddPoints':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-star"></i></span>'+
+                            ' POINTS ! '+'</p>'+
+                            '<p><span> Congratulations ... 30 extra points have been added to you as carpool </span></p>';
+                        break;
+                    case'ratingCarpool':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="blued"><i class="far fa-star"></i></span>'+
+                            ' Rating ! '+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' has added a rating for you as a carpool, based on your latest voyage. '+
+                            '</p>';
+                        break;
+                    case'cancelVoyage':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
+                            ' Cancel voyage!'+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' canceled a voyage you are traveling on. '
+                            +'</p>';
+                        break;
+                    case'pointsVoyageCanceled':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="far fa-star"></i></span>'+
+                            ' POINTS ! '+'</p>'+
+                            '<p><span >'+' You earned five extra points for canceling a voyage you are traveling on. '+'</span>'+
                             '</p>';
                         break;
                 }
@@ -306,7 +412,23 @@ function wsConnect(id) {
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='hostingPoints'){
-                    elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 hostingPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                }
+                else if(typeON==='removeUserPoints'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                }
+                else if(typeON==='pointsVoyageCanceled'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                }
+                else if(typeON==='removeCarpoolPoints'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                }
+                else if(typeON==='carpoolAddPoints' || typeON==='ratingCarpool' ){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='ratingMeetup'){
@@ -388,6 +510,19 @@ function wsConnect(id) {
                 for(var driverP of linksDrivers){
                     driverP.addEventListener('click', function (e) {
                         localStorage.setItem('profile_tap','#edit_driver' );
+                    });
+                }
+
+                var linksHosting = document.getElementsByClassName('hostingPoints');
+                for(var hostingP of linksHosting){
+                    hostingP.addEventListener('click', function (e) {
+                        localStorage.setItem('profile_tap','#edit_hosting' );
+                    });
+                }
+                var linksCarpool = document.getElementsByClassName('carpoolPoints');
+                for(var carpoolP of linksCarpool){
+                    carpoolP.addEventListener('click', function (e) {
+                        localStorage.setItem('profile_tap','#edit_carpool' );
                     });
                 }
 

@@ -57,6 +57,10 @@ class RatingController extends AbstractController
 
         $userCandidate = $this->userRepository->findOneById($candidate);
         $BDrating = $this->ratingRepository->findByTypeAndCandidate($type,$candidate);
+        $firstTime = false;
+        if(empty($BDrating)){
+            $firstTime = true;
+        }
         $newRating = new Rating();
         $newRating->setCandidate($userCandidate);
         $newRating->setType($type);
@@ -94,6 +98,16 @@ class RatingController extends AbstractController
             if($type === 'hosting'){
                 $notification->addNotification(['type' => 'ratingHosting', 'object' => $vote]);
                 return $this->redirectToRoute('hosting_request_index');
+            }
+            if($type === 'carpool'){
+                if($firstTime && $userCandidate){
+                    $userCandidate->getCarpool()->setPoint(30);
+                    $entityManager->persist($userCandidate->getCarpool());
+                    $entityManager->flush();
+                     $notification->addNotification(['type' => 'carpoolAddPoints', 'user'=>$userCandidate, 'point'=> 30]);
+                }
+                 $notification->addNotification(['type' => 'ratingCarpool', 'object' => $vote]);
+                return $this->redirectToRoute('voyage_index');
             }
 
             return $this->redirectToRoute('ad_index');
