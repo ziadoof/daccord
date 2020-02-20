@@ -15,15 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class StationController extends AbstractController
 {
-    /**
-     * @Route("/", name="carpool_station_index", methods={"GET"})
-     */
-    public function index(StationRepository $stationRepository): Response
-    {
-        return $this->render('carpool/station/index.html.twig', [
-            'stations' => $stationRepository->findAll(),
-        ]);
-    }
+
 
     /**
      * @Route("/new", name="carpool_station_new", methods={"GET","POST"})
@@ -48,35 +40,6 @@ class StationController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="carpool_station_show", methods={"GET"})
-     */
-    public function show(Station $station): Response
-    {
-        return $this->render('carpool/station/show.html.twig', [
-            'station' => $station,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="carpool_station_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Station $station): Response
-    {
-        $form = $this->createForm(StationType::class, $station);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('carpool_station_index');
-        }
-
-        return $this->render('carpool/station/edit.html.twig', [
-            'station' => $station,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="carpool_station_delete", methods={"DELETE"})
