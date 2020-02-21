@@ -1,44 +1,4 @@
-.fa-road{
-    font-size: 300%;
-}
-.point-departre i{
-    font-size: 150%;
-}
-.vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-.white{
-    color: white;
-}
-.inf-badge{
-    border-radius: 5px;
-}
-#voyage_request_description{
-    resize: none;
-    height: 9vh;
-}
-.passenger-carpool span i{
-    font-size: 150%;
-}
-.accepted-voyage form i{
-    color: limegreen;
-}
-.rejected-voyage form i{
-    color: red;
-}
-.message-voyage form i{
-    color: deepskyblue;
-}
-.voyage-map-time span{
-    position: absolute;
-    right: 0;
-}
-.voyage-map-item{
-    position: absolute;
-    top: auto;
+.fav-btn span {
+    font-size: 180%;
 }
 

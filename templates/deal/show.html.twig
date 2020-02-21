@@ -69,6 +69,24 @@
                         {% endif %}
                     </div>
                 </div>
+                <div>
+                    {% if app.user %}
+                        {% set isFavorite = 'false' %}
+                        {#data-favorite must be string not boolean#}
+                        {% for favorite in app.user.getFavoritesByType('deal')  %}
+                            {% if favorite.deal is same as (deal) %}
+                                {% set isFavorite = 'true' %}
+                            {% endif %}
+                        {% endfor %}
+                        <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  mt-1" data-object="{{ deal.id }}" data-type="deal" data-favorite="{{ isFavorite }}">
+                            <div class="flexbox">
+                                <div class="fav-btn">
+                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
             </div>
             {% if deal.offerUser is same as (app.user) and deal.demandUserStatus %}
                 <div class="justify-content-center my-0">

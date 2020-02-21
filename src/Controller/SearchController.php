@@ -70,7 +70,18 @@ class SearchController extends AbstractController
                     $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchOffer($offerSearch, $user);
 
                     foreach ($result as $ad) {
-                        $serializedResult [] = $ad->serialize();
+                        $isFavorite = 'false';
+                        if($user){
+                            foreach ($user->getFavoritesByType('ad') as $favorite){
+                                if($ad === $favorite->getAd()){
+                                    $isFavorite = 'true';
+                                }
+                            }
+                        }
+                        $favorite = $user?$isFavorite:'unknown';
+                        $serializedAd = $ad->serialize();
+                        $serializedAd['favorite']=$favorite;
+                        $serializedResult [] = $serializedAd;
                     }
                     $response = array(
                         'result' => $serializedResult,
@@ -137,7 +148,18 @@ class SearchController extends AbstractController
                     $result = $this->manager->getRepository('App\Entity\Ads\Ad')->searchDemand($demandSearch, $user);
 
                     foreach ($result as $ad) {
-                        $serializedResult [] = $ad->serialize();
+                        $isFavorite = 'false';
+                        if($user){
+                            foreach ($user->getFavoritesByType('ad') as $favorite){
+                                if($ad === $favorite->getAd()){
+                                    $isFavorite = 'true';
+                                }
+                            }
+                        }
+                        $favorite = $user?$isFavorite:'unknown';
+                        $serializedAd = $ad->serialize();
+                        $serializedAd['favorite']=$favorite;
+                        $serializedResult [] = $serializedAd;
                     }
                     $response = array(
                         'result' => $serializedResult,
@@ -187,6 +209,7 @@ class SearchController extends AbstractController
         $hostingForm = $formHostingSearchType->getForm();
         $hostingForm->handleRequest($request);
         $serializedResult = [];
+        $user = $this->getUser();
 
         if ($hostingForm->isSubmitted() && $hostingForm->isValid()) {
             $hostingSearch = $hostingForm->getData();
@@ -197,7 +220,19 @@ class SearchController extends AbstractController
                     $result = $this->manager->getRepository('App\Entity\Hosting\Hosting')->searchHosting($hostingSearch);
 
                     foreach ($result as $hosting) {
-                        $serializedResult [] = $hosting->serialize();
+                        $isFavorite = 'false';
+                        if($user){
+                            foreach ($user->getFavoritesByType('hosting') as $favorite){
+                                if($hosting === $favorite->getHosting()){
+                                    $isFavorite = 'true';
+                                }
+                            }
+                        }
+                        $favorite = $user?$isFavorite:'unknown';
+                        $serializedHosting = $hosting->serialize();
+                        $serializedHosting['favorite']=$favorite;
+                        $serializedResult [] = $serializedHosting;
+
                     }
                     $response = array(
                         'result' => $serializedResult,
@@ -250,6 +285,7 @@ class SearchController extends AbstractController
         $meetupForm = $formMeetupSearchType->getForm();
         $meetupForm->handleRequest($request);
         $serializedResult = [];
+        $user=$this->getUser();
 
         if ($meetupForm->isSubmitted() && $meetupForm->isValid()) {
             $meetupSearch = $meetupForm->getData();
@@ -261,7 +297,19 @@ class SearchController extends AbstractController
 
 
                     foreach ($result as $meetup) {
-                        $serializedResult [] = $meetup->serialize();
+                        $isFavorite = 'false';
+                        if($user){
+                            foreach ($user->getFavoritesByType('meetup') as $favorite){
+                                if($meetup === $favorite->getMeetup()){
+                                    $isFavorite = 'true';
+                                }
+                            }
+                        }
+                        $favorite = $user?$isFavorite:'unknown';
+                        $serializedMeetup = $meetup->serialize();
+                        $serializedMeetup['favorite']=$favorite;
+                        $serializedResult [] = $serializedMeetup;
+
                     }
                     usort($serializedResult, function($a1, $a2) {
                         $v1 = strtotime($a2['start']);
@@ -320,6 +368,7 @@ class SearchController extends AbstractController
         $voyageForm = $formVoyageSearchType->getForm();
         $voyageForm->handleRequest($request);
         $serializedResult = [];
+        $user = $this->getUser();
 
         if ($voyageForm->isSubmitted() && $voyageForm->isValid()) {
             $voyageSearch = $voyageForm->getData();
@@ -328,9 +377,20 @@ class SearchController extends AbstractController
                     $result = $this->manager->getRepository('App\Entity\Carpool\Voyage')->searchCarpooling($voyageSearch);
 
                     foreach ($result as $voyage) {
-                        $serialized = $voyage->searchSerialize();
-                        $serialized['creatorRating'] = $this->getCarpoolRating($voyage,$ratingRepository);
-                        $serializedResult [] = $serialized;
+                        $isFavorite = 'false';
+                        if($user){
+                            foreach ($user->getFavoritesByType('voyage') as $favorite){
+                                if($voyage === $favorite->getVoyage()){
+                                    $isFavorite = 'true';
+                                }
+                            }
+                        }
+                        $favorite = $user?$isFavorite:'unknown';
+                        $serializedVoyage =  $voyage->searchSerialize();
+                        $serializedVoyage['favorite']=$favorite;
+                        $serializedVoyage['creatorRating']=$this->getCarpoolRating($voyage,$ratingRepository);;
+                        $serializedResult [] = $serializedVoyage;
+
                     }
                     $response = array(
                         'result' => $serializedResult,

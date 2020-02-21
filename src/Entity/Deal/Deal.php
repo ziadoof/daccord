@@ -85,6 +85,13 @@ class Deal
 
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="deal", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $favorites;
+
+    /**
      * Deal constructor.
      */
     public function __construct()
@@ -94,6 +101,22 @@ class Deal
         $this->demandUserStatus = false;
         $this->driverStatus = false;
         $this->driverRequests = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param mixed $favorites
+     */
+    public function setFavorites($favorites): void
+    {
+        $this->favorites = $favorites;
     }
 
 

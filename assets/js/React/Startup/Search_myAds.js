@@ -21,7 +21,7 @@ $('#search-offer').submit( function(e) {
         window.history.pushState( "","",'/search/offers/'+ext);
         $('#all').hide();
         ReactDOM.render(<ListsAds result={response['result']}/>, document.getElementById('searching'));
-
+        setFavorite();
     }).fail(function(jxh,textmsg,errorThrown){
          alert('Something went wrong during processing search for offers!');
     });
@@ -44,6 +44,7 @@ $('#search-demand').submit( function(e) {
         window.history.pushState( "","",'/search/demands/'+ext);
         $('#all').hide();
         ReactDOM.render(<ListsAds  result={response['result']}/>, document.getElementById('searching'));
+        setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
                  alert('Something went wrong during processing search for demands!');
@@ -62,6 +63,8 @@ $(document).on('click', '#my_offer', function () {
         $('#all').hide();
         window.history.pushState("", "", '/my_ads/offers');
         ReactDOM.render(<ListsAds  result={response['result']}/>, document.getElementById('searching'));
+        setFavorite();
+
     }).fail(function(jxh,textmsg,errorThrown){
                  alert('Something went wrong during processing your offers!');
     });
@@ -80,6 +83,8 @@ $(document).on('click', '#my_demand', function () {
         window.history.pushState("", null, '/my_ads/demands');
 
         ReactDOM.render(<ListsAds  result={response['result']}/>, document.getElementById('searching'));
+        setFavorite();
+
     }).fail(function(jxh,textmsg,errorThrown){
                  alert('Something went wrong during processing your demands!');
     });
@@ -106,6 +111,7 @@ $('#search-hosting').submit( function(e) {
         window.history.pushState( "","",'/search/hosting/'+ext);
         $('#all').hide();
         ReactDOM.render(<ListsHosting result={response['result']}/>, document.getElementById('searching'));
+        setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
         alert('Something went wrong during processing search for hosting!');
@@ -128,6 +134,7 @@ $('#search-meetup').submit( function(e) {
         window.history.pushState( "","",'/search/meetup/'+ext);
         $('#all').hide();
         ReactDOM.render(<ListsMeetup result={response['result']}/>, document.getElementById('searching'));
+        setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
         alert('Something went wrong during processing search for hosting!');
@@ -150,8 +157,42 @@ $('#search-carpooling').submit( function(e) {
         window.history.pushState( "","",'/search/carpooling/'+ext);
         $('#all').hide();
         ReactDOM.render(<ListsVoyages result={response['result']}/>, document.getElementById('searching'));
+        setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
         alert('Something went wrong during processing search for offers!');
     });
 });
+
+function setFavorite() {
+
+    var favoriteAdd = document.getElementsByClassName('js-favorite-add');
+    for (var favorite of favoriteAdd) {
+        favorite.addEventListener('click', function (e) {
+            $(this.querySelector('span')).toggleClass('active');
+            e.preventDefault();
+            let object = this.getAttribute('data-object');
+            let type = this.getAttribute('data-type');
+            let isFavorite = this.getAttribute('data-favorite');
+            let data = {object, type};
+            let url = '';
+            if (isFavorite === 'true') {
+                url = Routing.generate('favorite_remove');
+                $(this).attr('data-favorite', 'false');
+            } else {
+                url = Routing.generate('favorite_add');
+                $(this).attr('data-favorite', 'true');
+            }
+
+            $.ajax({
+                method: "post",
+                dataType: "json",
+                url: url,
+                data: data,
+            }).done(function (response) {
+            })
+
+
+        })
+    }
+}
