@@ -55,4 +55,13 @@ class AdRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findOneById($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

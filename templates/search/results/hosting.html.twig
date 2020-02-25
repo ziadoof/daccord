@@ -22,6 +22,24 @@
                                         <span class="ml-2 blued">{{hosting['city']}}</span>
                                     </div>
                                 </div>
+                                <div>
+                                    {% if app.user %}
+                                        {% set isFavorite = 'false' %}
+                                        {#data-favorite must be string not boolean#}
+                                        {% for favorite in app.user.getFavoritesByType('hosting')  %}
+                                            {% if favorite.hosting.id is same as (hosting['id']) %}
+                                                {% set isFavorite = 'true' %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  mt-3 mr-4" data-object="{{ hosting['id'] }}" data-type="hosting" data-favorite="{{ isFavorite }}">
+                                            <div class="flexbox">
+                                                <div class="fav-btn">
+                                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </a>

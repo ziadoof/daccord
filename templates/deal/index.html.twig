@@ -11,13 +11,31 @@
                 {% for deal in suggestedDeals %}
                     <div class="deal">
                         <div class="border-respo">
-                            <div class="col-md-12 deals-form">
+                            <div class="col-md-12 ">
                                 <div class="row border-bottom">
-                                    <div class="col-md-6">
-                                        <p class="my-2 "><span>Suggested at</span> {{ deal.date_format(deal.suggestionDate) }}</p>
+                                    <div class="col-md-5">
+                                        <p class="my-2 "><span class="blued">Suggested at</span> {{ deal.date_format(deal.suggestionDate) }}</p>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p class="float-right my-2"><span>Category : </span>{{ deal.category }}</p>
+                                    <div class="col-md-2">
+                                        {% if app.user %}
+                                            {% set isFavorite = 'false' %}
+                                            {#data-favorite must be string not boolean#}
+                                            {% for favorite in app.user.getFavoritesByType('deal')  %}
+                                                {% if favorite.deal is same as (deal) %}
+                                                    {% set isFavorite = 'true' %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  mt-1" data-object="{{ deal.id }}" data-type="deal" data-favorite="{{ isFavorite }}">
+                                                <div class="flexbox">
+                                                    <div class="fav-btn">
+                                                        <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p class="float-right my-2"><span class="blued">Category : </span>{{ deal.category }}</p>
                                     </div>
                                 </div>
                                 {% if deal.offerUser.id is same as(app.user.id) %}

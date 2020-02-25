@@ -33,6 +33,22 @@
                                     <div class="col-md-1">
                                     </div>
                                 {% endif %}
+                                <div class="col ">
+                                    {% set isFavorite = 'false' %}
+                                    {#data-favorite must be string not boolean#}
+                                    {% for favorite in app.user.getFavoritesByType('meetup')  %}
+                                        {% if favorite.meetup.id is same as (meetup['id']) %}
+                                            {% set isFavorite = 'true' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  float-right mr-2 mb-2" data-object="{{ meetup['id'] }}" data-type="meetup" data-favorite="{{ isFavorite }}">
+                                        <div class="flexbox">
+                                            <div class="fav-btn">
+                                                <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </a>

@@ -161,6 +161,29 @@ class Ad
     private $category;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="ad", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $favorites;
+
+    /**
+     * @return mixed
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param mixed $favorites
+     */
+    public function setFavorites($favorites): void
+    {
+        $this->favorites = $favorites;
+    }
+
+    /**
      * @return mixed
      */
     public function getGeneralCategory()

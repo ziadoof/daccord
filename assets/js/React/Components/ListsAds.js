@@ -10,6 +10,7 @@ class ListsAds extends React.Component {
         };
         this.state.totalPage = Math.ceil(props.result.length / this.state.itemPerPage);
         this.handleClick = this.handleClick.bind(this);
+
     }
 
     componentDidUpdate(prevProps) {
@@ -33,6 +34,8 @@ class ListsAds extends React.Component {
         });
     }
 
+
+
     renderResult(items){
 
         return items.map((result) => {
@@ -49,6 +52,7 @@ class ListsAds extends React.Component {
             const ville = result.ville;
             const dateOfAd = result.dateOfAd;
             const typeOfAd = result.typeOfAd;
+            const favorite = result.favorite;
 
             let offerImage;
             if (imageOne !== null) {
@@ -87,36 +91,62 @@ class ListsAds extends React.Component {
             }
             let url = Routing.generate('ad_show', {'id': id});
 
+            let favoriteStatus;
+            if(favorite === 'false'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add  float-left mr-2" data-object={id} data-type="ad" data-favorite="false">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else if(favorite === 'true'){
+              favoriteStatus =
+                  <form method="post" action="" className="js-favorite-add  float-left mr-2" data-object={id} data-type="ad" data-favorite="true">
+                      <div className="flexbox">
+                          <div className="fav-btn">
+                            <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
+                          </div>
+                      </div>
+                  </form>;
+            }
+            else{
+                favoriteStatus = <div></div>;
+            }
+
             return (
 
                 <div className="text-center col-md-3 px-md-2 my-2 ad_show" key={Math.random()}>
                     <div id="ad_index" className="ad_index">
-                        <a href={url}>
                             <div className="px-2 border-ad">
                                 <div className="row">
                                     <div className="col-md-12 pt-2">
                                         <div className=" ">
+                                            {favoriteStatus}
                                             <b className="title-blue float-left">{category}</b>
                                             <b className="float-right ">{dateOfAd}</b>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <img className="image_ad" src={image}/>
+                                <a href={url}>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <img className="image_ad" src={image}/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-8">
-                                        {oldPrice}
-                                        {newPrice}
+                                    <div className="row">
+                                        <div className="col-md-8">
+                                            {oldPrice}
+                                            {newPrice}
+                                        </div>
+                                        <div className="col-md-4">
+                                            <span className="float-right mt-3">{place}</span>
+                                        </div>
                                     </div>
-                                    <div className="col-md-4">
-                                        <span className="float-right mt-3">{place}</span>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
                     </div>
                 </div>
             )

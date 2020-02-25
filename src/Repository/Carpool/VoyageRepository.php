@@ -59,4 +59,14 @@ class VoyageRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findOneById($id)
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 }

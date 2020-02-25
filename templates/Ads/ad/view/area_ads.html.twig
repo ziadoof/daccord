@@ -3,23 +3,39 @@
         {% for a_ad in ad_area %}
             <div class="text-center col-md-3 px-md-2 my-2 ad_show">
                 <div id="ad_index" class="ad_index">
-                    <a href="{{ path('ad_show', {'id': a_ad.id}) }}"class="">
-                        <div class="px-2 border-ad">
-                            <div class="row">
-                                <div class="col-md-12 pt-2">
-                                    <div class=" ">
-                                        <b class="title-blue float-left">{{ a_ad.typeOfAd }}</b>
-                                        {% if "now"|date('Y-m-d') == a_ad.dateOfAd|date('Y-m-d') %}
-                                            <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
-                                        {% elseif "now"|date('Y') == a_ad.dateOfAd|date('Y') and "now"|date('m') == a_ad.dateOfAd|date('m') and
-                                            "now"|date('d') == (a_ad.dateOfAd|date('d'))+1 %}
-                                            <b class="float-right ">{{ 'Hier' }}</b>
-                                        {% else %}
-                                            <b class="float-right ">{{ 'De ' }}{{ a_ad.dateOfAd|date('Y-m-d') }}</b>
+                    <div class="px-2 border-ad">
+                        <div class="row">
+                            <div class="col-md-12 pt-2">
+                                <div class=" ">
+                                    {% if app.user %}
+                                    {% set isFavorite = 'false' %}
+                                    {#data-favorite must be string not boolean#}
+                                    {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                        {% if favorite.ad is same as (a_ad) %}
+                                            {% set isFavorite = 'true' %}
                                         {% endif %}
-                                    </div>
+                                    {% endfor %}
+                                    <form method="post" action="" class="js-favorite-add  float-left mr-2" data-object="{{ a_ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                        <div class="flexbox">
+                                            <div class="fav-btn">
+                                                <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% endif %}
+                                    <b class="title-blue float-left">{{ a_ad.category }}</b>
+                                    {% if "now"|date('Y-m-d') == a_ad.dateOfAd|date('Y-m-d') %}
+                                        <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
+                                    {% elseif "now"|date('Y') == a_ad.dateOfAd|date('Y') and "now"|date('m') == a_ad.dateOfAd|date('m') and
+                                        "now"|date('d') == (a_ad.dateOfAd|date('d'))+1 %}
+                                        <b class="float-right ">{{ 'Hier' }}</b>
+                                    {% else %}
+                                        <b class="float-right ">{{ 'De ' }}{{ a_ad.dateOfAd|date('Y-m-d') }}</b>
+                                    {% endif %}
                                 </div>
                             </div>
+                        </div>
+                        <a href="{{ path('ad_show', {'id': a_ad.id}) }}"class="">
                             {% if a_ad.typeOfAd is same as ('Offer') %}
                                 <div class="row">
                                     <div class="col-md-12">
@@ -58,8 +74,8 @@
                                     <span class="float-right mt-3">{{ a_ad.user.city.name }}</span>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
                 <div class="mx-2">
 

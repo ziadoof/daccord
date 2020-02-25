@@ -96,6 +96,29 @@ class Meetup
     /**
      * @return mixed
      */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param mixed $favorites
+     */
+    public function setFavorites($favorites): void
+    {
+        $this->favorites = $favorites;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="meetup", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $favorites;
+
+    /**
+     * @return mixed
+     */
     public function getDescription()
     {
         return $this->description;

@@ -188,6 +188,29 @@ class Voyage
      */
     private $children;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="voyage", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $favorites;
+
+    /**
+     * @return mixed
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param mixed $favorites
+     */
+    public function setFavorites($favorites): void
+    {
+        $this->favorites = $favorites;
+    }
+
 
     public function __construct()
     {

@@ -55,9 +55,36 @@ class ListsMeetup extends React.Component {
             const isFinish = result.finish;
             const startAt = result.start;
             const finish = this.isFinish(isFinish);
+            const favorite = result.favorite;
+
 
 
             let url = Routing.generate('meetup_show', {'id': id});
+
+            let favoriteStatus;
+            if(favorite === 'false'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add float-right mr-2 mb-2" data-object={id} data-type="meetup" data-favorite="false">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else if(favorite === 'true'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add float-right mr-2 mb-2" data-object={id} data-type="meetup" data-favorite="true">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else{
+                favoriteStatus = <div></div>;
+            }
 
             return (
                     <div className="col-md-12 px-2" key={Math.random()}>
@@ -78,6 +105,9 @@ class ListsMeetup extends React.Component {
                                         </div>
                                         <div className="col-md-1">
                                             {finish}
+                                        </div>
+                                        <div className="col">
+                                            {favoriteStatus}
                                         </div>
                                     </div>
                                 </div>

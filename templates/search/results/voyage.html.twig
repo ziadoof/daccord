@@ -75,14 +75,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="col-md-6 mt-3 vertical-center">
-                               <span>{{ voyage['departureDate'] }}</span>
+                        <div class="row mb-1">
+                            <div class="col-md-6  ">
+                                <span>{{ voyage['departureDate'] }}</span>
                             </div>
-                            <div class="col-md-6 mt-3 vertical-center">
+                            <div class="col-md-6  ">
+                                <div class=" ">
+                                    {% if app.user %}
+                                        {% set isFavorite = 'false' %}
+                                        {#data-favorite must be string not boolean#}
+                                        {% for favorite in app.user.getFavoritesByType('voyage')  %}
+                                            {% if favorite.voyage.id is same as (voyage['id']) %}
+                                                {% set isFavorite = 'true' %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right ml-2" data-object="{{ voyage['id'] }}" data-type="voyage" data-favorite="{{ isFavorite }}">
+                                            <div class="flexbox">
+                                                <div class="fav-btn">
+                                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    {% endif %}
+                                </div>
                                 <span class="float-right">
                                     {{voyage['price']}}{{ '€' }}
                                 </span>
+
                             </div>
                         </div>
                     </div>

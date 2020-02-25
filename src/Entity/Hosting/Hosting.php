@@ -30,6 +30,29 @@ class Hosting
     private $department;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="hosting", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     *
+     */
+    private $favorites;
+
+    /**
+     * @return mixed
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param mixed $favorites
+     */
+    public function setFavorites($favorites): void
+    {
+        $this->favorites = $favorites;
+    }
+
+    /**
      * @return mixed
      */
     public function getDepartment()

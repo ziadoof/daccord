@@ -10,7 +10,23 @@
                             <div class="row">
                                 <div class="col-md-12 pt-2">
                                     <div class=" ">
-                                        <b class="title-blue float-left">{#{{ ad.typeOfAd }}#}{{ ad.category.parent }}{{ '/' }}{{ ad.category }}</b>
+                                        {% if app.user %}
+                                            {% set isFavorite = 'false' %}
+                                            {#data-favorite must be string not boolean#}
+                                            {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                                {% if favorite.ad is same as (ad) %}
+                                                    {% set isFavorite = 'true' %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  float-left mr-2" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                                <div class="flexbox">
+                                                    <div class="fav-btn">
+                                                        <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        {% endif %}
+                                        <b class="title-blue float-left">{{ ad.category }}</b>
                                         {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
                                             <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
                                         {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and

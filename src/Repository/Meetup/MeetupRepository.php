@@ -75,4 +75,14 @@ class MeetupRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function findOneById($id)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

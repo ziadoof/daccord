@@ -50,6 +50,7 @@ require('./meetup/meetup_gps');
 require('./voyage/jquery.collection');
 require('./voyage/voyage');
 require('./voyage/searchVoyage');
+require('./favorite');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

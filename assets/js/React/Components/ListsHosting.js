@@ -42,8 +42,34 @@ class ListsHosting extends React.Component {
             const imageHosting = result.image;
             const city = result.city;
             const userImage = result.userImage;
+            const favorite = result.favorite;
 
             let url = Routing.generate('hosting_show', {'id': id});
+
+            let favoriteStatus;
+            if(favorite === 'false'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add mt-3 mr-4" data-object={id} data-type="hosting" data-favorite="false">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else if(favorite === 'true'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add mt-3 mr-4" data-object={id} data-type="hosting" data-favorite="true">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else{
+                favoriteStatus = <div></div>;
+            }
 
             return (
                 <div className="col-md-3 px-md-2 my-2 ad_show" key={Math.random()}>
@@ -64,6 +90,9 @@ class ListsHosting extends React.Component {
                                         <div className="row">
                                             <span className="ml-2 blued">{city}</span>
                                         </div>
+                                    </div>
+                                    <div>
+                                        {favoriteStatus}
                                     </div>
                                 </div>
                             </div>

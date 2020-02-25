@@ -61,6 +61,7 @@ class ListsVoyages extends React.Component {
         return (<span className="badge badge-info mt-1 btn-block"><h7>{seats} Seat available</h7></span>);
 
     }
+
     renderResult(items){
 
         return items.map((result) => {
@@ -79,8 +80,35 @@ class ListsVoyages extends React.Component {
             const arrivalDate = result.arrivalDate;
             const departureDate = result.departureDate;
             const seats = result.seats;
+            const favorite = result.favorite;
+
 
             let url = Routing.generate('voyage_show', {'id': id});
+
+            let favoriteStatus;
+            if(favorite === 'false'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add float-right ml-2" data-object={id} data-type="voyage" data-favorite="false">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else if(favorite === 'true'){
+                favoriteStatus =
+                    <form method="post" action="" className="js-favorite-add float-right ml-2" data-object={id} data-type="voyage" data-favorite="true">
+                        <div className="flexbox">
+                            <div className="fav-btn">
+                                <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
+                            </div>
+                        </div>
+                    </form>;
+            }
+            else{
+                favoriteStatus = <div></div>;
+            }
 
             return (
                 <div className=" col-md-3 px-md-2 my-2 ad_show" key={Math.random()}>
@@ -144,13 +172,16 @@ class ListsVoyages extends React.Component {
                                     </div>
                                 </div>
                                 <div className="row ">
-                                    <div className="col-md-6 mt-3 vertical-center">
+                                    <div className="col-md-6">
                                         <span>{departureDate}</span>
                                     </div>
-                                    <div className="col-md-6 mt-3 vertical-center">
-                                <span className="float-right">
-                                    {price} €
-                                </span>
+                                    <div className="col-md-6 ">
+                                        <div>
+                                            {favoriteStatus}
+                                        </div>
+                                        <span className="float-right">
+                                            {price} €
+                                        </span>
                                     </div>
                                 </div>
                             </div>

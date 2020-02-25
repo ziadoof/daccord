@@ -443,6 +443,7 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
         $this->hostingRequestsReceived = new ArrayCollection();
         $this->meetups = new ArrayCollection();
         $this->joinRequests = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     /**
@@ -703,6 +704,12 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
      */
     private $carpool;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    private $favorites;
+
 
 
     /**
@@ -896,6 +903,48 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Favorite $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->contains($favorite)) {
+            $this->favorites->removeElement($favorite);
+            // set the owning side to null (unless already changed)
+            if ($favorite->getUser() === $this) {
+                $favorite->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFavoritesByType(string $type){
+        $favorites=[];
+        $allFavorites = $this->getFavorites()->toArray();
+        foreach ($allFavorites as $favorite){
+            if ($favorite->getType()=== $type){
+                $favorites[]= $favorite;
+            }
+        }
+        return $favorites;
     }
 
 }
