@@ -4,28 +4,23 @@
 
 {% block content %}
     <h2 class="blued text-center">Favorite </h2>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>CreatedAt</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for favorite in favorites %}
-            <tr>
-                <td>{{ favorite.id }}</td>
-                <td>{{ favorite.type }}</td>
-                <td>{{ favorite.createdAt ? favorite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+    <div class="favorite-page">
+        {% if favorites %}
+            {% for oneFavorite in favorites %}
+                {% if oneFavorite.type is same as ('ad') %}
+                    {% include "favorite/type/ad.html.twig" %}
+                {% elseif oneFavorite.type is same as ('deal') %}
+                    {% include "favorite/type/deal.html.twig" %}
+                {% elseif oneFavorite.type is same as ('hosting') %}
+                    {% include "favorite/type/hosting.html.twig" %}
+                {% elseif oneFavorite.type is same as ('meetup') %}
+                    {% include "favorite/type/meetup.html.twig" %}
+                {% elseif oneFavorite.type is same as ('voyage') %}
+                    {% include "favorite/type/voyage.html.twig" %}
+                {% endif %}
+            {% endfor %}
         {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            <h1 class="text-center title-blue">You have not favorites</h1>
+        {% endif %}
+    </div>
 {% endblock %}
