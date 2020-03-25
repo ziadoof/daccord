@@ -28,19 +28,82 @@ use App\Form\Location\CityType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\Location\CityRepository;
+use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Form\Factory\FactoryInterface;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
 
 
 
 class ProfileController extends BaseProController
 {
+    private $eventDispatcher;
+    private $formFactory;
+    private $userManager;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, UserManagerInterface $userManager)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+        $this->formFactory = $formFactory;
+        $this->userManager = $userManager;
+
+        return parent::__construct( $eventDispatcher,  $formFactory,  $userManager);
+    }
     /**
      * @Route("/profile/edit", name="profile_edit")
      */
     public function editAction(Request $request)
     {
-        $response = parent::editAction($request);
-        // ... do custom stuff
-        return $response;
+        $user = $this->getUser();
+        $oldImage = $user->getProfileImage();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $event = new GetResponseUserEvent($user, $request);
+        $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        $form = $this->formFactory->createForm();
+        $form->setData($user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filesystem = new Filesystem();
+            $fileUploader = new FileUploader('assets/images/profile/');
+            $profileImage = $form->get('profileImage')->getData();
+            //delet old photo
+            $oldImage && $profileImage ?$filesystem->remove('assets/images/profile/'.$oldImage):null;
+            // upload new photo
+            $profileImage ? $user->setProfileImage($fileUploader->upload($profileImage)):$user->setProfileImage($oldImage);
+
+            $event = new FormEvent($form, $request);
+            $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
+
+            $this->userManager->updateUser($user);
+
+            if (null === $response = $event->getResponse()) {
+                $url = $this->generateUrl('fos_user_profile_show');
+                $response = new RedirectResponse($url);
+            }
+
+            $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+            return $response;
+        }
+
+        return $this->render('user/Profile/edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -48,7 +111,14 @@ class ProfileController extends BaseProController
      */
     public function showAction()
     {
-        return parent::showAction();
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $oldImage = $user->getProfileImage();
+        return $this->render('user/Profile/show.html.twig', array(
+            'user' => $user,
+        ));
     }
 
     /**
