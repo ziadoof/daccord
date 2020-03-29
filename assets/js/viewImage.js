@@ -25,7 +25,7 @@ function viewCarImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-window.viewHostingImage = viewCarImage;
+window.viewCarImage = viewCarImage;
 
 function viewHostingImage(input) {
 

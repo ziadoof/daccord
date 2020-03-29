@@ -73,6 +73,8 @@ class ProfileController extends BaseProController
         }
 
         $form = $this->formFactory->createForm();
+        $form->remove('username');
+        $form->remove('current_password');
         $form->setData($user);
 
         $form->handleRequest($request);
