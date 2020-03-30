@@ -25,6 +25,7 @@ require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min');
 
 require('./rdcity');
 require('eonasdan-bootstrap-datetimepicker');
+
 require('tail.datetime/js/tail.datetime-full');
 
 

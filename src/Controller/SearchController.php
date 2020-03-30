@@ -438,8 +438,11 @@ class SearchController extends AbstractController
 
     public function getCarpoolRating(Voyage $voyage, RatingRepository $ratingRepository){
         $rating = $ratingRepository->findByTypeAndCandidate('carpool', $voyage->getCreator()->getUser()->getId());
-        $number = $rating->getTotal()/$rating->getNumVotes();
-        return number_format($number, 1);
+        if($rating){
+            $number = $rating->getTotal()/$rating->getNumVotes();
+            return number_format($number, 1);
+        }
+       return(0);
     }
 
 }

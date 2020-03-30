@@ -457,8 +457,11 @@ class VoyageController extends AbstractController
 
     public function getCarpoolRating(Voyage $voyage){
         $rating = $this->ratingRepository->findByTypeAndCandidate('carpool', $voyage->getCreator()->getUser()->getId());
-        $number = $rating->getTotal()/$rating->getNumVotes();
-        return number_format($number, 1);
+        if($rating){
+            $number = $rating->getTotal()/$rating->getNumVotes();
+            return number_format($number, 1);
+        }
+        return(0);
     }
 
     /**

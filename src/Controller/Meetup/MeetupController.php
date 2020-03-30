@@ -51,7 +51,6 @@ class MeetupController extends AbstractController
     /**
      * @Route("/new", name="meetup_new", methods={"GET","POST"})
      * @param Request $request
-     * @param FileUploader $fileUploader
      * @return Response
      */
     public function new(Request $request): Response
@@ -66,7 +65,6 @@ class MeetupController extends AbstractController
             $fileUploader = new FileUploader('assets/images/meetup/');
             $image = $form->get('image')->getData();
             $image ?$meetup->setImage($fileUploader->upload($image)):$meetup->setImage(null);
-
             $meetup->setDepartment($meetup->getCity()->getDepartment());
             $meetup->setRegion($meetup->getCity()->getDepartment()->getRegion());
             $entityManager = $this->getDoctrine()->getManager();

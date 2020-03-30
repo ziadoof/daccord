@@ -24,7 +24,7 @@ class City
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $inseeCode;
 
