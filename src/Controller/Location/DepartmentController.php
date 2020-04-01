@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/department")
  */
+
+/*THIS CLASS IS NOT USED*/
 class DepartmentController extends AbstractController
 {
     /**

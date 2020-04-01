@@ -15,6 +15,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="mt-3">
+                            {% if app.user is not same as (null) %}
                             {% set isFavorite = 'false' %}
                             {#data-favorite must be string not boolean#}
                             {% for favorite in app.user.getFavoritesByType('meetup')  %}
@@ -29,6 +30,7 @@
                                     </div>
                                 </div>
                             </form>
+                            {% endif %}
                             <span class="blued float-right ">{{ meetup.createdAt|date('d M Y') }}</span>
                         </div>
                     </div>

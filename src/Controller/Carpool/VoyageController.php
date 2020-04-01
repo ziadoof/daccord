@@ -38,7 +38,7 @@ class VoyageController extends AbstractController
         $this->ratingRepository = $ratingRepository;
     }
     /**
-     * @Route("/", name="voyage_index", methods={"GET"})
+     * @Route("/myvoyage", name="voyage_index", methods={"GET"})
      * @param VoyageRepository $voyageRepository
      * @param VoteRepository $voteRepository
      * @param Request $request

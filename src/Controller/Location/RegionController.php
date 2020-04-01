@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/region")
  */
+
+    /*THIS CLASS IS NOT USED*/
 class RegionController extends AbstractController
 {
     /**
