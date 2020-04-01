@@ -276,5 +276,12 @@ class Category
 
         return $this;
     }
-
+    public function serializ(): array
+    {
+        $parent = $this->getParent()?$this->getParent()->getName():null;
+        return [
+            'name'=>ucwords($this->getName()),
+            'parent'=>$parent
+        ];
+    }
 }

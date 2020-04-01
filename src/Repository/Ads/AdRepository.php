@@ -64,4 +64,21 @@ class AdRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function adCount(string $type = null)
+    {
+        if($type === null){
+            return $this->createQueryBuilder('a')
+                ->select('COUNT(a)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+        return $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.typeOfAd = :type')
+            ->setParameter('type',$type)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
 }

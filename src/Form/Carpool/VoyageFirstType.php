@@ -7,6 +7,7 @@ use App\Entity\Location\City;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -20,13 +21,14 @@ class VoyageFirstType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date',DateType::class,[
+            ->add('date',DateTimeType::class,[
                 'widget' => 'single_text',
-                'format' => 'YYYY-M-dd',
+                'format' => 'yyyy-MM-dd',
                 'label'=>'Date',
                 'required'=> true,
                 'attr'=>[
                     'autocomplete'=> 'off',
+                    'readonly'=> 'readonly',
                 ]
             ])
             ->add('time',TimeType::class,[
@@ -35,7 +37,6 @@ class VoyageFirstType extends AbstractType
                 'required'=> true,
                 'attr'=>[
                     'autocomplete'=> 'off',
-
                 ]
             ])
             ->add('placeMainDeparture',TextType::class,[

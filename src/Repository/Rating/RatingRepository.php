@@ -37,4 +37,14 @@ class RatingRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByUser(?int $id)
+    {
+        return $this->createQueryBuilder('r')
+            ->Where('r.candidateId = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

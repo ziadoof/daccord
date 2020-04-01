@@ -1,4 +1,10 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('category_edit', {'id': category.id}) }) }}
+
+    {{ form_row(form.name) }}
+    {% if category.parent is not same as(null) %}
+        {{ form_row(form.parent) }}
+    {% endif %}
+    <button class="btn btn-warning float-right mt-4">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

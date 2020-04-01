@@ -1,0 +1,88 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block title %}Admin hostings{% endblock %}
+
+{% block admin %}
+    <h1 class="rosed font-weight-bold text-center my-2">Hosting</h1>
+    <div class="row">
+        <div class="col text-center mb-2">
+            <span class="badge badge-success mx-2 px-2 py-2"><h5>{{ data['doneHosting'] }} Done hosting</h5></span>
+            <span class="badge badge-primary mx-2 px-2 py-2"><h5>{{ data['hosting'] }} Processing Hosting</h5></span>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>id</th>
+                <th><span class="float-left">Hosting</span> </th>
+                <th><span class="float-left">Guest</span> </th>
+                <th>Number of persons</th>
+                <th>Date</th>
+                <th>Hosting Status</th>
+                <th>Guest Status</th>
+                <th>Hosting city</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for hosting in hostings %}
+            <tr>
+                <td>{{ hosting.id }}</td>
+                <td >
+                    <div class="float-left">
+                        {% if hosting.hosting.hosting  %}
+                            <a href="{{ path('hosting_show',{'id':hosting.hosting.hosting.id}) }}"><i class="fas fa-suitcase-rolling rosed mr-1" ></i></a>
+                        {% else %}
+                            <i class="fas fa-user blued"></i>
+                        {% endif %}
+                        <a href="{{ path('user_show',{'id':hosting.hosting.id}) }}" >
+                            {{ hosting.hosting.firstname|title }} {{ hosting.hosting.lastname|upper }}
+                        </a>
+                    </div>
+                </td>
+                <td >
+                    <div class="float-left">
+                        {% if hosting.sender.hosting  %}
+                            <a href="{{ path('hosting_show',{'id':hosting.sender.hosting.id}) }}"><i class="fas fa-suitcase-rolling rosed mr-1" ></i></a>
+                        {% else %}
+                            <i class="fas fa-user blued"></i>
+                        {% endif %}
+                        <a href="{{ path('user_show',{'id':hosting.sender.id}) }}" >
+                            {{ hosting.sender.firstname|title }} {{ hosting.sender.lastname|upper }}
+                        </a>
+                    </div>
+                </td>
+                <td>{{ hosting.numberOfPersons }}</td>
+                <td>{{ hosting.date|date('d M -y')  }}</td>
+                <td>
+                    <div class="col text-center ">
+                        {% if hosting.hostingStatus %}
+                            <div class="col text-center"><img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes" class="vote-avatar"></div>
+                        {% else %}
+                            <div class="col text-center"><img src="{{ asset('/assets/images/icons/no.png') }}" alt="no" class="vote-avatar"></div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="col text-center ">
+                        {% if hosting.senderStatus %}
+                            <div class="col text-center"><img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes" class="vote-avatar"></div>
+                        {% else %}
+                            <div class="col text-center"><img src="{{ asset('/assets/images/icons/no.png') }}" alt="no" class="vote-avatar"></div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>{{hosting.hosting.ville}}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(hostings) }}
+        </div>
+    </div>
+{% endblock %}

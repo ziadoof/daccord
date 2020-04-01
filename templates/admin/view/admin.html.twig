@@ -1,0 +1,155 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block admin %}
+    <h1 class="text-center rosed mt-1 font-weight-bold">Dashboard</h1>
+
+    <div class="">
+        <div class="row">
+            <div class="col-md-4 offset-4 text-center card border-left-success shadow h-100 py-2">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-body count-user">
+                            <h1 class=" font-weight-bold text-success mb-1">{{data['userCount']}}</h1>
+                            <div class="h5 mb-0 font-weight-bold blued ">Users</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row px-2">
+                    <div class="col-md-5  border-left-success card-body activated ">
+                        <div class="row">
+                            <h5 class="col text-center white ">Active</h5>
+                        </div>
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1 white">{{data['activeUsers']}}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-5 offset-2 card border-left-success card-body rejected">
+                        <div class="row">
+                            <h5 class="col text-center white">Inactive</h5>
+                        </div>
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1 white">{{data['inactiveUsers']}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row px-2 my-1">
+                    <div class="col-md-4   card-body driver-count">
+                        <div class="row">
+                            <h5 class="col text-center  ">Drivers</h5>
+                        </div>
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{data['driverCount']}}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-4  border-left-success card-body hostingCount">
+                        <div class="row">
+                            <h5 class="col text-center ">Hosting</h5>
+                        </div>
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{data['hostingCount']}}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-4  border-left-success card-body carpoolCount">
+                        <div class="row">
+                            <h5 class="col text-center ">Carpool</h5>
+                        </div>
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{data['carpoolCount']}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-3 offset-1 bg-info py-2 white">
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{data['adCount']}}</h1>
+                        </div>
+                        <div class="row">
+                            <h5 class="col text-center ">ADS</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-2 bg-primary float-left white">
+                        <div class="row">
+                            <h3 class="col mb-1">{{data['offerCount']}}</h3>
+                            <h3 class="col mb-1">Offers</h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="col mb-1">{{data['demandCount']}}</h3>
+                            <h3 class="col mb-1">Demands</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="row">
+                    <div class="col-md-3 offset-1 bg-info py-2 white">
+                        <div class="row">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{ data['sDealCount'] + data['dDealCount'] }}</h1>
+                        </div>
+                        <div class="row">
+                            <h5 class="col text-center">DEALS</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-2 bg-primary float-left white">
+                        <div class="row">
+                            <h3 class="col mb-1">{{data['sDealCount']}}</h3>
+                            <h3 class="col mb-1">Suggested</h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="col mb-1">{{data['dDealCount']}}</h3>
+                            <h3 class="col mb-1">Done</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-3 offset-1 bg-info py-2 white">
+                        <div class="row ">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{data['voyageCount']}}</h1>
+                        </div>
+                        <div class="row">
+                            <h5 class="col text-center">VOYAGE</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-2 bg-primary float-left white">
+                        <div class="row">
+                            <h3 class="col mb-1">{{ data['mainVoyageCount'] }}</h3>
+                            <h3 class="col mb-1">Main</h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="col mb-1">{{ data['subVoyageCount'] }}</h3>
+                            <h3 class="col mb-1">Sub</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-3 offset-1 bg-info py-2  white">
+                        <div class="row ">
+                            <h1 class="col text-center font-weight-bold  mb-1">{{data['meetupCount']}}</h1>
+                        </div>
+                        <div class="row">
+                            <h5 class="col text-center">MEETUP</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-8 py-2  bg-primary float-left white">
+                        <div class="row">
+                            <h3 class="col mb-1">{{data['activeMeetupCount']}}</h3>
+                            <h3 class="col mb-1">Active</h3>
+                        </div>
+                        <div class="row">
+                            <h3 class="col mb-1">{{data['finishMeetupCount']}}</h3>
+                            <h3 class="col mb-1">Finish</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -144,7 +144,9 @@ class DealController extends AbstractController
                 'Your deal has been deleted!'
             );
         }
-
+        if($this->getUser()->isAdmin()){
+            return $this->redirectToRoute('admin_deals');
+        }
         return $this->redirectToRoute('deal_index');
     }
 
@@ -260,10 +262,8 @@ class DealController extends AbstractController
             }
             if($value){
             switch ($key){
-                case 'ges':
-                    $allSpecifications[$key] = $classEnergieAndGes[$value];
-                    break;
                 case 'classEnergie':
+                case 'ges':
                     $allSpecifications[$key] = $classEnergieAndGes[$value];
                     break;
                 case 'experience':

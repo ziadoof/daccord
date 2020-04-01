@@ -85,4 +85,32 @@ class MeetupRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function meetupCount(string $type = null)
+    {
+        $now = new \DateTime('now');
+        if ($type ==='active') {
+            return $this->createQueryBuilder('m')
+                ->select('COUNT(m)')
+                ->andWhere('m.endAt > :now')
+                ->setParameter('now',$now)
+                ->getQuery()
+                ->getSingleScalarResult();
+
+        }
+
+        if($type ==='finish') {
+            return $this->createQueryBuilder('m')
+                ->select('COUNT(m)')
+                ->andWhere('m.endAt < :now')
+                ->setParameter('now',$now)
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+        return $this->createQueryBuilder('m')
+            ->select('COUNT(m)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

@@ -9,6 +9,7 @@ use App\Repository\Message\MessageRepository;
 use App\Repository\UserRepository;
 use App\Server\Chat;
 use FOS\MessageBundle\Controller\MessageController as BaseController;
+use FOS\MessageBundle\Provider\ProviderInterface;
 use FOS\MessageBundle\Sender\SenderInterface;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
@@ -17,6 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use ZMQ;
@@ -29,10 +31,12 @@ use ZMQSocket;
 class MessageController extends BaseController
 {
 
+
     private $formHandler;
     private $sender;
     private $userRepository;
     private $messageRepository;
+    private $localContainer;
 
     public function __construct(ContainerInterface $container,
                                 NewThreadMessageFormHandler $formHandler,
@@ -45,7 +49,9 @@ class MessageController extends BaseController
         $this->sender = $sender;
         $this->userRepository =$userRepository;
         $this->messageRepository =$messageRepository;
+        $this->localContainer = $container;
     }
+
 
     /**
      * Displays the authenticated participant inbox.
@@ -59,8 +65,8 @@ class MessageController extends BaseController
         $unReadMessages =  $this->getFormsTreads()['unReadMessages'];
 
         foreach ($threads as $thread){
-            $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
-            $formHandler = $this->container->get('fos_message.reply_form.handler');
+            $form = $this->localContainer->get('fos_message.reply_form.factory')->create($thread);
+            $formHandler = $this->localContainer->get('fos_message.reply_form.handler');
             if ($message = $formHandler->process($form)) {
                 return $this->render('@FOSMessage/Message/inbox.html.twig', array(
                     'threads' => $threads,
@@ -81,18 +87,19 @@ class MessageController extends BaseController
     /**
      *
      * @Route("/conversation",name="message_send", methods={"POST"},options = { "expose" = true })
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      * @param EventDispatcherInterface $eventDispatcher
      * @return Response
      */
-    public function sendMessage(\Symfony\Component\HttpFoundation\Request $request, EventDispatcherInterface $eventDispatcher): Response
+    public function sendMessage(Request $request, EventDispatcherInterface $eventDispatcher): Response
     {
         $threadtext = $request->request->get('conversation');
         $messagetext = $request->request->get('message');
         $recipient = $request->request->get('recipient');
 
-        $composer = $this->container->get('fos_message.composer');
-        $thread = $this->getProvider()->getThread($threadtext);
+        $composer = $this->localContainer->get('fos_message.composer');
+        $provider = $this->localContainer->get('fos_message.provider');
+        $thread = $provider->getThread($threadtext);
 
 
         $message = $composer->reply($thread)
@@ -100,7 +107,7 @@ class MessageController extends BaseController
         ->setBody($messagetext)
         ->getMessage();
 
-        $sender = $this->container->get('fos_message.sender');
+        $sender = $this->localContainer->get('fos_message.sender');
         $sender->send($message);
 
 
@@ -122,7 +129,7 @@ class MessageController extends BaseController
 
         $recipient = null;
         $haveConversation = false;
-        $form = $this->container->get('fos_message.new_thread_form.factory')->create();
+        $form = $this->localContainer->get('fos_message.new_thread_form.factory')->create();
         if (isset($_POST['user']))
         {
             $recipient= $user= $this->userRepository->findOneById($_POST['user']);
@@ -139,7 +146,7 @@ class MessageController extends BaseController
 
         if($recipient){
             if($haveConversation){
-                return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
+                return new RedirectResponse($this->localContainer->get('router')->generate('fos_message_inbox', array(
                     'threads' => $threads,
                     'forms' => $forms,
                     'unReadMessages'=>$unReadMessages
@@ -148,7 +155,7 @@ class MessageController extends BaseController
             }
             $form->get('recipient')->setData($user);
 
-            return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:inbox.html.twig', array(
+            return $this->localContainer->get('templating')->renderResponse('FOSMessageBundle:Message:inbox.html.twig', array(
                 'form' => $form->createView(),
                 'data' => $form->getData(),
                 'recipient'=>$recipient,
@@ -160,14 +167,14 @@ class MessageController extends BaseController
         }
         if ($message = $this->formHandler->process($form)) {
 
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
+            return new RedirectResponse($this->localContainer->get('router')->generate('fos_message_inbox', array(
                 'threadId' => $message->getThread()->getId(),
                 'threads' => $threads,
                 'forms' => $forms,
                 'unReadMessages'=>$unReadMessages
             )));
         }
-        return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
+        return new RedirectResponse($this->localContainer->get('router')->generate('fos_message_inbox', array(
             'threads' => $threads,
             'forms' => $forms,
             'unReadMessages'=>$unReadMessages
@@ -181,11 +188,11 @@ class MessageController extends BaseController
         $forms =  $this->getFormsTreads()['forms'];
         $unReadMessages =  $this->getFormsTreads()['unReadMessages'];
 
-        $form = $this->container->get('fos_message.new_thread_form.factory')->create();
-        $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+        $form = $this->localContainer->get('fos_message.new_thread_form.factory')->create();
+        $formHandler = $this->localContainer->get('fos_message.new_thread_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox', array(
+            return new RedirectResponse($this->localContainer->get('router')->generate('fos_message_inbox', array(
                 'threadId' => $message->getThread()->getId(),
                 'forms' => $forms,
                 'threads' => $threads,
@@ -205,17 +212,19 @@ class MessageController extends BaseController
     /**
      * select Unseen Messages To Seen.
      * @Route("/statu", name="unseen_to_seen", methods={"POST"},options = { "expose" = true })
+     * @param Request $request
      * @return Response
-     *
      */
-    public function selectUnseenMessagesToSeen(\Symfony\Component\HttpFoundation\Request $request){
+    public function selectUnseenMessagesToSeen(Request $request){
         $threadId = $request->request->get('thread');
         $status = false;
         $unSeenMessages = $this->messageRepository->findUnreadMessageByUser($this->getUser(),$threadId);
         if(!empty($unSeenMessages)){
             $status = true;
         }
-        $thread = $this->getProvider()->getThread($threadId);
+        $provider = $this->localContainer->get('fos_message.provider');
+
+        $thread = $provider->getThread($threadId);
         $recipient = $thread->getOtherParticipants($this->getUser())[0];
 
         $em = $this->getDoctrine()->getManager();
@@ -232,8 +241,9 @@ class MessageController extends BaseController
 
     public function getFormsTreads()
     {
-        $threads = $this->getProvider()->getInboxThreads();
-        $sentThreads = $this->getProvider()->getSentThreads();
+        $provider = $this->localContainer->get('fos_message.provider');
+        $threads = $provider->getInboxThreads();
+        $sentThreads = $provider->getSentThreads();
         if(!empty($sentThreads)){
             foreach ($sentThreads as $sentThread){
                 if(!in_array($sentThread, $threads)){
@@ -269,7 +279,7 @@ class MessageController extends BaseController
         $forms = [];
         $unReadMessages =[];
         foreach ($threads as $thread){
-            $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
+            $form = $this->localContainer->get('fos_message.reply_form.factory')->create($thread);
             $forms [$thread->getId()]= $form->createView();
             /*$participant = $thread->getOtherParticipants($this->getUser())[0];*/
             /*$messages = $this->get('fos_message.message_manager')->getNbUnreadMessageByParticipant($this->getUser());*/

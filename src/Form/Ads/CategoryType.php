@@ -7,30 +7,31 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityRepository;
-use App\Form\EventListener\AddCategoryFieldSubscriber;
-use App\Form\EventListener\AddGeneralcategoryFieldSubscriber;
-use App\Repository\Ads\CategoryRepository;
 
 class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /* $builder
-            ->add('name')
-            ->add('parent')
-        ;*/
-      /*  $factort = $builder->getFormFactory();
-        $categorySubscriber = new AddCategoryFieldSubscriber($factort);
-        $builder->addEventSubscriber($categorySubscriber);
-        $subcategorySubscriber = new AddSubcategoryFieldSubscriber($factort);
-        $builder->addEventSubscriber($subcategorySubscriber);
-        $generalcategorySubscriber = new AddGeneralcategoryFieldSubscriber($factort);
-        $builder->addEventSubscriber($generalcategorySubscriber);*/
+        $category = $options['data'];
+        if($category->getParent() === null){
+            $builder
+                ->add('name');
+        }
+        else{
+            $builder
+                ->add('name')
+                ->add('parent',EntityType::class, array(
+                    'class' => Category::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('c')
+                            ->where('c.parent is NULL')
+                            ->andWhere('c.type = :type')
+                            ->setParameter('type','Offer')
+                            ;
+                    }
+                ));
+        }
     }
 
 

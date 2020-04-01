@@ -17,77 +17,91 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="category_index", methods={"GET"})
-     */
-    public function index(CategoryRepository $categoryRepository): Response
-    {
-        return $this->render('Ads/category/index.html.twig', ['categories' => $categoryRepository->findAll()]);
-    }
-
-    /**
-     * @Route("/new", name="category_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($category);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('category_index');
-        }
-
-        return $this->render('Ads/category/new.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="category_show", methods={"GET"})
-     */
-    public function show(Category $category): Response
-    {
-        return $this->render('Ads/category/show.html.twig', ['category' => $category]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="category_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Category $category): Response
-    {
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('category_index', ['id' => $category->getId()]);
-        }
-
-        return $this->render('Ads/category/driver_edit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="category_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Category $category
+     * @param CategoryRepository $repository
+     * @return Response
      */
-    public function delete(Request $request, Category $category): Response
+    public function delete(Request $request, Category $category, CategoryRepository $repository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($category);
+
+            if ($category->getParent() !== null){
+                $donedeals = $category->getDoneDeals();
+                foreach ($donedeals as $doneDeal){
+                    $entityManager->remove($doneDeal);
+                }
+
+                $deals = $category->getDeals();
+                foreach ($deals as $deal){
+                    $driverRequests =  $deal->getDriverRequests();
+                    foreach ($driverRequests as $driverRequest){
+                        $entityManager->remove($driverRequest);
+                    }
+                    $entityManager->remove($deal);
+                }
+                $ads = $category->getAds();
+                foreach ($ads as $ad){
+                    $entityManager->remove($ad);
+                }
+                $categoryRelateds = $repository->findCategoryRelated($category);
+                foreach ($categoryRelateds as $categoryRelated){
+                    $specifications = $categoryRelated->getSpecifications();
+                    foreach ($specifications as $specification){
+                        $entityManager->remove($specification);
+                    }
+                    $entityManager->remove($categoryRelated);
+                }
+                $entityManager->flush();
+                $this->addFlash(
+                    'success',
+                    'Your category has been deleted with all done deals and deals and driver requests and ads  and specification related!'
+                );
+            }
+            $children = $category->getChildren();
+            foreach ($children as $child){
+                $donedeals = $child->getDoneDeals();
+                foreach ($donedeals as $doneDeal){
+                    $entityManager->remove($doneDeal);
+                }
+
+                $deals = $child->getDeals();
+                foreach ($deals as $deal){
+                    $driverRequests =  $deal->getDriverRequests();
+                    foreach ($driverRequests as $driverRequest){
+                        $entityManager->remove($driverRequest);
+                    }
+                    $entityManager->remove($deal);
+                }
+                $ads = $child->getAds();
+                foreach ($ads as $ad){
+                    $entityManager->remove($ad);
+                }
+                $categoryRelateds = $repository->findCategoryRelated($child);
+                foreach ($categoryRelateds as $categoryRelated){
+                    $specifications = $categoryRelated->getSpecifications();
+                    foreach ($specifications as $specification){
+                        $entityManager->remove($specification);
+                    }
+                    $entityManager->remove($categoryRelated);
+                }
+            }
+            $categoryRelateds = $repository->findCategoryRelated($category);
+            foreach ($categoryRelateds as $categoryRelated){
+                $entityManager->remove($categoryRelated);
+            }
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Your parent category has been deleted with all his child and all done deals and deals and driver requests and ads  and specification related!'
+            );
         }
 
-        return $this->redirectToRoute('category_index');
+        return $this->redirectToRoute('admin_category');
     }
+
 
 
     /**

@@ -811,7 +811,8 @@ function wsConnect(id) {
 
                     let conversation = this.parentNode.getAttribute('data-conversation');
                     let recipient = this.parentNode.getAttribute('data-user');
-                    let messageDom = this.parentNode.children[0].children[0].children[0];
+                    /*let messageDom = this.parentNode.children[0].children[0].children[0];*/
+                    let messageDom = this.parentNode.children[0].children[0].children[1];
                     let message = messageDom.value.replace(/<\/?[^>]+(>|$)/g, "");
 
                     let data = {'conversation':conversation,'message':message,'recipient':recipient};

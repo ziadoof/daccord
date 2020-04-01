@@ -52,7 +52,7 @@ class MeetupType extends AbstractType
             ])
             ->add('startAt',DateTimeType::class,[
                 'widget' => 'single_text',
-                'format' => 'YYYY-M-dd',
+                'format' => 'yyyy-MM-dd HH:mm',
                 'label'=>'Start',
                 'attr'=>[
                     'autocomplete'=> 'off',
@@ -61,7 +61,7 @@ class MeetupType extends AbstractType
             ])
             ->add('endAt',DateTimeType::class,[
                 'widget' => 'single_text',
-                'format' => 'YYYY-M-dd',
+                'format' => 'yyyy-MM-dd HH:mm',
                 'label'=>'End',
                 'attr'=>[
                     'autocomplete'=> 'off',

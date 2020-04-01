@@ -34,7 +34,8 @@ class MeetupController extends AbstractController
      */
     public function index(Request $request,PaginatorInterface $paginator): Response
     {
-        $myMeetup = $this->getUser()->getMeetups();
+        $myMeetup = $this->getUser()->getMeetups()->toArray();
+
         $results = $paginator->paginate(
         // Doctrine Query, not results
             $myMeetup,
@@ -51,7 +52,6 @@ class MeetupController extends AbstractController
     /**
      * @Route("/new", name="meetup_new", methods={"GET","POST"})
      * @param Request $request
-     * @param FileUploader $fileUploader
      * @return Response
      */
     public function new(Request $request): Response
@@ -66,7 +66,6 @@ class MeetupController extends AbstractController
             $fileUploader = new FileUploader('assets/images/meetup/');
             $image = $form->get('image')->getData();
             $image ?$meetup->setImage($fileUploader->upload($image)):$meetup->setImage(null);
-
             $meetup->setDepartment($meetup->getCity()->getDepartment());
             $meetup->setRegion($meetup->getCity()->getDepartment()->getRegion());
             $entityManager = $this->getDoctrine()->getManager();
@@ -138,7 +137,7 @@ class MeetupController extends AbstractController
 
         $results = $paginator->paginate(
         // Doctrine Query, not results
-            $meetup->getComments(),
+            $meetup->getComments()->toArray(),
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
@@ -167,7 +166,9 @@ class MeetupController extends AbstractController
             $entityManager->remove($meetup);
             $entityManager->flush();
         }
-
+        if ($this->getUser()->isAdmin()){
+            return $this->redirectToRoute('admin_meetup');
+        }
         return $this->redirectToRoute('meetup_index');
     }
 

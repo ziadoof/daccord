@@ -1,0 +1,38 @@
+{% extends 'admin/layout_admin.html.twig' %}
+{% form_theme form 'jquery.collection.html.twig' 'SpecificationCollectionType.html.twig' %}
+
+{% block admin %}
+    <div class="container">
+        <h3 class="blued text-center">New Category</h3>
+        <div class="text-center mt-2 mb-5">
+            <div class="col-md-12 ">
+                <div class="mb-4">
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>Category name</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>Category parent</h7></span>
+                    <span class="badge badge-primary  mx-1 py-2 px-2"><h5>Offer specifications</h5></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>Demand specifications</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>Search offer specifications</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>Search demand specifications</h7></span>
+                </div>
+            </div>
+        </div>
+        <div class="row border-deal">
+            <div class="col-md-4 py-2 px-2 my-4">
+                <div class="btn-group d-block">
+                    <span class="badge badge-success py-2 px-2 mx-2"><h6>Category parent</h6></span> <span class="badge badge-info py-2 px-2 mx-2"><h6>{{ category['parent'] }}</h6></span>
+                </div>
+                <div class="btn-group d-block mt-2">
+                    <span class="badge badge-success py-2 px-2 mx-2"><h6>Category name_</h6></span> <span class="badge badge-info py-2 px-2 mx-2"><h6>{{ category['name'] }}</h6></span>
+                </div>
+            </div>
+            <div class="col-md-8 py-2">
+            </div>
+        </div>
+        <div class="">
+            {{ form_start(form,{'attr':{'id':'category-specification-offer'}}) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary float-right mt-4">{{ button_label|default('Continue') }} <i class="fas fa-arrow-right"></i></button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

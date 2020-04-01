@@ -8,6 +8,7 @@ use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,14 +19,14 @@ class VoyageSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date',DateType::class,[
+            ->add('date',DateTimeType::class,[
                 'widget' => 'single_text',
-                'format' => 'YYYY-M-dd',
+                'format' => 'yyyy-MM-dd',
                 'required'=> false,
                 'label'=>'Date',
                 'attr'=>[
                     'autocomplete'=> 'off',
-                    /*'readonly'=> 'readonly',*/
+                    'readonly'=> 'readonly',
                 ]
             ])
             ->add('highway',CheckboxType::class,[

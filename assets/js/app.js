@@ -25,6 +25,7 @@ require('../../node_modules/bootstrap4-toggle/js/bootstrap4-toggle.min');
 
 require('./rdcity');
 require('eonasdan-bootstrap-datetimepicker');
+
 require('tail.datetime/js/tail.datetime-full');
 
 
@@ -51,6 +52,7 @@ require('./voyage/jquery.collection');
 require('./voyage/voyage');
 require('./voyage/searchVoyage');
 require('./favorite');
+require('./admin/admin');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

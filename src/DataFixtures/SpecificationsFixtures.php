@@ -1397,27 +1397,23 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Car parts'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Car parts'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Car parts','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Car parts'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Car parts'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Car parts'],
             // Motor parts
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Motor parts'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Motor parts'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Motor parts','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Motor parts'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Motor parts'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Motor parts'],
             // Vehicle accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Vehicle accessories'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Vehicle accessories'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Vehicle accessories','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Vehicle accessories'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Vehicle accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Vehicle accessories'],
 
             // vehicle_other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'vehicle_other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'vehicle_other'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'vehicle_other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'vehicle_other'],
 
@@ -1476,11 +1472,9 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'placeOfLesson', 'type'=>'ChoiceType','label'=>'Place Of Servic', 'category'=>'Maintenance services','typeOfChoice'=>'TextOptions', 'choice'=>['At your house','At us','Not important']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Maintenance services'],
             ['name'=>'maxDistance','label'=>'Max distance (km)', 'type'=>'ChoiceType', 'category'=>'Maintenance services','typeOfChoice'=>'NumericOptions', 'choice'=>[5,10,15,20,30,40,50,60,70]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Maintenance services'],
             // jobs_other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'jobs_other'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'jobs_other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'jobs_other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'jobs_other'],
 
 
@@ -1494,14 +1488,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'TV'],
             ['name'=>'screenSizeCm', 'type'=>'TextType', 'category'=>'TV'],
             ['name'=>'screenSizeInch', 'type'=>'TextType', 'category'=>'TV'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'TV'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'TV'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'TV'],
             //Wolkman
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Wolkman'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Wolkman','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Wolkman'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Wolkman'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Wolkman'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Wolkman'],
             // Camera
@@ -1509,21 +1501,18 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'accuracy','label'=>'Accuracy (mp)', 'type'=>'TextType', 'category'=>'Camera'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Camera','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Camera'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Camera'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Camera'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Camera'],
             //Audio accessories
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Audio accessories'],
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Audio accessories'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Audio accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Audio accessories'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Audio accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Audio accessories'],
             //Camera accessories
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Camera accessories'],
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Camera accessories'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Camera accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Camera accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Camera accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Camera accessories'],
             //Headphones
@@ -1532,52 +1521,44 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Headphones'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Headphones','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Headphones'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Headphones'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Headphones'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Headphones'],
             //Telephone
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Telephone'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Telephone','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Telephone'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Telephone'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Telephone'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Telephone'],
             //Video games
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Video games'],
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'Video games'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Video games'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Video games'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Video games'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Video games'],
             //DVD Games
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'DVD Games'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'DVD Games'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'DVD Games'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'DVD Games'],
             //Games accessories
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Games accessories'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Games accessories','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Games accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Games accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Games accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Games accessories'],
             //Movies
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Movies'],
             ['name'=>'dvdCd', 'label'=>'DVD CD', 'type'=>'ChoiceType', 'category'=>'Movies','typeOfChoice'=>'TextOptions', 'choice'=>['DVD','CD']],
             ['name'=>'language', 'type'=>'ChoiceType', 'category'=>'Movies','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Movies'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Movies'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Movies'],
 
             //Books
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Books'],
             ['name'=>'language', 'type'=>'ChoiceType', 'category'=>'Books','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Books'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Books'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Books'],
             //media_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'media_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'media_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'media_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'media_Other'],
 
@@ -1593,7 +1574,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'screenSizeCm', 'type'=>'TextType', 'category'=>'Computer'],
             ['name'=>'screenSizeInch', 'type'=>'TextType', 'category'=>'Computer'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Computer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Computer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Computer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Computer'],
             // laptop
@@ -1609,7 +1589,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'laptop'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'laptop'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'laptop','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'laptop'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'laptop'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'laptop'],
             // Tablet
@@ -1622,7 +1601,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'Tablet'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Tablet'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Tablet','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Tablet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Tablet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Tablet'],
             // Mobile
@@ -1635,7 +1613,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'Mobile'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Mobile'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Mobile','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mobile'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mobile'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mobile'],
             // Scanner
@@ -1645,7 +1622,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Scanner'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             // Printer
@@ -1658,7 +1634,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'threeInOne', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Printer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Printer'],
             // Monitor
@@ -1669,7 +1644,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'screenSizeCm', 'type'=>'TextType', 'category'=>'Monitor'],
             ['name'=>'screenSizeInch', 'type'=>'TextType', 'category'=>'Monitor'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Monitor','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Monitor'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Monitor'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Monitor'],
             // information_mouse
@@ -1677,7 +1651,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'information_mouse'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'information_mouse'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'information_mouse','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'information_mouse'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'information_mouse'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'information_mouse'],
             // keyboard
@@ -1686,7 +1659,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'languages', 'type'=>'ChoiceType', 'category'=>'keyboard','typeOfChoice'=>'TextOptions', 'choice'=>['English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian']],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'keyboard'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'keyboard','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'keyboard'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'keyboard'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'keyboard'],
             // Speaker
@@ -1695,7 +1667,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'capacity','label'=>'MIN Power (watt)', 'type'=>'TextType', 'category'=>'Speaker'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Speaker'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Speaker','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Speaker'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Speaker'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Speaker'],
             // Hard disk
@@ -1704,13 +1675,11 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'minCapacity', 'label'=>'MIN HDD capacity (gb)','type'=>'ChoiceType', 'category'=>'Hard disk','typeOfChoice'=>'NumericOptions', 'choice'=>[0,60,100,120,160,200,250,300,500,720,750,800,1000,2000,3000,4000,8000]],
             ['name'=>'maxCapacity', 'label'=>'MAX HDD Capacity (gb)','type'=>'ChoiceType', 'category'=>'Hard disk','typeOfChoice'=>'NumericOptions', 'choice'=>[60,100,120,160,200,250,300,500,720,750,800,1000,2000,3000,4000,8000]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Hard disk','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Hard disk'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Hard disk'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Hard disk'],
 
             // information_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'information_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'information_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'information_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'information_Other'],
 
@@ -1722,7 +1691,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'T-shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','jeans','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'T-shirt'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'T-shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'T-shirt'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'T-shirt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'T-shirt'],
             // Shirt
@@ -1730,7 +1698,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','jeans','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Shirt'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Shirt'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Shirt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Shirt'],
             // Trouser
@@ -1738,7 +1705,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Trouser','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Trouser'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Trouser','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Trouser'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Trouser'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Trouser'],
             // Short
@@ -1746,7 +1712,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Short','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Short'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Short','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Short'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Short'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Short'],
             // Costume
@@ -1754,21 +1719,18 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Costume','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Costume'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Costume','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Costume'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Costume'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Costume'],
             // Dress
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Dress','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Dress','typeOfChoice'=>'TextOptions', 'choice'=>['Felt','Hessian','chiffon','Velours','Denim','Mousseline','Popeline','Charmeuse','Taffeta','Habutai','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Dress'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dress'],
             // Wedding dress
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Wedding dress','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Wedding dress','typeOfChoice'=>'TextOptions', 'choice'=>['Satin','Charmeuse','Chiffon','Organza','Tulle','Lace','mikado','radzmir','gazar','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Wedding dress'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Wedding dress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Wedding dress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Wedding dress'],
             // Jacket
@@ -1776,14 +1738,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Jacket','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Polyurethane','Fleece','Nylon','Cashmere','Shearling','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Jacket'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Jacket','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Jacket'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Jacket'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Jacket'],
             // Langerie
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Langerie','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'TextType', 'category'=>'Langerie'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Langerie'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Langerie'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Langerie'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Langerie'],
             // Shoe
@@ -1791,7 +1751,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Leather','Textiles','Synthetics','Rubber','Polyster','Foam','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Shoe'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Shoe'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Shoe'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Shoe'],
             // Slide sandal
@@ -1799,7 +1758,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Slide sandal','typeOfChoice'=>'TextOptions', 'choice'=>['Leather','Textiles','Synthetics','Rubber','Polyster','Foam','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Slide sandal'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Slide sandal','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Slide sandal'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Slide sandal'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Slide sandal'],
             // Athletic shoe
@@ -1807,12 +1765,10 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Athletic shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Leather','Textiles','Synthetics','Rubber','Polyster','Foam','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Athletic shoe'],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Athletic shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Athletic shoe'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Athletic shoe'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Athletic shoe'],
             // fashion_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'fashion_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'fashion_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'fashion_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'fashion_Other'],
 
@@ -1822,7 +1778,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //Refrigerator
             ['name'=>'capacity', 'label'=>'MIN Capacity (liter)','type'=>'ChoiceType', 'category'=>'Refrigerator','typeOfChoice'=>'TextOptions', 'choice'=>['Less than 50 Liters'=> 1,'50-80 Liters'=> 2,'80-150 Liters'=> 3,'150-250 Liters'=> 4,'250-330 Liters'=>5,'330-490 Liters'=> 6,'More than 50 Liters'=>7]],
             ['name'=>'withFreezer', 'type'=>'CheckboxType', 'category'=>'Refrigerator'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Refrigerator'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Refrigerator'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Refrigerator'],
 
@@ -1831,118 +1786,91 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfHead','type'=>'ChoiceType', 'category'=>'Cookers gas','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
             ['name'=>'withOven', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
             ['name'=>'electricHead', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cookers gas'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
             //Cookers electric
             ['name'=>'numberOfHead','type'=>'ChoiceType', 'category'=>'Cookers electric','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
             ['name'=>'withOven', 'type'=>'CheckboxType', 'category'=>'Cookers electric'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cookers electric'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cookers electric'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cookers electric'],
             //Gas plate
             ['name'=>'numberOfHead','type'=>'ChoiceType', 'category'=>'Gas plate','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Gas plate'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Gas plate'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Gas plate'],
             //Washing machine
             ['name'=>'capacity', 'label'=>'MIN Capacity (kg)','type'=>'ChoiceType', 'category'=>'Washing machine','typeOfChoice'=>'NumericOptions', 'choice'=>[3,4,5,6,7,8,9,10,12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Washing machine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Washing machine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Washing machine'],
             //Fan
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Fan'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Fan'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Fan'],
             //Coffee machine
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Coffee machine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Coffee machine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Coffee machine'],
             //Electric kettle
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric kettle'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric kettle'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric kettle'],
             //Vaccuum cleaner
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Vaccuum cleaner'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Vaccuum cleaner'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Vaccuum cleaner'],
             //Oven
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Oven'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Oven'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Oven'],
             //Blender
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Blender'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Blender'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Blender'],
             //Stand Mixer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Stand Mixer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Stand Mixer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Stand Mixer'],
             //Dishwashers
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dishwashers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dishwashers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dishwashers'],
             //Electric fryer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric fryer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric fryer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric fryer'],
             //Freezer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Freezer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Freezer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Freezer'],
             //Pressure cooker
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Pressure cooker'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Pressure cooker'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Pressure cooker'],
             //Heater
             ['name'=>'fuelType', 'type'=>'ChoiceType', 'category'=>'Heater','typeOfChoice'=>'TextOptions', 'choice'=>['Gas','Diesel','fuelwood','Electric','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Heater'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Heater'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Heater'],
             //Iron
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Iron'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Iron'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Iron'],
             //Men's shaver
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Men\'s shaver'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Men\'s shaver'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Men\'s shaver'],
             //Lady shavers
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Lady shavers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Lady shavers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Lady shavers'],
             //Sandwich toaster
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Sandwich toaster'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sandwich toaster'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sandwich toaster'],
             //Meat grinder
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Meat grinder'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Meat grinder'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Meat grinder'],
             //Grilling charcoal
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Grilling charcoal'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Grilling charcoal'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Grilling charcoal'],
             //Hair dryer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Hair dryer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Hair dryer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Hair dryer'],
             //Juicer machine
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Juicer machine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Juicer machine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Juicer machine'],
             //Electric vegetable
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric vegetable'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric vegetable'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric vegetable'],
             //Kitchen accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Kitchen accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Kitchen accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Kitchen accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Kitchen accessories'],
             //home_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'home_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'home_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'home_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'home_Other'],
 
@@ -1951,55 +1879,45 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //gardens--------------------------------------------------------------------------------------------------
             // Garden table
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Garden table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Garden table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Garden table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Garden table'],
             // Swing
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Swing','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson','type'=>'ChoiceType', 'category'=>'Swing','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Swing'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Swing'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Swing'],
             // Seedlings
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Seedlings'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Seedlings'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Seedlings'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Seedlings'],
             // Garden chair
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Garden chair','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)','type'=>'ChoiceType', 'category'=>'Garden chair','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>50]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Garden chair'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Garden chair'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Garden chair'],
             // Lawn mower
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Lawn mower'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Lawn mower'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Lawn mower'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Lawn mower'],
             // Chainsaw
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Chainsaw'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chainsaw'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chainsaw'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chainsaw'],
             // Garden tools
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Garden tools'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Garden tools'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Garden tools'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Garden tools'],
             // Fuelwood
             ['name'=>'material', 'type'=>'TextType', 'category'=>'Fuelwood'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Fuelwood'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Fuelwood'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Fuelwood'],
             // Electric generator
             ['name'=>'capacity', 'label'=>'MIN Power (watt)', 'type'=>'TextType', 'category'=>'Electric generator'],
             ['name'=>'fuelType', 'type'=>'ChoiceType', 'category'=>'Electric generator','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Gasoline','Gas','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric generator'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric generator'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric generator'],
             // garden_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'garden_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'garden_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'garden_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'garden_Other'],
 
@@ -2178,7 +2096,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Perfumes'],
             ['name'=>'maxCapacity', 'label'=>'MAX Capacity (ml)', 'type'=>'TextType', 'category'=>'Perfumes'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Perfumes'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Perfumes'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Perfumes'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Perfumes'],
             // Wine
@@ -2187,12 +2104,10 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Wine','choice'=>['min'=>1890,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Wine','choice'=>['min'=>1891,'max'=>$thisYear]],
             ['name'=>'originCountry', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'TextOptions', 'choice'=>['France','Italy','Spain','Chile','Australia','United States','Germany','New zealand','Portugal','Argentina','Croatia','Switzerland','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Wine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Wine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Wine'],
             // jewelry_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'jewelry_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'jewelry_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'jewelry_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'jewelry_Other'],
 
@@ -2205,35 +2120,30 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Piano'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Piano','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Piano','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Piano'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Piano'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Piano'],
             // Violin
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Violin'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Violin','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Violin','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Violin'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Violin'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Violin'],
             // Trumpet
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Trumpet'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Trumpet','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Trumpet','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Trumpet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Trumpet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Trumpet'],
             // Flute
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Flute'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Flute','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Flute','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Flute'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Flute'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Flute'],
             // Clarinet
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Clarinet'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Clarinet','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Clarinet','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Clarinet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Clarinet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Clarinet'],
             // Drums
@@ -2241,21 +2151,18 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Drums'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Drums','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Drums','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Drums'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Drums'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Drums'],
             // Cello
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Cello'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Cello','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Cello','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cello'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cello'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cello'],
             // Contrabass
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Contrabass'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Contrabass','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Contrabass','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Contrabass'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Contrabass'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Contrabass'],
             // Electric guitar
@@ -2263,14 +2170,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Electric guitar'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Electric guitar','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Electric guitar','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric guitar'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric guitar'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric guitar'],
             // Classic guitar
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Classic guitar'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Classic guitar','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Classic guitar','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Classic guitar'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Classic guitar'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Classic guitar'],
             // Digital keyboard
@@ -2278,7 +2183,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Digital keyboard'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Digital keyboard','choice'=>['min'=>1940,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Digital keyboard','choice'=>['min'=>1941,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Digital keyboard'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Digital keyboard'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Digital keyboard'],
             // Accordion
@@ -2286,18 +2190,15 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Accordion'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Accordion','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Accordion','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Accordion'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Accordion'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Accordion'],
             // Music accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Music accessories'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Music accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Music accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Music accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Music accessories'],
             // music_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'music_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'music_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'music_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'music_Other'],
 
@@ -2308,67 +2209,54 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Ski boots'],
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Ski boots','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>32,'max'=>48]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Ski boots','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Ski boots'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Ski boots'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Ski boots'],
             // Roller skating
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Roller skating'],
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Roller skating','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>32,'max'=>48]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Roller skating','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Roller skating'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Roller skating'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Roller skating'],
             // Parachute
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Parachute'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Parachute'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Parachute'],
             // Swimming glasses
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Swimming glasses'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Swimming glasses'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Swimming glasses'],
             // Football
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Football'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Football'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Football'],
             // Basketball
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Basketball'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Basketball'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Basketball'],
             // Iron balls
             ['name'=>'number', 'label'=>'MIN Number (unit)','type'=>'ChoiceType', 'category'=>'Iron balls','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>30]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Iron balls'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Iron balls'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Iron balls'],
             // Volley ball
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Volley ball'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Volley ball'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Volley ball'],
             // American football
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'American football'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'American football'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'American football'],
             // Sports tool
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Sports tool'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Sports tool','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Sports tool'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sports tool'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sports tool'],
             // Bicycle
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Bicycle'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Bicycle'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Bicycle','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Bicycle'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bicycle'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bicycle'],
             // Bicycle accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Bicycle accessories'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Bicycle accessories','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Bicycle accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bicycle accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bicycle accessories'],
             // sport_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'sport_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'sport_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'sport_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'sport_Other'],
 
@@ -2378,32 +2266,27 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //  Cat
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Cat'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Cat'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cat'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cat'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cat'],
             // Dog
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Dog'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Dog'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dog'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dog'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dog'],
             // Hamster
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Hamster'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Hamster'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Hamster'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Hamster'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Hamster'],
             // Mouse
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Mouse'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Mouse'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mouse'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mouse'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mouse'],
             // pet_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'pet_Other'],
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'pet_Other'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'pet_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'pet_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'pet_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'pet_Other'],
 
@@ -2412,28 +2295,23 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //kids------------------------------------------------------------------------------------------------------
             //  Crib
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Crib','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Crib'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Crib'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Crib'],
             // kids_Chest of drawers
 
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'kids_Chest of drawers','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'kids_Chest of drawers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'kids_Chest of drawers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'kids_Chest of drawers'],
             // Stroller
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Stroller'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Stroller'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Stroller'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Stroller'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Stroller'],
             // Diapers
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Diapers','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>0,'max'=>8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Diapers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Diapers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Diapers'],
             // kids_Mattress
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'kids_Mattress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'kids_Mattress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'kids_Mattress'],
             // Baby clothes
@@ -2441,26 +2319,22 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Baby clothes','typeOfChoice'=>'NumericOptions', 'choice'=>[40,44,50,54,60,67,71,74,81,86,94,102,108,116,122,128,134,140,146,152,158,164,170,174,180]],
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Baby clothes'],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Baby clothes','typeOfChoice'=>'TextOptions', 'choice'=>['Cotton','Cloth','Polyester','Linen','Jeans','Wool','Silk','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Baby clothes'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Baby clothes'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Baby clothes'],
             // Baby tools
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Baby tools'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Baby tools'],
             ['name'=>'age', 'type'=>'ChoiceType', 'category'=>'Baby tools','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>15]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Baby tools'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Baby tools'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Baby tools'],
             // Baby toys
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Baby toys'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Baby toys'],
             ['name'=>'age', 'type'=>'ChoiceType', 'category'=>'Baby toys','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>15]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Baby toys'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Baby toys'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Baby toys'],
             // kid_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'kid_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'kid_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'kid_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'kid_Other'],
 
@@ -2471,14 +2345,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Couch','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>5]],
             ['name'=>'coverMaterial', 'type'=>'ChoiceType', 'category'=>'Couch','typeOfChoice'=>'TextOptions', 'choice'=>['Cotton','Cloth','Leather','Linen','Velvet','Chamois','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Couch'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Couch'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Couch'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Couch'],
             // Dining table
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Dining table','typeOfChoice'=>'NumericOptions', 'choice'=>[2,4,6,8,10,12,14]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Dining table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
             ['name'=>'shape', 'type'=>'ChoiceType', 'category'=>'Dining table','typeOfChoice'=>'TextOptions', 'choice'=>['Oval','Circular','Square','Rectangle','Complex','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dining table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dining table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dining table'],
             // Chest of drawers
@@ -2486,7 +2358,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfStaging', 'label'=>'MIN Number of staging', 'type'=>'ChoiceType', 'category'=>'Chest of drawers','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'numberOfDoors', 'label'=>'MIN Number of doors', 'type'=>'ChoiceType', 'category'=>'Chest of drawers','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Chest of drawers','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chest of drawers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chest of drawers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chest of drawers'],
             // Closet
@@ -2494,117 +2365,95 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfStaging', 'label'=>'MIN Number of staging', 'type'=>'ChoiceType', 'category'=>'Closet','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'numberOfDoors', 'label'=>'MIN Number of doors', 'type'=>'ChoiceType', 'category'=>'Closet','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Closet','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Closet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Closet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Closet'],
             // Central table
             ['name'=>'shape', 'type'=>'ChoiceType', 'category'=>'Central table','typeOfChoice'=>'TextOptions', 'choice'=>['Oval','Circular','Square','Rectangle','Complex','Other']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Central table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Central table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Central table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Central table'],
             // Bed
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Bed'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bed'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bed'],
             // Mattress'
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mattress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mattress'],
             //Quilt
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Quilt'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Quilt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Quilt'],
             //Carpet
             ['name'=>'shape', 'type'=>'ChoiceType', 'category'=>'Carpet','typeOfChoice'=>'TextOptions', 'choice'=>['Oval','Circular','Square','Rectangle','Complex','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Carpet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Carpet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Carpet'],
             //Chair
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Chair','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Chair','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chair'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chair'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chair'],
             //Office chair
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Office chair','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Office chair','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Office chair'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Office chair'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Office chair'],
             //Sofa
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'label'=>'Number MIN', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Sofa'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sofa'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sofa'],
             //Racks
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Racks','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Racks'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Racks'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Racks'],
             //Study table
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Study table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Study table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Study table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Study table'],
             //Click clack
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Click clack','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Click clack'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Click clack'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Click clack'],
             //Nightstand
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Nightstand','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'numberOfDrawer', 'label'=>'MIN Number of drawer', 'type'=>'ChoiceType', 'category'=>'Nightstand','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Nightstand'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Nightstand'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Nightstand'],
             //Shoe cabinet
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Shoe cabinet','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'numberOfDrawer', 'label'=>'MIN Number of drawer', 'type'=>'ChoiceType', 'category'=>'Shoe cabinet','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Shoe cabinet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Shoe cabinet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Shoe cabinet'],
             //Chandelier
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Chandelier','typeOfChoice'=>'TextOptions', 'choice'=>['Glass','Crystal','Carton','Funt','Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Chandelier'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chandelier'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chandelier'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chandelier'],
             //Antic
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Antic'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Antic'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Antic'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Antic'],
             //Painting
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Painting'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Painting'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Painting'],
             //Roses
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Roses'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Roses'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Roses'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Roses'],
             //Curtain
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Curtain'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Curtain'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Curtain'],
             //Floor lamp
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Floor lamp'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Floor lamp'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Floor lamp'],
             //Mirror
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mirror'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mirror'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mirror'],
             //furniture_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'furniture_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'furniture_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'furniture_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'furniture_Other'],
 
@@ -2626,7 +2475,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             ['name'=>'eventType', 'label' => 'All type of events', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'TextOptions', 'choice'=>['Music','Cinema','Sport','Theater','Party','Resturant','Tourist','Travel','Other']],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Cards and reservations'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>10]],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
@@ -2696,27 +2544,23 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Car parts'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Car parts'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Car parts','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Car parts'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Car parts'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Car parts'],
             // Motor parts
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Motor parts'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Motor parts'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Motor parts','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Motor parts'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Motor parts'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Motor parts'],
             // Vehicle accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Vehicle accessories'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Vehicle accessories'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Vehicle accessories','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Vehicle accessories'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Vehicle accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Vehicle accessories'],
 
             // vehicle_other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'vehicle_other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'vehicle_other'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'vehicle_other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'vehicle_other'],
 
@@ -2757,10 +2601,8 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'House work'],
             // Maintenance services
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Maintenance services'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Maintenance services'],
             // jobs_other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'jobs_other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'jobs_other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'jobs_other'],
 
 
@@ -2771,13 +2613,11 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'TV'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'TV','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'TV','typeOfChoice'=>'TextOptions', 'choice'=>['Normal','Smart']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'TV'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'TV'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'TV'],
             //Wolkman
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Wolkman'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Wolkman','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Wolkman'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Wolkman'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Wolkman'],
             // Camera
@@ -2785,68 +2625,57 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'accuracy','label'=>'MIN Accuracy (mp)', 'type'=>'TextType', 'category'=>'Camera'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Camera','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Camera'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Camera'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Camera'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Camera'],
             //Audio accessories
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Audio accessories'],
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Audio accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Audio accessories'],
             ['name'=>'price','label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Audio accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Audio accessories'],
             //Camera accessories
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Camera accessories'],
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Camera accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Camera accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Camera accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Camera accessories'],
             //Headphones
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Headphones'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Headphones'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Headphones','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Headphones'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Headphones'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Headphones'],
             //Telephone
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Telephone'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Telephone','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Telephone'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Telephone'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Telephone'],
             //Video games
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Video games'],
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'Video games'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Video games'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Video games'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Video games'],
             //DVD Games
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'DVD Games'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'DVD Games'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'DVD Games'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'DVD Games'],
             //Games accessories
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Games accessories'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Games accessories','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Games accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Games accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Games accessories'],
             //Movies
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Movies'],
             ['name'=>'dvdCd', 'label'=>'DVD CD', 'type'=>'ChoiceType', 'category'=>'Movies','typeOfChoice'=>'TextOptions', 'choice'=>['DVD','CD']],
             ['name'=>'language', 'type'=>'ChoiceType', 'category'=>'Movies','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Movies'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Movies'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Movies'],
 
             //Books
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Books'],
             ['name'=>'language', 'type'=>'ChoiceType', 'category'=>'Books','typeOfChoice'=>'TextOptions', 'choice'=>['French','English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Books'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Books'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Books'],
             //media_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'media_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'media_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'media_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'media_Other'],
 
@@ -2859,7 +2688,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'maxCapacity', 'label'=>'MAX HDD capacity (gb)','type'=>'ChoiceType', 'category'=>'Computer','typeOfChoice'=>'NumericOptions', 'choice'=>[60,100,120,160,200,250,300,500,720,750,800,1000,2000,3000,4000,8000]],
             ['name'=>'ram', 'label'=>'MIN Ram capacity (gb)','type'=>'ChoiceType', 'category'=>'Computer','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,6,8,12,16,24,32,64]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Computer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Computer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Computer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Computer'],
             // laptop
@@ -2871,7 +2699,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'cdRoom', 'type'=>'CheckboxType', 'category'=>'laptop'],
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'laptop'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'laptop','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'laptop'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'laptop'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'laptop'],
             // Tablet
@@ -2881,7 +2708,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'ram', 'label'=>'MIN Ram capacity (gb)','type'=>'ChoiceType', 'category'=>'Tablet','typeOfChoice'=>'NumericOptions', 'choice'=>[0.5,1,2,3,4,6,8,16]],
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'Tablet'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Tablet','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Tablet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Tablet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Tablet'],
             // Mobile
@@ -2891,7 +2717,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'ram', 'label'=>'MIN Ram capacity (gb)','type'=>'ChoiceType', 'category'=>'Mobile','typeOfChoice'=>'NumericOptions', 'choice'=>[0.5,1,2,3,4,6,8,16]],
             ['name'=>'accessories', 'type'=>'CheckboxType', 'category'=>'Mobile'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Mobile','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mobile'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mobile'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mobile'],
             // Scanner
@@ -2900,7 +2725,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Scanner','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Scanner'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Scanner'],
             // Printer
@@ -2912,7 +2736,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'threeInOne', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'paperSize', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['4A0' => 1,'2A0' => 2,'A0' => 3,'A1'=>4,'A2'=>5,'A3'=>6,'A4'=>7,'A5'=>8,'A6'=>9,'A7'=>10,'A8'=>11,'A9'=>12,'A10'=>13]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Printer','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Printer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Printer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Printer'],
             // Monitor
@@ -2920,14 +2743,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'hdmi', 'type'=>'CheckboxType', 'category'=>'Monitor'],
             ['name'=>'usb', 'type'=>'CheckboxType', 'category'=>'Monitor'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Monitor','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Monitor'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Monitor'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Monitor'],
             // information_mouse
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'information_mouse'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'information_mouse'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'information_mouse','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'information_mouse'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'information_mouse'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'information_mouse'],
             // keyboard
@@ -2935,14 +2756,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'languages', 'type'=>'ChoiceType', 'category'=>'keyboard','typeOfChoice'=>'TextOptions', 'choice'=>['English','German','Italian','Spanish','Ukrainian','Polish','Dutch','Turkish','Romanian','Arabic','Austro-Bavarian','Russian','Hungarian','Greek','Czech','Portuguese','Swedish','Bulgarian','Albanian','Slovak','Chinese','Japanese','Indian','Vietnamese','Persian','Indonesian']],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'keyboard'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'keyboard','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'keyboard'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'keyboard'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'keyboard'],
             // Speaker
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Speaker'],
             ['name'=>'wifi', 'type'=>'CheckboxType', 'category'=>'Speaker'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Speaker','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Speaker'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Speaker'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Speaker'],
             // Hard disk
@@ -2950,13 +2769,11 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'minCapacity', 'label'=>'MIN HDD capacity (gb)','type'=>'ChoiceType', 'category'=>'Hard disk','typeOfChoice'=>'NumericOptions', 'choice'=>[0,60,100,120,160,200,250,300,500,720,750,800,1000,2000,3000,4000,8000]],
             ['name'=>'maxCapacity', 'label'=>'MAX HDD Capacity (gb)','type'=>'ChoiceType', 'category'=>'Hard disk','typeOfChoice'=>'NumericOptions', 'choice'=>[60,100,120,160,200,250,300,500,720,750,800,1000,2000,3000,4000,8000]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Hard disk','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Hard disk'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Hard disk'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Hard disk'],
 
             // information_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'information_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'information_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'information_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'information_Other'],
 
@@ -2967,86 +2784,73 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'T-shirt','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'T-shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','jeans','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'T-shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'T-shirt'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'T-shirt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'T-shirt'],
             // Shirt
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Shirt','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','jeans','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Shirt','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Shirt'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Shirt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Shirt'],
             // Trouser
             ['name'=>'iSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Trouser','typeOfChoice'=>'NumericOptions', 'choice'=>[32,34,36,38,40,41,42,43,44,45,46,47,48,50,52,54,56,58,60,62]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Trouser','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Trouser','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Trouser'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Trouser'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Trouser'],
             // Short
             ['name'=>'iSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Short','typeOfChoice'=>'NumericOptions', 'choice'=>[32,34,36,38,40,41,42,43,44,45,46,47,48,50,52,54,56,58,60,62]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Short','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Short','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Short'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Short'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Short'],
             // Costume
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Costume','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Costume','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Cloth','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Costume','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Costume'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Costume'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Costume'],
             // Dress
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Dress','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Dress','typeOfChoice'=>'TextOptions', 'choice'=>['Felt','Hessian','chiffon','Velours','Denim','Mousseline','Popeline','Charmeuse','Taffeta','Habutai','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dress'],
             // Wedding dress
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Wedding dress','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Wedding dress','typeOfChoice'=>'TextOptions', 'choice'=>['Satin','Charmeuse','Chiffon','Organza','Tulle','Lace','mikado','radzmir','gazar','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Wedding dress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Wedding dress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Wedding dress'],
             // Jacket
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Jacket','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Jacket','typeOfChoice'=>'TextOptions', 'choice'=>['Wool','Cotton','Linen','Leather','Polyster','Polyurethane','Fleece','Nylon','Cashmere','Shearling','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Jacket','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Jacket'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Jacket'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Jacket'],
             // Langerie
             ['name'=>'sSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Langerie','typeOfChoice'=>'TextOptions', 'choice'=>['XS','S','M','L','XL','XXL','XXXL']],
             ['name'=>'material', 'type'=>'TextType', 'category'=>'Langerie'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Langerie'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Langerie'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Langerie'],
             // Shoe
             ['name'=>'iSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Shoe','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>36,'max'=>48]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Leather','Textiles','Synthetics','Rubber','Polyster','Foam','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Shoe'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Shoe'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Shoe'],
             // Slide sandal
             ['name'=>'iSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Slide sandal','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>36,'max'=>48]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Slide sandal','typeOfChoice'=>'TextOptions', 'choice'=>['Leather','Textiles','Synthetics','Rubber','Polyster','Foam','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Slide sandal','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Slide sandal'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Slide sandal'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Slide sandal'],
             // Athletic shoe
             ['name'=>'iSize', 'label'=>'Size','type'=>'ChoiceType', 'category'=>'Athletic shoe','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>36,'max'=>48]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Athletic shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Leather','Textiles','Synthetics','Rubber','Polyster','Foam','Other']],
             ['name'=>'theType', 'type'=>'ChoiceType', 'category'=>'Athletic shoe','typeOfChoice'=>'TextOptions', 'choice'=>['Men','Women']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Athletic shoe'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Athletic shoe'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Athletic shoe'],
             // fashion_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'fashion_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'fashion_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'fashion_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'fashion_Other'],
 
@@ -3056,7 +2860,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //Refrigerator
             ['name'=>'minCapacity', 'label'=>'MIN Capacity (liter)','type'=>'ChoiceType', 'category'=>'Refrigerator','typeOfChoice'=>'TextOptions', 'choice'=>['Less than 50 Liters'=> 1,'50-80 Liters'=> 2,'80-150 Liters'=> 3,'150-250 Liters'=> 4,'250-330 Liters'=>5,'330-490 Liters'=> 6,'More than 50 Liters'=>7]],
             ['name'=>'withFreezer', 'type'=>'CheckboxType', 'category'=>'Refrigerator'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Refrigerator'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Refrigerator'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Refrigerator'],
 
@@ -3065,118 +2868,91 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfHead','label'=>'MIN Number Of Head','type'=>'ChoiceType', 'category'=>'Cookers gas','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
             ['name'=>'withOven', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
             ['name'=>'electricHead', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cookers gas'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cookers gas'],
             //Cookers electric
             ['name'=>'numberOfHead','label'=>'MIN Number Of Head','type'=>'ChoiceType', 'category'=>'Cookers electric','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
             ['name'=>'withOven', 'type'=>'CheckboxType', 'category'=>'Cookers electric'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cookers electric'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cookers electric'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cookers electric'],
             //Gas plate
             ['name'=>'numberOfHead','label'=>'MIN Number Of Head','type'=>'ChoiceType', 'category'=>'Gas plate','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Gas plate'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Gas plate'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Gas plate'],
             //Washing machine
             ['name'=>'minCapacity', 'label'=>'MIN Capacity (kg)','type'=>'ChoiceType', 'category'=>'Washing machine','typeOfChoice'=>'NumericOptions', 'choice'=>[3,4,5,6,7,8,9,10,12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Washing machine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Washing machine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Washing machine'],
             //Fan
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Fan'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Fan'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Fan'],
             //Coffee machine
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Coffee machine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Coffee machine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Coffee machine'],
             //Electric kettle
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric kettle'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric kettle'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric kettle'],
             //Vaccuum cleaner
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Vaccuum cleaner'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Vaccuum cleaner'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Vaccuum cleaner'],
             //Oven
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Oven'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Oven'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Oven'],
             //Blender
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Blender'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Blender'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Blender'],
             //Stand Mixer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Stand Mixer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Stand Mixer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Stand Mixer'],
             //Dishwashers
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dishwashers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dishwashers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dishwashers'],
             //Electric fryer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric fryer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric fryer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric fryer'],
             //Freezer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Freezer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Freezer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Freezer'],
             //Pressure cooker
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Pressure cooker'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Pressure cooker'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Pressure cooker'],
             //Heater
             ['name'=>'fuelType', 'type'=>'ChoiceType', 'category'=>'Heater','typeOfChoice'=>'TextOptions', 'choice'=>['Gas','Diesel','fuelwood','Electric','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Heater'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Heater'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Heater'],
             //Iron
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Iron'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Iron'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Iron'],
             //Men's shaver
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Men\'s shaver'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Men\'s shaver'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Men\'s shaver'],
             //Lady shavers
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Lady shavers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Lady shavers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Lady shavers'],
             //Sandwich toaster
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Sandwich toaster'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sandwich toaster'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sandwich toaster'],
             //Meat grinder
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Meat grinder'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Meat grinder'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Meat grinder'],
             //Grilling charcoal
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Grilling charcoal'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Grilling charcoal'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Grilling charcoal'],
             //Hair dryer
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Hair dryer'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Hair dryer'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Hair dryer'],
             //Juicer machine
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Juicer machine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Juicer machine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Juicer machine'],
             //Electric vegetable
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric vegetable'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric vegetable'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric vegetable'],
             //Kitchen accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Kitchen accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Kitchen accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Kitchen accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Kitchen accessories'],
             //home_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'home_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'home_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'home_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'home_Other'],
 
@@ -3185,51 +2961,41 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //gardens--------------------------------------------------------------------------------------------------
             // Garden table
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Garden table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Garden table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Garden table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Garden table'],
             // Swing
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Swing','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson','type'=>'ChoiceType', 'category'=>'Swing','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Swing'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Swing'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Swing'],
             // Seedlings
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Seedlings'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Seedlings'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Seedlings'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Seedlings'],
             // Garden chair
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Garden chair','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)','type'=>'ChoiceType', 'category'=>'Garden chair','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>50]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Garden chair'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Garden chair'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Garden chair'],
             // Lawn mower
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Lawn mower'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Lawn mower'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Lawn mower'],
             // Chainsaw
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chainsaw'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chainsaw'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chainsaw'],
             // Garden tools
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Garden tools'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Garden tools'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Garden tools'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Garden tools'],
             // Fuelwood
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Fuelwood'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Fuelwood'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Fuelwood'],
             // Electric generator
             ['name'=>'fuelType', 'type'=>'ChoiceType', 'category'=>'Electric generator','typeOfChoice'=>'TextOptions', 'choice'=>['Diesel','Gasoline','Gas','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric generator'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric generator'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric generator'],
             // garden_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'garden_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'garden_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'garden_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'garden_Other'],
 
@@ -3380,7 +3146,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             // Perfumes
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Perfumes'],
             ['name'=>'maxCapacity', 'label'=>'MAX Capacity (ml)', 'type'=>'TextType', 'category'=>'Perfumes'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Perfumes'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Perfumes'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Perfumes'],
             // Wine
@@ -3389,12 +3154,10 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Wine','choice'=>['min'=>1890,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Wine','choice'=>['min'=>1891,'max'=>$thisYear]],
             ['name'=>'originCountry', 'type'=>'ChoiceType', 'category'=>'Wine','typeOfChoice'=>'TextOptions', 'choice'=>['France','Italy','Spain','Chile','Australia','United States','Germany','New zealand','Portugal','Argentina','Croatia','Switzerland','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Wine'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Wine'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Wine'],
             // jewelry_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'jewelry_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'jewelry_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'jewelry_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'jewelry_Other'],
 
@@ -3407,95 +3170,81 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Piano'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Piano','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Piano','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Piano'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Piano'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Piano'],
             // Violin
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Violin'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Violin','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Violin','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Violin'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Violin'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Violin'],
             // Trumpet
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Trumpet'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Trumpet','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Trumpet','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Trumpet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Trumpet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Trumpet'],
             // Flute
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Flute'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Flute','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Flute','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Flute'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Flute'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Flute'],
             // Clarinet
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Clarinet'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Clarinet','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Clarinet','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Clarinet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Clarinet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Clarinet'],
             // Drums
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Drums'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Drums','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Drums','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Drums'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Drums'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Drums'],
             // Cello
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Cello'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Cello','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Cello','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cello'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cello'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cello'],
             // Contrabass
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Contrabass'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Contrabass','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Contrabass','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Contrabass'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Contrabass'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Contrabass'],
             // Electric guitar
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Electric guitar'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Electric guitar','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Electric guitar','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Electric guitar'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Electric guitar'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Electric guitar'],
             // Classic guitar
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Classic guitar'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Classic guitar','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Classic guitar','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Classic guitar'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Classic guitar'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Classic guitar'],
             // Digital keyboard
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Digital keyboard'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Digital keyboard','choice'=>['min'=>1940,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Digital keyboard','choice'=>['min'=>1941,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Digital keyboard'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Digital keyboard'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Digital keyboard'],
             // Accordion
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Accordion'],
             ['name'=>'minManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Accordion','choice'=>['min'=>1920,'max'=>$thisYear]],
             ['name'=>'maxManufacturingYear','type'=> 'ChoiceType', 'typeOfChoice'=>'SequentialNumericOptions', 'category'=>'Accordion','choice'=>['min'=>1921,'max'=>$thisYear]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Accordion'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Accordion'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Accordion'],
             // Music accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Music accessories'],
             ['name'=>'model', 'type'=>'TextType', 'category'=>'Music accessories'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Music accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Music accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Music accessories'],
             // music_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'music_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'music_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'music_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'music_Other'],
 
@@ -3505,65 +3254,52 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             // Ski boots
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Ski boots','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>32,'max'=>48]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Ski boots','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Ski boots'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Ski boots'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Ski boots'],
             // Roller skating
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Roller skating','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>32,'max'=>48]],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Roller skating','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Roller skating'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Roller skating'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Roller skating'],
             // Parachute
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Parachute'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Parachute'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Parachute'],
             // Swimming glasses
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Swimming glasses'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Swimming glasses'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Swimming glasses'],
             // Football
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Football'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Football'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Football'],
             // Basketball
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Basketball'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Basketball'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Basketball'],
             // Iron balls
             ['name'=>'number', 'label'=>'MIN Number (unit)','type'=>'ChoiceType', 'category'=>'Iron balls','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>30]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Iron balls'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Iron balls'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Iron balls'],
             // Volley ball
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Volley ball'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Volley ball'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Volley ball'],
             // American football
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'American football'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'American football'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'American football'],
             // Sports tool
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Sports tool'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Sports tool','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Sports tool'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sports tool'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sports tool'],
             // Bicycle
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Bicycle'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Bicycle','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Bicycle'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bicycle'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bicycle'],
             // Bicycle accessories
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Bicycle accessories'],
             ['name'=>'generalSituation', 'type'=>'ChoiceType', 'category'=>'Bicycle accessories','typeOfChoice'=>'TextOptions', 'choice'=>['Damaged'=> 1,'Medium'=> 2,'Good' => 3,'Semi-new'=> 4,'Totally new'=> 5]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Bicycle accessories'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bicycle accessories'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bicycle accessories'],
             // sport_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'sport_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'sport_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'sport_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'sport_Other'],
 
@@ -3573,32 +3309,27 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //  Cat
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Cat'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Cat'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cat'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Cat'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cat'],
             // Dog
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Dog'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Dog'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dog'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dog'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dog'],
             // Hamster
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Hamster'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Hamster'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Hamster'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Hamster'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Hamster'],
             // Mouse
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'Mouse'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'Mouse'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mouse'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mouse'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mouse'],
             // pet_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'pet_Other'],
             ['name'=>'age', 'label'=>'MAX Age (year)', 'type'=>'TextType', 'category'=>'pet_Other'],
             ['name'=>'animalSpecies', 'type'=>'TextType', 'category'=>'pet_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'pet_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'pet_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'pet_Other'],
 
@@ -3607,53 +3338,44 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //kids------------------------------------------------------------------------------------------------------
             //  Crib
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Crib','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Crib'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Crib'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Crib'],
             // kids_Chest of drawers
 
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'kids_Chest of drawers','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'kids_Chest of drawers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'kids_Chest of drawers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'kids_Chest of drawers'],
             // Stroller
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Stroller'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Stroller'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Stroller'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Stroller'],
             // Diapers
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Diapers','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>0,'max'=>8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Diapers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Diapers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Diapers'],
             // kids_Mattress
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'kids_Mattress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'kids_Mattress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'kids_Mattress'],
             // Baby clothes
             ['name'=>'iSize', 'label'=>'Size', 'type'=>'ChoiceType', 'category'=>'Baby clothes','typeOfChoice'=>'NumericOptions', 'choice'=>[40,44,50,54,60,67,71,74,81,86,94,102,108,116,122,128,134,140,146,152,158,164,170,174,180]],
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Baby clothes'],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Baby clothes','typeOfChoice'=>'TextOptions', 'choice'=>['Cotton','Cloth','Polyester','Linen','Jeans','Wool','Silk','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Baby clothes'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Baby clothes'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Baby clothes'],
             // Baby tools
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Baby tools'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Baby tools'],
             ['name'=>'age', 'label'=>'Min age','type'=>'ChoiceType', 'category'=>'Baby tools','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>15]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Baby tools'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Baby tools'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Baby tools'],
             // Baby toys
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Baby toys'],
             ['name'=>'manufactureCompany', 'type'=>'TextType', 'category'=>'Baby toys'],
             ['name'=>'age', 'label'=>'Min age','type'=>'ChoiceType', 'category'=>'Baby toys','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>15]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Baby toys'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Baby toys'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Baby toys'],
             // kid_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'kid_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'kid_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'kid_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'kid_Other'],
 
@@ -3663,14 +3385,12 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //  Couch
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Couch','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>5]],
             ['name'=>'coverMaterial', 'type'=>'ChoiceType', 'category'=>'Couch','typeOfChoice'=>'TextOptions', 'choice'=>['Cotton','Cloth','Leather','Linen','Velvet','Chamois','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Couch'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Couch'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Couch'],
             // Dining table
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Dining table','typeOfChoice'=>'NumericOptions', 'choice'=>[2,4,6,8,10,12,14]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Dining table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
             ['name'=>'shape', 'type'=>'ChoiceType', 'category'=>'Dining table','typeOfChoice'=>'TextOptions', 'choice'=>['Oval','Circular','Square','Rectangle','Complex','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Dining table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Dining table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Dining table'],
             // Chest of drawers
@@ -3678,7 +3398,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfStaging', 'label'=>'MIN Number of staging', 'type'=>'ChoiceType', 'category'=>'Chest of drawers','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'numberOfDoors', 'label'=>'MIN Number of doors', 'type'=>'ChoiceType', 'category'=>'Chest of drawers','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Chest of drawers','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chest of drawers'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chest of drawers'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chest of drawers'],
             // Closet
@@ -3686,115 +3405,93 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'numberOfStaging', 'label'=>'MIN Number of staging', 'type'=>'ChoiceType', 'category'=>'Closet','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'numberOfDoors', 'label'=>'MIN Number of doors', 'type'=>'ChoiceType', 'category'=>'Closet','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Closet','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Closet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Closet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Closet'],
             // Central table
             ['name'=>'shape', 'type'=>'ChoiceType', 'category'=>'Central table','typeOfChoice'=>'TextOptions', 'choice'=>['Oval','Circular','Square','Rectangle','Complex','Other']],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Central table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Central table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Central table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Central table'],
             // Bed
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Bed'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bed'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bed'],
             // Mattress'
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mattress'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mattress'],
             //Quilt
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Quilt'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Quilt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Quilt'],
             //Carpet
             ['name'=>'shape', 'type'=>'ChoiceType', 'category'=>'Carpet','typeOfChoice'=>'TextOptions', 'choice'=>['Oval','Circular','Square','Rectangle','Complex','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Carpet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Carpet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Carpet'],
             //Chair
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Chair','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Chair','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chair'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chair'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chair'],
             //Office chair
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Office chair','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Office chair','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Office chair'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Office chair'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Office chair'],
             //Sofa
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'label'=>'Number MIN', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Sofa'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sofa'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sofa'],
             //Racks
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Racks','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Racks'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Racks'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Racks'],
             //Study table
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Study table','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Study table'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Study table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Study table'],
             //Click clack
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Click clack','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Click clack'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Click clack'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Click clack'],
             //Nightstand
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Nightstand','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'numberOfDrawer', 'label'=>'MIN Number of drawer', 'type'=>'ChoiceType', 'category'=>'Nightstand','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Nightstand'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Nightstand'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Nightstand'],
             //Shoe cabinet
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Shoe cabinet','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'numberOfDrawer', 'label'=>'MIN Number of drawer', 'type'=>'ChoiceType', 'category'=>'Shoe cabinet','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Shoe cabinet'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Shoe cabinet'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Shoe cabinet'],
             //Chandelier
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Chandelier','typeOfChoice'=>'TextOptions', 'choice'=>['Glass','Crystal','Carton','Funt','Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Chandelier'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Chandelier'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Chandelier'],
             //Antic
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Antic'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Antic'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Antic'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Antic'],
             //Painting
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Painting'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Painting'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Painting'],
             //Roses
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'Roses'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Roses'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Roses'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Roses'],
             //Curtain
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Curtain'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Curtain'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Curtain'],
             //Floor lamp
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Floor lamp'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Floor lamp'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Floor lamp'],
             //Mirror
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Mirror'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mirror'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mirror'],
             //furniture_Other
             ['name'=>'subjectName', 'type'=>'TextType', 'category'=>'furniture_Other'],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'furniture_Other'],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'furniture_Other'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'furniture_Other'],
 
@@ -3810,7 +3507,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Cards and reservations
 
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
             ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>8]],
             ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Cards and reservations','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>10]],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Cards and reservations'],
@@ -4127,7 +3823,6 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //Gas plate
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Gas plate'],
             ['name'=>'numberOfHead','type'=>'ChoiceType', 'category'=>'Gas plate','typeOfChoice'=>'NumericOptions', 'choice'=>[1,2,3,4,5,6,7,8]],
-            ['name'=>'withDriver', 'type'=>'CheckboxType', 'category'=>'Gas plate'],
 
             //Washing machine
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Washing machine'],

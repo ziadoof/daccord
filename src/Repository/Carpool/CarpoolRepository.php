@@ -47,4 +47,12 @@ class CarpoolRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function carpoolCount()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

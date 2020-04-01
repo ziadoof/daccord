@@ -40,4 +40,12 @@ class DoneDealRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function doneDealCount()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('COUNT(d)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

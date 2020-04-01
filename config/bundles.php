@@ -24,6 +24,6 @@ return [
     Mgilet\NotificationBundle\MgiletNotificationBundle::class => ['all' => true],
     FOS\MessageBundle\FOSMessageBundle::class => ['all' => true],
     JMS\JobQueueBundle\JMSJobQueueBundle::class => ['all' => true],
+    Twig\CssInliner\Bundle\TwigCssInlinerBundle::class => ['all' => true],
+    Twig\Inky\Bundle\TwigInkyBundle::class => ['all' => true],
 ];
-
-

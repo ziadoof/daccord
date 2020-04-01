@@ -59,4 +59,30 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function userCount()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function activeUserCount()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.enabled = TRUE')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function inactiveUserCount()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.enabled = FALSE')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

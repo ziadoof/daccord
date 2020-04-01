@@ -53,6 +53,7 @@ class AdController extends AbstractController
     public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator, CityRepository $cityRepository): Response
     {
         $user = $this->getUser();
+
         $result = $adRepository->findAll();
         $results = $paginator->paginate(
         // Doctrine Query, not results
@@ -319,7 +320,9 @@ class AdController extends AbstractController
                 'Your ad and all the deals related to it has been removed successfully!'
             );
         }
-
+        if($this->getUser()->isAdmin()){
+            return $this->redirectToRoute('admin_ads');
+        }
         return $this->redirectToRoute('ad_index');
     }
 
