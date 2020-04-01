@@ -52,6 +52,7 @@ require('./voyage/jquery.collection');
 require('./voyage/voyage');
 require('./voyage/searchVoyage');
 require('./favorite');
+require('./admin/admin');
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

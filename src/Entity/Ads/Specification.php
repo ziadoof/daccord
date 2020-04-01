@@ -115,11 +115,13 @@ class Specification
         return $this;
     }
 
-    public function __construct(string $name)
+    public function __construct(string $name = null)
     {
-        $this->name = $name;
-        $lowerName = strtolower(preg_replace('/(?<!^)[A-Z]/', ' $0', $name));
-        $this->label = ucwords($lowerName) ;
+        if($name !== null){
+            $this->name = $name;
+            $lowerName = strtolower(preg_replace('/(?<!^)[A-Z]/', ' $0', $name));
+            $this->label = ucwords($lowerName) ;
+        }
     }
 
     public function getTextOptions(): ?array

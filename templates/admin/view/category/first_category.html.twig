@@ -1,0 +1,20 @@
+{% extends 'admin/layout_admin.html.twig' %}
+{% block admin %}
+    <div class="container">
+        <h3 class="blued text-center">New Category</h3>
+        <div class="text-center mt-2 ">
+            <div class="col-md-12">
+                <div class=" ">
+                    <span class="badge badge-primary mx-1 py-2 px-2"><h4>Category name</h4></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 offset-4">
+            {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.isParent) }}
+                <button class="btn btn-info float-right mt-4">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

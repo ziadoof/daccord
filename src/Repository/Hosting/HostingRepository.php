@@ -56,4 +56,12 @@ class HostingRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function hostingCount()
+    {
+        return $this->createQueryBuilder('h')
+            ->select('COUNT(h)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

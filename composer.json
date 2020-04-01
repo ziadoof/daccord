@@ -48,7 +48,11 @@
         "symfony/web-profiler-bundle": "4.2.*",
         "symfony/webpack-encore-bundle": "^1.1",
         "symfony/yaml": "4.2.*",
-        "twig/extensions": "^1.5"
+        "twig/cssinliner-extension": "^2.0",
+        "twig/cssinliner-extra": "^3.0",
+        "twig/extensions": "^1.5",
+        "twig/inky-extension": "^2.0",
+        "twig/inky-extra": "^3.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

@@ -68,4 +68,52 @@ class SpecificationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findUniqueNames(): array
+    {
+        $names = $this->createQueryBuilder('s')
+            ->select('MIN(s.name)')
+            ->groupBy('s.name')
+            ->getQuery()
+            ->getResult()
+        ;
+        $list = [];
+        foreach ($names as $name){
+            $list[$name[1]] = $name[1];
+        }
+
+        return $list;
+    }
+
+    public function findUniqueTypes()
+    {
+        $names = $this->createQueryBuilder('s')
+            ->select('MIN(s.type)')
+            ->groupBy('s.type')
+            ->getQuery()
+            ->getResult()
+        ;
+        $list = [];
+        foreach ($names as $name){
+            $list[$name[1]] = $name[1];
+        }
+
+        return $list;
+    }
+
+    public function findUniqueTypeOfChoice()
+    {
+        $names = $this->createQueryBuilder('s')
+            ->select('MIN(s.typeOfChoice)')
+            ->where('s.typeOfChoice is not NULL')
+            ->groupBy('s.typeOfChoice')
+            ->getQuery()
+            ->getResult()
+        ;
+        $list = [];
+        foreach ($names as $name){
+            $list[$name[1]] = $name[1];
+        }
+        return $list;
+    }
 }

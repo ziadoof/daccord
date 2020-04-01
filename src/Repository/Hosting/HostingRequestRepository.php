@@ -68,4 +68,24 @@ class HostingRequestRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function doneHostingCount()
+    {
+        return $this->createQueryBuilder('h')
+            ->select('COUNT(h)')
+            ->where('h.hostingStatus = TRUE')
+            ->andWhere('h.senderStatus = TRUE')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function noDonsHostingCount()
+    {
+        return $this->createQueryBuilder('h')
+            ->select('COUNT(h)')
+            ->where('h.hostingStatus = FALSE')
+            ->orWhere('h.senderStatus = FALSE')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

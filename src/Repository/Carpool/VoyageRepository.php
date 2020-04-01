@@ -69,4 +69,30 @@ class VoyageRepository extends ServiceEntityRepository
             ;
     }
 
+    public function voyageCount(string $type = null)
+    {
+        if ($type ==='main') {
+            return $this->createQueryBuilder('v')
+                ->select('COUNT(v)')
+                ->andWhere('v.parent is NULL')
+                ->getQuery()
+                ->getSingleScalarResult();
+
+        }
+
+        if($type ==='sub') {
+            return $this->createQueryBuilder('v')
+                ->select('COUNT(v)')
+                ->Where('v.parent is not NULL')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+        return $this->createQueryBuilder('v')
+            ->select('COUNT(v)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
 }

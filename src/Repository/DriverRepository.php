@@ -66,4 +66,12 @@ class DriverRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function driverCount()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('COUNT(d)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

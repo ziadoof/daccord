@@ -176,6 +176,27 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
     private $voyageRequests;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
+
+    /**
+     * @return mixed
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * @param mixed $deleted
+     */
+    public function setDeleted($deleted): void
+    {
+        $this->deleted = $deleted;
+    }
+
+    /**
      * @return mixed
      */
     public function getVoyageRequests()
@@ -420,18 +441,20 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
     public function __construct()
     {
         parent::__construct();
+        // first name obligatoir
+        $this->setFirstname('User');
+        $this->setLastname( (string) $this->getId());
+        $this->setEnabled(true);
+        $this->setDeleted(false);
+
         $this->setCreatedAt(new \DateTime('now'));
         $this->setEmailStatus(false);
-        $this->setEnabled(true);
         $this->setMaxDistance(10);
         $this->setPhonNumberStatus(false);
         $this->setPoint(10);
         $this->setBirthdayStatus(false);
-        // first name obligatoir
-        $this->setFirstname('Utilisateur');
-        $this->setLastname( (string) $this->getId());
-        $this->setUsername("onadaccordUser" );
         $this->setGenderStatus(false );
+
         $this->lastActivityAt = new \DateTime('now');
         $this->ads = new ArrayCollection();
         $this->offerDeals = new ArrayCollection();
@@ -945,6 +968,10 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
             }
         }
         return $favorites;
+    }
+
+    public function isAdmin(){
+        return in_array('ROLE_ADMIN', $this->getRoles(), true);
     }
 
 }

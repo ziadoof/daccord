@@ -165,7 +165,9 @@ class MeetupController extends AbstractController
             $entityManager->remove($meetup);
             $entityManager->flush();
         }
-
+        if ($this->getUser()->isAdmin()){
+            return $this->redirectToRoute('admin_meetup');
+        }
         return $this->redirectToRoute('meetup_index');
     }
 

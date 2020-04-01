@@ -1,0 +1,44 @@
+.count-user h1{
+  font-size: 800%;
+}
+.driver-count {
+  color: whitesmoke;
+  background-color: #00B5CE;
+}
+.hostingCount {
+  color: whitesmoke;
+  background-color: #9c9c9c;
+}
+.carpoolCount {
+  color: whitesmoke;
+  background-color: #8175c7;
+}
+.activated{
+  background-color: #ffa8fa;
+}
+
+.circle-red {
+  display: block;
+  background: red;
+  border-radius: 100%;
+  height: 1.2vw;
+  width: 1.2vw;
+  background: radial-gradient(circle at 50px 50px, red,brown );
+  float: right;
+  box-shadow: 0px 0px 10px;
+}
+.circle-green {
+  display: block;
+  background: limegreen;
+  border-radius: 100%;
+  height: 1.2vw;
+  width: 1.2vw;
+  background: radial-gradient(circle at 50px 50px, limegreen, green);
+  box-shadow: 0 0 0 rgba(50, 204, 0, 0.4);
+  animation: pulse 1s infinite;
+  float: right;
+}
+.admin-check label{
+  margin-top: 1vh;
+  width:100px;
+}

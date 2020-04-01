@@ -86,6 +86,10 @@ services:
             $entityManager:
             $type:
 
+    App\Form\EventListener\AddCollectionFieldSubscriber:
+        arguments:
+            $factory:
+
     App\Events\EventSubscriber\AdAddSubscriber:
         class: App\Events\EventSubscriber\AdAddSubscriber
         arguments: ['@doctrine.orm.entity_manager']

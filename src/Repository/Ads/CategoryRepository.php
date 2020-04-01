@@ -66,7 +66,18 @@ class CategoryRepository extends ServiceEntityRepository
             ;
     }
 
-
+    public function findParentCategoryByName($name, $type): ?Category
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.name = :name')
+            ->andWhere('c.type = :type')
+            ->andWhere('c.parent is NULL')
+            ->setParameter('name', $name)
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 
     // /**
     //  * @return Category[] Returns an array of Category objects
@@ -96,4 +107,54 @@ class CategoryRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function categoryCount(string $type =null)
+    {
+        if($type === null){
+            return $this->createQueryBuilder('c')
+                ->select('COUNT(c)')
+                ->where('c.parent is NULL')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c)')
+            ->where('c.parent is not NULL')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+    }
+
+    public function findAllOfferCategory()
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.type = :type')
+            ->setParameter('type', 'Offer')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findCategoryRelated(Category $category)
+    {
+        if($category->getParent() === null){
+            return $this->createQueryBuilder('c')
+                ->Where('c.name = :name')
+                ->andWhere('c.parent is NULL')
+                ->setParameter('name', $category->getName())
+                ->getQuery()
+                ->getResult()
+                ;
+        }
+        return $this->createQueryBuilder('c')
+            ->Where('c.name = :name')
+            ->innerJoin('c.parent','p')
+            ->andWhere('p.name = :parentName')
+            ->setParameter('name', $category->getName())
+            ->setParameter('parentName', $category->getParent()->getName())
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

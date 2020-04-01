@@ -61,4 +61,12 @@ class DealRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    public function dealCount()
+    {
+        return $this->createQueryBuilder('d')
+            ->select('COUNT(d)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

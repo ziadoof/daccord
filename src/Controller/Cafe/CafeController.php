@@ -148,7 +148,9 @@ class CafeController extends AbstractController
             $entityManager->remove($cafe);
             $entityManager->flush();
         }
-
+        if($this->getUser()->isAdmin()){
+            return $this->redirectToRoute('admin_cafe');
+        }
         return $this->redirectToRoute('cafe_index');
     }
 
