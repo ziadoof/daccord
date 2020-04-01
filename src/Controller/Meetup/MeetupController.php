@@ -34,7 +34,8 @@ class MeetupController extends AbstractController
      */
     public function index(Request $request,PaginatorInterface $paginator): Response
     {
-        $myMeetup = $this->getUser()->getMeetups();
+        $myMeetup = $this->getUser()->getMeetups()->toArray();
+
         $results = $paginator->paginate(
         // Doctrine Query, not results
             $myMeetup,
@@ -136,7 +137,7 @@ class MeetupController extends AbstractController
 
         $results = $paginator->paginate(
         // Doctrine Query, not results
-            $meetup->getComments(),
+            $meetup->getComments()->toArray(),
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
