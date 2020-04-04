@@ -91,9 +91,17 @@ class DealController extends AbstractController
      */
     public function show(Deal $deal, DriverRepository $driverRepository): Response
     {
-
-        if (!$deal) {
+        if(!$deal){
             throw $this->createNotFoundException('The deal does not exist');
+        }
+        $offerUser = $deal->getOfferUser();
+        $demandUser= $deal->getDemandUser();
+        $driverUser= $deal->getDriverUser();
+        if($driverUser){
+            $users = [$offerUser, $demandUser, $driverUser];
+        }
+        else{
+            $users = [$offerUser, $demandUser];
         }
         $specification = $this->specificationDeal($deal->getOffer(), $deal->getDemand());
         $withOutDrivers = ['Jobs and services','Residence','Holidays'];
@@ -103,11 +111,17 @@ class DealController extends AbstractController
             $drivers = null;
         }
 
-        return $this->render('deal/show.html.twig', [
-            'specification'=>$specification,
-            'drivers'=> $drivers,
-            'deal' => $deal,
-        ]);
+        if (in_array($this->getUser(),$users,true)){
+            return $this->render('deal/show.html.twig', [
+                'specification'=>$specification,
+                'drivers'=> $drivers,
+                'deal' => $deal,
+            ]);
+        }
+        else{
+            throw $this->createNotFoundException('The deal does not exist');
+        }
+
     }
 
     /**
