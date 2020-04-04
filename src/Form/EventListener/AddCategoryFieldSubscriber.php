@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityRepository;
-use App\Entity\Category;
+use App\Entity\Ads\Category;
 class AddCategoryFieldSubscriber implements EventSubscriberInterface
 
 {
@@ -53,11 +53,11 @@ class AddCategoryFieldSubscriber implements EventSubscriberInterface
 
         $formOptions = array(
             'class'         => Category::class,
-            /*'label'         => 'category',*/
-            'required' => false,
+            'required' => true,
             'placeholder'     => $generalcategory_id ? 'Sélectionnez votre category' : 'Sélectionnez votre general category',
             'attr'          => array(
-                'class' => 'category_selector',
+                'class' => 'category_selector ',
+
             ),
             'query_builder' => function (EntityRepository $repository) use ($generalcategory_id) {
                 $qb = $repository->createQueryBuilder('c')

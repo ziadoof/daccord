@@ -4,9 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: 'fr'
+    locale: 'en'
     adsimages: '%kernel.project_dir%/public/assets/images/annonce/'
     profileimages: '%kernel.project_dir%/public/assets/images/profile/'
+
 
 services:
     # default configuration for services in *this* file
@@ -17,16 +18,17 @@ services:
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
 
+
     redirect.after.login:
         class: App\Service\AfterLoginRedirection
         arguments: ['@router']
 
     app.form.registration:
-        class: App\Form\RegistrationType
+        class: App\Form\User\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
     app.profile.form.type:
-        class: App\Form\ProfilType
+        class: App\Form\User\ProfileType
         arguments: ['%fos_user.model.user.class%']
         tags:
             - { name: form.type, alias: app_user_profile }
@@ -43,10 +45,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Controller\RegistrationController:
+    App\Controller\User\RegistrationController:
         arguments:
             $formFactory: '@fos_user.registration.form.factory'
-    App\Controller\ProfileController:
+    App\Controller\User\ProfileController:
         arguments:
             $formFactory: '@fos_user.profile.form.factory'
 
@@ -61,14 +63,71 @@ services:
     App\Form\EventListener\AddGeneralcategoryFieldSubscriber:
         arguments:
             $factory:
+            $type:
 
-    App\Form\EventListener\AddOspecificationFieldSubscriber:
+    App\Form\EventListener\AddSpecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:
+            $type:
 
-    App\Form\EventListener\AddDspecificationFieldSubscriber:
+    App\Form\EventListener\AddSearchCategoryFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Form\EventListener\AddSearchGeneralcategoryFieldSubscriber:
+        arguments:
+            $factory:
+            $type:
+
+    App\Form\EventListener\AddSearchSpecificationFieldSubscriber:
         arguments:
             $factory:
             $entityManager:
+            $type:
+
+    App\Form\EventListener\AddCollectionFieldSubscriber:
+        arguments:
+            $factory:
+
+    App\Events\EventSubscriber\AdAddSubscriber:
+        class: App\Events\EventSubscriber\AdAddSubscriber
+        arguments: ['@doctrine.orm.entity_manager']
+
+    app_user.activity_listener:
+        class: App\Events\ActivityListener
+        arguments: ['@security.token_storage', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }
+
+    Mgilet\NotificationBundle\Manager\NotificationManager: '@mgilet.notification'
+
+    App\Twig\NotificationExtension:
+        class: App\Twig\NotificationExtension
+
+    notification:
+        class: App\Service\Notification
+        arguments: ['@doctrine.orm.entity_manager','@mgiletNotificationManager' ]
+
+    FOS\MessageBundle\Composer\ComposerInterface : '@fos_message.composer'
+    FOS\MessageBundle\Sender\SenderInterface : '@fos_message.sender'
+    FOS\MessageBundle\Security\ParticipantProviderInterface: '@fos_message.participant_provider'
+    FOS\MessageBundle\ModelManager\MessageManagerInterface: '@fos_message.message_manager'
+
+    app_message.new_thread_form.handler:
+        class: App\Form\Message\NewThreadMessageFormHandler
+        arguments: ['@request_stack', '@fos_message.composer', '@fos_message.sender', '@fos_message.participant_provider']
+        public: true
+
+    App\Service\Message\Message:
+        class: App\Service\Message\Message
+
+    App\Server\Chat:
+        class: App\Server\Chat
+
+
+
+
+
+
 

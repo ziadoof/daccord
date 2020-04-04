@@ -130,6 +130,16 @@
   font-size: 25px;
 }
 
+.sidebar ul li a .fa-suitcase-rolling {
+  font-size: 24px;
+  padding-left: 0;
+  margin-right: 0.3em;
+}
+.sidebar ul li a .fa-truck-moving {
+  font-size: 20px;
+  padding-left: 0;
+}
+
 
 .sidebar li a i{ padding-right:5px;
   margin-left: 7px;
@@ -361,5 +371,13 @@
   border-radius: 8px;
 }
 
+#cafe-gps a{
+  display: block;
+  padding: 5px 2px;
+  color: #fff;
+  border-left: 0px solid #dedede;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 

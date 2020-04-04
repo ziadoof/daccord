@@ -1,0 +1,56 @@
+<div id="message-center">
+    {% if form is defined or threads is not empty %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                {% if form is defined %}
+                        <a class="nav-link active new-conversation" id="v-pills-home-tab" data-toggle="pill" href="#user-{{ recipient.id }}" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <div class="btn-group message-link ">
+                                <img src="{{ asset(recipient.photoProfile()) }}" class="user-image mr-2 " ><br>
+                                <span class="ml-2 mt-4">{{ recipient.firstname|title }} {{ ' ' }}{{ recipient.lastname }}</span>
+                            </div>
+                        </a>
+                {% endif %}
+                {% if threads%}
+                {% for thread in threads %}
+                        <a class="nav-link {% if thread.id is same as (threads[0].id) and form is not defined %}{{ ' active ' }}{% endif %} mb-1 thread-link" id="v-pills-home-tab" data-toggle="pill" href="#user-{{thread.getOtherParticipants(app.user)[0].id}}" role="tab" aria-controls="v-pills-home" aria-selected="true" data-idOfThread="{{ thread.id }}">
+                            <div class="btn-group message-link">
+                                {% if thread.createdBy is not same as (app.user) %}
+                                    <img src="{{ thread.createdBy.photoProfile() }}" class="user-image mr-2" ><br>
+                                {% else %}
+                                    <img src="{{ asset(thread.getOtherParticipants(app.user)[0].photoProfile) }}" class="user-image mr-2" ><br>
+                                {% endif %}
+                                <span class="ml-2 mt-4 float-right ">{{ thread.getOtherParticipants(app.user)[0].firstname|title }}{{ ' ' }}{{ thread.getOtherParticipants(app.user)[0].lastname }}</span>
+                            </div>
+                            <div class="btn-group float-right">
+                                <div id="first-message-{{ thread.id }}">
+                                    {% if unReadMessages[thread.id] %}
+                                        <p id="new-message-{{ thread.id }}" class=" ml-2 mt-4 float-right new-message ">
+                                            {{ unReadMessages[thread.id] }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <br>
+                        </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content " id="v-pills-tabContent">
+                {% if form is defined %}
+                    {% include '@FOSMessageBundle/Message/thread_form.html.twig' with {'recipient': recipient} %}
+                {% endif %}
+                {% if threads%}
+                    {% include '@FOSMessageBundle/Message/thread_content.html.twig' with {'threads': threads} %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="mt-5">
+            <h4 class="rosed text-center">There is no conversations</h4>
+        </div>
+    {% endif %}
+</div>

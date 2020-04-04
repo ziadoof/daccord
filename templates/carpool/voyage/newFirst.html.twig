@@ -1,0 +1,17 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}New Voyage{% endblock %}
+
+{% block content %}
+    <h5 class="blued text-center">Create new Voyage</h5>
+    <div id="etape_simulation" class="text-center mt-2 ">
+        <div class="col-md-4 offset-4 ">
+            <div class=" ">
+                <span class="dot-active mx-2">1</span>
+                <span class="dot mx-2">2</span>
+            </div>
+        </div>
+    </div>
+    {{ include('carpool/voyage/formFirst.html.twig') }}
+
+{% endblock %}

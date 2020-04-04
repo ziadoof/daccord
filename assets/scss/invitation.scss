@@ -1,0 +1,33 @@
+// invitation or cafe
+.cafe-avatar{
+    width:  50px;
+    height: 50px;
+    float: left;
+    border-radius: 5px;
+}
+#cafe-icones{
+    font-size: 150%;
+}
+
+
+#cafe-gps a, #cafe-gps a.collapsed.active{
+  display: block;
+  padding: 5px 2px;
+  color: #fff;
+  border-left: 0px solid #dedede;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cafe-timer .hours {
+  font-size: 100%;
+  color: #00B5CE;
+}
+.cafe-timer .minutes {
+  font-size: 100%;
+  color: #00B5CE;
+}
+.cafe-timer .seconds {
+  font-size: 70%;
+  color: #F70055;
+}

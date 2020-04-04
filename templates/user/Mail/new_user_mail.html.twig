@@ -1,0 +1,37 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+{% block fos_user_content %}
+    {% apply inline_css(source("user/Mail/css/email.css")) %}
+        <html>
+            <body>
+            <div class="container">
+                <div>
+                    <div class="b-blued">
+                        <img src="{{img}}" alt="On est d'accord" class="d-inline">
+                        <h1 class="d-inline">On est d'accord</h1>
+                    </div>
+                    <h2 class="text-center blued">Create new user by admin</h2>
+                    <h4 class="text-center">Your <span class="rosed">On est d'accord </span> account has been created,
+                        You can now log in according to the following information</h4>
+                    <div class="text-center">
+                        <div class="d-block">
+                            <b class="rosed">User name :</b> <span class="blued">{{user.email}}</span>
+                        </div>
+                        <div class="d-block">
+                            <b class="rosed">Password :</b> <span class="blued">{{user.plainPassword}}</span>
+                        </div>
+                        <div class="d-block">
+                            <b class="rosed">City :</b> <span class="blued">{{user.city}}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center footer b-blued">
+                        <b>With best wishes from the team at  <a href="127.0.0.1:8000"><span class="white">On est d'accord </span></a> </b>
+                    </div>
+                </div>
+            </div>
+            </body>
+        </html>
+    {% endapply %}
+{% endblock fos_user_content %}
+{% endblock %}

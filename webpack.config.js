@@ -13,32 +13,39 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-
+    .enableReactPreset()
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     .enableSassLoader()
+    .enableLessLoader()
+
+
+
     .autoProvideVariables({
         "Routing": "router"
     })
     .addLoader({
         test: /jsrouting-bundle\/Resources\/public\/js\/router.js$/,
 
+    })
+
+    .configureBabel(function(babelConfig) {
+        babelConfig.plugins.push('transform-class-properties');
     });
 
-    let config = Encore.getWebpackConfig();
+
+let config = Encore.getWebpackConfig();
 
 
-    config.resolve.alias = {
+config.resolve.alias = {
 
-        'router': __dirname + '/assets/js/router.js'
+    'router': __dirname + '/assets/js/router.js'
 
-    };
+};
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
-
-
-    module.exports = config;
+// uncomment if you're having problems with a jQuery plugin
+//.autoProvidejQuery()
 
 
+module.exports = config;

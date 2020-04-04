@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Specification index{% endblock %}
+
+{% block body %}
+    <h1>Specification index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Label</th>
+                <th>Type</th>
+                <th>TextOptions</th>
+                <th>NumericOptions</th>
+                <th>TypeOfChoice</th>
+                <th>MinOption</th>
+                <th>MaxOption</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for specification in specifications %}
+            <tr>
+                <td>{{ specification.id }}</td>
+                <td>{{ specification.name }}</td>
+                <td>{{ specification.label }}</td>
+                <td>{{ specification.type }}</td>
+                <td>{{ specification.textOptions ? specification.textOptions|join(', ') : '' }}</td>
+                <td>{{ specification.numericOptions ? specification.numericOptions|join(', ') : '' }}</td>
+                <td>{{ specification.typeOfChoice }}</td>
+                <td>{{ specification.minOption }}</td>
+                <td>{{ specification.maxOption }}</td>
+                <td>
+                    <a href="{{ path('specification_show', {'id': specification.id}) }}">show</a>
+                    <a href="{{ path('specification_edit', {'id': specification.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('specification_new') }}">Create new</a>
+{% endblock %}

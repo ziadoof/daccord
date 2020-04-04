@@ -1,0 +1,108 @@
+{#
+# jquery.collection.html.twig
+#
+# Adds the following html attributes to the root node of your collection fields:
+#
+# - data-prototype-name: placeholder used in the prototype to replace element indexes on the collection
+# - data-allow-add: if set to false, plugin will automatically set allow_add option to false
+# - data-allow-delete: if set to false, plugin will automatically set allow_remove option to false
+# - data-name-prefix: contains the collection's prefix used in descendant field names
+#
+# Those information let you configure the plugin options automatically.
+#
+# If you are already using a form theme, you can use both by using:
+# {%
+#   form_theme myForm
+#       'FuzAppBundle::my-form-theme.html.twig'
+#       'FuzAppBundle::jquery.collection.html.twig'
+#       ...
+# %}
+#}
+
+{% block SpecificationCollectionType_entry_row %}
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+{% endblock %}
+
+{% block SpecificationCollectionType_widget %}
+    {% apply spaceless %}
+    {% endapply %}
+{% endblock %}
+
+{% block _category_specification_specification_widget %}{# the collection field of TaskManager #}
+    {% if prototype is defined %}
+        {% set attr = attr|merge({'data-prototype': form_row(prototype)}) %}
+        {% set attr = attr|merge({'data-prototype-name': prototype.vars.name}) %}
+    {% endif %}
+    {% set attr = attr|merge({'data-allow-add': allow_add ? 1 : 0}) %}
+    {% set attr = attr|merge({'data-allow-remove': allow_delete ? 1 : 0 }) %}
+    {% set attr = attr|merge({'data-name-prefix': full_name}) %}
+    {{ block('form_widget') }}
+{% endblock %}
+
+
+{% block _category_specification_specification_entry_widget %}{# the inner TaskListType #}
+    <div class="row border-deal" id="js-select-specification-form">
+        <div class="col-md-2">
+            <div class="mt-2">
+                {{ form_row(form.name) }}
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="mt-2">
+                {{ form_row(form.type) }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="mt-2">
+                {{ form_row(form.typeOfChoice) }}
+            </div>
+        </div>
+        <div class="col-md-5 mt-2">
+            <div id="dynamic-options">
+                <div>
+                    {% if form.textOptions is defined %}
+                        {{ form_row(form.textOptions) }}
+                        <span class=""><i class="fas fa-quote-left rosed"></i>
+                        For (experience,classEnergie, ges, paperSize, levelOfStudent,generalSituation,minCapacity,numberOfPersson,capacity)
+                            <span class="blued"> car. 1, motor. 2, piece. 3 </span><br>
+                            <i class="fas fa-quote-left rosed"></i>
+                        For rest <br>
+                            <span class="blued">car, motor, piece</span> <br>
+                            <span class="rosed">Points, commas, and spaces must be respected like the example</span>
+                        </span>
+                    {% endif %}
+                    {% if form.numericOptions is defined %}
+                        {{ form_row(form.numericOptions) }}
+                        <span class="blued"><i class="fas fa-quote-left rosed"></i>  Eg : (10, 25, 50, 75...etc)</span>
+                        <br>
+                        <span class="rosed"> Commas, and spaces must be respected like the example</span>
+                    {% endif %}
+                    {% if form.minOption is defined and form.maxOption is defined%}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.minOption) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.maxOption) }}
+                        </div>
+                    </div>
+                    <span class="blued"><i class="fas fa-quote-left rosed"></i>  Eg : min2019,max 2021 => 2019,2020,2021</span>
+                        <br>
+                        <span class="rosed">For (manufacturingYear, minManufacturingYear, maxManufacturingYear) It will be arranged in descending order</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1 mt-4">
+            <a href="#" class="collection-remove btn btn-danger float-right" ><i class="fas fa-trash-alt"></i></a>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+

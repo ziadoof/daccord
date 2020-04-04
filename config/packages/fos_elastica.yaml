@@ -1,0 +1,467 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+  clients:
+    default: { host: localhost, port: 9200 }
+  indexes:
+    app_ad:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              custom_search_analyzer:
+                type:    custom
+                tokenizer:    standard
+                filter:    [lowercase, asciifolding,standard]
+              custom_index_analyzer:
+                tokenizer:    standard
+                type:    custom
+                filter:    [lowercase, asciifolding,standard,custom_filter]
+            filter:
+              custom_filter:
+                type: edgeNGram
+                side: front
+                min_gram: 2
+                max_gram: 20
+      types:
+        ad:
+          properties:
+            fuelType: ~
+            title:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            price:
+              type: integer
+            mission: ~
+            theType: ~
+            secondLanguage: ~
+            age:
+              type: integer
+            iSize: ~
+            sSize: ~
+            languages:
+              type: ~
+            acitvityArea: ~
+            workHours: ~
+            typeOfContract: ~
+            experience:
+              type: integer
+            levelOfStudy: ~
+            typeOfAd: ~
+            language: ~
+            typeOfTranslation: ~
+            material:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            placeOfLesson: ~
+            levelOfStudent:
+              type: integer
+            brand:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            color:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            model:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            changeGear: ~
+            manufactureCompany:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            generalSituation:
+              type: integer
+            paperSize:
+              type: integer
+            printingType: ~
+            printingColor: ~
+            analogDigital: ~
+            animalSpecies:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            dvdCd: ~
+            originCountry: ~
+            coverMaterial: ~
+            shape: ~
+            heating: ~
+            heatingType: ~
+            gpsLat: ~
+            gpsLng: ~
+            classEnergie:
+              type: integer
+            ges:
+              type: integer
+            eventType: ~
+            subjectName:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            salary:
+              type: integer
+            durationOfLesson: ~
+            maxDistance:
+              type: integer
+            manufacturingYear:
+              type: integer
+            maxManufacturingYear:
+              type: integer
+            minManufacturingYear:
+              type: integer
+            numberOfPassengers:
+              type: integer
+            numberOfDoors:
+              type: integer
+            kilometer:
+              type: integer
+            maxKilometer:
+              type: integer
+            minKilometer:
+              type: integer
+            processor:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            ram:
+              type: integer
+            capacity:
+              type: integer
+            minCapacity:
+              type: integer
+            maxCapacity:
+              type: integer
+            accuracy:
+              type: integer
+            weight: ~
+            caliber: ~
+            maxCaliber: ~
+            minCaliber: ~
+            number:
+              type: integer
+            width: ~
+            height: ~
+            numberOfPersson:
+              type: float
+            length: ~
+            numberOfDrawer:
+              type: integer
+            numberOfStaging:
+              type: integer
+            numberOfHead:
+              type: integer
+            ability: ~
+            floor: ~
+            area:
+              type: integer
+            minArea:
+              type: integer
+            maxArea:
+              type: integer
+            numberOfRooms:
+              type: integer
+            minNumberOfRooms:
+              type: integer
+            maxNumberOfRooms:
+              type: integer
+            numberOfFloors: ~
+            hdmi:
+              type: boolean
+            cdRoom:
+              type: boolean
+            wifi:
+              type: boolean
+            usb:
+              type: boolean
+            threeInOne:
+              type: boolean
+            accessories:
+              type: boolean
+            withFreezer:
+              type: boolean
+            electricHead:
+              type: boolean
+            withOven:
+              type: boolean
+            covered:
+              type: boolean
+            withFurniture:
+              type: boolean
+            withGarden:
+              type: boolean
+            withVerandah:
+              type: boolean
+            withElevator:
+              type: boolean
+            donate:
+              type: boolean
+            city:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+                department:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
+                    name: ~
+                    region:
+                      type: nested
+                      properties:
+                        id:
+                          type: integer
+                        name: ~
+            ville:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            category:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            generalCategory:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Ads\Ad
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\AdsRepository
+    app_hosting:
+      types:
+        hosting:
+          properties:
+            age:
+              type: integer
+            sex:
+              type: ~
+            languages:
+              type: ~
+            numberOfPersons:
+              type: integer
+            numberOfDays:
+              type: integer
+            animal:
+              type: boolean
+            child:
+              type: boolean
+            handicapped:
+              type: boolean
+            food:
+              type: boolean
+            conversation:
+              type: boolean
+            cityTour:
+              type: boolean
+            videoGame:
+              type: boolean
+            movie:
+              type: boolean
+            television:
+              type: boolean
+            music:
+              type: boolean
+            active:
+              type: boolean
+            ville:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+                department:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
+                    name: ~
+                    region:
+                      type: nested
+                      properties:
+                        id:
+                          type: integer
+                        name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Hosting\Hosting
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\HostingsRepository
+    app_meetup:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              custom_search_analyzer:
+                type:    custom
+                tokenizer:    standard
+                filter:    [lowercase, asciifolding,standard]
+              custom_index_analyzer:
+                tokenizer:    standard
+                type:    custom
+                filter:    [lowercase, asciifolding,standard,custom_filter]
+            filter:
+              custom_filter:
+                type: edgeNGram
+                side: front
+                min_gram: 2
+                max_gram: 20
+      types:
+        meetup:
+          properties:
+            maxParticipants:
+              type: integer
+            finish:
+              type: boolean
+            title:
+              type: text
+              search_analyzer: custom_search_analyzer
+              analyzer: custom_index_analyzer
+              boost: 10
+            type: ~
+            city:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+                department:
+                  type: nested
+                  properties:
+                    id:
+                      type: integer
+                    name: ~
+                    region:
+                      type: nested
+                      properties:
+                        id:
+                          type: integer
+                        name: ~
+            department:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+            region:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                name: ~
+          persistence:
+            driver: orm
+            model: App\Entity\Meetup\Meetup
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\MeetupRepository
+    app_voyage:
+      types:
+        voyage:
+          properties:
+            timeDeparture:
+              type: date
+            numberOfPlaces:
+              type: integer
+            availableSeats:
+              type: integer
+            highway:
+              type: boolean
+            parent:
+              type: nested
+              properties:
+                id:
+                  type: integer
+            mainDeparture:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+            mainArrival:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+            stationDeparture:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+            stationArrival:
+              type: nested
+              properties:
+                id:
+                  type: integer
+                gpsLat:
+                  type: float
+                gpsLng:
+                  type: float
+          persistence:
+            driver: orm
+            model: App\Entity\Carpool\Voyage
+            provider: ~
+            listener: ~
+            finder: ~
+            repository: App\Entity\Search\VoyageRepository

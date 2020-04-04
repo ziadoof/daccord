@@ -2,8 +2,21 @@
 
 namespace App\Entity;
 
+use App\Entity\Ads\Ad;
+use App\Entity\Carpool\Carpool;
+use App\Entity\Deal\Deal;
+use App\Entity\Deal\DoneDeal;
+use App\Entity\Hosting\Hosting;
+use App\Entity\Hosting\HostingRequest;
+use App\Entity\Location\City;
+use App\Entity\Meetup\JoinRequest;
+use App\Entity\Meetup\Meetup;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\MessageBundle\Model\ParticipantInterface;
+use FOS\MessageBundle\Security\ParticipantProvider;
 use FOS\UserBundle\Model\User as BaseUser;
+use Mgilet\NotificationBundle\NotifiableInterface;
+use Mgilet\NotificationBundle\Annotation\Notifiable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,8 +30,10 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Table(name="user")
  * @UniqueEntity(fields="email", message="Email déjà pris")
  * @UniqueEntity(fields="username", message="Username déjà pris")
+ * @ORM\Table(name="user")
+ * @Notifiable(name="user")
  */
-class User  extends BaseUser
+class User  extends BaseUser implements NotifiableInterface, ParticipantInterface
 {
     /**
      * @ORM\Id()
@@ -48,7 +63,7 @@ class User  extends BaseUser
     private $postalCode;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location\City", inversedBy="users")
      *
      */
     private $city;
@@ -99,29 +114,9 @@ class User  extends BaseUser
     private $mapY;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $driver;
-
-    /**
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
-    private $car;
-
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $color;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $profileImage;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $carImage;
 
     /**
      * @ORM\Column(type="integer")
@@ -141,9 +136,82 @@ class User  extends BaseUser
     private $ville;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Ads\Ad", mappedBy="user", orphanRemoval=true)
      */
     private $ads;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\Deal", mappedBy="offerUser", orphanRemoval=true)
+     */
+    private $offerDeals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\Deal", mappedBy="demandUser", orphanRemoval=true)
+     */
+    private $demandDeals;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Driver", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $driver;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\DoneDeal", mappedBy="offerUser")
+     */
+    private $offerDoneDeals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Deal\DoneDeal", mappedBy="demandUser")
+     */
+    private $demandDoneDeals;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DriverRequest", mappedBy="user")
+     */
+    private $driverRequests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Carpool\VoyageRequest", mappedBy="sender")
+     */
+    private $voyageRequests;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
+
+    /**
+     * @return mixed
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * @param mixed $deleted
+     */
+    public function setDeleted($deleted): void
+    {
+        $this->deleted = $deleted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVoyageRequests()
+    {
+        return $this->voyageRequests;
+    }
+
+    /**
+     * @param mixed $voyageRequests
+     */
+    public function setVoyageRequests($voyageRequests): void
+    {
+        $this->voyageRequests = $voyageRequests;
+    }
+
 
     public function getId(): ?int
     {
@@ -306,42 +374,6 @@ class User  extends BaseUser
         return $this;
     }
 
-    public function getDriver(): ?bool
-    {
-        return $this->driver;
-    }
-
-    public function setDriver(?bool $driver): self
-    {
-        $this->driver = $driver;
-
-        return $this;
-    }
-
-    public function getCar(): ?string
-    {
-        return $this->car;
-    }
-
-    public function setCar(?string $car): self
-    {
-        $this->car = $car;
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
     public function getProfileImage(): ?string
     {
         return $this->profileImage;
@@ -350,18 +382,6 @@ class User  extends BaseUser
     public function setProfileImage(?string $profileImage): self
     {
         $this->profileImage = $profileImage;
-
-        return $this;
-    }
-
-    public function getCarImage(): ?string
-    {
-        return $this->carImage;
-    }
-
-    public function setCarImage(?string $carImage): self
-    {
-        $this->carImage = $carImage;
 
         return $this;
     }
@@ -421,19 +441,32 @@ class User  extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        // first name obligatoir
+        $this->setFirstname('User');
+        $this->setLastname( (string) $this->getId());
+        $this->setEnabled(true);
+        $this->setDeleted(false);
+
         $this->setCreatedAt(new \DateTime('now'));
         $this->setEmailStatus(false);
-        $this->setEnabled(true);
         $this->setMaxDistance(10);
         $this->setPhonNumberStatus(false);
         $this->setPoint(10);
         $this->setBirthdayStatus(false);
-        $this->setFirstname('Utilisateur');
-        $this->setLastname( (string) $this->getId());
-        $this->setUsername("onadaccordUser" );
-        $this->setgenderStatus(false );
+        $this->setGenderStatus(false );
+
+        $this->lastActivityAt = new \DateTime('now');
         $this->ads = new ArrayCollection();
-        // your own logic
+        $this->offerDeals = new ArrayCollection();
+        $this->demandDeals = new ArrayCollection();
+        $this->offerDoneDeals = new ArrayCollection();
+        $this->demandDoneDeals = new ArrayCollection();
+        $this->driverRequests = new ArrayCollection();
+        $this->hostingRequests = new ArrayCollection();
+        $this->hostingRequestsReceived = new ArrayCollection();
+        $this->meetups = new ArrayCollection();
+        $this->joinRequests = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     /**
@@ -466,4 +499,479 @@ class User  extends BaseUser
 
         return $this;
     }
+
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getOfferDeals(): Collection
+    {
+        return $this->offerDeals;
+    }
+
+    public function addOfferDeal(Deal $offerDeal): self
+    {
+        if (!$this->offerDeals->contains($offerDeal)) {
+            $this->offerDeals[] = $offerDeal;
+            $offerDeal->setOfferUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOfferDeal(Deal $offerDeal): self
+    {
+        if ($this->offerDeals->contains($offerDeal)) {
+            $this->offerDeals->removeElement($offerDeal);
+            // set the owning side to null (unless already changed)
+            if ($offerDeal->getOfferUser() === $this) {
+                $offerDeal->setOfferUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Deal[]
+     */
+    public function getDemandDeals(): Collection
+    {
+        return $this->demandDeals;
+    }
+
+    public function addDemandDeal(Deal $demandDeal): self
+    {
+        if (!$this->demandDeals->contains($demandDeal)) {
+            $this->demandDeals[] = $demandDeal;
+            $demandDeal->setDemandUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandDeal(Deal $demandDeal): self
+    {
+        if ($this->demandDeals->contains($demandDeal)) {
+            $this->demandDeals->removeElement($demandDeal);
+            // set the owning side to null (unless already changed)
+            if ($demandDeal->getDemandUser() === $this) {
+                $demandDeal->setDemandUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDeals(){
+        $deals = new ArrayCollection(
+            array_merge($this->getOfferDeals()->toArray(), $this->getDemandDeals()->toArray())
+        );
+        return $deals;
+    }
+
+    /**
+     * @return ArrayCollection
+     *
+     */
+    public function getDoneDeals(){
+        $deals = new ArrayCollection(
+            array_merge($this->getOfferDoneDeals()->toArray(), $this->getDemandDoneDeals()->toArray())
+        );
+        return $deals;
+    }
+
+    public function getDriver(): ?Driver
+    {
+        return $this->driver;
+    }
+
+    public function setDriver(Driver $driver): self
+    {
+        $this->driver = $driver;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $driver->getUser()) {
+            $driver->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DoneDeal[]
+     */
+    public function getOfferDoneDeals(): Collection
+    {
+        return $this->offerDoneDeals;
+    }
+
+    public function addOfferDoneDeal(DoneDeal $offerDoneDeal): self
+    {
+        if (!$this->offerDoneDeals->contains($offerDoneDeal)) {
+            $this->offerDoneDeals[] = $offerDoneDeal;
+            $offerDoneDeal->setOfferUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOfferDoneDeal(DoneDeal $offerDoneDeal): self
+    {
+        if ($this->offerDoneDeals->contains($offerDoneDeal)) {
+            $this->offerDoneDeals->removeElement($offerDoneDeal);
+            // set the owning side to null (unless already changed)
+            if ($offerDoneDeal->getOfferUser() === $this) {
+                $offerDoneDeal->setOfferUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DoneDeal[]
+     */
+    public function getDemandDoneDeals(): Collection
+    {
+        return $this->demandDoneDeals;
+    }
+
+    public function addDemandDoneDeal(DoneDeal $demandDoneDeal): self
+    {
+        if (!$this->demandDoneDeals->contains($demandDoneDeal)) {
+            $this->demandDoneDeals[] = $demandDoneDeal;
+            $demandDoneDeal->setDemandUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandDoneDeal(DoneDeal $demandDoneDeal): self
+    {
+        if ($this->demandDoneDeals->contains($demandDoneDeal)) {
+            $this->demandDoneDeals->removeElement($demandDoneDeal);
+            // set the owning side to null (unless already changed)
+            if ($demandDoneDeal->getDemandUser() === $this) {
+                $demandDoneDeal->setDemandUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DriverRequest[]
+     */
+    public function getDriverRequests(): Collection
+    {
+        return $this->driverRequests;
+    }
+
+    public function addDriverRequest(DriverRequest $driverRequest): self
+    {
+        if (!$this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests[] = $driverRequest;
+            $driverRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDriverRequest(DriverRequest $driverRequest): self
+    {
+        if ($this->driverRequests->contains($driverRequest)) {
+            $this->driverRequests->removeElement($driverRequest);
+            // set the owning side to null (unless already changed)
+            if ($driverRequest->getUser() === $this) {
+                $driverRequest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @ORM\Column(name="last_activity_at", type="datetime", nullable=true)
+     */
+    protected $lastActivityAt;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Hosting\Hosting", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $hosting;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\HostingRequest", mappedBy="sender", orphanRemoval=true)
+     */
+    private $hostingRequests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Hosting\HostingRequest", mappedBy="hosting", orphanRemoval=true)
+     */
+    private $hostingRequestsReceived;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Meetup\Meetup", mappedBy="creator")
+     */
+    private $meetups;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Meetup\JoinRequest", mappedBy="user", orphanRemoval=true)
+     */
+    private $joinRequests;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Carpool\Carpool", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $carpool;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user", orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     */
+    private $favorites;
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getLastActivityAt()
+    {
+        return $this->lastActivityAt;
+    }
+
+    /**
+     * @param mixed $lastActivityAt
+     */
+    public function setLastActivityAt($lastActivityAt): void
+    {
+        $this->lastActivityAt = $lastActivityAt;
+    }
+
+    /**
+     * @return Bool Whether the user is active or not
+     * @throws \Exception
+     */
+    public function isActiveNow():bool
+    {
+        // Delay during wich the user will be considered as still active
+        $delay = new \DateTime('2 minutes ago');
+
+        return ($this->getLastActivityAt() > $delay);
+    }
+
+    public function photoProfile(){
+        if($this->profileImage){
+            return '/assets/images/profile/'.$this->getProfileImage();
+        }
+        return '/assets/images/profile/avatar.jpeg';
+    }
+
+    public function getHosting(): ?Hosting
+    {
+        return $this->hosting;
+    }
+
+    public function setHosting(Hosting $hosting): self
+    {
+        $this->hosting = $hosting;
+
+        // set the owning side of the relation if necessary
+        if ($hosting->getUser() !== $this) {
+            $hosting->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HostingRequest[]
+     */
+    public function getHostingRequests(): Collection
+    {
+        return $this->hostingRequests;
+    }
+
+    public function addHostingRequest(HostingRequest $hostingRequest): self
+    {
+        if (!$this->hostingRequests->contains($hostingRequest)) {
+            $this->hostingRequests[] = $hostingRequest;
+            $hostingRequest->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHostingRequest(HostingRequest $hostingRequest): self
+    {
+        if ($this->hostingRequests->contains($hostingRequest)) {
+            $this->hostingRequests->removeElement($hostingRequest);
+            // set the owning side to null (unless already changed)
+            if ($hostingRequest->getSender() === $this) {
+                $hostingRequest->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HostingRequest[]
+     */
+    public function getHostingRequestsReceived(): Collection
+    {
+        return $this->hostingRequestsReceived;
+    }
+
+    public function addHostingRequestsReceived(HostingRequest $hostingRequestsReceived): self
+    {
+        if (!$this->hostingRequestsReceived->contains($hostingRequestsReceived)) {
+            $this->hostingRequestsReceived[] = $hostingRequestsReceived;
+            $hostingRequestsReceived->setHosting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHostingRequestsReceived(HostingRequest $hostingRequestsReceived): self
+    {
+        if ($this->hostingRequestsReceived->contains($hostingRequestsReceived)) {
+            $this->hostingRequestsReceived->removeElement($hostingRequestsReceived);
+            // set the owning side to null (unless already changed)
+            if ($hostingRequestsReceived->getHosting() === $this) {
+                $hostingRequestsReceived->setHosting(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Meetup[]
+     */
+    public function getMeetups(): Collection
+    {
+        return $this->meetups;
+    }
+
+    public function addMeetup(Meetup $meetup): self
+    {
+        if (!$this->meetups->contains($meetup)) {
+            $this->meetups[] = $meetup;
+            $meetup->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeetup(Meetup $meetup): self
+    {
+        if ($this->meetups->contains($meetup)) {
+            $this->meetups->removeElement($meetup);
+            // set the owning side to null (unless already changed)
+            if ($meetup->getCreator() === $this) {
+                $meetup->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JoinRequest[]
+     */
+    public function getJoinRequests(): Collection
+    {
+        return $this->joinRequests;
+    }
+
+    public function addJoinRequest(JoinRequest $joinRequest): self
+    {
+        if (!$this->joinRequests->contains($joinRequest)) {
+            $this->joinRequests[] = $joinRequest;
+            $joinRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJoinRequest(JoinRequest $joinRequest): self
+    {
+        if ($this->joinRequests->contains($joinRequest)) {
+            $this->joinRequests->removeElement($joinRequest);
+            // set the owning side to null (unless already changed)
+            if ($joinRequest->getUser() === $this) {
+                $joinRequest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCarpool(): ?Carpool
+    {
+        return $this->carpool;
+    }
+
+    public function setCarpool(Carpool $carpool): self
+    {
+        $this->carpool = $carpool;
+
+        // set the owning side of the relation if necessary
+        if ($carpool->getUser() !== $this) {
+            $carpool->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Favorite $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->contains($favorite)) {
+            $this->favorites->removeElement($favorite);
+            // set the owning side to null (unless already changed)
+            if ($favorite->getUser() === $this) {
+                $favorite->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFavoritesByType(string $type){
+        $favorites=[];
+        $allFavorites = $this->getFavorites()->toArray();
+        foreach ($allFavorites as $favorite){
+            if ($favorite->getType()=== $type){
+                $favorites[]= $favorite;
+            }
+        }
+        return $favorites;
+    }
+
+    public function isAdmin(){
+        return in_array('ROLE_ADMIN', $this->getRoles(), true);
+    }
+
 }

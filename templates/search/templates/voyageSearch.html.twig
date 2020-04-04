@@ -1,0 +1,33 @@
+{% set voyageForm = form_voyageSearchType.getForm().createView() %}
+<div class="row register-form">
+    <div class="col-md-12 mt-4">
+        {{ form_start(voyageForm, {'attr': {'id': 'search-carpooling'}}) }}
+        <div class=" ">
+            <div class="row">
+                <div class="col-md-8 offset-2 ">
+                    <div class="row my-4">
+                        <div class="col-md-4">
+                            {{ form_row(voyageForm.mainDeparture) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(voyageForm.mainArrival) }}
+                        </div>
+                        <div class="col-md-2">
+                             {{ form_row(voyageForm.date) }}
+                        </div>
+                        <div class="col-md-2 mt-4">
+                            {{ form_row(voyageForm.highway) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-2">
+            <div class="col-md-12">
+                <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{{ path('search_one_city') }}" id="url-one-list" class="hidden"></a>
+{{ form_end(voyageForm) }}

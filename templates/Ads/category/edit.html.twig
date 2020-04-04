@@ -1,0 +1,11 @@
+<div class="container">
+    <h4 class="blued text-center">Edit Category</h4>
+    <div class="row">
+        <div class="col my-3">
+            <h5 class="rosed d-block">Category parent : <span class="blued">{% if category.parent %}{{ category.parent.name }}{% else %}{{ 'Is Parent' }}{% endif %}</span></h5>
+            <h5 class="rosed d-block">Category name : <span class="blued" >{{ category.name }}</span></h5>
+        </div>
+    </div>
+        {{ include('Ads/category/_form.html.twig', {'button_label': 'Update'}) }}
+</div>
+

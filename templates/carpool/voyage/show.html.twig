@@ -1,0 +1,526 @@
+{% extends 'layout_user.html.twig' %}
+
+{% block title %}Voyage{% endblock %}
+
+{% block content %}
+    <div class="one-voyage">
+        <div class="row">
+            <div class="col border-deal">
+                <div class="row">
+                    <div class="col-md-6 mt-2">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ path('carpool_show',{'id':voyage.creator.id}) }}">
+                                    <img src="{{ voyage.creator.user.photoProfile() }}" alt="" class="cafe-avatar mr-2">
+                                </a>
+                                <span class="d-block blued small">{{ voyage.creator.user.firstname }}</span>
+                                <span class="d-block blued small">{{ voyage.creator.point }}{{ ' Points' }}</span>
+                                <span class="d-block blued small">{{ rating }} <i class="far fa-star rosed"></i> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <div class=" ">
+                            {% if app.user %}
+                                {% set isFavorite = 'false' %}
+                                {#data-favorite must be string not boolean#}
+                                {% for favorite in app.user.getFavoritesByType('voyage')  %}
+                                    {% if favorite.voyage is same as (voyage) %}
+                                        {% set isFavorite = 'true' %}
+                                    {% endif %}
+                                {% endfor %}
+                                <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right ml-2 mt-3" data-object="{{ voyage.id }}" data-type="voyage" data-favorite="{{ isFavorite }}">
+                                    <div class="flexbox">
+                                        <div class="fav-btn">
+                                            <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        </div>
+                        <span class="blued float-right mt-3">{{ voyage.timeDeparture|date('d M') }}</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h4 class="float-right text-center">
+                                    <span class="blued px-2">{{voyage.stationDeparture.name}}</span>
+                                    {% if voyage.parent %}
+                                    <small class="px-2 d-block">{{voyage.placeStationDeparture}}</small>
+                                    {% else %}
+                                        <small class="px-2 d-block">{{voyage.placeMainDeparture}}</small>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <h3> <i class="fas fa-arrow-right rosed vertical-center"></i></h3>
+                            </div>
+                            <div class="col-md-5">
+                                <h4 class="float-left text-center">
+                                    <span class="blued px-2">{{voyage.stationArrival.name}}</span>
+                                    {% if voyage.parent %}
+                                        <small class="px-2 d-block">{{voyage.placeStationArrival}}</small>
+                                    {% else %}
+                                        <small class="px-2 d-block">{{voyage.placeMainArrival}}</small>
+                                    {% endif %}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 offset-2  mt-4">
+                                {% if voyage.parent %}
+                                    <h6 class="inf-badge badge-info  py-2 px-2 white d-inline"><i class="fas fa-random"></i> {{ voyage.stationDistance }}{{ ' Km' }}</h6>
+                                    <h6 class="inf-badge badge-info  py-2 px-2 white d-inline"><i class="far fa-clock"></i> {{ voyage.durationToTime(voyage.stationDuration)}}</h6>
+                                    <h6 class="inf-badge badge-warning py-2 px-2 white d-inline"> {{ voyage.stationPrice }} <i class="fas fa-euro-sign"></i></h6>
+                                {% else %}
+                                    <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="fas fa-random"></i> {{ voyage.distance }}{{ ' Km' }}</h6>
+                                    <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="far fa-clock"></i>  {{ voyage.durationToTime(voyage.duration)}}</h6>
+                                    <h6 class="inf-badge badge-warning py-2 px-2 white d-inline"> {{ voyage.mainPrice }}  <i class="fas fa-euro-sign"></i></h6>
+                                {% endif %}
+                                <h6 class="inf-badge badge-info py-2 px-2 white d-inline"><i class="fas fa-running"></i> {{ voyage.timeDeparture|date('H:i') }}</h6>
+                                <h6 class="inf-badge badge-info py-2 px-2 white d-inline"> {{ voyage.timeArrival|date('H:i') }} <i class="fas fa-running"></i></h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 offset-2 mt-4">
+                                <span class="d-block blued">Description</span>
+                                {% if voyage.parent %}
+                                    {{ voyage.parent.description }}
+                                {% else %}
+                                    {{ voyage.description }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if voyage.highway %}
+                        <div class="row">
+                            <div class="col my-2 text-center">
+                                <span class="blued d-block"><i class="fas fa-road"></i></span>
+                                <span class="rosed"> This voyage uses the highway </span>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-6 offset-2 mt-4">
+                                <div class="">
+                                    {% if voyage.creator.isPossible %}
+                                        <span class="d-block blued mb-2">Possibility to</span>
+                                        {% if voyage.creator.bag %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-suitcase-rolling"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.animal %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-cat"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.baby %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-baby"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.bankCard %}
+                                            <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-money-check-alt"></i></h1></span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="mt-2">
+                                    {% if voyage.creator.isShare %}
+                                        <span class="d-block blued ">We can share</span>
+                                        {% if voyage.creator.conversation %}
+                                            <span class="badge badge-warning py-2 px-2 mr-1"><h1><i class="far fa-comments"></i></h1></span>
+                                        {% endif %}
+                                        {% if voyage.creator.music %}
+                                            <span class="badge badge-warning py-2 px-2 mr-1"><h1><i class="fas fa-music"></i></h1></span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-5">
+                                <div class="image_meetup_index">
+                                    <img src="{{ voyage.creator.photoCarpool() }}" alt="">
+                                </div>
+                                <div class="mt-1 text-center">
+                                    <h5 class="blued d-inline">{{ voyage.creator.carBrand }}</h5>
+                                    <h5 class="blued d-inline">{{ voyage.creator.carColor }}</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class=" my-4">
+                            <div class="row">
+                                <div class="col-md-5  text-center my-2">
+                                    {% if not voyage.isFinish() %}
+                                        {% if app.user is not same as(voyage.creator.user) %}
+                                            {% if voyage.availableSeats is same as(0) %}
+                                                <h7 class="inf-badge badge-danger py-2 px-2  ">No seats available</h7>
+                                            {% else %}
+                                                <h7 class="inf-badge badge-success py-2 px-2  ">{{ voyage.availableSeats }}{% if voyage.availableSeats >1 %}{{ ' Available seats' }}{% else %}{{ ' Available seat' }}{% endif %}</h7>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% for item in voyage.getVoyageMap %}
+                            <div class="row">
+                                <div class="col-md-2 mx-0 voyage-map-time">
+                                    <span class="float-right mt-1 city-time blued">
+                                        {% if item['time']|date('d') is same as (voyage.parentVoyage.date|date('d')) %}
+                                            {{ item['time']|date('H:i') }}<p class="white very-small text-center">.</p>
+                                        {% elseif voyage.parentVoyage.date|date('d')+1 is same as (item['time']|date('d'))%}
+                                            {{ item['time']|date('H:i') }} <p class="rosed very-small text-center">Next day</p>
+                                        {% else %}
+                                            {{ item['time']|date('H:i') }} <p class="rosed very-small text-center">{{ item['time']|date('d M') }}</p>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="col-md-1  text-center">
+                                    {% if item['departure'] %}
+                                        <span class="point-departre pl-0"><i class="fas fa-car rosed"></i></span>
+                                    {% else %}
+                                        {% if item['station'] or item['arrival'] %}
+                                            <span class="point-departre d-block mb-0"><i class="far fa-dot-circle rosed"></i></span>
+                                        {% else %}
+                                            <span class="point-departre d-block mb-0"><i class="far fa-dot-circle"></i></span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="col">
+                                    <span class="blued city-time d-block">{{item['city']}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1 offset-2 text-center">
+                                    {% if not item['last'] %}
+                                        {% if item['station'] or item['departure']  %}
+                                            <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                            <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical rosed"></i></span>
+                                        {% else %}
+                                            {% if not item['station']  and not item['departure']%}
+                                                <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical blued"></i></span>
+                                                <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical blued"></i></span>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                                <div class="col">
+                                    <div class="passenger-carpool mt-2">
+                                        {% for passenger in item['passenger'] %}
+                                            {% for i in 1..passenger['seats'] %}
+                                                {% if app.user is same as (voyage.creator.user) %}
+                                                    <img src="{{ passenger['user'] }}" alt="" class="vote-avatar mx-1">
+                                                {% else %}
+                                                    <span class="rosed"><i class="fas fa-male"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% if item['availableSeats'] >0 %}
+                                            {% for i in 1..item['availableSeats'] %}
+                                                {% if app.user is same as (voyage.creator.user) %}
+                                                    <img src="{{ asset('/assets/images/carpool/seat.png') }}" alt="" class="vote-avatar mx-1">
+                                                {% else %}
+                                                    <span class="blued"><i class="fas fa-male"></i></span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+        {% if app.user  and app.user is not same as (voyage.creator.user) %}{#and not joined#}
+            <div class="row pt-2 border-deal">
+            {#user not joined#}
+                {% if voyage.isPassenger(app.user) %}
+                    {% for passenger in voyage.passenger  %}
+                        {% if app.user is same as (passenger) %}
+                            {% set seats = voyage.getPassengerSeats(passenger) %}
+                            <div class="col-md-6 offset-3 border-deal">
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <a href="{{ path('user_show',{'id': voyage.creator.user.id }) }}" >
+                                            <div class="btn-group">
+                                                <img src="{{ voyage.creator.user.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                                <span class="blued ml-1 mt-3">{{ voyage.creator.user.firstname|title }} {{ voyage.creator.user.lastname|upper }}</span>
+                                            </div>
+                                        </a>
+                                        <div class=" cancel-joining-user my-1 message-voyage ">
+                                            <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                <button class="btn mt-1" >
+                                                    <input type="hidden" name="user" value="{{ voyage.creator.user.id }}">
+                                                    <i class="fas fa-comments"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span class="float-right mt-2 mx-2 badge badge-success py-2 px-2"><h5>{{seats }} {% if seats >1 %}Seats{% else %}Seat{% endif %} reserved</h5></span>
+                                    </div>
+                                    <div class="col-md-1 cancel-joining-user my-1 rejected-voyage mt-2">
+                                        <form method="post" action="{{ path('cancel_joining_passenger',{'voyage':voyage.id}) }}" onsubmit="return confirm('Do you really want to withdraw from this voyage ?Three points will be deducted');">
+                                            <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <hr class="my-0">
+                                <div class="row">
+                                    <div class="col text-center mt-2">
+                                        <span class="blued">{{ voyage.stationDeparture.name }}</span>
+                                        <span> <i class="fas fa-arrow-right rosed"></i></span>
+                                        <span class="blued">{{ voyage.stationArrival.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center my-2">
+                                        <span class="rosed">{{ voyage.timeDeparture|date('d M  H:i') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% if voyage.haveRequest(app.user) %}{#pending or rijected#}
+                        {% for request in voyage.voyageRequests  %}
+                            {% if request.sender is same as(app.user) and request.status is not same as('Accepted')%}
+                                {% if not voyage.isFinish() %}
+                                    <div class="col-md-6 offset-3 border-deal">
+                                        <div class="row">
+                                            <div class="col ">
+                                                <div class="cancel-joining-user mt-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('carpool_voyage_request_delete', {'id':request.id}) }}" onsubmit="return confirm('Are you sure you want to delete this request?');">
+                                                        <input type="hidden" name="_method" value="DELETE">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}">
+                                                        <button class="btn float-right mt-2"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                                <span class="float-right mt-2 mx-2 badge py-2 px-2 {% if request.status is same as('Pending') %}badge-warning{% else %}badge-danger{% endif %}"><h5>{{request.status}}</h5></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                {% if request.status is same as('Pending') %}
+                                                    <span class="blued ">Your request is being processed</span>
+                                                {% else %}
+                                                    <span class="rosed ">Your request has been rejected</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-2 ml-2">
+                                                <span class="rosed  d-block">Number of seats : {{ request.numberOfSeats }}</span>
+                                                <span class="rosed  d-inline">Description :</span>
+                                                <p class="d-inline minimize ml-2">{{ request.description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-6 offset-3 border-deal">
+                                        <div class="row py-2">
+                                            <div class="col text-center">
+                                                <span class="rosed ">This voyage is finish</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% if not voyage.isFinish() %}
+                            {% if not voyage.isClosedVoyage %}
+                                {% if not voyage.isPartOfAllPassenger(app.user) %}
+                                <div class="col text-center my-4 white">
+                                    <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">Join request</a>
+                                </div>
+                                {% else %}
+                                <div class="col text-center my-4 white">
+                                    <span class="badge badge-danger py-2 px-2"><h6>You are a passenger on this or part of this voyage</h6></span>
+                                </div>
+                                {% endif %}
+                            {% else %}
+                            <div class="col text-center my-4 white">
+                                <span class="badge badge-danger py-2 px-2"><h6>Close voyage</h6></span>
+                            </div>
+                            {% endif %}
+                        {% else %}
+                            <div class="col-md-6 offset-3 border-deal">
+                                <div class="row py-2">
+                                    <div class="col text-center">
+                                        <span class="rosed ">This voyage is finish</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% elseif not app.user %}
+            <div class="row pt-2 border-deal">
+                {#visitor#}
+                <div class="col text-center my-4 white">
+                    <a data-toggle="modal" data-target="#login" class="btn btn-info ">Log in to Join</a>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if app.user is same as (voyage.creator.user) and  not voyage.parent %}
+        <div class="row pt-2 border-deal">
+            {#creator#}
+            {% if voyage.getAllVoyageRequests() %}
+            <div class="col-md-5  py-2">
+                <h5 class="blued text-center">Passengers</h5>
+                {% for passenger in voyage.getAllVoyageRequests() %}
+                    {% if passenger.status is same as('Accepted') %}
+                        <div class="row">
+                            <div class="col-md-10 offset-1 border-deal">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="{{ path('user_show',{'id': passenger.sender.id}) }}" >
+                                            <div class="btn-group">
+                                                <img src="{{ passenger.sender.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                                <span class="blued ml-1 mt-3">{{ passenger.sender.firstname|title }} {{ passenger.sender.lastname|upper }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="btn-group float-right mt-1">
+                                            <div class=" cancel-joining-user my-1 message-voyage ">
+                                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                    <button class="btn" >
+                                                        <input type="hidden" name="user" value="{{ passenger.sender.id }}">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            {% if not voyage.isFinish() %}
+                                                <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?Ten points will be deducted');">
+                                                        <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-0">
+                                <div class="row my-2">
+                                    <div class="col-md-9 ">
+                                        <div class="col text-center mt-2">
+                                            <span class="blued">{{ passenger.voyage.stationDeparture.name }}</span>
+                                            <span> <i class="fas fa-arrow-right rosed"></i></span>
+                                            <span class="blued">{{ passenger.voyage.stationArrival.name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-2 justify-content-center">
+                                        <span class="badge badge-info py-1 px-2"><h5>{{ passenger.numberOfSeats }}{% if passenger.numberOfSeats >1 %} Seats{% else %} Seat{% endif %} </h5></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-5 offset-2  py-2">
+                <h5 class="blued text-center">Join requests</h5>
+                {% for request in voyage.getAllVoyageRequests() %}
+                    {% if request.status is same as('Pending') %}
+                        <div class="row">
+                            <div class="col-md-10 offset-1 border-deal">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <a href="{{ path('user_show',{'id': request.sender.id}) }}" >
+                                            <div class="btn-group">
+                                                <img src="{{ request.sender.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                                <span class="blued ml-1 mt-3">{{ request.sender.firstname|title }} {{ request.sender.lastname|upper }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="btn-group float-right mt-1">
+                                            <div class=" cancel-joining-user my-1 message-voyage ">
+                                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                    <button class="btn" >
+                                                        <input type="hidden" name="user" value="{{ request.sender.id }}">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            {% if not voyage.isFinish() %}
+                                                {% if not request.voyage.isClosedVoyage and  request.numberOfSeats <= request.voyage.getAvailableSeats() and not voyage.isPartOfAllPassenger(request.sender)  %}
+                                                    <div class=" cancel-joining-user my-1 accepted-voyage ">
+                                                        <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm('Do you really want to accept this request ?');">
+                                                            <button class="btn "><i class="fas fa-check-circle "></i></button>
+                                                        </form>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                                                        <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-0">
+                                <div class="row">
+                                    <div class="col text-center my-0">
+                                        <span class="blued">{{ request.voyage.stationDeparture.name }}</span>
+                                        <span> <i class="fas fa-arrow-right rosed"></i></span>
+                                        <span class="blued">{{ request.voyage.stationArrival.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 ">
+                                        <span class="badge badge-info py-1 px-2 mb-2"><h3>{{ request.numberOfSeats }} {{' Seat '}} </h3></span>
+                                    </div>
+                                    <div class="col-md-9 mb-2">
+                                        {% if request.description %}
+                                            <span class="blued">Description:</span>
+                                            <p class="d-inline minimize">{{ request.description }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% else %}
+                <div class="col my-4 mx-2 text-center">
+                    <span class=" blued">There are no requests for this <span class="rosed">voyage</span> yet</span>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border-deal ">
+                <form method="post" action="{{ path('voyage_delete', {'id': voyage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voyage.id) }}">
+                    <button class="btn btn-danger float-right my-3">Cancel this voyage</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg mt-4" id="voyage-request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    {{ render(controller('App\\Controller\\Carpool\\VoyageRequestController::new',{ 'voyage': voyage.id  })) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,5 @@
 
+@import "~select2/dist/css/select2.css";
 @import "bottstrap-reset";
 @import "variables";
 @import "jqueryui";
@@ -7,8 +8,23 @@
 @import "navbar";
 @import "fileinput";
 @import "fileinput-rtl";
+@import "offer";
+@import "~bootstrap4-toggle/css/bootstrap4-toggle.min.css";
 @import "~bootstrap/scss/bootstrap";
-
+@import "~semantic-ui-css/semantic.min.css";
+@import "deals";
+@import "notification";
+@import "message";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "rating";
+@import "invitation";
+@import "hosting";
+@import "meetupDate";
+@import "meetup";
+@import "voyage-form";
+@import "voyage";
+@import "favorite-button";
+@import "admin";
 
 
 
@@ -34,3 +50,96 @@ body .welcome-text {
   display: none;
 }
 /*-----------------end---------------*/
+/*----------------charchbar---------------*/
+#search-bar{
+  background-color: $noird;
+}
+#search-bar .form-control {
+  font-size: 85%;
+  color: $noird;
+}
+.border-search{
+  border-right: solid;
+  border-right-width: 1px;
+  border-right-color: #000;
+  height: 40%;
+  margin-bottom: 1%;
+}
+.border-search-category{
+  border-right: solid;
+  border-right-width: 1px;
+  border-right-color: #000;
+  height: 40%;
+  margin-bottom: 1%;
+}
+// select2 over read
+.select2-container{
+  font-size: 85%;
+  padding: 0;
+}
+.select2-container--default
+.select2-results__option--highlighted[aria-selected] {
+  font-size: 85%;
+  background-color: $blued;
+  color: white;
+}
+.select2-selection--multiple {
+  padding-bottom: 4vh;
+}
+.select2-selection--single {
+  height: 100% !important;
+}
+.select2-selection__rendered{
+  word-wrap: break-word !important;
+  text-overflow: inherit !important;
+  white-space: normal !important;
+}
+.select2-results__option[aria-selected=true] {
+  display: none;
+}
+/*-----------------end--------------*/
+
+/*______search bar error REGEX   */
+.error-keyup-1, .error-keyup-2, .error-keyup-3, .error-keyup-4, .error-keyup-5, .error-keyup-6, .error-keyup-7, .error-keyup-8,
+.error-keyup-9, .error-keyup-10, .error-keyup-11, .error-keyup-12, .error-keyup-13, .error-keyup-14, .error-keyup-15, .error-keyup-16,
+.error-keyup-17, .error-keyup-18, .error-keyup-19, .error-keyup-20,
+.error-keyup-21, .error-keyup-22, .error-keyup-23, .error-keyup-24,
+.error-keyup-25, .error-keyup-26, .error-keyup-27, .error-keyup-28,
+.error-keyup-29, .error-keyup-30, .error-keyup-31, .error-keyup-32,
+.error-keyup-33, .error-keyup-34, .error-keyup-35, .error-keyup-36{
+  color: orangered;
+  font-size: 85%;
+}
+
+.error {
+  color: orangered;
+  font-size: 85%;
+}
+
+/*______ nearme  */
+
+
+.nearme .form-group{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: whitesmoke;
+}
+.nearme{
+  margin-bottom: 1rem;
+}
+#offer_search_distance{
+  margin-top: 0.5rem;
+}
+#demand_search_distance{
+  margin-top: 0.5rem;
+}
+.my-area-hidden{
+  display: none;
+}
+/* messag alert */
+.message-flash{
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 20em;
+}

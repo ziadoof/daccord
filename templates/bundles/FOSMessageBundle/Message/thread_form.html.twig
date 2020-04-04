@@ -1,0 +1,28 @@
+<div class="tab-pane fade show active new_chat" id="user-{{ recipient.id }}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+    <div class="row border-bottom">
+        <div class="col-md-3">
+            <div class=" message-link">
+                {% if recipient is not same as (app.user) %}
+                    <h5 class="rosed mb-0">{{ recipient.point }}<span class="mt-5">{{ ' Points' }}</span></h5>
+                    <span class="blued mt-0 justify-content-center">{{recipient.city.name }}</span>
+                {% else %}
+                    <h5 class="rosed mb-0"> {{ recipient.point }}<span class="blued mt-2">{{ ' Points' }}</span></h5>
+                    <span class="blued mt-0 justify-content-center">{{ recipient.city.name }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            {#من اين اتى المرسل#}
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    <div class="chat-messages" id="messages-chat">
+      {#here new message for new recipient#}
+    </div>
+    <form action="{{ url('fos_message_thread_new') }}" method="post" class="mt-5">
+        {{ form_widget(form) }}
+        <input type="submit" class="send-message-chat btn btn-info mb-" />
+    </form>
+</div>

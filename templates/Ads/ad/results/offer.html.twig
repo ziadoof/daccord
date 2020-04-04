@@ -1,0 +1,108 @@
+{% extends "layout_user.html.twig" %}
+
+{% block content_search %}
+    <div class="row">
+        {% if ads is defined %}
+        {% for ad in ads %}
+            <div class="text-center col-md-3 px-md-2 my-2 ad_show">
+                <div id="ad_index" class="ad_index">
+                    <a href="{{ path('ad_show', {'id': ad.id}) }}"class="">
+                        <div class="px-2 border-ad">
+                            <div class="row">
+                                <div class="col-md-12 pt-2">
+                                    <div class=" ">
+                                        {% if app.user %}
+                                            {% set isFavorite = 'false' %}
+                                            {#data-favorite must be string not boolean#}
+                                            {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                                {% if favorite.ad is same as (ad) %}
+                                                    {% set isFavorite = 'true' %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  float-left mr-2" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                                <div class="flexbox">
+                                                    <div class="fav-btn">
+                                                        <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        {% endif %}
+                                        <b class="title-blue float-left">{{ ad.category }}</b>
+                                        {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
+                                            <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
+                                        {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
+                                            "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
+                                            <b class="float-right ">{{ 'Hier' }}</b>
+                                        {% else %}
+                                            <b class="float-right ">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</b>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if ad.typeOfAd is same as ('Offer') %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {% if ad.imageOne is not null %}
+                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                        {% else %}
+                                            {% if ad.imageTow is not null %}
+                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                            {% else %}
+                                                {% if ad.imageThree is not null %}
+                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                                {% else %}
+                                                    <img class="image_ad " src="/assets/images/icons/sansphoto.jpeg" alt="">
+                                                {%endif%}
+                                            {%endif%}
+                                        {%endif%}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img class="image_ad" src="{{ asset('assets/images/icons/search.jpg') }}" alt="">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-8">
+                                    {% if ad.pPrice is not same as (null) %}
+                                        <span class="title-blue float-left"><del>{{ ad.pPrice }}€</del></span>
+                                    {% endif %}
+                                    {% if ad.price %}
+                                        <span class="title-rose float-left">{{ ad.price }}€</span>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    {% if ad.city is not null %}
+                                    <span class="float-right mt-3">{{ ad.city.name }}</span>
+                                    {% else %}
+                                    <span class="float-right mt-3">{{ ad.ville.name }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mx-2">
+
+                </div>
+            </div>
+        {% endfor %}
+            <div class="pagination-search row justify-content-center mt-4">
+                <div class="navigation">
+                    {{ knp_pagination_render(ads) }}
+                </div>
+            </div>
+        {% else %}
+    </div>
+            <div class=" ">
+                <div class="">
+                    <div class="text-center title-blue">
+                         {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+                        <h1> There is no results</h1>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+{% endblock %}

@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Doctrine\ORM\EntityRepository;
-use App\Entity\Category;
+use App\Entity\Ads\Category;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
 
@@ -21,9 +21,12 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
 
     private $factory ;
 
-    public function __construct($factory)
+    private $type ;
+
+    public function __construct($factory, $type)
     {
         $this->factory = $factory;
+        $this->type = $type;
     }
 
 
@@ -59,10 +62,13 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
             'class'         => Category::class,
             'mapped'        => false,
             'label'         => 'General Category',
+            'required' => true,
             'placeholder' => 'Choisir un general Category',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->andWhere('c.parent is null')
+                    ->andWhere('c.type = :type')
+                    ->setParameter('type', $this->type)
                     ->orderBy('c.id', 'ASC');
             },
             'choice_label' => 'name',
