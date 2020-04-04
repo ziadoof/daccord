@@ -85,7 +85,7 @@ class MeetupController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="meetup_show", methods={"GET","POST"}, options={"expose"=true})
+     * @Route("/show/{id}", name="meetup_show", methods={"GET","POST"}, options={"expose"=true})
      * @param Request $request
      * @param Meetup $meetup
      * @param RatingRepository $ratingRepository

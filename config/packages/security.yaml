@@ -35,11 +35,32 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/driver/admin/, role: ROLE_ADMIN }
-        #- { path: ^/meetup/, role: ROLE_USER }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: /edit, role: ROLE_USER }
+        - { path: ^/my_ads, role: ROLE_USER }
+        - { path: ^/cafe, role: ROLE_USER }
+        - { path: ^/send-notification, role: ROLE_USER }
+        - { path: ^/ad, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/voyage/myvoyage, role: ROLE_USER }
+        - { path: ^/voyage/new, role: ROLE_USER }
+        - { path: ^/voyage/request/, role: ROLE_USER }
+        - { path: ^/voyage, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/deal, role: ROLE_USER }
+        - { path: ^/driver_request, role: ROLE_USER }
+        - { path: ^/driver/admin, role: ROLE_ADMIN }
+        - { path: ^/driver, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/specification, role: ROLE_ADMIN }
+        - { path: ^/favorite, role: ROLE_USER }
+        - { path: ^/hosting_request, role: ROLE_USER }
+        - { path: ^/hosting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/department, role: ROLE_ADMIN }
+        - { path: ^/region, role: ROLE_ADMIN }
+        - { path: ^/meetup/show, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/meetup, role: ROLE_USER }
+        - { path: ^/message, role: ROLE_USER }
+        - { path: ^/search, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/notifications, role: ROLE_USER }
+        - { path: ^/set_area, role: ROLE_USER }

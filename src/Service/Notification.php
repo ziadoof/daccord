@@ -738,7 +738,7 @@ class Notification
         $recipient = $joinRequest->getMeetup()->getCreator();
         $sender = $joinRequest->getUser();
 
-        $notification = $this->notificationManager->createNotification('','meetupParticipant','/meetup/'.$joinRequest->getMeetup()->getId());
+        $notification = $this->notificationManager->createNotification('','meetupParticipant','/meetup/show/'.$joinRequest->getMeetup()->getId());
 
         $this->notificationManager->addNotification(array($recipient), $notification, true);
 
@@ -754,7 +754,7 @@ class Notification
             'recipient'=>$recipient->getId(),
             'category'=>'',
             'sender'=>ucfirst($sender->getFirstname()),
-            'link' =>'/meetup/'.$joinRequest->getMeetup()->getId(),
+            'link' =>'/meetup/show/'.$joinRequest->getMeetup()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$sender->getProfileImage()
@@ -768,7 +768,7 @@ class Notification
         $recipient = $joinRequest->getUser();
         $sender = $joinRequest->getMeetup()->getCreator();
 
-        $notification = $this->notificationManager->createNotification($treatment,'meetupParticipant','/meetup/'.$joinRequest->getMeetup()->getId());
+        $notification = $this->notificationManager->createNotification($treatment,'meetupParticipant','/meetup/show/'.$joinRequest->getMeetup()->getId());
 
         $this->notificationManager->addNotification(array($recipient), $notification, true);
 
@@ -784,7 +784,7 @@ class Notification
             'recipient'=>$recipient->getId(),
             'category'=>'',
             'sender'=>ucfirst($sender->getFirstname()),
-            'link' =>'/meetup/'.$joinRequest->getMeetup()->getId(),
+            'link' =>'/meetup/show/'.$joinRequest->getMeetup()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$sender->getProfileImage(),
@@ -799,7 +799,7 @@ class Notification
         $recipient = $options['recipient'];
         $sender = $options['sender'];
 
-        $notification = $this->notificationManager->createNotification($options['status'],'meetupParticipant','/meetup/'.$meetup->getId());
+        $notification = $this->notificationManager->createNotification($options['status'],'meetupParticipant','/meetup/show/'.$meetup->getId());
 
         $this->notificationManager->addNotification(array($recipient), $notification, true);
 
@@ -815,7 +815,7 @@ class Notification
             'recipient'=>$recipient->getId(),
             'category'=>'',
             'sender'=>ucfirst($sender->getFirstname()),
-            'link' =>'/meetup/'.$meetup->getId(),
+            'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$sender->getProfileImage(),
@@ -830,7 +830,7 @@ class Notification
         $recipient = $options['recipient'];
         $sender = $options['sender'];
 
-        $notification = $this->notificationManager->createNotification($options['status'],'meetupParticipant','/meetup/'.$meetup->getId());
+        $notification = $this->notificationManager->createNotification($options['status'],'meetupParticipant','/meetup/show/'.$meetup->getId());
 
         $this->notificationManager->addNotification(array($recipient), $notification, true);
 
@@ -846,7 +846,7 @@ class Notification
             'recipient'=>$recipient->getId(),
             'category'=>'',
             'sender'=>ucfirst($sender->getFirstname()),
-            'link' =>'/meetup/'.$meetup->getId(),
+            'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$sender->getProfileImage(),
@@ -860,7 +860,7 @@ class Notification
 
         $sender = $meetup->getCreator();
 
-        $notification = $this->notificationManager->createNotification('','participant','/meetup/'.$meetup->getId());
+        $notification = $this->notificationManager->createNotification('','participant','/meetup/show/'.$meetup->getId());
 
         $this->notificationManager->addNotification(array($recipient), $notification, true);
 
@@ -876,7 +876,7 @@ class Notification
             'recipient'=>$recipient->getId(),
             'category'=>'',
             'sender'=>ucfirst($sender->getFirstname()),
-            'link' =>'/meetup/'.$meetup->getId(),
+            'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$sender->getProfileImage(),
@@ -889,7 +889,7 @@ class Notification
         $recipients = $options['recipients'];
         $sender = $options['sender'];
 
-        $notification = $this->notificationManager->createNotification('meetupComment','','/meetup/'.$meetup->getId());
+        $notification = $this->notificationManager->createNotification('meetupComment','','/meetup/show/'.$meetup->getId());
 
         $this->notificationManager->addNotification($recipients, $notification, true);
 
@@ -909,7 +909,7 @@ class Notification
                 'recipient'=>$recipient->getId(),
                 'category'=>'',
                 'sender'=>ucfirst($sender->getFirstname()),
-                'link' =>'/meetup/'.$meetup->getId(),
+                'link' =>'/meetup/show/'.$meetup->getId(),
                 'notificationId'=>$notificationId,
                 'notifiableId'=>$notifiableId,
                 'senderImage'=>$sender->getProfileImage(),
@@ -923,7 +923,7 @@ class Notification
     {
         $meetup = $options['meetup'];
 
-        $notification = $this->notificationManager->createNotification('ratingMeetup','','/meetup/'.$meetup->getId());
+        $notification = $this->notificationManager->createNotification('ratingMeetup','','/meetup/show/'.$meetup->getId());
         $this->notificationManager->addNotification(array($meetup->getCreator()), $notification, true);
 
         $notifiedBy = new NotifiedBy($notification, $vote->getVoter(), $meetup->getCreator(), 'ratingMeetup','');
@@ -938,7 +938,7 @@ class Notification
             'recipient'=>$meetup->getCreator()->getId(),
             'category'=>'',
             'sender'=>ucfirst($vote->getVoter()->getFirstname()),
-            'link' =>'/meetup/'.$meetup->getId(),
+            'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
             'senderImage'=>$vote->getVoter()->getProfileImage(),

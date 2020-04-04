@@ -28,29 +28,6 @@ class DriverController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="driver_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $driver = new Driver();
-        $form = $this->createForm(DriverType::class, $driver);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($driver);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('driver_index');
-        }
-
-        return $this->render('driver/new.html.twig', [
-            'driver' => $driver,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="driver_show", methods={"GET"})
      * @param Driver $driver
      * @return Response
@@ -65,26 +42,6 @@ class DriverController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/admin/{id}/edit", name="driver_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Driver $driver): Response
-    {
-        $form = $this->createForm(DriverType::class, $driver);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('driver_index');
-        }
-
-        return $this->render('user/Profile/driver_edit_form.html.twig', [
-            'driver' => $driver,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/admin/{id}", name="driver_delete", methods={"DELETE"})
