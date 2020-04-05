@@ -1,0 +1,70 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block title %}Admin driver users{% endblock %}
+
+{% block admin %}
+    <h1 class="rosed font-weight-bold text-center my-2">Driver Users</h1>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>LastLogin</th>
+                <th>Status</th>
+                <th>Ville</th>
+                <th>Car brand</th>
+                <th>Car color</th>
+                <th>Car image</th>
+                <th>Point</th>
+                <th>Show</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for driver in drivers %}
+            <tr>
+                <td>{{ driver.id }}</td>
+                <td><div class="float-left">{% if driver.user.isAdmin() %} <i class="fas fa-user-cog rosed"></i> {% else %} <i class="fas fa-user blued"></i> {% endif %}{{ driver.user.firstname|title }} {{ driver.user.lastname|upper }}</div></td>
+                {% if driver.active %}
+                    <td><div class="col text-center"><img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes" class="vote-avatar"></div></td>
+                {% else %}
+                    <td><div class="col text-center"><img src="{{ asset('/assets/images/icons/no.png') }}" alt="no" class="vote-avatar"></div></td>
+                {% endif %}
+                <td>{{ driver.user.lastLogin ? driver.user.lastLogin|date('d M-y | H:i') : '' }}</td>
+                <td>
+                    <div class="col text-center ">
+                        {% if not driver.user.isActiveNow() %}
+                            <div class="col text-center">
+                                <figure class="circle-red "></figure>
+                            </div>
+                        {% else %}
+                            <div class="col text-center">
+                                <figure class="circle-green"></figure>
+                            </div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>{{ driver.user.ville }}</td>
+                <td>{{ driver.carBrand }}</td>
+                <td>{{ driver.carColor |title}}</td>
+                <td class="justify-content-center"><div class="col text-center"><img src="{{ driver.photoDriver() }}" alt="car image" class="cafe-avatar"></div></td>
+                <td>{{ driver.point }}</td>
+                <td>
+                    <a href="{{ path('driver_show', {'id': driver.id}) }}"class="btn btn-warning">Driver</a>
+                    <a href="{{ path('user_show', {'id': driver.user.id}) }}"class="btn btn-info">User</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(drivers) }}
+        </div>
+    </div>
+
+{% endblock %}
