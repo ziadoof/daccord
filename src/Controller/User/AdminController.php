@@ -134,7 +134,7 @@ class AdminController extends AbstractController
             // Items per page
             50
         );
-        return $this->render('admin/view/users.html.twig', ['users' => $results]);
+        return $this->render('admin/view/users/users.html.twig', ['users' => $results]);
     }
 
     /**
@@ -185,7 +185,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('admin/view/new_user.html.twig', [
+        return $this->render('admin/view/users/new_user.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -691,6 +691,28 @@ class AdminController extends AbstractController
         $searchDemandCategory->setParent(null);
 
         return[$offerCategory,$demandCategory,$searchOfferCategory,$searchDemandCategory];
+    }
+
+    /**
+     * @Route("/admin/carpools", name="carpool_index", methods={"GET"})
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    public function carpool_index(Request $request, PaginatorInterface $paginator): Response
+    {
+        $result= $this->carpoolRepo->findAll();
+        $results = $paginator->paginate(
+        // Doctrine Query, not results
+            $result,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            50
+        );
+        return $this->render('admin/view/users/carpoolUsers.html.twig', [
+            'carpools' => $results,
+        ]);
     }
 
 }
