@@ -343,6 +343,13 @@
                                                     <span class="rosed"><i class="far fa-star"></i></span>
                                                     {{ 'POINTS !' }}</p>
                                                     <p><span> You earned five extra points for canceling a voyage you are traveling on. </span></p>
+                                                {% elseif type is same as ('cancelDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="fas fa-exclamation-triangle"></i></span>
+                                                    {{ 'Cancel Deal !' }}</p>
+                                                    <p><span class="blued">{{ data[notification.notification.id]['sender']|title }}</span> has canceled the deal that you were part of, and was to be executed soon,
+                                                        about the catigory <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
                                                 {% endif %}
                                         </span>
                                     </a>

@@ -37,7 +37,6 @@ class DealController extends AbstractController
      * @param UserRepository $userRepository
      * @param VoteRepository $voteRepository
      * @return Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function index(DoneDealRepository $doneDealRepository, UserRepository $userRepository, VoteRepository $voteRepository): Response
     {
@@ -129,20 +128,33 @@ class DealController extends AbstractController
      * @param Request $request
      * @param Deal $deal
      * @param DriverRequestRepository $driverRequestRepository
+     * @param Notification $notification
      * @return Response
      */
-    public function delete(Request $request, Deal $deal, DriverRequestRepository $driverRequestRepository): Response
+    public function delete(Request $request, Deal $deal, DriverRequestRepository $driverRequestRepository, Notification $notification): Response
     {
         if ($this->isCsrfTokenValid('delete'.$deal->getId(), $request->request->get('_token'))) {
             $driverRequests = $driverRequestRepository->findByDeal($deal);
             $user = $this->getUser();
             $entityManager = $this->getDoctrine()->getManager();
             if($deal->getDriverUser()){
-              //to do user lost 10 point
-                // notification for driver that the deal is canceled
+                if ($user === $deal->getDemandUser()){
+                    $point = $deal->getDemandUser()->getPoint();
+                    if($point <10){
+                        $user->setPoint(0);
+                    }
+                    else{
+                        $user->setPoint($user->getPoint()-10);
+                    }
+                    $entityManager->persist($user);
+                    $notification->addNotification(['type' => 'lostPoints', 'user' => $deal->getDemandUser(), 'point' => 10]);
+                }
                  foreach ($driverRequests as $driverRequest){
                      $entityManager->remove($driverRequest);
                  }
+                $notification->addNotification(['type' => 'dealCancel', 'recipient' => $deal->getDriverUser(), 'sender'=>$user, 'category'=>$deal->getCategory()->getName()]);
+
+                // notification for driver that the deal is canceled
             }
             else{
                 foreach ($driverRequests as $driverRequest){
