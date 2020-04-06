@@ -24,6 +24,7 @@ $(document).on('change', '#offer_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+            completeNormalCity('#offer_city');
         }
     });
 });
@@ -53,6 +54,7 @@ $(document).on('change', '#demand_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+            completeNormalCity('#demand_city');
         }
     });
 });
@@ -152,3 +154,46 @@ $(document).ready(function () {
     $('.select2-search__field').css('width', '100%');
 });
 
+$(document).ready(function () {
+    completeNormalCity('#auto_area_city');
+    completeNormalCity('#meetup_city');
+});
+
+function completeNormalCity(id) {
+    let makeSelect = false;
+    let $this = $(id), $fakeInput = $this.clone();
+    $fakeInput.attr('id', 'fake_' + $fakeInput.attr('id'));
+    $fakeInput.attr('name', 'fake_' + $fakeInput.attr('name'));
+    $this.hide().after($fakeInput);
+    $fakeInput.autocomplete({
+        source: $('#url-list').attr('href'),
+        autoFocus: true,
+        minLength:2,
+        theme: 'bootstrap',
+        formatNoMatches: 'No city found.',
+        formatSearching: 'Searching city...',
+        formatInputTooShort: 'Insert at least 2 character',
+        close: function(e, ui) {
+            if (!makeSelect) {
+                $this.val(false);
+            }
+        },
+        response:function( event, ui ){
+            if (!makeSelect) {
+                $this.val(false);
+            }
+        },
+        focus: function(event, ui) {
+            event.preventDefault();
+            $this.val(ui.item.label);
+        },
+        select: function (event, ui) {
+            event.preventDefault();
+            makeSelect = true;
+            $this.val(ui.item.value);
+            $(this).val(ui.item.label);
+        },
+
+    });
+
+}

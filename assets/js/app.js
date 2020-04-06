@@ -8,8 +8,7 @@ window.jQuery = $;
 require('./router');
 require('./jquery-ui.min');
 require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui');
-require('./autocompleter');
-require('./autocompleter_city');
+require('./search_city');
 require('jquery-validation');
 require('../../node_modules/jquery-validation/dist/additional-methods');
 require('./searchBar');
@@ -17,7 +16,7 @@ require('./searchBar');
 require('../../node_modules/select2/dist/js/select2.min');
 
 
-require('./specification');
+require('./specificationAndCityAutoCompleter');
 require('bootstrap-fileinput');
 require('../../node_modules/bootstrap-fileinput/js/locales/fr');
 require('../../node_modules/bootstrap-fileinput/js/locales/ar');

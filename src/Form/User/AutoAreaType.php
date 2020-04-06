@@ -15,7 +15,12 @@ class AutoAreaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('city', AutocompleteType::class, ['class' => City::class]);
+            ->add('city', AutocompleteType::class, [
+                'class' => City::class,
+                'attr'=>[
+                    'placeholder'=>'Insert at least 2 character OR Zip code'
+                ]
+            ]);
     }
 
 
