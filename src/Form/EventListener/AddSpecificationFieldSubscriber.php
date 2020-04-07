@@ -8,6 +8,7 @@
 
 namespace App\Form\EventListener;
 
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -99,8 +100,12 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                     $form->add($name, AutocompleteType::class, $options);
                 }
                 elseif($type === 'DateType'){
-                    $options = array('label' => $label, 'required' => false,'widget' => 'single_text',);
-                    $form->add($name, DateType::class, $options);
+                    $options = array('label' => $label, 'required' => false,'widget' => 'single_text',
+                                        'format' => 'yyyy-MM-dd','attr'=>[
+                            'autocomplete'=> 'off',
+                            'readonly'=> 'readonly',
+                        ]);
+                    $form->add($name, DateTimeType::class, $options);
                 }
                 elseif ($type === 'ChoiceType'){
                     $typeOfChoice = $specification->getTypeOfChoice();

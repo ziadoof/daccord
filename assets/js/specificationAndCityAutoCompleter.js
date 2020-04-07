@@ -1,3 +1,5 @@
+import tail from './meetup/tail.datetime-full';
+/*this file grouped th specification for new ad  & city auto complete for form & template for dateTime offer and demand and other*/
 var $ospecification = $("#offer_category");
 $(document).on('change', '#offer_category', function () {
     var $form = $(this).closest('form');
@@ -25,6 +27,7 @@ $(document).on('change', '#offer_category', function () {
                 width: '100%',
             });
             completeNormalCity('#offer_city');
+            addDateTimeForm('#offer_dateOfEvent');
         }
     });
 });
@@ -157,6 +160,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     completeNormalCity('#auto_area_city');
     completeNormalCity('#meetup_city');
+    addBirthdayForm('#fos_user_profile_form_birthday');
 });
 
 function completeNormalCity(id) {
@@ -196,4 +200,37 @@ function completeNormalCity(id) {
 
     });
 
+}
+
+function addDateTimeForm($id){
+        tail.DateTime($id,{
+            locale: "fr",
+            time12h: false,
+            timeSeconds: null,
+            weekStart: 1,
+            startOpen: false,
+            stayOpen: false,
+            dateFormat: "YYYY-mm-dd",
+            timeFormat: false,
+            zeroSeconds: false,
+            today: true,
+            closeButton:false,
+            dateStart:  new Date()
+        });
+}
+
+function addBirthdayForm($id){
+    tail.DateTime($id,{
+        locale: "fr",
+        time12h: false,
+        timeSeconds: null,
+        weekStart: 1,
+        startOpen: false,
+        stayOpen: false,
+        dateFormat: "YYYY-mm-dd",
+        timeFormat: false,
+        zeroSeconds: false,
+        today: true,
+        closeButton:false,
+    });
 }

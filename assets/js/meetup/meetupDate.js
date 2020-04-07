@@ -1,5 +1,5 @@
 import tail from './tail.datetime-full';
-
+/*date time form for hosting request and new meetup*/
 //------------------------------------//
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     });
 
-    tail.DateTime("#meetup_startAt").on('change',function () {
+    $("#meetup_startAt").on('change',function () {
         tail.DateTime("#meetup_endAt").remove();
 
         tail.DateTime("#meetup_endAt",{
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         });
     });
-    tail.DateTime("#meetup_endAt").on('change',function () {
+    $("#meetup_endAt").on('change',function () {
         tail.DateTime("#meetup_startAt").remove();
 
         tail.DateTime("#meetup_startAt",{
@@ -71,7 +71,86 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     });
 
+
 });
+
+/*--------------*/
+document.addEventListener("DOMContentLoaded", function(){
+
+        tail.DateTime("#hosting_request_startDate",{
+            locale: "fr",
+            time12h: false,
+            timeSeconds: null,
+            weekStart: 1,
+            startOpen: false,
+            stayOpen: false,
+            dateFormat: "YYYY-mm-dd",
+            timeFormat: false,
+            zeroSeconds: false,
+            today: true,
+            closeButton:false,
+            dateStart:  new Date()
+        });
+
+        tail.DateTime("#hosting_request_endDate",{
+            locale: "fr",
+            time12h: false,
+            timeSeconds:null,
+            weekStart:1,
+            startOpen: false,
+            stayOpen: false,
+            dateFormat: "YYYY-mm-dd",
+            timeFormat: false,
+            zeroSeconds: false,
+            today: true,
+            closeButton:false,
+            dateStart: new Date(),
+
+        });
+
+        $("#hosting_request_startDate").on('change',function () {
+
+            tail.DateTime("#hosting_request_endDate").remove();
+
+            tail.DateTime("#hosting_request_endDate",{
+                locale: "fr",
+                time12h: false,
+                timeSeconds:null,
+                weekStart:1,
+                startOpen: false,
+                stayOpen: false,
+                dateFormat: "YYYY-mm-dd",
+                timeFormat: false,
+                zeroSeconds: false,
+                today: true,
+                closeButton:false,
+                dateStart: new Date($('#hosting_request_startDate').val()).getTime(),
+
+            });
+        });
+        $("#hosting_request_endDate").on('change',function () {
+            tail.DateTime("#hosting_request_startDate").remove();
+
+            tail.DateTime("#hosting_request_startDate",{
+                locale: "fr",
+                time12h: false,
+                timeSeconds: null,
+                weekStart: 1,
+                startOpen: false,
+                stayOpen: false,
+                dateFormat: "YYYY-mm-dd",
+                timeFormat: false,
+                zeroSeconds: false,
+                today: true,
+                closeButton:false,
+                dateEnd: new Date($('#hosting_request_endDate').val()).getTime()
+            });
+        });
+
+    });
+
+
+
 
 $(document).ready(function () {
 
@@ -122,8 +201,24 @@ $(document).ready(function () {
             rules: {
                 'meetup[startAt]': {dateLessThan: '#meetup_endAt'},
                 'meetup[endtAt]': {dateGreaterThan: '#meetup_startAt'},
+            },
+        }
+    );
 
+    $("#hosting-request").validate(
+        {
+            rules: {
+                'hosting_request[startDate]': {dateLessThan: '#hosting_request_endDate'},
+                'hosting_request[endDate]': {dateGreaterThan: '#hosting_request_startDate'},
             },
         }
     );
 });
+
+
+
+
+
+
+
+

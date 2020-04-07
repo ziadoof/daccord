@@ -3,6 +3,7 @@
 namespace App\Form\User;
 
 use App\Form\PhotoType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -59,12 +60,16 @@ class ProfileType extends AbstractType
                 'expanded' => true,
                 'required' => false,
             ])
-            ->add('birthday', DateType::class, [
+            ->add('birthday', DateTimeType::class, [
                 'required' => false,
                 'label' => 'Birthday',
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
                 'html5' => true,
-                'attr' => ['placeholder' => 'AAAA-MM-JJ']
+                'attr' => [
+                    'autocomplete'=> 'off',
+                    'readonly'=> 'readonly',
+                    ]
             ])
             ->add('genderStatus', CheckboxType::class, [
                 'required' => false,
