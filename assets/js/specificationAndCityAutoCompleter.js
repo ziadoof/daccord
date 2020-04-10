@@ -1,3 +1,5 @@
+import tail from './meetup/tail.datetime-full';
+/*this file grouped th specification for new ad  & city auto complete for form & template for dateTime offer and demand and other*/
 var $ospecification = $("#offer_category");
 $(document).on('change', '#offer_category', function () {
     var $form = $(this).closest('form');
@@ -24,6 +26,8 @@ $(document).on('change', '#offer_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+            completeNormalCity('#offer_city');
+            addDateTimeForm('#offer_dateOfEvent');
         }
     });
 });
@@ -53,6 +57,7 @@ $(document).on('change', '#demand_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+            completeNormalCity('#demand_city');
         }
     });
 });
@@ -152,3 +157,80 @@ $(document).ready(function () {
     $('.select2-search__field').css('width', '100%');
 });
 
+$(document).ready(function () {
+    completeNormalCity('#auto_area_city');
+    completeNormalCity('#meetup_city');
+    addBirthdayForm('#fos_user_profile_form_birthday');
+});
+
+function completeNormalCity(id) {
+    let makeSelect = false;
+    let $this = $(id), $fakeInput = $this.clone();
+    $fakeInput.attr('id', 'fake_' + $fakeInput.attr('id'));
+    $fakeInput.attr('name', 'fake_' + $fakeInput.attr('name'));
+    $this.hide().after($fakeInput);
+    $fakeInput.autocomplete({
+        source: $('#url-list').attr('href'),
+        autoFocus: true,
+        minLength:2,
+        theme: 'bootstrap',
+        formatNoMatches: 'No city found.',
+        formatSearching: 'Searching city...',
+        formatInputTooShort: 'Insert at least 2 character',
+        close: function(e, ui) {
+            if (!makeSelect) {
+                $this.val(false);
+            }
+        },
+        response:function( event, ui ){
+            if (!makeSelect) {
+                $this.val(false);
+            }
+        },
+        focus: function(event, ui) {
+            event.preventDefault();
+            $this.val(ui.item.label);
+        },
+        select: function (event, ui) {
+            event.preventDefault();
+            makeSelect = true;
+            $this.val(ui.item.value);
+            $(this).val(ui.item.label);
+        },
+
+    });
+
+}
+
+function addDateTimeForm($id){
+        tail.DateTime($id,{
+            locale: "fr",
+            time12h: false,
+            timeSeconds: null,
+            weekStart: 1,
+            startOpen: false,
+            stayOpen: false,
+            dateFormat: "YYYY-mm-dd",
+            timeFormat: false,
+            zeroSeconds: false,
+            today: true,
+            closeButton:false,
+            dateStart:  new Date()
+        });
+}
+
+function addBirthdayForm($id){
+    tail.DateTime($id,{
+        locale: "fr",
+        time12h: false,
+        timeSeconds: null,
+        weekStart: 1,
+        startOpen: false,
+        stayOpen: false,
+        dateFormat: "YYYY-mm-dd",
+        timeFormat: false,
+        zeroSeconds: false,
+        today: true,
+        closeButton:false,
+    });
+}

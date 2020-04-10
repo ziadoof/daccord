@@ -29,9 +29,8 @@
                   {% if app.user==null %}
                   <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
                       <form class="form-inline my-2 my-lg-0 float-right">
-                          <a class="btn btn-info my-2 my-sm-0 mx-2" onclick="/*searchbar();*/" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button">Search</a>
-                          <a class="btn btn-info my-2 my-sm-0" data-toggle="modal" data-target="#Registration">Register</a>
-                          <a class="btn btn-info my-2 my-sm-0 ml-2" data-toggle="modal" data-target="#login">Login</a>
+                          <a class=" my-2 my-sm-0 mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button"><i class="fas fa-search search-icon"></i></a>
+                          <a class="btn btn-info my-2 my-sm-0 ml-2" href="{{ path('security_login') }}">Sign in</a>
                       </form>
                   </div>
                   {% else %}
@@ -100,44 +99,4 @@
         </div>
     </nav>
 </header>
-
-    <!-- Modal start-->
-    <div class="modal fade bd-example-modal-lg" id="Registration" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel" style="z-index: 9999;">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="row ml-2">
-                        <h4 class="modal-title " id="myModalLabel">Crée nouvelle counte</h4>
-                    </div>
-                </div>
-                <div class="modal-body">
-                        {{ render(controller('App\\Controller\\User\\RegistrationController::registerAction')) }}
-                    <div class="modal-footer mt-2">
-                        <button  type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade bd-example-modal-lg mt-4 " id="login" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel" style="z-index: 9999;">
-        <div class="modal-dialog modal-lg " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="row ml-2">
-                        <h4 class="modal-title " id="myModalLabel">Log in</h4>
-                    </div>
-                </div>
-                <div class="modal-body ">
-                    {{ render(controller('App\\Controller\\User\\SecurityController::login')) }}
-                </div>
-                <div class="modal-footer mt-2">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal end-->
 

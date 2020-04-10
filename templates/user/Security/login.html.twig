@@ -1,77 +1,58 @@
-
+{% extends "layout_user.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
-<div class="container pt-lg-5 pt-3">
-    <div class="formLogin mt-5 col-md-6 offset-4">
-        <p class="text-center">Connexion</p>
-        {% if error %}
-            <div class="alert alert-danger"
-                 role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        {#<form action="{{ path("fos_user_security_check") }}" method="post">
-            {% if csrf_token %}
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-            {% endif %}
 
-            <label for="username">{{ 'security.login.username'|trans }}</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
-
-            <label for="password">{{ 'security.login.password'|trans }}</label>
-            <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
-
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-        </form>#}
-        <form action="{{ path('fos_user_security_check') }}" method="post">
-            {% if csrf_token %}
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-            {% endif %}
-            <div class="formgroup">
-                {#<label for="email">Votre email</label>#}
-                <label for="username">{{ 'security.login.username'|trans }}</label>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fas fa-user-circle"></i></div>
+{% block content %}
+    <div class="container h-100 mt-5 pt-5">
+        <div class="d-flex justify-content-center h-100 ">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                        <img src="{{ asset('assets/images/icons/4.png') }}" class="brand_logo" alt="Logo">
                     </div>
-                    {#<input class="form-control" type="text" id="username" name="_username"
-                           value="{{ last_username }}"
-                           required="required"/>#}
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
                 </div>
-                <div class="formgroup my-4">
-                    {#<label for="password">Votre mot de passe</label><a class="float-right mr-1 washed" href="{{ csrf_token('authenticate') }}">mot de passe oublié ?</a>#}
-                    <label for="password">{{ 'security.login.password'|trans }}</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                <div class="d-flex justify-content-center form_container">
+                    <form action="{{ path('fos_user_security_check') }}" method="post">
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                        {% endif %}
+                        {% if error %}
+                            <div class="alert alert-danger"
+                                 role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                        {% endif %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" id="username" class="form-control input_user" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
                         </div>
-                        {#<input class="form-control" type="password" id="password" name="_password"
-                               required="required"/>#}
-                        <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
-                        <a class="float-right mr-1 washed" href="{{ path('fos_user_resetting_request') }}">mot de passe oublié ?</a>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="checkbox mt-3 mr-3">
-                            {#<input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                            <label for="remember_me">Remember me</label>#}
-                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" id="password" class="form-control input_pass" name="_password" required="required" autocomplete="current-password" />
                         </div>
-                        <div class="row">
-                            <div class="col-12 mt-2">
-                                {#<input type="submit" class="btn btn-info" id="_submit"
-                                       name="_submit"
-                                       value="LOG IN"/>#}
-                                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <input type="submit" id="_submit" class="btn login_btn" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                        </div>
+                    </form>
+                </div>
+
+                <div class="register-form my-4">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account? <a href="{{ path('user_registration') }}" class="ml-2">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        <a class="float-right mr-1 washed" href="{{ path('fos_user_resetting_request') }}">Forgot your password?</a>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
-{% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
 {% endblock %}

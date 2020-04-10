@@ -140,7 +140,6 @@
                     </div>
                     <div class="p-2 border-respo mt-2 mb-2 pt-4">
 
-                            <span class="font-weight-bold ">With Driver must delete whene front end endded</span>
 
                     </div>
                     <div class="p-2 border-respo mt-2 mb-2 pt-4">
@@ -239,14 +238,18 @@
                         <span class="font-weight-bold"> TEL :</span>{{ ad.user.phoneNumber }}
                     </div>
                 {% endif %}
-                    <div class="col mt-2 mb-2">
-                        <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Message</button>
-                    </div>
-                    <div class="col mt-2 mb-2">
-                        <button type="button" class="btn btn-info"href="{{ path('ad_edit', {'id': ad.id}) }}">Report</button>
-                    </div>
-                    <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
 
+                {% if app.user is not same as(null) %}
+                    <div class="col mt-2 mb-2">
+                        <form method="post" action="{{ url('new_conversation') }}"id="ad-message">
+                            <button class="btn btn-outline-info mx-1 " >
+                                <input type="hidden" name="user" value="{{ ad.user.id }}">
+                                <p class="mt-1"><i class="fas fa-comments"></i> Message to {{ad.user.firstname}}</p>
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+                    <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
                     <span class="profile-ava">
                         <a href="{{ path('user_show',{'id':ad.user.id}) }}">
                         {% if ad.user.profileImage %}

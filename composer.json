@@ -16,7 +16,6 @@
         "friendsofsymfony/message-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0",
         "jms/job-queue-bundle": "^2.0.1",
-        "kartik-v/bootstrap-fileinput": "@dev",
         "knplabs/knp-paginator-bundle": "^4.0",
         "mgilet/notification-bundle": "^3.1",
         "pugx/autocompleter-bundle": "^1.4",

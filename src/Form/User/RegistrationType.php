@@ -2,6 +2,8 @@
 
 namespace App\Form\User;
 
+use App\Entity\Location\City;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,6 +33,15 @@ class RegistrationType extends AbstractType
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
             ))
+            ->add('city', AutocompleteType::class, [
+                'class' => City::class,
+                'required'=> true,
+                'label'=>'City',
+                'attr'=>[
+                    'autocomplete'=> 'off',
+                    'placeholder'=>'City or Zip code'
+                ]
+            ]);
         ;
     }
 

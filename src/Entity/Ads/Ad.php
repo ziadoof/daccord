@@ -913,7 +913,7 @@ class Ad
     private $withElevator;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateOfEvent;
 
@@ -2626,6 +2626,7 @@ class Ad
     {
         $this->dateOfEvent = $dateOfEvent;
     }
+
 
     public function __construct()
     {

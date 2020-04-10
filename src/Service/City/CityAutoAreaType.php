@@ -3,6 +3,7 @@
 namespace App\Service\City;
 
 use App\Entity\Location\City;
+use App\Entity\User;
 use App\Form\User\AutoAreaType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -30,7 +31,7 @@ class CityAutoAreaType
 
         $user = !$tokenStorage->getToken() || is_string($tokenStorage->getToken()->getUser()) ? null : $tokenStorage->getToken()->getUser();
 
-        $this->form = $this->formFactory->create(AutoAreaType::class, $user,
+        $this->form = $this->formFactory->create(AutoAreaType::class, new User,
             array(
                 'attr' =>
                     array(

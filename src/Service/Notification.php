@@ -112,6 +112,7 @@ class Notification
             case 'voyageRemovePassenger':
                 $this->addVoyageRemovePassengerNotification($object,$options);
                 break;
+            case 'lostPoints':
             case 'removeUserPoints':
                 $this->addRemoveUserPointsNotification($options);
                 break;
@@ -130,6 +131,11 @@ class Notification
             case 'pointsVoyageCanceled':
                 $this->addCancelVoyageAddPointNotification($options);
                 break;
+            case 'dealCancel':
+                $this->addDealCancelNotification($options);
+                break;
+
+
         }
 
     }
@@ -1210,5 +1216,34 @@ class Notification
 
 
         $this->pushNotification($pushNotification);
+    }
+
+    public function addDealCancelNotification($options){
+        $recipient = $options['recipient'];
+        $sender = $options['sender'];
+        $category = $options['category'];
+
+        $notification = $this->notificationManager->createNotification('','','/driver_request/');
+
+        $this->notificationManager->addNotification(array($recipient), $notification, true);
+
+        $notifiedBy = new NotifiedBy($notification, $sender, $recipient, 'cancelDeal',$category);
+        $this->em->persist($notifiedBy);
+        $this->em->flush();
+
+        $notificationId = $notification->getId();
+        $notifiableId = $notification->getNotifiableNotifications()[0]->getNotifiableEntity()->getId();
+        $pushedNotification = array(
+            'type'=>'notification',
+            'typeOfNotification'=>'cancelDeal',
+            'recipient'=>$recipient->getId(),
+            'category'=>$category,
+            'sender'=>ucfirst($sender->getFirstname()),
+            'link' =>'/driver_request/',
+            'notificationId'=>$notificationId,
+            'notifiableId'=>$notifiableId,
+            'senderImage'=>$sender->getProfileImage(),
+        );
+        $this->pushNotification($pushedNotification);
     }
 }

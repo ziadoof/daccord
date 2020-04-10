@@ -9,6 +9,7 @@ twig:
     paths:
         '%kernel.project_dir%/templates/bundles/FOSMessageBundle': FOSMessageBundle
         '%kernel.project_dir%/templates/admin/view/JMSJobQueue': JMSJobQueue
+        '%kernel.project_dir%/templates/user': FOSUser
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:

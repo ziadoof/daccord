@@ -5,6 +5,7 @@ namespace App\Form\Hosting;
 use App\Entity\Hosting\HostingRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,19 +15,19 @@ class HostingRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('startDate',DateType::class,[
+            ->add('startDate',DateTimeType::class,[
                 'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
+                'format' => 'yyyy-MM-dd',
                 'label'=>'Arrival',
                 'attr'=>[
                     'autocomplete'=>"off",
                     'readonly'=>"readonly",
                 ]
             ])
-            ->add('endDate',DateType::class,[
+            ->add('endDate',DateTimeType::class,[
                 'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
                 'label'=>'Departure',
-                'format' => 'dd/MM/yyyy',
                 'attr'=>[
                     'autocomplete'=>"off",
                     'readonly'=>"readonly",

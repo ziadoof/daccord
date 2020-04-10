@@ -370,6 +370,16 @@ function wsConnect(id) {
                             '<p><span >'+' You earned five extra points for canceling a voyage you are traveling on. '+'</span>'+
                             '</p>';
                         break;
+                    case'cancelDeal':
+                        text=
+                            '<p class="font-weight-bold mb-0">'+
+                            '<span class="rosed"><i class="fas fa-exclamation-triangle"></i></span>'+
+                            ' Cancel deal!'+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            ' has canceled the deal that you were part of, and was to be executed soon,about the catigory ' +
+                            '<span class="blued">'+messageData['category']+'</span>'
+                            +'</p>';
+                        break;
                 }
                 return text;
             }

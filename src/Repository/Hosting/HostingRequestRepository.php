@@ -88,4 +88,15 @@ class HostingRequestRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function findByPendingHosting($id)
+    {
+        return $this->createQueryBuilder('h')
+            ->where('h.hosting = :id')
+            ->andWhere('h.treatment = :pending')
+            ->setParameter('id', $id)
+            ->setParameter('pending', 'pending')
+            ->getQuery()
+            ->getResult();
+    }
 }
