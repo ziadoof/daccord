@@ -6,7 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\DataFixtures\UserFixtures;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use App\Entity\Ad;
+use App\Entity\Ads\Ad;
 
 
 
