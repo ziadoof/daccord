@@ -1,12 +1,9 @@
 {% block content %}
     <div class="">
-
         {{ form_start(form, {'attr': {'id': ad.typeOfAd}}) }}
         <div class="row mt-4 pt-4">
             <div class="col-md-12 ">
-
                 <h1 class="text-center pt-0 title-blue">New {{ ad.typeOfAd }}</h1>
-
             </div>
         </div>
         <div class="row">
@@ -28,17 +25,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2 offset-3">
                 {% if form.imageOne is defined %}
                 {{ form_row(form.imageOne) }}
                 {% endif %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 {% if form.imageTow is defined %}
                 {{ form_row(form.imageTow) }}
                 {% endif %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 {% if form.imageThree is defined %}
                 {{ form_row(form.imageThree) }}
                 {% endif %}

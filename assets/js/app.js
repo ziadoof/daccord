@@ -30,7 +30,6 @@ require('tail.datetime/js/tail.datetime-full');
 
 require('./meetup/meetupDate');
 
-require('./ad-images');
 require('bootstrap');
 require('./sidebar');
 require('./category');

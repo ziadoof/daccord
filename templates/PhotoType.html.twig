@@ -73,6 +73,26 @@
                 {% endif %}
             {% endif %}
         {% endif %}
+        {%- if attr.offer is defined -%}{# view for carpool image#}
+            {% if attr.offer %}{# if the form has carpool attr#}
+                {% if attr.numberOfImage is same as ('one') %}{# if the user is hosting#}
+                    <div class="image-one">
+                        <img id="previewOfferImgeOne"
+                             src="{{ asset('/assets/images/icons/add_photo.png') }}" alt="offer photo">
+                    </div>
+                {% elseif attr.numberOfImage is same as ('tow') %}{# if the user is hosting#}
+                    <div class="image-tow">
+                        <img id="previewOfferImgeTow"
+                             src="{{ asset('/assets/images/icons/add_photo.png') }}" alt="offer photo">
+                    </div>
+                {% elseif attr.numberOfImage is same as ('three') %}{# if the user is hosting#}
+                    <div class="image-three">
+                        <img id="previewOfferImgeThree"
+                             src="{{ asset('/assets/images/icons/add_photo.png') }}" alt="offer photo">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
     </label>
     </{{ element|default('div') }}>
 {% endblock %}
