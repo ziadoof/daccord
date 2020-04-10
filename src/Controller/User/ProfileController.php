@@ -3,10 +3,12 @@ namespace App\Controller\User;
 
 use App\Entity\Carpool\Carpool;
 use App\Entity\Driver;
+use App\Entity\Hosting\HostingRequest;
 use App\Events\Events;
 use App\Form\DriverType;
 use App\Repository\Deal\DealRepository;
 use App\Repository\DriverRequestRepository;
+use App\Repository\Hosting\HostingRequestRepository;
 use App\Repository\Rating\RatingRepository;
 use App\Service\City\CityAreaType;
 use App\Service\FileUploader;
@@ -133,7 +135,8 @@ class ProfileController extends BaseProController
      */
     public function areaAction(Request $request, DriverRequestRepository $driverRequestRepository,
                                DealRepository $dealRepository , EventDispatcherInterface $eventDispatcher,
-                               \App\Service\City\CityAutoAreaType $cityType, CityAreaType $regionType )
+                               \App\Service\City\CityAutoAreaType $cityType, CityAreaType $regionType,
+                                HostingRequestRepository $hostingRequestRepository)
     {
         $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
@@ -147,6 +150,7 @@ class ProfileController extends BaseProController
         if ($formCity->isSubmitted() && $formCity->isValid()) {
 
             $data = $formCity->getData();
+            $city = $data->getCity();
             $ville=$data->getCity()->getName();
             $postalCode=$data->getCity()->getZipCode();
             $gpsLat=$data->getCity()->getGpsLat();
@@ -156,6 +160,7 @@ class ProfileController extends BaseProController
             $user->setPostalCode($postalCode);
             $user->setMapX($gpsLng);
             $user->setMapY($gpsLat);
+            $user->setCity($city);
             $driver = $user->getDriver();
             if($driver){
               $driver->setCity($data->getCity());
@@ -167,64 +172,96 @@ class ProfileController extends BaseProController
 
             $userAds = $user->getAds();
             $ads = 0;
-            $countDriverRequests=0;
-            $countDeals=0;
             foreach ($userAds as $ad){
                 $count = $this->deleteAdDeals($ad, $dealRepository, $driverRequestRepository);
-                $countDriverRequests = $count['countDriverRequests'];
-                $countDeals = $count['countDeals'];
                 $ad->setVille($data->getCity());
                 $ad->setDepartment($data->getCity()->getDepartment());
                 $ad->setRegion($data->getCity()->getDepartment()->getRegion());
+                $ad->setGpsLat($gpsLat);
+                $ad->setGpsLng($gpsLng);
                 $entityManager->persist($ad);
                    $event = new GenericEvent($ad);
                    $eventDispatcher->dispatch(Events::AD_ADD, $event);
                 $ads +=1;
             }
 
+            $hosting = $user->getHosting();
+            if($hosting){
+                $hostingRequests = $hostingRequestRepository->findByPendingHosting($user->getId());
+                if(!empty($hostingRequests)){
+                    foreach ($hostingRequests as $hostingRequest){
+                        $entityManager->remove($hostingRequest);
+                    }
+                }
+                $hosting->setVille($city);
+                $hosting->setDepartment($city->getDepartment());
+                $hosting->setRegion($city->getDepartment()->getRegion());
+                $entityManager->persist($hosting);
+            }
+
+
 
             $entityManager->persist($user);
             $entityManager->flush();
 
             $this->addFlash(
                 'success',
-                'Your city for your account and driver has been successfully changed, and there are ('
-                .$ads. ') ads that have been changed('
-                .$countDriverRequests.') Driver requests has been deleted('
-                .$countDeals.') Deals has been deleted'
+                'Your city for your account, driver, Hosting has been successfully changed, and there are ('
+                .$ads. ') ads that have been changed,All Deals and driver requests and hosting requests related has been deleted.'
 
             );
             return $this->redirectToRoute('fos_user_profile_show');
         }
 
         if($formRegion->isSubmitted() && $formRegion->isValid()) {
-            $data = $formRegion->getData();
+            $data = $formCity->getData();
+            $city = $data->getCity();
             $ville=$data->getCity()->getName();
             $postalCode=$data->getCity()->getZipCode();
             $gpsLat=$data->getCity()->getGpsLat();
             $gpsLng=$data->getCity()->getGpsLng();
+
             $user->setVille($ville);
             $user->setPostalCode($postalCode);
             $user->setMapX($gpsLng);
             $user->setMapY($gpsLat);
+            $user->setCity($city);
+            $driver = $user->getDriver();
+            if($driver){
+                $driver->setCity($data->getCity());
+                $driver->setGpsLat($gpsLat);
+                $driver->setGpsLng($gpsLng);
+                $entityManager->persist($user);
+            }
+
 
             $userAds = $user->getAds();
             $ads = 0;
-            $countDriverRequests=0;
-            $countDeals=0;
             foreach ($userAds as $ad){
                 $count = $this->deleteAdDeals($ad, $dealRepository, $driverRequestRepository);
-                $countDriverRequests = $count['countDriverRequests'];
-                $countDeals = $count['countDeals'];
                 $ad->setVille($data->getCity());
                 $ad->setDepartment($data->getCity()->getDepartment());
                 $ad->setRegion($data->getCity()->getDepartment()->getRegion());
+                $ad->setGpsLat($gpsLat);
+                $ad->setGpsLng($gpsLng);
                 $entityManager->persist($ad);
-
                 $event = new GenericEvent($ad);
                 $eventDispatcher->dispatch(Events::AD_ADD, $event);
-
                 $ads +=1;
+            }
+
+            $hosting = $user->getHosting();
+            if($hosting){
+                $hostingRequests = $hostingRequestRepository->findByPendingHosting($user->getId());
+                if(!empty($hostingRequests)){
+                    foreach ($hostingRequests as $hostingRequest){
+                        $entityManager->remove($hostingRequest);
+                    }
+                }
+                $hosting->setVille($city);
+                $hosting->setDepartment($city->getDepartment());
+                $hosting->setRegion($city->getDepartment()->getRegion());
+                $entityManager->persist($hosting);
             }
 
             $entityManager->persist($user);
@@ -232,10 +269,8 @@ class ProfileController extends BaseProController
 
             $this->addFlash(
                 'success',
-                'Your city for your account and driver has been successfully changed, and there are ('
-                .$ads. ') ads that have been changed('
-                .$countDriverRequests.') Driver requests has been deleted('
-                .$countDeals.') Deals has been deleted'
+                'Your city for your account, driver, Hosting has been successfully changed, and there are ('
+                .$ads. ') ads that have been changed,All Deals and driver requests and hosting requests related has been deleted.'
             );
             return $this->redirectToRoute('fos_user_profile_show');
         }
