@@ -78,12 +78,12 @@
                                               subject is same as ('removeCarpoolPoints')or
                                               subject is same as ('carpoolAddPoints')or
                                               subject is same as ('pointsVoyageCanceled')%}
-                                            <img src="{{asset('/assets/images/icons/tam.png')}}" alt="" class="user-image mx-2 mt-1" />
+                                            <img src="{{asset('/assets/images/logo/face.png')}}" alt="" class="user-image mx-2 mt-1" />
                                         {% else %}
                                             {% if data[notification.notification.id]['sender'].profileImage %}
                                                 <img src="{{asset('/assets/images/profile/'~data[notification.notification.id]['sender'].profileImage)}}" alt="" class="user-image mx-2 mt-1" />
                                             {% else %}
-                                                <img src="{{asset('/assets/images/icons/avatar.jpeg')}}" alt="" class="user-image mx-2 mt-1" />
+                                                <img src="{{asset('/assets/images/profile/user-avatar.png')}}" alt="" class="user-image mx-2 mt-1" />
                                             {% endif %}
                                         {% endif %}
                                         <span class="messages mx-2">

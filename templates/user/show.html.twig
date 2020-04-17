@@ -10,7 +10,7 @@
                         {% if user.profileImage %}
                             <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~user.profileImage) }}" alt="User" >
                         {% else %}
-                            <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
+                            <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="User">
                         {% endif %}
                     </a>
                 </div>

@@ -178,7 +178,7 @@ class AdminController extends AbstractController
                 ->setFrom('info@onestdaccord.com')
                 /*send to $email*/
                 ->setTo('ziadoof@gmail.com');
-            $img = $message->embed(\Swift_Image::fromPath('assets/images/icons/4.png'));
+            $img = $message->embed(\Swift_Image::fromPath('assets/images/logo/big.png'));
             $message->setBody($this->renderView('user/Mail/new_user_mail.html.twig', ['user' => $user, 'img' => $img]));
             $mailer->send($message);
 

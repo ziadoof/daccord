@@ -93,7 +93,7 @@
                             {%endif%}
                             {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
                                 <div class="item active">
-                                    <img class="item " src="/assets/images/icons/sansphoto.jpeg" alt="">
+                                    <img class="item " src="/assets/images/icons/offer.png" alt="">
                                 </div>
                             {%endif%}
                         </div>
@@ -161,7 +161,7 @@
             </div>
             {% else %}
             <div class="col-md-6 mt-4 mb-4">
-                <img class="item " src="/assets/images/icons/search.jpg" alt="" style="width: 90%;height: 280px">
+                <img class="item " src="/assets/images/icons/demand.png" alt="" style="width: 90%;height: 280px">
             </div>
             <div class="col-md-4 pt-5">
                 {% for spe in realCategory.specifications  %}
@@ -255,7 +255,7 @@
                         {% if ad.user.profileImage %}
                            <img alt="" src="{{ asset('/assets/images/profile/'~ad.user.profileImage) }}" id="avatar-small" class="mt-2 mb-2 mr-3">
                         {% else %}
-                           <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                           <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" id="avatar-small" class="mt-2 mb-2 mr-3">
                         {% endif %}
                         </a>
                     </span>

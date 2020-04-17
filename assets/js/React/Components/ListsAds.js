@@ -64,11 +64,11 @@ class ListsAds extends React.Component {
                     if (imageThree !== null) {
                         offerImage = imageThree
                     } else {
-                        offerImage = "../../assets/images/icons/sansphoto.jpeg";
+                        offerImage = "../../assets/images/icons/offer.png";
                     }
                 }
             }
-            let demandImage = "../../assets/images/icons/search.jpg";
+            let demandImage = "../../assets/images/icons/demand.png";
             let image;
             if (typeOfAd === 'Offer') {
                 image = offerImage;

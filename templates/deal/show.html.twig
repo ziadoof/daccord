@@ -123,22 +123,22 @@
                                     <th scope="col">
                                         {% if deal.offerUser.id is same as(app.user.id) %}
                                             <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                               <i class="fab fa-adversal"></i> Your offer
+                                               {#<i class="fab fa-adversal"></i>#}<img src="{{ asset('assets/images/icons/o-gray.png') }}"> Your offer
                                             </a>
                                         {% else %}
                                             <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                <i class="fab fa-affiliatetheme"></i>  Your demand
+                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> Your demand
                                             </a>
                                         {% endif %}
                                     </th>
                                     <th scope="col">
                                         {% if deal.demandUser.id is same as(app.user.id) %}
                                             <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                                <i class="fab fa-adversal"></i> {{ deal.offerUser.firstname }}{{ ' offer '}}
+                                                {#<i class="fab fa-adversal"></i>#} <img src="{{ asset('assets/images/icons/o-gray.png') }}">{{ deal.offerUser.firstname }}{{ ' offer '}}
                                             </a>
                                         {% else %}
                                             <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                <i class="fab fa-affiliatetheme"></i>  {{ deal.demandUser.firstname }}{{ ' demand '}}
+                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> {{ deal.demandUser.firstname }}{{ ' demand '}}
                                             </a>
                                         {% endif %}
                                     </th>
@@ -346,7 +346,7 @@
                                                     {% if driverRequest.driver.user.profileImage %}
                                                         <img class="mb-3 {% if driverRequest.driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~driverRequest.driver.user.profileImage) }}" alt="User" >
                                                     {% else %}
-                                                        <img class="mb-3 {% if driverRequest.driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
+                                                        <img class="mb-3 {% if driverRequest.driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="User">
                                                     {% endif %}
                                                 </a>
                                             </div>
@@ -409,7 +409,7 @@
                                                         {% if driver.user.profileImage %}
                                                             <img class="mb-3 {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~driver.user.profileImage) }}" alt="User" >
                                                         {% else %}
-                                                            <img class="mb-3 {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" alt="User">
+                                                            <img class="mb-3 {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="User">
                                                         {% endif %}
                                                     </a>
                                                     <p class="mt-1">{{driver.user.firstname}}</p>
