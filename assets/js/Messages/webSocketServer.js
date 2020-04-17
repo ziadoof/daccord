@@ -415,19 +415,19 @@ function wsConnect(id) {
                 let typeON = messageData['typeOfNotification'];
                 if(typeON==='profilePoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='driverPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='hostingPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 hostingPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='removeUserPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='pointsVoyageCanceled'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
@@ -435,11 +435,11 @@ function wsConnect(id) {
                 }
                 else if(typeON==='removeCarpoolPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='carpoolAddPoints' || typeON==='ratingCarpool' ){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='ratingMeetup'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 ratingMeetup" notifiable="'+notifiableId+'" notification="'+notificationId+'">';

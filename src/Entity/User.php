@@ -767,7 +767,7 @@ class User  extends BaseUser implements NotifiableInterface, ParticipantInterfac
         if($this->profileImage){
             return '/assets/images/profile/'.$this->getProfileImage();
         }
-        return '/assets/images/profile/avatar.jpeg';
+        return '/assets/images/profile/user-avatar.png';
     }
 
     public function getHosting(): ?Hosting

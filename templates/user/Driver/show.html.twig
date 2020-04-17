@@ -8,14 +8,14 @@
                         {% if driver.carImage %}
                             {% if driver.carImage is same as ('with out photo') %}
                                 <img class="mb-3 {% if driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
-                                     src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="car-avatar">
+                                     src="{{ asset('/assets/images/car_driver/driver-avatar.png') }}" alt="car-avatar">
                             {% else %}
                                 <img class="mb-3 {% if driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
                                      src="{{ asset('/assets/images/car_driver/'~driver.carImage) }}" alt="car image" >
                             {% endif %}
                         {% else %}
                             <img class="mb-3 {% if driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
-                                 src="{{ asset('/assets/images/car_driver/car-avatar.jpg') }}" alt="User">
+                                 src="{{ asset('/assets/images/car_driver/driver-avatar.png') }}" alt="User">
                         {% endif %}
                     </a>
                 </div>

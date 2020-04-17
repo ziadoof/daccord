@@ -265,7 +265,7 @@ class Driver
 
     public function photoDriver(){
         if(!$this->carImage || $this->carImage === 'with out photo'){
-            return '/assets/images/car_driver/car-avatar.jpg';
+            return '/assets/images/car_driver/driver-avatar.png';
         }
         return '/assets/images/car_driver/'.$this->getCarImage();
     }

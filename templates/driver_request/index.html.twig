@@ -31,7 +31,7 @@
                                                 {% if driver_request.deal.offerUser.profileImage %}
                                                     <img alt="" src="{{ asset('/assets/images/profile/'~driver_request.deal.offerUser.profileImage) }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
                                                 {% else %}
-                                                    <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                                    <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
                                                 {% endif %}
                                             </a>
                                             <a class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.offerUser.firstname}}</a>
@@ -44,7 +44,7 @@
                                                 {% if driver_request.deal.demandUser.profileImage %}
                                                     <img alt="" src="{{ asset('/assets/images/profile/'~driver_request.deal.demandUser.profileImage) }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
                                                 {% else %}
-                                                    <img alt="" src="{{ asset('/assets/images/profile/avatar.jpeg') }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                                    <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
                                                 {% endif %}
                                             </a>
                                             <a class="btn btn-info my-1 btn-block">Message to {{driver_request.deal.demandUser.firstname}}</a>

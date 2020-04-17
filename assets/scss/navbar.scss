@@ -3,8 +3,8 @@
   padding: 0.1rem 1rem;
 }
 .logo img {
-  width: 38.6px;
-  height: 50px;
+  width: 48px;
+  height: 35px;
 }
 
 .icon img{
@@ -25,18 +25,26 @@
   float: left;
   padding-left: 10px;
 }
-
+.forlogo{
+  color: $blued;
+  font-size: 22px;
+  font-weight: revert;
+}
+.deallogo{
+  color: $rosed;
+}
+/*
 .logo-acoord span {
   color: $blued;
-  font-size: 24px;
+  font-size: 60px;
   font-weight: revert;
 }
 
 .logo-acoord span span {
   color: $rosed;
-  font-size: 26px;
+  font-size: 40px;
 
-}
+}*/
 .sidebar-toggle-box {
   margin-left: 0;
   margin-top: 9px;
@@ -380,4 +388,14 @@
   cursor: pointer;
 }
 
+.side-bar-icon img{
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+#cafe-gps img{
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
 

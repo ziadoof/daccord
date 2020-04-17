@@ -2,65 +2,75 @@
     <div  class="main"  >
         <div class="sidebar left">
             <ul class="list-sidebar bg-defoult">
+                <li class="icon">
+                    <a  href="javascript:void(0)" id="my_offer" class="side-bar-icon">
+                        {#<i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>#}
+                        <img src="{{ asset('assets/images/icons/o-white.png') }}" alt="" >
+                        <span class="nav-label">My offers </span>
+                    </a>
+                </li>
+                <li class="icon "> <a href="javascript:void(0)" id="my_demand" class="side-bar-icon">
+                        {#<i class="fab fa-affiliatetheme" title="Mes demandes"></i>#}
+                        <img src="{{ asset('assets/images/icons/d-white.png') }}" alt="" >
+                        <span class="nav-label">My demands</span>
+                    </a>
+                </li>
+                <li class="icon "> <a href="{{path('deal_index')}}"  class="side-bar-icon">
+                        {#<i class="fas fa-handshake" class="button-left" title="Offres suggérées"></i>#}
+                        <img src="{{ asset('assets/images/icons/deal-icon.png') }}"  >
+                        <span class="nav-label">My deals</span>
+                    </a>
+                </li>
                 {% if app.user.driver %}
                     <li class="icon">
-                        <a  href="{{path('driver_request_index')}}" id="my_driver_request">
-                            <i class="fas fa-truck-moving button-left" title="Driver request"></i>
+                        <a  href="{{path('driver_request_index')}}" id="my_driver_request" class="side-bar-icon">
+                            {#<i class="fas fa-truck-moving button-left" title="Driver request"></i>#}
+                            <img src="{{ asset('assets/images/icons/driver-request.png') }}"  >
                             {#<i class="fas fa-shuttle-van"></i>#}
                             <span class="nav-label">Driver request</span>
                         </a>
                     </li>
                 {% endif %}
-                <li class="icon">
-                    <a  href="javascript:void(0)" id="my_offer">
-                        <i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>
-                        <span class="nav-label">My offers </span>
-                    </a>
-                </li>
-                <li class="icon "> <a href="javascript:void(0)" id="my_demand">
-                        <i class="fab fa-affiliatetheme" title="Mes demandes"></i>
-                        <span class="nav-label">My demands</span>
-                    </a>
-                </li>
-                <li class="icon "> <a href="{{path('deal_index')}}"  >
-                        <i class="fas fa-handshake" class="button-left" title="Offres suggérées"></i>
-                        <span class="nav-label">My deals</span>
-                    </a>
-                </li>
                 <li class="icon ">
                     <form method="post" action="{{path('cafe_index')}}" id="cafe-gps">
-                        <a class="" id="btn-cafe-gps" >
+                        <a class="" id="btn-cafe-gps" class="side-bar-icon">
                             <input type="hidden" name="lat" id="cafe_gps_lat">
                             <input type="hidden" name="lng" id="cafe_gps_lng">
-                            <i class="fas fa-coffee" class="button-left" title="Café"></i>
+                            {#<i class="fas fa-coffee" class="button-left" title="Café"></i>#}
+                            <img src="{{ asset('assets/images/icons/cafe-icon.png') }}"  >
                             <span class="nav-label">Cafe</span>
                         </a>
                     </form>
                 </li>
-                <li> <a href="{{path('hosting_request_index')}}">
-                        <i class="fas fa-bed" class="button-left" title="Hosting"></i>
+                <li> <a href="{{path('hosting_request_index')}}" class="side-bar-icon">
+                        <img src="{{ asset('assets/images/icons/hosting-icon.png') }}"  >
+                        {#<i class="fas fa-bed" class="button-left" title="Hosting"></i>#}
                         <span class="nav-label">Hosting</span>
                     </a>
                 </li>
                 {% if app.user.hosting %}
-                <li> <a href="{{path('hosting_request_received')}}">
-                        <i class="fas fa-suitcase-rolling"class="button-left" title="Hosting_request"></i>
+                <li> <a href="{{path('hosting_request_received')}}" class="side-bar-icon">
+                        {#<i class="fas fa-suitcase-rolling"class="button-left" title="Hosting_request"></i>#}
+                        <img src="{{ asset('assets/images/icons/hosting-request.png') }}"  >
                         <span class="nav-label">Hosting request</span>
                     </a>
                 </li>
                 {% endif %}
-                <li> <a href="{{path('meetup_index')}}">
-                        <i class="far fa-calendar-check" class="button-left" title="Meetup"></i>
+                <li> <a href="{{path('meetup_index')}}" class="side-bar-icon">
+                        {#<i class="far fa-calendar-check" class="button-left" title="Meetup"></i>#}
+                        <img src="{{ asset('assets/images/icons/meetup-icon.png') }}"  >
                         <span class="nav-label">Meetup</span>
                     </a>
                 </li>
-                <li> <a href="{{path('voyage_index')}}">
-                        <i class="fas fa-car" class="button-left" title="Covoiturage"></i>
+                <li> <a href="{{path('voyage_index')}}" class="side-bar-icon">
+                        {#<i class="fas fa-car" class="button-left" title="Covoiturage"></i>#}
+                        <img src="{{ asset('assets/images/icons/voyage-icon.png') }}"  >
                         <span class="nav-label">My voyage</span>
                     </a>
                 </li>
-                <li> <a href="{{path('favorite_index')}}" >
-                        <i class="fab fa-gratipay" class="button-left" title="Favorite"></i>
+                <li> <a href="{{path('favorite_index')}}"  class="side-bar-icon">
+                        {#<i class="fab fa-gratipay" class="button-left" title="Favorite"></i>#}
+                        <img src="{{ asset('assets/images/icons/favorite-icon.png') }}"  >
                         <span class="nav-label">Favoris</span>
                     </a>
                 </li>
