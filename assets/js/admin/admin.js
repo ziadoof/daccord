@@ -79,3 +79,46 @@ $('.specification-form').collection({
     },
     add_at_the_end: true,
 });
+$(document).ready(function() {
+    let makeSelect = false;
+
+    let $this = $('#user_city'), $fakeInput = $this.clone();
+    $fakeInput.attr('id', 'fake_' + $fakeInput.attr('id'));
+    $fakeInput.attr('name', 'fake_' + $fakeInput.attr('name'));
+    $this.hide().after($fakeInput);
+    let input = document.getElementById('fake_user_city');
+    let div = input.parentNode;
+    $(div).addClass('ui-front');
+
+    $fakeInput.autocomplete({
+        source: $('#url-list').attr('href'),
+        autoFocus: true,
+        minLength:2,
+        theme: 'bootstrap',
+        formatNoMatches: 'No city found.',
+        formatSearching: 'Searching city...',
+        formatInputTooShort: 'Insert at least 2 character',
+        close: function(e, ui) {
+            if (!makeSelect) {
+                $this.val(false);
+            }
+
+        },
+        response:function( event, ui ){
+            if (!makeSelect) {
+                $this.val(false);
+            }
+        },
+        focus: function(event, ui) {
+            event.preventDefault();
+            $this.val(ui.item.label);
+        },
+        select: function (event, ui) {
+            event.preventDefault();
+            makeSelect = true;
+            $this.val(ui.item.value);
+            $(this).val(ui.item.label);
+        },
+
+    });
+});

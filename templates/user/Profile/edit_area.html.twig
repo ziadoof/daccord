@@ -1,14 +1,13 @@
-{% trans_default_domain 'FOSUserBundle' %}
     {% set formCity = form_CityAutoAreaType.getForm().createView() %}
     {% set formRegion = form_CityAreaType.getForm().createView() %}
         <div class="fos_user_user_show  px-4 py-4">
             <div class="border-respo px-4 py-4">
-                <h6 class="text-center pt-0 title-blue">Your current area</h6>
+                <h6 class="text-center pt-0 title-blue">{% trans %}Your current area{% endtrans %}</h6>
                 {% if app.user.ville != null %}
                 <h5 class="text-center pt-0 title-rose">{{ app.user.ville }}</h5>
                 <h2 class="text-center pt-0 ">{{ app.user.postalCode }}</h2>
                 {% else %}
-                    <h5 class="text-center pt-0 title-rose">You did not choose a city</h5>
+                    <h5 class="text-center pt-0 title-rose">{% trans %}You did not choose a city{% endtrans %}</h5>
                 {% endif %}
             </div>
             <div class="row">
@@ -16,12 +15,12 @@
                     <div class="border-respo px-4 py-4">
                         <div class="row">
                             <div class="col-md-12">
-                                <h6 class="text-center pt-0 title-blue">Enter your city name</h6>
+                                <h6 class="text-center pt-0 title-blue">{% trans %}Enter your city name{% endtrans %}</h6>
                                 {{ form_start(formCity) }}
                                 {{ form_row(formCity.city, { 'label': 'City' }) }}
                                 <div class="row">
                                     <img src="{{ asset('/assets/images/icons/warning.png') }}" alt="warning" class="warning ml-4">
-                                    <b class="ml-2 mb-2">This will change the city for all your ads, deals, driver requests</b>
+                                    <b class="ml-2 mb-2">{% trans %}This will change the city for all your ads, deals, driver requests{% endtrans %}</b>
                                 </div>
                                 <div class="row justify-content-center">
                                     <input type="submit" class="btn btn-primary" value="{{ 'Update'|trans }}" />
@@ -35,12 +34,12 @@
                 </div>
                 <div class="col-md-1">
                     <div class="row">
-                        <h2 class="text-center mt-5 pt-4 mx-5 title-rose">OR</h2>
+                        <h2 class="text-center mt-5 pt-4 mx-5 title-rose">{% trans %}OR{% endtrans %}</h2>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="border-respo px-4 py-4">
-                        <h6 class="text-center pt-0 title-blue">Change your area</h6>
+                        <h6 class="text-center pt-0 title-blue">{% trans %}Change your area{% endtrans %}</h6>
                         {{ form_start(formRegion) }}
                         <div class="row ">
                             <div class="col-md-4">
@@ -55,7 +54,7 @@
                         </div>
                         <div class="row">
                             <img src="{{ asset('/assets/images/icons/warning.png') }}" alt="warning" class="warning ml-4">
-                            <b class="ml-2 mb-2">This will change the city for all your ads, deals, driver requests</b>
+                            <b class="ml-2 mb-2">{% trans %}This will change the city for all your ads, deals, driver requests{% endtrans %}</b>
                         </div>
                         <div class="row justify-content-center">
                             <input type="submit" class="btn btn-primary" value="{{ 'Update'|trans }}" />

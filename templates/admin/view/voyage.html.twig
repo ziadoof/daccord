@@ -3,7 +3,7 @@
 {% block title %}Admin voyage{% endblock %}
 
 {% block admin %}
-    <h1 class="rosed font-weight-bold text-center my-2">Voyage</h1>
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Voyage{% endtrans %}</h1>
     <div class="row">
         <div class="col text-center mb-2">
             <span class="badge badge-success mx-2 px-2 py-2"><h5>{{ data['mainVoyageCount'] }} Main voyage</h5></span>
@@ -60,19 +60,19 @@
                 <td>
                     <div class="col text-center ">
                         {% if voyage.parent %}
-                            <div class="col text-center"><span class="badge badge-primary px-2 py-2">Sub</span></div>
+                            <div class="col text-center"><span class="badge badge-primary px-2 py-2">{% trans %} Sub{% endtrans %}</span></div>
                         {% else %}
-                            <div class="col text-center"><span class="badge badge-success px-2 py-2">Main</span></div>
+                            <div class="col text-center"><span class="badge badge-success px-2 py-2">{% trans %} Main{% endtrans %}</span></div>
                         {% endif %}
                     </div>
                 </td>
                 <td>
-                    <a href="{{ path('voyage_show', {'id': voyage.id}) }}"class="btn btn-info">show</a>
+                    <a href="{{ path('voyage_show', {'id': voyage.id}) }}"class="btn btn-info">{% trans %} show{% endtrans %}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="34">no records found</td>
+                <td colspan="34">{% trans %} no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>

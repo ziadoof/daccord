@@ -95,21 +95,21 @@
                             {% if deal.driverStatus %}
                                 and {{ deal.driverUser.firstname|title  }}
                             {% endif %}
-                        </span> ended the deal. </p>
+                        </span>{% trans %} ended the deal.{% endtrans %}  </p>
                 </div>
             {% elseif deal.demandUser is same as (app.user) and deal.offerUserStatus %}
                 <div class="justify-content-center my-0">
                     <p class="text-center rosed">
                         <span class="blued">{{ deal.offerUser.firstname|title  }}
                             {% if deal.driverStatus %}
-                            and {{ deal.driverUser.firstname|title  }}
+                                {% trans %} and{% endtrans %} {{ deal.driverUser.firstname|title  }}
                             {% endif %}
-                        </span> ended the deal. </p>
+                        </span> {% trans %} ended the deal.{% endtrans %}</p>
                 </div>
             {% elseif deal.driverStatus %}
             <div class="justify-content-center my-0">
                 <p class="text-center rosed">
-                <span class="blued">{{ deal.driverUser.firstname|title }}</span> ended the deal. </p>
+                <span class="blued">{{ deal.driverUser.firstname|title }}</span>{% trans %} ended the deal.{% endtrans %}  </p>
             </div>
             {% endif %}
             <div class= "row ">
@@ -119,26 +119,26 @@
                             <table class="table table-striped border-deal  ">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Specification</th>
+                                    <th scope="col">{% trans %}Specification{% endtrans %}</th>
                                     <th scope="col">
                                         {% if deal.offerUser.id is same as(app.user.id) %}
                                             <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                               {#<i class="fab fa-adversal"></i>#}<img src="{{ asset('assets/images/icons/o-gray.png') }}"> Your offer
+                                               {#<i class="fab fa-adversal"></i>#}<img src="{{ asset('assets/images/icons/o-gray.png') }}">{% trans %} Your offer{% endtrans %}
                                             </a>
                                         {% else %}
                                             <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> Your demand
+                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> {% trans %} Your demand{% endtrans %}
                                             </a>
                                         {% endif %}
                                     </th>
                                     <th scope="col">
                                         {% if deal.demandUser.id is same as(app.user.id) %}
                                             <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                                {#<i class="fab fa-adversal"></i>#} <img src="{{ asset('assets/images/icons/o-gray.png') }}">{{ deal.offerUser.firstname }}{{ ' offer '}}
+                                                {#<i class="fab fa-adversal"></i>#} <img src="{{ asset('assets/images/icons/o-gray.png') }}">{{ deal.offerUser.firstname }}{% trans %} offer{% endtrans %}
                                             </a>
                                         {% else %}
                                             <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> {{ deal.demandUser.firstname }}{{ ' demand '}}
+                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> {{ deal.demandUser.firstname }}{% trans %} demand{% endtrans %}
                                             </a>
                                         {% endif %}
                                     </th>
@@ -237,39 +237,39 @@
                                             <form method="post" action="{{ url('new_conversation') }}"id="demandUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1 " >
                                                     <input type="hidden" name="user" value="{{ deal.demandUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.demandUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i>{% trans %}  Message to{% endtrans %}{{deal.demandUser.firstname}}</p>
                                                 </button>
                                             </form>
                                             <form method="post" action="{{ url('new_conversation') }}"id="driverUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1 " >
                                                     <input type="hidden" name="user" value="{{ deal.driverUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.driverUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i>{% trans %}  Message to {% endtrans %}{{deal.driverUser.firstname}}</p>
                                                 </button>
                                             </form>
                                         {% elseif deal.demandUser.id is same as(app.user.id) %}
                                             <form method="post" action="{{ url('new_conversation') }}"id="offerUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1 " >
                                                     <input type="hidden" name="user" value="{{ deal.offerUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.offerUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i> {% trans %}Message to  {% endtrans %}{{deal.offerUser.firstname}}</p>
                                                 </button>
                                             </form>
                                             <form method="post" action="{{ url('new_conversation') }}"id="driverUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1 " >
                                                     <input type="hidden" name="user" value="{{ deal.driverUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.driverUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i>{% trans %}  Message to {% endtrans %}{{deal.driverUser.firstname}}</p>
                                                 </button>
                                             </form>
                                         {% else %}
                                             <form method="post" action="{{ url('new_conversation') }}"id="demandUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1 " >
                                                     <input type="hidden" name="user" value="{{ deal.demandUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.demandUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i>{% trans %}  Message to {% endtrans %}{{deal.demandUser.firstname}}</p>
                                                 </button>
                                             </form>
                                             <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1" >
                                                     <input type="hidden" name="user" value="{{ deal.offerUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.offerUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i>{% trans %}  Message to {% endtrans %}{{deal.offerUser.firstname}}</p>
                                                 </button>
                                             </form>
                                         {% endif %}
@@ -278,14 +278,14 @@
                                             <form method="post" action="{{ url('new_conversation') }}"id="demandUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1 " >
                                                     <input type="hidden" name="user" value="{{ deal.demandUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.demandUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i>{% trans %}Message to  {% endtrans %} {{deal.demandUser.firstname}}</p>
                                                 </button>
                                             </form>
                                         {% else %}
                                             <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                                                 <button class="btn btn-outline-info btn-block mx-1" >
                                                     <input type="hidden" name="user" value="{{ deal.offerUser.id }}">
-                                                    <p class="mt-1"><i class="fas fa-comments"></i> Message to {{deal.offerUser.firstname}}</p>
+                                                    <p class="mt-1"><i class="fas fa-comments"></i> {% trans %} Message to{% endtrans %} {{deal.offerUser.firstname}}</p>
                                                 </button>
                                             </form>
                                         {% endif %}
@@ -294,7 +294,7 @@
 
                                     <form method="post" action="{{ path('deal_done', {'id': deal.id}) }}" onsubmit="return confirm('Are you sure you want to finish this Deal?');">
                                         <button class="btn btn-outline-success btn-block mx-1 ">
-                                            <p class="mt-1"><i class="fas fa-check-circle"></i> Deal done</p>
+                                            <p class="mt-1"><i class="fas fa-check-circle"></i> {% trans %} Deal done{% endtrans %}</p>
                                         </button>
                                     </form>
                                     {% if app.user is not same as(deal.driverUser) %}
@@ -303,7 +303,7 @@
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deal.id) }}">
                                         <button class="btn btn-outline-danger btn-block mx-1">
-                                            <p class="mt-1"><i class="fas fa-window-close"></i> Cancel the deal</p>
+                                            <p class="mt-1"><i class="fas fa-window-close"></i>{% trans %} Cancel the deal{% endtrans %} </p>
                                         </button>
                                     </form>
                                     {% endif %}
@@ -319,7 +319,7 @@
                                     <div class="border-deal {{ driverRequest.status }}">
                                         <div class="row pt-2 mx-4 pb-0">
                                             <div class="col-md-4">
-                                                <h5>Requested at : {{ driverRequest.date|date("m/d/Y") }}</h5>
+                                                <h5>{% trans %}Requested at :  {% endtrans %} {{ driverRequest.date|date("m/d/Y") }}</h5>
                                             </div>
                                             <div class="col-md-2 offset-6 ">
                                                 <div class="float-right btn-group">
@@ -328,13 +328,13 @@
                                                           onsubmit="return confirm('NOTE : If you add this driver to the deal\n'+
                                                             'All the driver requests will be canceled before adding\n' +
                                                              'Are you sure you want to add this driver to your deal?');">
-                                                        <button class="btn btn-success" href="">Add driver to deal</button>
+                                                        <button class="btn btn-success" href="">{% trans %} Add driver to deal{% endtrans %}</button>
                                                     </form>
                                                     {% endif %}
                                                     <form method="post" action="{{ path('driver_request_delete', {'id': driverRequest.id,'deal':deal.id}) }}" onsubmit="return confirm('Are you sure you want to delete this request?');">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ driverRequest.id) }}">
-                                                        <button class="btn btn-danger ml-2" href="">Cancel the request</button>
+                                                        <button class="btn btn-danger ml-2" href="">{% trans %} Cancel the request{% endtrans %}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -351,16 +351,16 @@
                                                 </a>
                                             </div>
                                             <div class="col-md-7 pt-2">
-                                                <b>{{ 'Driver : ' }}{{ driverRequest.driver.user.firstname }} {{ driverRequest.driver.user.lastname }}</b><br>
-                                                <b>{{ 'Car brand : ' }}{{ driverRequest.driver.carBrand }} </b><br>
-                                                <b>{{ 'City : ' }}{{ driverRequest.driver.city }}</b>
+                                                <b>{% trans %} Driver : {% endtrans %}{{ driverRequest.driver.user.firstname }} {{ driverRequest.driver.user.lastname }}</b><br>
+                                                <b>{% trans %} Car brand : {% endtrans %}{{ driverRequest.driver.carBrand }} </b><br>
+                                                <b>{% trans %} City : {% endtrans %}{{ driverRequest.driver.city }}</b>
                                             </div>
                                             <div class="col-md-3 text-center">
-                                               <p>Request status</p>
+                                               <p>{% trans %} Request status{% endtrans %}</p>
                                                 <div class="bdg-serenite mb-2">
                                                     <h3>{{ driverRequest.status|upper }}</h3>
                                                     {% if  driverRequest.price %}
-                                                    <span class="">Suggested price : <span class="title-blue">{{ driverRequest.price }}</span>{{ ' €' }}</span>
+                                                    <span class="">{% trans %} Suggested price : {% endtrans %}<span class="title-blue">{{ driverRequest.price }}</span>{{ ' €' }}</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -370,7 +370,7 @@
                                         <div class="border-deal {{ driverRequest.status }}">
                                             <div class="row pt-2 mx-4 pb-0">
                                                 <div class="col">
-                                                    <h5><span class="title-blue">{{ driverRequest.user.firstname }} </span> had made a driver's request at : {{ driverRequest.date|date("m/d/Y") }}</h5>
+                                                    <h5><span class="title-blue">{{ driverRequest.user.firstname }} </span> {% trans %}had made a driver's request at :  {% endtrans %}{{ driverRequest.date|date("m/d/Y") }}</h5>
                                                 </div>
                                             </div>
                                             <hr class="my-1">
@@ -379,12 +379,12 @@
                                                     <img  src="{{ asset('/assets/images/profile/'~driverRequest.driver.user.profileImage) }}" alt="offerUser" class="">
                                                 </div>
                                                 <div class="col-md-7 pt-2">
-                                                    <b>{{ 'Driver : ' }}{{ driverRequest.driver.user.firstname }} {{ driverRequest.driver.user.lastname }}</b><br>
-                                                    <b>{{ 'Car brand : ' }}{{ driverRequest.driver.carBrand }} </b><br>
-                                                    <b>{{ 'City : ' }}{{ driverRequest.driver.city }}</b>
+                                                    <b>{% trans %}Driver :  {% endtrans %}{{ driverRequest.driver.user.firstname }} {{ driverRequest.driver.user.lastname }}</b><br>
+                                                    <b>{% trans %} Car brand : {% endtrans %}{{ driverRequest.driver.carBrand }} </b><br>
+                                                    <b>{% trans %} City : {% endtrans %}{{ driverRequest.driver.city }}</b>
                                                 </div>
                                                 <div class="col-md-3 text-center">
-                                                    <p>Request status</p>
+                                                    <p>{% trans %} Request status{% endtrans %}</p>
                                                     <div class="bdg-serenite mb-2">
                                                         <h3>{{ driverRequest.status|upper }}</h3>
                                                     </div>
@@ -418,7 +418,7 @@
                                                     <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                                                         <button class="btn btn-info mx-1" >
                                                             <input type="hidden" name="user" value="{{ driver.user.id }}">
-                                                            <p class="mt-1">Message to {{driver.user.firstname}}</p>
+                                                            <p class="mt-1">{% trans %} Message to{% endtrans %} {{driver.user.firstname}}</p>
                                                         </button>
                                                     </form>
                                                     <button id="driver_request_js" data-toggle="modal" class="btn btn-info my-1 btn-block"
@@ -426,7 +426,7 @@
                                                             {% if deal.driverUser %}
                                                                 disabled
                                                             {% endif %}>
-                                                        Driver request
+                                                        {% trans %} Driver request{% endtrans %}
                                                     </button>
                                                 </div>
                                             {% endfor %}
@@ -434,7 +434,7 @@
                                             <div class="col-md-12">
                                                 <div class="border-deal px-4">
                                                     <a class="text-center  px-2">
-                                                        <h2>There is no Drivers in this area</h2>
+                                                        <h2>{% trans %} There is no Drivers in this area{% endtrans %}</h2>
                                                     </a>
                                                 </div>
                                             </div>
@@ -463,7 +463,7 @@
                         {{ render(controller('App\\Controller\\DriverRequestController::new',{ 'driver': driver.id , 'deal':deal.id })) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                 </div>
             </div>
         </div>

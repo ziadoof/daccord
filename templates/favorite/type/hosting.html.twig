@@ -11,16 +11,16 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="">
-                                        <h4 class="meetup-text rosed">Hosting</h4>
+                                        <h4 class="meetup-text rosed">{% trans %} Hosting{% endtrans %}</h4>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Name : ' }}</span>{{ oneFavorite.hosting.user.firstname|title }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %}Name : {% endtrans %} </span>{{ oneFavorite.hosting.user.firstname|title }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'City : ' }}</span>{{ oneFavorite.hosting.ville.name }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} City : {% endtrans %}</span>{{ oneFavorite.hosting.ville.name }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Active : ' }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} Active : {% endtrans %}</span>
                                             <b class="deal-terminate">
                                                 {% if oneFavorite.hosting.active %}
                                                     <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">

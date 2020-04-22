@@ -1,9 +1,9 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}My ads{% endblock %}
+{% block title %}{% trans %} My ads{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h1 class="text-center title-rose">My ads</h1>
+    <h1 class="text-center title-rose">{% trans %} My ads{% endtrans %}</h1>
     {% if app.user is not same as (null) %}
         {% if my_ads is not empty %}
             <div class="row">
@@ -80,7 +80,7 @@
                 </div>
             </div>
         {% else %}
-            <h1 class="text-center title-blue">You have not ads</h1>
+            <h1 class="text-center title-blue">{% trans %} You have not ads{% endtrans %}</h1>
         {% endif %}
     {% endif %}
 {# ------------------  End area ads -------------------#}

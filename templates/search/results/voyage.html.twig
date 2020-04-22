@@ -67,8 +67,8 @@
                                         <span class="badge badge-info mt-1 btn-block">
                                             <h7>
                                                 {{voyage['seats']}}
-                                                {% if voyage['seats']>1 %}Seats {% else %} Seat{% endif %}
-                                                available
+                                                {% if voyage['seats']>1 %}{% trans %} Seats{% endtrans %} {% else %} {% trans %} Seat{% endtrans %}{% endif %}
+                                                {% trans %} available{% endtrans %}
                                             </h7>
                                         </span>
                                     </div>
@@ -120,7 +120,7 @@
             <div class="">
                 <div class="text-center title-blue">
                     {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
-                    <h1> There is no results</h1>
+                    <h1> {% trans %} There is no results{% endtrans %}</h1>
                 </div>
             </div>
         </div>

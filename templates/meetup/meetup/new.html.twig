@@ -1,5 +1,5 @@
 {% extends 'meetup/layout_meetup.html.twig' %}
 {% block meetup %}
-    <h6 class="text-center rosed"> Create new meetup</h6>
+    <h6 class="text-center rosed">{% trans %} Create new meetup{% endtrans %} </h6>
     {{ include('meetup/meetup/_form.html.twig') }}
 {% endblock %}

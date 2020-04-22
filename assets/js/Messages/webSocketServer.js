@@ -38,7 +38,7 @@ function wsConnect(id) {
                             '<p class="font-weight-bold mb-0">'+
                             '<span class="blued"><i class="fas fas fa-truck-moving"></i></span>'+
                             ' New driver request ! '+ '</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span> had been sent you a new driver request about the catigory ' +
+                            '<p><span class="blued">'+messageData['sender']+'</span> had been sent you a new driver request about the category ' +
                             ' <span class="blued">'+messageData['category']+'</span>'+
                             '</p>';
                         break;
@@ -49,7 +49,7 @@ function wsConnect(id) {
                                 '<span class="rosed"><i class="fas fa-times"></i></span>'+
                                 ' Treatment driver request ! '+'</p>'+
                                 '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' rejected the driver\'s request that you had previously sent him about the catigory '+
+                                ' rejected the driver\'s request that you had previously sent him about the category '+
                                 '<span class="blued">'+messageData['category']+'</span>'+
                                 '</p>';
                         }
@@ -59,7 +59,7 @@ function wsConnect(id) {
                                 '<span class="rosed"><i class="fas fa-check"></i></span>'+
                                 ' Treatment driver request ! '+'</p>'+
                                 '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' accepted the driver\'s request that you had previously sent him about the catigory '+
+                                ' accepted the driver\'s request that you had previously sent him about the category '+
                                 '<span class="blued">'+messageData['category']+'</span>'+
                                 '</p>';
                         }
@@ -70,7 +70,7 @@ function wsConnect(id) {
                             '<span class="blued"><i class="fas fa-check"></i> '+' '+ ' <i class="fas fas fa-truck-moving"></i></span>'+
                             ' Add to Deal ! '+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has added you to a deal that will be executed soon about the catigory '+
+                            ' has added you to a deal that will be executed soon about the category '+
                             '<span class="blued">'+messageData['category']+'</span>'+
                             '</p>';
                         break;
@@ -80,7 +80,7 @@ function wsConnect(id) {
                             '<span class="blued"><i class="fas fa-handshake"></i></span>'+
                             ' Semi done Deal ! '+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has ended a deal about the catigory '+
+                            ' has ended a deal about the category '+
                             '<span class="blued">'+messageData['category']+'</span>'+
                             ' that you are a member of, Waiting for other members to finish the deal '+
                             '</p>';
@@ -91,7 +91,7 @@ function wsConnect(id) {
                             '<span class="rosed"><i class="fas fa-handshake"></i></span>'+
                             ' DONE DEAL ! '+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has ended a deal about the catigory '+
+                            ' has ended a deal about the category '+
                             '<span class="blued">'+messageData['category']+'</span>'+
                             ' that you are a member of, '+
                             '<span>The deal was terminated</span>'+
@@ -376,7 +376,7 @@ function wsConnect(id) {
                             '<span class="rosed"><i class="fas fa-exclamation-triangle"></i></span>'+
                             ' Cancel deal!'+'</p>'+
                             '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has canceled the deal that you were part of, and was to be executed soon,about the catigory ' +
+                            ' has canceled the deal that you were part of, and was to be executed soon,about the category ' +
                             '<span class="blued">'+messageData['category']+'</span>'
                             +'</p>';
                         break;

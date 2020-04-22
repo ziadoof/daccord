@@ -1,5 +1,5 @@
 {% if rating  %}
-<h4 class="text-center blued mt-4">Rating</h4>
+<h4 class="text-center blued mt-4">{% trans %} Rating{% endtrans %}</h4>
 <div class="text-center">
     {% set range = rating.total/rating.numVotes %}
     {% set total = range|round(2, 'ceil')  %}
@@ -44,7 +44,7 @@
     </div>
 </div>
 <div class="">
-    <h6 class="text-center blued mt-4" >Comments</h6>
+    <h6 class="text-center blued mt-4" >{% trans %} Comments{% endtrans %}</h6>
     <div>
         {% for vote in rating.votes %}
             <div class="row">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="row border-bottom">
-                        <p class="my-2 mx-2"> <span class="rosed">Comment : </span>{{ vote.comment }}</p>
+                        <p class="my-2 mx-2"> <span class="rosed">{% trans %} Comment : {% endtrans %}</span>{{ vote.comment }}</p>
                     </div>
                     <div class="row border-bottom float-right">
                         <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>

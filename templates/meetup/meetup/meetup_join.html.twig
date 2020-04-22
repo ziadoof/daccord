@@ -1,6 +1,6 @@
 {% extends 'meetup/layout_meetup.html.twig' %}
 {% block meetup %}
-    <h6 class="text-center rosed">My meetups join</h6>
+    <h6 class="text-center rosed">{% trans %} My meetups join{% endtrans %}</h6>
     {% if app.user is not same as (null) %}
         {% if meetupsJoin is not empty %}
                 {% for meetup in meetupsJoin %}
@@ -18,18 +18,18 @@
                                                 <h4 class="rosed meetup-text">{{ meetup.title }}</h4>
                                             </div>
                                             <div class="">
-                                                <span class="meetup-text mt-3"><span class="blued">{{ 'Type : ' }}</span>{{ meetup.type }}</span>
+                                                <span class="meetup-text mt-3"><span class="blued">{% trans %} Type : {% endtrans %}</span>{{ meetup.type }}</span>
                                             </div>
                                             <div class="">
-                                                <span class="meetup-text mt-3"><span class="blued">{{ 'Start at : ' }}</span>{{ meetup.startAt|date('d M Y - H:i') }}</span>
+                                                <span class="meetup-text mt-3"><span class="blued">{% trans %} Start at :{% endtrans %}</span>{{ meetup.startAt|date('d M Y - H:i') }}</span>
                                             </div>
                                             <div class="">
-                                                <span class="meetup-text mt-3"><span class="blued">{{ 'City : ' }}</span>{{ meetup.city.name }}</span>
+                                                <span class="meetup-text mt-3"><span class="blued">{% trans %} City : {% endtrans %}</span>{{ meetup.city.name }}</span>
                                             </div>
                                         </div>
                                         {% if meetup.isFinish() %}
                                             <div class="col-md-1">
-                                                <span class="badge badge-danger float-right mt-2">Finish</span>
+                                                <span class="badge badge-danger float-right mt-2">{% trans %} Finish{% endtrans %}</span>
                                             </div>
                                         {% endif %}
                                         <div class="col ">
@@ -61,7 +61,7 @@
                 </div>
             </div>
         {% else %}
-            <h1 class="text-center title-blue">You have not meetups</h1>
+            <h1 class="text-center title-blue">{% trans %}You have not meetups {% endtrans %}</h1>
         {% endif %}
     {% endif %}
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}Ad{% endblock %}
+{% block title %}{% trans %} Ad{% endtrans %}{% endblock %}
 {% block content %}
         <div class="">
             <div class="row border-offer">
@@ -101,11 +101,11 @@
                         <!--Controls-->
                         <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
+                            <span class="sr-only">{% trans %} Previous{% endtrans %}</span>
                         </a>
                         <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
+                            <span class="sr-only">{% trans %} Next{% endtrans %}</span>
                         </a>
                         <!--/.Controls-->
                     </div>
@@ -144,9 +144,9 @@
                     </div>
                     <div class="p-2 border-respo mt-2 mb-2 pt-4">
                         {% if(ad.donate is same as (true)) %}
-                            <span class="font-weight-bold">Donate</span>
+                            <span class="font-weight-bold">{% trans %} Donate{% endtrans %}</span>
                         {% else %}
-                            <span class="font-weight-bold">For Sell</span>
+                            <span class="font-weight-bold">{% trans %} For Sell{% endtrans %}</span>
                         {% endif %}
                     </div>
                     <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
@@ -195,9 +195,9 @@
                 </div>
                 <div class="p-2 border-respo mt-2 mb-2 pt-4">
                     {% if(ad.donate) %}
-                        <span class="font-weight-bold">Donate</span>
+                        <span class="font-weight-bold">{% trans %} Donate{% endtrans %}</span>
                     {% else %}
-                        <span class="font-weight-bold">For Sell</span>
+                        <span class="font-weight-bold">{% trans %} For Sell{% endtrans %}</span>
                     {% endif %}
                 </div>
                 <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
@@ -214,7 +214,7 @@
         <div class="row border-respo">
             <div class="row">
                 <div class="col-md-12 p-2 pl-4">
-                    <span class="title-blue">Description</span><br>
+                    <span class="title-blue">{% trans %} Description{% endtrans %}</span><br>
                     {{ ad.description }}
                 </div>
             </div>
@@ -223,19 +223,19 @@
             {% if ad.user is same as (app.user) %}
                 <div class="">
                     <div class="col p-2 pl-4">
-                        <a class="btn btn-info btn-lg " href="{{ path('ad_edit', {'id': ad.id}) }}">Edit</a>
+                        <a class="btn btn-info btn-lg " href="{{ path('ad_edit', {'id': ad.id}) }}">{% trans %} Edit{% endtrans %}</a>
                         <div class="btn " >{{ include('Ads/ad/_delete_form.html.twig') }}</div>
                     </div>
                 </div>
             {% else %}
                 {% if ad.user.emailStatus %}
                     <div class="mt-4 ml-2 d-block">
-                        <span class="font-weight-bolder"> Email :</span> {{ ad.user.email }}
+                        <span class="font-weight-bolder"> {% trans %}Email : {% endtrans %}</span> {{ ad.user.email }}
                     </div>
                 {% endif %}
                 {% if ad.user.phonNumberStatus %}
                     <div class="mt-4 ml-2 d-block">
-                        <span class="font-weight-bold"> TEL :</span>{{ ad.user.phoneNumber }}
+                        <span class="font-weight-bold"> {% trans %} TEL :{% endtrans %}</span>{{ ad.user.phoneNumber }}
                     </div>
                 {% endif %}
 
@@ -244,12 +244,12 @@
                         <form method="post" action="{{ url('new_conversation') }}"id="ad-message">
                             <button class="btn btn-outline-info mx-1 " >
                                 <input type="hidden" name="user" value="{{ ad.user.id }}">
-                                <p class="mt-1"><i class="fas fa-comments"></i> Message to {{ad.user.firstname}}</p>
+                                <p class="mt-1"><i class="fas fa-comments"></i>{% trans %} Message to {% endtrans %} {{ad.user.firstname}}</p>
                             </button>
                         </form>
                     </div>
                 {% endif %}
-                    <span class="mt-3 mb-2 ">{{ ad.user.point }} Point</span>
+                    <span class="mt-3 mb-2 ">{{ ad.user.point }} {% trans %}Point {% endtrans %}</span>
                     <span class="profile-ava">
                         <a href="{{ path('user_show',{'id':ad.user.id}) }}">
                         {% if ad.user.profileImage %}

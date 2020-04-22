@@ -8,9 +8,6 @@
                           <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
                       </a>
                   </div>
-                  {# <div class="logo2 py-2">
-                       <img src="{{ asset('assets/images/icons/1.png') }}" alt="" onclick="dashboard();">
-                   </div>#}
                   {% if app.user != null%}
                   <div class="col-md-3 col-sm-4 col-xs-4 backnavbar">
                       <div class="">
@@ -25,12 +22,23 @@
                       </div>
                   </div>
                   {% endif %}
+{#  test for translation #}
+                  <div class="col">
+                      <ul class="navbar-nav">
+                          {% for locale in locales if locale is not same as(app.request.locale)%}
+                              <li class="nav-item locale-icon">
+                                  <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
+                              </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
 
+{#end test#}
                   {% if app.user==null %}
                   <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
                       <form class="form-inline my-2 my-lg-0 float-right">
                           <a class=" my-2 my-sm-0 mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button"><i class="fas fa-search search-icon"></i></a>
-                          <a class="btn btn-info my-2 my-sm-0 ml-2" href="{{ path('security_login') }}">Sign in</a>
+                          <a class="btn btn-info my-2 my-sm-0 ml-2" href="{{ path('security_login') }}">{% trans %}Sign in{% endtrans %}</a>
                       </form>
                   </div>
                   {% else %}
@@ -53,27 +61,27 @@
                                  <h6 >{{ app.user.firstName }} {{ app.user.lastname }}</h6>
                              </li>
                              <li >
-                                 <a href="{{ path('ad_new',{'type': 'Offer'}) }}">New offer</a>
+                                 <a href="{{ path('ad_new',{'type': 'Offer'}) }}">{% trans %}New offer{% endtrans %}</a>
                              </li>
                              <li >
-                                 <a href="{{ path('ad_new',{'type': 'Demand'}) }}">New demand</a>
+                                 <a href="{{ path('ad_new',{'type': 'Demand'}) }}">{% trans %}New demand{% endtrans %}</a>
                              </li>
                              <li >
-                                 <a href="{{ path('fos_user_profile_show') }}">My profile</a>
+                                 <a href="{{ path('fos_user_profile_show') }}">{% trans %}My profile{% endtrans %}</a>
                              </li>
                              <li >
-                               <a href="{{ path('fos_user_profile_edit') }}">Edit my profile</a>
+                               <a href="{{ path('fos_user_profile_edit') }}">{% trans %}Edit my profile{% endtrans %}</a>
                              </li>
                              <li>
-                                 <a href="{{ path('fos_user_change_password') }}">change my password</a>
+                                 <a href="{{ path('fos_user_change_password') }}">{% trans %}change my password{% endtrans %}</a>
                              </li>
                              {% if is_granted('ROLE_ADMIN') %}
                                  <li>
-                                     <a href="{{ path('admin_index') }}">ADMINISTRATION</a>
+                                     <a href="{{ path('admin_index') }}">{% trans %}ADMINISTRATION{% endtrans %}</a>
                                  </li>
                              {% endif %}
                              <li>
-                                 <a href="{{ path('security_logout') }}">Log out</a>
+                                 <a href="{{ path('security_logout') }}">{% trans %}Log out{% endtrans %}</a>
                              </li>
                          </ul>
                     <!-- user login dropdown end -->

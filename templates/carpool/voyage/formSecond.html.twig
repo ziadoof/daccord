@@ -53,7 +53,7 @@
             </div>
             <div class="row">
                 <div class="col my-2">
-                    <button class="btn btn-info float-right btn-block">{{ button_label|default('Save') }}</button>
+                    <button class="btn btn-info float-right btn-block">{% trans %} Save{% endtrans %}</button>
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                             {% if arrivalTime|date('d') is same as (voyage.date|date('d')) %}
                                 {{ arrivalTime|date('H:i') }}<p class="white very-small text-center">.</p>
                             {% elseif voyage.date|date('d')+1 is same as (arrivalTime|date('d'))%}
-                                {{ arrivalTime|date('H:i') }} <p class="rosed very-small text-center">Next day</p>
+                                {{ arrivalTime|date('H:i') }} <p class="rosed very-small text-center">{% trans %} Next day{% endtrans %}</p>
                             {% else %}
                                 {{ arrivalTime|date('H:i') }}<p class="rosed very-small text-center">{{ mainArrivalTime|date('d-M') }}</p>
                             {% endif %}
@@ -122,7 +122,7 @@
                         {% if mainArrivalTime|date('d') is same as (voyage.date|date('d')) %}
                             {{ mainArrivalTime|date('H:i') }}<p class="white very-small text-center">.</p>
                         {% elseif voyage.date|date('d')+1  is same as (mainArrivalTime|date('d'))%}
-                            {{ mainArrivalTime|date('H:i') }} <p class="rosed very-small text-center">Next day</p>
+                            {{ mainArrivalTime|date('H:i') }} <p class="rosed very-small text-center">{% trans %} Next day{% endtrans %}</p>
                         {% else %}
                             {{ mainArrivalTime|date('H:i') }}<p class="rosed very-small text-center">{{ mainArrivalTime|date('d-M') }}</p>
                         {% endif %}

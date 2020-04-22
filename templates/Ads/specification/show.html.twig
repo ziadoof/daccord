@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Specification{% endblock %}
+{% block title %}{% trans %} Specification{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>Specification</h1>
+    <h1>{% trans %} Specification{% endtrans %}</h1>
 
     <table class="table">
         <tbody>
@@ -46,9 +46,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('specification_index') }}">back to list</a>
+    <a href="{{ path('specification_index') }}">{% trans %}back to list {% endtrans %}</a>
 
-    <a href="{{ path('specification_edit', {'id': specification.id}) }}">edit</a>
+    <a href="{{ path('specification_edit', {'id': specification.id}) }}">{% trans %}edit {% endtrans %}</a>
 
     {{ include('specification/_delete_form.html.twig') }}
 {% endblock %}

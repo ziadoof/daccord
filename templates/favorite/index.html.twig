@@ -1,9 +1,9 @@
 {% extends 'layout_user.html.twig' %}
 
-{% block title %}Favorite{% endblock %}
+{% block title %}{% trans %} Favorite{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h2 class="blued text-center">Favorite </h2>
+    <h2 class="blued text-center">{% trans %} Favorite{% endtrans %} </h2>
     <div class="favorite-page">
         {% if favorites %}
             {% for oneFavorite in favorites %}
@@ -20,7 +20,7 @@
                 {% endif %}
             {% endfor %}
         {% else %}
-            <h1 class="text-center title-blue">You have not favorites</h1>
+            <h1 class="text-center title-blue">{% trans %} You have not favorites{% endtrans %}</h1>
         {% endif %}
     </div>
 {% endblock %}

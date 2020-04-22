@@ -1,12 +1,12 @@
 {% if not meetup.isFinish() %}
-{% if app.user is same as(meetup.creator) %}
+ {% if app.user is same as(meetup.creator) %}
     {% set col = '4' %}
  {% else %}
     {% set col = '6' %}
  {% endif %}
 <div class="row my-4 participants">
     <div class="col-md-{{col}} border-meetup">
-        <h5 class="rosed text-center">Participants</h5>
+        <h5 class="rosed text-center">{% trans %} Participants{% endtrans %}</h5>
         {% if meetup.participants is not empty %}
         {% for user in meetup.participants %}
             <div class=" border-deal user-link">
@@ -43,7 +43,7 @@
         {% else %}
             <div class="row">
                 <div class="col text-center">
-                    <span class="blued "><i class="far fa-clock"></i> There is no participant in this meetup</span>
+                    <span class="blued "><i class="far fa-clock"></i> {% trans %} There is no participant in this meetup{% endtrans %}</span>
                 </div>
             </div>
         {% endif %}
@@ -54,7 +54,7 @@
                     <div class="row ">
                         <div class="col-md-8 offset-2">
                             <div class="mt-3 ">
-                                <a  class="btn btn-warning btn-block disabled" >This meetup is full</a>
+                                <a  class="btn btn-warning btn-block disabled" >{% trans %}This meetup is full {% endtrans %}</a>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                 <div class="row ">
                     <div class="col-md-8 offset-2">
                         <div class="mt-3 ">
-                            <a href="" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#joinToMeetup">Join to this meetup</a>
+                            <a href="" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#joinToMeetup">{% trans %} Join to this meetup{% endtrans %}</a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <div class="row ">
                         <div class="col-md-8 offset-2">
                             <div class="mt-3 ">
-                                <a  class="btn btn-warning btn-block disabled" >This meetup is full</a>
+                                <a  class="btn btn-warning btn-block disabled" >{% trans %} This meetup is full{% endtrans %}</a>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
         {% endif %}
     </div>
     <div class="col-md-{{col}}  border-meetup">
-        <h5 class="rosed text-center">Waiting list</h5>
+        <h5 class="rosed text-center">{% trans %} Waiting list{% endtrans %}</h5>
         {% if meetup.waitlists is not empty %}
         {% for user in meetup.waitlists %}
             <div class="border-deal user-link">
@@ -146,19 +146,19 @@
         {% else %}
             <div class="row">
                 <div class="col text-center">
-                    <span class="blued "><i class="far fa-clock"></i> There is no participant in the wait list</span>
+                    <span class="blued "><i class="far fa-clock"></i> {% trans %} There is no participant in the wait list{% endtrans %}</span>
                 </div>
             </div>
         {% endif %}
     </div>
     {% if app.user is same as(meetup.creator) %}
     <div class="col-md-{{col}} border-meetup ">
-        <h5 class="rosed text-center">Requests to join</h5>
+        <h5 class="rosed text-center">{% trans %} Requests to join{% endtrans %}</h5>
         {% if meetup.isFull() %}
             <div class="row ">
                 <div class="col-md-8 offset-2">
                     <div class="my-2 ">
-                        <a  class="btn btn-warning btn-block disabled" >This meetup is full</a>
+                        <a  class="btn btn-warning btn-block disabled" >{% trans %} This meetup is full{% endtrans %}</a>
                     </div>
                 </div>
             </div>
@@ -182,26 +182,27 @@
                     {% if request.treatment is same as('Pending')  %}
                     <div class="col-md-3 mt-2">
                         <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Accept'}) }}" onsubmit="return confirm('Are you sure you want to accept this request ?');">
-                            <button class="btn btn-success btn-block">Accept</button>
-                        </form>                </div>
+                            <button class="btn btn-success btn-block">{% trans %} Accept{% endtrans %}</button>
+                        </form>
+                    </div>
                     <div class="col-md-3 mt-2">
                         <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
-                            <button class="btn btn-danger btn-block">Reject</button>
+                            <button class="btn btn-danger btn-block">{% trans %} Reject{% endtrans %}</button>
                         </form>
                     </div>
                     {% else %}
                         <div class="col-md-6 mt-3">
-                            <span class="badge badge-danger float-right py-2 px-2">Rejected</span>
+                            <span class="badge badge-danger float-right py-2 px-2">{% trans %} Rejected{% endtrans %}</span>
                         </div>
                     {% endif %}
                 {% else %}
                     {% if request.treatment is same as('Pending')  %}
                         <div class="col-md-6 mt-3">
-                            <span class="badge badge-warning float-right py-2 px-2">Pending</span>
+                            <span class="badge badge-warning float-right py-2 px-2">{% trans %} Pending{% endtrans %}</span>
                         </div>
                     {% else %}
                         <div class="col-md-6 mt-3">
-                            <span class="badge badge-danger float-right py-2 px-2">Rejected</span>
+                            <span class="badge badge-danger float-right py-2 px-2">{% trans %} Rejected{% endtrans %}</span>
                         </div>
                     {% endif %}
                 {% endif %}
@@ -210,7 +211,7 @@
         {% else %}
             <div class="row">
                 <div class="col text-center">
-                    <span class="blued "> <i class="far fa-clock"></i> There is no join requests in this meetup</span>
+                    <span class="blued "> <i class="far fa-clock"></i> {% trans %} There is no join requests in this meetup{% endtrans %}</span>
                 </div>
             </div>
         {% endif %}
@@ -220,7 +221,7 @@
 {% else %}
     <div class="row my-4 participants">
         <div class="col-md-6 border-meetup">
-            <h5 class="rosed text-center">Participants</h5>
+            <h5 class="rosed text-center">{% trans %} Participants{% endtrans %}</h5>
             {% for user in meetup.participants %}
                 <div class=" border-deal user-link">
                     <div class="row">
@@ -241,7 +242,7 @@
             {% endfor %}
         </div>
         <div class="col-md-6  border-meetup">
-            <h5 class="rosed text-center">Waiting list</h5>
+            <h5 class="rosed text-center">{% trans %} Waiting list{% endtrans %}</h5>
             {% for user in meetup.waitlists %}
                 <div class="border-deal user-link">
                     <div class="row">
@@ -270,7 +271,7 @@
          <div class="modal-content">
              <div class="modal-header">
                  <div class="row ml-2">
-                     <h4 class="modal-title " id="myModalLabel">Join to this meetup</h4>
+                     <h4 class="modal-title " id="myModalLabel">{% trans %} Join to this meetup{% endtrans %}</h4>
                  </div>
              </div>
              <div class="modal-body">
@@ -296,14 +297,14 @@
                      </div>
                      <div class="row float-right">
                          <div class=" ">
-                             <a href="{{ path('meetup_join_request',{'meetup':meetup.id}) }}" class="btn btn-info float-right mb-2 mx-4">Send join request to this meetup</a>
+                             <a href="{{ path('meetup_join_request',{'meetup':meetup.id}) }}" class="btn btn-info float-right mb-2 mx-4">{% trans %} Send join request to this meetup{% endtrans %}</a>
                          </div>
                      </div>
                  </div>
              </div>
              <div class="">
                  <div class="modal-footer">
-                     <button  type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                     <button  type="button" class="btn btn-primary" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                  </div>
              </div>
          </div>

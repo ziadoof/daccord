@@ -1,13 +1,13 @@
 {% extends "layout_user.html.twig" %}
-{% block title %}My Voyage{% endblock %}
+{% block title %}{% trans %} My Voyage{% endtrans %}{% endblock %}
 
 {% block content %}
-        <h5 class="text-center blued">My voyage</h5>
+        <h5 class="text-center blued">{% trans %} My voyage{% endtrans %}</h5>
         <div class="voyag-index">
             {% if app.user.carpool %}
              <div class="row">
                  <div class="col-md-2 offset-10 mb-4">
-                     <a class="btn btn-block btn-info" href="{{ path('voyage_new',{'type':'first'}) }}">New voyage</a>
+                     <a class="btn btn-block btn-info" href="{{ path('voyage_new',{'type':'first'}) }}">{% trans %} New voyage{% endtrans %}</a>
                  </div>
              </div>
             {% endif %}
@@ -32,32 +32,32 @@
                                                                 <h4 class="meetup-text blued d-inline">{{ voyage.stationArrival.name }}</h4>
                                                             </div>
                                                             <div class="">
-                                                                <span class=" mt-3"><span class="blued">{{ 'Date : ' }}</span>{{ voyage.timeDeparture|date('d M Y') }}</span>
+                                                                <span class=" mt-3"><span class="blued">{% trans %} Date : {% endtrans %}</span>{{ voyage.timeDeparture|date('d M Y') }}</span>
                                                             </div>
                                                             <div class="">
-                                                                <span class=" mt-3"><span class="blued">{{ 'Time : ' }}</span>{{ voyage.timeDeparture|date('H:i') }}</span>
+                                                                <span class=" mt-3"><span class="blued">{% trans %} Time : {% endtrans %}</span>{{ voyage.timeDeparture|date('H:i') }}</span>
                                                             </div>
                                                             <div class="mt-1">
                                                                 <img src="{{ voyage.creator.user.photoProfile() }}" alt="" class="cafe-avatar mr-2">
                                                                 <span class="d-block blued small">{{ voyage.creator.user.firstname }}</span>
-                                                                <span class="d-block blued small">{{ voyage.creator.point }}{{ ' Points' }}</span>
+                                                                <span class="d-block blued small">{{ voyage.creator.point }}{% trans %} Points{% endtrans %} </span>
                                                                 <span class=" blued small">{{ ratingList[voyage.id] }}<i class="far fa-star rosed"></i></span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1">
                                                         {% if  voyage.isFinish() %}
-                                                            <span class="badge badge-danger mt-1 btn-block"><h7>Finish</h7></span>
+                                                            <span class="badge badge-danger mt-1 btn-block"><h7>{% trans %} Finish{% endtrans %}</h7></span>
                                                         {% else %}
                                                             {% if voyage.getAvailableSeats(voyage) > 0 %}
                                                                 <span class="badge badge-info float-right">
                                                                 <h7>
                                                                     {{voyage.getAvailableSeats(voyage) }}
-                                                                    {% if voyage.getAvailableSeats(voyage)>1 %}Seats {% else %} Seat{% endif %}
-                                                                    available
+                                                                    {% if voyage.getAvailableSeats(voyage)>1 %}{% trans %} Seats{% endtrans %} {% else %} {% trans %} Seat{% endtrans %}{% endif %}
+                                                                    {% trans %} available{% endtrans %}
                                                                 </h7>
                                                             </span>
                                                             {% else %}
-                                                                <span class="badge badge-danger float-right"><h7>Closed Voyage</h7></span>
+                                                                <span class="badge badge-danger float-right"><h7>{% trans %} Closed Voyage{% endtrans %}</h7></span>
                                                             {% endif %}
                                                         {% endif %}
                                                         </div>
@@ -89,7 +89,7 @@
                                     {% if  voyage.isFinish() %}
                                         {% if app.user is not same as(voyage.creator.user) %}
                                             {% if votesVoyage[voyage.creator.user.id] is defined  %}
-                                                <p class="blued text-center py-1">  Your rating for this voyage :
+                                                <p class="blued text-center py-1">{% trans %} Your rating for this voyage : {% endtrans %}
                                                     {% set reste = 5 - votesVoyage[voyage.creator.user.id]%}
                                                     {% if  votesVoyage[voyage.creator.user.id] is not same as(null)%}
                                                         {% for  i in votesVoyage[voyage.creator.user.id] ..1%}
@@ -109,7 +109,7 @@
                                             {% else %}
                                                 <button  data-toggle="modal" class="btn btn-outline-info btn-block mt-0"
                                                          data-target="#voyage_vote-{{ voyage.creator.user.id }}">
-                                                    <i class="far fa-star"></i> Rate this voyage
+                                                    <i class="far fa-star"></i> {% trans %} Rate this voyage{% endtrans %}
                                                 </button>
                                             {% endif %}
                                         {% endif %}
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             {% else %}
-                <h1 class="text-center title-blue">You have not voyages</h1>
+                <h1 class="text-center title-blue">{% trans %} You have not voyages{% endtrans %}</h1>
             {% endif %}
         </div>
 
@@ -144,7 +144,7 @@
                                 {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': carpoolId, 'type':'carpool' })) }}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                             </div>
                         </div>
                     </div>

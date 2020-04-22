@@ -45,3 +45,5 @@ JMSJobQueueBundle:
     resource: "@JMSJobQueueBundle/Controller/"
     type: annotation
     prefix: /admin/jobs
+
+

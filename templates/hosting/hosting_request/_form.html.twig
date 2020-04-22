@@ -20,6 +20,6 @@
             {{ form_row(form.description) }}
         </div>
     </div>
-    <button class="btn btn-info float-right mb-4">{{ button_label|default('Send') }}</button>
+    <button class="btn btn-info float-right mb-4">{% trans %} Send{% endtrans %}</button>
 </div>
 {{ form_end(form) }}

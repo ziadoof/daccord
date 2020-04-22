@@ -19,14 +19,14 @@
                 <div class="justify-content-center">
                     <div class="text-center pt-2">
                         <button  data-toggle="modal" class="btn btn-success mx-1" data-target="#hostingRequest">
-                            Send hosting request to {{ hosting.user.firstname|title }}
+                            {% trans %} Send hosting request to {% endtrans %}{{ hosting.user.firstname|title }}
                         </button>
                     </div>
                 </div>
             {% else %}
                 <div class="justify-content-center">
                     <div class="text-center pt-2">
-                        <a class="btn btn-outline-success text-center" data-toggle="modal" data-target="#login">Login to send hosting request to {{ hosting.user.firstname|title }}</a>
+                        <a class="btn btn-outline-success text-center" data-toggle="modal" data-target="#login">{% trans %} Login to send hosting request to {% endtrans %}{{ hosting.user.firstname|title }}</a>
                     </div>
                 </div>
             {% endif %}
@@ -34,7 +34,7 @@
         <div class="justify-content-center">
             <div class="text-center pt-2">
 
-                <h6 class="d-inline font-weight-bold blued">Active :  </h6>
+                <h6 class="d-inline font-weight-bold blued">{% trans %} Active :  {% endtrans %}</h6>
                 <b class="deal-terminate">
                     {% if hosting.active %}
                         <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -43,35 +43,35 @@
                     {% endif %}
                 </b>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold blued">Sex  :  </h6><span>  {{ hosting.sex}}</span>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} Sex  : {% endtrans %} </h6><span>  {{ hosting.sex}}</span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold blued"> Age:  </h6><span>  {{ hosting.age }} <span class="font-weight-bold">Years</span></span>
+                    <h6 class="d-inline font-weight-bold blued"> {% trans %} Age:  {% endtrans %}</h6><span>  {{ hosting.age }} <span class="font-weight-bold">Years</span></span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold blued">Number of persons :  </h6><span>  {{ hosting.numberOfPersons }}</span>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} Number of persons :{% endtrans %}  </h6><span>  {{ hosting.numberOfPersons }}</span>
                 </div>
 
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold blued">Number of days :  </h6><span>  {{hosting.numberOfDays }}</span>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} Number of days :{% endtrans %}  </h6><span>  {{hosting.numberOfDays }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold blued">City  :  </h6><span>  {{ hosting.ville}}</span>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} City  : {% endtrans %} </h6><span>  {{ hosting.ville}}</span>
                 </div>
                 <div class="col-md-4 offset-4 my-2 ">
-                    <h6 class="d-inline font-weight-bold blued">About me  :  </h6><span>  {{ hosting.aboutMe}}</span>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} About me  : {% endtrans %} </h6><span>  {{ hosting.aboutMe}}</span>
                 </div>
                 <div class="col-md-4 offset-4 my-2">
-                    <h6 class="d-inline font-weight-bold blued">Hosting for  :  </h6><span>  {{ hosting.hostingFor}}</span>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} Hosting for  : {% endtrans %} </h6><span>  {{ hosting.hostingFor}}</span>
                 </div>
                 <div class="col mb-2">
-                    <h6 class="d-inline font-weight-bold blued">Languages  :  </h6>
+                    <h6 class="d-inline font-weight-bold blued">{% trans %} Languages  : {% endtrans %} </h6>
                     {% for language in hosting.languages %}
                         <span> {{language}} </span>
                     {% endfor %}
                 </div>
                 {% if hosting.getPossibility() %}
-                    <h6 class="blued">I have the possibility to host</h6>
+                    <h6 class="blued">{% trans %} I have the possibility to host{% endtrans %}</h6>
                     <div class="col my-2">
                         {% for possible in hosting.getPossibility() %}
                             <span class="badge badge-primary"><h5>{{ possible }}</h5></span>
@@ -79,7 +79,7 @@
                     </div>
                 {% endif %}
                 {% if hosting.getShare() %}
-                    <h6 class="blued">I can share with the guest</h6>
+                    <h6 class="blued">{% trans %}I can share with the guest {% endtrans %}</h6>
                     <div class="col my-2">
                         {% for share in hosting.getShare() %}
                             <span class="badge badge-info"><h5>{{ share }}</h5></span>
@@ -89,7 +89,7 @@
             </div>
         </div>
         {% if rating  %}
-        <h4 class="text-center blued mt-4">Rating</h4>
+        <h4 class="text-center blued mt-4">{% trans %} Rating{% endtrans %}</h4>
         <div class="text-center">
             {% set range = rating.total/rating.numVotes %}
             {% set total = range|round(2, 'ceil')  %}
@@ -134,7 +134,7 @@
             </div>
         </div>
         <div class="">
-            <h6 class="text-center blued mt-4" >Comments</h6>
+            <h6 class="text-center blued mt-4" >{% trans %} Comments{% endtrans %}</h6>
             <div>
                 {% for vote in rating.votes %}
                     <div class="row">
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
                             <div class="row border-bottom">
-                                <p class="my-2 mx-2"> <span class="rosed">Comment : </span>{{ vote.comment }}</p>
+                                <p class="my-2 mx-2"> <span class="rosed">{% trans %}Comment :  {% endtrans %}</span>{{ vote.comment }}</p>
                             </div>
                             <div class="row border-bottom float-right">
                                 <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>
@@ -188,7 +188,7 @@
                     {{ render(controller('App\\Controller\\Hosting\\HostingRequestController::new',{ 'hosting': hosting.id  })) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                 </div>
             </div>
         </div>

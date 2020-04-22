@@ -149,9 +149,6 @@
     "jms/job-queue-bundle": {
         "version": "2.1.0"
     },
-    "kartik-v/bootstrap-fileinput": {
-        "version": "4.5.x-dev"
-    },
     "knplabs/knp-components": {
         "version": "v2.2.0"
     },

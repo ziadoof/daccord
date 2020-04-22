@@ -84,12 +84,22 @@
                 </div>
             </div>
         {% endfor %}
-        {% endif %}
+        {% else %}
     </div>
     <div class="pagination-search row justify-content-center mt-4">
         <div class="navigation">
             {{ knp_pagination_render(ads) }}
         </div>
     </div>
+
+    <div class=" ">
+        <div class="">
+            <div class="text-center title-blue">
+                {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+                <h1> {% trans %} There is no results{% endtrans %}</h1>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
 

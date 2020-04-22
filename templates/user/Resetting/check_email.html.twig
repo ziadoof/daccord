@@ -1,10 +1,9 @@
 {% extends "layout_visitor.html.twig" %}
-{% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
     <div class="container pt-lg-5 pt-3">
         <div class="row mb-md-3 mb-lg-3">
             <div class="col-12">
-                <h1 class="welcome-text mt-3">Mot de passe resetting.!</h1>
+                <h1 class="welcome-text mt-3">{% trans %}Reset password{% endtrans %}</h1>
             </div>
         </div>
         <hr>
@@ -13,7 +12,11 @@
                     <div class="row justify-content-center">
                         <div class="row">
                             <div class="col-12 mt-3">
-                                {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                                {#{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}#}
+                                {% trans %}An email has been sent. It contains a link you must click to reset your password.{% endtrans %}
+                                {% trans %}Note: You can only request a new password once within{% endtrans %}
+                                {{ tokenLifetime }} {% trans %}hours.{% endtrans %}
+                                {% trans %}If you don't get an email check your spam folder or try again.{% endtrans %}
                             </div>
                         </div>
                     </div>

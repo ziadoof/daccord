@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-md-8 offset-2">
-        <h4 class="title-blue text-center">Driver Request</h4>
+        <h4 class="title-blue text-center">{% trans %} Driver Request{% endtrans %}</h4>
         <div class="driver">
            <div class="row border-deal">
                <div class="col-md-2 deal-show my-4">
                    <img src="{{ asset('/assets/images/profile/'~driver.user.profileImage) }}" alt="">
                </div>
                <div class="col mt-2 justify-content-center">
-                  <b>Driver : {{ driver.user.firstname }}{{ ' ' }}{{ driver.user.lastname }}</b><br>
-                  <b>Car : {{ driver.carbrand }}</b><br>
-                  <b>Car color : {{ driver.carColor }}</b><br>
-                  <b>City : {{ driver.city.name }}</b><br>
-                   <b>Max distance : {{ driver.maxDistance }}{{ ' KM' }}</b>
+                  <b>{% trans %} Driver : {% endtrans %}{{ driver.user.firstname }}{{ ' ' }}{{ driver.user.lastname }}</b><br>
+                  <b>{% trans %} Car : {% endtrans %}{{ driver.carbrand }}</b><br>
+                  <b>{% trans %} Car color : {% endtrans %}{{ driver.carColor }}</b><br>
+                  <b>{% trans %} City : {% endtrans %}{{ driver.city.name }}</b><br>
+                   <b>{% trans %} Max distance :{% endtrans %} {{ driver.maxDistance }}{{ ' KM' }}</b>
                </div>
                <div class="col-md-2 deal-show my-4 mx-4">
                    <img src="{{ asset('/assets/images/car_driver/'~driver.carImage) }}" alt="car_image">
@@ -20,7 +20,7 @@
         </div>
         <div class="row border-deal justify-content-center">
             <div class=" deal-show my-2  ">
-               <h5 class="">{{ 'Request for transfer ' }}{{ deal.category }}{{ ' From ' }}{{ deal.offerUser.city }}{{ ' To ' }}{{ deal.demandUser.city }}</h5>
+               <h5 class="">{% trans %}Request for transfer {% endtrans %}{{ deal.category }}{% trans %} From{% endtrans %} {{ deal.offerUser.city }}{% trans %} To{% endtrans %}  {{ deal.demandUser.city }}</h5>
             </div>
         </div>
         <div class="row">

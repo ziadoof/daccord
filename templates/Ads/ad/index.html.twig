@@ -1,12 +1,12 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}Ad index{% endblock %}
+{% block title %}{% trans %} Ad index{% endtrans %}{% endblock %}
 
 {% block content %}
     <div class="text-center">
     {% if app.user is same as (null) %}
         {% if ads is empty %}
-          <h1>no results fond</h1>
+          <h1>{% trans %} no results fond{% endtrans %}</h1>
         {% endif %}
         {% block ads_content %}
             {% include "Ads/ad/view/ads.html.twig" %}
@@ -20,7 +20,7 @@
             {% endblock area_ads_content %}
         {% else %}
             {% if ads is empty %}
-                <h1>no results fond</h1>
+                <h1>{% trans %}no results fond {% endtrans %}</h1>
             {% endif %}
             {% block user_ads_content %}
                 {% include "Ads/ad/view/ads.html.twig" %}

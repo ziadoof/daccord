@@ -1,4 +1,3 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
     {% if app.user.driver %}
     <div class="fos_user_user_show px-4 py-4">
@@ -28,7 +27,7 @@
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
-                <h6 class="d-inline font-weight-bold">Active :  </h6>
+                <h6 class="d-inline font-weight-bold">{% trans %}Active : {% endtrans %} </h6>
                 <b class="deal-terminate">
                     {% if app.user.driver.active %}
                         <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -36,16 +35,16 @@
                         <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
                     {% endif %}</b>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Car brand :  </h6><span>  {{ user.driver.carBrand }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Car brand :{% endtrans %}  </h6><span>  {{ user.driver.carBrand }}</span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Car color :  </h6><span>  {{ user.driver.carColor }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Car color :{% endtrans %}  </h6><span>  {{ user.driver.carColor }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold">City  :  </h6><span>  {{ user.driver.city}}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}City  : {% endtrans %} </h6><span>  {{ user.driver.city}}</span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold"> Max distance:  </h6><span>  {{ user.driver.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                    <h6 class="d-inline font-weight-bold"> {% trans %}Max distance:  {% endtrans %}</h6><span>  {{ user.driver.maxDistance }} <span class="font-weight-bold">Km</span></span>
                 </div>
             </div>
         </div>
@@ -56,14 +55,12 @@
     <div class="col-md-4 offset-4 mt-5">
         <div class="row border-driver">
             <div class="col my-4 mx-2 text-center">
-                <h4 class="title-blue my-1 mx-1">Be a driver in simple steps</h4>
-                <p>Registering yourself as a driver enables you to see the deals taking place in your area and you can also receive notifications of potential deals and your profile is displayed as a potential driver within these deals.
-                    If one of the parties wishes to transfer his purchases through you, you will receive a notification and you will be able to talk to the owner of the transaction.
-                    At any moment you can stop or reset your account as a driver</p>
+                <h4 class="title-blue my-1 mx-1">{% trans %}Be a driver in simple steps{% endtrans %}</h4>
+                <p>{% trans %}Registering yourself as a driver enables you to see the deals taking place in your area and you can also receive notifications of potential deals and your profile is displayed as a potential driver within these deals. If one of the parties wishes to transfer his purchases through you, you will receive a notification and you will be able to talk to the owner of the transaction.At any moment you can stop or reset your account as a driver{% endtrans %}</p>
             </div>
         </div>
         <div class="row text-center ">
-            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">Be a driver</a>
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">{% trans %}Be a driver{% endtrans %}</a>
         </div>
     </div>
     {% endif %}

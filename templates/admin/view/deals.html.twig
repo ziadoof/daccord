@@ -3,7 +3,7 @@
 {% block title %}Admin deals{% endblock %}
 
 {% block admin %}
-    <h1 class="rosed font-weight-bold text-center my-2">DEALS</h1>
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} DEALS{% endtrans %}</h1>
     <div class="row">
         <div class="col text-center mb-2">
             <span class="badge badge-primary mx-2 px-2 py-2"><h5>{{ data['sDealCount'] }} Deals</h5></span>
@@ -37,14 +37,14 @@
                         <form method="post" class="d-inline" action="{{ path('deal_delete', {'id': deal.id}) }}" onsubmit="return confirm('Are you sure you want to delete this Deal?');">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deal.id) }}">
-                            <button class="btn btn-danger  mx-1">Delete</button>
+                            <button class="btn btn-danger  mx-1">{% trans %} Delete{% endtrans %}</button>
                         </form>
                     {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="34">no records found</td>
+                <td colspan="34">{% trans %} no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>

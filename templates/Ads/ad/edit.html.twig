@@ -1,9 +1,9 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}Edit Ad{% endblock %}
+{% block title %}{% trans %}Edit Ad {% endtrans %}{% endblock %}
 
 {% block content %}
-    <h1>Edit Ad</h1>
+    <h1>{% trans %} Edit Ad{% endtrans %}</h1>
     <div class="">
         <div class="row border-offer">
             <div class="col-md-2">
@@ -79,11 +79,11 @@
                     <!--Controls-->
                     <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">{% trans %} Previous{% endtrans %}</span>
                     </a>
                     <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">{% trans %} Next{% endtrans %}</span>
                     </a>
                     <!--/.Controls-->
                 </div>
@@ -123,13 +123,10 @@
                     <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
                 </div>
                 <div class="p-2 border-respo mt-2 mb-2 pt-4">
-                        <span class="font-weight-bold ">With Driver must delet win front end endded</span>
-                </div>
-                <div class="p-2 border-respo mt-2 mb-2 pt-4">
                     {% if(ad.donate) %}
-                        <span class="font-weight-bold">Donate</span>
+                        <span class="font-weight-bold">{% trans %}Donate {% endtrans %}</span>
                     {% else %}
-                        <span class="font-weight-bold">For Sell</span>
+                        <span class="font-weight-bold">{% trans %}For Sell {% endtrans %}</span>
                     {% endif %}
                 </div>
                 <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
@@ -146,12 +143,12 @@
     <div class="row border-respo">
         <div class="row">
             <div class="col-md-12 p-2 pl-4">
-                <span class="title-blue">Description</span><br>
+                <span class="title-blue">{% trans %} Description{% endtrans %}</span><br>
                 {{ ad.description }}
             </div>
         </div>
     </div>
-    <h2 class="title-rose"> Edit your ad </h2>
+    <h2 class="title-rose"> {% trans %} Edit your ad {% endtrans %}</h2>
     {{ form_start(form) }}
     <div class="row border-respo">
             <div class="col-md-10 p-2 pl-4 ">
@@ -167,12 +164,12 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <input type="submit" class="btn btn-primary" value="{{ 'Update'|trans }}" />
+        <input type="submit" class="btn btn-primary" value="{% trans %} Update {% endtrans %}" />
     </div>
     {{ form_end(form) }}
     <div class="row border-offer">
         <div class="col p-2 pl-4">
-            <a class="btn btn-info btn-lg " href="{{ path('ad_show', {'id': ad.id}) }}">Back to ad</a>
+            <a class="btn btn-info btn-lg " href="{{ path('ad_show', {'id': ad.id}) }}">{% trans %} Back to ad{% endtrans %}</a>
             <div class="btn" >{{ include('Ads/ad/_delete_form.html.twig') }}</div>
         </div>
     </div>

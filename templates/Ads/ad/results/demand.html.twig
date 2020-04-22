@@ -93,7 +93,16 @@
                     {{ knp_pagination_render(ads) }}
                 </div>
             </div>
-        {% endif %}
+        {% else %}
     </div>
+    <div class=" ">
+        <div class="">
+            <div class="text-center title-blue">
+                {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+                <h1> {% trans %} There is no results{% endtrans %}</h1>
+            </div>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}
 
