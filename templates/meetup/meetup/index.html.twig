@@ -18,7 +18,7 @@
                                                 <h4 class="meetup-text rosed">{{ meetup.title }}</h4>
                                             </div>
                                             <div class="">
-                                                <span class=" mt-3"><span class="blued">{% trans %} Type :{% endtrans %} </span>{{ meetup.type }}</span>
+                                                <span class=" mt-3"><span class="blued">{% trans %} Type :{% endtrans %} </span>{{ meetup.type|trans }}</span>
                                             </div>
                                             <div class="">
                                                 <span class=" mt-3"><span class="blued">{% trans %} Start at :{% endtrans %} </span>{{ meetup.startAt|date('d M Y - H:i') }}</span>
@@ -61,7 +61,7 @@
                 </div>
             </div>
         {% else %}
-            <h1 class="text-center title-blue">{% trans %} You have not meetups{% endtrans %}</h1>
+            <h1 class="text-center title-blue">{% trans %}You don't have meetups{% endtrans %}</h1>
         {% endif %}
     {% endif %}
 

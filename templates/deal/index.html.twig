@@ -35,7 +35,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="col-md-5">
-                                        <p class="float-right my-2"><span class="blued">Category : </span>{{ deal.category }}</p>
+                                        <p class="float-right my-2"><span class="blued">Category : </span>{{ deal.category|trans }}</p>
                                     </div>
                                 </div>
                                 {% if deal.offerUser.id is same as(app.user.id) %}
@@ -45,11 +45,7 @@
                                                 <div class="row offer-user">
                                                     <div class="col-md-12">
                                                         <div class="col-md-4 offset-4">
-                                                            {% if deal.offerUser.profileImage  %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" >
-                                                            {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="offerUser">
-                                                            {% endif %}
+                                                            <img alt="" src="{{ deal.offerUser.photoProfile() }}" alt="offerUser" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -69,9 +65,9 @@
                                                     <div class="col-md-12">
                                                         <div class="col-md-4 offset-4">
                                                             {% if deal.demandUser.profileImage %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" >
+                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="demandUser" >
                                                             {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="offerUser">
+                                                                <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="demandUser">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -93,11 +89,7 @@
                                                 <div class="row offer-user">
                                                     <div class="col-md-12">
                                                         <div class="col-md-4 offset-4">
-                                                            {% if deal.demandUser.profileImage %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" >
-                                                            {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="offerUser">
-                                                            {% endif %}
+                                                            <img alt="" src="{{ deal.demandUser.photoProfile() }}" alt="offerUser" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,11 +108,7 @@
                                                 <div class="row offer-user">
                                                     <div class="col-md-12">
                                                         <div class="col-md-4 offset-4">
-                                                            {% if deal.offerUser.profileImage %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" >
-                                                            {% else %}
-                                                                <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="offerUser">
-                                                            {% endif %}
+                                                            <img alt="" src="{{ deal.offerUser.photoProfile() }}" alt="offerUser" >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -165,7 +153,7 @@
                                         <div class="">
                                             <div class="btn-group driver deal-show">
                                                 <a class="text-center mx-2 px-2 py-2  ">
-                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.offerUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <img  src="{{ pendingDeal.offerUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                     <b class="deal-terminate">{{pendingDeal.offerUser.firstname}}
                                                         {% if pendingDeal.offerUserStatus %}
                                                             <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -177,7 +165,7 @@
                                                 {% if pendingDeal.driverUser %}
                                                     <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
                                                     <a class="text-center mx-2 px-2 py-2  ">
-                                                        <img  src="{{ asset('/assets/images/profile/'~pendingDeal.driverUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                        <img  src="{{ pendingDeal.driverUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                         <b class="deal-terminate">{{pendingDeal.driverUser.firstname}}
                                                             {% if pendingDeal.driverStatus %}
                                                                 <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -192,7 +180,7 @@
                                                     <i class="fas fa-handshake deal-show-photo mt-4"></i>
                                                 {% endif %}
                                                 <a class="text-center mx-2 px-2 py-2  ">
-                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.demandUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <img  src="{{ pendingDeal.demandUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                     <b class="deal-terminate">{{pendingDeal.demandUser.firstname}}
                                                         {% if pendingDeal.demandUserStatus %}
                                                             <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -214,7 +202,7 @@
                                         <div class="">
                                             <div class="btn-group driver deal-show">
                                                 <a class="text-center mx-2 px-2 py-2  ">
-                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.demandUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <img  src="{{ pendingDeal.demandUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                     <b class="deal-terminate">{{pendingDeal.demandUser.firstname}}
                                                         {% if pendingDeal.demandUserStatus %}
                                                             <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -226,7 +214,7 @@
                                                 {% if pendingDeal.driverUser %}
                                                     <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
                                                     <a class="text-center mx-2 px-2 py-2  ">
-                                                        <img  src="{{ asset('/assets/images/profile/'~pendingDeal.driverUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                        <img  src="{{ pendingDeal.driverUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                         <b class="deal-terminate">{{pendingDeal.driverUser.firstname}}
                                                         {% if pendingDeal.driverStatus %}
                                                             <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -241,7 +229,7 @@
                                                     <i class="fas fa-handshake deal-show-photo mt-4"></i>
                                                 {% endif %}
                                                 <a class="text-center mx-2 px-2 py-2  ">
-                                                    <img  src="{{ asset('/assets/images/profile/'~pendingDeal.OfferUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                    <img  src="{{ pendingDeal.OfferUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                     <b class="deal-terminate">{{pendingDeal.OfferUser.firstname}}
                                                         {% if pendingDeal.OfferUserStatus %}
                                                             <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">

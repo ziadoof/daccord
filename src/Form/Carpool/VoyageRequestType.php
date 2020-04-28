@@ -30,6 +30,7 @@ class VoyageRequestType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => VoyageRequest::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

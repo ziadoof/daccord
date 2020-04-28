@@ -29,6 +29,7 @@ class VoteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Vote::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

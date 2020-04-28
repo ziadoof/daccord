@@ -31,7 +31,7 @@ class StationType extends AbstractType
             ->add('place',TextType::class,[
                 'label'=>false,
                 'attr'=>[
-                    'placeholder'=>'Place Eg : Gare, Hotel..'
+                    'placeholder'=>'Place Eg : Gare, Hotel..',
                 ]
             ])
             ->add('duration',HiddenType::class,[
@@ -46,6 +46,7 @@ class StationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Station::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

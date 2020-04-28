@@ -54,11 +54,11 @@ class AddSearchCategoryFieldSubscriber implements EventSubscriberInterface
         $formOptions = array(
             'class'         => Category::class,
             'required' => false,
-            'placeholder'     => 'All categorys',
+            'placeholder'     => 'All category',
+            'translation_domain'=> 'manual',
             'label' => false,
             'attr'          => array(
                 'class' => 'category_selector ',
-
             ),
             'query_builder' => function (EntityRepository $repository) use ($generalcategory_id) {
                 $qb = $repository->createQueryBuilder('c')
@@ -66,7 +66,7 @@ class AddSearchCategoryFieldSubscriber implements EventSubscriberInterface
                     ->setParameter('generalcategory_id', $generalcategory_id)
                 ;
                 return $qb;
-            }
+            },
         );
 
         $form->add($this->factory, EntityType::class, $formOptions);

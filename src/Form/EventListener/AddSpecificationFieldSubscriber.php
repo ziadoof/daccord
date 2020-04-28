@@ -84,15 +84,15 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                 $name = $specification->getName();
                 $label =  $specification->getLabel();
                 if($type === 'TextType'){
-                    $options = array('label' => $label, 'required' => false,);
+                    $options = array('label' => $label, 'required' => false,'translation_domain'=> 'manual');
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'CheckboxType'){
-                    $options = array('label' => $label, 'required' => false,);
+                    $options = array('label' => $label, 'required' => false,'translation_domain'=> 'manual',);
                     $form->add($name, CheckboxType::class, $options);
                 }
                 elseif($type === 'ColorType'){
-                    $options = array('label' => $label, 'required' => false);
+                    $options = array('label' => $label, 'required' => false, 'translation_domain'=> 'manual',);
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'EntityType'){
@@ -120,6 +120,7 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                                 'choices' => $choiceOptions,
                                 'placeholder' => 'Select'.' '.$label,
                                 'multiple'  => true,
+                                'translation_domain'=> 'manual',
                             );
                         }
                         elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize'
@@ -128,12 +129,14 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                             $options = array('label' => $label, 'required' => false,
                                 'choices' => $textOptions,
                                 'placeholder' => 'Select'.' '.$label,
+                                'translation_domain'=> 'manual',
                             );
                         }
                         else{
                             $options = array('label' => $label, 'required' => false,
                                 'choices' => $choiceOptions,
-                                'placeholder' => 'Select'.' '.$label
+                                'placeholder' => 'Select'.' '.$label,
+                                'translation_domain'=> 'manual',
                             );
                         }
 
@@ -147,7 +150,8 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                         }
                         $options = array('label' => $label, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => 'Select'.' '.$label
+                            'placeholder' => 'Select'.' '.$label,
+                            'translation_domain'=> 'manual',
                         );
                         $form->add($name, ChoiceType::class, $options);
                     }
@@ -167,7 +171,8 @@ class AddSpecificationFieldSubscriber implements EventSubscriberInterface
                         }
                         $options = array('label' => $label, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => 'Select'.' '.$label
+                            'placeholder' => 'Select'.' '.$label,
+                            'translation_domain'=> 'manual',
                         );
                         $form->add($name, ChoiceType::class, $options);
                     }

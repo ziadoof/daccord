@@ -28,11 +28,7 @@
                                     <div class="btn-group driver deal-show">
                                         <div class="justify-content-center">
                                             <a href="{{ path('user_show',{'id':driver_request.deal.offerUser.id}) }}" class="btn-group">
-                                                {% if driver_request.deal.offerUser.profileImage %}
-                                                    <img alt="" src="{{ asset('/assets/images/profile/'~driver_request.deal.offerUser.profileImage) }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
-                                                {% else %}
-                                                    <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
-                                                {% endif %}
+                                                <img alt="" src="{{ driver_request.deal.offerUser.photoProfile() }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
                                             </a>
                                             <a class="btn btn-info my-1 btn-block">{% trans %} Message to {% endtrans %}{{driver_request.deal.offerUser.firstname}}</a>
                                         </div>
@@ -101,7 +97,7 @@
                                 <div class="">
                                     <div class="btn-group driver deal-show">
                                         <a class="text-center mx-2 px-2 py-2  ">
-                                            <img  src="{{ asset('/assets/images/profile/'~deal.offerUser.profileImage) }}" alt="offerUser" class=""><br>
+                                            <img  src="{{ deal.offerUser.photoProfile() }}" alt="offerUser" class=""><br>
                                             <b class="deal-terminate">{{deal.offerUser.firstname}}
                                                 {% if deal.offerUserStatus %}
                                                     <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -113,7 +109,7 @@
 
                                             <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
                                             <a class="text-center mx-2 px-2 py-2  ">
-                                                <img  src="{{ asset('/assets/images/profile/'~deal.driverUser.profileImage) }}" alt="offerUser" class=""><br>
+                                                <img  src="{{ deal.driverUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                 <b class="deal-terminate">{{deal.driverUser.firstname}}
                                                     {% if deal.driverStatus %}
                                                         <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
@@ -126,7 +122,7 @@
                                             <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
 
                                         <a class="text-center mx-2 px-2 py-2  ">
-                                            <img  src="{{ asset('/assets/images/profile/'~deal.demandUser.profileImage) }}" alt="offerUser" class=""><br>
+                                            <img  src="{{ deal.demandUser.photoProfile() }}" alt="offerUser" class=""><br>
                                             <b class="deal-terminate">{{deal.demandUser.firstname}}
                                                 {% if deal.demandUserStatus %}
                                                     <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">

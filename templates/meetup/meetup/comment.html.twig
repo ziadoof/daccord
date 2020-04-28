@@ -26,7 +26,8 @@
                         </div>
                         <div class="col-md-4 offset-4 mt-1">
                             <div class="float-right pt-1">
-                                {{   comment.date_format(comment.createdAt) }}
+                                {% set date = comment.date_format(comment.createdAt) %}
+                                {{   date|trans }}
                             </div>
                             {% if app.user is same as(comment.sender) or app.user is same as(comment.meetup.creator) %}
                                 <div class="float-right">

@@ -25,7 +25,7 @@ class AreaType extends AbstractType
         $builder
             ->add('region', EntityType::class, [
                 'class'       => Region::class,
-                'placeholder' => 'Sélectionnez votre région',
+                'placeholder' => 'Select region',
                 'mapped'      => false,
                 'required'    => false
             ]);
@@ -85,11 +85,12 @@ class AreaType extends AbstractType
             null,
             [
                 'class'           => Department::class,
-                'placeholder'     => $region ? 'Sélectionnez votre département' : 'Sélectionnez votre région',
+                'placeholder'     => $region ? 'Select your department' : 'Select your region',
+                'translation_domain'=> 'manual',
                 'mapped'          => false,
                 'required'        => false,
                 'auto_initialize' => false,
-                'label' =>'Département',
+                'label' =>'Department',
                 'choices'         => $region ? $region->getDepartments() : []
             ]
         );
@@ -108,7 +109,8 @@ class AreaType extends AbstractType
         $form->add('city', EntityType::class, [
             'class'       => City::class,
             'label' =>'Ville',
-            'placeholder' => $department ? 'Sélectionnez votre ville' : 'Sélectionnez votre département',
+            'translation_domain'=> 'manual',
+            'placeholder' => $department ? 'Select city' : 'Select department',
             'choices'     => $department ? $department->getCitys() : []
 
         ]);
@@ -119,6 +121,7 @@ class AreaType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 

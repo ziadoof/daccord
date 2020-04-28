@@ -29,6 +29,7 @@ class SpecificationType extends AbstractType
             ->add('name', ChoiceType::class,[
                 'label' => 'Name',
                 'placeholder' => 'Select specification',
+                'translation_domain'=> 'manual',
                 'choices' => $this->names,
             ]);
 

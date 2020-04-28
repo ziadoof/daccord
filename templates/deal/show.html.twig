@@ -28,7 +28,7 @@
                     </div>
                     <div class="mt-3 mx-3 text-center">
                         <i class="fas fa-handshake deal-show-photo mt-0"></i><br>
-                        <b class="title-rose ">{% if deal.category.name is same as('Other') %}{{ deal.offer.subjectName }}{% else %}{{ deal.category}}{% endif %}</b>
+                        <b class="title-rose ">{% if deal.category.name is same as('Other') %}{{ deal.offer.subjectName }}{% else %}{{ deal.category|trans}}{% endif %}</b>
                         {% if deal.driverUser %}
                             {% set driverId =null %}
                             {% for driver in drivers %}
@@ -134,11 +134,11 @@
                                     <th scope="col">
                                         {% if deal.demandUser.id is same as(app.user.id) %}
                                             <a href="{{ path('ad_show', {'id': deal.offer.id}) }}">
-                                                {#<i class="fab fa-adversal"></i>#} <img src="{{ asset('assets/images/icons/o-gray.png') }}">{{ deal.offerUser.firstname }}{% trans %} offer{% endtrans %}
+                                                {#<i class="fab fa-adversal"></i>#} <img src="{{ asset('assets/images/icons/o-gray.png') }}">{{ deal.offerUser.firstname }}{{' '}}{% trans %} offer{% endtrans %}
                                             </a>
                                         {% else %}
                                             <a href="{{ path('ad_show', {'id': deal.demand.id}) }}">
-                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> {{ deal.demandUser.firstname }}{% trans %} demand{% endtrans %}
+                                                {#<i class="fab fa-affiliatetheme"></i>#} <img src="{{ asset('assets/images/icons/d-gray.png') }}"> {{ deal.demandUser.firstname }}{{' '}}{% trans %} demand{% endtrans %}
                                             </a>
                                         {% endif %}
                                     </th>
@@ -149,20 +149,20 @@
                                     {% if deal.offerUser.id is same as(app.user.id) %}
                                         {% if key is same as ('Date Of Event')  %}
                                             <tr>
-                                                <th scope="row">{{ key  }}</th>
+                                                <th scope="row">{{ key|trans  }}</th>
                                                 <td>{{ value['offer']|date("m/d/Y") }}</td>
                                                 <td>{{ value['demand'] }}</td>
                                             </tr>
                                         {% elseif key is same as ('Languages')  %}
                                             <tr>
-                                                <th scope="row">{{ key }}</th>
+                                                <th scope="row">{{ key|trans  }}</th>
                                                 <td>
                                                     {% for cont in value['offer'] %}
                                                         {#for show - befor all languages without the first#}
                                                         {% if cont is same as(value['offer'][0]) %}
-                                                            {{cont}}
+                                                            {{cont|trans}}
                                                         {% else %}
-                                                            {{ ' - ' }}{{cont}}
+                                                            {{ ' - ' }}{{cont|trans}}
                                                         {% endif %}
                                                     {% endfor %}
                                                 </td>
@@ -170,37 +170,37 @@
                                                     {% for cont in value['demand'] %}
                                                         {#for show - befor all languages without the first#}
                                                         {% if cont is same as(value['demand'][0]) %}
-                                                            {{cont}}
+                                                            {{cont|trans}}
                                                         {% else %}
-                                                            {{ ' - ' }}{{cont}}
+                                                            {{ ' - ' }}{{cont|trans}}
                                                         {% endif %}
                                                     {% endfor %}
                                                 </td>
                                             </tr>
                                         {% else %}
                                             <tr class="{#{% if value['offer'] is same as(value['demand'])  %}{{ 'bg-success' }}{% endif %}#}">
-                                                <th scope="row">{{ key }}</th>
-                                                <td>{{ value['offer'] }}</td>
-                                                <td>{{ value['demand'] }}</td>
+                                                <th scope="row">{{ key|trans  }}</th>
+                                                <td>{% if value['offer']is not same as('Undefined')  %}{{ value['offer'] }}{% else %}{{ '-' }}{% endif %}</td>
+                                                <td>{% if value['demand']is not same as('Undefined')  %}{{ value['demand'] }}{% else %}{{ '-' }}{% endif %}</td>
                                             </tr>
                                         {% endif %}
                                     {% else %}
                                         {% if key is same as ('Date Of Event')  %}
                                             <tr>
-                                                <th scope="row">{{ key  }}</th>
+                                                <th scope="row">{{ key|trans   }}</th>
                                                 <td>{{ value['demand'] }}</td>
                                                 <td>{{ value['offer']|date("m/d/Y") }}</td>
                                             </tr>
                                         {% elseif key is same as ('Languages')  %}
                                             <tr>
-                                                <th scope="row">{{ key }}</th>
+                                                <th scope="row">{{ key|trans  }}</th>
                                                 <td>
                                                     {% for cont in value['demand'] %}
                                                         {#for show - befor all languages without the first#}
                                                         {% if cont is same as(value['demand'][0]) %}
-                                                            {{cont}}
+                                                            {{cont|trans}}
                                                         {% else %}
-                                                            {{ ' - ' }}{{cont}}
+                                                            {{ ' - ' }}{{cont|trans}}
                                                         {% endif %}
                                                     {% endfor %}
                                                 </td>
@@ -208,18 +208,18 @@
                                                     {% for cont in value['offer'] %}
                                                         {#for show - befor all languages without the first#}
                                                         {% if cont is same as(value['offer'][0]) %}
-                                                            {{cont}}
+                                                            {{cont|trans}}
                                                         {% else %}
-                                                            {{ ' - ' }}{{cont}}
+                                                            {{ ' - ' }}{{cont|trans}}
                                                         {% endif %}
                                                     {% endfor %}
                                                 </td>
                                             </tr>
                                         {% else %}
                                             <tr class="{#{% if value['offer'] is same as(value['demand'])  %}{{ 'bg-success' }}{% endif %}#}">
-                                                <th scope="row">{{ key }}</th>
-                                                <td>{{ value['demand'] }}</td>
-                                                <td>{{ value['offer'] }}</td>
+                                                <th scope="row">{{ key|trans  }}</th>
+                                                <td>{% if value['demand']is not same as('Undefined')  %}{{ value['demand'] }}{% else %}{{ '-' }}{% endif %}</td>
+                                                <td>{% if value['offer']is not same as('Undefined')  %}{{ value['offer'] }}{% else %}{{ '-' }}{% endif %}</td>
                                             </tr>
                                         {% endif %}
                                     {% endif %}

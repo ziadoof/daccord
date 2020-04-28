@@ -42,6 +42,7 @@ class CafeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Cafe::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

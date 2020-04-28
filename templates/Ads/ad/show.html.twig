@@ -21,20 +21,13 @@
                         </div>
                     </form>
                     {% endif %}
-                    <span class="float-left mt-4 mb-4">{{ ad.typeOfAd }} </span>
+                    <span class="float-left mt-4 mb-4">{% if ad.typeOfAd is same as ('Offer') %}{% trans%}Offer{% endtrans%} {% else %} {% trans%}Demand{% endtrans%} {% endif %}</span>
                 </div>
                 <div class="col-md-8 mt-2 text-center">
                     <span class="text-center title-rose">{{ ad.title }}</span>
                 </div>
                 <div class="col-md-2  mt-4">
-                    {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
-                       <span class="float-right title-blue">{{ 'Aujoud\'hui à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
-                    {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
-                        "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
-                        <span class="float-right title-blue">{{ 'Hier à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
-                    {% else %}
-                    <span class="float-right title-blue">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</span>
-                    {% endif %}
+                    <b class="float-right blued">{{ ad.date_format(ad.dateOfAd)|trans }}</b>
                 </div>
             </div>
             <div class="row border-respo">
@@ -116,17 +109,17 @@
                         {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
                             {% if spe.name is same as ('languages') %}
                                 <div class="p-2">
-                                    <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span>
+                                    <span class="font-weight-bold">{{ spe.label|trans }} {{ ':' }}</span>
                                 {% for language in specifications[spe.name] %}
-                                <span class="title-blue ">{{ language }}&nbsp; </span>
+                                <span class="title-blue ">{{ language|trans }}&nbsp; </span>
                                 {% endfor %}
                                 </div>
                             {% else %}
                             <div class="p-2">
                                 {% if spe.name is same as ('dateOfEvent') %}
-                                <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|date("m/d/Y") }} </span><br>
+                                <span class="font-weight-bold">{{ spe.label|trans }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|date("m/d/Y") }} </span><br>
                                 {% else %}
-                                <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                                <span class="font-weight-bold">{{ spe.label|trans }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|trans }} </span><br>
                                 {% endif %}
                             </div>
                             {% endif %}

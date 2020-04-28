@@ -1,5 +1,5 @@
 {{ form_start(commentForm) }}
-<span>Add new comment</span>
+<span>{% trans %}Add new comment{% endtrans %}</span>
     {{ form_widget(commentForm) }}
-<button class="btn btn-info float-right my-2">{% trans %} Comment{% endtrans %}</button>
+<button class="btn btn-info float-right my-2">{% trans %}Comment{% endtrans %}</button>
 {{ form_end(commentForm) }}

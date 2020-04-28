@@ -21,6 +21,7 @@ class DriverRequestType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => DriverRequest::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

@@ -72,7 +72,8 @@ class OfferSearchType extends  AbstractType
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Location\Region',
-                'placeholder' => 'Région',
+                'placeholder' => 'Region',
+                'translation_domain'=> 'manual',
                 'label' => false,
                 'required'    => true
             ]);
@@ -129,7 +130,8 @@ class OfferSearchType extends  AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => 'App\Model\AdModel'
+            'data_class' => 'App\Model\AdModel',
+            'translation_domain'=> 'manual',
         ]);
         $resolver->setRequired('entity_manager');
     }
@@ -147,8 +149,9 @@ class OfferSearchType extends  AbstractType
             null,
             [
                 'class'           => 'App\Entity\Location\Department',
-                'placeholder'     => $region ? 'Département' : 'Select Region',
+                'placeholder'     => $region ? 'Department' : 'Select Region',
                 'required'        => false,
+                'translation_domain'=> 'manual',
                 'auto_initialize' => false,
                 'label' => false,
                 'choices'         => $region ? $region->getDepartments() : []
@@ -183,6 +186,7 @@ class OfferSearchType extends  AbstractType
             'label' => false,
             'required' => false,
             'expanded' => false,
+            'translation_domain'=> 'manual',
             'multiple'=> true,
             'choices'     => $choice,
         ]);

@@ -43,6 +43,7 @@ security:
         - { path: ^/my_ads, role: ROLE_USER }
         - { path: ^/cafe, role: ROLE_USER }
         - { path: ^/send-notification, role: ROLE_USER }
+        - { path: ^/ad/new, role: ROLE_USER }
         - { path: ^/ad, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/voyage/myvoyage, role: ROLE_USER }
         - { path: ^/voyage/new, role: ROLE_USER }

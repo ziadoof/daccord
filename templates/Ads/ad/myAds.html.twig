@@ -16,14 +16,7 @@
                                         <div class="col-md-12 pt-2">
                                             <div class=" ">
                                                 <b class="title-blue float-left">{{ my_ad.typeOfAd }}</b>
-                                                {% if "now"|date('Y-m-d') == my_ad.dateOfAd|date('Y-m-d') %}
-                                                    <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
-                                                {% elseif "now"|date('Y') == my_ad.dateOfAd|date('Y') and "now"|date('m') == my_ad.dateOfAd|date('m') and
-                                                    "now"|date('d') == (my_ad.dateOfAd|date('d'))+1 %}
-                                                    <b class="float-right ">{{ 'Hier' }}</b>
-                                                {% else %}
-                                                    <b class="float-right ">{{ 'De ' }}{{ my_ad.dateOfAd|date('Y-m-d') }}</b>
-                                                {% endif %}
+                                                <b class="float-right ">{{ my_ad.date_format(my_ad.dateOfAd)|trans }}</b>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +73,7 @@
                 </div>
             </div>
         {% else %}
-            <h1 class="text-center title-blue">{% trans %} You have not ads{% endtrans %}</h1>
+            <h1 class="text-center title-blue">{% trans %}You don't have ads{% endtrans %}</h1>
         {% endif %}
     {% endif %}
 {# ------------------  End area ads -------------------#}

@@ -33,6 +33,9 @@ class DemandType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('entity_manager');
+        $resolver->setDefaults([
+            'translation_domain'=> 'manual',
+        ]);
 
     }
 

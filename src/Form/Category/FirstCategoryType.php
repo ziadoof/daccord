@@ -17,7 +17,7 @@ class FirstCategoryType extends AbstractType
             ->add('name')
             ->add('isParent',CheckboxType::class,array(
                'mapped'=>false,
-               'required'=>false
+               'required'=>false,
            ));
     }
 
@@ -27,6 +27,7 @@ class FirstCategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

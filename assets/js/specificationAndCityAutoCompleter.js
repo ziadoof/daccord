@@ -1,4 +1,5 @@
 import tail from './meetup/tail.datetime-full';
+
 /*this file grouped th specification for new ad  & city auto complete for form & template for dateTime offer and demand and other*/
 var $ospecification = $("#offer_category");
 $(document).on('change', '#offer_category', function () {

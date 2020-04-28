@@ -13,14 +13,7 @@
                 <span class="text-center title-rose">{{ ad.title }}</span>
             </div>
             <div class="col-md-2  mt-4">
-                {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
-                    <span class="float-right title-blue">{{ 'Aujoud\'hui à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
-                {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
-                    "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
-                    <span class="float-right title-blue">{{ 'Hier à' }}{{ ad.dateOfAd|date('H') }}{{ 'h' }}{{ ad.dateOfAd|date('i') }}</span>
-                {% else %}
-                    <span class="float-right title-blue">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</span>
-                {% endif %}
+                <b class="float-right blued">{{ ad.date_format(ad.dateOfAd)|trans }}</b>
             </div>
         </div>
         <div class="row border-respo">

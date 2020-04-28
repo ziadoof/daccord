@@ -85,7 +85,7 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                 $label =  $specification->getLabel();
 
                 if($type === 'TextType'){
-                    $options = array('label' => false, 'required' => false, 'attr' => array(
+                    $options = array('label' => false, 'required' => false,'translation_domain'=> 'manual', 'attr' => array(
                         'placeholder' => $label,
                         'data-validation-optional'=>"true",
                         'data-validation'=>"alphanumeric",
@@ -94,11 +94,11 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'CheckboxType'){
-                    $options = array('label' => false, 'required' => false);
+                    $options = array('label' => false, 'required' => false,'translation_domain'=> 'manual',);
                     $form->add($name, CheckboxType::class, $options);
                 }
                 elseif($type === 'ColorType'){
-                    $options = array('label' => $label, 'required' => false);
+                    $options = array('label' => $label, 'required' => false, 'translation_domain'=> 'manual',);
                     $form->add($name, TextType::class, $options);
                 }
                 elseif($type === 'EntityType'){
@@ -124,6 +124,7 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                                 'choices' => $choiceOptions,
                                 'placeholder' => $label,
                                 'multiple'  => true,
+                                'translation_domain'=> 'manual',
                             );
                         }
                         elseif($name === 'experience' || $name==='classEnergie' || $name==='ges' || $name==='paperSize'
@@ -132,12 +133,14 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                             $options = array('label' => false, 'required' => false,
                                 'choices' => $textOptions,
                                 'placeholder' => $label,
+                                'translation_domain'=> 'manual',
                             );
                         }
                         else{
                             $options = array('label' => false, 'required' => false,
                                 'choices' => $choiceOptions,
-                                'placeholder' => $label
+                                'placeholder' => $label,
+                                'translation_domain'=> 'manual',
                             );
                         }
 
@@ -151,7 +154,8 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
                         }
                         $options = array('label' => false, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => $label
+                            'placeholder' => $label,
+                            'translation_domain'=> 'manual',
                         );
                         $form->add($name, ChoiceType::class, $options);
                     }
@@ -172,7 +176,8 @@ class AddSearchSpecificationFieldSubscriber implements EventSubscriberInterface
 
                         $options = array('label' => false, 'required' => false,
                             'choices' => $choiceOptions,
-                            'placeholder' => $label
+                            'placeholder' => $label,
+                            'translation_domain'=> 'manual',
                         );
                         $form->add($name, ChoiceType::class, $options);
                     }

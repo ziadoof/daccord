@@ -57,7 +57,7 @@
                     <h6 class="blued">{% trans %}I have the possibility to host{% endtrans %}</h6>
                     <div class="col my-2">
                         {% for possible in user.hosting.getPossibility() %}
-                            <span class="badge badge-primary"><h5>{{ possible }}</h5></span>
+                            <span class="badge badge-primary"><h5>{{ possible|trans }}</h5></span>
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -65,7 +65,7 @@
                     <h6 class="blued">{% trans %}I can share with the guest{% endtrans %}</h6>
                     <div class="col my-2">
                         {% for share in user.hosting.getShare() %}
-                            <span class="badge badge-info"><h5>{{ share }}</h5></span>
+                            <span class="badge badge-info"><h5>{{ share|trans }}</h5></span>
                         {% endfor %}
                     </div>
                 {% endif %}

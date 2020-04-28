@@ -1,3 +1,5 @@
+import Translator from 'bazinga-translator';
+
 $(function(){
     $("#offer_generalcategory").change(function(){
         var data = {
@@ -58,11 +60,12 @@ $(function(){
             success: function(data) {
 
                 var $category_selector = $('#offer_search_category');
+                let all_category = Translator.trans('All category', {}, 'category');
 
-                $category_selector.html('<option value="">' + 'All categorys' + '</option>');
-
+                $category_selector.html('<option value="">' + all_category + '</option>');
                 for (var i=0, total = data.length; i < total; i++) {
-                    $category_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    let name = Translator.trans(data[i].name, {}, 'category');
+                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
                 }
             }
         });

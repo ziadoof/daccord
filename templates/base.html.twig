@@ -29,8 +29,10 @@
             </section>
         {% endblock %}
         {% block javascripts %}
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'category', 'locales': 'en,fr' }) }}"></script>
             <script src="{{ asset('build/runtime.js') }}"></script>
             <script src="{{ asset('build/app.js') }}"></script>
-            {% endblock %}
+        {% endblock %}
     </body>
 </html>

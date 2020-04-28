@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="FOSMessageBundle.en">
+    <unit id="A2zzW0Z" name="undelete">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/FOSMessageBundle/Message/thread_content.html.twig:36</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>undelete</source>
+        <target>undelete</target>
+      </segment>
+    </unit>
+    <unit id="YZdZVQP" name="delete">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/FOSMessageBundle/Message/thread_content.html.twig:39</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>delete</source>
+        <target>delete</target>
+      </segment>
+    </unit>
+    <unit id="OB6rcSi" name="message_info">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/FOSMessageBundle/Message/thread.html.twig:7</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>message_info</source>
+        <target>message_info</target>
+      </segment>
+    </unit>
+    <unit id="V4Kxhof" name="reply">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/FOSMessageBundle/Message/thread.html.twig:16</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>reply</source>
+        <target>reply</target>
+      </segment>
+    </unit>
+    <unit id="evuzNH_" name="sent">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/FOSMessageBundle/Message/sent.html.twig:5</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>sent</source>
+        <target>sent</target>
+      </segment>
+    </unit>
+    <unit id="1S_loRu" name="    threads_found&#10;">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/FOSMessageBundle/Message/search.html.twig:5</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>    threads_found
+</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

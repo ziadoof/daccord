@@ -23,15 +23,8 @@
                                         </div>
                                     </form>
                                     {% endif %}
-                                    <b class="title-blue float-left">{{ a_ad.category }}</b>
-                                    {% if "now"|date('Y-m-d') == a_ad.dateOfAd|date('Y-m-d') %}
-                                        <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
-                                    {% elseif "now"|date('Y') == a_ad.dateOfAd|date('Y') and "now"|date('m') == a_ad.dateOfAd|date('m') and
-                                        "now"|date('d') == (a_ad.dateOfAd|date('d'))+1 %}
-                                        <b class="float-right ">{{ 'Hier' }}</b>
-                                    {% else %}
-                                        <b class="float-right ">{{ 'De ' }}{{ a_ad.dateOfAd|date('Y-m-d') }}</b>
-                                    {% endif %}
+                                    <b class="title-blue float-left">{{ a_ad.category|trans }}</b>
+                                    <b class="float-right ">{{ a_ad.date_format(a_ad.dateOfAd)|trans }}</b>
                                 </div>
                             </div>
                         </div>

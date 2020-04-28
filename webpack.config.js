@@ -43,7 +43,9 @@ config.resolve.alias = {
     'router': __dirname + '/assets/js/router.js'
 
 };
-
+config.externals = {
+    'bazinga-translator': 'Translator'
+};
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery()
 

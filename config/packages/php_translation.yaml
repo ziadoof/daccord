@@ -1,0 +1,21 @@
+# config/packages/php_translation.yaml
+translation:
+    default_locale: en
+    locales: "%app.locales%"
+    edit_in_place:
+        enabled: true
+    configs:
+        app:
+            dirs: ["%kernel.project_dir%/templates", "%kernel.project_dir%/src"]
+            output_dir: "%kernel.project_dir%/translations"
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs]
+
+    symfony_profiler:
+        enabled: true
+    webui:
+        enabled: true
+
+    auto_add_missing_translations:
+        enabled: true
+        config_name: 'default'
