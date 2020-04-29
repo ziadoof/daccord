@@ -4,6 +4,7 @@ import ListsAds from "../Components/ListsAds";
 import ListsHosting from "../Components/ListsHosting";
 import ListsMeetup from "../Components/ListsMeetup";
 import ListsVoyages from "../Components/ListsVoyages";
+import Translator from "bazinga-translator";
 
 $('#search-offer').submit( function(e) {
     e.preventDefault();
@@ -23,7 +24,7 @@ $('#search-offer').submit( function(e) {
         ReactDOM.render(<ListsAds result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
     }).fail(function(jxh,textmsg,errorThrown){
-         alert('Something went wrong during processing search for offers!');
+         alert(Translator.trans('Something went wrong during processing search for offers!'));
     });
 });
 
@@ -47,7 +48,7 @@ $('#search-demand').submit( function(e) {
         setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
-                 alert('Something went wrong during processing search for demands!');
+                 alert(Translator.trans('Something went wrong during processing search for demands!'));
     });
 });
 
@@ -66,7 +67,7 @@ $(document).on('click', '#my_offer', function () {
         setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
-                 alert('Something went wrong during processing your offers!');
+                 alert(Translator.trans('Something went wrong during processing your offers!'));
     });
 
 });
@@ -86,7 +87,7 @@ $(document).on('click', '#my_demand', function () {
         setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
-                 alert('Something went wrong during processing your demands!');
+                 alert(Translator.trans('Something went wrong during processing your demands!'));
     });
 
 });
@@ -114,7 +115,7 @@ $('#search-hosting').submit( function(e) {
         setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
-        alert('Something went wrong during processing search for hosting!');
+        alert(Translator.trans('Something went wrong during processing search for hosting!'));
     });
 });
 
@@ -137,7 +138,7 @@ $('#search-meetup').submit( function(e) {
         setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
-        alert('Something went wrong during processing search for hosting!');
+        alert(Translator.trans('Something went wrong during processing search for meetup!'));
     });
 });
 
@@ -160,7 +161,7 @@ $('#search-carpooling').submit( function(e) {
         setFavorite();
 
     }).fail(function(jxh,textmsg,errorThrown){
-        alert('Something went wrong during processing search for offers!');
+        alert(Translator.trans('Something went wrong during processing search for voyage!'));
     });
 });
 

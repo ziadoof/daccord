@@ -1,0 +1,3 @@
+{
+    "translations": {"sv":{"FOSMessageBundle":{"messenger":"Meddelanden","inbox":"Inkorg","sent":"Skickat","send_new":"Skriv nytt meddelande","search":"S\u00f6k","threads_found":"%num% tr\u00e5d hittad | %num% tr\u00e5dar hittade","message_info":"Av %sender%, den %date%","reply":"Svara","subject":"\u00c4mne","starter":"Avs\u00e4ndare","startdate":"P\u00e5b\u00f6rjad den","messages":"Meddelanden","last_message":"Senaste meddelande","actions":"\u00c5tg\u00e4rder","new":"Ny","goto_last":"G\u00e5 till senaste meddelande","on":"den %date%","by":"av %sender%","no_thread":"Det finns inga tr\u00e5dar","delete":"Ta bort"}}}
+}

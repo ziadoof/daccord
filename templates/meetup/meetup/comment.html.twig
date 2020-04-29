@@ -32,7 +32,7 @@
                             {% if app.user is same as(comment.sender) or app.user is same as(comment.meetup.creator) %}
                                 <div class="float-right">
                                     <div class="delete-comment">
-                                        <form method="post" action="{{ path('meetup_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Do you really want to remove this comment ?');">
+                                        <form method="post" action="{{ path('meetup_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm(Translator.trans('Do you really want to remove this comment ?'));">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
                                             <button class="btn float-right"><i class="fas fa-trash-alt"></i></button>

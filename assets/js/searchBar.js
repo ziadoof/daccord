@@ -1,6 +1,5 @@
 // regx for search bar
-
-
+import Translator from 'bazinga-translator';
 $(document).ready(function () {
     $("#Demand").validate(
         {
@@ -39,32 +38,32 @@ $(document).ready(function () {
                 'demand[caliber]':              { regex: /^([0-9.]{0,3})$/},
             },
             messages: {
-                'demand[model]':              {'regex': "No Numeric and special characters allowed."},
-                'demand[price]':              {'regex': "8 Numeric characters only."},
-                'demand[brand]':              {'regex': "No Numeric and special characters allowed."},
-                'demand[age]':                {'regex': "2 Numeric characters only."},
-                'demand[manufactureCompany]': {'regex': "No Numeric and special characters allowed."},
-                'demand[subjectName]':        {'regex': "No special characters allowed."},
-                'demand[salary]':             {'regex': "4 Numeric characters only."},
-                'demand[material]':           { 'regex':'No special characters allowed.'},
-                'demand[screenSizeCm]':       { 'regex':'3 Numeric characters only.'},
-                'demand[screenSizeInch]':     { 'regex':'3 Numeric characters only.'},
-                'demand[accuracy]':           { 'regex':'4 Numeric characters only.'},
-                'demand[weight]':             { 'regex':'2 Numeric characters only.'},
-                'demand[capacity]':           { 'regex':'4 Numeric characters only.'},
-                'demand[animalSpecies]':      { 'regex':'No Numeric and special characters allowed.'},
+                'demand[model]':              {'regex': Translator.trans('No Numeric and special characters allowed.')},
+                'demand[price]':              {'regex': Translator.trans("8 Numeric characters only.")},
+                'demand[brand]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'demand[age]':                {'regex': Translator.trans("2 Numeric characters only.")},
+                'demand[manufactureCompany]': {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'demand[subjectName]':        {'regex': Translator.trans("No special characters allowed.")},
+                'demand[salary]':             {'regex': Translator.trans("4 Numeric characters only.")},
+                'demand[material]':           { 'regex':Translator.trans('No special characters allowed.')},
+                'demand[screenSizeCm]':       { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand[screenSizeInch]':     { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand[accuracy]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'demand[weight]':             { 'regex':Translator.trans('2 Numeric characters only.')},
+                'demand[capacity]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'demand[animalSpecies]':      { 'regex':Translator.trans('No Numeric and special characters allowed.')},
                 /*search_demand*/
-                'demand[kilometer]':          { 'regex':'6 Numeric characters only.'},
-                'demand[area]':               { 'regex':'4 Numeric characters only.'},
+                'demand[kilometer]':          { 'regex':Translator.trans('6 Numeric characters only.')},
+                'demand[area]':               { 'regex':Translator.trans('4 Numeric characters only.')},
                 /*offer*/
-                'demand[color]':              { 'regex':'No Numeric and special characters allowed.'},
-                'demand[ability]':            { 'regex':'4 Numeric characters only.'},
-                'demand[mission]':            { 'regex':'No Numeric and special characters allowed.'},
-                'demand[processor]':          { 'regex':'No special characters allowed.'},
-                'demand[length]':             { 'regex':'3 Numeric characters only.'},
-                'demand[width]':              { 'regex' :'3 Numeric characters only.'},
-                'demand[height]':             { 'regex':'3 Numeric characters only.'},
-                'demand[caliber]':            { 'regex':'3 Numeric characters only.'},
+                'demand[color]':              { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'demand[ability]':            { 'regex':Translator.trans('4 Numeric characters only.')},
+                'demand[mission]':            { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'demand[processor]':          { 'regex':Translator.trans('No special characters allowed.')},
+                'demand[length]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand[width]':              { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand[height]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand[caliber]':            { 'regex':Translator.trans('3 Numeric characters only.')},
             },
         }
     );
@@ -109,32 +108,32 @@ $(document).ready(function () {
                 'offer[caliber]':              { regex: /^([0-9.]{0,3})$/},
             },
             messages: {
-                'offer[model]':              {'regex': "No Numeric and special characters allowed."},
-                'offer[price]':              {'regex': "8 Numeric characters only."},
-                'offer[brand]':              {'regex': "No Numeric and special characters allowed."},
-                'offer[age]':                {'regex': "2 Numeric characters only."},
-                'offer[manufactureCompany]': {'regex': "No Numeric and special characters allowed."},
-                'offer[subjectName]':        {'regex': "No special characters allowed."},
-                'offer[salary]':             {'regex': "4 Numeric characters only."},
-                'offer[material]':           { 'regex':'No special characters allowed.'},
-                'offer[screenSizeCm]':       { 'regex':'3 Numeric characters only.'},
-                'offer[screenSizeInch]':     { 'regex':'3 Numeric characters only.'},
-                'offer[accuracy]':           { 'regex':'4 Numeric characters only.'},
-                'offer[weight]':             { 'regex':'2 Numeric characters only.'},
-                'offer[capacity]':           { 'regex':'4 Numeric characters only.'},
-                'offer[animalSpecies]':      { 'regex':'No Numeric and special characters allowed.'},
+                'offer[model]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'offer[price]':              {'regex': Translator.trans("8 Numeric characters only.")},
+                'offer[brand]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'offer[age]':                {'regex': Translator.trans("2 Numeric characters only.")},
+                'offer[manufactureCompany]': {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'offer[subjectName]':        {'regex': Translator.trans("No special characters allowed.")},
+                'offer[salary]':             {'regex': Translator.trans("4 Numeric characters only.")},
+                'offer[material]':           { 'regex':Translator.trans('No special characters allowed.')},
+                'offer[screenSizeCm]':       { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer[screenSizeInch]':     { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer[accuracy]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'offer[weight]':             { 'regex':Translator.trans('2 Numeric characters only.')},
+                'offer[capacity]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'offer[animalSpecies]':      { 'regex':Translator.trans('No Numeric and special characters allowed.')},
                 /*search_offer*/
-                'offer[kilometer]':          { 'regex':'6 Numeric characters only.'},
-                'offer[area]':               { 'regex':'4 Numeric characters only.'},
+                'offer[kilometer]':          { 'regex':Translator.trans('6 Numeric characters only.')},
+                'offer[area]':               { 'regex':Translator.trans('4 Numeric characters only.')},
                 /*offer*/
-                'offer[color]':              { 'regex':'No Numeric and special characters allowed.'},
-                'offer[ability]':            { 'regex':'4 Numeric characters only.'},
-                'offer[mission]':            { 'regex':'No Numeric and special characters allowed.'},
-                'offer[processor]':          { 'regex':'No special characters allowed.'},
-                'offer[length]':             { 'regex':'3 Numeric characters only.'},
-                'offer[width]':              { 'regex' :'3 Numeric characters only.'},
-                'offer[height]':             { 'regex':'3 Numeric characters only.'},
-                'offer[caliber]':            { 'regex':'3 Numeric characters only.'},
+                'offer[color]':              { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'offer[ability]':            { 'regex':Translator.trans('4 Numeric characters only.')},
+                'offer[mission]':            { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'offer[processor]':          { 'regex':Translator.trans('No special characters allowed.')},
+                'offer[length]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer[width]':              { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer[height]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer[caliber]':            { 'regex':Translator.trans('3 Numeric characters only.')},
             },
         }
     );
@@ -178,32 +177,32 @@ $(document).ready(function () {
                 'offer_search[caliber]':              { regex: /^([0-9.]{0,3})$/},
             },
             messages: {
-                'offer_search[model]':              {'regex': "No Numeric and special characters allowed."},
-                'offer_search[price]':              {'regex': "8 Numeric characters only."},
-                'offer_search[brand]':              {'regex': "No Numeric and special characters allowed."},
-                'offer_search[age]':                {'regex': "2 Numeric characters only."},
-                'offer_search[manufactureCompany]': {'regex': "No Numeric and special characters allowed."},
-                'offer_search[subjectName]':        {'regex': "No special characters allowed."},
-                'offer_search[salary]':             {'regex': "4 Numeric characters only."},
-                'offer_search[material]':           { 'regex':'No special characters allowed.'},
-                'offer_search[screenSizeCm]':       { 'regex':'3 Numeric characters only.'},
-                'offer_search[screenSizeInch]':     { 'regex':'3 Numeric characters only.'},
-                'offer_search[accuracy]':           { 'regex':'4 Numeric characters only.'},
-                'offer_search[weight]':             { 'regex':'2 Numeric characters only.'},
-                'offer_search[capacity]':           { 'regex':'4 Numeric characters only.'},
-                'offer_search[animalSpecies]':      { 'regex':'No Numeric and special characters allowed.'},
+                'offer_search[model]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'offer_search[price]':              {'regex': Translator.trans("8 Numeric characters only.")},
+                'offer_search[brand]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'offer_search[age]':                {'regex': Translator.trans("2 Numeric characters only.")},
+                'offer_search[manufactureCompany]': {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'offer_search[subjectName]':        {'regex': Translator.trans("No special characters allowed.")},
+                'offer_search[salary]':             {'regex': Translator.trans("4 Numeric characters only.")},
+                'offer_search[material]':           { 'regex':Translator.trans('No special characters allowed.')},
+                'offer_search[screenSizeCm]':       { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer_search[screenSizeInch]':     { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer_search[accuracy]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'offer_search[weight]':             { 'regex':Translator.trans('2 Numeric characters only.')},
+                'offer_search[capacity]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'offer_search[animalSpecies]':      { 'regex':Translator.trans('No Numeric and special characters allowed.')},
                 /*search_demand*/
-                'offer_search[kilometer]':          { 'regex':'6 Numeric characters only.'},
-                'offer_search[area]':               { 'regex':'4 Numeric characters only.'},
+                'offer_search[kilometer]':          { 'regex':Translator.trans('6 Numeric characters only.')},
+                'offer_search[area]':               { 'regex':Translator.trans('4 Numeric characters only.')},
                 /*offer*/
-                'offer_search[color]':              { 'regex':'No Numeric and special characters allowed.'},
-                'offer_search[ability]':            { 'regex':'4 Numeric characters only.'},
-                'offer_search[mission]':            { 'regex':'No Numeric and special characters allowed.'},
-                'offer_search[processor]':          { 'regex':'No special characters allowed.'},
-                'offer_search[length]':             { 'regex':'3 Numeric characters only.'},
-                'offer_search[width]':              { 'regex' :'3 Numeric characters only.'},
-                'offer_search[height]':             { 'regex':'3 Numeric characters only.'},
-                'offer_search[caliber]':            { 'regex':'3 Numeric characters only.'},
+                'offer_search[color]':              { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'offer_search[ability]':            { 'regex':Translator.trans('4 Numeric characters only.')},
+                'offer_search[mission]':            { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'offer_search[processor]':          { 'regex':Translator.trans('No special characters allowed.')},
+                'offer_search[length]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer_search[width]':              { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer_search[height]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'offer_search[caliber]':            { 'regex':Translator.trans('3 Numeric characters only.')},
             },
         }
     );
@@ -248,32 +247,32 @@ $(document).ready(function () {
                 'demand_search[caliber]':              { regex: /^([0-9.]{0,3})$/},
             },
             messages: {
-                'demand_search[model]':              {'regex': "No Numeric and special characters allowed."},
-                'demand_search[price]':              {'regex': "8 Numeric characters only."},
-                'demand_search[brand]':              {'regex': "No Numeric and special characters allowed."},
-                'demand_search[age]':                {'regex': "2 Numeric characters only."},
-                'demand_search[manufactureCompany]': {'regex': "No Numeric and special characters allowed."},
-                'demand_search[subjectName]':        {'regex': "No special characters allowed."},
-                'demand_search[salary]':             {'regex': "4 Numeric characters only."},
-                'demand_search[material]':           { 'regex':'No special characters allowed.'},
-                'demand_search[screenSizeCm]':       { 'regex':'3 Numeric characters only.'},
-                'demand_search[screenSizeInch]':     { 'regex':'3 Numeric characters only.'},
-                'demand_search[accuracy]':           { 'regex':'4 Numeric characters only.'},
-                'demand_search[weight]':             { 'regex':'2 Numeric characters only.'},
-                'demand_search[capacity]':           { 'regex':'4 Numeric characters only.'},
-                'demand_search[animalSpecies]':      { 'regex':'No Numeric and special characters allowed.'},
+                'demand_search[model]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'demand_search[price]':              {'regex': Translator.trans("8 Numeric characters only.")},
+                'demand_search[brand]':              {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'demand_search[age]':                {'regex': Translator.trans("2 Numeric characters only.")},
+                'demand_search[manufactureCompany]': {'regex': Translator.trans("No Numeric and special characters allowed.")},
+                'demand_search[subjectName]':        {'regex': Translator.trans("No special characters allowed.")},
+                'demand_search[salary]':             {'regex': Translator.trans("4 Numeric characters only.")},
+                'demand_search[material]':           { 'regex':Translator.trans('No special characters allowed.')},
+                'demand_search[screenSizeCm]':       { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand_search[screenSizeInch]':     { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand_search[accuracy]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'demand_search[weight]':             { 'regex':Translator.trans('2 Numeric characters only.')},
+                'demand_search[capacity]':           { 'regex':Translator.trans('4 Numeric characters only.')},
+                'demand_search[animalSpecies]':      { 'regex':Translator.trans('No Numeric and special characters allowed.')},
                 /*search_demand*/
-                'demand_search[kilometer]':          { 'regex':'6 Numeric characters only.'},
-                'demand_search[area]':               { 'regex':'4 Numeric characters only.'},
+                'demand_search[kilometer]':          { 'regex':Translator.trans('6 Numeric characters only.')},
+                'demand_search[area]':               { 'regex':Translator.trans('4 Numeric characters only.')},
                 /*demand*/
-                'demand_search[color]':              { 'regex':'No Numeric and special characters allowed.'},
-                'demand_search[ability]':            { 'regex':'4 Numeric characters only.'},
-                'demand_search[mission]':            { 'regex':'No Numeric and special characters allowed.'},
-                'demand_search[processor]':          { 'regex':'No special characters allowed.'},
-                'demand_search[length]':             { 'regex':'3 Numeric characters only.'},
-                'demand_search[width]':              { 'regex' :'3 Numeric characters only.'},
-                'demand_search[height]':             { 'regex':'3 Numeric characters only.'},
-                'demand_search[caliber]':            { 'regex':'3 Numeric characters only.'},
+                'demand_search[color]':              { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'demand_search[ability]':            { 'regex':Translator.trans('4 Numeric characters only.')},
+                'demand_search[mission]':            { 'regex':Translator.trans('No Numeric and special characters allowed.')},
+                'demand_search[processor]':          { 'regex':Translator.trans('No special characters allowed.')},
+                'demand_search[length]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand_search[width]':              { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand_search[height]':             { 'regex':Translator.trans('3 Numeric characters only.')},
+                'demand_search[caliber]':            { 'regex':Translator.trans('3 Numeric characters only.')},
             },
         }
     );
@@ -293,7 +292,7 @@ $.validator.addMethod( "moinDe", function( value, element, param ) {
     else {
          return this.optional(element) || parseInt(value) <= parseInt(target.val()) ;
     }
-}, "The minimum is greater than the maximum." );
+}, Translator.trans("The minimum is greater than the maximum.") );
 
 $.validator.addMethod( "plusDe", function( value, element, param ) {
     var target = $( param );
@@ -308,7 +307,7 @@ $.validator.addMethod( "plusDe", function( value, element, param ) {
     else {
         return this.optional(element) || parseInt(value) >= parseInt(target.val()) ;
     }
-}, "The maximum is less than the minimum." );
+}, Translator.trans("The maximum is less than the minimum.") );
 
 $.validator.addMethod(
     "regex",
@@ -318,7 +317,7 @@ $.validator.addMethod(
         else if (regexp.global)
             regexp.lastIndex = 0;
         return this.optional(element) || regexp.test(value);
-    },"erreur expression reguliere"
+    },Translator.trans("erreur expression reguliere")
 );
 
 $.validator.addMethod( "moinFloors", function( value, element, param ) {
@@ -335,7 +334,7 @@ $.validator.addMethod( "moinFloors", function( value, element, param ) {
     else {
         return this.optional(element) || parseInt(value) <= parseInt(target.val()) ;
     }
-}, "The floor must be less than number of floors." );
+}, Translator.trans("The floor must be less than number of floors.") );
 
 $.validator.addMethod( "plusFloor", function( value, element, param ) {
     var target = $( param );
@@ -350,7 +349,7 @@ $.validator.addMethod( "plusFloor", function( value, element, param ) {
     else {
         return this.optional(element) || parseInt(value) >= parseInt(target.val()) ;
     }
-}, "The number of floors must be more than the floor." );
+}, Translator.trans("The number of floors must be more than the floor.") );
 
 // activ tab search bar
 $(document).ready(function(){

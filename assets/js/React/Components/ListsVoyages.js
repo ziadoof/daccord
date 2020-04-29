@@ -1,4 +1,5 @@
 import React from 'react';
+import Translator from "bazinga-translator";
 
 class ListsVoyages extends React.Component {
     constructor(props) {
@@ -55,10 +56,10 @@ class ListsVoyages extends React.Component {
     getSeats(seats) {
         if(seats > 1){
             return (
-                <span className="badge badge-info mt-1 btn-block"><h7>{seats} Seats available</h7></span>
+                <span className="badge badge-info mt-1 btn-block"><h7>{seats} {Translator.trans('Seats available')} </h7></span>
             );
         }
-        return (<span className="badge badge-info mt-1 btn-block"><h7>{seats} Seat available</h7></span>);
+        return (<span className="badge badge-info mt-1 btn-block"><h7>{seats} {Translator.trans('Seat available')} </h7></span>);
 
     }
 
@@ -233,13 +234,13 @@ class ListsVoyages extends React.Component {
                                 <ul className="pagination justify-content-center">
                                     <li className="page-item">
                                         <a  id={this.state.currentPage-1} onClick={this.handleClick} className="page-link" >
-                                            « Previous
+                                            « {Translator.trans('Previous')}
                                         </a>
                                     </li>
                                     {renderPageNumbers}
                                     <li className="page-item">
                                         <a  id={this.state.currentPage+1} onClick={this.handleClick} className="page-link">
-                                            Next »
+                                            {Translator.trans('Next')} »
                                         </a>
                                     </li>
                                 </ul>
@@ -251,7 +252,7 @@ class ListsVoyages extends React.Component {
         } else {
             return (
                 <div key={Math.random()}>
-                    <h1 className="text-center">There is no results :(</h1>
+                    <h1 className="text-center">« {Translator.trans('There is no results')}</h1>
                 </div>
             );
         }

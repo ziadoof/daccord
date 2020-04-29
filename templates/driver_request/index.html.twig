@@ -62,12 +62,12 @@
                                         <form>
                                             <a class="btn btn-danger my-1 mx-2 btn-block"
                                                href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id, 'type': 'rejected'}) }}"
-                                               onclick="return confirm('Are you sure you want to reject this Deal?');">{% trans %}Reject the request {% endtrans %}</a>
+                                               onclick="return confirm(Translator.trans('Are you sure you want to reject this Deal?'));">{% trans %}Reject the request {% endtrans %}</a>
                                         </form>
                                         <form>
                                             <a class="btn btn-success my-1 mx-2 btn-block"
                                                href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id,'type': 'accepted'}) }}"
-                                               onclick="return confirm('Are you sure you want to accept this Deal?');">{% trans %}Accept the request {% endtrans %}</a>
+                                               onclick="return confirm(Translator.trans('Are you sure you want to accept this Deal?'));">{% trans %}Accept the request {% endtrans %}</a>
                                         </form>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                             <a href="{{ path('deal_show', {'id': deal.id}) }}" class="btn btn-info mx-2">{% trans %} Show deal{% endtrans %}</a>
                                             {% if not deal.driverStatus %}
                                                 <form method="post" action="{{ path('deal_done', {'id': deal.id}) }}"
-                                                      onsubmit="return confirm('Are you sure you want to finish this deal?');">
+                                                      onsubmit="return confirm(Translator.trans('Are you sure you want to finish this deal?'));">
                                                     <button class="btn btn-info" href="">{% trans %} Finish this deal{% endtrans %}</button>
                                                 </form>
                                             {% endif %}

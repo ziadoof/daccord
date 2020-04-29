@@ -1,4 +1,5 @@
 import React from 'react';
+import Translator from "bazinga-translator";
 
 class ListsMeetup extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class ListsMeetup extends React.Component {
      isFinish(finish) {
         if(finish){
             return (
-                <span className="badge badge-danger float-right mt-2">Finish</span>
+                <span className="badge badge-danger float-right mt-2">{Translator.trans('Finish')}</span>
             );
         }
         return (<div></div>);
@@ -49,7 +50,7 @@ class ListsMeetup extends React.Component {
 
             const id = result.id;
             const title = result.title;
-            const type = result.type;
+            const type = Translator.trans(result.type);
             const imageMeetup = result.image;
             const city = result.city;
             const isFinish = result.finish;
@@ -99,9 +100,9 @@ class ListsMeetup extends React.Component {
                                             <div className="">
                                                 <h4 className="meetup-text rosed">{title}</h4>
                                             </div>
-                                            <div className=""><span className=" mt-3"><span className="blued"> Type : </span>{type}</span></div>
-                                            <div className=""><span className=" mt-3"><span className="blued">Start at : </span>{startAt}</span></div>
-                                            <div className=""><span className=" mt-3"><span className="blued">City : </span>{city}</span></div>
+                                            <div className=""><span className=" mt-3"><span className="blued">{Translator.trans('Type :')}  </span> {type}</span></div>
+                                            <div className=""><span className=" mt-3"><span className="blued">{Translator.trans('Start at :')}  </span> {startAt}</span></div>
+                                            <div className=""><span className=" mt-3"><span className="blued">{Translator.trans('City :')}  </span> {city}</span></div>
                                         </div>
                                         <div className="col-md-1">
                                             {finish}
@@ -157,13 +158,13 @@ class ListsMeetup extends React.Component {
                                 <ul className="pagination justify-content-center">
                                     <li className="page-item">
                                         <a  id={this.state.currentPage-1} onClick={this.handleClick} className="page-link" >
-                                            « Previous
+                                            « {Translator.trans('Previous')}
                                         </a>
                                     </li>
                                     {renderPageNumbers}
                                     <li className="page-item">
                                         <a  id={this.state.currentPage+1} onClick={this.handleClick} className="page-link">
-                                            Next »
+                                            {Translator.trans('Next')} »
                                         </a>
                                     </li>
                                 </ul>
@@ -175,7 +176,7 @@ class ListsMeetup extends React.Component {
         } else {
             return (
                 <div key={Math.random()}>
-                    <h1 className="text-center">There is no results :(</h1>
+                    <h1 className="text-center">{Translator.trans('There is no results')}</h1>
                 </div>
             );
         }

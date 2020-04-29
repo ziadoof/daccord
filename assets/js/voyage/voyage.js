@@ -1,4 +1,5 @@
 import ymaps from "ymaps";
+import Translator from "bazinga-translator";
 
 let myMap;
 let points={};
@@ -25,7 +26,7 @@ ymaps
 
         let NofStation = -1;
         $('.carpooling-form').collection({
-            add:'<a href="#" class="collection-add btn btn-info mb-4"><i class="fas fa-plus"></i> Add station </a>',
+            add:'<a href="#" class="collection-add btn btn-info mb-4"><i class="fas fa-plus"></i>' +Translator.trans('Add station')+ '</a>',
             up:false,
             down:false,
             max: 5,
@@ -163,10 +164,10 @@ ymaps
                     // Output route information.
                     if(localActiveRoute){
                         if($('#'+distance_id).length===0 || $('#'+time_id) === 0){
-                            alert('There is a problem');
+                            alert(Translator.trans('There is a problem'));
                         }
                         if (localActiveRoute.properties.get("blocked")) {
-                            alert('The route has sections with closed roads.');
+                            alert(Translator.trans('The route has sections with closed roads.'));
                         }
                         else {
                             distance.value = Math.floor(localActiveRoute.properties.get("distance").value / 1000);
@@ -209,9 +210,9 @@ ymaps
                 autoFocus: true,
                 minLength:2,
                 theme: 'bootstrap',
-                formatNoMatches: 'No city found.',
-                formatSearching: 'Searching city...',
-                formatInputTooShort: 'Insert at least 2 character',
+                formatNoMatches: Translator.trans('No city found.'),
+                formatSearching: Translator.trans('Searching city...'),
+                formatInputTooShort: Translator.trans('Insert at least 2 character'),
                 close: function(e, ui) {
                     if (!makeSelect) {
                         $this.val(false);
@@ -258,7 +259,7 @@ ymaps
                         }
 
                     }).fail(function(jxh,textmsg,errorThrown){
-                        alert('Something went wrong during processing search for city!');
+                        alert(Translator.trans('Something went wrong during processing search for city!'));
                     });
 
                 },

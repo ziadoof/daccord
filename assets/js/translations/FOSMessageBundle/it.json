@@ -1,0 +1,3 @@
+{
+    "translations": {"it":{"FOSMessageBundle":{"messenger":"Messaggi","inbox":"Posta in arrivo","sent":"Posta inviata","deleted":"Cestino","send_new":"Scrivere un nuovo messaggio","search":"Cercare","threads_found":"%num% conversazione trovata con | %num%  conversazioni trovate con","message_info":"Di %sender%, il %date%","reply":"Rispondere","subject":"Oggetto","starter":"Iniziato da","startdate":"Iniziato il","messages":"Messaggi","last_message":"Ultimo messaggio","actions":"Azioni","new":"Nuovo","goto_last":"Vedere l\u2019ultimo messaggio","on":"Il %date%","by":"Di %sender%","no_thread":"Nessuna conversazione"}}}
+}

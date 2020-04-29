@@ -1,6 +1,5 @@
-
+import Translator from 'bazinga-translator';
 // hosting read more
-
 $(function() {
 
     var minimized_elements = $('p.minimize');
@@ -9,9 +8,12 @@ $(function() {
         var t = $(this).text();
         if (t.length < 200) return;
 
+        let more = Translator.trans('More');
+        let less = Translator.trans('Less');
+
         $(this).html(
-            t.slice(0, 200) + '<span>... </span><a href="#" class="more">More</a>' +
-            '<span style="display:none;">' + t.slice(100, t.length) + ' <a href="#" class="less">Less</a></span>'
+            t.slice(0, 200) + '<span>... </span><a href="#" class="more">'+more+'</a>' +
+            '<span style="display:none;">' + t.slice(100, t.length) + ' <a href="#" class="less">'+less+'</a></span>'
         );
 
     });
@@ -31,7 +33,8 @@ $(function() {
 
 // hosting form
 $('#hosting_languages').select2({
-    placeholder: "Languages",
+
+    placeholder: Translator.trans('Languages'),
     tage: true,
     maximumSelectionLength: 6,
     dropdownAutoWidth: true,

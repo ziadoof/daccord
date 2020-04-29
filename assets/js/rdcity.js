@@ -1,3 +1,4 @@
+import Translator from 'bazinga-translator';
 
 $(document).on('change', '#area_region, #area_department', function () {
     let $field = $(this)
@@ -37,7 +38,7 @@ $(document).on('change', '#demand_search_region', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $('#demand_search_ville').select2({
-            placeholder: " Select department",
+            placeholder: Translator.trans('Select department'),
         });
     });
 });
@@ -58,7 +59,7 @@ $(document).on('change', '#demand_search_department', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $(target).select2({
-            placeholder: "City or zip code",
+            placeholder: Translator.trans('City or zip code'),
             tage: true,
             selectOnClose: true,
             maximumSelectionLength: 8,
@@ -91,7 +92,7 @@ $(document).on('change', '#offer_search_region', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $('#offer_search_ville').select2({
-            placeholder: " Select department",
+            placeholder: Translator.trans('Select department'),
         });
     });
 });
@@ -112,7 +113,7 @@ $(document).on('change', '#offer_search_department', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $(target).select2({
-            placeholder: "City or zip code",
+            placeholder: Translator.trans('City or zip code'),
             tage: true,
             selectOnClose: true,
             maximumSelectionLength: 8,
@@ -129,16 +130,16 @@ $(document).on('change', '#offer_search_department', function () {
 
 $(document).ready(function () {
     $('#offer_search_ville').select2({
-        placeholder: " Select region",
+        placeholder: Translator.trans('Select region'),
     });
     $('#demand_search_ville').select2({
-        placeholder: " Select region",
+        placeholder: Translator.trans('Select region'),
         dropdownAutoWidth: true,
         width: '100%',
         height: '30px',
     });
     $('#hosting_search_ville').select2({
-        placeholder: " Select region",
+        placeholder: Translator.trans('Select region'),
         dropdownAutoWidth: true,
         width: '100%',
         height: '30px',
@@ -166,7 +167,7 @@ $(document).on('change', '#hosting_search_region', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $('#hosting_search_ville').select2({
-            placeholder: " Select department",
+            placeholder: Translator.trans('Select department'),
         });
     });
 });
@@ -187,7 +188,7 @@ $(document).on('change', '#hosting_search_department', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $(target).select2({
-            placeholder: "City or zip code",
+            placeholder: Translator.trans('City or zip code'),
             tage: true,
             selectOnClose: true,
             maximumSelectionLength: 8,
@@ -215,7 +216,7 @@ $(document).on('change', '#meetup_search_region', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $('#meetup_search_city').select2({
-            placeholder: " Select department",
+            placeholder: Translator.trans('Select department'),
         });
     });
 });
@@ -236,7 +237,7 @@ $(document).on('change', '#meetup_search_department', function () {
         // On remplace notre <select> actuel
         $(target).replaceWith($input)
         $(target).select2({
-            placeholder: "City or zip code",
+            placeholder: Translator.trans('City or zip code'),
             tage: true,
             selectOnClose: true,
             maximumSelectionLength: 8,
@@ -248,7 +249,7 @@ $(document).on('change', '#meetup_search_department', function () {
 });
 
 $('#hosting_search_languages').select2({
-    placeholder: "Languages",
+    placeholder: Translator.trans('Languages'),
     tage: true,
     maximumSelectionLength: 6,
     dropdownAutoWidth: true,
@@ -270,9 +271,9 @@ function completeNormalCity(id) {
         autoFocus: true,
         minLength:2,
         theme: 'bootstrap',
-        formatNoMatches: 'No city found.',
-        formatSearching: 'Searching city...',
-        formatInputTooShort: 'Insert at least 2 character',
+        formatNoMatches: Translator.trans('No city found.'),
+        formatSearching: Translator.trans('Searching city...'),
+        formatInputTooShort: Translator.trans('Insert at least 2 character'),
         close: function(e, ui) {
             if (!makeSelect) {
                 $this.val(false);

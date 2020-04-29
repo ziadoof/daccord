@@ -1,9 +1,12 @@
+import Translator from "bazinga-translator";
+
 $("#btn-cafe-gps").click(function(e) {
     e.preventDefault();
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(showPosition);
     }else{
-        alert('Geolocation is not supported by this browser.');
+        let error_message = Translator.trans('Geolocation is not supported by this browser.');
+        alert(error_message);
     }
 
 });
@@ -22,7 +25,8 @@ $("#btn-cafe_deactivate").click(function(e) {
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(cafeShowPosition);
     }else{
-        alert('Geolocation is not supported by this browser.');
+        let error_message = Translator.trans('Geolocation is not supported by this browser.');
+        alert(error_message);
     }
 
 });
@@ -88,7 +92,7 @@ function makeTimer(id) {
         let yourCafe = document.getElementById('myCafe');
         if(element.getAttribute('data-value')==='myCafe'){
             element.remove();
-            yourCafe.innerHTML = 'Your cafe has expired';
+            yourCafe.innerHTML = Translator.trans('Your cafe has expired');
         }
         else{
             let anotherCafes = document.getElementsByClassName('anotherCafe');
@@ -98,7 +102,7 @@ function makeTimer(id) {
             else {
                 let anotherCafe = document.getElementById('anotherCafe');
                 element.remove();
-                anotherCafe.innerHTML = 'There is no invitations in your area';
+                anotherCafe.innerHTML = Translator.trans('There is no invitations in your area');
             }
         }
     }

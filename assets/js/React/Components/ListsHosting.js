@@ -1,4 +1,5 @@
 import React from 'react';
+import Translator from "bazinga-translator";
 
 class ListsHosting extends React.Component {
     constructor(props) {
@@ -143,13 +144,13 @@ class ListsHosting extends React.Component {
                                 <ul className="pagination justify-content-center">
                                     <li className="page-item">
                                         <a  id={this.state.currentPage-1} onClick={this.handleClick} className="page-link" >
-                                            « Previous
+                                            « {Translator.trans('Previous')}
                                         </a>
                                     </li>
                                     {renderPageNumbers}
                                     <li className="page-item">
                                         <a  id={this.state.currentPage+1} onClick={this.handleClick} className="page-link">
-                                            Next »
+                                            {Translator.trans('Next')} »
                                         </a>
                                     </li>
                                 </ul>
@@ -161,7 +162,7 @@ class ListsHosting extends React.Component {
         } else {
             return (
                 <div key={Math.random()}>
-                    <h1 className="text-center">There is no results :(</h1>
+                    <h1 className="text-center">{Translator.trans('There is no results ')}</h1>
                 </div>
             );
         }

@@ -365,8 +365,8 @@ Notification: Notification
 Unseen: Invisible
 'There is no notification found!': 'Aucune notification trouvée!'
 'New suggested deal !': 'Nouvelle deal suggérée!'
-'There is a proposed deal with': 'Il y a un deal proposé avec '
-'regarding your AD from category': 'concernant votre annonce de la catégorie '
+'There is a proposed deal with': 'Il y a un deal proposé avec'
+'regarding your AD from category': 'concernant votre annonce de la catégorie'
 'New driver request': 'Nouvelle demande de driver'
 deleted: supprimé
 'There is no conversations': 'Il n''y a pas de conversations'
@@ -1633,4 +1633,62 @@ SequentialNumericOptions: SequentialNumericOptions
 'The driver request has bin accepted ..!': 'La demande du Driver a été acceptée ..!'
 Today: 'Aujourd''hui'
 Yesterday: Hier
+#JS
+More: Plus
+Less: Moins
+Geolocation is not supported by this browser.: La géolocalisation n'est pas prise en charge par ce navigateur.
+Your cafe has expired: Votre Cafe a expiré
+Select department: Sélectionnez un département
+City or zip code: Ville ou code postal
+No city found.: Aucune ville trouvée .
+Searching city...: Recherche de ville ...
+Insert at least 2 character: Insérez au moins 2 caractères
+No Numeric and special characters allowed.: Aucun caractère numérique et spécial autorisé .
+"8 Numeric characters only.": 8 caractères numériques uniquement.
+"2 Numeric characters only.": 2 caractères numériques uniquement.
+"No special characters allowed.": Aucun caractère spécial autorisé.
+"4 Numeric characters only.": 4 caractères numériques uniquement.
+'3 Numeric characters only.': 3 caractères numériques uniquement.
+'6 Numeric characters only.': 6 caractères numériques uniquement.
+The minimum is greater than the maximum.: Le minimum est supérieur au maximum .
+The maximum is less than the minimum.: Le maximum est inférieur au minimum
+erreur expression reguliere: erreur expression reguliere
+The floor must be less than number of floors.: L'étage doit être inférieur au nombre d'étages .
+The number of floors must be more than the floor.: Le nombre d'étages doit être supérieur de l'étage .
+Select languages: Sélectionnez les langues
+Add station: Ajouter une station
+There is a problem: Il ya un problème
+The route has sections with closed roads.: L'itinéraire a des sections avec des routes fermées .
+Something went wrong during processing search for city!: Une erreur s'est produite lors du traitement de la recherche de ville!
+Must be less than OR equal End.: Doit être inférieur ou égal à Fin
+Must be greater than OR equal Start.: Doit être supérieur ou égal au début
+Something went wrong during processing search for offers!: Une erreur s'est produite lors du traitement de la recherche d'offres!
+Something went wrong during processing search for voyage!: Une erreur s'est produite lors du traitement de la recherche de voyage!
+Something went wrong during processing search for hosting!: Une erreur s'est produite lors du traitement de la recherche d'hébergement!
+Something went wrong during processing search for meetup!: Une erreur s'est produite lors du traitement de la recherche de Meetup!
+Something went wrong during processing your demands!: Une erreur s'est produite lors du traitement de vos demandes!
+Something went wrong during processing your offers!: Une erreur s'est produite lors du traitement de vos offres!
+Something went wrong during processing search for demands!: Une erreur s'est produite lors du traitement de la recherche de demandes!
+Seat available: Place disponible
+Seats available: Places disponible
+
+Are you sure you want to delete this request?: Voulez-vous vraiment supprimer cette demande?
+Are you sure you want to finish this Deal?: Etes-vous sûr de vouloir terminer cette Deal?
+Are you sure you want to delete this Deal?: Voulez-vous vraiment supprimer cette Deal?
+'NOTE : If you add this driver to the deal': 'REMARQUE: si vous ajoutez ce Driver à ce Deal,'
+'All the driver requests will be canceled before adding': Toutes les demandes de Driver seront annulées avant l'ajout
+'Are you sure you want to add this driver to your deal?': Voulez-vous vraiment ajouter ce Driver à votre Deal?
+Are you sure you want to finish this deal?: Etes-vous sûr de vouloir terminer cette Deal?
+Are you sure you want to accept this Deal?: Voulez-vous vraiment accepter cette Deal?
+Are you sure you want to reject this Deal?: Voulez-vous vraiment refuser cette Deal?
+Are you sure you want to reject this hosting request?: Voulez-vous vraiment rejeter cette demande d'hébergement?
+Are you sure you want to accept this hosting request?: Voulez-vous vraiment accepter cette demande d'hébergement?
+Are you sure you want to DONE this hosting ?: Êtes-vous sûr de vouloir DONE cet hébergement?
+Do you really want to remove this comment ?: Voulez-vous vraiment supprimer ce commentaire?
+Are you sure you want to remove this user ?: Voulez-vous vraiment supprimer cet utilisateur?
+Are you sure you want to reject this request ?: Voulez-vous vraiment rejeter cette demande?
+Are you sure you want to accept this request ?: Voulez-vous vraiment accepter cette demande?
+Do you really want to leave this meetup ?: Voulez-vous vraiment quitter ce meetup?
+Are you sure you want to add this user ?: Voulez-vous vraiment ajouter cet utilisateur?
+Are you sure you want to delete your account?: Voulez-vous vraiment supprimer votre compte?
 

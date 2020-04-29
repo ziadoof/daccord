@@ -113,16 +113,13 @@ class Message extends BaseMessage
     public function dateFormat(\DateTime $date){
         $now  = new \DateTime('now');
         $interval = date_diff($date, $now)->days;
-        $dateString = $date->format('d M y').(' at ').$date->format('H:i');
+        $dateString = $date->format('d M').(' - ').$date->format('H:i');
         $houreString = $date->format('H:i');
         switch (true) {
             case $interval === 0:
                 return $houreString;
                 break;
-            case $interval === 1:
-                return 'Yesterday '.$houreString;
-                break;
-            case $interval >1:
+            default:
                 return $dateString;
                 break;
         }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Translator from "bazinga-translator";
 
 class ListsAds extends React.Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class ListsAds extends React.Component {
 
             const id = result.id;
             const generalCategory = result.generalCategory;
-            const category = result.category;
+            const category = Translator.trans(result.category);
             const imageOne = result.imageOne;
             const imageTow = result.imageTow;
             const imageThree = result.imageThree;
@@ -193,13 +194,13 @@ class ListsAds extends React.Component {
                                 <ul className="pagination justify-content-center">
                                     <li className="page-item">
                                         <a  id={this.state.currentPage-1} onClick={this.handleClick} className="page-link" >
-                                            « Previous
+                                            « {Translator.trans('Previous')}
                                         </a>
                                     </li>
                                     {renderPageNumbers}
                                     <li className="page-item">
                                         <a  id={this.state.currentPage+1} onClick={this.handleClick} className="page-link">
-                                            Next »
+                                            {Translator.trans('Next')} »
                                         </a>
                                     </li>
                                 </ul>
@@ -211,7 +212,7 @@ class ListsAds extends React.Component {
         } else {
             return (
                 <div key={Math.random()}>
-                    <h1 className="text-center">There is no results :(</h1>
+                    <h1 className="text-center">{Translator.trans('There is no results')}</h1>
                 </div>
             );
         }

@@ -12,11 +12,13 @@ $(function(){
             data: data,
             success: function(data) {
                 var $category_selector = $('#offer_category');
+                let all_category = Translator.trans('Category');
 
-                $category_selector.html('<option>Category</option>');
+                $category_selector.html('<option value="">' + all_category + '</option>');
 
                 for (var i=0, total = data.length; i < total; i++) {
-                    $category_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    let name = Translator.trans(data[i].name);
+                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
                 }
             }
         });
@@ -35,10 +37,13 @@ $(function(){
             success: function(data) {
                 var $category_selector = $('#demand_category');
 
-                $category_selector.html('<option>Category</option>');
+                let all_category = Translator.trans('Category');
+
+                $category_selector.html('<option value="">' + all_category + '</option>');
 
                 for (var i=0, total = data.length; i < total; i++) {
-                    $category_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    let name = Translator.trans(data[i].name);
+                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
                 }
             }
         });
@@ -60,11 +65,11 @@ $(function(){
             success: function(data) {
 
                 var $category_selector = $('#offer_search_category');
-                let all_category = Translator.trans('All category', {}, 'category');
+                let all_category = Translator.trans('Category');
 
                 $category_selector.html('<option value="">' + all_category + '</option>');
                 for (var i=0, total = data.length; i < total; i++) {
-                    let name = Translator.trans(data[i].name, {}, 'category');
+                    let name = Translator.trans(data[i].name);
                     $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
                 }
             }
@@ -85,10 +90,13 @@ $(function(){
             success: function(data) {
                 var $category_selector = $('#demand_search_category');
 
-                $category_selector.html('<option value="">' + 'All categorys' + '</option>');
+                let all_category = Translator.trans('Category');
+
+                $category_selector.html('<option value="">' + all_category + '</option>');
 
                 for (var i=0, total = data.length; i < total; i++) {
-                    $category_selector.append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                    let name = Translator.trans(data[i].name);
+                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
                 }
             }
         });

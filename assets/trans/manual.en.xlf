@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="manual.en">
+    <unit id="iii9dvZ" name="Near me">
+      <segment>
+        <source>Near me</source>
+        <target>Near me</target>
+      </segment>
+    </unit>
+    <unit id="O8Pb6IV" name="My area">
+      <segment>
+        <source>My area</source>
+        <target>My area</target>
+      </segment>
+    </unit>
+    <unit id="zFuBc2f" name="10 Km">
+      <segment>
+        <source>10 Km</source>
+        <target>10 Km</target>
+      </segment>
+    </unit>
+    <unit id="8mlptjc" name="20 Km">
+      <segment>
+        <source>20 Km</source>
+        <target>20 Km</target>
+      </segment>
+    </unit>
+    <unit id="ojIXy6h" name="30 Km">
+      <segment>
+        <source>30 Km</source>
+        <target>30 Km</target>
+      </segment>
+    </unit>
+    <unit id="qKzjb1O" name="40 Km">
+      <segment>
+        <source>40 Km</source>
+        <target>40 Km</target>
+      </segment>
+    </unit>
+    <unit id="s9SYvo1" name="50 Km">
+      <segment>
+        <source>50 Km</source>
+        <target>50 Km</target>
+      </segment>
+    </unit>
+    <unit id="CzVVED." name="75 Km">
+      <segment>
+        <source>75 Km</source>
+        <target>75 Km</target>
+      </segment>
+    </unit>
+    <unit id="aMScQuy" name="100 Km">
+      <segment>
+        <source>100 Km</source>
+        <target>100 Km</target>
+      </segment>
+    </unit>
+    <unit id="J9OzIuL" name="125 Km">
+      <segment>
+        <source>125 Km</source>
+        <target>125 Km</target>
+      </segment>
+    </unit>
+    <unit id="duM_Gd8" name="150 Km">
+      <segment>
+        <source>150 Km</source>
+        <target>150 Km</target>
+      </segment>
+    </unit>
+    <unit id="06AI7xM" name="Region">
+      <segment>
+        <source>Region</source>
+        <target>Region</target>
+      </segment>
+    </unit>
+    <unit id="CdgG8vY" name="Select Region">
+      <segment>
+        <source>Select Region</source>
+        <target>Select Region</target>
+      </segment>
+    </unit>
+    <unit id="_JKbW_X" name="General Category">
+      <segment>
+        <source>General Category</source>
+        <target>General Category</target>
+      </segment>
+    </unit>
+    <unit id="SoVxHMH" name="All category">
+      <segment>
+        <source>All category</source>
+        <target>All category</target>
+      </segment>
+    </unit>
+    <unit id="TlI6Ctf" name="What are you looking for....">
+      <segment>
+        <source>What are you looking for....</source>
+        <target>What are you looking for....</target>
+      </segment>
+    </unit>
+    <unit id="uhGL9.y" name="English">
+      <segment>
+        <source>English</source>
+        <target>English</target>
+      </segment>
+    </unit>
+    <unit id="plm2DSR" name="German">
+      <segment>
+        <source>German</source>
+        <target>German</target>
+      </segment>
+    </unit>
+    <unit id=".h2cfbN" name="Italian">
+      <segment>
+        <source>Italian</source>
+        <target>Italian</target>
+      </segment>
+    </unit>
+    <unit id="NBEFnLj" name="Spanish">
+      <segment>
+        <source>Spanish</source>
+        <target>Spanish</target>
+      </segment>
+    </unit>
+    <unit id="b0JDA.o" name="Ukrainian">
+      <segment>
+        <source>Ukrainian</source>
+        <target>Ukrainian</target>
+      </segment>
+    </unit>
+    <unit id="dwNB1ui" name="Polish">
+      <segment>
+        <source>Polish</source>
+        <target>Polish</target>
+      </segment>
+    </unit>
+    <unit id="RfFhRMG" name="Dutch">
+      <segment>
+        <source>Dutch</source>
+        <target>Dutch</target>
+      </segment>
+    </unit>
+    <unit id="bnqsZds" name="Turkish">
+      <segment>
+        <source>Turkish</source>
+        <target>Turkish</target>
+      </segment>
+    </unit>
+    <unit id="CWuGHfZ" name="Romanian">
+      <segment>
+        <source>Romanian</source>
+        <target>Romanian</target>
+      </segment>
+    </unit>
+    <unit id="uvtm8yz" name="Arabic">
+      <segment>
+        <source>Arabic</source>
+        <target>Arabic</target>
+      </segment>
+    </unit>
+    <unit id="YBvLraP" name="Austro-Bavarian">
+      <segment>
+        <source>Austro-Bavarian</source>
+        <target>Austro-Bavarian</target>
+      </segment>
+    </unit>
+    <unit id="W8xArfb" name="Russian">
+      <segment>
+        <source>Russian</source>
+        <target>Russian</target>
+      </segment>
+    </unit>
+    <unit id="WIAeaQf" name="Hungarian">
+      <segment>
+        <source>Hungarian</source>
+        <target>Hungarian</target>
+      </segment>
+    </unit>
+    <unit id="XHTluBA" name="Greek">
+      <segment>
+        <source>Greek</source>
+        <target>Greek</target>
+      </segment>
+    </unit>
+    <unit id="i0Y_ojp" name="Czech">
+      <segment>
+        <source>Czech</source>
+        <target>Czech</target>
+      </segment>
+    </unit>
+    <unit id="mLAbiQa" name="Portuguese">
+      <segment>
+        <source>Portuguese</source>
+        <target>Portuguese</target>
+      </segment>
+    </unit>
+    <unit id="qJqTKdP" name="Swedish">
+      <segment>
+        <source>Swedish</source>
+        <target>Swedish</target>
+      </segment>
+    </unit>
+    <unit id="7NmGCUu" name="Bulgarian">
+      <segment>
+        <source>Bulgarian</source>
+        <target>Bulgarian</target>
+      </segment>
+    </unit>
+    <unit id="nQNnRXz" name="Albanian">
+      <segment>
+        <source>Albanian</source>
+        <target>Albanian</target>
+      </segment>
+    </unit>
+    <unit id="4pIvZ1H" name="Slovak">
+      <segment>
+        <source>Slovak</source>
+        <target>Slovak</target>
+      </segment>
+    </unit>
+    <unit id="ipd59CE" name="Chinese">
+      <segment>
+        <source>Chinese</source>
+        <target>Chinese</target>
+      </segment>
+    </unit>
+    <unit id="vk7pBtP" name="Japanese">
+      <segment>
+        <source>Japanese</source>
+        <target>Japanese</target>
+      </segment>
+    </unit>
+    <unit id="ZwgfsqC" name="Indian">
+      <segment>
+        <source>Indian</source>
+        <target>Indian</target>
+      </segment>
+    </unit>
+    <unit id="8lSZ6d9" name="Vietnamese">
+      <segment>
+        <source>Vietnamese</source>
+        <target>Vietnamese</target>
+      </segment>
+    </unit>
+    <unit id="dCiQmhB" name="Persian">
+      <segment>
+        <source>Persian</source>
+        <target>Persian</target>
+      </segment>
+    </unit>
+    <unit id="T_G7Z.O" name="Indonesian">
+      <segment>
+        <source>Indonesian</source>
+        <target>Indonesian</target>
+      </segment>
+    </unit>
+    <unit id="KB5fQHi" name="Number of persons">
+      <segment>
+        <source>Number of persons</source>
+        <target>Number of persons</target>
+      </segment>
+    </unit>
+    <unit id="a4ayc.8" name="1">
+      <segment>
+        <source>1</source>
+        <target>1</target>
+      </segment>
+    </unit>
+    <unit id="1HNeOiZ" name="2">
+      <segment>
+        <source>2</source>
+        <target>2</target>
+      </segment>
+    </unit>
+    <unit id="TgdAhWK" name="3">
+      <segment>
+        <source>3</source>
+        <target>3</target>
+      </segment>
+    </unit>
+    <unit id="SyJ3d9T" name="4">
+      <segment>
+        <source>4</source>
+        <target>4</target>
+      </segment>
+    </unit>
+    <unit id="7y0SfeN" name="5">
+      <segment>
+        <source>5</source>
+        <target>5</target>
+      </segment>
+    </unit>
+    <unit id="5.bAEXd" name="6">
+      <segment>
+        <source>6</source>
+        <target>6</target>
+      </segment>
+    </unit>
+    <unit id="eQJpm_Q" name="7">
+      <segment>
+        <source>7</source>
+        <target>7</target>
+      </segment>
+    </unit>
+    <unit id="cRfNiW_" name="Number of days">
+      <segment>
+        <source>Number of days</source>
+        <target>Number of days</target>
+      </segment>
+    </unit>
+    <unit id="WZ83XRm" name="Handicapped">
+      <segment>
+        <source>Handicapped</source>
+        <target>Handicapped</target>
+      </segment>
+    </unit>
+    <unit id="gFMyEoH" name="Child">
+      <segment>
+        <source>Child</source>
+        <target>Child</target>
+      </segment>
+    </unit>
+    <unit id="PyV_aEo" name="Animal">
+      <segment>
+        <source>Animal</source>
+        <target>Animal</target>
+      </segment>
+    </unit>
+    <unit id="5OsYBp1" name="Food">
+      <segment>
+        <source>Food</source>
+        <target>Food</target>
+      </segment>
+    </unit>
+    <unit id="zMoYF1d" name="Conversation">
+      <segment>
+        <source>Conversation</source>
+        <target>Conversation</target>
+      </segment>
+    </unit>
+    <unit id="FT873yV" name="City tour">
+      <segment>
+        <source>City tour</source>
+        <target>City tour</target>
+      </segment>
+    </unit>
+    <unit id="brALSyY" name="Music">
+      <segment>
+        <source>Music</source>
+        <target>Music</target>
+      </segment>
+    </unit>
+    <unit id="eIBwH6n" name="Video game">
+      <segment>
+        <source>Video game</source>
+        <target>Video game</target>
+      </segment>
+    </unit>
+    <unit id="lB3kRHs" name="Movie">
+      <segment>
+        <source>Movie</source>
+        <target>Movie</target>
+      </segment>
+    </unit>
+    <unit id="fnU2qV3" name="Television">
+      <segment>
+        <source>Television</source>
+        <target>Television</target>
+      </segment>
+    </unit>
+    <unit id="a1tMFMd" name="Search by title">
+      <segment>
+        <source>Search by title</source>
+        <target>Search by title</target>
+      </segment>
+    </unit>
+    <unit id="8GF.9gx" name="Select type of meetup">
+      <segment>
+        <source>Select type of meetup</source>
+        <target>Select type of meetup</target>
+      </segment>
+    </unit>
+    <unit id="mghd2FT" name="Sport">
+      <segment>
+        <source>Sport</source>
+        <target>Sport</target>
+      </segment>
+    </unit>
+    <unit id="I9LXNUP" name="Dance">
+      <segment>
+        <source>Dance</source>
+        <target>Dance</target>
+      </segment>
+    </unit>
+    <unit id="HIrIZ.B" name="Visit">
+      <segment>
+        <source>Visit</source>
+        <target>Visit</target>
+      </segment>
+    </unit>
+    <unit id="czEKqSD" name="Playing cards">
+      <segment>
+        <source>Playing cards</source>
+        <target>Playing cards</target>
+      </segment>
+    </unit>
+    <unit id="H7kwXsm" name="Cup">
+      <segment>
+        <source>Cup</source>
+        <target>Cup</target>
+      </segment>
+    </unit>
+    <unit id="7ddPGNe" name="Hang around">
+      <segment>
+        <source>Hang around</source>
+        <target>Hang around</target>
+      </segment>
+    </unit>
+    <unit id="LloZlAY" name="Bicycle">
+      <segment>
+        <source>Bicycle</source>
+        <target>Bicycle</target>
+      </segment>
+    </unit>
+    <unit id="kkB12bT" name="Picnic">
+      <segment>
+        <source>Picnic</source>
+        <target>Picnic</target>
+      </segment>
+    </unit>
+    <unit id="nRbb6h1" name="Museum">
+      <segment>
+        <source>Museum</source>
+        <target>Museum</target>
+      </segment>
+    </unit>
+    <unit id="iewLuBd" name="Cinema">
+      <segment>
+        <source>Cinema</source>
+        <target>Cinema</target>
+      </segment>
+    </unit>
+    <unit id="0722Xl2" name="Cooking">
+      <segment>
+        <source>Cooking</source>
+        <target>Cooking</target>
+      </segment>
+    </unit>
+    <unit id="3.kktp_" name="Movies">
+      <segment>
+        <source>Movies</source>
+        <target>Movies</target>
+      </segment>
+    </unit>
+    <unit id="UnDxPxG" name="Informatics">
+      <segment>
+        <source>Informatics</source>
+        <target>Informatics</target>
+      </segment>
+    </unit>
+    <unit id="p1fGtAO" name="Lecture">
+      <segment>
+        <source>Lecture</source>
+        <target>Lecture</target>
+      </segment>
+    </unit>
+    <unit id="0rmPtTc" name="Travel">
+      <segment>
+        <source>Travel</source>
+        <target>Travel</target>
+      </segment>
+    </unit>
+    <unit id="_X6doOO" name="Other">
+      <segment>
+        <source>Other</source>
+        <target>Other</target>
+      </segment>
+    </unit>
+    <unit id="qLaMV2y" name="Max Number of participants">
+      <segment>
+        <source>Max Number of participants</source>
+        <target>Max Number of participants</target>
+      </segment>
+    </unit>
+    <unit id="LGJCMs3" name="8">
+      <segment>
+        <source>8</source>
+        <target>8</target>
+      </segment>
+    </unit>
+    <unit id="GVgeJ95" name="9">
+      <segment>
+        <source>9</source>
+        <target>9</target>
+      </segment>
+    </unit>
+    <unit id="SkTcFTZ" name="10">
+      <segment>
+        <source>10</source>
+        <target>10</target>
+      </segment>
+    </unit>
+    <unit id="T8grJq7" name="11">
+      <segment>
+        <source>11</source>
+        <target>11</target>
+      </segment>
+    </unit>
+    <unit id="a1HUMd9" name="12">
+      <segment>
+        <source>12</source>
+        <target>12</target>
+      </segment>
+    </unit>
+    <unit id="g1aYOwc" name="Departure">
+      <segment>
+        <source>Departure</source>
+        <target>Departure</target>
+      </segment>
+    </unit>
+    <unit id="eUrbvGw" name="Arrival">
+      <segment>
+        <source>Arrival</source>
+        <target>Arrival</target>
+      </segment>
+    </unit>
+    <unit id="mcQKtAW" name="Date">
+      <segment>
+        <source>Date</source>
+        <target>Date</target>
+      </segment>
+    </unit>
+    <unit id="aNhP3MK" name="Highway">
+      <segment>
+        <source>Highway</source>
+        <target>Highway</target>
+      </segment>
+    </unit>
+    <unit id="RPXj__x" name="Comment">
+      <segment>
+        <source>Comment</source>
+        <target>Comment</target>
+      </segment>
+    </unit>
+    <unit id="k8kchR5" name="Price">
+      <segment>
+        <source>Price</source>
+        <target>Price</target>
+      </segment>
+    </unit>
+    <unit id="Um4Ah8w" name="Description">
+      <segment>
+        <source>Description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

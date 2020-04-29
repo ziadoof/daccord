@@ -17,5 +17,5 @@ translation:
         enabled: true
 
     auto_add_missing_translations:
-        enabled: true
+        enabled: false
         config_name: 'default'

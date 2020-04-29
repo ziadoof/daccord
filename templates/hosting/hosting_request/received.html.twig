@@ -65,14 +65,14 @@
                             <form>
                                 <a class="btn btn-outline-success  btn-block"
                                    href="{{ path('hosting_request_treatment', {'hostingRequest':hosting.id, 'type': 'accepted'}) }}"
-                                   onclick="return confirm('Are you sure you want to accept this hosting request?');">{% trans %}Accept the request {% endtrans %}</a>
+                                   onclick="return confirm(Translator.trans('Are you sure you want to accept this hosting request?'));">{% trans %}Accept the request {% endtrans %}</a>
                             </form>
                         </div>
                         <div class="col-md-4">
                             <form>
                                 <a class="btn btn-outline-danger  btn-block"
                                    href="{{ path('hosting_request_treatment', {'hostingRequest':hosting.id, 'type': 'rejected'}) }}"
-                                   onclick="return confirm('Are you sure you want to reject this hosting request?');">{% trans %} Reject the request{% endtrans %}</a>
+                                   onclick="return confirm(Translator.trans('Are you sure you want to reject this hosting request?'));">{% trans %} Reject the request{% endtrans %}</a>
                             </form>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
                                         <form>
                                             <a class="btn btn-success  btn-block"
                                                href="{{ path('done_hosting', {'hosting':hosting.id}) }}"
-                                               onclick="return confirm('Are you sure you want to DONE this hosting ?');">{% trans %} DONE HOSTING{% endtrans %}</a>
+                                               onclick="return confirm(Translator.trans('Are you sure you want to DONE this hosting ?'));">{% trans %} DONE HOSTING{% endtrans %}</a>
                                         </form>
                                     </div>
                                 </div>

@@ -1,10 +1,11 @@
 import tail from './tail.datetime-full';
+import Translator from "bazinga-translator";
 /*date time form for hosting request and new meetup*/
 //------------------------------------//
 document.addEventListener("DOMContentLoaded", function(){
 
     tail.DateTime("#meetup_startAt",{
-        locale: "fr",
+        locale: Translator.locale,
         time12h: false,
         timeSeconds: null,
         weekStart: 1,
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
         dateStart:  new Date()
     });
     tail.DateTime("#meetup_endAt",{
-        locale: "fr",
+        locale: Translator.locale,
         time12h: false,
         timeSeconds:null,
         weekStart:1,
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(){
         tail.DateTime("#meetup_endAt").remove();
 
         tail.DateTime("#meetup_endAt",{
-            locale: "fr",
+            locale: Translator.locale,
             time12h: false,
             timeSeconds:null,
             weekStart:1,
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function(){
         tail.DateTime("#meetup_startAt").remove();
 
         tail.DateTime("#meetup_startAt",{
-            locale: "fr",
+            locale: Translator.locale,
             time12h: false,
             timeSeconds: null,
             weekStart: 1,
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(){
 document.addEventListener("DOMContentLoaded", function(){
 
         tail.DateTime("#hosting_request_startDate",{
-            locale: "fr",
+            locale: Translator.locale,
             time12h: false,
             timeSeconds: null,
             weekStart: 1,
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function(){
         });
 
         tail.DateTime("#hosting_request_endDate",{
-            locale: "fr",
+            locale: Translator.locale,
             time12h: false,
             timeSeconds:null,
             weekStart:1,
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function(){
             tail.DateTime("#hosting_request_endDate").remove();
 
             tail.DateTime("#hosting_request_endDate",{
-                locale: "fr",
+                locale: Translator.locale,
                 time12h: false,
                 timeSeconds:null,
                 weekStart:1,
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function(){
             tail.DateTime("#hosting_request_startDate").remove();
 
             tail.DateTime("#hosting_request_startDate",{
-                locale: "fr",
+                locale: Translator.locale,
                 time12h: false,
                 timeSeconds: null,
                 weekStart: 1,
@@ -178,7 +179,7 @@ $(document).ready(function () {
                 return theDate >= paramDate;
             }
             return isNaN(value) && isNaN($(params).val()) || (Number(value) >= Number($(params).val()));
-        }, 'Must be greater than OR equal Start.');
+        }, Translator.trans('Must be greater than OR equal Start.'));
 
     $.validator.addMethod("dateLessThan",
 
@@ -192,7 +193,7 @@ $(document).ready(function () {
             }
 
             return isNaN(value) && isNaN($(params).val()) || (Number(value) <= Number($(params).val()));
-        }, 'Must be less than OR equal End.');
+        }, Translator.trans('Must be less than OR equal End.'));
 
 
 

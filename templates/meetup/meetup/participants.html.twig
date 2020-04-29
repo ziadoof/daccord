@@ -25,14 +25,14 @@
                     </div>
                     {% if app.user is same as(meetup.creator) %}
                     <div class="col-md-2 cancel-joining-user">
-                        <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Are you sure you want to remove this user ?');">
+                        <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to remove this user ?'));">
                             <button class="btn"><i class="fas fa-user-slash mt-1"></i></button>
                         </form>
                     </div>
                     {% endif %}
                     {% if app.user is same as(user) %}
                         <div class="col-md-2 cancel-joining-user">
-                            <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Do you really want to leave this meetup ?');">
+                            <form method="post" action="{{ path('cancel_joining',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm(Translator.trans('Do you really want to leave this meetup ?'));">
                                 <button class="btn float-right"><i class="fas fa-user-slash mt-1"></i></button>
                             </form>
                         </div>
@@ -120,7 +120,7 @@
                     {% if app.user is same as(meetup.creator) %}
                         {% if  not meetup.participantFull() %}
                         <div class="col-md-2 joining-user ">
-                            <form method="post" action="{{ path('add_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Are you sure you want to add this user ?');">
+                            <form method="post" action="{{ path('add_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to add this user ?'));">
                                 <div class="col">
                                     <button class="btn"><i class="fas fa-user-plus mt-1 float-right"></i></button>
                                 </div>
@@ -128,14 +128,14 @@
                         </div>
                         {% endif %}
                         <div class="col-md-2 cancel-joining-user">
-                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Are you sure you want to remove this user ?');">
+                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to remove this user ?'));">
                                 <button class="btn"><i class="fas fa-user-slash mt-1 "></i></button>
                             </form>
                         </div>
                     {% endif %}
                     {% if app.user is same as(user) %}
                         <div class="col-md-4 cancel-joining-user">
-                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm('Do you really want to leave this meetup ?');">
+                            <form method="post" action="{{ path('cancel_joining_waiting',{'meetup':meetup.id,'user':user.id}) }}" onsubmit="return confirm(Translator.trans('Do you really want to leave this meetup ?'));">
                                 <button class="btn float-right"><i class="fas fa-user-slash mt-1"></i></button>
                             </form>
                         </div>
@@ -181,12 +181,12 @@
                 {% if not request.meetup.isFull() %}
                     {% if request.treatment is same as('Pending')  %}
                     <div class="col-md-3 mt-2">
-                        <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Accept'}) }}" onsubmit="return confirm('Are you sure you want to accept this request ?');">
+                        <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Accept'}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to accept this request ?'));">
                             <button class="btn btn-success btn-block">{% trans %} Accept{% endtrans %}</button>
                         </form>
                     </div>
                     <div class="col-md-3 mt-2">
-                        <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                        <form method="post" action="{{ path('join_treatment',{'joinRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to reject this request ?'));">
                             <button class="btn btn-danger btn-block">{% trans %} Reject{% endtrans %}</button>
                         </form>
                     </div>
