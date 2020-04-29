@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    app.locales: [en, fr]
     adsimages: '%kernel.project_dir%/public/assets/images/annonce/'
     profileimages: '%kernel.project_dir%/public/assets/images/profile/'
 
@@ -124,6 +125,7 @@ services:
 
     App\Server\Chat:
         class: App\Server\Chat
+
 
 
 

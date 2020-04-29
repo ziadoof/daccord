@@ -26,4 +26,6 @@ return [
     JMS\JobQueueBundle\JMSJobQueueBundle::class => ['all' => true],
     Twig\CssInliner\Bundle\TwigCssInlinerBundle::class => ['all' => true],
     Twig\Inky\Bundle\TwigInkyBundle::class => ['all' => true],
+    Translation\Bundle\TranslationBundle::class => ['all' => true],
+    Bazinga\Bundle\JsTranslationBundle\BazingaJsTranslationBundle::class => ['all' => true],
 ];

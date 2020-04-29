@@ -18,6 +18,7 @@
         "jms/job-queue-bundle": "^2.0.1",
         "knplabs/knp-paginator-bundle": "^4.0",
         "mgilet/notification-bundle": "^3.1",
+        "php-translation/symfony-bundle": "0.9.0",
         "pugx/autocompleter-bundle": "^1.4",
         "ramsey/uuid": "^3.9",
         "react/zmq": "^0.4.0",
@@ -30,6 +31,7 @@
         "symfony/expression-language": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/http-kernel": "4.2.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "^1.0",
         "symfony/process": "4.2.*",
@@ -51,7 +53,8 @@
         "twig/cssinliner-extra": "^3.0",
         "twig/extensions": "^1.5",
         "twig/inky-extension": "^2.0",
-        "twig/inky-extra": "^3.0"
+        "twig/inky-extra": "^3.0",
+        "willdurand/js-translation-bundle": "^3.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

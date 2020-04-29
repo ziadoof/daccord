@@ -1,9 +1,9 @@
 {{ form_start(form) }}
     <div class="row ">
         <div class="col-md-6 offset-3 border-deal">
-            <p class="my-2 mx-4 blued text-center">Once the order is created, all
-                <span class="rosed">On est d'accord</span>
-                users located within one kilometer area will be able to view your order.
+            <p class="my-2 mx-4  text-center">{% trans %}Once the invitation is created, all {% endtrans %}
+                <span class="blued">FOR<span class="rosed">DEAL</span>ING</span>
+                {% trans %} users located within one kilometer area will be able to view your invitation.{% endtrans %}
             </p>
             <div class="row pt-3">
                 <div class="col-md-5 ">
@@ -13,7 +13,7 @@
                     {{ form_row(form.duration) }}
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-outline-info btn-block">{{ button_label|default('Create') }}</button>
+                    <button class="btn btn-outline-info btn-block">{% trans %} Create{% endtrans %}</button>
                 </div>
             </div>
 

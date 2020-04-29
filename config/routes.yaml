@@ -31,7 +31,7 @@ fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 mgilet_notification:
-    resource: "@MgiletNotificationBundle/Controller/"
+    resource: App\Controller\NotificationController
     prefix: /notifications
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
@@ -45,3 +45,10 @@ JMSJobQueueBundle:
     resource: "@JMSJobQueueBundle/Controller/"
     type: annotation
     prefix: /admin/jobs
+
+_bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+
+
+
+

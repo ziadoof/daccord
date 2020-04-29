@@ -174,7 +174,7 @@ class Notification
             'link' =>'/deal/' . $deal->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage()
+            'senderImage'=>$sender->photoProfile()
         );
 
             $this->pushNotification($pushedNotification);
@@ -207,7 +207,7 @@ class Notification
             'link' =>'/driver_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage()
+            'senderImage'=>$sender->photoProfile()
         );
 
         $this->pushNotification($pushedNotification);
@@ -239,7 +239,7 @@ class Notification
             'link' =>'/deal/'.$driverRequest->getDeal()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
             'subject' =>$type
         );
 
@@ -272,7 +272,7 @@ class Notification
             'link' =>'/driver_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
 
         $this->pushNotification($pushedNotification);
@@ -480,7 +480,7 @@ class Notification
             'link' =>$firstLink,
             'notificationId'=>$firstNotificationId,
             'notifiableId'=>$firstNotifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
 
 
@@ -496,7 +496,7 @@ class Notification
                 'link' =>$secondLink,
                 'notificationId'=>$secondNotificationId,
                 'notifiableId'=>$secondNotifiableId,
-                'senderImage'=>$sender->getProfileImage(),
+                'senderImage'=>$sender->photoProfile(),
             );
             $this->pushNotification($secondNotification);
         }
@@ -575,7 +575,7 @@ class Notification
             'link' =>'/profile/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$vote->getVoter()->getProfileImage(),
+            'senderImage'=>$vote->getVoter()->photoProfile(),
         );
 
 
@@ -603,7 +603,7 @@ class Notification
             'link' =>'/profile/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$vote->getVoter()->getProfileImage(),
+            'senderImage'=>$vote->getVoter()->photoProfile(),
         );
 
 
@@ -634,7 +634,7 @@ class Notification
             'link' =>'/hosting_request/received',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage()
+            'senderImage'=>$sender->photoProfile()
         );
 
         $this->pushNotification($pushedNotification);
@@ -664,7 +664,7 @@ class Notification
             'link' =>'/hosting_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
             'subject' =>$type
         );
 
@@ -705,7 +705,7 @@ class Notification
             'link' =>$link,
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
 
         $this->pushNotification($pushedNotification);
@@ -763,7 +763,7 @@ class Notification
             'link' =>'/meetup/show/'.$joinRequest->getMeetup()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage()
+            'senderImage'=>$sender->photoProfile()
         );
 
         $this->pushNotification($pushedNotification);
@@ -793,7 +793,7 @@ class Notification
             'link' =>'/meetup/show/'.$joinRequest->getMeetup()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
             'subject' =>$treatment
         );
 
@@ -824,7 +824,7 @@ class Notification
             'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
             'subject' =>$options['status']
         );
         $this->pushNotification($pushedNotification);
@@ -855,7 +855,7 @@ class Notification
             'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
             'subject' =>$options['status']
         );
         $this->pushNotification($pushedNotification);
@@ -885,7 +885,7 @@ class Notification
             'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
         $this->pushNotification($pushedNotification);
     }
@@ -918,7 +918,7 @@ class Notification
                 'link' =>'/meetup/show/'.$meetup->getId(),
                 'notificationId'=>$notificationId,
                 'notifiableId'=>$notifiableId,
-                'senderImage'=>$sender->getProfileImage(),
+                'senderImage'=>$sender->photoProfile(),
             );
             $this->pushNotification($pushedNotification);
         }
@@ -947,7 +947,7 @@ class Notification
             'link' =>'/meetup/show/'.$meetup->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$vote->getVoter()->getProfileImage(),
+            'senderImage'=>$vote->getVoter()->photoProfile(),
         );
 
 
@@ -978,7 +978,7 @@ class Notification
             'link' =>'/voyage/'.$voyageRequest->getVoyage()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage()
+            'senderImage'=>$sender->photoProfile()
         );
 
         $this->pushNotification($pushedNotification);
@@ -1009,7 +1009,7 @@ class Notification
             'link' =>'/voyage/'.$voyageRequest->getVoyage()->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
             'subject' =>$treatment
         );
 
@@ -1041,7 +1041,7 @@ class Notification
             'link' =>'/voyage/'.$voyage->getId(),
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
         $this->pushNotification($pushedNotification);
     }
@@ -1153,7 +1153,7 @@ class Notification
             'link' =>'/profile/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$vote->getVoter()->getProfileImage(),
+            'senderImage'=>$vote->getVoter()->photoProfile(),
         );
 
 
@@ -1184,7 +1184,7 @@ class Notification
             'link' =>'/voyage/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
         $this->pushNotification($pushedNotification);
     }
@@ -1242,7 +1242,7 @@ class Notification
             'link' =>'/driver_request/',
             'notificationId'=>$notificationId,
             'notifiableId'=>$notifiableId,
-            'senderImage'=>$sender->getProfileImage(),
+            'senderImage'=>$sender->photoProfile(),
         );
         $this->pushNotification($pushedNotification);
     }

@@ -1,5 +1,5 @@
 {% block content %}
-    <h1>Carpool index</h1>
+    <h1>{% trans %} Carpool index{% endtrans %}</h1>
     {# for admin#}
 {% for driver in drivers %}
     <a href="{{ path('driver_show',{'id':driver.id}) }}">

@@ -1,6 +1,6 @@
 {% extends 'layout_user.html.twig' %}
 
-{% block title %}Voyage{% endblock %}
+{% block title %}{% trans %} Voyage{% endtrans %}{% endblock %}
 
 {% block content %}
     <div class="one-voyage">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8 offset-2 mt-4">
-                                <span class="d-block blued">Description</span>
+                                <span class="d-block blued">{% trans %} Description{% endtrans %}</span>
                                 {% if voyage.parent %}
                                     {{ voyage.parent.description }}
                                 {% else %}
@@ -98,7 +98,7 @@
                         <div class="row">
                             <div class="col my-2 text-center">
                                 <span class="blued d-block"><i class="fas fa-road"></i></span>
-                                <span class="rosed"> This voyage uses the highway </span>
+                                <span class="rosed"> {% trans %} This voyage uses the highway {% endtrans %}</span>
                             </div>
                         </div>
                         {% endif %}
@@ -106,7 +106,7 @@
                             <div class="col-md-6 offset-2 mt-4">
                                 <div class="">
                                     {% if voyage.creator.isPossible %}
-                                        <span class="d-block blued mb-2">Possibility to</span>
+                                        <span class="d-block blued mb-2">{% trans %} Possibility to{% endtrans %}</span>
                                         {% if voyage.creator.bag %}
                                             <span class="badge badge-info py-2 px-2 mr-1"><h1><i class="fas fa-suitcase-rolling"></i></h1></span>
                                         {% endif %}
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="mt-2">
                                     {% if voyage.creator.isShare %}
-                                        <span class="d-block blued ">We can share</span>
+                                        <span class="d-block blued ">{% trans %} We can share{% endtrans %}</span>
                                         {% if voyage.creator.conversation %}
                                             <span class="badge badge-warning py-2 px-2 mr-1"><h1><i class="far fa-comments"></i></h1></span>
                                         {% endif %}
@@ -152,9 +152,9 @@
                                     {% if not voyage.isFinish() %}
                                         {% if app.user is not same as(voyage.creator.user) %}
                                             {% if voyage.availableSeats is same as(0) %}
-                                                <h7 class="inf-badge badge-danger py-2 px-2  ">No seats available</h7>
+                                                <h7 class="inf-badge badge-danger py-2 px-2">{% trans %} No seats available{% endtrans %}</h7>
                                             {% else %}
-                                                <h7 class="inf-badge badge-success py-2 px-2  ">{{ voyage.availableSeats }}{% if voyage.availableSeats >1 %}{{ ' Available seats' }}{% else %}{{ ' Available seat' }}{% endif %}</h7>
+                                                <h7 class="inf-badge badge-success py-2 px-2">{{ voyage.availableSeats }}{% if voyage.availableSeats >1 %}{% trans %} Available seats {% endtrans %}{% else %}{% trans %} Available seat {% endtrans %}{% endif %}</h7>
                                             {% endif %}
                                         {% endif %}
                                     {% endif %}
@@ -167,7 +167,7 @@
                                         {% if item['time']|date('d') is same as (voyage.parentVoyage.date|date('d')) %}
                                             {{ item['time']|date('H:i') }}<p class="white very-small text-center">.</p>
                                         {% elseif voyage.parentVoyage.date|date('d')+1 is same as (item['time']|date('d'))%}
-                                            {{ item['time']|date('H:i') }} <p class="rosed very-small text-center">Next day</p>
+                                            {{ item['time']|date('H:i') }} <p class="rosed very-small text-center">{% trans %} Next day{% endtrans %}</p>
                                         {% else %}
                                             {{ item['time']|date('H:i') }} <p class="rosed very-small text-center">{{ item['time']|date('d M') }}</p>
                                         {% endif %}
@@ -255,7 +255,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5">
-                                        <span class="float-right mt-2 mx-2 badge badge-success py-2 px-2"><h5>{{seats }} {% if seats >1 %}Seats{% else %}Seat{% endif %} reserved</h5></span>
+                                        <span class="float-right mt-2 mx-2 badge badge-success py-2 px-2"><h5>{{seats }} {% if seats >1 %}{% trans %} Seats{% endtrans %}{% else %}{% trans %} Seat{% endtrans %}{% endif %} {% trans %} reserved{% endtrans %}</h5></span>
                                     </div>
                                     <div class="col-md-1 cancel-joining-user my-1 rejected-voyage mt-2">
                                         <form method="post" action="{{ path('cancel_joining_passenger',{'voyage':voyage.id}) }}" onsubmit="return confirm('Do you really want to withdraw from this voyage ?Three points will be deducted');">
@@ -300,16 +300,16 @@
                                         <div class="row">
                                             <div class="col text-center">
                                                 {% if request.status is same as('Pending') %}
-                                                    <span class="blued ">Your request is being processed</span>
+                                                    <span class="blued ">{% trans %} Your request is being processed{% endtrans %}</span>
                                                 {% else %}
-                                                    <span class="rosed ">Your request has been rejected</span>
+                                                    <span class="rosed ">{% trans %} Your request has been rejected{% endtrans %}</span>
                                                 {% endif %}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col mb-2 ml-2">
-                                                <span class="rosed  d-block">Number of seats : {{ request.numberOfSeats }}</span>
-                                                <span class="rosed  d-inline">Description :</span>
+                                                <span class="rosed  d-block">{% trans %} Number of seats : {% endtrans %}{{ request.numberOfSeats }}</span>
+                                                <span class="rosed  d-inline">{% trans %} Description :{% endtrans %}</span>
                                                 <p class="d-inline minimize ml-2">{{ request.description }}</p>
                                             </div>
                                         </div>
@@ -318,7 +318,7 @@
                                     <div class="col-md-6 offset-3 border-deal">
                                         <div class="row py-2">
                                             <div class="col text-center">
-                                                <span class="rosed ">This voyage is finish</span>
+                                                <span class="rosed ">{% trans %} This voyage is finish{% endtrans %}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -330,23 +330,23 @@
                             {% if not voyage.isClosedVoyage %}
                                 {% if not voyage.isPartOfAllPassenger(app.user) %}
                                 <div class="col text-center my-4 white">
-                                    <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">Join request</a>
+                                    <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">{% trans %} Join request{% endtrans %}</a>
                                 </div>
                                 {% else %}
                                 <div class="col text-center my-4 white">
-                                    <span class="badge badge-danger py-2 px-2"><h6>You are a passenger on this or part of this voyage</h6></span>
+                                    <span class="badge badge-danger py-2 px-2"><h6>{% trans %} You are a passenger on this or part of this voyage{% endtrans %}</h6></span>
                                 </div>
                                 {% endif %}
                             {% else %}
                             <div class="col text-center my-4 white">
-                                <span class="badge badge-danger py-2 px-2"><h6>Close voyage</h6></span>
+                                <span class="badge badge-danger py-2 px-2"><h6>{% trans %} Closed Voyage{% endtrans %}</h6></span>
                             </div>
                             {% endif %}
                         {% else %}
                             <div class="col-md-6 offset-3 border-deal">
                                 <div class="row py-2">
                                     <div class="col text-center">
-                                        <span class="rosed ">This voyage is finish</span>
+                                        <span class="rosed ">{% trans %} This voyage is finish{% endtrans %}</span>
                                     </div>
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
             <div class="row pt-2 border-deal">
                 {#visitor#}
                 <div class="col text-center my-4 white">
-                    <a data-toggle="modal" data-target="#login" class="btn btn-info ">Log in to Join</a>
+                    <a data-toggle="modal" data-target="#login" class="btn btn-info ">{% trans %} Log in to Join{% endtrans %}</a>
                 </div>
             </div>
         {% endif %}
@@ -368,7 +368,7 @@
             {#creator#}
             {% if voyage.getAllVoyageRequests() %}
             <div class="col-md-5  py-2">
-                <h5 class="blued text-center">Passengers</h5>
+                <h5 class="blued text-center">{% trans %} Passengers{% endtrans %}</h5>
                 {% for passenger in voyage.getAllVoyageRequests() %}
                     {% if passenger.status is same as('Accepted') %}
                         <div class="row">
@@ -412,7 +412,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-2 justify-content-center">
-                                        <span class="badge badge-info py-1 px-2"><h5>{{ passenger.numberOfSeats }}{% if passenger.numberOfSeats >1 %} Seats{% else %} Seat{% endif %} </h5></span>
+                                        <span class="badge badge-info py-1 px-2"><h5>{{ passenger.numberOfSeats }}{% if passenger.numberOfSeats >1 %} {% trans %} Seats{% endtrans %}{% else %} {% trans %} Seat{% endtrans %}{% endif %} </h5></span>
                                     </div>
                                 </div>
                             </div>
@@ -421,7 +421,7 @@
                 {% endfor %}
             </div>
             <div class="col-md-5 offset-2  py-2">
-                <h5 class="blued text-center">Join requests</h5>
+                <h5 class="blued text-center">{% trans %} Join requests{% endtrans %}</h5>
                 {% for request in voyage.getAllVoyageRequests() %}
                     {% if request.status is same as('Pending') %}
                         <div class="row">
@@ -472,11 +472,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 ">
-                                        <span class="badge badge-info py-1 px-2 mb-2"><h3>{{ request.numberOfSeats }} {{' Seat '}} </h3></span>
+                                        <span class="badge badge-info py-1 px-2 mb-2"><h3>{{ request.numberOfSeats }} {% trans %} Seat{% endtrans %} </h3></span>
                                     </div>
                                     <div class="col-md-9 mb-2">
                                         {% if request.description %}
-                                            <span class="blued">Description:</span>
+                                            <span class="blued">{% trans %} Description:{% endtrans %}</span>
                                             <p class="d-inline minimize">{{ request.description }}</p>
                                         {% endif %}
                                     </div>
@@ -488,7 +488,7 @@
             </div>
             {% else %}
                 <div class="col my-4 mx-2 text-center">
-                    <span class=" blued">There are no requests for this <span class="rosed">voyage</span> yet</span>
+                    <span class=" blued"> {% trans %} There are no requests for this {% endtrans %}<span class="rosed">{% trans %} voyage{% endtrans %}</span> {% trans %} yet{% endtrans %}</span>
                 </div>
             {% endif %}
         </div>
@@ -501,7 +501,7 @@
                 <form method="post" action="{{ path('voyage_delete', {'id': voyage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voyage.id) }}">
-                    <button class="btn btn-danger float-right my-3">Cancel this voyage</button>
+                    <button class="btn btn-danger float-right my-3">{% trans %} Cancel this voyage{% endtrans %}</button>
                 </form>
             </div>
         </div>
@@ -520,7 +520,7 @@
                     {{ render(controller('App\\Controller\\Carpool\\VoyageRequestController::new',{ 'voyage': voyage.id  })) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                 </div>
             </div>
         </div>

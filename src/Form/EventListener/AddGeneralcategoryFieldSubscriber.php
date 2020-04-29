@@ -61,9 +61,10 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
         $formOptions = array(
             'class'         => Category::class,
             'mapped'        => false,
-            'label'         => 'General Category',
+            'label'         => 'General category',
+            'translation_domain'=> 'manual',
             'required' => true,
-            'placeholder' => 'Choisir un general Category',
+            'placeholder' => 'Select general category',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->andWhere('c.parent is null')
@@ -72,6 +73,7 @@ class AddGeneralcategoryFieldSubscriber implements EventSubscriberInterface
                     ->orderBy('c.id', 'ASC');
             },
             'choice_label' => 'name',
+            'choice_translation_domain'=> 'category',
             'attr'          => array(
                 'class' => 'generalcategory_selector',
             ),

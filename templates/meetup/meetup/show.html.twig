@@ -1,6 +1,6 @@
 {% extends 'meetup/layout_meetup.html.twig' %}
 
-{% block title %}Meetup{% endblock %}
+{% block title %}{% trans %} Meetup{% endtrans %}{% endblock %}
 
 {% block meetup %}
     <div class="meetup-show">
@@ -49,32 +49,32 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="">
-                                    <span class=" mt-3"><span class="blued">{{ 'Type : ' }}</span>{{ meetup.type }}</span>
+                                    <span class=" mt-3"><span class="blued">{% trans %} Type :{% endtrans %}</span>{{ meetup.type|trans }}</span>
                                 </div>
                                 {% if app.user is not same as(null) %}
                                 <div class="">
                                     {% if meetup.place %}
-                                    <span class="meetup-text mt-3"><span class="blued">{{ 'Place : ' }}</span>{{ meetup.place }}</span>
+                                    <span class="meetup-text mt-3"><span class="blued">{% trans %} Place : {% endtrans %}</span>{{ meetup.place }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="">
                                     {% if meetup.address %}
-                                    <span class="meetup-text mt-3"><span class="blued">{{ 'Address : ' }}</span>{{ meetup.address }}</span>
+                                    <span class="meetup-text mt-3"><span class="blued">{% trans %} Address : {% endtrans %}</span>{{ meetup.address }}</span>
                                     {% endif %}
                                 </div>
                                 <div class="">
-                                        <span class="meetup-text mt-3"><span class="blued">{{ 'City : ' }}</span>{{ meetup.city.name }}</span>
+                                        <span class="meetup-text mt-3"><span class="blued">{% trans %} City : {% endtrans %}</span>{{ meetup.city.name }}</span>
                                 </div>
                                 <div class="">
                                     {% if meetup.address %}
-                                        <span class=" mt-3"><span class="blued">{{ 'Max participants : ' }}</span>{{ meetup.maxParticipants }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} Max participants :{% endtrans %} </span>{{ meetup.maxParticipants }}</span>
                                     {% endif %}
                                 </div>
                                 {% endif %}
                             </div>
                             <div class="col-md-8">
                                 <div class="mb-2 ">
-                                    <span class="blued">{{ 'Description : ' }}</span><p class="minimize meetup-text">{{ meetup.description }}</p>
+                                    <span class="blued">{% trans %} Description :{% endtrans %}</span><p class="minimize meetup-text">{{ meetup.description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -84,12 +84,12 @@
                 <div class="row">
                     <div class="col-md-9 mb-2">
                         {% if meetup.startAt|date('d m y')is same as(meetup.endAt|date('d m y')) %}
-                            <span>{{meetup.startAt|date('d M Y')}} <span class="blued"> From </span>{{ meetup.startAt|date('H:i') }}
-                                <span class="blued"> To </span> {{ meetup.endAt|date('H:i') }}
+                            <span>{{meetup.startAt|date('d M Y')}} <span class="blued">{% trans %} From{% endtrans %}  </span>{{ meetup.startAt|date('H:i') }}
+                                <span class="blued"> {% trans %} To{% endtrans %} </span> {{ meetup.endAt|date('H:i') }}
                             </span>
                         {% else %}
-                            <span><span class="blued"> From </span>{{ meetup.startAt|date('d M Y - H:i') }}
-                                <span class="blued"> To </span> {{ meetup.endAt|date('d M Y - H:i') }}
+                            <span><span class="blued">{% trans %}From {% endtrans %}  </span>{{ meetup.startAt|date('d M Y - H:i') }}
+                                <span class="blued"> {% trans %}To {% endtrans %} </span> {{ meetup.endAt|date('d M Y - H:i') }}
                             </span>
                         {% endif %}
                     </div>
@@ -118,7 +118,7 @@
                             {% else %}
                                 <button  data-toggle="modal" class="btn btn-info btn-block "
                                          data-target="#meetup_rating">
-                                    <i class="fas fa-star"></i> Rate this meetup
+                                    <i class="fas fa-star"></i> {% trans %}Rate this meetup {% endtrans %}
                                 </button>
                             {% endif %}
                                 </div>
@@ -131,10 +131,10 @@
         <div class="row">
             <div class="col-md-12" >
                 <ul class="nav nav-tabs nav-justified " id="js_meetup_tab" >
-                    <li class="nav-item "><a  href="#meetupParticipant" class="nav-link active">Participants</a></li>
-                    <li class="nav-item "><a  href="#meetupComment" class="nav-link">Comment</a></li>
+                    <li class="nav-item "><a  href="#meetupParticipant" class="nav-link active">{% trans %}Participants{% endtrans %}</a></li>
+                    <li class="nav-item "><a  href="#meetupComment" class="nav-link">{% trans %}Comment {% endtrans %}</a></li>
                     {% if meetup.isFinish() %}
-                    <li class="nav-item "><a  href="#meetupRating" class="nav-link">Rating</a></li>
+                    <li class="nav-item "><a  href="#meetupRating" class="nav-link">{% trans %} Rating{% endtrans %}</a></li>
                     {% endif %}
                 </ul>
                 <div class="tab-content" >
@@ -173,7 +173,7 @@
                     {{ render(controller('App\\Controller\\RatingController::createMeetupVote',{ 'meetup': meetup.id, 'type':'meetup' })) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import Translator from 'bazinga-translator';
+
 $(document).on('click', "#offer_search_city",function () {
     'use strict';
     /* autocomplete city on new user (this is the main feature) */
@@ -8,9 +10,9 @@ $(document).on('click', "#offer_search_city",function () {
             otherOptions: {
                 minimumInputLength: 2,
                 theme: 'boostrap',
-                formatNoMatches: 'No author found.',
-                formatSearching: 'Searching city...',
-                formatInputTooShort: 'Insert at least 2 character'
+                formatNoMatches: Translator.trans('No city found.'),
+                formatSearching: Translator.trans('Searching city...'),
+                formatInputTooShort: Translator.trans('Insert at least 2 character'),
             }
         };
         $('#offer_search_city').autocompleter(options);
@@ -27,9 +29,9 @@ $(document).on('click', "#demand_search_city",function () {
             otherOptions: {
                 minimumInputLength: 2,
                 theme: 'boostrap',
-                formatNoMatches: 'No author found.',
-                formatSearching: 'Searching city...',
-                formatInputTooShort: 'Insert at least 2 character'
+                formatNoMatches: Translator.trans('No city found.'),
+                formatSearching: Translator.trans('Searching city...'),
+                formatInputTooShort: Translator.trans('Insert at least 2 character'),
             }
         };
         $('#demand_search_city').autocompleter(options);

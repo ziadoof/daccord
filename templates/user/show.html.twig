@@ -1,6 +1,6 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}User{% endblock %}
+{% block title %}{% trans %}User{% endtrans %}{% endblock %}
 {% block content %}
     <div class="fos_user_user_show px-4 py-4">
         <div class="row">
@@ -22,38 +22,38 @@
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
-                <h5 class=" pt-0 title-blue">Renseignements personnels</h5>
+                <h5 class=" pt-0 title-blue">{% trans %}Personal information{% endtrans %}</h5>
                 {% if user.emailStatus %}
-                    <h6 class="d-inline font-weight-bold">Email :  </h6><span>  {{ user.email }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Email : {% endtrans %} </h6><span>  {{ user.email }}</span>
                     <br>
                 {% endif %}
                 {% if user.phonNumberStatus and user.phoneNumber %}
-                    <h6 class="d-inline font-weight-bold">Phone number :  </h6><span>  {{ user.phoneNumber }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Phone number : {% endtrans %} </h6><span>  {{ user.phoneNumber }}</span>
                     <br>
                 {% endif %}
                 {% if user.genderStatus and user.gender %}
-                    <h6 class="d-inline font-weight-bold">Sex :  </h6><span>  {{ user.gender }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Sex :  {% endtrans %}</h6><span>  {{ user.gender }}</span>
                     <br>
                 {% endif %}
                 {% if user.birthdayStatus and user.birthday%}
-                    <h6 class="d-inline font-weight-bold">Birth day :  </h6><span>  {{ user.birthday }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Birthday : {% endtrans %} </h6><span>  {{ user.birthday }}</span>
                     <br>
                 {% endif %}
-                <h6 class="d-inline font-weight-bold">Max distance :  </h6><span>  {{ user.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                <h6 class="d-inline font-weight-bold">{% trans %}Max distance : {% endtrans %} </h6><span>  {{ user.maxDistance }} <span class="font-weight-bold">Km</span></span>
                 <br>
             </div>
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
-                <h5 class=" pt-0 title-blue">Positioning</h5>
+                <h5 class=" pt-0 title-blue">{% trans %}Positioning{% endtrans %}</h5>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Department :  </h6><span>  {{ user.city.department }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Department :  {% endtrans %}</h6><span>  {{ user.city.department }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold">Region :  </h6><span>  {{ user.city.department.region }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Region :  {% endtrans %}</h6><span>  {{ user.city.department.region }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold">Last login :  </h6><span>  {{ user.lastLogin|date('d  M  Y')  }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Last login : {% endtrans %} </h6><span>  {{ user.lastLogin|date('d  M  Y')  }}</span>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                     <button class="btn btn-info mx-1" >
                         <input type="hidden" name="user" value="{{ user.id }}">
-                        <p class="mt-1">Message to {{user.firstname}}</p>
+                        <p class="mt-1">{% trans %}Message to {% endtrans %}{{user.firstname}}</p>
                     </button>
                 </form>
             </div>

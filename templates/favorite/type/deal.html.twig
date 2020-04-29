@@ -11,19 +11,19 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="">
-                                        <h4 class="meetup-text rosed">Suggested Deals</h4>
+                                        <h4 class="meetup-text rosed">{% trans %}Suggested Deals {% endtrans %}</h4>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Category : ' }}</span>{{ oneFavorite.deal.category }}</span>
+                                        <span class=" mt-3"><span class="blued">{{ 'Category : ' }}</span>{{ oneFavorite.deal.category|trans }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Suggested at : ' }}</span>{{ oneFavorite.deal.suggestionDate|date('d M Y') }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %}Suggested at :  {% endtrans %}</span>{{ oneFavorite.deal.suggestionDate|date('d M Y') }}</span>
                                     </div>
                                     <div class="">
                                         {% if app.user is same as (oneFavorite.deal.offerUser) %}
-                                        <span class=" mt-3"><span class="blued">{{ 'With : ' }}</span>{{ oneFavorite.deal.demandUser.firstname|title }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} With : {% endtrans %}</span>{{ oneFavorite.deal.demandUser.firstname|title }}</span>
                                         {% else %}
-                                        <span class=" mt-3"><span class="blued">{{ 'With : ' }}</span>{{ oneFavorite.deal.offerUser.firstname|title }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} With : {% endtrans %}</span>{{ oneFavorite.deal.offerUser.firstname|title }}</span>
                                         {% endif %}
                                     </div>
                                 </div>

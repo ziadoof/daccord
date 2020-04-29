@@ -1,3 +1,5 @@
+import Translator from "bazinga-translator";
+
 $(document).ready(function() {
     let user = document.getElementById('socket_identifier');
     let id = parseInt(user.getAttribute('data-value'));
@@ -27,357 +29,362 @@ function wsConnect(id) {
                     case 'deal':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-handshake"></i></span>'+
-                            ' New suggested deal ! '+'</p>'+
-                            '<p>There is a proposed deal with <span class="blued">'+messageData['sender']+'</span>'+
-                            ' regarding your AD from category <span class="blued">'+messageData['category']+'</span>'+
+                            '<span class="blued mr-1"><i class="fas fa-handshake"></i></span>'+
+                            Translator.trans('New suggested deal !')+'</p>'+
+                            '<p>'+Translator.trans('There is a proposed deal with')+ '<span class="blued"> '+messageData['sender']+' </span>'+
+                            Translator.trans('regarding your AD from category') +'<span class="blued"> '+messageData['category']+'</span>'+
                             '</p>';
                         break;
                     case 'driverRequest':
                         text =
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fas fa-truck-moving"></i></span>'+
-                            ' New driver request ! '+ '</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span> had been sent you a new driver request about the catigory ' +
-                            ' <span class="blued">'+messageData['category']+'</span>'+
+                            '<span class="blued mr-1"><i class="fas fas fa-truck-moving"></i></span>'+
+                            Translator.trans('New driver request !')+ '</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('had been sent you a new driver request about the category')  +
+                            ' <span class="blued"> '+messageData['category']+'</span>'+
                             '</p>';
                         break;
                     case 'treatmentDriverRequest':
                         if (messageData['subject']=== 'rejected'){
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
-                                ' Treatment driver request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' rejected the driver\'s request that you had previously sent him about the catigory '+
-                                '<span class="blued">'+messageData['category']+'</span>'+
+                                '<span class="rosed mr-1"><i class="fas fa-times"></i></span>'+
+                                Translator.trans('Treatment driver request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('rejected the driver\'s request that you had previously sent him about the category')+
+                                '<span class="blued"> '+messageData['category']+'</span>'+
                                 '</p>';
                         }
                         else{
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-check"></i></span>'+
-                                ' Treatment driver request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' accepted the driver\'s request that you had previously sent him about the catigory '+
-                                '<span class="blued">'+messageData['category']+'</span>'+
+                                '<span class="rosed mr-1"><i class="fas fa-check"></i></span>'+
+                                Translator.trans('Treatment driver request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('accepted the driver\'s request that you had previously sent him about the category')+
+                                '<span class="blued"> '+messageData['category']+'</span>'+
                                 '</p>';
                         }
                         break;
                     case 'addDriverToDeal':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-check"></i> '+' '+ ' <i class="fas fas fa-truck-moving"></i></span>'+
-                            ' Add to Deal ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has added you to a deal that will be executed soon about the catigory '+
-                            '<span class="blued">'+messageData['category']+'</span>'+
+                            '<span class="blued mr-1"><i class="fas fa-check"></i> '+' '+ ' <i class="fas fas fa-truck-moving"></i></span>'+
+                            Translator.trans('Add to Deal !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has added you to a deal that will be executed soon about the category')+
+                            '<span class="blued"> '+messageData['category']+'</span>'+
                             '</p>';
                         break;
                     case 'semiDoneDeal':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-handshake"></i></span>'+
-                            ' Semi done Deal ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has ended a deal about the catigory '+
-                            '<span class="blued">'+messageData['category']+'</span>'+
-                            ' that you are a member of, Waiting for other members to finish the deal '+
+                            '<span class="blued mr-1"><i class="fas fa-handshake"></i></span>'+
+                            Translator.trans('Semi done Deal !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has ended a deal about the category')+
+                            '<span class="blued"> '+messageData['category']+' </span>'+
+                            Translator.trans('that you are a member of, Waiting for other members to finish the deal')+
                             '</p>';
                         break;
                     case 'doneDeal':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="fas fa-handshake"></i></span>'+
-                            ' DONE DEAL ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has ended a deal about the catigory '+
-                            '<span class="blued">'+messageData['category']+'</span>'+
-                            ' that you are a member of, '+
-                            '<span>The deal was terminated</span>'+
+                            '<span class="rosed mr-1"><i class="fas fa-handshake"></i></span>'+
+                            Translator.trans('DONE DEAL !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has ended a deal about the category')+
+                            '<span class="blued"> '+messageData['category']+' </span>'+
+                            Translator.trans('that you are a member of,')+
+                            '<span>'+Translator.trans('The deal was terminated')+'</span>'+
                             '</p>';
                         break;
                     case'profilePoints':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
-                            '<p><span> Congratulations ... Five extra points have been added to you </span></p>';
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
+                            '<p><span>'+Translator.trans('Congratulations ... Five extra points have been added to you') +'</span></p>';
                         break;
 
                     case'driverPoints':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
-                            '<p><span> Congratulations ... Seven extra points have been added to you </span></p>';
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
+                            '<p><span>'+Translator.trans('Congratulations ... Seven extra points have been added to you')+ '</span></p>';
                         break;
                     case'ratingDriver':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="far fa-star"></i></span>'+
-                            ' Rating ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has added a rating for you as a driver, based on your latest deal. '+
+                            '<span class="blued mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('Rating !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has added a rating for you as a driver, based on your latest deal.')+
                             '</p>';
                         break;
                     case'ratingHosting':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="far fa-star"></i></span>'+
-                            ' Rating ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has added a rating for you as a hosting, based on your latest hosting. '+
+                            '<span class="blued mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('Rating !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has added a rating for you as a hosting, based on your latest hosting.')+
                             '</p>';
                         break;
                     case'hostingRequest':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-suitcase-rolling ml-0"></i></span>'+
-                            ' New hosting request ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' had been sent you a new hosting request..! '+
+                            '<span class="blued mr-1"><i class="fas fa-suitcase-rolling ml-0"></i></span>'+
+                            Translator.trans('New hosting request !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('had been sent you a new hosting request..!')+
                             '</p>';
                         break;
                     case 'treatmentHostingRequest':
                         if (messageData['subject']=== 'rejected'){
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
-                                ' Treatment hosting request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' rejected the hosting\'s request that you had previously sent him. '+
+                                '<span class="rosed mr-1"><i class="fas fa-times"></i></span>'+
+                                Translator.trans('Treatment hosting request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('rejected the hosting\'s request that you had previously sent him.')+
                                 '</p>';
                         }
                         else{
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-check"></i></span>'+
-                                ' Treatment hosting request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' accepted the hosting\'s request that you had previously sent him. '+
+                                '<span class="rosed mr-1"><i class="fas fa-check"></i></span>'+
+                                Translator.trans('Treatment hosting request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('accepted the hosting\'s request that you had previously sent him.')+
                                 '</p>';
                         }
                         break;
                     case'doneHosting':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="fas fa-suitcase-rolling ml-0"></i></span>'+
-                            ' Done hosting ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' had ended the hosting that you are part of...! '+
+                            '<span class="rosed mr-1"><i class="fas fa-suitcase-rolling ml-0"></i></span>'+
+                            Translator.trans('Done hosting !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('had ended the hosting that you are part of...!')+
                             '</p>';
                         break;
                     case'hostingPoints':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
-                            '<p><span >'+'Congratulations ... Ten extra points have been added to your hosting profile.'+'</span>'+
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
+                            '<p><span >'+Translator.trans('Congratulations ... Ten extra points have been added to your hosting profile.')+'</span>'+
                             '</p>';
                         break;
                     case'meetupRequest':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-user-friends"></i></span>'+
-                            ' New Meetup join request ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' had been sent you a new meetup join request..! '+
+                            '<span class="blued mr-1"><i class="fas fa-user-friends"></i></span>'+
+                            Translator.trans('New Meetup join request !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('had been sent you a new meetup join request..!')+
                             '</p>';
                         break;
                     case 'treatmentMeetupRequest':
                         if (messageData['subject']=== 'Rejected'){
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
-                                ' Treatment meetup join request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' rejected the meetup join request that you had previously sent him. '+
+                                '<span class="rosed mr-1"><i class="fas fa-times"></i></span>'+
+                                Translator.trans('Treatment meetup join request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('rejected the meetup join request that you had previously sent him.')+
                                 '</p>';
                         }
                         else{
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-check"></i></span>'+
-                                ' Treatment meetup join request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' accepted the meetup join request that you had previously sent him. '+
+                                '<span class="rosed mr-1"><i class="fas fa-check"></i></span>'+
+                                Translator.trans('Treatment meetup join request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('accepted the meetup join request that you had previously sent him.')+
                                 '</p>';
                         }
                         break;
                     case'cancelJoinParticipant':
                         let statusParticipant = '';
                         if(messageData['subject']=== 'removed'){
-                            statusParticipant = ' had canceled your participation in his meetup. ';
+                            statusParticipant = Translator.trans('had canceled your participation in his meetup.');
                         }
                         else{
-                            statusParticipant = ' had canceled his participation in your meetup. ';
+                            statusParticipant = Translator.trans('had canceled his participation in your meetup.');
                         }
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
-                            ' Cancel meetup join !'+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            '<span class="rosed mr-1"><i class="far fa-calendar-times"></i></span>'+
+                            Translator.trans('Cancel meetup join !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
                             statusParticipant
                             +'</p>';
                         break;
                     case'cancelJoinWaiting':
                         let statusWaiting = '';
                         if(messageData['subject']=== 'removed'){
-                            statusWaiting = ' had canceled your subscription to the waiting list in his meetup. ';
+                            statusWaiting = Translator.trans('had canceled your subscription to the waiting list in his meetup.');
                         }
                         else{
-                            statusWaiting = ' had canceled his subscription to the waiting list in your meetup. ';
+                            statusWaiting = Translator.trans('had canceled his subscription to the waiting list in your meetup.');
                         }
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
-                            ' Cancel meetup join! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            '<span class="rosed mr-1"><i class="far fa-calendar-times"></i></span>'+
+                            Translator.trans('Cancel meetup join!')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
                             statusWaiting
                             +'</p>';
                         break;
                     case'transferToParticipant':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-exchange-alt"></i></span>'+
-                            ' Transfer to participants list ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' transferred you from the waiting list to the participants in his meetup ..! '+
+                            '<span class="blued mr-1"><i class="fas fa-exchange-alt"></i></span>'+
+                            Translator.trans('Transfer to participants list !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('transferred you from the waiting list to the participants in his meetup ..!')+
                             '</p>';
                         break;
                     case'meetupComment':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="far fa-comment-alt"></i></span>'+
-                            ' New comment !'+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' added a comment to an meetup where you are a member..! '+
+                            '<span class="blued mr-1"><i class="far fa-comment-alt"></i></span>'+
+                            Translator.trans('New comment !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('added a comment to an meetup where you are a member..!')+
                             '</p>';
                         break;
                     case'ratingMeetup':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="far fa-star"></i></span>'+
-                            ' Rating ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has added a rating for your meetup. '+
+                            '<span class="blued mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('Rating !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has added a rating for your meetup.')+
                             '</p>';
                         break;
                     case'voyageRequest':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="fas fa-car"></i></span>'+
-                            ' New voyage join request ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' had been sent you a new voyage join request..! '+
+                            '<span class="blued mr-1"><i class="fas fa-car"></i></span>'+
+                            Translator.trans('New voyage join request !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('had been sent you a new voyage join request..!')+
                             '</p>';
                         break;
                     case 'treatmentVoyageRequest':
                         if (messageData['subject']=== 'Rejected'){
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="rosed"><i class="fas fa-times"></i></span>'+
-                                ' Treatment voyage join request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' rejected the voyage join request that you had previously sent him. '+
+                                '<span class="rosed mr-1"><i class="fas fa-times"></i></span>'+
+                                Translator.trans('Treatment voyage join request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('rejected the voyage join request that you had previously sent him.')+
                                 '</p>';
                         }
                         else{
                             text=
                                 '<p class="font-weight-bold mb-0">'+
-                                '<span class="blued"><i class="fas fa-check"></i></span>'+
-                                ' Treatment voyage join request ! '+'</p>'+
-                                '<p><span class="blued">'+messageData['sender']+'</span>'+
-                                ' accepted the voyage join request that you had previously sent him. '+
+                                '<span class="blued mr-1"><i class="fas fa-check"></i></span>'+
+                                Translator.trans('Treatment voyage join request !')+'</p>'+
+                                '<p><span class="blued">'+messageData['sender']+' </span>'+
+                                Translator.trans('accepted the voyage join request that you had previously sent him.')+
                                 '</p>';
                         }
                         break;
                     case'voyageRemovePassenger':
                         let statusRemovedPassenger = '';
                         if(messageData['subject']=== 'removed'){
-                            statusRemovedPassenger = ' had canceled your subscription in his voyage. ';
+                            statusRemovedPassenger = Translator.trans('had canceled your subscription in his voyage.');
                         }
                         else{
-                            statusRemovedPassenger = ' had canceled his subscription in your voyage. ';
+                            statusRemovedPassenger = Translator.trans('had canceled his subscription in your voyage.');
                         }
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
-                            ' Cancel voyage join! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
+                            '<span class="rosed mr-1"><i class="far fa-calendar-times"></i></span>'+
+                            Translator.trans('Cancel voyage join!')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
                             statusRemovedPassenger
                             +'</p>';
                         break;
                     case'removeUserPoints':
                         let numberOfPoints = '';
                         if(messageData['category']=== '0'){
-                            numberOfPoints = ' You have no points left!. ';
+                            numberOfPoints = Translator.trans('You have no points left!.');
                         }
                         else{
-                            numberOfPoints = ' You lost '+messageData['category']+' points. ';
+                            let lost = Translator.trans('You lost');
+                            let point = Translator.trans('points.');
+                            numberOfPoints = lost +'<span> '+messageData['category']+' </span>' +point;
                         }
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
                             '<p><span>'+ numberOfPoints +'</span></p>';
                         break;
                     case'removeCarpoolPoints':
                         let carpoolPoints = '';
                         if(messageData['category']=== '0'){
-                            carpoolPoints = ' You have no points left as carpool!. ';
+                            carpoolPoints = Translator.trans('You have no points left as carpool!.');
                         }
                         else{
-                            carpoolPoints = ' You lost '+messageData['category']+' points as carpool!. ';
+                            let lost = Translator.trans('You lost');
+                            let point = Translator.trans('points as carpool!.');
+                            carpoolPoints = lost +'<span> '+messageData['category']+' </span>' +point;
                         }
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
                             '<p><span>'+ carpoolPoints +'</span></p>';
                         break;
                     case'carpoolAddPoints':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
-                            '<p><span> Congratulations ... 30 extra points have been added to you as carpool </span></p>';
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
+                            '<p><span>'+Translator.trans('Congratulations ... 30 extra points have been added to you as carpool')+'</span></p>';
                         break;
                     case'ratingCarpool':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="blued"><i class="far fa-star"></i></span>'+
-                            ' Rating ! '+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has added a rating for you as a carpool, based on your latest voyage. '+
+                            '<span class="blued mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('Rating !')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has added a rating for you as a carpool, based on your latest voyage.')+
                             '</p>';
                         break;
                     case'cancelVoyage':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-calendar-times"></i></span>'+
-                            ' Cancel voyage!'+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' canceled a voyage you are traveling on. '
+                            '<span class="rosed mr-1"><i class="far fa-calendar-times"></i></span>'+
+                            Translator.trans('Cancel voyage!')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('canceled a voyage you are traveling on.')
                             +'</p>';
                         break;
                     case'pointsVoyageCanceled':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="far fa-star"></i></span>'+
-                            ' POINTS ! '+'</p>'+
-                            '<p><span >'+' You earned five extra points for canceling a voyage you are traveling on. '+'</span>'+
+                            '<span class="rosed mr-1"><i class="far fa-star"></i></span>'+
+                            Translator.trans('POINTS !')+'</p>'+
+                            '<p><span >'+Translator.trans('You earned five extra points for canceling a voyage you are traveling on.')+'</span>'+
                             '</p>';
                         break;
                     case'cancelDeal':
                         text=
                             '<p class="font-weight-bold mb-0">'+
-                            '<span class="rosed"><i class="fas fa-exclamation-triangle"></i></span>'+
-                            ' Cancel deal!'+'</p>'+
-                            '<p><span class="blued">'+messageData['sender']+'</span>'+
-                            ' has canceled the deal that you were part of, and was to be executed soon,about the catigory ' +
-                            '<span class="blued">'+messageData['category']+'</span>'
+                            '<span class="rosed mr-1"><i class="fas fa-exclamation-triangle"></i></span>'+
+                            Translator.trans('Cancel deal!')+'</p>'+
+                            '<p><span class="blued">'+messageData['sender']+' </span>'+
+                            Translator.trans('has canceled the deal that you were part of, and was to be executed soon,about the category') +
+                            '<span class="blued"> '+messageData['category']+'</span>'
                             +'</p>';
                         break;
                 }
@@ -431,7 +438,7 @@ function wsConnect(id) {
                 }
                 else if(typeON==='pointsVoyageCanceled'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/icons/tam.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='removeCarpoolPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
@@ -443,19 +450,19 @@ function wsConnect(id) {
                 }
                 else if(typeON==='ratingMeetup'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 ratingMeetup" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
                 else if(typeON==='meetupComment'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 meetupComment" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
                 else if(typeON==='meetupRequest'||typeON ==='treatmentMeetupRequest'||typeON ==='cancelJoinParticipant'||typeON ==='cancelJoinWaiting'||typeON ==='transferToParticipant'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 meetupParticipant" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
                 else {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image='<img src="/assets/images/profile/'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
 
                 let notification =

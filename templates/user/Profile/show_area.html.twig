@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col-md-4 offset-4">
             <div class=" px-4 py-4">
-                <h6 class="text-center pt-0 title-blue">Your current area</h6>
+                <h6 class="text-center pt-0 title-blue">{% trans %}Your current area{% endtrans %}</h6>
                 {% if app.user.ville != null %}
                     <h5 class="text-center pt-0 title-rose">{{ app.user.ville }}</h5>
                     <h2 class="text-center pt-0 ">{{ app.user.postalCode }}</h2>
                 {% else %}
-                    <h5 class="text-center pt-0 title-rose">You did not choose a city</h5>
+                    <h5 class="text-center pt-0 title-rose">{% trans %}You did not choose a city{% endtrans %}</h5>
                 {% endif %}
             </div>
         </div>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="fr">
+  <file id="FOSMessageBundle.fr">
+    <unit id="A2zzW0Z" name="undelete">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>undelete</source>
+        <target>restituer</target>
+      </segment>
+    </unit>
+    <unit id="YZdZVQP" name="delete">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>delete</source>
+        <target>supprimer</target>
+      </segment>
+    </unit>
+    <unit id="OB6rcSi" name="message_info">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>message_info</source>
+        <target>info_message</target>
+      </segment>
+    </unit>
+    <unit id="V4Kxhof" name="reply">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>reply</source>
+        <target>répondre</target>
+      </segment>
+    </unit>
+    <unit id="evuzNH_" name="sent">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>sent</source>
+        <target>expédié</target>
+      </segment>
+    </unit>
+    <unit id="1S_loRu" name="    threads_found&#10;">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>    threads_found
+</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

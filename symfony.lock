@@ -95,6 +95,9 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "elao/form-translation-bundle": {
+        "version": "v3.2.0"
+    },
     "elasticsearch/elasticsearch": {
         "version": "v6.1.0"
     },
@@ -149,9 +152,6 @@
     "jms/job-queue-bundle": {
         "version": "2.1.0"
     },
-    "kartik-v/bootstrap-fileinput": {
-        "version": "4.5.x-dev"
-    },
     "knplabs/knp-components": {
         "version": "v2.2.0"
     },
@@ -173,11 +173,44 @@
     "nikic/php-parser": {
         "version": "v4.1.0"
     },
+    "nyholm/nsa": {
+        "version": "1.1.0"
+    },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
     "pagerfanta/pagerfanta": {
         "version": "v1.1.0"
+    },
+    "php-http/discovery": {
+        "version": "1.7.4"
+    },
+    "php-http/httplug": {
+        "version": "2.1.0"
+    },
+    "php-http/promise": {
+        "version": "v1.0.0"
+    },
+    "php-translation/common": {
+        "version": "1.0.0"
+    },
+    "php-translation/extractor": {
+        "version": "1.7.1"
+    },
+    "php-translation/symfony-bundle": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "ee15ad002114fba7b694a7fe429419b518d43bc4"
+        }
+    },
+    "php-translation/symfony-storage": {
+        "version": "1.1.0"
+    },
+    "php-translation/translator": {
+        "version": "1.1.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -192,6 +225,9 @@
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/http-client": {
         "version": "1.0.0"
     },
     "psr/http-message": {
@@ -362,6 +398,9 @@
             "ref": "82e2278ff2a74a97837e84c2493c30e7a85ad299"
         }
     },
+    "symfony/http-client": {
+        "version": "v5.0.7"
+    },
     "symfony/http-foundation": {
         "version": "v4.2.1"
     },
@@ -421,6 +460,9 @@
     },
     "symfony/polyfill-php72": {
         "version": "v1.10.0"
+    },
+    "symfony/polyfill-php73": {
+        "version": "v1.15.0"
     },
     "symfony/process": {
         "version": "v4.2.1"
@@ -592,6 +634,18 @@
     },
     "webmozart/assert": {
         "version": "1.5.0"
+    },
+    "willdurand/js-translation-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "02b720a49f6d36b44d557e0b18e48bf09e0a8e07"
+        },
+        "files": [
+            "config/routes/js_translation.yaml"
+        ]
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

@@ -1,4 +1,5 @@
-{% form_theme form 'jquery.collection.html.twig' 'StationCollectionType.html.twig' %}
+
+{% form_theme form 'jquery.collection.html.twig' 'StationCollectionType.html.twig'%}
 {{ form_start(form,{'attr':{'id':'voyage-form-new2'}}) }}
 <div class="new-voyage mt-5">
     <div class="row">
@@ -45,7 +46,7 @@
             </div>
             <div class="row">
                 <div class="col mt-5">
-                    <button class="btn btn-info btn-block">{{ button_label|default('Continue') }}</button>
+                    <button class="btn btn-info btn-block">{% trans %}Continue {% endtrans %}</button>
                 </div>
             </div>
         </div>

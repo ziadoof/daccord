@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+<html lang="{{ app.request.locale|split('_')[0] }}">
     {% block header %}
         <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
         {% include "header.html.twig" %}
@@ -19,7 +20,7 @@
                     {% for message in messages %}
                         {% if label != 'comment' %}
                             <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
-                                <p class="py-4 ">{{ message }}</p>
+                                <p class="py-4 ">{{ message|trans }}</p>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -47,6 +48,7 @@
                 </div>
             </div>
         </section>
+        {% block footer %}{#{% include "footer.html.twig" %}#}{% endblock %}
     </section>
 {% endblock %}
 

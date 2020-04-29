@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 mt-3">
         {% if app.user is not same as(null) %}
-        <h4 class="text-center blued">Comments</h4>
+        <h4 class="text-center blued">{% trans %} Comments{% endtrans %}</h4>
         <div class="row">
             <div class="col-md-6 offset-3 border-deal pt-2">
                 {{ include('meetup/meetup/comment_form.html.twig') }}
@@ -10,7 +10,7 @@
         {% else %}
             <div class="row">
                 <div class="col-md-4 offset-4">
-                    <a class="btn btn-outline-info btn-block my-4 my-sm-0 ml-2" data-toggle="modal" data-target="#login">Login for add a comment</a>
+                    <a class="btn btn-outline-info btn-block my-4 my-sm-0 ml-2" data-toggle="modal" data-target="#login">{% trans %} Login for add a comment{% endtrans %}</a>
                 </div>
             </div>
         {% endif %}
@@ -26,12 +26,13 @@
                         </div>
                         <div class="col-md-4 offset-4 mt-1">
                             <div class="float-right pt-1">
-                                {{   comment.date_format(comment.createdAt) }}
+                                {% set date = comment.date_format(comment.createdAt) %}
+                                {{   date|trans }}
                             </div>
                             {% if app.user is same as(comment.sender) or app.user is same as(comment.meetup.creator) %}
                                 <div class="float-right">
                                     <div class="delete-comment">
-                                        <form method="post" action="{{ path('meetup_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Do you really want to remove this comment ?');">
+                                        <form method="post" action="{{ path('meetup_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm(Translator.trans('Do you really want to remove this comment ?'));">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
                                             <button class="btn float-right"><i class="fas fa-trash-alt"></i></button>

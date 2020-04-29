@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="fr">
+  <file id="MgiletNotificationBundle.fr">
+    <unit id="i7aSJ1i" name="notifications">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/MgiletNotificationBundle/template.html.twig:44</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>notifications</source>
+        <target>notifications</target>
+      </segment>
+    </unit>
+    <unit id="tP5W0.R" name="mark_all_as_seen">
+      <notes>
+        <note category="file-source" priority="1">templates/bundles/MgiletNotificationBundle/template.html.twig:45</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>mark_all_as_seen</source>
+        <target>marquer_tout_comme_vu</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

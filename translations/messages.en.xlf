@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="en">
+  <file id="messages.en">
+    <unit id="v9QCsvb" name="Sign in">
+      <segment>
+        <source>Sign in</source>
+        <target>Sign in</target>
+      </segment>
+    </unit>
+    <unit id="DPV8Y_u" name="Offer">
+      <segment>
+        <source>Offer</source>
+        <target>Offer</target>
+      </segment>
+    </unit>
+    <unit id="jJ_KKly" name="Demand">
+      <segment>
+        <source>Demand</source>
+        <target>Demand</target>
+      </segment>
+    </unit>
+    <unit id="tOybuoA" name="Hosting">
+      <segment>
+        <source>Hosting</source>
+        <target>Hosting</target>
+      </segment>
+    </unit>
+    <unit id="uOmfUry" name="Meetup">
+      <segment>
+        <source>Meetup</source>
+        <target>Meetup</target>
+      </segment>
+    </unit>
+    <unit id="LcjRw61" name="Carpooling">
+      <segment>
+        <source>Carpooling</source>
+        <target>Carpooling</target>
+      </segment>
+    </unit>
+    <unit id="ScJmuqq" name="Search">
+      <segment>
+        <source>Search</source>
+        <target>Search</target>
+      </segment>
+    </unit>
+    <unit id="ckytXhN" name="With ability to host :">
+      <segment>
+        <source>With ability to host :</source>
+        <target>With ability to host :</target>
+      </segment>
+    </unit>
+    <unit id=".0GYIi2" name="With ability to share :">
+      <segment>
+        <source>With ability to share :</source>
+        <target>With ability to share :</target>
+      </segment>
+    </unit>
+    <unit id="_TJnqhH" name="Remember me">
+      <segment>
+        <source>Remember me</source>
+        <target>Remember me</target>
+      </segment>
+    </unit>
+    <unit id="G1RbI.r" name="Don't have an account?">
+      <segment>
+        <source>Don't have an account?</source>
+        <target>Don't have an account?</target>
+      </segment>
+    </unit>
+    <unit id="R94jWG5" name="Sign Up">
+      <segment>
+        <source>Sign Up</source>
+        <target>Sign Up</target>
+      </segment>
+    </unit>
+    <unit id="r9Jf3xf" name="Forgot your password?">
+      <segment>
+        <source>Forgot your password?</source>
+        <target>Forgot your password?</target>
+      </segment>
+    </unit>
+    <unit id="vpn5Xkx" name="Ad index">
+      <segment>
+        <source>Ad index</source>
+        <target>Ad index</target>
+      </segment>
+    </unit>
+    <unit id="pc3wfbv" name="Car">
+      <segment>
+        <source>Car</source>
+        <target>Car</target>
+      </segment>
+    </unit>
+    <unit id="sloU8r6" name="Motor">
+      <segment>
+        <source>Motor</source>
+        <target>Motor</target>
+      </segment>
+    </unit>
+    <unit id="b712axp" name="Translation">
+      <segment>
+        <source>Translation</source>
+        <target>Translation</target>
+      </segment>
+    </unit>
+    <unit id="JpPtX5E" name="House work">
+      <segment>
+        <source>House work</source>
+        <target>House work</target>
+      </segment>
+    </unit>
+    <unit id="A0lLDR_" name="Camera">
+      <segment>
+        <source>Camera</source>
+        <target>Camera</target>
+      </segment>
+    </unit>
+    <unit id="naf3a8g" name="Books">
+      <segment>
+        <source>Books</source>
+        <target>Books</target>
+      </segment>
+    </unit>
+    <unit id="qeDHBYU" name="Speaker">
+      <segment>
+        <source>Speaker</source>
+        <target>Speaker</target>
+      </segment>
+    </unit>
+    <unit id="L1JK9kA" name="Dress">
+      <segment>
+        <source>Dress</source>
+        <target>Dress</target>
+      </segment>
+    </unit>
+    <unit id="4VXsKUu" name="Jacket">
+      <segment>
+        <source>Jacket</source>
+        <target>Jacket</target>
+      </segment>
+    </unit>
+    <unit id="R_e9sj." name="Oven">
+      <segment>
+        <source>Oven</source>
+        <target>Oven</target>
+      </segment>
+    </unit>
+    <unit id="I36xzbG" name="Sandwich toaster">
+      <segment>
+        <source>Sandwich toaster</source>
+        <target>Sandwich toaster</target>
+      </segment>
+    </unit>
+    <unit id="jxQ0qe7" name="Seedlings">
+      <segment>
+        <source>Seedlings</source>
+        <target>Seedlings</target>
+      </segment>
+    </unit>
+    <unit id="PWocxWn" name="Fuelwood">
+      <segment>
+        <source>Fuelwood</source>
+        <target>Fuelwood</target>
+      </segment>
+    </unit>
+    <unit id="FIBfJIE" name="Sell apartment">
+      <segment>
+        <source>Sell apartment</source>
+        <target>Sell apartment</target>
+      </segment>
+    </unit>
+    <unit id="kgQRYSn" name="Bracelet">
+      <segment>
+        <source>Bracelet</source>
+        <target>Bracelet</target>
+      </segment>
+    </unit>
+    <unit id="2Xfgkeq" name="T-shirt">
+      <segment>
+        <source>T-shirt</source>
+        <target>T-shirt</target>
+      </segment>
+    </unit>
+    <unit id="lrdv528" name="Wolkman">
+      <segment>
+        <source>Wolkman</source>
+        <target>Wolkman</target>
+      </segment>
+    </unit>
+    <unit id="SHNcT65" name="Cat">
+      <segment>
+        <source>Cat</source>
+        <target>Cat</target>
+      </segment>
+    </unit>
+    <unit id="Bon5Skk" name="New offer">
+      <segment>
+        <source>New offer</source>
+        <target>New offer</target>
+      </segment>
+    </unit>
+    <unit id="ULOflqD" name="New demand">
+      <segment>
+        <source>New demand</source>
+        <target>New demand</target>
+      </segment>
+    </unit>
+    <unit id="Jxxi_i3" name="My profile">
+      <segment>
+        <source>My profile</source>
+        <target>My profile</target>
+      </segment>
+    </unit>
+    <unit id="CG9UULI" name="Edit my profile">
+      <segment>
+        <source>Edit my profile</source>
+        <target>Edit my profile</target>
+      </segment>
+    </unit>
+    <unit id="YjSDSvr" name="change my password">
+      <segment>
+        <source>change my password</source>
+        <target>change my password</target>
+      </segment>
+    </unit>
+    <unit id="SWFhRVF" name="Log out">
+      <segment>
+        <source>Log out</source>
+        <target>Log out</target>
+      </segment>
+    </unit>
+    <unit id="fTG4MxO" name="Notification">
+      <segment>
+        <source>Notification</source>
+        <target>Notification</target>
+      </segment>
+    </unit>
+    <unit id="r4kj47h" name="Unseen">
+      <segment>
+        <source>Unseen</source>
+        <target>Unseen</target>
+      </segment>
+    </unit>
+    <unit id="zDrLloA" name="New suggested deal !">
+      <segment>
+        <source>New suggested deal !</source>
+        <target>New suggested deal !</target>
+      </segment>
+    </unit>
+    <unit id="V7Bkiix" name="There is a proposed deal with">
+      <segment>
+        <source>There is a proposed deal with</source>
+        <target>There is a proposed deal with</target>
+      </segment>
+    </unit>
+    <unit id="FSMWOyW" name="regarding your AD from category">
+      <segment>
+        <source>regarding your AD from category</source>
+        <target>regarding your AD from category</target>
+      </segment>
+    </unit>
+    <unit id="IDg6IkP" name="Mark as seen">
+      <segment>
+        <source>Mark as seen</source>
+        <target>Mark as seen</target>
+      </segment>
+    </unit>
+    <unit id="LfKnsVh" name="My offers">
+      <segment>
+        <source>My offers</source>
+        <target>My offers</target>
+      </segment>
+    </unit>
+    <unit id="4Q5KuKU" name="My demands">
+      <segment>
+        <source>My demands</source>
+        <target>My demands</target>
+      </segment>
+    </unit>
+    <unit id="X.p76Vg" name="My deals">
+      <segment>
+        <source>My deals</source>
+        <target>My deals</target>
+      </segment>
+    </unit>
+    <unit id="DV8udKn" name="Cafe">
+      <segment>
+        <source>Cafe</source>
+        <target>Cafe</target>
+      </segment>
+    </unit>
+    <unit id="lzKCqfg" name="My voyage">
+      <segment>
+        <source>My voyage</source>
+        <target>My voyage</target>
+      </segment>
+    </unit>
+    <unit id="qTiDCly" name="Favoris">
+      <segment>
+        <source>Favoris</source>
+        <target>Favoris</target>
+      </segment>
+    </unit>
+    <unit id="diwcWEp" name="no results fond">
+      <segment>
+        <source>no results fond</source>
+        <target>no results fond</target>
+      </segment>
+    </unit>
+    <unit id="3yW5aKe" name="There is no notification found!">
+      <segment>
+        <source>There is no notification found!</source>
+        <target>There is no notification found!</target>
+      </segment>
+    </unit>
+    <unit id="v.8FdwW" name="Cancel Deal !">
+      <segment>
+        <source>Cancel Deal !</source>
+        <target>Cancel Deal !</target>
+      </segment>
+    </unit>
+    <unit id="bXAIutX" name="c58208b">
+      <segment>
+        <source>has canceled the deal that you were part of, and was to be executed soon, about the category</source>
+        <target>has canceled the deal that you were part of, and was to be executed soon, about the category</target>
+      </segment>
+    </unit>
+    <unit id="ilV5Mbp" name="Add to Deal !">
+      <segment>
+        <source>Add to Deal !</source>
+        <target>Add to Deal !</target>
+      </segment>
+    </unit>
+    <unit id="Dw3p1g9" name="has added you to a deal that will be executed soon about the category">
+      <segment>
+        <source>has added you to a deal that will be executed soon about the category</source>
+        <target>has added you to a deal that will be executed soon about the category</target>
+      </segment>
+    </unit>
+    <unit id="NaU1Y_x" name="New driver request">
+      <segment>
+        <source>New driver request</source>
+        <target>New driver request</target>
+      </segment>
+    </unit>
+    <unit id="1bUp824" name="had been sent you a new driver request about the category">
+      <segment>
+        <source>had been sent you a new driver request about the category</source>
+        <target>had been sent you a new driver request about the category</target>
+      </segment>
+    </unit>
+    <unit id="_hHJG3v" name="POINTS !">
+      <segment>
+        <source>POINTS !</source>
+        <target>POINTS !</target>
+      </segment>
+    </unit>
+    <unit id="Uhm_Quj" name="Congratulations ... Seven extra points have been added to you">
+      <segment>
+        <source>Congratulations ... Seven extra points have been added to you</source>
+        <target>Congratulations ... Seven extra points have been added to you</target>
+      </segment>
+    </unit>
+    <unit id="7V.epBt" name="DONE DEAL !">
+      <segment>
+        <source>DONE DEAL !</source>
+        <target>DONE DEAL !</target>
+      </segment>
+    </unit>
+    <unit id="cKvPol_" name="has ended a deal about the category">
+      <segment>
+        <source>has ended a deal about the category</source>
+        <target>has ended a deal about the category</target>
+      </segment>
+    </unit>
+    <unit id="WzcoZPZ" name="that you are a member of,">
+      <segment>
+        <source>that you are a member of,</source>
+        <target>that you are a member of,</target>
+      </segment>
+    </unit>
+    <unit id="oRJQGLz" name="The deal was terminated">
+      <segment>
+        <source>The deal was terminated</source>
+        <target>The deal was terminated</target>
+      </segment>
+    </unit>
+    <unit id="x.xCJXw" name="Semi done Deal !">
+      <segment>
+        <source>Semi done Deal !</source>
+        <target>Semi done Deal !</target>
+      </segment>
+    </unit>
+    <unit id="rJT4YA4" name="that you are a member of, Waiting for other members to finish the deal">
+      <segment>
+        <source>that you are a member of, Waiting for other members to finish the deal</source>
+        <target>that you are a member of, Waiting for other members to finish the deal</target>
+      </segment>
+    </unit>
+    <unit id="y.ABpSr" name="Driver request">
+      <segment>
+        <source>Driver request</source>
+        <target>Driver request</target>
+      </segment>
+    </unit>
+    <unit id="7UUYcG3" name="Garden table">
+      <segment>
+        <source>Garden table</source>
+        <target>Garden table</target>
+      </segment>
+    </unit>
+    <unit id="xgaHftz" name="Trouser">
+      <segment>
+        <source>Trouser</source>
+        <target>Trouser</target>
+      </segment>
+    </unit>
+    <unit id="RD9H9cF" name="Job opportunity">
+      <segment>
+        <source>Job opportunity</source>
+        <target>Job opportunity</target>
+      </segment>
+    </unit>
+    <unit id="u9vL9zR" name="ADMINISTRATION">
+      <segment>
+        <source>ADMINISTRATION</source>
+        <target>ADMINISTRATION</target>
+      </segment>
+    </unit>
+    <unit id="9A2au6k" name="Treatment driver request !">
+      <segment>
+        <source>Treatment driver request !</source>
+        <target>Treatment driver request !</target>
+      </segment>
+    </unit>
+    <unit id="TS8T8bk" name="1acd4d5">
+      <segment>
+        <source>accepted the driver's request that you had previously sent him about the category</source>
+        <target>accepted the driver's request that you had previously sent him about the category</target>
+      </segment>
+    </unit>
+    <unit id="4r0ZrYj" name="You lost">
+      <segment>
+        <source>You lost</source>
+        <target>You lost</target>
+      </segment>
+    </unit>
+    <unit id="xUoGHfz" name="points">
+      <segment>
+        <source>points</source>
+        <target>points</target>
+      </segment>
+    </unit>
+    <unit id="M7P4i3a" name="Congratulations ... Five extra points have been added to you">
+      <segment>
+        <source>Congratulations ... Five extra points have been added to you</source>
+        <target>Congratulations ... Five extra points have been added to you</target>
+      </segment>
+    </unit>
+    <unit id="_eFcE2x" name="Treatment voyage join request !">
+      <segment>
+        <source>Treatment voyage join request !</source>
+        <target>Treatment voyage join request !</target>
+      </segment>
+    </unit>
+    <unit id="79WYKyI" name="accepted the voyage join request that you had previously sent him.">
+      <segment>
+        <source>accepted the voyage join request that you had previously sent him.</source>
+        <target>accepted the voyage join request that you had previously sent him.</target>
+      </segment>
+    </unit>
+    <unit id="5cbExcE" name="Treatment meetup join request !">
+      <segment>
+        <source>Treatment meetup join request !</source>
+        <target>Treatment meetup join request !</target>
+      </segment>
+    </unit>
+    <unit id="FJsD2U9" name="accepted the meetup join request that you had previously sent him.">
+      <segment>
+        <source>accepted the meetup join request that you had previously sent him.</source>
+        <target>accepted the meetup join request that you had previously sent him.</target>
+      </segment>
+    </unit>
+    <unit id="Idb90A_" name="Done Hosting !">
+      <segment>
+        <source>Done Hosting !</source>
+        <target>Done Hosting !</target>
+      </segment>
+    </unit>
+    <unit id="MG6vUVu" name="had ended the hosting that you are part of...!">
+      <segment>
+        <source>had ended the hosting that you are part of...!</source>
+        <target>had ended the hosting that you are part of...!</target>
+      </segment>
+    </unit>
+    <unit id="i1nYdUf" name="Treatment hosting request !">
+      <segment>
+        <source>Treatment hosting request !</source>
+        <target>Treatment hosting request !</target>
+      </segment>
+    </unit>
+    <unit id="oz8hf9N" name="accepted the hosting's request that you had previously sent him.">
+      <segment>
+        <source>accepted the hosting's request that you had previously sent him.</source>
+        <target>accepted the hosting's request that you had previously sent him.</target>
+      </segment>
+    </unit>
+    <unit id="mPm9G0O" name="New hosting request !">
+      <segment>
+        <source>New hosting request !</source>
+        <target>New hosting request !</target>
+      </segment>
+    </unit>
+    <unit id="exukxZp" name="had been sent you a new hosting request..!">
+      <segment>
+        <source>had been sent you a new hosting request..!</source>
+        <target>had been sent you a new hosting request..!</target>
+      </segment>
+    </unit>
+    <unit id="gVPawYO" name="Hosting request">
+      <segment>
+        <source>Hosting request</source>
+        <target>Hosting request</target>
+      </segment>
+    </unit>
+    <unit id="v61rsw4" name="My Deals">
+      <segment>
+        <source>My Deals</source>
+        <target>My Deals</target>
+      </segment>
+    </unit>
+    <unit id="qZQRO2H" name="Suggested Deals">
+      <segment>
+        <source>Suggested Deals</source>
+        <target>Suggested Deals</target>
+      </segment>
+    </unit>
+    <unit id="_r9UYLj" name="Suggested at">
+      <segment>
+        <source>Suggested at</source>
+        <target>Suggested at</target>
+      </segment>
+    </unit>
+    <unit id="dIuxv87" name="Your offer">
+      <segment>
+        <source>Your offer</source>
+        <target>Your offer</target>
+      </segment>
+    </unit>
+    <unit id="3.wXf9C" name="demand">
+      <segment>
+        <source>demand</source>
+        <target>demand</target>
+      </segment>
+    </unit>
+    <unit id="xvA7o7T" name="Your demand">
+      <segment>
+        <source>Your demand</source>
+        <target>Your demand</target>
+      </segment>
+    </unit>
+    <unit id="mIGAvwy" name="offer">
+      <segment>
+        <source>offer</source>
+        <target>offer</target>
+      </segment>
+    </unit>
+    <unit id="9dYerT7" name="Short">
+      <segment>
+        <source>Short</source>
+        <target>Short</target>
+      </segment>
+    </unit>
+    <unit id="_SKEP26" name="Car parts">
+      <segment>
+        <source>Car parts</source>
+        <target>Car parts</target>
+      </segment>
+    </unit>
+    <unit id="mjg5vcZ" name="Done Deals">
+      <segment>
+        <source>Done Deals</source>
+        <target>Done Deals</target>
+      </segment>
+    </unit>
+    <unit id="9mvgKpV" name="Deal status :">
+      <segment>
+        <source>Deal status :</source>
+        <target>Deal status :</target>
+      </segment>
+    </unit>
+    <unit id="MxVRsN5" name="Pending">
+      <segment>
+        <source>Pending</source>
+        <target>Pending</target>
+      </segment>
+    </unit>
+    <unit id="QABDgaJ" name="DONE DEAL">
+      <segment>
+        <source>DONE DEAL</source>
+        <target>DONE DEAL</target>
+      </segment>
+    </unit>
+    <unit id="LWWV_KB" name="You have completed a deal on">
+      <segment>
+        <source>You have completed a deal on</source>
+        <target>You have completed a deal on</target>
+      </segment>
+    </unit>
+    <unit id="EMIrz0x" name="for">
+      <segment>
+        <source>for</source>
+        <target>for</target>
+      </segment>
+    </unit>
+    <unit id="BpW1Y6z" name="with">
+      <segment>
+        <source>with</source>
+        <target>with</target>
+      </segment>
+    </unit>
+    <unit id="d7qpmA2" name="and in cooperation with the driver">
+      <segment>
+        <source>and in cooperation with the driver</source>
+        <target>and in cooperation with the driver</target>
+      </segment>
+    </unit>
+    <unit id="T.x3Gwp" name="and you get">
+      <segment>
+        <source>and you get</source>
+        <target>and you get</target>
+      </segment>
+    </unit>
+    <unit id="arUjxS0" name="Five">
+      <segment>
+        <source>Five</source>
+        <target>Five</target>
+      </segment>
+    </unit>
+    <unit id="yfE4qT8" name="extra  points.">
+      <segment>
+        <source>extra  points.</source>
+        <target>extra  points.</target>
+      </segment>
+    </unit>
+    <unit id="z03M3kt" name="cc6c4a7">
+      <segment>
+        <source>Based on this deal, The associated ads and all possible deals for these ads have been deleted.</source>
+        <target>Based on this deal, The associated ads and all possible deals for these ads have been deleted.</target>
+      </segment>
+    </unit>
+    <unit id="NvfgfLv" name="Rate this driver">
+      <segment>
+        <source>Rate this driver</source>
+        <target>Rate this driver</target>
+      </segment>
+    </unit>
+    <unit id="jGBYxTD" name="Driver Rating">
+      <segment>
+        <source>Driver Rating</source>
+        <target>Driver Rating</target>
+      </segment>
+    </unit>
+    <unit id="nylTBGT" name="Rating">
+      <segment>
+        <source>Rating</source>
+        <target>Rating</target>
+      </segment>
+    </unit>
+    <unit id="fZ63rLE" name="Close">
+      <segment>
+        <source>Close</source>
+        <target>Close</target>
+      </segment>
+    </unit>
+    <unit id="NLdD3Ti" name="ended the deal.">
+      <segment>
+        <source>ended the deal.</source>
+        <target>ended the deal.</target>
+      </segment>
+    </unit>
+    <unit id="OXMkFg6" name="Specification">
+      <segment>
+        <source>Specification</source>
+        <target>Specification</target>
+      </segment>
+    </unit>
+    <unit id="a3MZGgp" name="Color">
+      <segment>
+        <source>Color</source>
+        <target>Color</target>
+      </segment>
+    </unit>
+    <unit id="YWyyGKZ" name="Material">
+      <segment>
+        <source>Material</source>
+        <target>Material</target>
+      </segment>
+    </unit>
+    <unit id="4wYakgp" name="Length (cm)">
+      <segment>
+        <source>Length (cm)</source>
+        <target>Length (cm)</target>
+      </segment>
+    </unit>
+    <unit id="OLtk0jY" name="Width (cm)">
+      <segment>
+        <source>Width (cm)</source>
+        <target>Width (cm)</target>
+      </segment>
+    </unit>
+    <unit id="Gc5LAcU" name="Height (cm)">
+      <segment>
+        <source>Height (cm)</source>
+        <target>Height (cm)</target>
+      </segment>
+    </unit>
+    <unit id="k8kchR5" name="Price">
+      <segment>
+        <source>Price</source>
+        <target>Price</target>
+      </segment>
+    </unit>
+    <unit id="yR7g8nm" name="Donate">
+      <segment>
+        <source>Donate</source>
+        <target>Donate</target>
+      </segment>
+    </unit>
+    <unit id="XfJm23k" name="Message to">
+      <segment>
+        <source>Message to</source>
+        <target>Message to</target>
+      </segment>
+    </unit>
+    <unit id="WJz3eHu" name="Deal done">
+      <segment>
+        <source>Deal done</source>
+        <target>Deal done</target>
+      </segment>
+    </unit>
+    <unit id="xHsAUOS" name="Cancel the deal">
+      <segment>
+        <source>Cancel the deal</source>
+        <target>Cancel the deal</target>
+      </segment>
+    </unit>
+    <unit id="l_Ke..y" name="Driver Request">
+      <segment>
+        <source>Driver Request</source>
+        <target>Driver Request</target>
+      </segment>
+    </unit>
+    <unit id="scVpUNY" name="Driver :">
+      <segment>
+        <source>Driver :</source>
+        <target>Driver :</target>
+      </segment>
+    </unit>
+    <unit id="lPB9JQr" name="Car :">
+      <segment>
+        <source>Car :</source>
+        <target>Car :</target>
+      </segment>
+    </unit>
+    <unit id="FDnlGYw" name="Car color :">
+      <segment>
+        <source>Car color :</source>
+        <target>Car color :</target>
+      </segment>
+    </unit>
+    <unit id="tM.9tXJ" name="City :">
+      <segment>
+        <source>City :</source>
+        <target>City :</target>
+      </segment>
+    </unit>
+    <unit id="vDs0Z1w" name="Max distance :">
+      <segment>
+        <source>Max distance :</source>
+        <target>Max distance :</target>
+      </segment>
+    </unit>
+    <unit id="QR78EJR" name="Request for transfer">
+      <segment>
+        <source>Request for transfer</source>
+        <target>Request for transfer</target>
+      </segment>
+    </unit>
+    <unit id="IYGXaTQ" name="From">
+      <segment>
+        <source>From</source>
+        <target>From</target>
+      </segment>
+    </unit>
+    <unit id="9LBu9tP" name="To">
+      <segment>
+        <source>To</source>
+        <target>To</target>
+      </segment>
+    </unit>
+    <unit id="9vRoj.I" name="Send">
+      <segment>
+        <source>Send</source>
+        <target>Send</target>
+      </segment>
+    </unit>
+    <unit id="n_TGjsI" name="Driver">
+      <segment>
+        <source>Driver</source>
+        <target>Driver</target>
+      </segment>
+    </unit>
+    <unit id="CC3iYFl" name="New comment !">
+      <segment>
+        <source>New comment !</source>
+        <target>New comment !</target>
+      </segment>
+    </unit>
+    <unit id="OwQK9Wm" name="added a comment to an meetup where you are a member..!">
+      <segment>
+        <source>added a comment to an meetup where you are a member..!</source>
+        <target>added a comment to an meetup where you are a member..!</target>
+      </segment>
+    </unit>
+    <unit id="n9omPZT" name="Message center">
+      <segment>
+        <source>Message center</source>
+        <target>Message center</target>
+      </segment>
+    </unit>
+    <unit id="jpwlxxf" name="23 Mar">
+      <segment>
+        <source>23 Mar</source>
+        <target>23 Mar</target>
+      </segment>
+    </unit>
+    <unit id="yk_t6nx" name="29 Mar">
+      <segment>
+        <source>29 Mar</source>
+        <target>29 Mar</target>
+      </segment>
+    </unit>
+    <unit id="BJZZP5Q" name="01 Apr">
+      <segment>
+        <source>01 Apr</source>
+        <target>01 Apr</target>
+      </segment>
+    </unit>
+    <unit id="jsFlbmj" name="02 Apr">
+      <segment>
+        <source>02 Apr</source>
+        <target>02 Apr</target>
+      </segment>
+    </unit>
+    <unit id="UwwIGog" name="06 Apr">
+      <segment>
+        <source>06 Apr</source>
+        <target>06 Apr</target>
+      </segment>
+    </unit>
+    <unit id="8IWFKtP" name="Hosting request from">
+      <segment>
+        <source>Hosting request from</source>
+        <target>Hosting request from</target>
+      </segment>
+    </unit>
+    <unit id="Zj6hv.." name="to">
+      <segment>
+        <source>to</source>
+        <target>to</target>
+      </segment>
+    </unit>
+    <unit id="05JF_o_" name="persons">
+      <segment>
+        <source>persons</source>
+        <target>persons</target>
+      </segment>
+    </unit>
+    <unit id="Lc07R5s" name="Description :">
+      <segment>
+        <source>Description :</source>
+        <target>Description :</target>
+      </segment>
+    </unit>
+    <unit id="gE2Zyyz" name="Accept the request">
+      <segment>
+        <source>Accept the request</source>
+        <target>Accept the request</target>
+      </segment>
+    </unit>
+    <unit id="5IpPeVI" name="Reject the request">
+      <segment>
+        <source>Reject the request</source>
+        <target>Reject the request</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

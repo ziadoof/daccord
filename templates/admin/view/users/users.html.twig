@@ -3,9 +3,9 @@
 {% block title %}Admin users{% endblock %}
 
 {% block admin %}
-    <h1 class="rosed font-weight-bold text-center my-2">Users</h1>
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Users{% endtrans %}</h1>
     <div>
-        <a href="{{ path('user_new') }}" class="btn btn-info float-right my-2" data-toggle="modal" data-target="#new-user-admin">Create new user</a>
+        <a href="{{ path('user_new') }}" class="btn btn-info float-right my-2" data-toggle="modal" data-target="#new-user-admin">{% trans %} Create new user{% endtrans %}</a>
     </div>
     <table class="table">
         <thead class="thead-dark text-center">
@@ -53,21 +53,21 @@
                 <td>{{ user.ville }}</td>
                 <td>{{ user.postalCode }}</td>
                 <td>{{ user.createdAt ? user.createdAt|date('d M -y') : '' }}</td>
-                <td>{{ user.gender }}</td>
+                <td>{% if user.gender %}{{ user.gender|trans }}{% else %}{{ 'Unknown'|trans }}{% endif %}</td>
                 <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
                 <td>{{ user.point }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}"class="btn btn-info">show</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}"class="btn btn-info">{% trans %} show{% endtrans %}</a>
                     <form method="post" class="d-inline" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this user?');">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger">{% trans %} Delete{% endtrans %}</button>
                     </form>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="34">no records found</td>
+                <td colspan="34">{% trans %} no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -3,7 +3,7 @@
 {% block title %}Admin ads{% endblock %}
 
 {% block admin %}
-    <h1 class="rosed font-weight-bold text-center my-2">Ads</h1>
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Ads{% endtrans %}</h1>
     <div class="row">
         <div class="col text-center mb-2">
             <span class="badge badge-primary mx-2 px-2 py-2"><h5>{{ data['offerCount'] }} Offer</h5></span>
@@ -36,17 +36,17 @@
                 <td>{% if ad.city %}{{ ad.city }}{% else %}{{ ad.ville }}{% endif %}</td>
                 <td>{% if ad.city %}{{ ad.city.zipCode }}{% else %}{{ ad.ville.zipCode }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('ad_show', {'id': ad.id}) }}"class="btn btn-info">show</a>
+                    <a href="{{ path('ad_show', {'id': ad.id}) }}"class="btn btn-info">{% trans %} show{% endtrans %}</a>
                     <form method="post" class="d-inline" action="{{ path('ad_delete', {'id': ad.id}) }}" onsubmit="return confirm('Are you sure you want to delete this ad?');">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger">{% trans %} Delete{% endtrans %}</button>
                     </form>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="34">no records found</td>
+                <td colspan="34">{% trans %} no records found{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>

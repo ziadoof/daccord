@@ -27,6 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\ElasticaBundle\Manager\RepositoryManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use ZMQ;
 use ZMQContext;
 
@@ -50,7 +51,7 @@ class AdController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator, CityRepository $cityRepository): Response
+    public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
 
@@ -457,6 +458,7 @@ class AdController extends AbstractController
         if($generalCategory !== null) {
             return in_array($generalCategory, $listCity);
         }
+        return false;
     }
 
     /**

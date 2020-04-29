@@ -27,15 +27,8 @@
                                                 </div>
                                             </form>
                                         {% endif %}
-                                        <b class="title-blue float-left">{{ ad.category }}</b>
-                                        {% if "now"|date('Y-m-d') == ad.dateOfAd|date('Y-m-d') %}
-                                            <b class="float-right ">{{ 'Aujoud\'hui' }}</b>
-                                        {% elseif "now"|date('Y') == ad.dateOfAd|date('Y') and "now"|date('m') == ad.dateOfAd|date('m') and
-                                            "now"|date('d') == (ad.dateOfAd|date('d'))+1 %}
-                                            <b class="float-right ">{{ 'Hier' }}</b>
-                                        {% else %}
-                                            <b class="float-right ">{{ 'De ' }}{{ ad.dateOfAd|date('Y-m-d') }}</b>
-                                        {% endif %}
+                                        <b class="title-blue float-left">{{ ad.category|trans }}</b>
+                                        <b class="float-right ">{{ ad.date_format(ad.dateOfAd)|trans }}</b>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +93,7 @@
                 <div class="">
                     <div class="text-center title-blue">
                          {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
-                        <h1> There is no results</h1>
+                        <h1> {% trans %} There is no results{% endtrans %}</h1>
                     </div>
                 </div>
             </div>

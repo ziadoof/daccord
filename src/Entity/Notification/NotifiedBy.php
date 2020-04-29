@@ -197,40 +197,13 @@ class NotifiedBy
         $dateString = $date->format('d-m-Y');
         switch (true) {
             case $interval === 0:
-                return 'Today';
+                return $date->format('H:i');
                 break;
             case $interval === 1:
                 return 'Yesterday';
                 break;
-            case ($interval >1 && $interval< 7):
-                return $interval.'Days ago';
-                break;
-            case $interval === 7:
-                return '1 Week ago';
-                break;
-            case ($interval >7 && $interval< 15):
-                return 'Last week';
-                break;
-            case ($interval >15 && $interval< 21):
-                return 'About َ3 Week ago';
-                break;
-            case ($interval >21 && $interval< 30):
-                return 'About 4 Week ago';
-                break;
-            case ($interval > 30 && $interval< 60):
-                return 'Last month';
-                break;
-            case ( $interval> 60):
-                return $dateString;
-                break;
-            case 15:
-                return '2 Week ago';
-                break;
-            case 21:
-                return '3 Week ago';
-                break;
-            case 30:
-                return '1 Month ago';
+            default:
+                return $date->format('d M');
                 break;
         }
     }

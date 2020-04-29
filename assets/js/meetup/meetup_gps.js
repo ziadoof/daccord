@@ -1,9 +1,11 @@
-        $("#btn-meetup-gps").click(function(e) {
+import Translator from "bazinga-translator";
+
+$("#btn-meetup-gps").click(function(e) {
             e.preventDefault();
             if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(showPosition);
             }else{
-                alert('Geolocation is not supported by this browser.');
+                alert(Translator.trans('Geolocation is not supported by this browser.'));
             }
 
         });

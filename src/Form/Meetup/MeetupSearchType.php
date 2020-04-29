@@ -92,7 +92,7 @@ class MeetupSearchType extends  AbstractType
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Location\Region',
-                'placeholder' => 'Région',
+                'placeholder' => 'Region',
                 'label' => false,
                 'required'    => true
             ]);
@@ -137,7 +137,8 @@ class MeetupSearchType extends  AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => 'App\Model\MeetupModel'
+            'data_class' => 'App\Model\MeetupModel',
+            'translation_domain'=> 'manual',
         ]);
         $resolver->setRequired('entity_manager');
     }
@@ -155,7 +156,8 @@ class MeetupSearchType extends  AbstractType
             null,
             [
                 'class'           => 'App\Entity\Location\Department',
-                'placeholder'     => $region ? 'Département' : 'Select Region',
+                'placeholder'     => $region ? 'Department' : 'Select Region',
+                'translation_domain'=> 'manual',
                 'required'        => false,
                 'auto_initialize' => false,
                 'label' => false,
@@ -190,6 +192,7 @@ class MeetupSearchType extends  AbstractType
 
             'label' => false,
             'required' => false,
+            'translation_domain'=> 'manual',
             'expanded' => false,
             'multiple'=> true,
             'choices'     => $choice,

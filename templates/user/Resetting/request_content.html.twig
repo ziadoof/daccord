@@ -1,6 +1,4 @@
 {% extends "layout_user.html.twig" %}
-{% trans_default_domain 'FOSUserBundle' %}
-
 {% block content %}
     {% block fos_user_content %}
         {#<div class="container pt-lg-5 pt-3">
@@ -44,13 +42,13 @@
                         <form class="form-group formLogin" action="{{ path('fos_user_resetting_send_email') }}"
                               method="POST" class="fos_user_resetting_request">
                             <div class="my-4">
-                                <label for="username">Your Email </label>
+                                <label for="username">{% trans %}Your Email{% endtrans %} </label>
                                 <input class="form-control" type="text" id="username" name="username" required="required"/>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="row">
                                     <div class="">
-                                        <input class="btn login_btn" type="submit" value="{{ 'resetting.request.submit'|trans }}"/>
+                                        <input class="btn login_btn" type="submit" value="{% trans %}Reset password{% endtrans %}"/>
                                     </div>
                                 </div>
                             </div>
@@ -59,8 +57,8 @@
 
                     <div class="register-form my-4">
                         <div class="d-flex justify-content-center links">
-                            <a href="{{ path('user_registration') }}" class="ml-2 btn btn-outline-secondary">Sign Up</a>
-                            <a href="{{ path('security_login') }}" class="ml-2 btn btn-outline-secondary">Sign In</a>
+                            <a href="{{ path('user_registration') }}" class="ml-2 btn btn-outline-secondary">{% trans %}Sign Up{% endtrans %}</a>
+                            <a href="{{ path('security_login') }}" class="ml-2 btn btn-outline-secondary">{% trans %}Sign In{% endtrans %}</a>
                         </div>
                     </div>
                 </div>

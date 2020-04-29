@@ -54,7 +54,8 @@ class AddCategoryFieldSubscriber implements EventSubscriberInterface
         $formOptions = array(
             'class'         => Category::class,
             'required' => true,
-            'placeholder'     => $generalcategory_id ? 'Sélectionnez votre category' : 'Sélectionnez votre general category',
+            'translation_domain'=> 'manual',
+            'placeholder'     => $generalcategory_id ? 'Category' : 'Select general category',
             'attr'          => array(
                 'class' => 'category_selector ',
 
@@ -65,7 +66,7 @@ class AddCategoryFieldSubscriber implements EventSubscriberInterface
                     ->setParameter('generalcategory_id', $generalcategory_id)
                 ;
                 return $qb;
-            }
+            },
         );
 
         $form->add($this->factory, EntityType::class, $formOptions);

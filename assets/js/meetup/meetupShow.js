@@ -9,9 +9,9 @@ $(document).on('click', "#meetup_city",function () {
                 otherOptions: {
                     minimumInputLength: 2,
                     theme: 'boostrap',
-                    formatNoMatches: 'No author found.',
-                    formatSearching: 'Searching city...',
-                    formatInputTooShort: 'Insert at least 2 character'
+                    formatNoMatches: Translator.trans('No city found.'),
+                    formatSearching: Translator.trans('Searching city...'),
+                    formatInputTooShort: Translator.trans('Insert at least 2 character'),
                 }
             };
             $('#meetup_city').autocompleter(options);

@@ -14,17 +14,17 @@
                                         <h4 class="meetup-text rosed">{{ oneFavorite.ad.title }}</h4>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Type : ' }}</span>{{ oneFavorite.ad.typeOfAd }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %}Type : {% endtrans %} </span>{{ oneFavorite.ad.typeOfAd|trans }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Category : ' }}</span>{{ oneFavorite.ad.category }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %}Category : {% endtrans %}</span>{{ oneFavorite.ad.category|trans }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'City : ' }}</span>{% if oneFavorite.ad.city %}{{ oneFavorite.ad.city.name }}{% else %}{{ oneFavorite.ad.ville.name }}{% endif %}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} City : {% endtrans %}</span>{% if oneFavorite.ad.city %}{{ oneFavorite.ad.city.name }}{% else %}{{ oneFavorite.ad.ville.name }}{% endif %}</span>
                                     </div>
                                     <div class="">
                                         {% if oneFavorite.ad.price %}
-                                        <span class=" mt-3"><span class="blued">{{ 'Price : ' }}</span>{{ oneFavorite.ad.price }} €</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} Price :{% endtrans %}</span>{{ oneFavorite.ad.price }} €</span>
                                         {% endif %}
                                     </div>
                                 </div>

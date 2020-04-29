@@ -63,6 +63,7 @@ class AddSearchGeneralcategoryFieldSubscriber implements EventSubscriberInterfac
             'label' => false,
             'required' => true,
             'placeholder' => 'General Category',
+            'translation_domain'=> 'manual',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('c')
                     ->andWhere('c.parent is null')
@@ -71,6 +72,7 @@ class AddSearchGeneralcategoryFieldSubscriber implements EventSubscriberInterfac
                     ->orderBy('c.id', 'ASC');
             },
             'choice_label' => 'name',
+            'choice_translation_domain'=> 'category',
             'attr'          => array(
                 'class' => 'generalcategory_selector',
             ),

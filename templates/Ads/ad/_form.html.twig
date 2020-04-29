@@ -3,7 +3,7 @@
         {{ form_start(form, {'attr': {'id': ad.typeOfAd}}) }}
         <div class="row mt-4 pt-4">
             <div class="col-md-12 ">
-                <h1 class="text-center pt-0 title-blue">New {{ ad.typeOfAd }}</h1>
+                <h1 class="text-center pt-0 title-blue">{% if ad.typeOfAd is same as ('Offer') %}{% trans%}New Offer {% endtrans%} {% else %} {% trans%}New Demand {% endtrans%} {% endif %}</h1>
             </div>
         </div>
         <div class="row">
@@ -549,7 +549,7 @@
         </div>
         <hr>
         <div class="row justify-content-center">
-            <input type="submit" class="btn btn-primary" value="{{ 'Valider'|trans }}" />
+            <input type="submit" class="btn btn-primary" value="{% trans %}Ok{% endtrans %}" />
         </div>
         {{ form_end(form) }}
             <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>

@@ -1,7 +1,7 @@
 Notifications :
 {% if notificationList|length > 0 %}
     <form action="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}" method="post">
-        <button type="submit">Mark all as seen</button>
+        <button type="submit">{% trans %} Mark all as seen{% endtrans %}</button>
     </form>
 {% endif %}
 <ul>
@@ -9,14 +9,14 @@ Notifications :
         <li>
             <b>{{ item.notification }}</b>
             <br>
-            seen : {{ item.seen }}
+            {% trans %} seen : {% endtrans %}{{ item.seen }}
             <form action="{{ mgilet_notification_generate_path('notification_mark_as_seen', item.notifiableEntity, item.notification) }}"
                   method="post">
-                <button type="submit">Mark as seen</button>
+                <button type="submit">{% trans %} Mark as seen{% endtrans %}</button>
             </form>
             <form action="{{ mgilet_notification_generate_path('notification_mark_as_unseen', item.notifiableEntity, item.notification) }}"
                   method="post">
-                <button type="submit">Mark as unseen</button>
+                <button type="submit">{% trans %} Mark as unseen{% endtrans %}</button>
             </form>
         </li>
     {% endfor %}

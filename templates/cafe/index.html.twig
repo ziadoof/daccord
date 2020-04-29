@@ -1,15 +1,15 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}Cafe{% endblock %}
+{% block title %}{% trans %} Cafe{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h1 class="text-center rosed mb-4">Cafe</h1>
+    <h1 class="text-center rosed mb-4">{% trans %} Cafe{% endtrans %}</h1>
 
     {% if form is defined %}
      {% include 'cafe/_form.html.twig' %}
     {% endif %}
     {% if currentCafe is defined %}
-        <h5 class="text-center blued" id="myCafe">Your cafe</h5>
+        <h5 class="text-center blued" id="myCafe">{% trans %} Your cafe{% endtrans %}</h5>
         <div class="row " id="div-cafe-timer{{ currentCafe.id }}" data-value="myCafe">
             <div class="col-md-6 offset-3 border-deal">
                 <div class="row my-2">
@@ -31,7 +31,7 @@
                     <div class="col-md-3 mt-4 text-center">
                         <div class="cafe-timer" id="cafe-timer{{ currentCafe.id }}">
                             <input type="hidden" name="expiresTime"  value="{{ currentCafe.expireAt|date }}">
-                            <span class="rosed ">Expires in </span>
+                            <span class="rosed ">{% trans %} Expires in {% endtrans %}</span>
                             <span class="hours"></span>
                             <span class="minutes"></span>
                             <span class="seconds"></span>
@@ -44,7 +44,7 @@
                                 <input type="hidden" name="lng" id="cafe_deactivate_gps_lng">
                                 <input type="hidden" name="currentCafe" id="cafe_deactivate_gps_cafe" value="{{ currentCafe.id }}">
                                 <i class="fas fa-trash"></i>
-                                <span class="nav-label">Delete</span>
+                                <span class="nav-label">{% trans %} Delete{% endtrans %}</span>
                             </button>
                         </form>
                     </div>
@@ -55,7 +55,7 @@
     {% if areaCafes is defined %}
     {% if areaCafes is not empty %}
         <hr>
-        <h5 class="text-center blued mt-4" id="anotherCafe">Another cafe</h5>
+        <h5 class="text-center blued mt-4" id="anotherCafe">{% trans %} Another cafe{% endtrans %}</h5>
         {% for cafe in areaCafes %}
         <div class="row anotherCafe" id="div-cafe-timer{{ cafe.id }}" >
             <div class="col-md-6 offset-3 border-deal">
@@ -77,7 +77,7 @@
                     <div class="col-md-3 mt-4 text-center">
                         <div class="cafe-timer" id="cafe-timer{{ cafe.id }}">
                             <input type="hidden" name="expiresTime" value="{{ cafe.expireAt|date }}">
-                            <span class="rosed ">Expires in </span>
+                            <span class="rosed ">{% trans %} Expires in {% endtrans %}</span>
                             <span class="hours"></span>
                             <span class="minutes"></span>
                             <span class="seconds"></span>
@@ -87,7 +87,7 @@
                         <form method="post" action="{{ url('new_conversation') }}" class="cafe-message">
                             <button class="btn btn-info btn-block" >
                                 <input type="hidden" name="user" value="{{ cafe.createdBy.id }}">
-                                <p class="mt-1">Message</p>
+                                <p class="mt-1">{% trans %} Message{% endtrans %}</p>
                             </button>
                         </form>
                     </div>
@@ -96,7 +96,7 @@
         </div>
         {% endfor %}
     {% else %}
-        <h4 class="text-center blued mt-4">There is no invitations in your area</h4>
+        <h4 class="text-center blued mt-4">{% trans %} There is no invitations in your area{% endtrans %}</h4>
     {% endif %}
     {% endif %}
     {% if form is not defined and areaCafes is not defined and currentCafe is not defined %}

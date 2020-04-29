@@ -123,6 +123,7 @@ class MeetupType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Meetup::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

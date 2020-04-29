@@ -1,4 +1,3 @@
-{% trans_default_domain 'FOSUserBundle' %}
 <div class="container h-100 mt-5 pt-5">
     <div class="d-flex justify-content-center h-100">
         <div class="user_card">
@@ -13,13 +12,13 @@
                     {{ form_row(form.email) }}
                     {{ form_row(form.plainPassword) }}
                     {{ form_row(form.city) }}
-                    <button type="submit" class="btn login_btn col-md-10 offset-1 mt-4">Sign up!</button>
+                    <button type="submit" class="btn login_btn col-md-10 offset-1 mt-4">{% trans %}Sign up!{% endtrans %}</button>
                     {{ form_end(form) }}
                 </div>
             </div>
             <div class="my-4">
                 <div class="d-flex justify-content-center links register-form">
-                    You have an account? <a href="{{ path('security_login') }}" class="ml-2">Sign In</a>
+                    {% trans %}You have an account?{% endtrans %} <a href="{{ path('security_login') }}" class="ml-2">{% trans %}Sign In{% endtrans %}</a>
                 </div>
             </div>
         </div>

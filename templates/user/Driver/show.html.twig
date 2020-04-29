@@ -28,16 +28,16 @@
         <div class="justify-content-center">
             <div class="text-center pt-2">
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Car brand :  </h6><span>  {{ driver.carBrand }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %} Car brand : {% endtrans %} </h6><span>  {{ driver.carBrand }}</span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Car color :  </h6><span>  {{ driver.carColor }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %} Car color : {% endtrans %} </h6><span>  {{ driver.carColor }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold">City  :  </h6><span>  {{ driver.city}}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %} City  : {% endtrans %} </h6><span>  {{ driver.city}}</span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold"> Max distance:  </h6><span>  {{ driver.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                    <h6 class="d-inline font-weight-bold">{% trans %} Max distance: {% endtrans %}  </h6><span>  {{ driver.maxDistance }} <span class="font-weight-bold">Km</span></span>
                 </div>
             </div>
         </div>
@@ -46,13 +46,13 @@
                 <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                     <button class="btn btn-info mx-1" >
                         <input type="hidden" name="user" value="{{ driver.user.id }}">
-                        <p class="mt-1">Message to {{driver.user.firstname}}</p>
+                        <p class="mt-1">{% trans %}Message to {% endtrans %} {{driver.user.firstname}}</p>
                     </button>
                 </form>
             </div>
         </div>
         {% if rating  %}
-        <h4 class="text-center blued mt-4">Rating</h4>
+        <h4 class="text-center blued mt-4">{% trans %} Rating{% endtrans %}</h4>
         <div class="text-center">
             {% set range = rating.total/rating.numVotes %}
             {% set total = range|round(2, 'ceil')  %}
@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="">
-            <h6 class="text-center blued mt-4" >Comments</h6>
+            <h6 class="text-center blued mt-4" >{% trans %} Comments{% endtrans %}</h6>
             <div>
                 {% for vote in rating.votes %}
                     <div class="row">
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="row border-bottom">
-                                <p class="my-2 mx-2"> <span class="rosed">Comment : </span>{{ vote.comment }}</p>
+                                <p class="my-2 mx-2"> <span class="rosed">{% trans %} Comment :{% endtrans %} </span>{{ vote.comment }}</p>
                             </div>
                             <div class="row border-bottom float-right">
                                 <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>

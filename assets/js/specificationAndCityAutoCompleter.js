@@ -1,4 +1,6 @@
 import tail from './meetup/tail.datetime-full';
+import Translator from "bazinga-translator";
+
 /*this file grouped th specification for new ad  & city auto complete for form & template for dateTime offer and demand and other*/
 var $ospecification = $("#offer_category");
 $(document).on('change', '#offer_category', function () {
@@ -20,7 +22,7 @@ $(document).on('change', '#offer_category', function () {
             $('#new_form_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('offer');
             $('#offer_languages').select2({
-                placeholder: " Select languages",
+                placeholder: Translator.trans("Select languages"),
                 tage: true,
                 maximumSelectionLength: 4,
                 dropdownAutoWidth: true,
@@ -51,7 +53,7 @@ $(document).on('change', '#demand_category', function () {
             $('#new_form_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('demand');
             $('#demand_languages').select2({
-                placeholder: " Select languages",
+                placeholder: Translator.trans("Select languages"),
                 tage: true,
                 maximumSelectionLength: 4,
                 dropdownAutoWidth: true,
@@ -82,7 +84,7 @@ $(document).on('change', '#demand_search_category', function () {
             $('#search_demand_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('demand_search');
             $('#demand_search_languages').select2({
-                placeholder: " Select languages",
+                placeholder: Translator.trans("Select languages"),
                 tage: true,
                 maximumSelectionLength: 4,
                 dropdownAutoWidth: true,
@@ -112,7 +114,7 @@ $(document).on('change', '#offer_search_category', function () {
             $('#search_offer_dynamic').replaceWith($dynamicForm);
             addBootstrapToggle('offer_search');
             $('#offer_search_languages').select2({
-                placeholder: " Select languages",
+                placeholder: Translator.trans("Select languages"),
                 tage: true,
                 maximumSelectionLength: 4,
                 dropdownAutoWidth: true,
@@ -143,16 +145,16 @@ function donate($type) {
 
 $(document).ready(function () {
     $('#offer_search_languages').select2({
-        placeholder: " Select languages",
+        placeholder: Translator.trans("Select languages"),
     });
     $('#demand_search_languages').select2({
-        placeholder: " Select languages",
+        placeholder: Translator.trans("Select languages"),
     });
     $('#offer_languages').select2({
-        placeholder: " Select languages",
+        placeholder: Translator.trans("Select languages"),
     });
     $('#demand_languages').select2({
-        placeholder: " Select languages",
+        placeholder: Translator.trans("Select languages"),
     });
     $('.select2-search__field').css('width', '100%');
 });
@@ -174,9 +176,9 @@ function completeNormalCity(id) {
         autoFocus: true,
         minLength:2,
         theme: 'bootstrap',
-        formatNoMatches: 'No city found.',
-        formatSearching: 'Searching city...',
-        formatInputTooShort: 'Insert at least 2 character',
+        formatNoMatches: Translator.trans('No city found.'),
+        formatSearching: Translator.trans('Searching city...'),
+        formatInputTooShort: Translator.trans('Insert at least 2 character'),
         close: function(e, ui) {
             if (!makeSelect) {
                 $this.val(false);
@@ -204,7 +206,7 @@ function completeNormalCity(id) {
 
 function addDateTimeForm($id){
         tail.DateTime($id,{
-            locale: "fr",
+            locale: Translator.locale,
             time12h: false,
             timeSeconds: null,
             weekStart: 1,
@@ -221,7 +223,7 @@ function addDateTimeForm($id){
 
 function addBirthdayForm($id){
     tail.DateTime($id,{
-        locale: "fr",
+        locale: Translator.locale,
         time12h: false,
         timeSeconds: null,
         weekStart: 1,

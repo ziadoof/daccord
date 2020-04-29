@@ -11,25 +11,25 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="">
-                                        <h4 class="meetup-text rosed">Voyage</h4>
+                                        <h4 class="meetup-text rosed">{% trans %} Voyage{% endtrans %}</h4>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'From : ' }}</span>{{ oneFavorite.voyage.stationDeparture.name }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} From :{% endtrans %} </span>{{ oneFavorite.voyage.stationDeparture.name }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'To : ' }}</span>{{ oneFavorite.voyage.stationArrival.name }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %}To :  {% endtrans %}</span>{{ oneFavorite.voyage.stationArrival.name }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'Date: ' }}</span>{{ oneFavorite.voyage.timeDeparture|date('d M Y - H:i') }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} Date: {% endtrans %}</span>{{ oneFavorite.voyage.timeDeparture|date('d M Y - H:i') }}</span>
                                     </div>
                                     <div class="">
-                                        <span class=" mt-3"><span class="blued">{{ 'With : ' }}</span>{{ oneFavorite.voyage.creator.user.firstname|title }}</span>
+                                        <span class=" mt-3"><span class="blued">{% trans %} With : {% endtrans %}</span>{{ oneFavorite.voyage.creator.user.firstname|title }}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     {% if oneFavorite.voyage.isFinish() %}
                                         <div class="col">
-                                            <span class="badge badge-danger float-right mt-2">Finish</span>
+                                            <span class="badge badge-danger float-right mt-2">{% trans %}Finish{% endtrans %}</span>
                                         </div>
                                     {% endif %}
                                 </div>

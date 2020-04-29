@@ -1,9 +1,9 @@
 {% extends "layout_user.html.twig" %}
 
-{% block title %}Hosting{% endblock %}
+{% block title %}{% trans %} Hosting{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h1 class="title-blue text-center">Hosting</h1>
+    <h1 class="title-blue text-center">{% trans %} Hosting{% endtrans %}</h1>
     {% if hosting_received is not empty %}
         <div class="col-md-6 offset-3 my-2">
             {% for hosting in hosting_received %}
@@ -30,24 +30,24 @@
                     {% if hosting.treatment is same as('pending') %}
                     <div class="row">
                         <div class="col text-center ">
-                            <h6 class="blued ">Hosting request from
+                            <h6 class="blued ">{% trans %} Hosting request from{% endtrans %}
                                 <span class="rosed">{{ hosting.startDate|date('d/m/Y') }}</span>
-                                 to <span class="rosed">{{ hosting.endDate|date('d/m/Y') }}</span>
-                                 for <span class="rosed">{{ hosting.numberOfPersons }}</span> persons
+                                {% trans %} to{% endtrans %} <span class="rosed">{{ hosting.endDate|date('d/m/Y') }}</span>
+                                {% trans %} for{% endtrans %} <span class="rosed">{{ hosting.numberOfPersons }}</span> {% trans %} persons{% endtrans %}
                             </h6>
                         </div>
                     </div>
                     {% if hosting.description %}
                         <div class="row mx-2 ">
                             <div class="col-md-12">
-                                <span class="blued">Description : </span>
+                                <span class="blued">{% trans %} Description : {% endtrans %}</span>
                                 <p class="minimize">{{ hosting.description }}</p>
                             </div>
                         </div>
                     {% else %}
                         <div class="row mx-2 ">
                             <div class="col-md-12 text-center">
-                                <span class="">There is no description ! </span>
+                                <span class="">{% trans %} There is no description !{% endtrans %} </span>
                             </div>
                         </div>
                     {% endif %}
@@ -57,7 +57,7 @@
                             <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                                 <button class="btn btn-outline-info  btn-block" >
                                     <input type="hidden" name="user" value="{{ hosting.sender.id }}">
-                                    <p class="mt-1">Message to {{hosting.sender.firstname}}</p>
+                                    <p class="mt-1">{% trans %} Message to {% endtrans %}{{hosting.sender.firstname}}</p>
                                 </button>
                             </form>
                         </div>
@@ -65,14 +65,14 @@
                             <form>
                                 <a class="btn btn-outline-success  btn-block"
                                    href="{{ path('hosting_request_treatment', {'hostingRequest':hosting.id, 'type': 'accepted'}) }}"
-                                   onclick="return confirm('Are you sure you want to accept this hosting request?');">Accept the request</a>
+                                   onclick="return confirm(Translator.trans('Are you sure you want to accept this hosting request?'));">{% trans %}Accept the request {% endtrans %}</a>
                             </form>
                         </div>
                         <div class="col-md-4">
                             <form>
                                 <a class="btn btn-outline-danger  btn-block"
                                    href="{{ path('hosting_request_treatment', {'hostingRequest':hosting.id, 'type': 'rejected'}) }}"
-                                   onclick="return confirm('Are you sure you want to reject this hosting request?');">Reject the request</a>
+                                   onclick="return confirm(Translator.trans('Are you sure you want to reject this hosting request?'));">{% trans %} Reject the request{% endtrans %}</a>
                             </form>
                         </div>
                     </div>
@@ -81,11 +81,11 @@
                             <div class="row ">
                                 <div class="col my-2">
                                    <h5 class="ml-4 text-center">
-                                    You have hosting <span class="rosed">{{hosting.sender.firstname}}</span> in your home
+                                       {% trans %} You have hosting {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span>{% trans %} in your home{% endtrans %}
                                     {% if hosting.numberOfPersons > 1 %}
-                                        with other people
+                                        {% trans %}with other people {% endtrans %}
                                     {% endif %}
-                                    from <span class="blued">{{hosting.startDate|date('d M Y')}}</span> to <span class="blued">{{hosting.endDate|date('d M Y')}}</span>
+                                       {% trans %} from{% endtrans %} <span class="blued">{{hosting.startDate|date('d M Y')}}</span> {% trans %} to{% endtrans %} <span class="blued">{{hosting.endDate|date('d M Y')}}</span>
                                     </h5>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                             <div class="row">
                                 <div class="col">
                                     <i class="far fa-star rosed ml-2 pt-1"></i>
-                                    <span>10 points were added to your account based on this hosting</span>
+                                    <span>{% trans %} 10 points were added to your account based on this hosting{% endtrans %}</span>
                                 </div>
                             </div>
                         {% else %}
@@ -101,17 +101,17 @@
                                 <div class="row">
                                     <div class="col">
                                        <h5 class="ml-4 text-center">
-                                        You have hosting <span class="rosed">{{hosting.sender.firstname}}</span> in your home
+                                           {% trans %} You have hosting {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span>{% trans %} in your home {% endtrans %}
                                         {% if hosting.numberOfPersons > 1 %}
-                                            with other people
+                                            {% trans %}with other people {% endtrans %}
                                         {% endif %}
-                                        from <span class="blued">{{hosting.startDate|date('d M Y')}}</span> to <span class="blued">{{hosting.endDate|date('d M Y')}}</span>
+                                           {% trans %} from{% endtrans %}  <span class="blued">{{hosting.startDate|date('d M Y')}}</span>{% trans %} to{% endtrans %}  <span class="blued">{{hosting.endDate|date('d M Y')}}</span>
                                        </h5>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-center">
-                                        <span class="">Waiting for DONE HOSTING by <span class="rosed">{{hosting.sender.firstname}}</span> to end this hosting</span>
+                                        <span class="">{% trans %} Waiting for DONE HOSTING by {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span> {% trans %}to end this hosting {% endtrans %}</span>
                                     </div>
                                 </div>
                                 <hr class="my-1">
@@ -120,7 +120,7 @@
                                         <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                                             <button class="btn btn-info  btn-block" >
                                                 <input type="hidden" name="user" value="{{ hosting.sender.id }}">
-                                                <p class="mt-1">Message to {{hosting.sender.firstname}}</p>
+                                                <p class="mt-1">{% trans %} Message to {% endtrans %}{{hosting.sender.firstname}}</p>
                                             </button>
                                         </form>
                                     </div>
@@ -128,20 +128,20 @@
                             {% else %}
                                 <div class="row">
                                     <span class="ml-4">
-                                        You have accepted to host <span class="rosed">{{hosting.sender.firstname}}</span> in your home
+                                        {% trans %} You have accepted to host {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span> {% trans %} in your home{% endtrans %}
                                         {% if hosting.numberOfPersons > 1 %}
-                                            with other people
+                                            {% trans %} with other people{% endtrans %}
                                         {% endif %}
-                                        from <span class="blued">{{hosting.startDate|date('d M Y')}}</span> to <span class="blued">{{hosting.endDate|date('d M Y')}}</span>.
+                                        {% trans %} from{% endtrans %} <span class="blued">{{hosting.startDate|date('d M Y')}}</span>{% trans %} to{% endtrans %}  <span class="blued">{{hosting.endDate|date('d M Y')}}</span>.
                                         <br>
-                                        Upon completion of the hosting, you can DONE this hosting to dispose of <span class="rosed">{{hosting.sender.firstname}}</span>
-                                        adding an rating to your account.
+                                        {% trans %} Upon completion of the hosting, you can DONE this hosting to dispose of {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span>
+                                        {% trans %} adding an rating to your account.{% endtrans %}
                                     </span>
                                 </div>
                                 {% if hosting.senderStatus %}
                                     <div class="row ">
                                         <i class="fas fa-star-of-life ml-4 pt-1 rosed"></i>
-                                        <span class="blued ml-1">{{ hosting.sender.firstname }} has been DONE this hosting</span>
+                                        <span class="blued ml-1">{{ hosting.sender.firstname }}{% trans %} has been DONE this hosting{% endtrans %} </span>
                                     </div>
                                 {% endif %}
                                 <hr class="my-1">
@@ -150,7 +150,7 @@
                                         <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
                                             <button class="btn btn-info  btn-block" >
                                                 <input type="hidden" name="user" value="{{ hosting.sender.id }}">
-                                                <p class="mt-1">Message to {{hosting.sender.firstname}}</p>
+                                                <p class="mt-1">{% trans %} Message to{% endtrans %} {{hosting.sender.firstname}}</p>
                                             </button>
                                         </form>
                                     </div>
@@ -158,7 +158,7 @@
                                         <form>
                                             <a class="btn btn-success  btn-block"
                                                href="{{ path('done_hosting', {'hosting':hosting.id}) }}"
-                                               onclick="return confirm('Are you sure you want to DONE this hosting ?');">DONE HOSTING</a>
+                                               onclick="return confirm(Translator.trans('Are you sure you want to DONE this hosting ?'));">{% trans %} DONE HOSTING{% endtrans %}</a>
                                         </form>
                                     </div>
                                 </div>
@@ -171,6 +171,6 @@
         </div>
 
     {% else %}
-        <h6 class="blued text-center">There is no hosting requests</h6>
+        <h6 class="blued text-center">{% trans %}There is no hosting requests {% endtrans %}</h6>
     {% endif %}
 {% endblock %}

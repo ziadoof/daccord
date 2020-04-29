@@ -1,4 +1,3 @@
-{% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
     {% if app.user.carpool %}
     <div class="fos_user_user_show px-4 py-4">
@@ -16,36 +15,36 @@
         <div class="justify-content-center">
             <div class="text-center pt-2">
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Car brand :  </h6><span>  {{ app.user.carpool.carBrand }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Car brand : {% endtrans %} </h6><span>  {{ app.user.carpool.carBrand }}</span>
                 </div>
                 <div class="col">
-                    <h6 class="d-inline font-weight-bold">Car color :  </h6><span>  {{ app.user.carpool.carColor }}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Car color : {% endtrans %} </h6><span>  {{ app.user.carpool.carColor }}</span>
                 </div>
                 <div class="col ">
-                    <h6 class="d-inline font-weight-bold">Number of passengers  :  </h6><span>  {{ app.user.carpool.numberOfPassengers}}</span>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Number of passengers  : {% endtrans %} </h6><span>  {{ app.user.carpool.numberOfPassengers}}</span>
                 </div>
-                <h6 class="text-center rosed mt-4">Possibility to</h6>
+                <h6 class="text-center rosed mt-4">{% trans %}Possibility to{% endtrans %}</h6>
                 <div class="col">
                     {% if app.user.carpool.bag %}
-                        <span class="badge badge-info py-2 px-2 mr-1">Bag</span>
+                        <span class="badge badge-info py-2 px-2 mr-1">{% trans %}Bag{% endtrans %}</span>
                     {% endif %}
                     {% if app.user.carpool.animal %}
-                        <span class="badge badge-info py-2 px-2 mr-1">Animal</span>
+                        <span class="badge badge-info py-2 px-2 mr-1">{% trans %}Animal{% endtrans %}</span>
                     {% endif %}
                     {% if app.user.carpool.baby %}
-                        <span class="badge badge-info py-2 px-2 mr-1">Baby</span>
+                        <span class="badge badge-info py-2 px-2 mr-1">{% trans %}Baby{% endtrans %}</span>
                     {% endif %}
                     {% if app.user.carpool.bankCard %}
-                        <span class="badge badge-info py-2 px-2 mr-1">bank card</span>
+                        <span class="badge badge-info py-2 px-2 mr-1">{% trans %}bank card{% endtrans %}</span>
                     {% endif %}
                 </div>
-                <h6 class="text-center rosed mt-4">I can share</h6>
+                <h6 class="text-center rosed mt-4">{% trans %}I can share{% endtrans %}</h6>
                 <div class="col">
                     {% if app.user.carpool.conversation %}
-                        <span class="badge badge-warning py-2 px-2 mr-1">Conversation</span>
+                        <span class="badge badge-warning py-2 px-2 mr-1">{% trans %}Conversation{% endtrans %}</span>
                     {% endif %}
                     {% if app.user.carpool.music %}
-                        <span class="badge badge-warning py-2 px-2 mr-1">Music</span>
+                        <span class="badge badge-warning py-2 px-2 mr-1">{% trans %}Music{% endtrans %}</span>
                     {% endif %}
                 </div>
             </div>
@@ -57,14 +56,12 @@
     <div class="col-md-4 offset-4 mt-5">
         <div class="row border-driver">
             <div class="col my-4 mx-2 text-center">
-                <h4 class="title-blue my-1 mx-1">Share your car in simple steps</h4>
-                <p>Registering yourself with the Carpool service will allow you to share your car
-                    with other people to get them to your same destination
-                    You can get subscribers if your prices are competitive</p>
+                <h4 class="title-blue my-1 mx-1">{% trans %}Share your car in simple steps{% endtrans %}</h4>
+                <p>{% trans %}Registering yourself with the Carpool service will allow you to share your car with other people to get them to your same destination You can get subscribers if your prices are competitive{% endtrans %}</p>
             </div>
         </div>
         <div class="row text-center ">
-            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">Share your car</a>
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">{% trans %}Share your car{% endtrans %}</a>
         </div>
     </div>
     {% endif %}

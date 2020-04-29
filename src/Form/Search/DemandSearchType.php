@@ -62,7 +62,7 @@ class DemandSearchType extends  AbstractType
         $builder
             ->add('region', EntityType::class, [
                 'class'       => 'App\Entity\Location\Region',
-                'placeholder' => 'Région',
+                'placeholder' => 'Region',
                 'label' => false,
                 'required'    => true
             ]);
@@ -121,7 +121,8 @@ class DemandSearchType extends  AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => 'App\Model\AdModel'
+            'data_class' => 'App\Model\AdModel',
+            'translation_domain'=> 'manual',
         ]);
         $resolver->setRequired('entity_manager');
     }
@@ -139,10 +140,11 @@ class DemandSearchType extends  AbstractType
             null,
             [
                 'class'           => 'App\Entity\Location\Department',
-                'placeholder'     => $region ? 'Département' : 'Select Region',
+                'placeholder'     => $region ? 'Department' : 'Select Region',
                 'required'        => false,
                 'auto_initialize' => false,
                 'label' => false,
+                'translation_domain'=> 'manual',
                 'choices'         => $region ? $region->getDepartments() : []
             ]
         );
@@ -175,6 +177,7 @@ class DemandSearchType extends  AbstractType
             'required' => false,
             'expanded' => false,
             'multiple'=> true,
+            'translation_domain'=> 'manual',
             'choices'     => $choice,
         ]);
     }

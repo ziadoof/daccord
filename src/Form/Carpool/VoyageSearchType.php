@@ -55,7 +55,8 @@ class VoyageSearchType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'data_class' => 'App\Model\VoyageModel'
+            'data_class' => 'App\Model\VoyageModel',
+            'translation_domain'=> 'manual',
         ]);
         $resolver->setRequired('entity_manager');
     }

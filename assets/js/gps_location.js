@@ -1,3 +1,4 @@
+import Translator from 'bazinga-translator';
 
 // offer search location
 $(document).ready(function() {
@@ -19,7 +20,8 @@ $(document).ready(function() {
             if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(offer_showLocation);
             }else{
-                $('#offer_location').html('Geolocation is not supported by this browser.');
+                let error_message = Translator.trans('Geolocation is not supported by this browser.');
+                $('#offer_location').html(error_message);
             }
         } else {
             $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
@@ -64,10 +66,6 @@ function offer_showLocation(position){
     });
 }
 
-
-
-
-
 //demand search location
 $(document).ready(function() {
     var nearme = localStorage.getItem('demand_nearme');
@@ -89,7 +87,8 @@ $(document).ready(function() {
             if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(demand_showLocation);
             }else{
-                $('#demand_location').html('Geolocation is not supported by this browser.');
+                let error_message = Translator.trans('Geolocation is not supported by this browser.');
+                $('#demand_location').html(error_message);
             }
         } else {
             $("#demand_search_region,#demand_search_department,#demand_search_ville").attr("disabled", false);

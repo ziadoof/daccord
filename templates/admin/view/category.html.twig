@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col text-center mb-2">
-            <span class="badge badge-info mx-2 px-2 py-2"><h6>Each category is duplicated as Offer , Demand , SearchOffer , SearchDemand </h6></span>
+            <span class="badge badge-info mx-2 px-2 py-2"><h6>{% trans %} Each category is duplicated as Offer , Demand , SearchOffer , SearchDemand {% endtrans %}</h6></span>
         </div>
     </div>
     <div class="row">
@@ -22,8 +22,8 @@
     </div>
     <div class="row">
         <div class="col text-center">
-            <h5 class="rosed my-2"><i class="fas fa-exclamation-triangle rosed"> Attention : </i>
-                Deleting any category means that you will delete all the ads, deals, done deals, driver request for deals, specifications,and all category children.</h5>
+            <h5 class="rosed my-2"><i class="fas fa-exclamation-triangle rosed"> {% trans %} Attention : {% endtrans %}</i>
+                {% trans %} Deleting any category means that you will delete all the ads, deals, done deals, driver request for deals, specifications,and all category children.{% endtrans %}</h5>
         </div>
     </div>
     <div class="category-list">
@@ -60,13 +60,13 @@
                                         <td>
                                             <form action="" method="post" class="d-inline">
                                                 <button type="submit" value="{{ category.id }}" name="edit_category_id" data-toggle="modal"
-                                                        class="btn btn-info my-1 ">Edit</button>
+                                                        class="btn btn-info my-1 ">{% trans %} Edit{% endtrans %}</button>
                                             </form>
 
                                             <form method="post" class="d-inline" action="{{ path('category_delete', {'id': category.id}) }}" onsubmit="return confirm('Are you sure you want to delete this category? This will remove all done deals and deals and ads and specifications for all children category related');">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
-                                                <button class="btn btn-danger">Delete</button>
+                                                <button class="btn btn-danger">{% trans %} Delete{% endtrans %}</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -77,19 +77,19 @@
                                         <td>
                                             <form action="" method="post" class="d-inline">
                                                 <button type="submit" value="{{ child.id }}" name="edit_category_id" data-toggle="modal"
-                                                        class="btn btn-info my-1 ">Edit</button>
+                                                        class="btn btn-info my-1 ">{% trans %} Edit{% endtrans %}</button>
                                             </form>
 
                                             <form method="post" class="d-inline" action="{{ path('category_delete', {'id': child.id}) }}" onsubmit="return confirm('Are you sure you want to delete this category? This will remove all done deals and deals and ads and specifications for 4 category related');">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ child.id) }}">
-                                                <button class="btn btn-danger">Delete</button>
+                                                <button class="btn btn-danger">{% trans %} Delete{% endtrans %}</button>
                                             </form>
                                         </td>
                                     </tr>
                                     {% else %}
                                         <tr>
-                                            <td colspan="34">no records found</td>
+                                            <td colspan="34">{% trans %} no records found{% endtrans %}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

@@ -56,6 +56,7 @@ class CarpoolType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Carpool::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

@@ -1,3 +1,5 @@
+import Translator from "bazinga-translator";
+
 $(document).ready(function () {
     completeCity('#voyage_search_mainDeparture');
     completeCity('#voyage_search_mainArrival');
@@ -14,9 +16,9 @@ function completeCity(id) {
         autoFocus: true,
         minLength:2,
         theme: 'bootstrap',
-        formatNoMatches: 'No city found.',
-        formatSearching: 'Searching city...',
-        formatInputTooShort: 'Insert at least 2 character',
+        formatNoMatches: Translator.trans('No city found.'),
+        formatSearching: Translator.trans('Searching city...'),
+        formatInputTooShort: Translator.trans('Insert at least 2 character'),
         close: function(e, ui) {
             if (!makeSelect) {
                 $this.val(false);

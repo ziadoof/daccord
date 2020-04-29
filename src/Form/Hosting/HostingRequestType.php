@@ -55,6 +55,7 @@ class HostingRequestType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => HostingRequest::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }

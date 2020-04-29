@@ -40,6 +40,7 @@ class SecondCategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
+            'translation_domain'=> 'manual',
         ]);
     }
 }
