@@ -22,18 +22,6 @@
                       </div>
                   </div>
                   {% endif %}
-{#  test for translation #}
-                  <div class="col">
-                      <ul class="navbar-nav">
-                          {% for locale in locales if locale is not same as(app.request.locale)%}
-                              <li class="nav-item locale-icon">
-                                  <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
-                              </li>
-                          {% endfor %}
-                      </ul>
-                  </div>
-
-{#end test#}
                   {% if app.user==null %}
                   <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
                       <form class="form-inline my-2 my-lg-0 float-right">

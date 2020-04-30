@@ -3,12 +3,12 @@
 {% block header %}{% include "header.html.twig" %}{% endblock %}
     <section class="wrapper">
         <div class="">
-            <div class="">
+            <div class="user_layout">
                 {% block content %}
 
                 {% endblock %}
             </div>
         </div>
-    </section>
+        {% block footer %}{% include "footer.html.twig" %}{% endblock %}
     </section>
 {% endblock %}
