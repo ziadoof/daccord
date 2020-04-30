@@ -1,3 +1,35 @@
-<div>
-    <h1>foooooooooooooooooooooooooooooooooooooooooter</h1>
-</div>
+<!-- Footer -->
+    <footer class="text-white-50">
+        <div class=" mt-5 py-2">
+            <div class="row">
+                <div class="col justify-content-center">
+                    <div class="">
+                        <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
+                        <span class="rosed">|</span>
+                        <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col text-center">
+                        <h6 class="ml-5"><span class="white">Copyright©</span>
+                            <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
+                            <span class="white">{{ 'now'|date('Y')}}</span>
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="">
+                        <ul class="navbar-nav float-right">
+                            {% for locale in locales if locale is not same as(app.request.locale)%}
+                                <li class="nav-item locale-icon">
+                                    <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- Footer -->
