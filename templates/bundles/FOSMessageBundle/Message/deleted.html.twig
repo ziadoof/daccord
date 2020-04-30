@@ -1,0 +1,4 @@
+{% block fos_message_content %}
+<h2>{% trans %}deleted{% endtrans %}</h2>
+{% include '@FOSMessageBundle/Message/threads_list.html.twig' with {'threads': threads} %}
+{% endblock %}

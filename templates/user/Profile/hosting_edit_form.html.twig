@@ -1,0 +1,262 @@
+{% set HostingForm = form_HostingType.getForm().createView() %}
+    {{ form_start(HostingForm, {'attr': {'id': 'hosting_user_edit'}}) }}
+        {% if app.user.hosting %}
+            <div class="fos_user_user_show px-4 py-4">
+                <div class="row ">
+                    <div class="col-md-4 offset-4 ">
+                        <div class="row">
+                            <div class="my-3 border-deal">
+                                <a class="">
+                                    {{ form_row(HostingForm.image) }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="col-md-4 offset-4 text-center mt-3">
+                        {{ form_row(HostingForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(HostingForm.aboutMe) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(HostingForm.hostingFor) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <hr>
+                        <span class="blued">{% trans %}The number of people and days you can host{% endtrans %}</span>
+                        <div class="row mt-1">
+                            <div class="col-md-6">
+                                {{ form_row(HostingForm.numberOfPersons) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(HostingForm.numberOfDays) }}
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.sex) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.age) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.languages) }}
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <span class="blued">{% trans %}You have the possibility to host{% endtrans %}</span>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.child) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.animal) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.handicapped) }}
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <span class="blued">{% trans %}What can you share with the guest?{% endtrans %}</span>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.conversation) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.cityTour) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.food) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.television) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.movie) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.videoGame) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <div class="row">
+                            <div class="col-md-4 offset-4">
+                                {{ form_row(HostingForm.music) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class=" col-md-4 offset-4 justify-content-center">
+                        <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                    </div>
+                </div>
+                {{ form_end(HostingForm) }}
+            </div>
+        {% else %}
+            <div class="fos_user_user_show px-4 py-4">
+                <div class="row ">
+                    <div class="col-md-4 offset-4 mt-5">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h4 class="title-blue my-1 mx-1">{% trans %}Be a host in simple steps{% endtrans %}</h4>
+                                <p>{% trans %}By registering as a host, you can meet new people, host them in your home, and share your hobbies and activities.Hosting people will increase your chances in the future to be hosted by other people in other cities.At any moment you can stop or reset your account as  a host{% endtrans %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="col-md-4 offset-4 text-center mt-3">
+                        {{ form_row(HostingForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(HostingForm.aboutMe) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        {{ form_row(HostingForm.hostingFor) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <hr>
+                        <span class="blued">{% trans %}The number of people and days you can host{% endtrans %}</span>
+                        <div class="row mt-1">
+                            <div class="col-md-6">
+                                {{ form_row(HostingForm.numberOfPersons) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(HostingForm.numberOfDays) }}
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.sex) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.age) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.languages) }}
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <span class="blued">{% trans %}You have the possibility to host{% endtrans %}</span>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.child) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.animal) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.handicapped) }}
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <span class="blued">{% trans %}What can you share with the guest?{% endtrans %}</span>
+                        <div class="row mt-1">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.conversation) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.cityTour) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.food) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.television) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.movie) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(HostingForm.videoGame) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 offset-4">
+                        <div class="row">
+                            <div class="col-md-4 offset-4">
+                                {{ form_row(HostingForm.music) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 offset-4 ">
+                        <span class="blued ">{% trans %}A picture of your house{% endtrans %}</span>
+                        <div class="row">
+                            <div class="my-3 border-deal">
+                                <a class="">
+                                    {{ form_row(HostingForm.image) }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-md-4 offset-4 justify-content-center">
+                        <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                    </div>
+                </div>
+                {{ form_end(HostingForm) }}
+            </div>
+            {{ form_end(HostingForm) }}
+        {% endif %}

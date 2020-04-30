@@ -1,0 +1,32 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}{% trans %} Meetup{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h4 class="title-blue text-center">{% trans %} Meetup{% endtrans %}</h4>
+    <div class="row">
+        <div class="col-md-12">
+            {% if app.user is not same as(null) %}
+            <div class="row">
+                <div class="btn-group btn-block" id="meetup-button">
+                    <a class="btn btn-info" href="{{path('meetup_index')}}" >{% trans %} My meetup{% endtrans %}</a>
+                    <a class="btn btn-info" href="{{path('meetup_join')}}">{% trans %} Meetup join{% endtrans %}</a>
+                    <a class="btn btn-info " id="btn-meetup-gps">{% trans %} Meetup near Me{% endtrans %}
+                        <form method="post" action="{{path('meetup_near_me')}}" id="meetup-gps" >
+                                <input type="hidden" name="meetup_lat" id="meetup_gps_lat">
+                                <input type="hidden" name="meetup_lng" id="meetup_gps_lng">
+                        </form>
+                    </a>
+                    <a class="btn btn-info" href="{{path('meetup_new')}}">{% trans %} New meetup{% endtrans %}</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="mt-3">
+                {% block meetup %}
+
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

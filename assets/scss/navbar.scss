@@ -3,8 +3,8 @@
   padding: 0.1rem 1rem;
 }
 .logo img {
-  width: 38.6px;
-  height: 50px;
+  width: 48px;
+  height: 35px;
 }
 
 .icon img{
@@ -25,18 +25,26 @@
   float: left;
   padding-left: 10px;
 }
-
+.forlogo{
+  color: $blued;
+  font-size: 22px;
+  font-weight: revert;
+}
+.deallogo{
+  color: $rosed;
+}
+/*
 .logo-acoord span {
   color: $blued;
-  font-size: 24px;
+  font-size: 60px;
   font-weight: revert;
 }
 
 .logo-acoord span span {
   color: $rosed;
-  font-size: 26px;
+  font-size: 40px;
 
-}
+}*/
 .sidebar-toggle-box {
   margin-left: 0;
   margin-top: 9px;
@@ -128,6 +136,16 @@
 
 .sidebar ul li a .fa-calendar-check {
   font-size: 25px;
+}
+
+.sidebar ul li a .fa-suitcase-rolling {
+  font-size: 24px;
+  padding-left: 0;
+  margin-right: 0.3em;
+}
+.sidebar ul li a .fa-truck-moving {
+  font-size: 20px;
+  padding-left: 0;
 }
 
 
@@ -309,7 +327,6 @@
 
 .wrapper {
   display: inline-block;
-  /* margin-top: 60px;*/
   padding: 15px;
   width: 100%;
 }
@@ -361,5 +378,23 @@
   border-radius: 8px;
 }
 
+#cafe-gps a{
+  display: block;
+  padding: 5px 2px;
+  color: #fff;
+  border-left: 0px solid #dedede;
+  text-decoration: none;
+  cursor: pointer;
+}
 
+.side-bar-icon img{
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+#cafe-gps img{
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
 

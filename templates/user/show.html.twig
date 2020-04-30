@@ -1,150 +1,71 @@
-{% extends 'base.html.twig' %}
+{% extends "layout_user.html.twig" %}
 
-{% block title %}User{% endblock %}
-
-{% block body %}
-    <h1>User</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>UsernameCanonical</th>
-                <td>{{ user.usernameCanonical }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>EmailCanonical</th>
-                <td>{{ user.emailCanonical }}</td>
-            </tr>
-            <tr>
-                <th>Enabled</th>
-                <td>{{ user.enabled ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Salt</th>
-                <td>{{ user.salt }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>LastLogin</th>
-                <td>{{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ConfirmationToken</th>
-                <td>{{ user.confirmationToken }}</td>
-            </tr>
-            <tr>
-                <th>PasswordRequestedAt</th>
-                <td>{{ user.passwordRequestedAt ? user.passwordRequestedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>EmailStatus</th>
-                <td>{{ user.emailStatus ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>PostalCode</th>
-                <td>{{ user.postalCode }}</td>
-            </tr>
-            <tr>
-                <th>PhoneNumber</th>
-                <td>{{ user.phoneNumber }}</td>
-            </tr>
-            <tr>
-                <th>PhonNumberStatus</th>
-                <td>{{ user.phonNumberStatus ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ user.gender }}</td>
-            </tr>
-            <tr>
-                <th>GenderStatus</th>
-                <td>{{ user.genderStatus ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Birthday</th>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>BirthdayStatus</th>
-                <td>{{ user.birthdayStatus ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>MapX</th>
-                <td>{{ user.mapX }}</td>
-            </tr>
-            <tr>
-                <th>MapY</th>
-                <td>{{ user.mapY }}</td>
-            </tr>
-            <tr>
-                <th>Driver</th>
-                <td>{{ user.driver ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Car</th>
-                <td>{{ user.car }}</td>
-            </tr>
-            <tr>
-                <th>Color</th>
-                <td>{{ user.color }}</td>
-            </tr>
-            <tr>
-                <th>ProfileImage</th>
-                <td>{{ user.profileImage }}</td>
-            </tr>
-            <tr>
-                <th>CarImage</th>
-                <td>{{ user.carImage }}</td>
-            </tr>
-            <tr>
-                <th>MaxDistance</th>
-                <td>{{ user.maxDistance }}</td>
-            </tr>
-            <tr>
-                <th>Point</th>
-                <td>{{ user.point }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.ville }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+{% block title %}{% trans %}User{% endtrans %}{% endblock %}
+{% block content %}
+    <div class="fos_user_user_show px-4 py-4">
+        <div class="row">
+            <div class="col-md-2 offset-5 btn-group ">
+                <div class=" profile-edit ml-2  ">
+                    <a class="">
+                        {% if user.profileImage %}
+                            <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~user.profileImage) }}" alt="User" >
+                        {% else %}
+                            <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="User">
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
+            <h1 class="pt-3 bdg-accord ">{{ user.point }} <span>Points</span></h1>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <h5 class=" pt-0 title-blue">{% trans %}Personal information{% endtrans %}</h5>
+                {% if user.emailStatus %}
+                    <h6 class="d-inline font-weight-bold">{% trans %}Email : {% endtrans %} </h6><span>  {{ user.email }}</span>
+                    <br>
+                {% endif %}
+                {% if user.phonNumberStatus and user.phoneNumber %}
+                    <h6 class="d-inline font-weight-bold">{% trans %}Phone number : {% endtrans %} </h6><span>  {{ user.phoneNumber }}</span>
+                    <br>
+                {% endif %}
+                {% if user.genderStatus and user.gender %}
+                    <h6 class="d-inline font-weight-bold">{% trans %}Sex :  {% endtrans %}</h6><span>  {{ user.gender }}</span>
+                    <br>
+                {% endif %}
+                {% if user.birthdayStatus and user.birthday%}
+                    <h6 class="d-inline font-weight-bold">{% trans %}Birthday : {% endtrans %} </h6><span>  {{ user.birthday }}</span>
+                    <br>
+                {% endif %}
+                <h6 class="d-inline font-weight-bold">{% trans %}Max distance : {% endtrans %} </h6><span>  {{ user.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                <br>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <h5 class=" pt-0 title-blue">{% trans %}Positioning{% endtrans %}</h5>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Department :  {% endtrans %}</h6><span>  {{ user.city.department }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Region :  {% endtrans %}</h6><span>  {{ user.city.department.region }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Last login : {% endtrans %} </h6><span>  {{ user.lastLogin|date('d  M  Y')  }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                    <button class="btn btn-info mx-1" >
+                        <input type="hidden" name="user" value="{{ user.id }}">
+                        <p class="mt-1">{% trans %}Message to {% endtrans %}{{user.firstname}}</p>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

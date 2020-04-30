@@ -1,0 +1,62 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block title %}Admin cafes{% endblock %}
+
+{% block admin %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Cafe{% endtrans %}</h1>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>id</th>
+                <th><span class="float-left">User</span> </th>
+                <th>Type</th>
+                <th>Duration</th>
+                <th>Created at</th>
+                <th>Status</th>
+                <th>City</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for cafe in cafes %}
+            <tr>
+                <td>{{ cafe.id }}</td>
+                <td ><a href="{{ path('user_show',{'id':cafe.createdBy.id}) }}" class="float-left"><i class="fas fa-user blued"></i> {{ cafe.createdBy.firstname|title }} {{ cafe.createdBy.lastname|upper }}</a>  </td>
+                <td>{{ cafe.type }}</td>
+                <td>{{ cafe.duration }}{{ ' Minuts' }}</td>
+                <td>{{ cafe.createdAt|date('d M -y H:i')  }}</td>
+                <td>
+                    <div class="col text-center ">
+                        {% if not cafe.active %}
+                            <div class="col text-center">
+                                <figure class="circle-red "></figure>
+                            </div>
+                        {% else %}
+                            <div class="col text-center">
+                                <figure class="circle-green"></figure>
+                            </div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td><a href="https://www.google.fr/maps/@{{cafe.gpsLat}},{{cafe.gpsLng}},15z?hl=en" target="_blank">{% trans %} Location{% endtrans %}</a></td>
+                <td>
+                    <form method="post" action="{{ path('cafe_delete', {'id': cafe.id}) }}" onsubmit="return confirm('Are you sure you want to delete this cafe?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cafe.id) }}">
+                        <button class="btn btn-danger">{% trans %} Delete{% endtrans %}</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(cafes) }}
+        </div>
+    </div>
+{% endblock %}

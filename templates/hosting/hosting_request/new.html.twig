@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <h4 class="title-blue text-center">{% trans %} Hosting Request{% endtrans %}</h4>
+        <div class="driver">
+            <div class="row border-deal">
+                <div class="col-md-2 deal-show my-4">
+                    <img src="{{ hosting.user.photoProfile() }}" alt="">
+                </div>
+                <div class="col my-4 justify-content-center ml-3">
+                    <div class="row">
+                        <div class="col mb-2">
+                            <div class="row">
+                                <span class="ml-2 "><span class="blued">{% trans %} Hosting : {% endtrans %}</span> {{ hosting.user.firstname|title }}{{ ' ' }}{{ hosting.user.lastname }}</span>
+                            </div>
+                            <div class="row">
+                                <span class="ml-2"><span class="blued">{% trans %} Number of persons :{% endtrans %} </span>{{ hosting.numberOfPersons }}</span>
+                            </div>
+                            <div class="row">
+                                <span class="ml-2"><span class="blued">{% trans %} Number of days : {% endtrans %}</span>{{ hosting.numberOfDays }}</span>
+                            </div>
+                            <div class="row">
+                                <span class="ml-2"><span class="blued">{% trans %} City : {% endtrans %}</span>{{ hosting.ville.name }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 border-deal">
+                {{ include('hosting/hosting_request/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>

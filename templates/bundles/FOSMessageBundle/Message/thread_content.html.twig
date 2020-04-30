@@ -1,0 +1,91 @@
+{% for thread in threads %}
+    <div class="tab-pane fade chat{% if thread.id is same as (threads[0].id) and form is not defined %}{{ ' show active ' }}{% endif %}" id="user-{{thread.getOtherParticipants(app.user)[0].id}}" role="tabpanel" aria-labelledby="v-pills-home-tab" data-thread="{{ thread.id }}">
+        <div class="row border-bottom">
+            <div class="col-md-3">
+                <div class=" message-link">
+                    {% if thread.createdBy is not same as (app.user) %}
+                        <h5 class="rosed mb-0">{{ thread.createdBy.point }}<span class="mt-5">{{ ' Points' }}</span></h5>
+                        <span class="blued mt-0 justify-content-center">{{ thread.createdBy.city.name }}</span>
+                    {% else %}
+                        <h5 class="rosed mb-0"> {{ thread.getOtherParticipants(app.user)[0].point }}<span class="blued mt-2">{{ ' Points' }}</span></h5>
+                        <span class="blued mt-0 justify-content-center">{{ thread.getOtherParticipants(app.user)[0].city.name }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                {#من اين اتى المرسل#}
+            </div>
+            <div class="col-md-3">
+                <div class="row bord-thread">
+                    <div class="col-md-5 offset-3 number-messages-thread" >
+                        <div class="row">
+                            <div class="col-md-4 pt-2 ">
+                                <div id="numberMessagesThread-{{ thread.id }}">
+                                    <b class="title-blue " >{{ thread.messages|length }}</b>
+                                </div>
+                            </div>
+                            <div class="col-md-6 offset-1 ">
+                                <i class="fas fa-envelope  "></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 delete-thread mb-2">
+                        {% if fos_message_can_delete_thread(thread) %}
+                            {% if fos_message_deleted_by_participant(thread) %}
+                                {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                                {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+                            {% else %}
+                                {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
+                                {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
+                            {% endif %}
+                            <div class=" mr-5">
+                                <form action="{{ formAction }}" method="post">
+                                    <button class="btn btn-outline-danger mx-1" >
+                                        <input type="hidden" name="user" value="{{ submitValue }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-messages" id="messages-chat-{{ thread.id }}">
+            {% for message in thread.messages %}
+                <br>
+                <div class=" my-2 py-2 messenger_thread_message d-inline-block col-md-6 {% if message.sender is not same as (app.user) %}{{ 'offset-6 box-clint ' }}{% else %}{{ ' box-user ' }}{% endif %}" id="message_{{ message.id }}">
+                    <div class="messenger_thread_message_body d-block" >
+                        <p class=" {% if message.sender is same as (app.user) %}{{ ' user-message  ' }}{% else %}{{ ' clint-message ' }}{% endif %}">
+                            {{ message.body }}
+                        </p>
+                    </div>
+                    <div class="messenger_thread_message_info d-block" id="message-info-{{ message.id }}">
+                        <small class=" {% if message.sender is same as (app.user) %}{{ ' user-message  float-right ' }}{% else %}{{ ' clint-message float-right ' }}{% endif %}">
+                            {{ message.dateFormat(message.createdAt) }}
+                            {% if message.sender is same as (app.user) %}
+                                {% if  message.sender is same as (message.metadata[0].participant) %}
+                                    {% if message.metadata[1].isRead %}
+                                        <i class="fas fa-check"></i>
+                                    {% else %}
+                                        <i class="far fa-clock"></i>
+                                    {% endif %}
+                                {% else %}
+                                    {% if message.metadata[0].isRead %}
+                                        <i class="fas fa-check"></i>
+                                    {% else %}
+                                        <i class="far fa-clock"></i>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+            <form id="send"  action="" method="post" class="mt-5 send-form" data-conversation="{{ thread.id }}" data-user="{{ thread.getOtherParticipants(app.user)[0].id }}" >
+                {{ form_widget(forms[thread.id]) }}
+                <input  type="submit" class="send-message-chat btn btn-info mb-5 " value="{{ 'Send'|trans }}" />
+            </form>
+    </div>
+{% endfor %}

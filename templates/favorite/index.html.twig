@@ -1,0 +1,26 @@
+{% extends 'layout_user.html.twig' %}
+
+{% block title %}{% trans %} Favorite{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h2 class="blued text-center">{% trans %} Favorite{% endtrans %} </h2>
+    <div class="favorite-page">
+        {% if favorites %}
+            {% for oneFavorite in favorites %}
+                {% if oneFavorite.type is same as ('ad') %}
+                    {% include "favorite/type/ad.html.twig" %}
+                {% elseif oneFavorite.type is same as ('deal') %}
+                    {% include "favorite/type/deal.html.twig" %}
+                {% elseif oneFavorite.type is same as ('hosting') %}
+                    {% include "favorite/type/hosting.html.twig" %}
+                {% elseif oneFavorite.type is same as ('meetup') %}
+                    {% include "favorite/type/meetup.html.twig" %}
+                {% elseif oneFavorite.type is same as ('voyage') %}
+                    {% include "favorite/type/voyage.html.twig" %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <h1 class="text-center title-blue">{% trans %}You don't have favorites{% endtrans %}</h1>
+        {% endif %}
+    </div>
+{% endblock %}

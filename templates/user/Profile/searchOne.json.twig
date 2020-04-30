@@ -1,0 +1,4 @@
+[{% for city in citys -%}
+    {{ {value: city.id, label: city.name}|json_encode|raw }}
+    {%- if not loop.last %},{% endif -%}
+{%- endfor %}]

@@ -1,0 +1,143 @@
+{% extends "layout_user.html.twig" %}
+{% block content %}
+    <div class="fos_user_user_show px-4 py-4">
+        <div class="row">
+            <div class="col-md-2 offset-5 btn-group ">
+                <div class=" profile-edit ml-2  ">
+                    <a class="">
+                        {% if driver.carImage %}
+                            {% if driver.carImage is same as ('with out photo') %}
+                                <img class="mb-3 {% if driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                     src="{{ asset('/assets/images/car_driver/driver-avatar.png') }}" alt="car-avatar">
+                            {% else %}
+                                <img class="mb-3 {% if driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                     src="{{ asset('/assets/images/car_driver/'~driver.carImage) }}" alt="car image" >
+                            {% endif %}
+                        {% else %}
+                            <img class="mb-3 {% if driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                                 src="{{ asset('/assets/images/car_driver/driver-avatar.png') }}" alt="User">
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <h1 class="text-center pt-3">{{ driver.user.firstname|title }} {{ driver.user.lastname|upper }}</h1>
+            <h1 class="pt-3 bdg-accord ">{{ driver.user.driver.point }} <span>Points</span></h1>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %} Car brand : {% endtrans %} </h6><span>  {{ driver.carBrand }}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %} Car color : {% endtrans %} </h6><span>  {{ driver.carColor }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">{% trans %} City  : {% endtrans %} </h6><span>  {{ driver.city}}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %} Max distance: {% endtrans %}  </h6><span>  {{ driver.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                    <button class="btn btn-info mx-1" >
+                        <input type="hidden" name="user" value="{{ driver.user.id }}">
+                        <p class="mt-1">{% trans %}Message to {% endtrans %} {{driver.user.firstname}}</p>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% if rating  %}
+        <h4 class="text-center blued mt-4">{% trans %} Rating{% endtrans %}</h4>
+        <div class="text-center">
+            {% set range = rating.total/rating.numVotes %}
+            {% set total = range|round(2, 'ceil')  %}
+            {% set ceil = total|round(0,('ceil'))  %}
+            {% set floor = total|round(0,('floor'))  %}
+            {% set def =  ceil-floor %}
+            {% set reste = 5 - total %}
+            {% set roundReste = reste|round(0,('floor')) %}
+            <div class="row justify-content-center">
+                <span class="float-right mt-2 rosed">
+                    {% if  total is not same as(null) and total <=5%}{#rating is not null#}
+                        {% if  def %} {# rating is floot#}
+                            {% if floor %}
+                                {% for  i in floor ..1%}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                            {% endif %}
+                            <i class="fas fa-star-half-alt"></i>
+                            {% if roundReste %}
+                                {% for  i in roundReste..1%}
+                                    <i class="far fa-star"></i>
+                                {% endfor %}
+                            {% endif %}
+                        {% else %}{#rating is integer#}
+                        {% if total>0 %}
+                            {% for  i in total ..1%}
+                                <i class="fas fa-star"></i>
+                            {% endfor %}
+                        {% if reste>0 %}
+                            {% for  i in reste..1%}
+                                <i class="far fa-star"></i>
+                            {% endfor %}
+                        {% endif %}
+                    {% else %} {# rating is 0#}
+                        {% for  i in 5..1%}
+                            <i class="far fa-star"></i>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+        {% endif %}
+                </span>
+            </div>
+        </div>
+        <div class="">
+            <h6 class="text-center blued mt-4" >{% trans %} Comments{% endtrans %}</h6>
+            <div>
+                {% for vote in rating.votes %}
+                    <div class="row">
+                        <div class="col-md-6 offset-3 border-respo">
+                            <div class="row border-bottom">
+                                <div class="col-md-6 my-1">
+                                    <img class="vote-avatar"  src="{{ asset(vote.voter.photoProfile()) }}" alt="voter-image">
+                                </div>
+                                <div class="col-md-6">
+                                    {% set reste = 5 - vote.value%}
+                                    <span class="float-right mt-2 blued">
+                                       {% if  vote.value is not same as(null)%}
+                                           {% for  i in vote.value ..1%}
+                                               <i class="fas fa-star"></i>
+                                           {% endfor %}
+                                        {% if reste>0 %}
+                                           {% for  i in reste..1%}
+                                               <i class="far fa-star"></i>
+                                           {% endfor %}
+                                       {% endif %}
+                                    {% else %}
+                                           {% for  i in 5..1%}
+                                               <i class="far fa-star"></i>
+                                           {% endfor %}
+                                       {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row border-bottom">
+                                <p class="my-2 mx-2"> <span class="rosed">{% trans %} Comment :{% endtrans %} </span>{{ vote.comment }}</p>
+                            </div>
+                            <div class="row border-bottom float-right">
+                                <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+

@@ -19,11 +19,25 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return User $user
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneById($id): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    ///**
+     //* @return User[] Returns an array of User objects
+     //*/
+
+    /*public function findByExampleField($value)
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')
@@ -32,10 +46,8 @@ class UserRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
-    }
-    */
-
+            ;
+    }*/
     /*
     public function findOneBySomeField($value): ?User
     {
@@ -47,4 +59,30 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function userCount()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function activeUserCount()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.enabled = TRUE')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function inactiveUserCount()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.enabled = FALSE')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

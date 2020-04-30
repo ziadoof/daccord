@@ -1,0 +1,25 @@
+{% extends 'admin/layout_admin.html.twig' %}
+{% block admin %}
+    <div class="container">
+        <h3 class="blued text-center">{% trans %} New Category{% endtrans %}</h3>
+        <div class="text-center mt-2 ">
+            <div class="col-md-12 ">
+                <div class=" ">
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Category name{% endtrans %}</h7></span>
+                    <span class="badge badge-primary  mx-1 py-2 px-2"><h5>{% trans %} Category parent{% endtrans %}</h5></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Offer specifications{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Demand specifications{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Search offer specifications{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Search demand specifications{% endtrans %}</h7></span>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 offset-4">
+            {{ form_start(form) }}
+                {{ form_row(form.parent) }}
+                <button class="btn btn-info float-right mt-4">{% trans %} Save{% endtrans %}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

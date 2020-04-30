@@ -1,0 +1,122 @@
+.new-conversation a{
+    background-color: lightgray;
+    width: 100%;
+}
+.nav.nav-pills{
+    background-color: whitesmoke;
+    border: solid 1px floralwhite;
+    min-height: 75vh;
+    max-height: calc(100% - 5px);
+    overflow-y: auto;
+    overflow-x:hidden;
+
+}
+.nav-link{
+    background-color: ghostwhite;
+    width: 100%;
+}
+.message-link span{
+    color: #00B5CE;
+    font-size: 80%;
+    font-style: revert;
+}
+.message-link{
+
+}
+.nav-link,.btn-group{
+    float: left;
+}
+.chat{
+    border: solid 1px lightgray;
+    box-shadow: 0px 0px 10px #d2d4d7;
+    height: 75vh;
+    padding: 1em;
+}
+.new_chat{
+    border: solid 1px lightgray;
+    box-shadow: 0px 0px 10px #d2d4d7;
+    height: 75vh;
+    padding: 1em;
+}
+.chat-messages{
+    height: 80%;
+    overflow-x:hidden;
+    overflow-y: auto;
+    padding-right: 1em;
+}
+.chat-messages::-webkit-scrollbar {
+    width: 2px;
+    height: 4px;
+    background-color: #00B5CE; /* or add it to the track */
+}
+.user-message{
+    overflow-wrap: break-word;
+    color: white;
+}
+.clint-message{
+    overflow-wrap: break-word;
+    display: block;
+    color: white;
+}
+.box-user {
+    background-color: #00B5CE;
+    border-radius: 20px;
+    border-top-left-radius: 0px;
+}
+.box-clint{
+    background-color: #F70055;
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+}
+.send-message-chat{
+    float: right;
+}
+#message_body{
+    resize : none;
+    height: 3.5em;
+
+}
+.nav-pills .nav-link{border-radius:0.25rem}.nav-pills .nav-link.active,.nav-pills .show>.nav-link{color:#aaa;background-color:#e0cdc6}
+.dropdown-item:active{color:#fff;text-decoration:none;background-color:#fff}
+
+.new-message{
+  font-size: 0.8em;
+  border-radius: 20%;
+  background-color: orangered;
+  border: 2px solid orangered;
+  color: #FFFFFF;
+/*  position: absolute;
+  top: 60%;
+  left: 50%;*/
+  width: auto;
+}
+.number-messages-thread i {
+    font-size: 2.4em;
+    color: lightgray;
+}
+.number-messages-thread b {
+    font-size: 1.5em;
+}
+.delete-thread i {
+    font-size: 2em;
+    margin-bottom: 0.2em;
+    color: lightgray;
+    cursor: pointer;
+
+}
+#messagesCount{
+    font-size: 0.8em;
+    border-radius: 20%;
+    background-color: orangered;
+    border: 2px solid orangered;
+    color: #FFFFFF;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: auto;
+}
+.hide-padge{
+    display: none;
+}
+
+

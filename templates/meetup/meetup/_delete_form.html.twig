@@ -1,0 +1,7 @@
+
+<form method="post" action="{{ path('meetup_delete', {'id': meetup.id}) }}" onsubmit="return confirm('Are you sure you want to delete this meetup ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ meetup.id) }}">
+    <button class="btn btn-danger float-right">{% trans %} Delete this meetup{% endtrans %}</button>
+</form>
+

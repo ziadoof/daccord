@@ -1,0 +1,98 @@
+
+{# Widgets #}
+{% block photo_widget -%}
+    <{{ element|default('div') }} class="custom-fileg">
+    {%- set type = type|default('file') -%}
+    {{- block('form_widget_simple') -}}
+    <label for="{{ form.vars.id }}" class="custom-file-labelg">
+        {%- if attr.new_form is defined -%}
+            {% if attr.new_form %}
+                {# view for new photo ad offer#}
+
+            {% endif %}
+        {%- endif -%}
+        {%- if attr.profileImage is defined -%}
+            {#view for profile image and car image #}
+            {% if attr.profileImage %}{# view for profile image#}
+                <div class="profile-edit">
+                    <img id="previewProfileImge" class="{% if app.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                         src="{{ asset(app.user.photoProfile()) }}" alt="User profile" >
+                </div>
+            {% endif %}
+        {%- endif -%}
+        {%- if attr.driverImage is defined -%}{# view for car image#}
+            {% if attr.driverImage %}{# if the form has driverImage attr#}
+                {% if app.user.driver %} {# if the user is driver#}
+                    <div class="profile-edit">
+                        <img id="previewCarImge" class=" {% if app.user.driver.active %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}"
+                             src="{{ asset(app.user.driver.photoDriver()) }}" alt="driver car">
+                    </div>
+                {% else %}{#if user not driver#}
+                    <div class="profile-edit">
+                        <img id="previewCarImge" class="offline-status"
+                             src="{{ asset('/assets/images/car_driver/driver-avatar.png') }}" alt="driver car">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {%- endif -%}
+        {%- if attr.hosting is defined -%}{# view for hosting image#}
+            {% if attr.hosting %}{# if the form has hosting attr#}
+                {% if app.user.hosting %}{# if the user is hosting#}
+                    <div class="hosting-edit">
+                        <img id="previewHostingImge"
+                             src="{{ asset(app.user.hosting.photoHosting()) }}" alt="Hosting photo">
+                    </div>
+                {% else %}{# if the user is not hosting#}
+                    <div class="hosting-edit">
+                        <img id="previewHostingImge"
+                             src="{{ asset('/assets/images/Hosting/hosting_avatar.png') }}" alt="Hosting photo">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        {%- if attr.meetup is defined -%}{# view for hosting image#}
+            {% if attr.meetup %}{# if the form has hosting attr#}
+                <div class="meetup-form-image">
+                    <img id="previewMeetupImge"
+                         src="{{ asset('/assets/images/meetup/meetup.png') }}" alt="Meetup photo">
+                </div>
+            {% endif %}
+        {% endif %}
+        {%- if attr.carpool is defined -%}{# view for carpool image#}
+            {% if attr.carpool %}{# if the form has carpool attr#}
+                {% if app.user.carpool %}{# if the user is hosting#}
+                    <div class="carpool-edit">
+                        <img id="previewCarpoolImge"
+                             src="{{ asset(app.user.carpool.photoCarpool()) }}" alt="carpooling photo">
+                    </div>
+                {% else %}{# if the user is not carpool#}
+                    <div class="carpool-edit">
+                        <img id="previewCarpoolImge"
+                             src="{{ asset('/assets/images/carpool/carpool.png') }}" alt="carpool photo">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        {%- if attr.offer is defined -%}{# view for carpool image#}
+            {% if attr.offer %}{# if the form has carpool attr#}
+                {% if attr.numberOfImage is same as ('one') %}{# if the user is hosting#}
+                    <div class="image-one">
+                        <img id="previewOfferImgeOne"
+                             src="{{ asset('/assets/images/icons/add_photo.png') }}" alt="offer photo">
+                    </div>
+                {% elseif attr.numberOfImage is same as ('tow') %}{# if the user is hosting#}
+                    <div class="image-tow">
+                        <img id="previewOfferImgeTow"
+                             src="{{ asset('/assets/images/icons/add_photo.png') }}" alt="offer photo">
+                    </div>
+                {% elseif attr.numberOfImage is same as ('three') %}{# if the user is hosting#}
+                    <div class="image-three">
+                        <img id="previewOfferImgeThree"
+                             src="{{ asset('/assets/images/icons/add_photo.png') }}" alt="offer photo">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </label>
+    </{{ element|default('div') }}>
+{% endblock %}

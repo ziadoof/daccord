@@ -1,0 +1,67 @@
+{% extends 'meetup/layout_meetup.html.twig' %}
+{% block meetup %}
+    <h6 class="text-center rosed">{% trans %} My meetups join{% endtrans %}</h6>
+    {% if app.user is not same as (null) %}
+        {% if meetupsJoin is not empty %}
+                {% for meetup in meetupsJoin %}
+                <div class="row">
+                    <div class="col-md-12 px-2">
+                        <div id="meetup_index" class="meetup_index">
+                            <a href="{{ path('meetup_show', {'id': meetup.id}) }}"class="">
+                                <div class="px-2 border-deal">
+                                    <div class="row">
+                                        <div class="col-md-3 my-1 image_meetup_index">
+                                            <img class="" src="{{ meetup.meetupImage() }}" alt="meetup image">
+                                        </div>
+                                        <div class="col-md-8 float-left py-2">
+                                            <div class="">
+                                                <h4 class="rosed meetup-text">{{ meetup.title }}</h4>
+                                            </div>
+                                            <div class="">
+                                                <span class="meetup-text mt-3"><span class="blued">{% trans %} Type : {% endtrans %}</span>{{ meetup.type }}</span>
+                                            </div>
+                                            <div class="">
+                                                <span class="meetup-text mt-3"><span class="blued">{% trans %} Start at :{% endtrans %}</span>{{ meetup.startAt|date('d M Y - H:i') }}</span>
+                                            </div>
+                                            <div class="">
+                                                <span class="meetup-text mt-3"><span class="blued">{% trans %} City : {% endtrans %}</span>{{ meetup.city.name }}</span>
+                                            </div>
+                                        </div>
+                                        {% if meetup.isFinish() %}
+                                            <div class="col-md-1">
+                                                <span class="badge badge-danger float-right mt-2">{% trans %} Finish{% endtrans %}</span>
+                                            </div>
+                                        {% endif %}
+                                        <div class="col ">
+                                            {% set isFavorite = 'false' %}
+                                            {#data-favorite must be string not boolean#}
+                                            {% for favorite in app.user.getFavoritesByType('meetup')  %}
+                                                {% if favorite.meetup is same as (meetup) %}
+                                                    {% set isFavorite = 'true' %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  float-right mr-2 mb-2" data-object="{{ meetup.id }}" data-type="meetup" data-favorite="{{ isFavorite }}">
+                                                <div class="flexbox">
+                                                    <div class="fav-btn">
+                                                        <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            <div class="pagination-search row justify-content-center mt-4">
+                <div class="navigation">
+                    {{ knp_pagination_render(meetupsJoin) }}
+                </div>
+            </div>
+        {% else %}
+            <h1 class="text-center title-blue">{% trans %}You have not meetups {% endtrans %}</h1>
+        {% endif %}
+    {% endif %}
+{% endblock %}

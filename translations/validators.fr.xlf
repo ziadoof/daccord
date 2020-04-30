@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="fr">
+  <file id="validators.fr">
+    <unit id="3B5Sbis" name="You must enter numbers only.">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="file-source" priority="1">src/Entity/Ads/Ad.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>You must enter numbers only.</source>
+        <target>Vous ne devez saisir que des chiffres.</target>
+      </segment>
+    </unit>
+    <unit id="wnQDyal" name="Email déjà pris">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Email déjà pris</source>
+        <target>Email déjà pris</target>
+      </segment>
+    </unit>
+    <unit id="mL41TYT" name="Username déjà pris">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Username déjà pris</source>
+        <target>Username déjà pris</target>
+      </segment>
+    </unit>
+    <unit id="3gsm.Dj" name="fos_user.username.already_used">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.username.already_used</source>
+        <target>Username déjà pris</target>
+      </segment>
+    </unit>
+    <unit id="vqk8sdH" name="fos_user.email.already_used">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.email.already_used</source>
+        <target>Email déjà pris</target>
+      </segment>
+    </unit>
+    <unit id="jtmA7tx" name="fos_user.username.blank">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.username.blank</source>
+        <target>Le nom d'utilisateur ne peut pas être vide</target>
+      </segment>
+    </unit>
+    <unit id="VVzgoob" name="fos_user.username.long">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.username.long</source>
+        <target>Le nom d'utilisateur est trop long</target>
+      </segment>
+    </unit>
+    <unit id="ypasfnh" name="fos_user.username.short">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.username.short</source>
+        <target>Le nom d'utilisateur est trop court</target>
+      </segment>
+    </unit>
+    <unit id="g72C3vn" name="fos_user.email.blank">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.email.blank</source>
+        <target>L'email ne peut pas être vide</target>
+      </segment>
+    </unit>
+    <unit id="Y1eOW4z" name="fos_user.email.long">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.email.long</source>
+        <target>L'email est trop long</target>
+      </segment>
+    </unit>
+    <unit id="9GR5Mk6" name="fos_user.email.short">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.email.short</source>
+        <target>L'email est trop court</target>
+      </segment>
+    </unit>
+    <unit id="lRE_vn_" name="fos_user.email.invalid">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.email.invalid</source>
+        <target>Email invalide</target>
+      </segment>
+    </unit>
+    <unit id="Zrr5_qX" name="fos_user.password.blank">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.password.blank</source>
+        <target>Le mot de passe ne peut pas être vide</target>
+      </segment>
+    </unit>
+    <unit id="2k0f5kz" name="fos_user.password.short">
+      <notes>
+        <note category="file-source" priority="1">src/Entity/User.php:0</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.password.short</source>
+        <target>Le mot de passe est trop court</target>
+      </segment>
+    </unit>
+    <unit id="G6rntWw" name="fos_user.password.mismatch">
+      <notes>
+        <note category="file-source" priority="1">src/Form/User/RegistrationType.php:27</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>fos_user.password.mismatch</source>
+        <target>Le mot de passe ne correspond pas</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

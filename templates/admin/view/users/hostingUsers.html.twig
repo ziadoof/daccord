@@ -1,0 +1,68 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block title %}Admin hosting users{% endblock %}
+
+{% block admin %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Hosting users{% endtrans %}</h1>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>LastLogin</th>
+                <th>Status</th>
+                <th>Ville</th>
+                <th>Gender</th>
+                <th>Hosting photo</th>
+                <th>Point</th>
+                <th>Show</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for hosting in hostings %}
+            <tr>
+                <td>{{ hosting.id }}</td>
+                <td><div class="float-left">{% if hosting.user.isAdmin() %} <i class="fas fa-user-cog rosed"></i> {% else %} <i class="fas fa-user blued"></i> {% endif %}{{ hosting.user.firstname|title }} {{ hosting.user.lastname|upper }}</div></td>
+                {% if hosting.active %}
+                    <td><div class="col text-center"><img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes" class="vote-avatar"></div></td>
+                {% else %}
+                    <td><div class="col text-center"><img src="{{ asset('/assets/images/icons/no.png') }}" alt="no" class="vote-avatar"></div></td>
+                {% endif %}
+                <td>{{ hosting.user.lastLogin ? hosting.user.lastLogin|date('d M-y | H:i') : '' }}</td>
+                <td>
+                    <div class="col text-center ">
+                        {% if not hosting.user.isActiveNow() %}
+                            <div class="col text-center">
+                                <figure class="circle-red "></figure>
+                            </div>
+                        {% else %}
+                            <div class="col text-center">
+                                <figure class="circle-green"></figure>
+                            </div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>{{ hosting.ville }}</td>
+                <td>{{ hosting.sex }}</td>
+                <td class="justify-content-center"><div class="col text-center"><img src="{{ hosting.photoHosting() }}" alt="hosting image" class="cafe-avatar"></div></td>
+                <td>{{ hosting.point }}</td>
+                <td>
+                    <a href="{{ path('hosting_show', {'id': hosting.id}) }}"class="btn btn-warning">Hosting</a>
+                    <a href="{{ path('user_show', {'id': hosting.user.id}) }}"class="btn btn-info">User</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(hostings) }}
+        </div>
+    </div>
+
+{% endblock %}

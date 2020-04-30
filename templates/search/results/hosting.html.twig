@@ -1,0 +1,65 @@
+{% extends "layout_user.html.twig" %}
+{% block content %}
+    <div class="row">
+    {% if hostings is defined %}
+        {% for hosting in hostings %}
+            <div class="col-md-3 px-md-2 my-2 ad_show" >
+                <div id="hosting_index" class="hosting_index">
+                    <a href={{path('hosting_show',{'id':hosting['id']})}}>
+                        <div class="px-2 border-respo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img class="image_hosting" src="{{hosting['image']}}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-2">
+                                    <img class="cafe-avatar ml-2" src="{{hosting['userImage']}}"/>
+                                    <div class="row">
+                                        <span class="ml-2 blued">{{hosting['user']}}</span>
+                                    </div>
+                                    <div class="row">
+                                        <span class="ml-2 blued">{{hosting['city']}}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    {% if app.user %}
+                                        {% set isFavorite = 'false' %}
+                                        {#data-favorite must be string not boolean#}
+                                        {% for favorite in app.user.getFavoritesByType('hosting')  %}
+                                            {% if favorite.hosting.id is same as (hosting['id']) %}
+                                                {% set isFavorite = 'true' %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  mt-3 mr-4" data-object="{{ hosting['id'] }}" data-type="hosting" data-favorite="{{ isFavorite }}">
+                                            <div class="flexbox">
+                                                <div class="fav-btn">
+                                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="pagination-search row justify-content-center mt-4">
+            <div class="navigation">
+                {{ knp_pagination_render(hostings) }}
+            </div>
+        </div>
+    {% else %}
+    </div>
+        <div class=" ">
+        <div class="">
+            <div class="text-center title-blue">
+                {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+                <h1> {% trans %} There is no results{% endtrans %}</h1>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

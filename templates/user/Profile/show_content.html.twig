@@ -1,114 +1,92 @@
-{% extends "layout_user.html.twig" %}
-{% trans_default_domain 'FOSUserBundle' %}
 {% block content %}
-    <div class="row">
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                {% if label != 'comment' %}
-                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    </div>
-<div class="fos_user_user_show">
-    <div class="row border-accord">
-        <div class="col-md-2 user_avatar">
-            <a class="editer_utilisateur" data-toggle="modal" data-target="#edit-user">
-                <img src="{{ asset('assets/images/icons/4.png') }}" alt="logo" class="mb-3 "/>
-                <span class="middle">Modifier</span>
-            </a>
+    <div class="fos_user_user_show px-4 py-4">
+        <div class="row">
+           <div class="col-md-2 offset-5 btn-group ">
+                <div class=" profile-edit ml-2  ">
+                    <a class="">
+                        {% if app.user.profileImage %}
+                            <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" alt="User" >
+                        {% else %}
+                            <img class="mb-3 {% if user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset('/assets/images/profile/user-avatar.png') }}" alt="User">
+                        {% endif %}
+                    </a>
+                </div>
+           </div>
         </div>
-        <div class="col-md-3 offset-2">
+        <div class="justify-content-center">
             <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
+            <h1 class="pt-3 bdg-accord ">{{ user.point }} <span>Points</span></h1>
         </div>
-        <div class="col-md-2 offset-3">
-            <h1 class="text-center pt-3 bdg-accord">{{ user.point }} <span class="title-blue">Points</span></h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 border-respo  pt-2">
-            <div>
-                <h5 class="text-center pt-0 title-blue">Renseignements personnels</h5>
-            </div>
-            <div class="col">
-                <h6 class="d-inline font-weight-bold">Votre email :  </h6><span>  {{ user.email }}</span>
-            </div>
-            <div class="col">
-                <h6 class="d-inline font-weight-bold">Phone numbre :  </h6><span>  {{ user.phoneNumber }}</span>
-            </div>
-            <div class="col">
-                <h6 class="d-inline font-weight-bold">gender :  </h6><span>  {{ user.gender }}</span>
-            </div>
-            <div class="col mb-4">
-                <h6 class="d-inline font-weight-bold">Birthday :  </h6><span>  {{ user.birthday|date('d / m / Y') }}</span>
-            </div>
-        </div>
-        <div class="col-md-6 border-respo  pt-2">
-            <div>
-                <h5 class="text-center title-blue">Emplacement</h5>
-            </div>
-            <div class="col">
-                <h6 class="d-inline font-weight-bold">Ville :  </h6>
-                    {% if user.city %}
-                    <span>  {{ user.city.name }}</span>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                    <h5 class=" pt-0 title-blue">{% trans %}Personal information{% endtrans %}</h5>
+                    <h6 class="d-inline font-weight-bold">{% trans %}Email :  {% endtrans %}</h6><span>  {{ user.email }}</span>
+                    <b class="deal-terminate">
+                    {% if app.user.emailStatus %}
+                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
                     {% else %}
-                        <a href="{{ path('set_area') }}">Choisissez votre ville</a>
-                    {% endif %}
+                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                    {% endif %}</b>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Phone number : {% endtrans %} </h6><span>  {{ user.phoneNumber }}</span>
+                    <b class="deal-terminate">
+                        {% if app.user.phonNumberStatus %}
+                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                        {% else %}
+                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                        {% endif %}</b>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Sex :  {% endtrans %}</h6><span>  {{ user.gender }}</span>
+                    <b class="deal-terminate">
+                        {% if app.user.genderStatus %}
+                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                        {% else %}
+                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                        {% endif %}</b>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Birthday :  {% endtrans %}</h6><span>  {{ user.birthday|date('d / m / Y') }}</span>
+                    <b class="deal-terminate">
+                        {% if app.user.birthdayStatus %}
+                            <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                        {% else %}
+                            <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                        {% endif %}</b>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Max distance :  {% endtrans %}</h6><span>  {{ user.maxDistance }} <span class="font-weight-bold">Km</span></span>
+                </div>
             </div>
-            <div class="col">
-                <h6 class="d-inline font-weight-bold">Code postal :  </h6>
-                {% if user.city %}
-                    <span>  {{ user.city.zipCode }}</span>
-                {% else %}
-                    <a href="{{ path('set_area') }}">Choisissez votre code postal</a>
-                {% endif %}            </div>
-            <div class="col">
-                <h6 class="d-inline font-weight-bold">Departement :  </h6>
-                {% if user.city %}
-                    <span>  {{ user.city.department.name }}</span>
-                {% else %}
-                    <a href="{{ path('set_area') }}">Choisissez votre département</a>
-                {% endif %}
+        </div>
+        <div class="justify-content-center">
+            <div class="text-center pt-2">
+                <h5 class=" pt-0 title-blue">{% trans %}Positioning{% endtrans %}</h5>
+                <h6 class="d-inline font-weight-bold">{% trans %}City : {% endtrans %} </h6><span>  {{ user.city.name }}</span>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Zip Code : {% endtrans %} </h6><span>  {{ user.postalCode }}</span>
+                </div>
+                <div class="col">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Department : {% endtrans %} </h6><span>  {{ user.city.department }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Region : {% endtrans %} </h6><span>  {{ user.city.department.region }}</span>
+                </div>
+                <div class="col ">
+                    <h6 class="d-inline font-weight-bold">{% trans %}Last login :  {% endtrans %}</h6><span>  {{ user.lastLogin|date('d  M  Y - H:d:s')  }}</span>
+                </div>
             </div>
-            <div class="col mb-4">
-                <h6 class="d-inline font-weight-bold">Région :  </h6>
-                {% if user.city %}
-                    <span>  {{ user.city.department.region.name }}</span>
-                {% else %}
-                    <a href="{{ path('set_area') }}">Choisissez votre region</a>
-                {% endif %}            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-5 mt-5">
+                <form method="post" class="d-inline" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to delete your account?'));">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                    <button class="btn btn-danger btn-block text-center">{% trans %}Delete Your Account{% endtrans %}</button>
+                </form>
+            </div>
 
         </div>
-        <div class="col-md-12 border-respo  pt-2">
-            <div>
-                <h5 class="text-center title-blue">Driver</h5>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="col">
-                        <h6 class="d-inline font-weight-bold">Voiteur :  </h6><span>  {{ user.car }}</span>
-                    </div>
-                    <div class="col">
-                        <h6 class="d-inline font-weight-bold">Color :  </h6><span style="background-color:{{ user.color }};color:{{ user.color }}">____</span>
-                    </div>
-                    <div class="col">
-                        <h6 class="d-inline font-weight-bold">Max distance :  </h6><span>  {{ user.point }} <span class="font-weight-bold">Km</span></span>
-                    </div>
-                </div>
-                <div class="col-md-4 editer_utilisateur" >
-                    <div class="col mb-4">
-                        <img src="{{ asset('assets/images/icons/1.png') }}" alt="logo" class="mb-3 "/>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 {% endblock %}
 

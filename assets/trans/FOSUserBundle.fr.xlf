@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="fr">
+  <file id="FOSUserBundle.fr">
+    <unit id="C5vgizW" name=" Car brand : ">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:20</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Car brand :</source>
+        <target>Marque de voiture :</target>
+      </segment>
+    </unit>
+    <unit id="qc1gq65" name=" Car color :">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:23</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Car color :</source>
+        <target>Couleur de la voiture :</target>
+      </segment>
+    </unit>
+    <unit id="W2CXoy8" name=" Number of passengers  : ">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:26</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Number of passengers  :</source>
+        <target>Nombre de passagers  :</target>
+      </segment>
+    </unit>
+    <unit id="yXqGTYl" name=" Possibility to">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:28</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Possibility to</source>
+        <target>Possibilité de</target>
+      </segment>
+    </unit>
+    <unit id="kRMukQh" name=" Bag">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:31</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Bag</source>
+        <target>Valise</target>
+      </segment>
+    </unit>
+    <unit id="JfWHKHZ" name=" Animal">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:34</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Animal</source>
+        <target>Animal</target>
+      </segment>
+    </unit>
+    <unit id="UyGA1qo" name=" Baby">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:37</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Baby</source>
+        <target>Bébé</target>
+      </segment>
+    </unit>
+    <unit id="0YK8GpK" name="bank card ">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:40</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>bank card</source>
+        <target>Carte bancaire</target>
+      </segment>
+    </unit>
+    <unit id="uYvOLm1" name=" I can share">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:43</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>I can share</source>
+        <target>Je peux partager</target>
+      </segment>
+    </unit>
+    <unit id="cgndL_4" name=" Conversation">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:46</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Conversation</source>
+        <target>Conversation</target>
+      </segment>
+    </unit>
+    <unit id="kzWfUaR" name=" Music">
+      <notes>
+        <note category="file-source" priority="1">templates/user/Carpool/carpool_show.html.twig:49</note>
+        <note category="state" priority="1">new</note>
+      </notes>
+      <segment>
+        <source>Music</source>
+        <target>La musique</target>
+      </segment>
+    </unit>
+    <unit id="3IGOm9D" name="form.email">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.email</source>
+        <target>Adresse e-mail</target>
+      </segment>
+    </unit>
+    <unit id="zUyAH.U" name="group.edit.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>group.edit.submit</source>
+        <target>Mettre à jour le groupe</target>
+      </segment>
+    </unit>
+    <unit id="gbd_oyy" name="group.show.name">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>group.show.name</source>
+        <target>Nom du groupe</target>
+      </segment>
+    </unit>
+    <unit id="q9PlPqt" name="group.new.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>group.new.submit</source>
+        <target>Créer le groupe</target>
+      </segment>
+    </unit>
+    <unit id="W8JrORM" name="group.flash.updated">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>group.flash.updated</source>
+        <target>Le groupe a été mis à jour.</target>
+      </segment>
+    </unit>
+    <unit id="qApK0Ss" name="group.flash.created">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>group.flash.created</source>
+        <target>Le groupe a été créé.</target>
+      </segment>
+    </unit>
+    <unit id="62IBurx" name="group.flash.deleted">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>group.flash.deleted</source>
+        <target>Le groupe a été supprimé.</target>
+      </segment>
+    </unit>
+    <unit id="cMU.0rQ" name="security.login.username">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>security.login.username</source>
+        <target>Nom d'utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="N_kLMwm" name="security.login.password">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>security.login.password</source>
+        <target>Mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="8DSptbg" name="security.login.remember_me">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>security.login.remember_me</source>
+        <target>Se souvenir de moi</target>
+      </segment>
+    </unit>
+    <unit id="tuAV77Z" name="security.login.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>security.login.submit</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="7g9SaRk" name="profile.show.username">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>profile.show.username</source>
+        <target>Nom d'utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="AaZaMf7" name="profile.show.email">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>profile.show.email</source>
+        <target>Adresse e-mail</target>
+      </segment>
+    </unit>
+    <unit id="ci5Tbzf" name="profile.edit.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>profile.edit.submit</source>
+        <target>Mettre à jour</target>
+      </segment>
+    </unit>
+    <unit id="C2lNaG." name="profile.flash.updated">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>profile.flash.updated</source>
+        <target>Le profil a été mis à jour.</target>
+      </segment>
+    </unit>
+    <unit id="agwdlwc" name="change_password.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>change_password.submit</source>
+        <target>Modifier le mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="SFo6Y3." name="change_password.flash.success">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>change_password.flash.success</source>
+        <target>Le mot de passe a été modifié.</target>
+      </segment>
+    </unit>
+    <unit id=".ndupSK" name="registration.check_email">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.check_email</source>
+        <target>Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra cliquer afin d'activer votre compte.</target>
+      </segment>
+    </unit>
+    <unit id="B.ZozIs" name="registration.confirmed">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.confirmed</source>
+        <target>Félicitations %username%, votre compte est maintenant activé.</target>
+      </segment>
+    </unit>
+    <unit id="_wd.d62" name="registration.back">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.back</source>
+        <target>Retour à la page d'origine.</target>
+      </segment>
+    </unit>
+    <unit id="hmX3IJA" name="registration.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.submit</source>
+        <target>Créer un compte</target>
+      </segment>
+    </unit>
+    <unit id="by9ThPc" name="registration.flash.user_created">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.flash.user_created</source>
+        <target>L'utilisateur a été créé avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="N.aTMve" name="registration.email.subject">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.email.subject</source>
+        <target>Bienvenue %username% !</target>
+      </segment>
+    </unit>
+    <unit id="hN23SFM" name="registration.email.message">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>registration.email.message</source>
+        <target>Bonjour %username% !
+
+Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+
+Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.
+
+Cordialement,
+L'équipe
+</target>
+      </segment>
+    </unit>
+    <unit id="_cY.wHP" name="resetting.check_email">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.check_email</source>
+        <target>Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe.
+Remarque : Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
+
+Si vous ne recevez pas un email, vérifiez votre dossier spam ou essayez à nouveau.
+</target>
+      </segment>
+    </unit>
+    <unit id="f5J.GZt" name="resetting.request.username">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.request.username</source>
+        <target>Nom d'utilisateur ou adresse e-mail</target>
+      </segment>
+    </unit>
+    <unit id="55aST1i" name="resetting.request.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.request.submit</source>
+        <target>Réinitialiser le mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="KsNOzZz" name="resetting.reset.submit">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.reset.submit</source>
+        <target>Modifier le mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="TUD.2.O" name="resetting.flash.success">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.flash.success</source>
+        <target>Le mot de passe a été réinitialisé avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="Redv4tu" name="resetting.email.subject">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.email.subject</source>
+        <target>Réinitialisation de votre mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="Lm8o8Qg" name="resetting.email.message">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>resetting.email.message</source>
+        <target>Bonjour %username% !
+
+Pour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%
+
+Cordialement,
+L'équipe
+</target>
+      </segment>
+    </unit>
+    <unit id="7oF7jXj" name="layout.logout">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>layout.logout</source>
+        <target>Déconnexion</target>
+      </segment>
+    </unit>
+    <unit id="J.8npBV" name="layout.login">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>layout.login</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="sLu8MAv" name="layout.register">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>layout.register</source>
+        <target>Inscription</target>
+      </segment>
+    </unit>
+    <unit id="BW_lWYD" name="layout.logged_in_as">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>layout.logged_in_as</source>
+        <target>Connecté en tant que %username%</target>
+      </segment>
+    </unit>
+    <unit id="v1EdMjG" name="form.group_name">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.group_name</source>
+        <target>Nom du groupe</target>
+      </segment>
+    </unit>
+    <unit id="B0VCgO_" name="form.username">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.username</source>
+        <target>Nom d'utilisateur</target>
+      </segment>
+    </unit>
+    <unit id="IY9XZs0" name="form.current_password">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.current_password</source>
+        <target>Mot de passe actuel</target>
+      </segment>
+    </unit>
+    <unit id="yjqmSBK" name="form.password">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.password</source>
+        <target>Mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="Y4Q7qvl" name="form.password_confirmation">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.password_confirmation</source>
+        <target>Répéter le mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="JTbuLK0" name="form.new_password">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.new_password</source>
+        <target>Nouveau mot de passe</target>
+      </segment>
+    </unit>
+    <unit id="hdTL88S" name="form.new_password_confirmation">
+      <notes>
+        <note category="state" priority="1">obsolete</note>
+      </notes>
+      <segment>
+        <source>form.new_password_confirmation</source>
+        <target>Répéter le nouveau mot de passe</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

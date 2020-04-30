@@ -1,0 +1,65 @@
+//slider photos offer
+
+
+.item {
+  height: 40vh;
+}
+
+.item img {
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+
+}
+
+// ad index
+.border-ad{
+  width: auto;
+  height: 28vh;
+  -webkit-box-shadow: 0px 0px 10px #D2D4D7;
+  -moz-box-shadow: 0px 0px 10px #d2d4d7;
+  box-shadow: 0px 0px 10px #d2d4d7;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 5%;
+
+}
+.image_ad {
+
+  height: 20vh;
+  max-width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.ad_show {
+  cursor: pointer;
+  text-decoration:none;
+  color:black;
+  font-weight: lighter;
+
+}
+#ad_index a{
+  text-decoration:none;
+  color:black;
+}
+.ad_index:hover{
+  -webkit-box-shadow: 0px 0px 10px #00B5CE;
+  -moz-box-shadow: 0px 0px 10px #00B5CE;
+  box-shadow: 0px 0px 10px #00B5CE;
+  text-decoration:none;
+  color:black;
+  font-weight: lighter;
+  border-radius: 5%;
+}

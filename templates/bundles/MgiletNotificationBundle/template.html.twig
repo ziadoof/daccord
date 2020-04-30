@@ -1,0 +1,441 @@
+{% if not mgilet_notification_count(app.user)  %}
+    <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+       aria-haspopup="true"><i class="fas fa-bell"></i>
+    </a>
+    <li >
+        <div class="bell-icon header__notification ">
+            <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
+                <ul class="notification__list dropdown " >
+                    <h4 class="notification__list__name py-3">
+                        {% trans %} Notification{% endtrans %}
+                        <span class="notification-number large-number">{{mgilet_notification_count(app.user)}}</span>
+                        {% trans %} Unseen{% endtrans %}
+                        <span class="notification-number large-number" id="unseen-large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
+                    </h4>
+                    <h6 class="text-center mt-2"> {% trans %} There is no notification found!{% endtrans %}</h6>
+                </ul>
+            </div>
+        </div> <!-- bell-icon-->
+    </li>
+{% else %}
+    <div class="general-notification">
+    {% if mgilet_notification_unseen_count(app.user) > 0 %}
+        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span><i class="fas fa-bell"></i>
+        </a>
+        <li class="active-notification">
+    {% else %}
+        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true"><i class="fas fa-bell"></i>
+        </a>
+        <li class="active-notification">
+    {% endif %}
+            <div class="bell-icon header__notification ">
+                <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
+                <ul class="notification__list dropdown " >
+                        <h4 class="notification__list__name py-3">
+                            {% trans %} Notification{% endtrans %}
+                            <span class="notification-number large-number">{{mgilet_notification_count(app.user)}}</span>
+                            {% trans %} Unseen{% endtrans %}
+                            <span class="notification-number large-number" id="unseen-large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
+                            {% if notificationList|length > 0 %}
+                                {% if mgilet_notification_unseen_count(app.user) > 0 %}
+                                    <li style="padding: 10px;">
+                                        <b class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
+                                        <a id="notification-MarkAllAsSeen" href="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        </h4>
+                    <div id="new-notification">
+                        {#new notification here#}
+                    </div>
+                    {% for notification in notificationList %}
+                        {% set subject = notification.notification.subject  %}
+                        <section class="one-note">
+                            <li class="list__item {% if notification.seen %}{{ 'seen' }}{% endif %}">
+                                    <a href="{{ notification.notification.link }}"
+                                       class="list__item--link my-0
+                                        {% if     subject is same as ('profilePoints') %}{{" profilePoints"}}
+                                        {% elseif subject is same as ('driverPoints')  %}{{" driverPoints"}}
+                                        {% elseif subject is same as ('ratingMeetup')  %}{{" ratingMeetup"}}
+                                        {% elseif subject is same as ('meetupComment') %}{{" meetupComment"}}
+                                        {% elseif subject is same as ('hostingPoints') %}{{" hostingPoints"}}
+                                        {% elseif subject is same as ('removeUserPoints') %}{{" profilePoints"}}
+                                        {% elseif subject is same as ('removeCarpoolPoints') %}{{" carpoolPoints"}}
+                                        {% elseif subject is same as ('carpoolAddPoints') %}{{" carpoolPoints"}}
+                                        {% elseif subject is same as ('ratingCarpool') %}{{" carpoolPoints"}}
+                                        {% elseif subject is same as ('pointsVoyageCanceled') %}{{" profilePoints"}}
+                                        {% endif %}
+                                        {% if notification.notification.message is same as ('meetupParticipant') %}{{" meetupParticipant"}}{% endif %}"
+                                       {% if not notification.seen %}notifiable="{{notification.notifiableEntity.id}}"
+                                       notification="{{ notification.notification.id }}"
+                                        {% endif %}>
+                                        {% if subject is same as ('profilePoints') or
+                                              subject is same as ('driverPoints') or
+                                              subject is same as ('hostingPoints')or
+                                              subject is same as ('removeUserPoints')or
+                                              subject is same as ('removeCarpoolPoints')or
+                                              subject is same as ('carpoolAddPoints')or
+                                              subject is same as ('pointsVoyageCanceled')%}
+                                            <img src="{{asset('/assets/images/logo/face.png')}}" alt="" class="user-image mx-2 mt-1" />
+                                        {% else %}
+                                            <img src="{{data[notification.notification.id]['sender'].photoProfile()}}" alt="" class="user-image mx-2 mt-1" />
+                                        {% endif %}
+                                        <span class="messages mx-2">
+                                            {% set type = data[notification.notification.id]['type'] %}
+                                                {% if type is same as ('deal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-handshake"></i></span>
+                                                        {% trans %}New suggested deal !{% endtrans %}</p>
+                                                    <p>
+                                                        {% trans %}There is a proposed deal with{% endtrans %}
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}regarding your AD from category{% endtrans %}
+                                                        <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% elseif type is same as ('driverRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fas fa-truck-moving"></i></span>
+                                                    {% trans %}New driver request{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}had been sent you a new driver request about the category{% endtrans %}
+                                                        <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% elseif type is same as ('treatmentDriverRequest') %}
+                                                    {% if notification.notification.subject is same as ('rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {% trans %}Treatment driver request{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}rejected the driver's request that you had previously sent him about the category{% endtrans %}
+                                                            <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {% trans %}Treatment driver request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}accepted the driver's request that you had previously sent him about the category{% endtrans %}
+                                                            <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                        </p>
+                                                    {% endif %}
+                                                {% elseif type is same as ('addDriverToDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-check"></i>{{ ' ' }}<i class="fas fas fa-truck-moving"></i></span>
+                                                    {% trans %}Add to Deal !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}has added you to a deal that will be executed soon about the category{% endtrans %}
+                                                        <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% elseif type is same as ('semiDoneDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-handshake"></i></span>
+                                                    {% trans %}Semi done Deal !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %} has ended a deal about the category {% endtrans %}
+                                                        <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                        {% trans %} that you are a member of, Waiting for other members to finish the deal{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('doneDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="fas fa-handshake"></i></span>
+                                                    {% trans %}DONE DEAL !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %} has ended a deal about the category {% endtrans %}
+                                                        <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                        {% trans %} that you are a member of,{% endtrans %}
+                                                        <span>{% trans %}The deal was terminated{% endtrans %}</span>
+                                                    </p>
+                                                {% elseif type is same as ('profilePoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span>{% trans %}Congratulations ... Five extra points have been added to you{% endtrans %}</span>
+                                                    </p>
+                                                {% elseif type is same as ('driverPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="far fa-star"></i></span>
+                                                        {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span>{% trans %}Congratulations ... Seven extra points have been added to you{% endtrans %}</span>
+                                                    </p>
+                                                {% elseif type is same as ('ratingDriver') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                        <span class="blued"><i class="far fa-star"></i></span>
+                                                        {% trans %}Rating !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %} has added a rating for you as a driver, based on your latest deal.{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('ratingHosting') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-star"></i></span>
+                                                    {% trans %}Rating !{% endtrans %}</p>
+                                                    <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                    <p>
+                                                        {% trans %}has added a rating for you as a hosting, based on your latest hosting.{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('hostingRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-suitcase-rolling ml-0"></i></span>
+                                                    {% trans %}New hosting request !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %} had been sent you a new hosting request..!{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('treatmentHostingRequest') %}
+                                                    {% if notification.notification.subject is same as ('rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {% trans %}Treatment hosting request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}rejected the hosting's request that you had previously sent him.{% endtrans %}
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {% trans %}Treatment hosting request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}accepted the hosting's request that you had previously sent him.{% endtrans %}
+                                                        </p>
+                                                    {% endif %}
+                                                {% elseif type is same as ('doneHosting') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="fas fa-suitcase-rolling ml-0"></i></span>
+                                                    {% trans %}Done Hosting !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}had ended the hosting that you are part of...!{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('hostingPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span>{% trans %}Congratulations ... Ten extra points have been added to your hosting profile.{% endtrans %}</span>
+                                                    </p>
+                                                {% elseif type is same as ('meetupRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-user-friends"></i></span>
+                                                    {% trans %} New meetup join request !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}had been sent you a new meetup join request..!{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('treatmentMeetupRequest') %}
+                                                    {% if notification.notification.subject is same as ('Rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {% trans %}Treatment meetup join request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}rejected the meetup join request that you had previously sent him.{% endtrans %}
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {% trans %}Treatment meetup join request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}accepted the meetup join request that you had previously sent him.{% endtrans %}
+                                                        </p>
+                                                    {% endif %}
+                                                {% elseif type is same as ('cancelJoinParticipant') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-calendar-times"></i></span>
+                                                    {% trans %}Cancel meetup join !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% if notification.notification.subject is same as ('removed')  %}
+                                                            {% trans %}had canceled your participation in his meetup.{% endtrans %}
+                                                        {% else %}
+                                                            {% trans %}had canceled his participation in your meetup.{% endtrans %}
+                                                        {% endif %}
+                                                    </p>
+                                                {% elseif type is same as ('cancelJoinWaiting') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-calendar-times"></i></span>
+                                                    {% trans %}Cancel meetup join !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% if notification.notification.subject is same as ('removed')  %}
+                                                            {% trans %}had canceled your subscription to the waiting list in his meetup.{% endtrans %}
+                                                        {% else %}
+                                                            {% trans %}had canceled his subscription to the waiting list in your meetup.{% endtrans %}
+                                                        {% endif %}
+                                                    </p>
+                                                {% elseif type is same as ('transferToParticipant') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-exchange-alt"></i></span>
+                                                    {% trans %}Transfer to participants list !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}transferred you from the waiting list to the participants in his meetup !.{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('meetupComment') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-comment-alt"></i></span>
+                                                    {% trans %}New comment !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %} added a comment to an meetup where you are a member..!{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('ratingMeetup') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-star"></i></span>
+                                                    {% trans %}Rating !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}has added a rating for your meetup.{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('voyageRequest') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="fas fa-car"></i></span>
+                                                    {% trans %}New voyage join request !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}had been sent you a new voyage join request..!{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('treatmentVoyageRequest') %}
+                                                    {% if notification.notification.subject is same as ('Rejected') %}
+                                                        <p class="font-weight-bold mb-0">
+                                                        <span class="rosed"><i class="fas fa-times"></i></span>
+                                                        {% trans %}Treatment voyage join request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}rejected the voyage join request that you had previously sent him.{% endtrans %}
+                                                        </p>
+                                                    {% else %}
+                                                        <p class="font-weight-bold mb-0">
+                                                            <span class="blued"><i class="fas fa-check"></i></span>
+                                                        {% trans %}Treatment voyage join request !{% endtrans %}</p>
+                                                        <p>
+                                                            <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                            {% trans %}accepted the voyage join request that you had previously sent him.{% endtrans %}
+                                                        </p>
+                                                    {% endif %}
+                                                {% elseif type is same as ('voyageRemovePassenger') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-calendar-times"></i></span>
+                                                    {% trans %}Cancel voyage join !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% if notification.notification.subject is same as ('removed')  %}
+                                                            {% trans %}had canceled your participation in his voyage.{% endtrans %}
+                                                        {% else %}
+                                                            {% trans %}had canceled his participation in your voyage.{% endtrans %}
+                                                        {% endif %}
+                                                    </p>
+                                                {% elseif type is same as ('removeUserPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span>
+                                                            {% if notification.notification.message is same as ('0') %}
+                                                                {% trans %}You have no points left!{% endtrans %}
+                                                            {% else %}
+                                                                {% trans %}You lost{% endtrans %}
+                                                                <span>{{ notification.notification.message }} </span>
+                                                                {% trans %}points{% endtrans %}!
+                                                            {% endif %}
+                                                        </span>
+                                                    </p>
+                                                {% elseif type is same as ('removeCarpoolPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span>
+                                                            {% if notification.notification.message is same as ('0') %}
+                                                                {% trans %}You have no points left as carpool!{% endtrans %}
+                                                            {% else %}
+                                                                {% trans %}You lost{% endtrans %}
+                                                                <span>{{ notification.notification.message }}</span>
+                                                                {% trans %}points as carpool!{% endtrans %}
+                                                            {% endif %}
+                                                        </span>
+                                                    </p>
+                                                {% elseif type is same as ('carpoolAddPoints') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span>{% trans %}Congratulations ... 30 extra points have been added to you as carpool{% endtrans %}</span>
+                                                    </p>
+                                                {% elseif type is same as ('ratingCarpool') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="blued"><i class="far fa-star"></i></span>
+                                                    {% trans %}Rating !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}has added a rating for you as a carpool, based on your latest voyage..{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('cancelVoyage') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-calendar-times"></i></span>
+                                                    {% trans %}Cancel voyage!{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}canceled a voyage you are traveling on.{% endtrans %}
+                                                    </p>
+                                                {% elseif type is same as ('pointsVoyageCanceled') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="far fa-star"></i></span>
+                                                    {% trans %}POINTS !{% endtrans %}</p>
+                                                    <p>
+                                                        <span> {% trans %}You earned five extra points for canceling a voyage you are traveling on.{% endtrans %}</span>
+                                                    </p>
+                                                {% elseif type is same as ('cancelDeal') %}
+                                                    <p class="font-weight-bold mb-0">
+                                                    <span class="rosed"><i class="fas fa-exclamation-triangle"></i></span>
+                                                    {% trans %}Cancel Deal !{% endtrans %}</p>
+                                                    <p>
+                                                        <span class="blued">{{ data[notification.notification.id]['sender']|title }}</span>
+                                                        {% trans %}has canceled the deal that you were part of, and was to be executed soon, about the category{% endtrans %}
+                                                        <span class="blued">{{data[notification.notification.id]['category']}}</span>
+                                                    </p>
+                                                {% endif %}
+                                        </span>
+                                    </a>
+                                <div class="row">
+                                    <div class="col btn-group">
+                                        <div class="col-md-6 ">
+                                            {% if notification.seen %}
+                                            <div class=" seen">
+                                            {% else %}
+                                            <div class="all-as-seen mark-as">
+                                                <a href="{{ mgilet_notification_generate_path('notification_mark_as_seen', notification.notifiableEntity, notification.notification) }}" class="ajax-notification action-secondary">{% trans %} Mark as seen{% endtrans %}</a>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 offset-4">
+                                            <div class="row">
+                                                <div class=" mb-1 mt-0 float-right">
+                                                    <b class=" all-as-seen">
+                                                        {{ notifiedBy.date_format(notification.notification.date ) }}
+                                                    </b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </section>
+                    {% endfor %}
+                </ul>
+                </div>
+            </div> <!-- bell-icon-->
+        </li>
+    </div>
+{% endif %}

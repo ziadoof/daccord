@@ -1,29 +1,59 @@
-
 {% extends 'base.html.twig' %}
 {% block body %}
-{% block header %}{% include "header.html.twig" %}{% endblock %}
-{% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
+<html lang="{{ app.request.locale|split('_')[0] }}">
+    {% block header %}
+        <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
+        {% include "header.html.twig" %}
+    {% endblock %}
+    {% if app.user != null%}
+        {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
+    {% endif %}
+    <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-4">
+    {% block searchbar_content %}
+            {% include "search/searchbar.html.twig" %}
+    {% endblock searchbar_content %}
+    </div>
     <section id="main-content">
-        <section class="container-fluid ">
+        <section class="container-fluid">
+            <div class=" message-flash mb-4"style="z-index: 9999;">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        {% if label != 'comment' %}
+                            <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
+                                <p class="py-4 ">{{ message|trans }}</p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
             <div class="wrapper">
-                <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-4">
-                    {% block content %}
-                        {% for label, messages in app.flashes %}
-                            {% for message in messages %}
-                                {% if label != 'comment' %}
-                                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
-                                        {{ message }}
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                    {% endblock %}
+                <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-2 user_layout">
+                    <div id="all">
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
+                    <div id="searching">
+                        {% block content_search %}
+
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
+            {#<div class="wrapper">
+                <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-2">
+                    <div id="searching">
+                        {% block content_search %}
+
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>#}
         </section>
+        {% block footer %}{% include "footer.html.twig" %}{% endblock %}
     </section>
 {% endblock %}
 

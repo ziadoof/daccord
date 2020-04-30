@@ -1,0 +1,57 @@
+{% extends 'admin/layout_admin.html.twig' %}
+{% form_theme form 'jquery.collection.html.twig' 'SpecificationCollectionType.html.twig' %}
+
+{% block admin %}
+    <div class="container">
+        <h3 class="blued text-center">{% trans %} New Category{% endtrans %}</h3>
+        <div class="text-center mt-2 mb-5">
+            <div class="col-md-12 ">
+                <div class="mb-4">
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Category name{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Category parent{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Offer specifications{% endtrans %}</h7></span>
+                    <span class="badge badge-primary  mx-1 py-2 px-2"><h7>{% trans %} Demand specifications{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h7>{% trans %} Search offer specifications{% endtrans %}</h7></span>
+                    <span class="badge badge-info  mx-1 py-2 px-2"><h5>{% trans %} Search demand specifications{% endtrans %}</h5></span>
+
+                </div>
+            </div>
+        </div>
+        <div class="row border-deal">
+            <div class="col-md-4 py-2 px-2">
+                <div class="btn-group d-block">
+                    <span class="badge badge-success py-2 px-2 mx-2"><h6>{% trans %} Category parent{% endtrans %}</h6></span> <span class="badge badge-info py-2 px-2 mx-2"><h6>{{ category['parent'] }}</h6></span>
+                </div>
+                <div class="btn-group d-block mt-2">
+                    <span class="badge badge-success py-2 px-2 mx-2"><h6>{% trans %} Category name_{% endtrans %}</h6></span> <span class="badge badge-info py-2 px-2 mx-2"><h6>{{ category['name'] }}</h6></span>
+                </div>
+            </div>
+            <div class="col-md-8 py-2">
+                <div class="row">
+                    <span class="badge badge-primary py-2 px-2"><h7>{% trans %} Offer Specifications{% endtrans %}</h7></span>
+                    {% for one in offerSpecifications  %}
+                        <span class="badge badge-info mx-1 py-2 px-2">{{ one['name'] }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row my-2">
+                    <span class="badge badge-primary py-2 px-2"><h7>{% trans %} Demand Specifications{% endtrans %}</h7></span>
+                    {% for one in demandSpecifications  %}
+                        <span class="badge badge-info mx-1 py-2 px-2">{{ one['name'] }}</span>
+                    {% endfor %}
+                </div>
+                <div class="row my-2">
+                    <span class="badge badge-primary py-2 px-2"><h7>{% trans %} Search Offer Specifications{% endtrans %}</h7></span>
+                    {% for one in searchOfferSpecifications  %}
+                        <span class="badge badge-info mx-1 py-2 px-2">{{ one['name'] }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="">
+            {{ form_start(form,{'attr':{'id':'category-specification-offer'}}) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary float-right mt-4">{% trans %} Continue{% endtrans %} <i class="fas fa-arrow-right"></i></button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% block content %}
+    <div class="row">
+        {% for a_ad in ad_area %}
+            <div class="text-center col-md-3 px-md-2 my-2 ad_show">
+                <div id="ad_index" class="ad_index">
+                    <div class="px-2 border-ad">
+                        <div class="row">
+                            <div class="col-md-12 pt-2">
+                                <div class=" ">
+                                    {% if app.user %}
+                                    {% set isFavorite = 'false' %}
+                                    {#data-favorite must be string not boolean#}
+                                    {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                        {% if favorite.ad is same as (a_ad) %}
+                                            {% set isFavorite = 'true' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="post" action="" class="js-favorite-add  float-left mr-2" data-object="{{ a_ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                        <div class="flexbox">
+                                            <div class="fav-btn">
+                                                <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    {% endif %}
+                                    <b class="title-blue float-left">{{ a_ad.category|trans }}</b>
+                                    <b class="float-right ">{{ a_ad.date_format(a_ad.dateOfAd)|trans }}</b>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ path('ad_show', {'id': a_ad.id}) }}"class="">
+                            {% if a_ad.typeOfAd is same as ('Offer') %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {% if a_ad.imageOne is not null %}
+                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ a_ad.imageOne) }}" alt="">
+                                        {% else %}
+                                            {% if a_ad.imageTow is not null %}
+                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ a_ad.imageTow) }}" alt="">
+                                            {% else %}
+                                                {% if a_ad.imageThree is not null %}
+                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ a_ad.imageThree) }}" alt="">
+                                                {% else %}
+                                                    <img class="image_ad " src="/assets/images/icons/offer.png" alt="">
+                                                {%endif%}
+                                            {%endif%}
+                                        {%endif%}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img class="image_ad" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="row">
+                                <div class="col-md-8">
+                                    {% if a_ad.pPrice is not same as (null) %}
+                                        <span class="title-blue float-left"><del>{{ a_ad.pPrice }}€</del></span>
+                                    {% endif %}
+                                    {% if a_ad.price %}
+                                        <span class="title-rose float-left">{{ a_ad.price }}€</span>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="float-right mt-3">{{ a_ad.user.city.name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="mx-2">
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(ad_area) }}
+        </div>
+    </div>
+{% endblock %}
+

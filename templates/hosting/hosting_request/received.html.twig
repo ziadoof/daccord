@@ -1,0 +1,176 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}{% trans %} Hosting{% endtrans %}{% endblock %}
+
+{% block content %}
+    <h1 class="title-blue text-center">{% trans %} Hosting{% endtrans %}</h1>
+    {% if hosting_received is not empty %}
+        <div class="col-md-6 offset-3 my-2">
+            {% for hosting in hosting_received %}
+                <div class="border-respo px-2 py-2
+                                    {% if hosting.treatment is same as('pending') %}
+                                    pending
+                                    {% else %}
+                                    accepted
+                                    {% endif %}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a class="d-block" href="{{ path('user_show', {'id': hosting.sender.id}) }}">
+                                <img src="{{ hosting.sender.photoProfile() }}" alt="profile photo" class="vote-avatar">
+                            </a>
+                            <div class="mt-2">
+                                <span class="blue ml-2">{{ hosting.sender.firstname }}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-4 ">
+                            <span class="float-right py-2 px-2">{{ hosting.date|date('d M Y') }}</span>
+                        </div>
+                    </div>
+                    <hr class="my-1">
+                    {% if hosting.treatment is same as('pending') %}
+                    <div class="row">
+                        <div class="col text-center ">
+                            <h6 class="blued ">{% trans %} Hosting request from{% endtrans %}
+                                <span class="rosed">{{ hosting.startDate|date('d/m/Y') }}</span>
+                                {% trans %} to{% endtrans %} <span class="rosed">{{ hosting.endDate|date('d/m/Y') }}</span>
+                                {% trans %} for{% endtrans %} <span class="rosed">{{ hosting.numberOfPersons }}</span> {% trans %} persons{% endtrans %}
+                            </h6>
+                        </div>
+                    </div>
+                    {% if hosting.description %}
+                        <div class="row mx-2 ">
+                            <div class="col-md-12">
+                                <span class="blued">{% trans %} Description : {% endtrans %}</span>
+                                <p class="minimize">{{ hosting.description }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row mx-2 ">
+                            <div class="col-md-12 text-center">
+                                <span class="">{% trans %} There is no description !{% endtrans %} </span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <hr class="my-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                <button class="btn btn-outline-info  btn-block" >
+                                    <input type="hidden" name="user" value="{{ hosting.sender.id }}">
+                                    <p class="mt-1">{% trans %} Message to {% endtrans %}{{hosting.sender.firstname}}</p>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form>
+                                <a class="btn btn-outline-success  btn-block"
+                                   href="{{ path('hosting_request_treatment', {'hostingRequest':hosting.id, 'type': 'accepted'}) }}"
+                                   onclick="return confirm(Translator.trans('Are you sure you want to accept this hosting request?'));">{% trans %}Accept the request {% endtrans %}</a>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form>
+                                <a class="btn btn-outline-danger  btn-block"
+                                   href="{{ path('hosting_request_treatment', {'hostingRequest':hosting.id, 'type': 'rejected'}) }}"
+                                   onclick="return confirm(Translator.trans('Are you sure you want to reject this hosting request?'));">{% trans %} Reject the request{% endtrans %}</a>
+                            </form>
+                        </div>
+                    </div>
+                    {% else %}
+                        {% if hosting.senderStatus and hosting.hostingStatus %}
+                            <div class="row ">
+                                <div class="col my-2">
+                                   <h5 class="ml-4 text-center">
+                                       {% trans %} You have hosting {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span>{% trans %} in your home{% endtrans %}
+                                    {% if hosting.numberOfPersons > 1 %}
+                                        {% trans %}with other people {% endtrans %}
+                                    {% endif %}
+                                       {% trans %} from{% endtrans %} <span class="blued">{{hosting.startDate|date('d M Y')}}</span> {% trans %} to{% endtrans %} <span class="blued">{{hosting.endDate|date('d M Y')}}</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <hr class="my-1">
+                            <div class="row">
+                                <div class="col">
+                                    <i class="far fa-star rosed ml-2 pt-1"></i>
+                                    <span>{% trans %} 10 points were added to your account based on this hosting{% endtrans %}</span>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if hosting.hostingStatus %}
+                                <div class="row">
+                                    <div class="col">
+                                       <h5 class="ml-4 text-center">
+                                           {% trans %} You have hosting {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span>{% trans %} in your home {% endtrans %}
+                                        {% if hosting.numberOfPersons > 1 %}
+                                            {% trans %}with other people {% endtrans %}
+                                        {% endif %}
+                                           {% trans %} from{% endtrans %}  <span class="blued">{{hosting.startDate|date('d M Y')}}</span>{% trans %} to{% endtrans %}  <span class="blued">{{hosting.endDate|date('d M Y')}}</span>
+                                       </h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <span class="">{% trans %} Waiting for DONE HOSTING by {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span> {% trans %}to end this hosting {% endtrans %}</span>
+                                    </div>
+                                </div>
+                                <hr class="my-1">
+                                <div class="row">
+                                    <div class="col-md-4 offset-4">
+                                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                            <button class="btn btn-info  btn-block" >
+                                                <input type="hidden" name="user" value="{{ hosting.sender.id }}">
+                                                <p class="mt-1">{% trans %} Message to {% endtrans %}{{hosting.sender.firstname}}</p>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row">
+                                    <span class="ml-4">
+                                        {% trans %} You have accepted to host {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span> {% trans %} in your home{% endtrans %}
+                                        {% if hosting.numberOfPersons > 1 %}
+                                            {% trans %} with other people{% endtrans %}
+                                        {% endif %}
+                                        {% trans %} from{% endtrans %} <span class="blued">{{hosting.startDate|date('d M Y')}}</span>{% trans %} to{% endtrans %}  <span class="blued">{{hosting.endDate|date('d M Y')}}</span>.
+                                        <br>
+                                        {% trans %} Upon completion of the hosting, you can DONE this hosting to dispose of {% endtrans %}<span class="rosed">{{hosting.sender.firstname}}</span>
+                                        {% trans %} adding an rating to your account.{% endtrans %}
+                                    </span>
+                                </div>
+                                {% if hosting.senderStatus %}
+                                    <div class="row ">
+                                        <i class="fas fa-star-of-life ml-4 pt-1 rosed"></i>
+                                        <span class="blued ml-1">{{ hosting.sender.firstname }}{% trans %} has been DONE this hosting{% endtrans %} </span>
+                                    </div>
+                                {% endif %}
+                                <hr class="my-1">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                            <button class="btn btn-info  btn-block" >
+                                                <input type="hidden" name="user" value="{{ hosting.sender.id }}">
+                                                <p class="mt-1">{% trans %} Message to{% endtrans %} {{hosting.sender.firstname}}</p>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form>
+                                            <a class="btn btn-success  btn-block"
+                                               href="{{ path('done_hosting', {'hosting':hosting.id}) }}"
+                                               onclick="return confirm(Translator.trans('Are you sure you want to DONE this hosting ?'));">{% trans %} DONE HOSTING{% endtrans %}</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <h6 class="blued text-center">{% trans %}There is no hosting requests {% endtrans %}</h6>
+    {% endif %}
+{% endblock %}

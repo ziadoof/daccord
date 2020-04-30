@@ -1,0 +1,85 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block title %}Admin voyage{% endblock %}
+
+{% block admin %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Voyage{% endtrans %}</h1>
+    <div class="row">
+        <div class="col text-center mb-2">
+            <span class="badge badge-success mx-2 px-2 py-2"><h5>{{ data['mainVoyageCount'] }} Main voyage</h5></span>
+            <span class="badge badge-primary mx-2 px-2 py-2"><h5>{{ data['subVoyageCount'] }} Sub voyage</h5></span>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>id</th>
+                <th><span class="float-left">Creator</span> </th>
+                <th>Departure at</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Price</th>
+                <th>Available seats</th>
+                <th>Finish</th>
+                <th>Main/Sub</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for voyage in voyages %}
+            <tr>
+                <td>{{ voyage.id }}</td>
+                <td >
+                    <div class="float-left">
+                        <a href="{{ path('carpool_show',{'id':voyage.creator.id}) }}"><i class="fas fa-car rosed mr-1"></i></a>
+                        <a href="{{ path('user_show',{'id':voyage.creator.user.id}) }}" >
+                            {{ voyage.creator.user.firstname|title }} {{ voyage.creator.user.lastname|upper }}
+                        </a>
+                    </div>
+                </td>
+                <td>{{ voyage.timeDeparture|date('d M -y | H:i')  }}</td>
+                <td >{{ voyage.stationDeparture }}</td>
+                <td>{{ voyage.stationArrival }}</td>
+                <td>
+                    {% if voyage.parent %}
+                        {{ voyage.stationPrice }}
+                    {% else %}
+                        {{ voyage.mainPrice }}
+                    {% endif %}
+                </td>
+                <td>{{ voyage.availableSeats }}</td>
+                <td>
+                    <div class="col text-center ">
+                        {% if voyage.isFinish() %}
+                            <div class="col text-center"><img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes" class="vote-avatar"></div>
+                        {% else %}
+                            <div class="col text-center"><img src="{{ asset('/assets/images/icons/no.png') }}" alt="no" class="vote-avatar"></div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div class="col text-center ">
+                        {% if voyage.parent %}
+                            <div class="col text-center"><span class="badge badge-primary px-2 py-2">{% trans %} Sub{% endtrans %}</span></div>
+                        {% else %}
+                            <div class="col text-center"><span class="badge badge-success px-2 py-2">{% trans %} Main{% endtrans %}</span></div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <a href="{{ path('voyage_show', {'id': voyage.id}) }}"class="btn btn-info">{% trans %} show{% endtrans %}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">{% trans %} no records found{% endtrans %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(voyages) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+/*form*/
+#meetup_description{
+  resize: none;
+  height: 16vh;
+}
+.meetup-form-image img{
+  width: 320px;
+  height: 10vh;
+  text-align: center;
+  cursor: pointer;
+}
+/*my meetup*/
+#meetup_index a{
+  text-decoration:none;
+  color:black;
+}
+.meetup_index:hover{
+  -webkit-box-shadow: 0px 0px 10px #00B5CE;
+  -moz-box-shadow: 0px 0px 10px #00B5CE;
+  box-shadow: 0px 0px 10px #00B5CE;
+  text-decoration:none;
+  color:black;
+  font-weight: lighter;
+}
+.image_meetup_index img{
+  height: 12vh;
+  width: 100%;
+}
+.show-image-meetup img{
+  height: 16vh;
+  width: 100%;
+}
+.user-link{
+  text-decoration:none;
+}
+.user-link:hover{
+  -webkit-box-shadow: 0px 0px 10px #00B5CE;
+  -moz-box-shadow: 0px 0px 10px #00B5CE;
+  box-shadow: 0px 0px 10px #00B5CE;
+  text-decoration:none;
+  color:black;
+  font-weight: lighter;
+}
+.pending-meetup-request{
+  background-color: bisque;
+}
+
+.border-meetup {
+  -webkit-box-shadow: 0px 0px 2px #D2D4D7;
+  -moz-box-shadow: 0px 0px 2px #d2d4d7;
+  box-shadow: 0px 0px 2px #d2d4d7;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+.cancel-joining-user i{
+  font-size: 1.4em;
+  color: orangered;
+}
+.participants a:hover{
+  text-decoration:none;
+}
+.joining-user i{
+  font-size: 1.4em;
+  color: orangered;
+  float: right;
+}
+#comment_description{
+  resize: none;
+}
+.delete-comment i{
+  font-size: 1.2em;
+  color: orangered;
+  float: right;
+}
+.border-comment{
+  border: 1px solid #D2D4D7;
+}
+.border-comment-head{
+  border-bottom: 1px solid #D2D4D7;
+  background-color: #D2D4D7;
+}
+#btn-meetup-gps{
+  color: white;
+}
+
+.meetup-text{
+  overflow-wrap: break-word;
+}

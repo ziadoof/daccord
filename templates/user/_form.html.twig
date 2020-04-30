@@ -1,5 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-<button type="submit" class="btn btn-primary">S'inscrire !</button>
+    <button class="btn">{% trans %}Save{% endtrans %}</button>
+<button type="submit" class="btn btn-primary">{% trans %}Register{% endtrans %}</button>
 {{ form_end(form) }}

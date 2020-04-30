@@ -1,0 +1,3 @@
+{
+    "translations": {"es":{"FOSMessageBundle":{"messenger":"Mensajes","inbox":"Carpeta de entrada","sent":"Enviado","deleted":"Eliminados","send_new":"Enviar nuevo mensaje","search":"Buscar","threads_found":"%num% hilo encontrado | %num% hilos encontrados","message_info":"Por %sender%, el %date%","reply":"Responder","subject":"Asunto","starter":"Emisor","startdate":"Fecha de emisi\u00f3n","messages":"Mensajes","last_message":"\u00daltimo mensaje","actions":"Acciones","new":"Nuevo","goto_last":"Ir al \u00faltimo mensaje","on":"En %date%","by":"Por %sender%","no_thread":"No hay hilos que mostrar","delete":"Eliminar","undelete":"Restaurar","recipient":"Destinatario","recipients":"Destinatario","body":"Cuerpo"}}}
+}

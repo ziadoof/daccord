@@ -1,0 +1,61 @@
+{% extends 'admin/layout_admin.html.twig' %}
+
+{% block title %}Admin carpool users{% endblock %}
+
+{% block admin %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Carpool users{% endtrans %}</h1>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>LastLogin</th>
+                <th>Status</th>
+                <th>Car brand</th>
+                <th>Car color</th>
+                <th>Car photo</th>
+                <th>Point</th>
+                <th>Show</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for carpool in carpools %}
+            <tr>
+                <td>{{ carpool.id }}</td>
+                <td><div class="float-left">{% if carpool.user.isAdmin() %} <i class="fas fa-user-cog rosed"></i> {% else %} <i class="fas fa-user blued"></i> {% endif %}{{ carpool.user.firstname|title }} {{ carpool.user.lastname|upper }}</div></td>
+                <td>{{ carpool.user.lastLogin ? carpool.user.lastLogin|date('d M-y | H:i') : '' }}</td>
+                <td>
+                    <div class="col text-center ">
+                        {% if not carpool.user.isActiveNow() %}
+                            <div class="col text-center">
+                                <figure class="circle-red "></figure>
+                            </div>
+                        {% else %}
+                            <div class="col text-center">
+                                <figure class="circle-green"></figure>
+                            </div>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>{{ carpool.carBrand }}</td>
+                <td>{{ carpool.carColor }}</td>
+                <td class="justify-content-center"><div class="col text-center"><img src="{{ carpool.photoCarpool() }}" alt="hosting image" class="cafe-avatar"></div></td>
+                <td>{{ carpool.point }}</td>
+                <td>
+                    <a href="{{ path('carpool_show', {'id': carpool.id}) }}"class="btn btn-warning">Carpool</a>
+                    <a href="{{ path('user_show', {'id': carpool.user.id}) }}"class="btn btn-info">User</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(carpools) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}{% trans %}Edit Ad {% endtrans %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans %} Edit Ad{% endtrans %}</h1>
+    <div class="">
+        <div class="row border-offer">
+            <div class="col-md-2">
+                <span class="float-left mt-4 mb-4">{{ ad.typeOfAd }} </span>
+            </div>
+            <div class="col-md-8 mt-2 text-center">
+                <span class="text-center title-rose">{{ ad.title }}</span>
+            </div>
+            <div class="col-md-2  mt-4">
+                <b class="float-right blued">{{ ad.date_format(ad.dateOfAd)|trans }}</b>
+            </div>
+        </div>
+        <div class="row border-respo">
+        {% if ad.typeOfAd is same as ('Offer') %}
+            <div class="col-md-6 mt-4 mb-4">
+                <!--Carousel Wrapper-->
+                <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half " data-ride="carousel">
+                    <!--Indicators-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                    </ol>
+                    <!--/.Indicators-->
+                    <!--Slides-->
+                    <div class="carousel-inner g-photo" role="listbox">
+                        {%  if ad.imageOne is not null %}
+                            <div class="carousel-item active">
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if ad.imageTow is not null %}
+                            <div {% if ad.imageOne is  null %}class="carousel-item active"{% else %}class="carousel-item"{% endif %}>
+                                <!--Mask color-->
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if ad.imageThree is not null %}
+                            <div {% if (ad.imageOne is  null) and (ad.imageTow is null) %} class="carousel-item active" {% else %}class="carousel-item"{% endif %}>
+                                <!--Mask color-->
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                            </div>
+                        {%endif%}
+                        {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
+                            <div class="item active">
+                                <img class="item " src="/assets/images/icons/offer.png" alt="">
+                            </div>
+                        {%endif%}
+                    </div>
+                    <!--/.Slides-->
+                    <!--Controls-->
+                    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">{% trans %} Previous{% endtrans %}</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">{% trans %} Next{% endtrans %}</span>
+                    </a>
+                    <!--/.Controls-->
+                </div>
+                <!--/.Carousel Wrapper-->
+            </div>
+
+        {% else %}
+            <div class="col-md-6 mt-4 mb-4">
+                <img class="item " src="/assets/images/icons/demand.png" alt="" style="width: 90%;height: 280px">
+            </div>
+        {% endif %}
+            <div class="col-md-4 pt-5">
+                {% for spe in realCategory.specifications  %}
+                    {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                        {% if spe.name is same as ('languages') %}
+                            <div class="p-2">
+                                <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span>
+                                {% for language in specifications[spe.name] %}
+                                    <span class="title-blue ">{{ language }}&nbsp; </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="p-2">
+                                {% if spe.name is same as ('dateOfEvent') %}
+                                    <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|date("m/d/Y") }} </span><br>
+                                {% else %}
+                                    <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-2 pt-4 text-center">
+                <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                    <span class="font-weight-bold ">{{ ad.user.city.name }}</span><br>
+                    <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
+                </div>
+                <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                    {% if(ad.donate) %}
+                        <span class="font-weight-bold">{% trans %}Donate {% endtrans %}</span>
+                    {% else %}
+                        <span class="font-weight-bold">{% trans %}For Sell {% endtrans %}</span>
+                    {% endif %}
+                </div>
+                <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
+                    {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
+                        <span class=""><del class="title-rose">{{ ad.pPrice }}€</del></span><br>
+                    {% endif %}
+                    {% if(ad.price is not null) %}
+                        <span class="title-blue">{{ ad.price }}€</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border-respo">
+        <div class="row">
+            <div class="col-md-12 p-2 pl-4">
+                <span class="title-blue">{% trans %} Description{% endtrans %}</span><br>
+                {{ ad.description }}
+            </div>
+        </div>
+    </div>
+    <h2 class="title-rose"> {% trans %} Edit your ad {% endtrans %}</h2>
+    {{ form_start(form) }}
+    <div class="row border-respo">
+            <div class="col-md-10 p-2 pl-4 ">
+                {{ form_row(form.title) }}
+            </div>
+            <div class="col-md-2 p-2 pl-4">
+                {{ form_row(form.price) }}
+            </div>
+    </div>
+    <div class="row border-respo">
+        <div class="col-md-12 p-2 pl-4 ">
+        {{ form_row(form.description) }}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <input type="submit" class="btn btn-primary" value="{% trans %} Update {% endtrans %}" />
+    </div>
+    {{ form_end(form) }}
+    <div class="row border-offer">
+        <div class="col p-2 pl-4">
+            <a class="btn btn-info btn-lg " href="{{ path('ad_show', {'id': ad.id}) }}">{% trans %} Back to ad{% endtrans %}</a>
+            <div class="btn" >{{ include('Ads/ad/_delete_form.html.twig') }}</div>
+        </div>
+    </div>
+{% endblock %}

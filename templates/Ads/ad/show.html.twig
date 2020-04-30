@@ -1,0 +1,257 @@
+{% extends "layout_user.html.twig" %}
+
+{% block title %}{% trans %} Ad{% endtrans %}{% endblock %}
+{% block content %}
+        <div class="">
+            <div class="row border-offer">
+                <div class="col-md-2">
+                    {% if app.user %}
+                    {% set isFavorite = 'false' %}
+                    {#data-favorite must be string not boolean#}
+                    {% for favorite in app.user.getFavoritesByType('ad')  %}
+                        {% if favorite.ad is same as (ad) %}
+                            {% set isFavorite = 'true' %}
+                        {% endif %}
+                    {% endfor %}
+                    <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add mt-4 float-left mr-2" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                        <div class="flexbox">
+                            <div class="fav-btn">
+                                <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %}
+                    <span class="float-left mt-4 mb-4">{% if ad.typeOfAd is same as ('Offer') %}{% trans%}Offer{% endtrans%} {% else %} {% trans%}Demand{% endtrans%} {% endif %}</span>
+                </div>
+                <div class="col-md-8 mt-2 text-center">
+                    <span class="text-center title-rose">{{ ad.title }}</span>
+                </div>
+                <div class="col-md-2  mt-4">
+                    <b class="float-right blued">{{ ad.date_format(ad.dateOfAd)|trans }}</b>
+                </div>
+            </div>
+            <div class="row border-respo">
+        {% if ad.typeOfAd is same as ('Offer') %}
+                <div class="col-md-6 mt-4 mb-4">
+                    <!--Carousel Wrapper-->
+                    <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half " data-ride="carousel">
+                        <!--Indicators-->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                        </ol>
+                        <!--/.Indicators-->
+                        <!--Slides-->
+                        <div class="carousel-inner g-photo" role="listbox">
+                            {%  if ad.imageOne is not null %}
+                            <div class="carousel-item active">
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if ad.imageTow is not null %}
+                                {% if ad.imageOne is  null %}
+                            <div class="carousel-item active">
+                                {% else %}
+                            <div class="carousel-item">
+                                {% endif %}
+                                <!--Mask color-->
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if ad.imageThree is not null %}
+                                {% if (ad.imageOne is  null) and (ad.imageTow is null) %}
+                                <div class="carousel-item active">
+                                {% else %}
+                                <div class="carousel-item">
+                                {% endif %}
+                                <!--Mask color-->
+                                <div class="view">
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                    </div>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                            </div>
+                            {%endif%}
+                            {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
+                                <div class="item active">
+                                    <img class="item " src="/assets/images/icons/offer.png" alt="">
+                                </div>
+                            {%endif%}
+                        </div>
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">{% trans %} Previous{% endtrans %}</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">{% trans %} Next{% endtrans %}</span>
+                        </a>
+                        <!--/.Controls-->
+                    </div>
+                    <!--/.Carousel Wrapper-->
+                </div>
+                <div class="col-md-4 pt-5">
+                    {% for spe in ad.category.specifications  %}
+                        {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                            {% if spe.name is same as ('languages') %}
+                                <div class="p-2">
+                                    <span class="font-weight-bold">{{ spe.label|trans }} {{ ':' }}</span>
+                                {% for language in specifications[spe.name] %}
+                                <span class="title-blue ">{{ language|trans }}&nbsp; </span>
+                                {% endfor %}
+                                </div>
+                            {% else %}
+                            <div class="p-2">
+                                {% if spe.name is same as ('dateOfEvent') %}
+                                <span class="font-weight-bold">{{ spe.label|trans }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|date("m/d/Y") }} </span><br>
+                                {% else %}
+                                <span class="font-weight-bold">{{ spe.label|trans }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|trans }} </span><br>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-2 pt-4 text-center">
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                        <span class="font-weight-bold ">{{ ad.user.city.name }}</span><br>
+                        <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
+                    </div>
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4">
+
+
+                    </div>
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                        {% if(ad.donate is same as (true)) %}
+                            <span class="font-weight-bold">{% trans %} Donate{% endtrans %}</span>
+                        {% else %}
+                            <span class="font-weight-bold">{% trans %} For Sell{% endtrans %}</span>
+                        {% endif %}
+                    </div>
+                    <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
+                        {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
+                            <span class=""><del class="title-rose">{{ ad.pPrice }}€</del></span><br>
+                        {% endif %}
+                        {% if(ad.price is not null) %}
+                            <span class="font-weight-bold">{{ ad.price }}€</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-md-6 mt-4 mb-4">
+                <img class="item " src="/assets/images/icons/demand.png" alt="" style="width: 90%;height: 280px">
+            </div>
+            <div class="col-md-4 pt-5">
+                {% for spe in realCategory.specifications  %}
+                    {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                        {% if spe.name is same as ('languages') %}
+                            <div class="p-2">
+                                <span class="font-weight-bold">{{ spe.label }} {{ ':' }}</span>
+                                {% for language in specifications[spe.name] %}
+                                    <span class="title-blue ">{{ language }}&nbsp; </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="p-2">
+                                {% if spe.name is same as ('dateOfEvent') %}
+                                    <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name]|date("m/d/Y") }} </span><br>
+                                {% else %}
+                                    <span class="font-weight-bold">{{ spe.label }} {{ ': ' }}</span><span class="title-blue ">{{ specifications[spe.name] }} </span><br>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-2 pt-4 text-center">
+                <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                    <span class="font-weight-bold ">{{ ad.user.city.name }}</span><br>
+                    <span class="font-weight-bold ">{{ ad.user.city.zipcode }}</span>
+                </div>
+                <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                        <span class="font-weight-bold ">With Driver must delete front end</span>
+                </div>
+                <div class="p-2 border-respo mt-2 mb-2 pt-4">
+                    {% if(ad.donate) %}
+                        <span class="font-weight-bold">{% trans %} Donate{% endtrans %}</span>
+                    {% else %}
+                        <span class="font-weight-bold">{% trans %} For Sell{% endtrans %}</span>
+                    {% endif %}
+                </div>
+                <div class="p-2 border-respo mt-2 mb-2 pt-4 mb-4">
+                    {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
+                        <span class=""><del class="title-rose">{{ ad.pPrice }}€</del></span><br>
+                    {% endif %}
+                    {% if(ad.price is not null) %}
+                        <span class="title-blue">{{ ad.price }}€</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row border-respo">
+            <div class="row">
+                <div class="col-md-12 p-2 pl-4">
+                    <span class="title-blue">{% trans %} Description{% endtrans %}</span><br>
+                    {{ ad.description }}
+                </div>
+            </div>
+        </div>
+        <div class="row border-offer">
+            {% if ad.user is same as (app.user) %}
+                <div class="">
+                    <div class="col p-2 pl-4">
+                        <a class="btn btn-info btn-lg " href="{{ path('ad_edit', {'id': ad.id}) }}">{% trans %} Edit{% endtrans %}</a>
+                        <div class="btn " >{{ include('Ads/ad/_delete_form.html.twig') }}</div>
+                    </div>
+                </div>
+            {% else %}
+                {% if ad.user.emailStatus %}
+                    <div class="mt-4 ml-2 d-block">
+                        <span class="font-weight-bolder"> {% trans %}Email : {% endtrans %}</span> {{ ad.user.email }}
+                    </div>
+                {% endif %}
+                {% if ad.user.phonNumberStatus %}
+                    <div class="mt-4 ml-2 d-block">
+                        <span class="font-weight-bold"> {% trans %} TEL :{% endtrans %}</span>{{ ad.user.phoneNumber }}
+                    </div>
+                {% endif %}
+
+                {% if app.user is not same as(null) %}
+                    <div class="col mt-2 mb-2">
+                        <form method="post" action="{{ url('new_conversation') }}"id="ad-message">
+                            <button class="btn btn-outline-info mx-1 " >
+                                <input type="hidden" name="user" value="{{ ad.user.id }}">
+                                <p class="mt-1"><i class="fas fa-comments"></i>{% trans %} Message to {% endtrans %} {{ad.user.firstname}}</p>
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+                    <span class="mt-3 mb-2 ">{{ ad.user.point }} {% trans %}Point {% endtrans %}</span>
+                    <span class="profile-ava">
+                        <a href="{{ path('user_show',{'id':ad.user.id}) }}">
+                        {% if ad.user.profileImage %}
+                           <img alt="" src="{{ asset('/assets/images/profile/'~ad.user.profileImage) }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                        {% else %}
+                           <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" id="avatar-small" class="mt-2 mb-2 mr-3">
+                        {% endif %}
+                        </a>
+                    </span>
+            {% endif %}
+        </div>
+{% endblock %}
