@@ -6,7 +6,17 @@
         {% include "header.html.twig" %}
     {% endblock %}
     {% if app.user != null%}
-        {% block sidebar %}{% include "sideBar.html.twig" %}{% endblock %}
+        {% block sidebar %}
+            <div class="d-none d-lg-block">
+                {% include "sideBar.html.twig" %}
+            </div>
+            <div class="d-none d-md-block d-lg-none">
+                {% include "mdSideBar.html.twig" %}
+            </div>
+            <div class=" d-sm-block d-md-none">
+                {% include "smSideBar.html.twig" %}
+            </div>
+        {% endblock %}
     {% endif %}
     <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-4">
     {% block searchbar_content %}

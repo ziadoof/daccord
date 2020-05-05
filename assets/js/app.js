@@ -69,3 +69,9 @@ window.setTimeout(function() {
         $(this).remove();
     });
 }, 5000);
+
+//----------------------------------------------------------------------
+$(".menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sm-sidebar").toggleClass("toggled");
+});

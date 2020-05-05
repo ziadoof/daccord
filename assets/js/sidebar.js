@@ -28,7 +28,9 @@ $(document).ready(function(){
     });
 });
 /* save navbar status*/
-$( window ).on(function() {
+
+$(document).ready( function() {
+    console.log(myStorage.getItem('nav'));
     if (myStorage.getItem('nav') === "active"){
         fliph();
     }

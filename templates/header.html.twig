@@ -1,9 +1,124 @@
 <header class="header pb-5">
     <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 pl-0" id="nav">
         <div class=" navbar-collapse flex-row-reverse" id="navbarNavDropdown">
-           <div class="row">
-              <div class=" col-md-12">
-                  <div class="logo py-2">
+            <div class="row">
+                {% if app.user is same as (null) %} {#visitor#}
+                    <div class="col-md-6 col-sm-6 col-8 col-lg-6 col-xl-6">
+                        <div class="big-logo mt-sm-2 mt-md-3 mt-2 ">
+                            <a href="{{ path('index') }}">
+                                <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
+                                <span class="blued forlogo pl-1 ">FOR<b class="rosed dealLogo">DEAL</b>ING </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-4 col-lg-6 col-xl-6">
+                        <div class=" pt-2">
+                            <form class="form-inline my-2 float-right icon-visitor">
+                                <a class=" my-2  mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button">
+                                    <img src="{{ asset('assets/images/icons/search.png') }} " alt="">
+                                </a>
+                                <a class="my-2  ml-2" href="{{ path('security_login') }}">
+                                    <img src="{{ asset('assets/images/icons/login.png') }} " alt="">
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}{#user#}
+                    <div class="col-md-6 col-sm-2 col-2 col-lg-6 col-xl-6">
+                        <div class="d-none d-md-inline-block">
+                            <div class="backnavbar ">
+                                <div class="big-logo mt-sm-2 mt-md-3 mt-2 ">
+                                    <a href="{{ path('index') }}">
+                                        <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
+                                        <span class="blued forlogo pl-1 logo-acoord">FOR<b class="rosed dealLogo">DEAL</b>ING </span>
+                                    </a>
+                                   {# <a  class="button-left ml-2 pt-1 sidebar-toggle-box d-non d-lg-block">
+                                        <span class="fa fa-fw fa-bars"></span>
+                                    </a>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-lg-inline-block big-logo">
+                            <a  class="button-left ml-2 pt-1 sidebar-toggle-box ">
+                                <span class="fa fa-fw fa-bars"></span>
+                            </a>
+                        </div>
+                        {#--------------------#}
+                        <div class="sm-sidebar-toggle mt-2">
+                            <div class="float-left pt-1 d-sm-block d-md-none  menu-toggle">
+                                <a class=" button-left ml-2 pt-1 sidebar-toggle-box">
+                                    <span class="fa fa-fw fa-bars"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-10 col-10 col-lg-6 col-xl-6">
+                        <div class="pt-2">
+                            <form class="form-inline float-right icon-visitor ">
+                                <a class=" my-2  mr-5" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button">
+                                    <img src="{{ asset('assets/images/icons/search.png') }} " alt="">
+                                </a>
+
+
+                                {% set messageCount = MessageCount.getNbUnreadMessage(app.user) %}
+                                <a  href="{{path('message_index')}}" class=" mr-5">
+                                    <div id="centerOfMessages">
+                                        <p id="messagesCount" class="{% if messageCount is same as (0) %}{{ 'hide-padge' }}{% endif %}">
+                                            {{ messageCount }}
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('assets/images/icons/message.png') }} " alt="">
+                                </a>
+                                <div class="mr-5">
+                                    {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
+                                </div>
+                                <div class="user-profile ml-sm-2">
+                                    <a data-toggle="dropdown"  href="#">
+                                            <span class="profile-ava">
+                                             {% if app.user.profileImage != "" or app.user.profileImage != null %}
+                                                 <img alt="" src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" id="avatar-small">
+                                             {% else %}
+                                                 <img  src="{{ asset('/assets/images/profile/user-avatar.png') }}" id="avatar-small">
+                                             {% endif %}
+                                            </span>
+                                    </a>
+                                    <ul class="dropdown-menu extended logout">
+                                        <li class="username">
+                                            <h6 >{{ app.user.firstName }} {{ app.user.lastname }}</h6>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('ad_new',{'type': 'Offer'}) }}">{% trans %}New offer{% endtrans %}</a>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('ad_new',{'type': 'Demand'}) }}">{% trans %}New demand{% endtrans %}</a>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('fos_user_profile_show') }}">{% trans %}My profile{% endtrans %}</a>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('fos_user_profile_edit') }}">{% trans %}Edit my profile{% endtrans %}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('fos_user_change_password') }}">{% trans %}change my password{% endtrans %}</a>
+                                        </li>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li>
+                                                <a href="{{ path('admin_index') }}">{% trans %}ADMINISTRATION{% endtrans %}</a>
+                                            </li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="{{ path('security_logout') }}">{% trans %}Log out{% endtrans %}</a>
+                                        </li>
+                                    </ul>
+                                    <!-- user login dropdown end -->
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                {% endif %}
+                  {#<div class="logo py-2">
                       <a href="{{ path('index') }}">
                           <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
                       </a>
@@ -25,8 +140,9 @@
                   {% if app.user==null %}
                   <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
                       <form class="form-inline my-2 my-lg-0 float-right">
-                          <a class=" my-2 my-sm-0 mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button"><i class="fas fa-search search-icon"></i></a>
-                          <a class="btn btn-info my-2 my-sm-0 ml-2" href="{{ path('security_login') }}">{% trans %}Sign in{% endtrans %}</a>
+                          <a class=" my-2 my-sm-0 mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button"><img
+                                      src="{{ asset('assets/images/icons/search.png') }}" alt=""></a>
+                          <a class="my-2 my-sm-0 ml-2" href="{{ path('security_login') }}"><img src="{{ asset('assets/images/icons/login.png') }}" alt=""></a>
                       </form>
                   </div>
                   {% else %}
@@ -88,11 +204,11 @@
                           {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
                       </div>
                   </div>
-                  {% endif %}
+                  {% endif %}#}
                   </div>
-              </div>
-           </div>
+            </div>
         </div>
     </nav>
 </header>
+
 

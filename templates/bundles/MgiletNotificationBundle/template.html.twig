@@ -1,6 +1,7 @@
+
 {% if not mgilet_notification_count(app.user)  %}
     <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-       aria-haspopup="true"><i class="fas fa-bell"></i>
+       aria-haspopup="true">{#<i class="fas fa-bell"></i>#}<img src="{{ asset('assets/images/icons/notification.png') }} ">
     </a>
     <li >
         <div class="bell-icon header__notification ">
@@ -20,13 +21,15 @@
 {% else %}
     <div class="general-notification">
     {% if mgilet_notification_unseen_count(app.user) > 0 %}
-        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-           aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span><i class="fas fa-bell"></i>
+        <a href="#!"  id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span>
+            {#<i class="fas fa-bell"></i>#}<img src="{{ asset('assets/images/icons/notification.png') }} " alt="">
         </a>
         <li class="active-notification">
     {% else %}
-        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-           aria-haspopup="true"><i class="fas fa-bell"></i>
+        <a href="#!"  id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true">{#<i class="fas fa-bell"></i>#}
+            <img src="{{ asset('assets/images/icons/notification.png') }} " alt="">
         </a>
         <li class="active-notification">
     {% endif %}

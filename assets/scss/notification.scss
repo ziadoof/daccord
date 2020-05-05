@@ -42,8 +42,9 @@
   max-height: 55vh;
   list-style-type: none;
   text-align: center;
-  left: -140%;
-  top: 0.5em;
+  /*left: -140%;*/
+  right: 1em;
+  top: 1em;
   border-radius: 7px;
   -webkit-animation: fadeIn 0.3s;
   animation: fadeIn 0.3s;
@@ -162,11 +163,7 @@
   list-style: none;
 }
 
-.search-icon{
-  color:white;
-  font-size:2.6em;
-  cursor: pointer;
-}
+
 
 /*notification*/
 .active-notification{

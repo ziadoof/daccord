@@ -1,0 +1,91 @@
+<div id="sm-sidebar">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+
+        <ul class="sidebar-nav">
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <div class="list-logo my-3 justify-content-center">
+                        <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
+                        <span class="blued forlogo pl-1">FOR<b class="rosed dealLogo">DEAL</b>ING </span>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="float-right mt-2 pt-2 d-sm-block d-md-none  menu-toggle i-sm-sidebar">
+                        <a class="mr-4"><i class="fas fa-arrow-left white"></i></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <li class="icon pt-5">
+                <a  href="javascript:void(0)" id="my_offer" class="side-bar-icon">
+                    {#<i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>#}
+                    <img src="{{ asset('assets/images/icons/o-white.png') }}" alt="" >
+                    <span class="nav-label">{% trans %}My offers{% endtrans %}</span>
+                </a>
+            </li>
+            <li class="icon "> <a href="javascript:void(0)" id="my_demand" class="side-bar-icon">
+                    {#<i class="fab fa-affiliatetheme" title="Mes demandes"></i>#}
+                    <img src="{{ asset('assets/images/icons/d-white.png') }}" alt="" >
+                    <span class="nav-label">{% trans %}My demands{% endtrans %}</span>
+                </a>
+            </li>
+            <li class="icon "> <a href="{{path('deal_index')}}"  class="side-bar-icon">
+                    {#<i class="fas fa-handshake" class="button-left" title="Offres suggérées"></i>#}
+                    <img src="{{ asset('assets/images/icons/deal-icon.png') }}"  >
+                    <span class="nav-label">{% trans %}My deals{% endtrans %}</span>
+                </a>
+            </li>
+            {% if app.user.driver %}
+                <li class="icon">
+                    <a  href="{{path('driver_request_index')}}" id="my_driver_request" class="side-bar-icon">
+                        {#<i class="fas fa-truck-moving button-left" title="Driver request"></i>#}
+                        <img src="{{ asset('assets/images/icons/driver-request.png') }}"  >
+                        {#<i class="fas fa-shuttle-van"></i>#}
+                        <span class="nav-label">{% trans %}Driver{% endtrans %}</span>
+                    </a>
+                </li>
+            {% endif %}
+            <li class="icon ">
+                <form method="post" action="{{path('cafe_index')}}" id="cafe-gps">
+                    <a class="" id="btn-cafe-gps" class="side-bar-icon">
+                        <input type="hidden" name="lat" id="cafe_gps_lat">
+                        <input type="hidden" name="lng" id="cafe_gps_lng">
+                        {#<i class="fas fa-coffee" class="button-left" title="Café"></i>#}
+                        <img src="{{ asset('assets/images/icons/cafe-icon.png') }}"  >
+                        <span class="nav-label">{% trans %}Cafe{% endtrans %}</span>
+                    </a>
+                </form>
+            </li>
+            <li> <a href="{{path('hosting_request_index')}}" class="side-bar-icon">
+                    <img src="{{ asset('assets/images/icons/hosting-icon.png') }}"  >
+                    {#<i class="fas fa-bed" class="button-left" title="Hosting"></i>#}
+                    <span class="nav-label">{% trans %}Hosting{% endtrans %}</span>
+                </a>
+            </li>
+            <li> <a href="{{path('meetup_index')}}" class="side-bar-icon">
+                    {#<i class="far fa-calendar-check" class="button-left" title="Meetup"></i>#}
+                    <img src="{{ asset('assets/images/icons/meetup-icon.png') }}"  >
+                    <span class="nav-label">{% trans %}Meetup{% endtrans %}</span>
+                </a>
+            </li>
+            <li> <a href="{{path('voyage_index')}}" class="side-bar-icon">
+                    {#<i class="fas fa-car" class="button-left" title="Covoiturage"></i>#}
+                    <img src="{{ asset('assets/images/icons/voyage-icon.png') }}"  >
+                    <span class="nav-label">{% trans %}My voyage{% endtrans %}</span>
+                </a>
+            </li>
+            <li> <a href="{{path('favorite_index')}}"  class="side-bar-icon">
+                    {#<i class="fab fa-gratipay" class="button-left" title="Favorite"></i>#}
+                    <img src="{{ asset('assets/images/icons/favorite-icon.png') }}"  >
+                    <span class="nav-label">{% trans %}Favoris{% endtrans %}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
