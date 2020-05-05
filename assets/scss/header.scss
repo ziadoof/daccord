@@ -1,0 +1,147 @@
+.big-logo img{
+  width: auto;
+  height: 3em;
+  margin-left: 0.3vw;
+  opacity: 1;
+}
+.big-logo:hover{
+  opacity: 0.8;
+}
+.small-logo img{
+  width: auto;
+  height: 2em;
+  margin-left: 0.3vw;
+  opacity: 1;
+}
+
+.big-logo a{
+  text-decoration: none;
+}
+.big-logo span{
+  vertical-align:middle;
+}
+
+.list-logo img{
+  width: 10vw;
+  height: auto;
+}
+.list-logo span{
+  font-size: calc(15px + 10 * (100vw - 200px) / 1200);
+}
+.icon-visitor img{
+  width:  calc(25px + 10 * (100vw - 200px) / 1200);
+  height:  calc(25px + 10 * (100vw - 200px) / 1200);
+  max-height: 3em;
+}
+.icon-visitor img:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+.header .fa.fa-fw.fa-bars{
+  color: #fff;
+
+}
+
+/*--------------------------------------sm side bar -------------------*/
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 70vw;
+  width: 0;
+  height: 100%;
+  margin-left: -70vw;
+  overflow-y: auto;
+  background: #444444;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#sm-sidebar.toggled #sidebar-wrapper {
+  width: 70vw;
+  min-width: 250px;
+
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#sm-sidebar.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -70vw;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 70vw;
+  min-width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+  margin-top: 1em;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+.sm-sidebar-toggle .fa-bars {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+}
+
+.i-sm-sidebar i{
+  font-size : 7vw;
+  cursor: pointer;
+
+}
+
+.icon span{
+  font-size: 120%;
+}
+
+
+/*-------------- profile list----------*/
+
+#profile-list {
+  width: 2em;
+  height: 2em;
+}
+
+.username{
+  border-bottom: 1px solid #e9ecef;
+
+}
