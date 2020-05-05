@@ -4,26 +4,21 @@
             <ul class="list-sidebar bg-defoult justify-content-center">
                 <li class="icon">
                     <a  href="javascript:void(0)" id="my_offer" class="side-bar-icon">
-                        {#<i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>#}
                         <img src="{{ asset('assets/images/icons/o-white.png') }}" alt="" >
                     </a>
                 </li>
                 <li class="icon "> <a href="javascript:void(0)" id="my_demand" class="side-bar-icon">
-                        {#<i class="fab fa-affiliatetheme" title="Mes demandes"></i>#}
                         <img src="{{ asset('assets/images/icons/d-white.png') }}" alt="" >
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('deal_index')}}"  class="side-bar-icon">
-                        {#<i class="fas fa-handshake" class="button-left" title="Offres suggérées"></i>#}
                         <img src="{{ asset('assets/images/icons/deal-icon.png') }}"  >
                     </a>
                 </li>
                 {% if app.user.driver %}
                     <li class="icon">
                         <a  href="{{path('driver_request_index')}}" id="my_driver_request" class="side-bar-icon">
-                            {#<i class="fas fa-truck-moving button-left" title="Driver request"></i>#}
                             <img src="{{ asset('assets/images/icons/driver-request.png') }}"  >
-                            {#<i class="fas fa-shuttle-van"></i>#}
                         </a>
                     </li>
                 {% endif %}
@@ -32,28 +27,23 @@
                         <a class="" id="btn-cafe-gps" class="side-bar-icon">
                             <input type="hidden" name="lat" id="cafe_gps_lat">
                             <input type="hidden" name="lng" id="cafe_gps_lng">
-                            {#<i class="fas fa-coffee" class="button-left" title="Café"></i>#}
                             <img src="{{ asset('assets/images/icons/cafe-icon.png') }}"  >
                         </a>
                     </form>
                 </li>
                 <li class="icon "> <a href="{{path('hosting_request_index')}}" class="side-bar-icon">
                         <img src="{{ asset('assets/images/icons/hosting-icon.png') }}"  >
-                        {#<i class="fas fa-bed" class="button-left" title="Hosting"></i>#}
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('meetup_index')}}" class="side-bar-icon">
-                        {#<i class="far fa-calendar-check" class="button-left" title="Meetup"></i>#}
                         <img src="{{ asset('assets/images/icons/meetup-icon.png') }}"  >
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('voyage_index')}}" class="side-bar-icon">
-                        {#<i class="fas fa-car" class="button-left" title="Covoiturage"></i>#}
                         <img src="{{ asset('assets/images/icons/voyage-icon.png') }}"  >
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('favorite_index')}}"  class="side-bar-icon">
-                        {#<i class="fab fa-gratipay" class="button-left" title="Favorite"></i>#}
                         <img src="{{ asset('assets/images/icons/favorite-icon.png') }}"  >
                     </a>
                 </li>

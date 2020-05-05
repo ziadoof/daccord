@@ -41,10 +41,7 @@
     color: #fff;
 
 }
-/*.user-profile {
-    float: right;
-    margin-top: 5px;
-}*/
+
 /*--------------------------------------sm side bar -------------------*/
 
 #sidebar-wrapper {
@@ -134,4 +131,17 @@
 
 .icon span{
     font-size: 120%;
+}
+
+
+/*-------------- profile list----------*/
+
+#profile-list {
+    width: 2em;
+    height: 2em;
+}
+
+.username{
+    border-bottom: 1px solid #e9ecef;
+
 }

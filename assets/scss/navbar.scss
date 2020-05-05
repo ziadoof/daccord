@@ -275,7 +275,7 @@
 
 @media  (min-width: 1200px){
   .sidebar{
-    width:18vw;
+    width:220px;
   }
   .sidebar li {
     padding: 8px 2px;
@@ -299,7 +299,7 @@
     margin-top:0;
   }
   .sidebar {
-    width: 18vw;
+    width: 190px;
   }
   .nav-label{
     font-size: small;
@@ -339,29 +339,41 @@
 }
 .header .dropdown-menu {
   /* position: absolute; */
-  right: 0;
+  right: 1em;
   left: auto;
-  border-radius: 2px;
-  margin-top: 10px;
+  border-radius: 5px;
+  margin-top: 2em;
+  background-color: whitesmoke;
 }
 
 .dropdown-menu.extended {
-  max-width: 220px !important;
-  min-width: 110px !important;
-  top: 42px;
-  width: 235px !important;
+  max-width: 280px !important;
+  min-width: 150px !important;
+  top: 2em;
+  width: 280px !important;
   padding: 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.176) !important;
-  border: none !important;
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.176) !important;
+  /*border: none !important;*/
+  border-left: 1px solid #e9ecef;
   border-radius: 4px;
   -webkit-border-radius: 4px;
 }
 
 
 .dropdown-menu.extended.logout > li {
-  text-align: center;
   padding-top: 8px;
   padding-bottom: 8px;
+  border-bottom: 1px solid #e9ecef;
+
+}
+
+.dropdown-menu.extended.logout > li a{
+ text-decoration: none;
+  color: #495057;
+}
+
+.dropdown-menu.extended.logout > li:hover{
+  background-color: #00B5CE;
 }
 
 .dropdown-menu.extended.logout > li > a i {
