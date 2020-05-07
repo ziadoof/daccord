@@ -422,31 +422,31 @@ function wsConnect(id) {
                 let typeON = messageData['typeOfNotification'];
                 if(typeON==='profilePoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='driverPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 driverPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='hostingPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 hostingPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='removeUserPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='pointsVoyageCanceled'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 profilePoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='removeCarpoolPoints'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='carpoolAddPoints' || typeON==='ratingCarpool' ){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 carpoolPoints" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
-                    image = '<img src="/assets/images/logo/face.png" alt="" class="user-image mx-2 mt-1" />';
+                    image = '<img src="/assets/images/icons/face-icon.png" alt="" class="user-image mx-2 mt-1" />';
                 }
                 else if(typeON==='ratingMeetup'){
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 ratingMeetup" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
@@ -476,15 +476,15 @@ function wsConnect(id) {
                     '</a>'+
                     '<div class="row">'+
                     '<div class="col btn-group">'+
-                    '<div class="col-md-6 ">'+
+                    '<div class="col-6 col-md-6 ">'+
                     '<div class="all-as-seen mark-as">'+
                     '<a href="'+markAsSeenHref+'" class="ajax-notification action-secondary">'+'Mark as seen'+'</a>'+
                     '</div>'+
                     '</div>'+
-                    '<div class="col-md-2 offset-4">'+
+                    '<div class="col-6 col-md-2 offset-4">'+
                     '<div class="row">'+
-                    '<div class=" mb-1 mt-0 float-right">'+
-                    '<b class=" all-as-seen">'+
+                    '<div class=" mb-1 mt-0">'+
+                    '<b class=" all-as-seen  float-right">'+
                     now+
                     '</b>'+
                     '</div>'+

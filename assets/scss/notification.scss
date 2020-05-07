@@ -1,12 +1,4 @@
 
-
-.fa-bell{
-  font-size: 42px;
-  float: right;
-  cursor: pointer;
-  color: white;
-}
-
 .bell-icon {
   cursor: pointer;
 }
@@ -14,35 +6,24 @@
      color: #eee;
  }*/
 #notificationCount{
-  font-size: 0.8em;
-  border-radius: 20%;
+  font-size: 0.9em;
+  border-radius: 50%;
   background-color: orangered;
-  border: 2px solid orangered;
   color: #FFFFFF;
   position: absolute;
   top: 50%;
-  left: 80%;
-  width: auto;
+  min-width: 1.3em;
+  height: auto;
+  text-align: center;
 }
 
-/*.notification-number {
-      font-size: 0.8em;
-      border-radius: 20%;
-      background-color: orangered;
-      border: 4px solid orangered;
-      color: #FFFFFF;
-  }*/
-.bell-number {
-
-}
 .notification__list {
   position: absolute;
   background: #f2f2f2;
-  width: 30em;
-  max-height: 55vh;
+  width: 25em;
+  max-height: 70vh;
   list-style-type: none;
   text-align: center;
-  /*left: -140%;*/
   right: 1em;
   top: 1em;
   border-radius: 7px;
@@ -51,6 +32,14 @@
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 3em;
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.176) !important;
+}
+#notification-MarkAllAsSeen{
+  text-decoration: none;
+  color: #00B5CE;
+}
+#notification-MarkAllAsSeen:hover{
+  color: #F70055;
 }
 .notification__list::-webkit-scrollbar {
   width: 2px;
@@ -90,9 +79,16 @@
   /*height: 2em;*/
   /* justify-content: space-around;*/
 }
-.user-image {
-  width: 60px;
-  height: 60px;
+/*.user-image {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+}*/
+.list__item--link img{
+  width: 5em;
+  height: 5em;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
@@ -105,7 +101,7 @@
   color: $gray-600;
 }
 .list__item {
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid #e9ecef;
   transition: all 0.2s ease-in-out;
 }
 /*.list__item--link:hover {
