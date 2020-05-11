@@ -23,24 +23,13 @@
 }
 .forlogo{
   color: $blued;
-  font-size: 24px;
+  font-size: calc(15px + 10 * (100vw - 200px) / 1200);
   font-weight: bold;
 }
 .deallogo{
   color: $rosed;
 }
-/*
-.logo-acoord span {
-  color: $blued;
-  font-size: 60px;
-  font-weight: revert;
-}
 
-.logo-acoord span span {
-  color: $rosed;
-  font-size: 40px;
-
-}*/
 .sidebar-toggle-box {
   margin-left: 0;
   margin-top: 9px;
@@ -67,6 +56,7 @@
   min-height: 100vh;
   max-height: calc(100% - 5px);
   overflow-y: auto;
+  z-index: 9999;
 }
 
 .fix-search  {
@@ -76,7 +66,7 @@
 
 
 
-.bg-defoult{background-color:$noird;}
+
 .sidebar li a,.sidebar li a.collapsed.active{ display:block; padding:5px 2px; color: #999999;border-left:0px solid #dedede;  text-decoration:none}
 .sidebar li a.active{background-color:#3e3e3e;border-left:5px solid #dedede; transition: all 0.5s  ease-in-out}
 .sidebar li a:hover {
@@ -141,6 +131,7 @@
   min-height: 100vh;
   max-height: calc(100% - 5px);
   overflow-y: auto;
+  z-index: 9999;
 }
 
 .mdSidebar li a,.mdSidebar li a.collapsed.active{ display:block; padding:5px 2px; color: #999999;border-left:0px solid #dedede;  text-decoration:none}
@@ -276,6 +267,7 @@
 @media  (min-width: 1200px){
   .sidebar{
     width:220px;
+    z-index: 9999;
   }
   .sidebar li {
     padding: 8px 2px;
@@ -300,6 +292,7 @@
   }
   .sidebar {
     width: 190px;
+    z-index: 9999;
   }
   .nav-label{
     font-size: small;

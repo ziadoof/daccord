@@ -26,7 +26,7 @@
   height: auto;
 }
 .list-logo span{
-  font-size: calc(15px + 10 * (100vw - 200px) / 1200);
+  font-size: calc(14px + 10 * (100vw - 200px) / 1200);
 }
 .icon-visitor {
   width:  calc(25px + 10 * (100vw - 200px) / 1200);
@@ -45,12 +45,12 @@
 /*--------------------------------------sm side bar -------------------*/
 
 #sidebar-wrapper {
-  z-index: 1000;
+  z-index: 9999;
   position: fixed;
-  left: 70vw;
-  width: 0;
+  left: 60vw;
+  top: 0;
   height: 100%;
-  margin-left: -70vw;
+  margin-left: -60vw;
   overflow-y: auto;
   background: #444444;
   -webkit-transition: all 0.5s ease;
@@ -60,8 +60,8 @@
 }
 
 #sm-sidebar.toggled #sidebar-wrapper {
-  width: 70vw;
-  min-width: 250px;
+  width: 60vw;
+  min-width: 200px;
 
 }
 
@@ -73,7 +73,7 @@
 
 #sm-sidebar.toggled #page-content-wrapper {
   position: absolute;
-  margin-right: -70vw;
+  margin-right: -60vw;
 }
 
 /* Sidebar Styles */
@@ -81,8 +81,8 @@
 .sidebar-nav {
   position: absolute;
   top: 0;
-  width: 70vw;
-  min-width: 250px;
+  width: 60vw;
+  min-width: 200px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -124,7 +124,7 @@
 }
 
 .i-sm-sidebar i{
-  font-size : 7vw;
+  font-size : 5vw;
   cursor: pointer;
 
 }
@@ -143,5 +143,7 @@
 
 .username{
   border-bottom: 1px solid #e9ecef;
-
+}
+.header-icons a:hover{
+  opacity: 0.8;
 }

@@ -131,6 +131,9 @@ $(document).on('change', '#offer_search_department', function () {
 $(document).ready(function () {
     $('#offer_search_ville').select2({
         placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        width: '100%',
+        height: '30px',
     });
     $('#demand_search_ville').select2({
         placeholder: Translator.trans('Select region'),

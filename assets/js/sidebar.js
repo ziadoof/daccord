@@ -4,37 +4,37 @@ myStorage = window.localStorage;
 
 /*navbar toggle*/
 $(document).ready(function(){
-    $('.button-left').click(function(){
-        $('.sub-menu').toggleClass('collapse');
+    $('.button-leftxx').click(function(){
+        /*$('.sub-menu').toggleClass('collapse');*/
         if (myStorage.getItem("nav") === "desactive" ){
             myStorage.setItem("nav", "active");
             /* $('.wrapper').css({
                  'margin-left': '-100px'
              });*/
-            $('.centr-changer').addClass('col-md-10 col-md-offset-1  col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3').removeClass('col-md-8 col-md-offset-2 col-sm-7 col-sm-offset-4 col-xs-6 col-xs-offset-5');
+            /*$('.centr-changer').addClass('col-md-10 col-md-offset-1  col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3').removeClass('col-md-8 col-md-offset-2 col-sm-7 col-sm-offset-4 col-xs-6 col-xs-offset-5');*/
 
         }
         else {
             myStorage.setItem("nav", "desactive");
-            /* $('.wrapper').css({
+             $('.wrapper').css({
                  'margin-left': '100px'
-             });*/
-            $('.centr-changer').addClass('col-md-8 col-md-offset-2 col-sm-7 col-sm-offset-4 col-xs-6 col-xs-offset-5').removeClass('col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3 ');
+             });
+            /*$('.centr-changer').addClass('col-md-8 col-md-offset-2 col-sm-7 col-sm-offset-4 col-xs-6 col-xs-offset-5').removeClass('col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3 ');*/
 
         }
-        $('.sidebar').toggleClass('fliph');
+       /* $('.sidebar').toggleClass('fliph');*/
         $('.logo-acoord').toggle();
         $('.sidebar-toggle-box').toggleClass('ana');
     });
 });
 /* save navbar status*/
 
-$(document).ready( function() {
+/*$(document).ready( function() {
     console.log(myStorage.getItem('nav'));
     if (myStorage.getItem('nav') === "active"){
         fliph();
     }
-});
+});*/
 /*link logo for dashboard*/
 function dashboard(){
     window.location.replace(/#0/)

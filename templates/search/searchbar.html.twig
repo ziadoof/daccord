@@ -1,49 +1,45 @@
-{% block content %}
-        <div class="row collapse" id="search-bar">
-            <div class="col-md-12">
-                <div class=" register ">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="offer-tab" data-toggle="tab" href="#offer" role="tab" aria-controls="offer" aria-selected="true">{% trans %}Offer{% endtrans %}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="demand-tab" data-toggle="tab" href="#demand" role="tab" aria-controls="demand" aria-selected="false">{% trans %}Demand{% endtrans %}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="hebergement-tab" data-toggle="tab" href="#hosting" role="tab" aria-controls="hebergement" aria-selected="false">{% trans %}Hosting{% endtrans %}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="meetup-tab" data-toggle="tab" href="#meetup" role="tab" aria-controls="meetup" aria-selected="false">{% trans %}Meetup{% endtrans %}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="carpooling-tab" data-toggle="tab" href="#carpooling" role="tab" aria-controls="carpooling" aria-selected="false">{% trans %}Carpooling{% endtrans %}</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content " id="myTabContent">
-                                <div class="tab-pane fade show active text-align form-new" id="offer" role="tabpanel" aria-labelledby="offer-tab">
-                                    {% include "search/templates/offerSearch.html.twig" %}
-                                </div>
-                                <div class="tab-pane fade show text-align form-new " id="demand" role="tabpanel" aria-labelledby="demand-tab">
-                                    {% include "search/templates/demandSearch.html.twig" %}
-                                </div>
-                                <div class="tab-pane fade show text-align form-new " id="hosting" role="tabpanel" aria-labelledby="hosting-tab">
-                                    {% include "search/templates/hostingSearch.html.twig" %}
-                                </div>
-                                <div class="tab-pane fade show text-align form-new " id="meetup" role="tabpanel" aria-labelledby="meetup-tab">
-                                    {% include "search/templates/meetupSearch.html.twig" %}
-                                </div>
-                                <div class="tab-pane fade show text-align form-new " id="carpooling" role="tabpanel" aria-labelledby="carpooling-tab">
-                                    {% include "search/templates/voyageSearch.html.twig" %}
-                                </div>
-                            </div>
+<div class="row collapse" id="search-bar">
+    <div class="col-md-12">
+        <div class=" register ">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="offer-tab" data-toggle="tab" href="#offer" role="tab" aria-controls="offer" aria-selected="true">{% trans %}Offer{% endtrans %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="demand-tab" data-toggle="tab" href="#demand" role="tab" aria-controls="demand" aria-selected="false">{% trans %}Demand{% endtrans %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="hebergement-tab" data-toggle="tab" href="#hosting" role="tab" aria-controls="hebergement" aria-selected="false">{% trans %}Hosting{% endtrans %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="meetup-tab" data-toggle="tab" href="#meetup" role="tab" aria-controls="meetup" aria-selected="false">{% trans %}Meetup{% endtrans %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="carpooling-tab" data-toggle="tab" href="#carpooling" role="tab" aria-controls="carpooling" aria-selected="false">{% trans %}Carpooling{% endtrans %}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content " id="myTabContent">
+                        <div class="tab-pane fade show active text-align form-new" id="offer" role="tabpanel" aria-labelledby="offer-tab">
+                            {#{% include "search/templates/offerSearch.html.twig" %}#}
+                            {% include "search/smTemplate/smOfferSearch.html.twig" %}
+                        </div>
+                        <div class="tab-pane fade show text-align form-new " id="demand" role="tabpanel" aria-labelledby="demand-tab">
+                           {# {% include "search/templates/demandSearch.html.twig" %}#}
+                        </div>
+                        <div class="tab-pane fade show text-align form-new " id="hosting" role="tabpanel" aria-labelledby="hosting-tab">
+                            {#{% include "search/templates/hostingSearch.html.twig" %}#}
+                        </div>
+                        <div class="tab-pane fade show text-align form-new " id="meetup" role="tabpanel" aria-labelledby="meetup-tab">
+                            {#{% include "search/templates/meetupSearch.html.twig" %}#}
+                        </div>
+                        <div class="tab-pane fade show text-align form-new " id="carpooling" role="tabpanel" aria-labelledby="carpooling-tab">
+                            {#{% include "search/templates/voyageSearch.html.twig" %}#}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    <div>
-
     </div>
-{% endblock %}
+</div>

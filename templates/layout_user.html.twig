@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block body %}
+{#{% block body %}
 <html lang="{{ app.request.locale|split('_')[0] }}">
     {% block header %}
         <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
@@ -53,17 +53,107 @@
                     </div>
                 </div>
             </div>
-            {#<div class="wrapper">
-                <div class="col-md-9 offset-2 col-lg-9 col-sm-9  col-xs-7  mt-2">
+        </section>
+        {% block footer %}{% include "footer.html.twig" %}{% endblock %}
+    </section>
+{% endblock %}#}
+{% block body %}
+{% block header %}
+    <html lang="{{ app.request.locale|split('_')[0] }}">
+    <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
+    {% include "header.html.twig" %}
+{% endblock %}
+{% block min %}
+    <div class="row">
+        <div id="main">
+            {#------------------#}
+            <div class="wrapper d-flex align-items-stretch">
+                <div>
+                    {% if app.user != null%}
+                        {% block sidebar %}
+                            <div class="d-none d-lg-block">
+                                {% include "sideBar.html.twig" %}
+                            </div>
+                            <div class="d-none d-md-block d-lg-none">
+                                {% include "mdSideBar.html.twig" %}
+                            </div>
+                            <div class="d-sm-block d-md-none">
+                                {% include "smSideBar.html.twig" %}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+                <!-- Page Content  -->
+                <div id="content" class="p-4 p-md-5 mar-open user_layout">
+                    {% block searchbar_content %}
+                        {% include "search/searchbar.html.twig" %}
+                    {% endblock searchbar_content %}
+                    <div id="all">
+                        {% block content %}
+
+                        {% endblock %}
+                    </div>
                     <div id="searching">
                         {% block content_search %}
 
                         {% endblock %}
                     </div>
                 </div>
-            </div>#}
-        </section>
-        {% block footer %}{% include "footer.html.twig" %}{% endblock %}
-    </section>
+            </div>
+            {#------------------#}
+        </div>
+    </div>
+    <div class=" message-flash mb-4"style="z-index: 9999;">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                {% if label != 'comment' %}
+                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
+                        <p class="py-4 ">{{ message|trans }}</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
+{% block footer %}
+        {% include "footer.html.twig" %}
+{% endblock %}
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <!-- Bootstrap JS -->
 
+    <script>
+        $(document).ready(function(){
+            let nav = myStorage.getItem('nav');
+            if(nav === 'close'){
+                $('.sidebar').addClass('fliph');
+                $('.logo-acoord').toggle();
+                $('.sidebar-toggle-box').toggleClass('ana');
+                $('#content').addClass('mar-close').removeClass('mar-open');
+            }
+            else {
+                $('#content').removeClass('mar-close');
+            }
+
+            $('.button-left').click(function(){
+                if (nav === "close" ){
+                    myStorage.setItem("nav", "open");
+                    $('#content').toggleClass('mar-open').toggleClass('mar-close');
+                }
+                else {
+                    myStorage.setItem("nav", "close");
+                    $('#content').toggleClass('mar-close').toggleClass('mar-open');
+                }
+                 $('.sidebar').toggleClass('fliph');
+                $('.logo-acoord').toggle();
+                $('.sidebar-toggle-box').toggleClass('ana');
+            });
+        });
+
+
+    </script>
+{% endblock %}

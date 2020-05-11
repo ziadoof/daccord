@@ -6,7 +6,7 @@
                 {% if form is defined %}
                         <a class="nav-link active new-conversation" id="v-pills-home-tab" data-toggle="pill" href="#user-{{ recipient.id }}" role="tab" aria-controls="v-pills-home" aria-selected="true">
                             <div class="btn-group message-link ">
-                                <img src="{{ asset(recipient.photoProfile()) }}" class="user-image mr-2 " ><br>
+                                <img src="{{ asset(recipient.photoProfile()) }}" class="user-image photo-message mr-2 " ><br>
                                 <span class="ml-2 mt-4">{{ recipient.firstname|title }} {{ ' ' }}{{ recipient.lastname }}</span>
                             </div>
                         </a>
@@ -16,9 +16,9 @@
                         <a class="nav-link {% if thread.id is same as (threads[0].id) and form is not defined %}{{ ' active ' }}{% endif %} mb-1 thread-link" id="v-pills-home-tab" data-toggle="pill" href="#user-{{thread.getOtherParticipants(app.user)[0].id}}" role="tab" aria-controls="v-pills-home" aria-selected="true" data-idOfThread="{{ thread.id }}">
                             <div class="btn-group message-link">
                                 {% if thread.createdBy is not same as (app.user) %}
-                                    <img src="{{ thread.createdBy.photoProfile() }}" class="user-image mr-2" ><br>
+                                    <img src="{{ thread.createdBy.photoProfile() }}" class="user-image photo-message mr-2" ><br>
                                 {% else %}
-                                    <img src="{{ asset(thread.getOtherParticipants(app.user)[0].photoProfile) }}" class="user-image mr-2" ><br>
+                                    <img src="{{ asset(thread.getOtherParticipants(app.user)[0].photoProfile) }}" class="user-image photo-message mr-2" ><br>
                                 {% endif %}
                                 <span class="ml-2 mt-4 float-right ">{{ thread.getOtherParticipants(app.user)[0].firstname|title }}{{ ' ' }}{{ thread.getOtherParticipants(app.user)[0].lastname }}</span>
                             </div>
