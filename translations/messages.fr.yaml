@@ -1214,14 +1214,18 @@ Usb: USB
 Ges: Ges
 'Select Ges': 'Sélectionnez Ges'
 'With Furniture': 'Avec des meubles'
+'Furniture': 'Meubles'
 'With Garden': 'Avec jardin'
+'Garden': 'Jardin'
 Floor: Étage
 'Select Floor': 'Sélectionnez l''étage'
 'Select Heating': 'Sélectionnez Chauffage'
 'Floors in the building': 'Étages du bâtiment'
 'Select Floors in the building': 'Sélectionnez les étages du bâtiment'
 'With Elevator': 'Avec ascenseur'
+'Elevator': 'Ascenseur'
 'With Verandah': 'Avec Véranda'
+'Verandah': 'Véranda'
 Covered: Couvert
 Rent: Location
 Caliber: Calibre
@@ -1695,6 +1699,6 @@ About us: À propos de nous
 about us: À propos de nous
 Legal Notice: Mention légale
 Legal notice: Mention légale
-
+Kilometre: Kilometrage
 
 

@@ -51,6 +51,7 @@ require('./voyage/voyage');
 require('./voyage/searchVoyage');
 require('./favorite');
 require('./admin/admin');
+var Slider = require("bootstrap-slider");
 
 //-----------React.js
 //require('./React/startup/result_offer_search');
@@ -69,7 +70,11 @@ window.setTimeout(function() {
         $(this).remove();
     });
 }, 5000);
-
+$(document).ready(function (){
+    $('[data-toggle="tooltip"]').tooltip({
+        container : 'body'
+    })
+})
 //----------------------------------------------------------------------
 $(".menu-toggle").click(function(e) {
     e.preventDefault();

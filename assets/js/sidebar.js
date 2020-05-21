@@ -4,47 +4,36 @@ myStorage = window.localStorage;
 
 /*navbar toggle*/
 $(document).ready(function(){
-    $('.button-leftxx').click(function(){
-        /*$('.sub-menu').toggleClass('collapse');*/
-        if (myStorage.getItem("nav") === "desactive" ){
-            myStorage.setItem("nav", "active");
-            /* $('.wrapper').css({
-                 'margin-left': '-100px'
-             });*/
-            /*$('.centr-changer').addClass('col-md-10 col-md-offset-1  col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3').removeClass('col-md-8 col-md-offset-2 col-sm-7 col-sm-offset-4 col-xs-6 col-xs-offset-5');*/
+    let nav = myStorage.getItem('nav');
+    if(nav === 'close'){
+        $('.sidebar').addClass('fliph');
+        $('.logo-acoord').toggle();
+        $('.sidebar-toggle-box').toggleClass('ana');
+        $('#content').addClass('mar-close').removeClass('mar-open');
+    }
+    else {
+        $('#content').removeClass('mar-close');
+    }
 
+    $('.button-left').click(function(){
+        if (nav === "close" ){
+            myStorage.setItem("nav", "open");
+            $('#content').toggleClass('mar-open').toggleClass('mar-close');
         }
         else {
-            myStorage.setItem("nav", "desactive");
-             $('.wrapper').css({
-                 'margin-left': '100px'
-             });
-            /*$('.centr-changer').addClass('col-md-8 col-md-offset-2 col-sm-7 col-sm-offset-4 col-xs-6 col-xs-offset-5').removeClass('col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3 ');*/
-
+            myStorage.setItem("nav", "close");
+            $('#content').toggleClass('mar-close').toggleClass('mar-open');
         }
-       /* $('.sidebar').toggleClass('fliph');*/
+        $('.sidebar').toggleClass('fliph');
         $('.logo-acoord').toggle();
         $('.sidebar-toggle-box').toggleClass('ana');
     });
 });
-/* save navbar status*/
-
-/*$(document).ready( function() {
-    console.log(myStorage.getItem('nav'));
-    if (myStorage.getItem('nav') === "active"){
-        fliph();
-    }
-});*/
 /*link logo for dashboard*/
 function dashboard(){
     window.location.replace(/#0/)
 }
-/*for use whene navbar status*/
-function fliph() {
-    $('.sidebar').toggleClass('fliph');
-    $('.logo-acoord').toggle();
-    $('.sidebar-toggle-box').toggleClass('ana');
-}
+
 var body = document.body,
     html = document.documentElement;
 
