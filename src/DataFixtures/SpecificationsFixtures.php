@@ -1172,7 +1172,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'length', 'label'=>'Length (cm)', 'type'=>'TextType', 'category'=>'Bed'],
             ['name'=>'width', 'label'=>'Width (cm)', 'type'=>'TextType', 'category'=>'Bed'],
             ['name'=>'height', 'label'=>'Height (cm)', 'type'=>'TextType', 'category'=>'Bed'],
-            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Bed'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bed'],
@@ -1182,7 +1182,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'length', 'label'=>'Length (cm)', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'width', 'label'=>'Width (cm)', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'height', 'label'=>'Height (cm)', 'type'=>'TextType', 'category'=>'Mattress'],
-            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mattress'],
             //Quilt
@@ -1190,7 +1190,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'length', 'label'=>'Length (cm)', 'type'=>'TextType', 'category'=>'Quilt'],
             ['name'=>'width', 'label'=>'Width (cm)', 'type'=>'TextType', 'category'=>'Quilt'],
             ['name'=>'height', 'label'=>'Height (cm)', 'type'=>'TextType', 'category'=>'Quilt'],
-            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'price', 'type'=>'TextType', 'category'=>'Quilt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Quilt'],
             //Carpet
@@ -2373,17 +2373,17 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Central table'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Central table'],
             // Bed
-            ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Bed'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Bed'],
             // Mattress'
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Mattress'],
-            ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Mattress'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Mattress'],
             //Quilt
-            ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'label'=>'MIN Number of persson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Quilt'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Quilt'],
             //Carpet
@@ -3441,7 +3441,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Office chair'],
             //Sofa
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
-            ['name'=>'number', 'label'=>'MIN Number (unit)', 'label'=>'Number MIN', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
+            ['name'=>'number', 'label'=>'MIN Number (unit)', 'type'=>'ChoiceType', 'category'=>'Sofa','typeOfChoice'=>'SequentialNumericOptions', 'choice'=>['min'=>1,'max'=>12]],
             ['name'=>'price', 'label'=>'Price MAX', 'type'=>'TextType', 'category'=>'Sofa'],
             ['name'=>'donate', 'type'=>'CheckboxType', 'category'=>'Sofa'],
             //Racks
@@ -4250,15 +4250,15 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             // Bed
 
-            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
             ['name'=>'material', 'type'=>'ChoiceType', 'category'=>'Bed','typeOfChoice'=>'TextOptions', 'choice'=>['Metal','Wood','Plastic','Mixed','Other']],
 
             // Mattress'
             ['name'=>'brand', 'type'=>'TextType', 'category'=>'Mattress'],
-            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Mattress','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
 
             //Quilt
-            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'NumericOptions', 'choice'=>[1,1.5,2]],
+            ['name'=>'numberOfPersson', 'type'=>'ChoiceType', 'category'=>'Quilt','typeOfChoice'=>'TextOptions', 'choice'=>['1'=>1,'1.5'=>1.5,'2'=>2]],
 
             //Carpet
 

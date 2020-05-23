@@ -51,7 +51,7 @@ require('./voyage/voyage');
 require('./voyage/searchVoyage');
 require('./favorite');
 require('./admin/admin');
-var Slider = require("bootstrap-slider");
+
 
 //-----------React.js
 //require('./React/startup/result_offer_search');

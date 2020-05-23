@@ -500,17 +500,25 @@
                                                 </div>
                                             {% endif %}
                                             {% if offerForm.numberOfPersson is defined %}
-                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfPersson">
-                                                    <span class="blued pr-3">{% trans %}Number Of Persson{% endtrans %}</span><br>
-                                                    <input id="numberOfPersson-slider" type="text"/>
-                                                    <div class="checkbox-hidden">
-                                                    {{ form_row(offerForm.numberOfPersson, { 'attr': {'hidden': true}}) }}
+                                                {% if offerForm.category.vars.value is same as("1856") or
+                                                    offerForm.category.vars.value is same as("1857") or
+                                                    offerForm.category.vars.value is same as("1858") %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfPersson2">
+                                                        {{ form_row(offerForm.numberOfPersson) }}
                                                     </div>
-                                                </div>
+                                                {% else %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfPersson">
+                                                        <span class="blued pr-3">{% trans %}Number Of Persson{% endtrans %}</span><br>
+                                                        <input id="numberOfPersson-slider" type="text"/>
+                                                        <div class="checkbox-hidden">
+                                                            {{ form_row(offerForm.numberOfPersson, { 'attr': {'hidden': true}}) }}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
                                             {% endif %}
                                             {% if offerForm.number is defined %}
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-number">
-                                                    <span class="blued pr-3">{% trans %}Number{% endtrans %}</span><br>
+                                                    <span id="numberOfferSearch" class="blued pr-3"></span><br>
                                                     <input id="number-slider" type="text"/>
                                                     <div class="checkbox-hidden">
                                                     {{ form_row(offerForm.number, { 'attr': {'hidden': true}}) }}
@@ -764,6 +772,64 @@
                                                     <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
                                                 </div>
                                             {% endif %}
+                                            {#not yet useed#}
+                                            {% if offerForm.manufacturingYear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-manufacturingYear">
+                                                    {{ form_row(offerForm.manufacturingYear) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.kilometer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-kilometer">
+                                                    {{ form_row(offerForm.kilometer) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.area is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-area">
+                                                    {{ form_row(offerForm.area) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.minCaliber is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minCaliber">
+                                                    {{ form_row(offerForm.minCaliber) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.maxCaliber is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxCaliber">
+                                                    {{ form_row(offerForm.maxCaliber) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.printingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-printingType">
+                                                    {{ form_row(offerForm.printingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.screenSizeCm is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-screenSizeCm">
+                                                    {{ form_row(offerForm.screenSizeCm) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.screenSizeInch is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-screenSizeInch">
+                                                    {{ form_row(offerForm.screenSizeInch) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.minNumberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minNumberOfRooms">
+                                                    {{ form_row(offerForm.minNumberOfRooms) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if offerForm.maxNumberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxNumberOfRooms">
+                                                    {{ form_row(offerForm.maxNumberOfRooms) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.eventType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-eventType">
+                                                    {{ form_row(offerForm.eventType) }}
+                                                </div>
+                                            {% endif %}
+                                            {#not yet useed#}
                                         </div>
                                         <div class="row">
                                             <div class="btn-group btn-block white" id="section-price">
@@ -1273,63 +1339,3 @@
 {{ form_end(offerForm) }}
 <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
 <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-
-
-<script>
-
-    /*$("#ex16b").slider({ min: 0, max: 10, value: [0, 10], focus: true });*/
-    /*var kilometrage = new Slider("#kilometrage-slider", {
-        value: [0, 300000],
-        ticks: [0, 15000, 30000, 45000, 60000, 75000, 90000, 105000, 120000, 150000, 180000, 200000, 220000, 250000, 275000, 300000],
-
-    });
-    var manufacturingYear = new Slider("#manufacturingYear-slider", {
-        min: 1945, max: 2020, value: [2005, 2015], focus: true
-    });*/
-
-    /*   $('#search-offer').submit( function(e) {
-         e.preventDefault();
-
-         if ($("#manufacturingYear-slider").length>0){
-             let manufacturingYear_value = document.getElementById('manufacturingYear-slider').value;
-             let value = manufacturingYear_value.split(",");
-
-             $("#offer_search_minManufacturingYear option[value=" + parseInt(value[0]) +"]").attr("selected","selected");
-             $("#offer_search_maxManufacturingYear option[value=" + parseInt(value[1]) +"]").attr("selected","selected");
-         }
-         if ($("#kilometrage-slider").length>0) {
-             let kilometrage_value = document.getElementById('kilometrage-slider').value;
-             let value = kilometrage_value.split(",");
-             $("#offer_search_minKilometer option[value=" + parseInt(value[0]) +"]").attr("selected", "selected");
-             $("#offer_search_maxKilometer option[value=" + parseInt(value[1]) +"]").attr("selected", "selected");
-         }
-
-                 var url = '';
-       var formSerialize = $(this).serialize();
-       $.ajax({
-            method: "post",
-            dataType: "json",
-            url: url,
-            async: true,
-            data:formSerialize,
-        }).done( function(response) {
-            let ext = response['random'];
-            window.history.pushState( "","",'/search/offers/'+ext);
-            $('#all').hide();
-            ReactDOM.render(<ListsAds result={response['result']}/>, document.getElementById('searching'));
-            setFavorite();
-        }).fail(function(jxh,textmsg,errorThrown){
-            alert(Translator.trans('Something went wrong during processing search for offers!'));
-        });
-    });
-    */
-
-
-</script>
