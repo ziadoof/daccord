@@ -73,3 +73,38 @@
 .slider-horizontal{
  margin-bottom: 1em;
 }
+
+
+@media (min-width: 992px)and (max-width: 1052px) {
+    .span-hosting{
+        font-size: 1.4vh;
+    }
+    #hosting-specifications label{
+        font-size: 1.4vh;
+    }
+}
+@media (min-width: 768px)and (max-width: 892px) {
+    .span-hosting{
+        font-size: 1.2vh;
+    }
+    #hosting-specifications label{
+        font-size: 1.4vh;
+    }
+}
+@media (max-width: 364px) {
+    .span-hosting{
+        font-size: 1.2vh;
+    }
+    #hosting-specifications label{
+        font-size: 1.4vh;
+    }
+}
+@media (min-width: 992px)and (max-width: 1054px) {
+    .nav-link {
+        padding: 0.5rem 0.5rem;
+    }
+}
+.hosting-down i{
+    color: #F70055;
+}
+

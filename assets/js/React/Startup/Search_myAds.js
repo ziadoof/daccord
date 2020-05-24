@@ -5,7 +5,7 @@ import ListsHosting from "../Components/ListsHosting";
 import ListsMeetup from "../Components/ListsMeetup";
 import ListsVoyages from "../Components/ListsVoyages";
 import Translator from "bazinga-translator";
-import {generateSearchOfferSlide,generateSearchDemandSlide} from '../../generate_slider';
+import {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide} from '../../generate_slider';
 
 $('#search-offer').submit( function(e) {
     e.preventDefault();
@@ -13,20 +13,6 @@ $('#search-offer').submit( function(e) {
 
     var url = Routing.generate('add-offerType');
     var formSerialize = $(this).serialize();
-
-    //test//
-    let array1 = formSerialize.split("offer_search%5B");
-    let array2 = [];
-    for (var i = 0; i < array1.length; i++) {
-        if(array1[i]!==''){
-            let string = array1[i].replace('%5D','');
-            let string2 = string.replace('=',' = ');
-            let string3 = string2.replace('&','');
-            array2.push(string3);
-        }
-    }
-    console.log(array2);
-    //end test//
 
     $.ajax({
         method: "post",
@@ -45,28 +31,12 @@ $('#search-offer').submit( function(e) {
     });
 });
 
-
-
 $('#search-demand').submit( function(e) {
     e.preventDefault();
     generateSearchDemandSlide();
 
     var url = Routing.generate('add-DemandType');
     var formSerialize = $(this).serialize();
-
-    //test//
-    let array1 = formSerialize.split("demand_search%5B");
-    let array2 = [];
-    for (var i = 0; i < array1.length; i++) {
-        if(array1[i]!==''){
-            let string = array1[i].replace('%5D','');
-            let string2 = string.replace('=',' = ');
-            let string3 = string2.replace('&','');
-            array2.push(string3);
-        }
-    }
-    console.log(array2);
-    //end test//
 
     $.ajax({
         method: "post",
@@ -132,9 +102,10 @@ window.addEventListener('popstate', function(e) {
 
 $('#search-hosting').submit( function(e) {
     e.preventDefault();
+    generateHostingSlide();
     var url = Routing.generate('add-hostingType');
     var formSerialize = $(this).serialize();
-
+console.log(formSerialize);
     $.ajax({
         method: "post",
         dataType: "json",

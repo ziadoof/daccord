@@ -227,8 +227,10 @@ available: disponible
 'Start at :': 'Commencer à :'
 Finish: Terminer
 Search: Chercher
-'With ability to host :': 'Avec capacité d''accueil :'
-'With ability to share :': 'Avec capacité à partager :'
+'With ability to host :': 'Avec possibilité d''héberger:'
+'Ability to host :': 'Possibilité d''héberger:'
+'With ability to share :': 'Avec possibilité de partager :'
+'Ability to share :': 'Possibilité de partager :'
 'Your cafe': 'Votre café'
 'Expires in': 'Expire dans'
 'Another cafe': 'Autre café'

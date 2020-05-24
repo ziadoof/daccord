@@ -265,3 +265,27 @@ $('#more-localisation-demand').on('click',function(){
         $('#more-localisation-demand i').addClass('fa-arrow-alt-circle-up');
     }
 });
+
+$('#more-host').on('click',function(){
+    let status = $('#list-more-host');
+    if(status.hasClass('show')){
+        $('#more-host i').removeClass('fa-arrow-alt-circle-up');
+        $('#more-host i').addClass('fa-arrow-alt-circle-down');
+    }
+    else {
+        $('#more-host i').removeClass('fa-arrow-alt-circle-down');
+        $('#more-host i').addClass('fa-arrow-alt-circle-up');
+    }
+});
+
+$('#more-share').on('click',function(){
+    let status = $('#list-more-share');
+    if(status.hasClass('show')){
+        $('#more-share i').removeClass('fa-arrow-alt-circle-up');
+        $('#more-share i').addClass('fa-arrow-alt-circle-down');
+    }
+    else {
+        $('#more-share i').removeClass('fa-arrow-alt-circle-down');
+        $('#more-share i').addClass('fa-arrow-alt-circle-up');
+    }
+});

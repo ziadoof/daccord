@@ -648,6 +648,29 @@ function toTitleCase(str) {
         return match.toUpperCase();
     });
 }
+
+$(document).ready(function () {
+    //hosting//
+    let idPerson = document.getElementById('hosting_search_numberOfPersons').options;
+    let lastPerson = (idPerson.length)-1;
+    let numberOfPersons = new Slider('#numberOfPerson-slider-hosting',{
+        min: 0,
+        max: lastPerson,
+        value: 0,
+        focus: true
+    });
+
+    let idDays = document.getElementById('hosting_search_numberOfDays').options;
+    let lastDays = (idDays.length)-1;
+    let numberOfDays = new Slider('#numberOfDays-slider-hosting',{
+        min: 0,
+        max: lastDays,
+        value: 0,
+        focus: true
+    });
+    //end hosting//
+
+});
 function hideElementsOfferSearch() {
     let items = $('[id^="section"]');
     if(items.length>3){

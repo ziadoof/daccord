@@ -43,7 +43,7 @@ class HostingSearchType extends  AbstractType
             ->add('numberOfPersons', ChoiceType::class, [
                 'placeholder' => 'Number of persons',
                 'label' => false,
-                'required'=>true,
+                'required'=>false,
                 'choices'   => array(
                     '1' => 1,
                     '2' => 2,

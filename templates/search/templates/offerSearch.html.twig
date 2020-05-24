@@ -2,477 +2,846 @@
 <div class="row register-form">
     <div class="col-md-12 mt-4">
         {{ form_start(offerForm, {'attr': {'id': 'search-offer'}}) }}
-        <div class="text-center ">
+        <div class="">
             <div class="row">
-                <div class="col-md-2 border-search">
-                    <div class="row nearme">
-                        <div class="col-md-6 mt-2">
-                            {{ form_row(offerForm.nearme,{'attr':{'id':'offer_location'}}) }}
-                            <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %} ">
-                            {{ form_row(offerForm.myArea) }}
+                <div class="col-lg-6 col-md-6 ">
+                    <div class="local-border ">
+                        <div class="row nearme px-2 pt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form_row(offerForm.nearme,{'attr':{'id':'offer_location',},label_attr:{'class':'checkbox-custom'}}) }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form_row(offerForm.distance) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 search-down">
+                                <a id="more-localisation" class="float-right" data-toggle="collapse" href="#localisation" role="button" aria-expanded="false" aria-controls="localisation">
+                                    <i class="far fa-arrow-alt-circle-down mt-3 "></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            {{ form_row(offerForm.distance) }}
-                        </div>
-                    </div>
-                    <div class="">
-                        {{ form_row(offerForm.region) }}
-                    </div>
-                        <div class="">
-                            {{ form_row(offerForm.department) }}
-                        </div>
-                    <div class="">
-                        {{ form_row(offerForm.ville) }}
-                    </div>
-                </div>
-                <div class="col-md-2 border-search-category mt-4">
-                    <div class="">
-                        {{ form_row(offerForm.generalcategory) }}
-                    </div>
-                    <div class="" >
-                        {{ form_row(offerForm.category) }}
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-12 ">
-                            {{ form_row(offerForm.title) }}
-                            {{ form_row(offerForm.lat) }}
-                            {{ form_row(offerForm.lng) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="search_offer_dynamic">
-                                <div class="">
-                                    <div class="row">
-                                        {% if offerForm.manufactureCompany is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.manufactureCompany) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.minManufacturingYear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.minManufacturingYear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.manufacturingYear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.manufacturingYear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.maxManufacturingYear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.maxManufacturingYear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.subjectName is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.subjectName) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.brand is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.brand) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.city is defined %}
-                                            <div class="col-md-6">
-                                                {{ form_row(offerForm.city) }}
-                                                <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-                                                <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.age is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.age) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.model is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.model) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.material is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.material) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.theType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.theType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.minKilometer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.minKilometer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.kilometer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.kilometer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.maxKilometer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.maxKilometer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.changeGear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.changeGear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.fuelType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.fuelType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.acitvityArea is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.acitvityArea) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.workHours is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.workHours) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.experience is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.experience) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.levelOfStudent is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.levelOfStudent) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.levelOfStudy is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.levelOfStudy) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.typeOfContract is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.typeOfContract) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.salary is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.salary) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.typeOfTranslation is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.typeOfTranslation) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.placeOfLesson is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.placeOfLesson) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.language is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.language) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.languages is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.languages) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.secondLanguage is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.secondLanguage) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.accuracy is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.accuracy) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.capacity is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.capacity) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.minCapacity is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.minCapacity) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.maxCapacity is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.maxCapacity) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.dvdCd is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.dvdCd) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.analogDigital is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.analogDigital) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.minArea is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.minArea) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.area is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.area) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.maxArea is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.maxArea) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.heating is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.heating) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.heatingType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.heatingType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.coverMaterial is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.coverMaterial) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.shape is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.shape) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.originCountry is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.originCountry) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.animalSpecies is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.animalSpecies) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.minCaliber is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.minCaliber) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.maxCaliber is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.maxCaliber) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.generalSituation is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.generalSituation) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.ram is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.ram) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.printingColor is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.printingColor) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.printingType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.printingType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.paperSize is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.paperSize) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.iSize is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.iSize) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.sSize is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.sSize) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.screenSizeCm is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.screenSizeCm) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.screenSizeInch is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.screenSizeInch) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.number is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.number) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.numberOfPassengers is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfPassengers) }}
-                                            </div>
-                                        {% endif %}
-
-                                        {% if offerForm.numberOfDoors is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfDoors) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.numberOfDrawer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfDrawer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.numberOfHead is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfHead) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.numberOfPersson is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfPersson) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.minNumberOfRooms is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.minNumberOfRooms) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.numberOfRooms is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfRooms) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.maxNumberOfRooms is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.maxNumberOfRooms) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.numberOfStaging is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.numberOfStaging) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.weight is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.weight) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.classEnergie is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.classEnergie) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.ges is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.ges) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.eventType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.eventType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.accessories is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.accessories, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with accessories', 'data-off':'Accessories', 'data-onstyle':'warning', 'data-offstyle':'info',}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.cdRoom is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.cdRoom, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with CD room', 'data-off':'CD room', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.covered is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.covered, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with covered', 'data-off':'Covered', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.electricHead is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.electricHead, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with elctric head', 'data-off':'Elctric head', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.hdmi is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.hdmi, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with HDMI', 'data-off':'HDMI', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.threeInOne is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.threeInOne, {'attr': {'data-toggle':'toggle' ,'data-on':'Just three in one', 'data-off':'Three in one', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.usb is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.usb, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with USB', 'data-off':'USB', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.withOven is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.withOven, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with oven', 'data-off':'Oven', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.wifi is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.wifi, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with wifi', 'data-off':'Wifi', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.withElevator is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.withElevator, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with elevator', 'data-off':'Elevator', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.withFreezer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.withFreezer, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with freezer', 'data-off':'Freezer', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.withFurniture is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.withFurniture, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with furniture', 'data-off':'Furniture', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.withGarden is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.withGarden, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with garden', 'data-off':'Garden', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if offerForm.withVerandah is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(offerForm.withVerandah, {'attr': {'data-toggle':'toggle' ,'data-on':'Just with verandah', 'data-off':'Verandah', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
+                        <div class="collapse mx-2" id="localisation">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 white">
+                                    <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %}">
+                                        {{ form_row(offerForm.myArea, {label_attr:{'class':'checkbox-custom'}}) }}
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        {% if offerForm.donate is defined %}
-                                            <div class="col-md-3 ">
-                                                {{ form_row(offerForm.donate, {'attr': {'data-toggle':'toggle' ,'data-on':'Just donate', 'data-off':'Donat', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(offerForm.region) }}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(offerForm.department) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    {{ form_row(offerForm.ville) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2  local-border mb-3">
+                        <div class="row px-1 pt-2">
+                            <div class="col-lg-6 col-md-6 col-6">
+                                {{ form_row(offerForm.generalcategory) }}
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6">
+                                {{ form_row(offerForm.category) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="local-border">
+                        <div class="row px-1 pt-2">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                {{ form_row(offerForm.title) }}
+                                <div class="checkbox-hidden">
+                                    {{ form_row(offerForm.lat) }}
+                                    {{ form_row(offerForm.lng) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row px-1">
+                            <div class="col">
+                                <div id="search_offer_dynamic">
+                                    <div class="">
+                                        <div class="row">
+                                            {% if offerForm.minManufacturingYear is defined and offerForm.maxManufacturingYear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minMaxManufacturingYear" >
+                                                    <span class="blued pr-3">{% trans %}Manufacturing Year{% endtrans %}</span><br>
+                                                    <input class="" id="manufacturingYear-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.minManufacturingYear, { 'attr': {'hidden': true} }) }}
+                                                        {{ form_row(offerForm.maxManufacturingYear, { 'attr': {'hidden': true} }) }}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                {% if offerForm.minManufacturingYear is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minManufacturingYear">
+                                                        {{ form_row(offerForm.minManufacturingYear) }}
+                                                    </div>
+                                                {% endif %}
+                                                {% if offerForm.maxManufacturingYear is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxManufacturingYear">
+                                                        {{ form_row(offerForm.maxManufacturingYear) }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if offerForm.minKilometer is defined and offerForm.maxKilometer is defined%}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-kilometrage">
+                                                    <span class="blued pr-3">{% trans %}Kilometre{% endtrans %}</span><br>
+                                                    <input id="kilometrage-slider" type="text" data-slider-lock-to-ticks="true"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.minKilometer, { 'attr': {'hidden': true} }) }}
+                                                        {{ form_row(offerForm.maxKilometer, { 'attr': {'hidden': true} }) }}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                {% if offerForm.minKilometer is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minKilometer">
+                                                        {{ form_row(offerForm.minKilometer) }}
+                                                    </div>
+                                                {% endif %}
+                                                {% if offerForm.maxKilometer is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxKilometer">
+                                                        {{ form_row(offerForm.maxKilometer) }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if offerForm.minArea is defined and offerForm.maxArea is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-AreaMinMax">
+                                                    <span id="minMaxAreaOfferSearch" class="blued pr-3"></span><br>
+                                                    <input id="AreaMinMax-slider" type="text" data-slider-lock-to-ticks="true"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.minArea, { 'attr': {'hidden': true}}) }}
+                                                        {{ form_row(offerForm.maxArea, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                {% if offerForm.minArea is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minArea">
+                                                        {{ form_row(offerForm.minArea) }}
+                                                    </div>
+                                                {% endif %}
+                                                {% if offerForm.maxArea is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxArea">
+                                                        {{ form_row(offerForm.maxArea) }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if offerForm.changeGear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-changeGear">
+                                                    <span class="blued pr-3">{% trans %}Change Gear{% endtrans %}</span><br>
+                                                    <div class="change-gear">
+                                                        <input id="changeGear-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="2"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.changeGear, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfPassengers is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfPassengers">
+                                                    <span class="blued pr-3">{% trans %}Min number of passengers{% endtrans %}</span><br>
+                                                    <input id="numberOfPassengers-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.numberOfPassengers, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfDoors is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfDoors">
+                                                    <span class="blued pr-3">{% trans %}Min number of doors{% endtrans %}</span><br>
+                                                    <input id="numberOfDoors-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.numberOfDoors, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.minCapacity is defined and offerForm.maxCapacity is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-capacityMinMax">
+                                                    <span id="minMaxCapacityOfferSearch" class="blued pr-3"></span><br>
+                                                    <input id="capacityMinMax-slider" type="text" data-slider-lock-to-ticks="true"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.minCapacity, { 'attr': {'hidden': true}}) }}
+                                                        {{ form_row(offerForm.maxCapacity, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                {% if offerForm.minCapacity is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minCapacity">
+                                                        {{ form_row(offerForm.minCapacity) }}
+                                                    </div>
+                                                {% endif %}
+                                                {% if offerForm.maxCapacity is defined %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxCapacity">
+                                                        {{ form_row(offerForm.maxCapacity) }}
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if offerForm.workHours is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-workHours">
+                                                    <span class="blued pr-3">{% trans %}Work Hours{% endtrans %}</span><br>
+                                                    <div class="workHoursOfferSearch">
+                                                        <input id="workHours-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="2"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.workHours, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.dvdCd is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-dvdCd">
+                                                    <span class="blued pr-3">{% trans %}DVD CD{% endtrans %}</span><br>
+                                                    <div class="dvdCdOfferSearch">
+                                                        <input id="dvdCd-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="2"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.dvdCd , { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.ram is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-ram">
+                                                    <span id="ramOfferSearch" class="blued pr-3"></span><br>
+                                                    <input id="ram-slider" type="text" data-slider-lock-to-ticks="true" />
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.ram, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.wifi is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-wifi">
+                                                    <span class="blued pr-3">{% trans %}Wifi{% endtrans %}</span><br>
+                                                    <div class="wifiOfferSearch">
+                                                        <input id="wifi-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.wifi, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.usb is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-usb">
+                                                    <span class="blued pr-3">{% trans %}Usb{% endtrans %}</span><br>
+                                                    <div class="usbOfferSearch">
+                                                        <input id="usb-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.usb, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.accessories is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-accessories">
+                                                    <span class="blued pr-3">{% trans %}Accessories{% endtrans %}</span><br>
+                                                    <div class="accessoriesOfferSearch">
+                                                        <input id="accessories-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.accessories , { 'attr': {'hidden': true}} ) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.hdmi is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-hdmi">
+                                                    <span class="blued pr-3">{% trans %}Hdmi{% endtrans %}</span><br>
+                                                    <div class="hdmiOfferSearch">
+                                                        <input id="hdmi-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.hdmi, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.cdRoom is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-cdRoom">
+                                                    <span class="blued pr-3">{% trans %}Cd Room{% endtrans %}</span><br>
+                                                    <div class="cdRoomOfferSearch">
+                                                        <input id="cdRoom-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.cdRoom, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.covered is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-covered">
+                                                    <span class="blued pr-3">{% trans %}Covered{% endtrans %}</span><br>
+                                                    <div class="coveredOfferSearch">
+                                                        <input id="covered-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.covered, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.electricHead is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-electricHead">
+                                                    <span class="blued pr-3">{% trans %}Electric Head{% endtrans %}</span><br>
+                                                    <div class="electricHeadOfferSearch">
+                                                        <input id="electricHead-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.electricHead, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.threeInOne is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-threeInOne">
+                                                    <span class="blued pr-3">{% trans %}Three In One{% endtrans %}</span><br>
+                                                    <div class="threeInOneOfferSearch">
+                                                        <input id="threeInOne-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.threeInOne, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.withOven is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-withOven">
+                                                    <span class="blued pr-3">{% trans %}Oven{% endtrans %}</span><br>
+                                                    <div class="OvenOfferSearch">
+                                                        <input id="Oven-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.withOven, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.withElevator is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-withElevator">
+                                                    <span class="blued pr-3">{% trans %}Elevator{% endtrans %}</span><br>
+                                                    <div class="ElevatorOfferSearch">
+                                                        <input id="Elevator-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.withElevator, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.withFreezer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-withFreezer">
+                                                    <span class="blued pr-3">{% trans %}Freezer{% endtrans %}</span><br>
+                                                    <div class="FreezerOfferSearch">
+                                                        <input id="Freezer-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.withFreezer, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.withFurniture is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-withFurniture">
+                                                    <span class="blued pr-3">{% trans %}Furniture{% endtrans %}</span><br>
+                                                    <div class="FurnitureOfferSearch">
+                                                        <input id="Furniture-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.withFurniture, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.withGarden is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-withGarden">
+                                                    <span class="blued pr-3">{% trans %}Garden{% endtrans %}</span><br>
+                                                    <div class="GardenOfferSearch">
+                                                        <input id="Garden-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.withGarden, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.withVerandah is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-withVerandah">
+                                                    <span class="blued pr-3">{% trans %}Verandah{% endtrans %}</span><br>
+                                                    <div class="VerandahOfferSearch">
+                                                        <input id="Verandah-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.withVerandah, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfHead is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfHead">
+                                                    <span class="blued pr-3">{% trans %}Min Number Of Head{% endtrans %}</span><br>
+                                                    <input id="numberOfHead-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.numberOfHead, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfPersson is defined %}
+                                                {% if offerForm.category.vars.value is same as("1856") or
+                                                    offerForm.category.vars.value is same as("1857") or
+                                                    offerForm.category.vars.value is same as("1858") %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfPersson2">
+                                                        {{ form_row(offerForm.numberOfPersson) }}
+                                                    </div>
+                                                {% else %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfPersson">
+                                                        <span class="blued pr-3">{% trans %}Number Of Persson{% endtrans %}</span><br>
+                                                        <input id="numberOfPersson-slider" type="text"/>
+                                                        <div class="checkbox-hidden">
+                                                            {{ form_row(offerForm.numberOfPersson, { 'attr': {'hidden': true}}) }}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if offerForm.number is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-number">
+                                                    <span id="numberOfferSearch" class="blued pr-3"></span><br>
+                                                    <input id="number-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.number, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfRooms">
+                                                    <span class="blued pr-3">{% trans %}Number Of Rooms{% endtrans %}</span><br>
+                                                    <input id="numberOfRooms-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.numberOfRooms, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.classEnergie is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-classEnergie">
+                                                    <span class="blued pr-3">{% trans %}Class Energie{% endtrans %}</span><br>
+                                                    <div class="classEnergieOfferSearch">
+                                                        <input id="classEnergie-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2,3,4,5,6,7]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="7"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.classEnergie, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.ges is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-ges">
+                                                    <span class="blued pr-3">{% trans %}Ges{% endtrans %}</span><br>
+                                                    <div class="classGesOfferSearch">
+                                                        <input id="classGes-slider" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2,3,4,5,6,7]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="7"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.ges, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfDrawer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfDrawer">
+                                                    <span class="blued pr-3">{% trans %}Number Of Drawer{% endtrans %}</span><br>
+                                                    <input id="numberOfDrawer-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.numberOfDrawer, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.numberOfStaging is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-numberOfStaging">
+                                                    <span class="blued pr-3">{% trans %}Number Of Staging{% endtrans %}</span><br>
+                                                    <input id="numberOfStaging-slider" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(offerForm.numberOfStaging, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.fuelType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-fuelType">
+                                                    {{ form_row(offerForm.fuelType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.brand is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-brand">
+                                                    {{ form_row(offerForm.brand) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.model is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-model">
+                                                    {{ form_row(offerForm.model) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.manufactureCompany is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-manufactureCompany">
+                                                    {{ form_row(offerForm.manufactureCompany) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.subjectName is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-subjectName">
+                                                    {{ form_row(offerForm.subjectName) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.generalSituation is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-generalSituation">
+                                                    {{ form_row(offerForm.generalSituation) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.acitvityArea is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-acitvityArea">
+                                                    {{ form_row(offerForm.acitvityArea) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if offerForm.experience is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-experience">
+                                                    {{ form_row(offerForm.experience) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.levelOfStudent is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-levelOfStudent">
+                                                    {{ form_row(offerForm.levelOfStudent) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.levelOfStudy is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-levelOfStudy">
+                                                    {{ form_row(offerForm.levelOfStudy) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.typeOfContract is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-typeOfContract">
+                                                    {{ form_row(offerForm.typeOfContract) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.salary is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-salary">
+                                                    {{ form_row(offerForm.salary) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.typeOfTranslation is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-typeOfTranslation">
+                                                    {{ form_row(offerForm.typeOfTranslation) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.languages is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-languages">
+                                                    {{ form_row(offerForm.languages) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.placeOfLesson is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-placeOfLesson">
+                                                    {{ form_row(offerForm.placeOfLesson) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.language is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-language">
+                                                    {{ form_row(offerForm.language) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if offerForm.secondLanguage is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-secondLanguage">
+                                                    {{ form_row(offerForm.secondLanguage) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.material is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-material">
+                                                    {{ form_row(offerForm.material) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.theType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-theType">
+                                                    {{ form_row(offerForm.theType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.accuracy is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-accuracy">
+                                                    {{ form_row(offerForm.accuracy) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.paperSize is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-paperSize">
+                                                    {{ form_row(offerForm.paperSize) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.printingColor is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-printingColor">
+                                                    {{ form_row(offerForm.printingColor) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.printingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-printingType">
+                                                    {{ form_row(offerForm.printingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.iSize is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-">
+                                                    {{ form_row(offerForm.iSize) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.sSize is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-iSize">
+                                                    {{ form_row(offerForm.sSize) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.capacity is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-capacity">
+                                                    {{ form_row(offerForm.capacity) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.heatingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-heatingType">
+                                                    {{ form_row(offerForm.heatingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.heating is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-heating">
+                                                    {{ form_row(offerForm.heating) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.weight is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-weight">
+                                                    {{ form_row(offerForm.weight) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.analogDigital is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-analogDigital">
+                                                    {{ form_row(offerForm.analogDigital) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.originCountry is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-originCountry">
+                                                    {{ form_row(offerForm.originCountry) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.age is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-age">
+                                                    {{ form_row(offerForm.age) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.animalSpecies is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-animalSpecies">
+                                                    {{ form_row(offerForm.animalSpecies) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.coverMaterial is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-coverMaterial">
+                                                    {{ form_row(offerForm.coverMaterial) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.shape is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-shape">
+                                                    {{ form_row(offerForm.shape) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.city is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-city">
+                                                    {{ form_row(offerForm.city) }}
+                                                    <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+                                                    <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
+                                                </div>
+                                            {% endif %}
+                                            {#not yet useed#}
+                                            {% if offerForm.manufacturingYear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-manufacturingYear">
+                                                    {{ form_row(offerForm.manufacturingYear) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.kilometer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-kilometer">
+                                                    {{ form_row(offerForm.kilometer) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.area is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-area">
+                                                    {{ form_row(offerForm.area) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.minCaliber is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minCaliber">
+                                                    {{ form_row(offerForm.minCaliber) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.maxCaliber is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxCaliber">
+                                                    {{ form_row(offerForm.maxCaliber) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.printingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-printingType">
+                                                    {{ form_row(offerForm.printingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.screenSizeCm is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-screenSizeCm">
+                                                    {{ form_row(offerForm.screenSizeCm) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.screenSizeInch is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-screenSizeInch">
+                                                    {{ form_row(offerForm.screenSizeInch) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.minNumberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-minNumberOfRooms">
+                                                    {{ form_row(offerForm.minNumberOfRooms) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.maxNumberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-maxNumberOfRooms">
+                                                    {{ form_row(offerForm.maxNumberOfRooms) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if offerForm.eventType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="section-eventType">
+                                                    {{ form_row(offerForm.eventType) }}
+                                                </div>
+                                            {% endif %}
+                                            {#not yet useed#}
+                                        </div>
+                                        <div class="row">
+                                            <div class="btn-group btn-block white" id="section-price">
+                                                {% if offerForm.price is defined %}
+                                                    {{ form_row(offerForm.price) }}
+                                                {% endif %}
+                                                <div class="ml-1 mt-1">
+                                                    {% if offerForm.donate is defined %}
+                                                        {{ form_row(offerForm.donate, {'label':'Donate',label_attr:{'class':'checkbox-custom'}}) }}
+                                                    {% endif %}
+                                                </div>
                                             </div>
-                                        {% endif %}
-                                        {% if offerForm.price is defined %}
-                                            <div class="col-md-3  ">
-                                                {{ form_row(offerForm.price) }}
-                                            </div>
-                                        {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -480,7 +849,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-2">
+            <div class="row justify-content-center my-3">
                 <div class="col-md-12">
                     <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
                 </div>

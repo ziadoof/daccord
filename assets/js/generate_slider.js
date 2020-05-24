@@ -433,9 +433,28 @@ function generateSearchDemandSlide() {
             $("#demand_search_numberOfStaging")[0].selectedIndex = -1;
         }
     }
+}
+function generateHostingSlide() {
+    let numberOfPerson_value = document.getElementById('numberOfPerson-slider-hosting').value;
+    $('#hosting_search_numberOfPersons option:selected').removeAttr('selected');
 
+    if(numberOfPerson_value >0){
+        $("#hosting_search_numberOfPersons option[value=" + parseInt(numberOfPerson_value) +"]").attr("selected", "selected");
+    }
+    else{
+        $("#hosting_search_numberOfPersons")[0].selectedIndex = 1;
+    }
 
+    let numberOfDays_value = document.getElementById('numberOfDays-slider-hosting').value;
+    $('#hosting_search_numberOfDays option:selected').removeAttr('selected');
+
+    if(numberOfDays_value >0){
+        $("#hosting_search_numberOfDays option[value=" + parseInt(numberOfDays_value) +"]").attr("selected", "selected");
+    }
+    else{
+        $("#hosting_search_numberOfDays")[0].selectedIndex = 1;
+    }
 
 }
 
-export {generateSearchOfferSlide,generateSearchDemandSlide};
+export {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide};
