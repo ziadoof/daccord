@@ -5,7 +5,7 @@ import ListsHosting from "../Components/ListsHosting";
 import ListsMeetup from "../Components/ListsMeetup";
 import ListsVoyages from "../Components/ListsVoyages";
 import Translator from "bazinga-translator";
-import {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide} from '../../generate_slider';
+import {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide,generateMeetupSlide} from '../../generate_slider';
 
 $('#search-offer').submit( function(e) {
     e.preventDefault();
@@ -105,7 +105,6 @@ $('#search-hosting').submit( function(e) {
     generateHostingSlide();
     var url = Routing.generate('add-hostingType');
     var formSerialize = $(this).serialize();
-console.log(formSerialize);
     $.ajax({
         method: "post",
         dataType: "json",
@@ -126,9 +125,10 @@ console.log(formSerialize);
 
 $('#search-meetup').submit( function(e) {
     e.preventDefault();
+    generateMeetupSlide();
     var url = Routing.generate('add-meetupType');
     var formSerialize = $(this).serialize();
-
+    console.log(formSerialize);
     $.ajax({
         method: "post",
         dataType: "json",

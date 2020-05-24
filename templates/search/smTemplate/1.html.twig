@@ -1,97 +1,41 @@
-{% set hostingForm = form_hostingSearchType.getForm().createView() %}
+{% set meetupForm = form_meetupSearchType.getForm().createView() %}
 <div class="row register-form">
     <div class="col-md-12 mt-4">
-        {{ form_start(hostingForm, {'attr': {'id': 'search-hosting'}}) }}
-        <div class="">
+        {{ form_start(meetupForm, {'attr': {'id': 'search-meetup'}}) }}
+        <div class="text-center ">
             <div class="row">
                 <div class="col-lg-6 col-md-6 ">
                     <div class="local-border ">
                         <div class="mx-2 mt-2">
                             <div class="row ">
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    {{ form_row(hostingForm.region) }}
+                                    {{ form_row(meetupForm.region) }}
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    {{ form_row(hostingForm.department) }}
+                                    {{ form_row(meetupForm.department) }}
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    {{ form_row(hostingForm.ville) }}
+                                    {{ form_row(meetupForm.city) }}
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-2  local-border mb-3">
-                        <div class="row px-1 pt-2">
-                            <div class="col-lg-12 col-md-12 col-12">
-                                {{ form_row(hostingForm.languages) }}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <div class="local-border">
-                        <div id="hosting-specifications">
-                            <div class="row px-1 pt-2">
-                                <div class="col-lg-12 col-md-12 col-12 text-center">
-                                    <span class="blued pr-3">{% trans %}Number Of Persons{% endtrans %}</span><br>
-                                    <input class="" id="numberOfPerson-slider-hosting" type="text"/>
+                    <div class="local-border px-3 py-3">
+                        <div id="meetup-specifications">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                    {{ form_row(meetupForm.title) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                    {{ form_row(meetupForm.type) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                    <span class="blued pr-3">{% trans %}Max Number of participants{% endtrans %}</span><br>
+                                    <input class="" id="maxParticipants-slider-meetup" type="text"/>
                                     <div class="checkbox-hidden">
-                                        {{ form_row(hostingForm.numberOfPersons, { 'attr': {'hidden': true} }) }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row px-1 pt-2">
-                                <div class="col-lg-12 col-md-12 col-12 text-center">
-                                    <span class="blued pr-3">{% trans %}Number Of Days{% endtrans %}</span><br>
-                                    <input class="" id="numberOfDays-slider-hosting" type="text"/>
-                                    <div class="checkbox-hidden">
-                                        {{ form_row(hostingForm.numberOfDays, { 'attr': {'hidden': true} }) }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row px-3">
-                                <div class="col-lg-6 col-md-6 col-sm-4 col-6">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-12">
-                                            <span class="blued float-left mb-2 span-hosting">{% trans %}Ability to host :  {% endtrans %}</span>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-12">
-                                            {{ form_row(hostingForm.handicapped,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-12">
-                                            {{ form_row(hostingForm.child,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-12">
-                                            {{ form_row(hostingForm.animal,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-8 col-6">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-12">
-                                            <span class="blued float-left mb-2 span-hosting">{% trans %}Ability to share : {% endtrans %}</span>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.food,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.conversation,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.cityTour,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.music,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.movie,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.television,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-6 col-12">
-                                            {{ form_row(hostingForm.videoGame,{label_attr:{'class':'checkbox-custom'}}) }}
-                                        </div>
+                                        {{ form_row(meetupForm.maxParticipants, { 'attr': {'hidden': true} }) }}
                                     </div>
                                 </div>
                             </div>
@@ -99,14 +43,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center my-3">
-                <div class="col-md-12">
-                    <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
-                </div>
+        </div>
+        <div class="row justify-content-center my-3">
+            <div class="col-md-12">
+                <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
             </div>
         </div>
     </div>
 </div>
-{{ form_end(hostingForm) }}
+
+{{ form_end(meetupForm) }}
 <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
 <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
+

@@ -669,6 +669,16 @@ $(document).ready(function () {
         focus: true
     });
     //end hosting//
+    //meetup//
+    let idParticipants = document.getElementById('meetup_search_maxParticipants').options;
+    let lastParticipants = (idParticipants.length)-1;
+    let Participants = new Slider('#maxParticipants-slider-meetup',{
+        min: 0,
+        max: lastParticipants,
+        value: 0,
+        focus: true
+    });
+    //end meetup
 
 });
 function hideElementsOfferSearch() {

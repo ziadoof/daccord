@@ -456,5 +456,16 @@ function generateHostingSlide() {
     }
 
 }
+function generateMeetupSlide(){
+    let participants_value = document.getElementById('maxParticipants-slider-meetup').value;
+    $('#meetup_search_maxParticipants option:selected').removeAttr('selected');
 
-export {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide};
+    if(participants_value >0){
+        $("#meetup_search_maxParticipants option[value=" + parseInt(participants_value) +"]").attr("selected", "selected");
+    }
+    else{
+        $("#meetup_search_maxParticipants")[0].selectedIndex = -1;
+    }
+}
+
+export {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide,generateMeetupSlide};
