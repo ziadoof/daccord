@@ -104,19 +104,28 @@
     cursor: pointer;
 
 }
-#messagesCount{
-    font-size: 0.8em;
-    border-radius: 20%;
+
+#centerOfMessages{
+    font-size: 0.9em;
+    border-radius: 50%;
     background-color: orangered;
-    border: 2px solid orangered;
     color: #FFFFFF;
     position: absolute;
     top: 50%;
-    left: 0;
-    width: auto;
+    min-width: 1.3em;
+    height: auto;
+    text-align: center;
 }
 .hide-padge{
     display: none;
+}
+
+.photo-message{
+    width: 5em;
+    height: 5em;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
 }
 
 

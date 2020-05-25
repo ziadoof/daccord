@@ -1,6 +1,7 @@
+
 {% if not mgilet_notification_count(app.user)  %}
     <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-       aria-haspopup="true"><i class="fas fa-bell"></i>
+       aria-haspopup="true"><img src="{{ asset('assets/images/icons/notification.png') }}" class="icon-visitor">
     </a>
     <li >
         <div class="bell-icon header__notification ">
@@ -20,19 +21,21 @@
 {% else %}
     <div class="general-notification">
     {% if mgilet_notification_unseen_count(app.user) > 0 %}
-        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-           aria-haspopup="true"><span id="notificationCount">{{ mgilet_notification_unseen_count(app.user) }}</span><i class="fas fa-bell"></i>
+        <a href="#!"  id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true"><span id="notificationCount" class="px-1">{{ mgilet_notification_unseen_count(app.user) }}</span>
+            <img src="{{ asset('assets/images/icons/notification.png') }} " class="icon-visitor">
         </a>
         <li class="active-notification">
     {% else %}
-        <a href="#!" id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
-           aria-haspopup="true"><i class="fas fa-bell"></i>
+        <a href="#!"  id="notificationDropdown" data-toggle="dropdown" data-target="#notification-menu"
+           aria-haspopup="true">
+            <img src="{{ asset('assets/images/icons/notification.png') }} " class="icon-visitor">
         </a>
         <li class="active-notification">
     {% endif %}
             <div class="bell-icon header__notification ">
-                <div id="notification-menu" class="notification-menu collapse" aria-labelledby="notificationDropdown">
-                <ul class="notification__list dropdown " >
+                <div id="notification-menu" class="notification-menu" aria-labelledby="notificationDropdown">
+                <ul class="notification__list dropdown-menu mt-5" >
                         <h4 class="notification__list__name py-3">
                             {% trans %} Notification{% endtrans %}
                             <span class="notification-number large-number">{{mgilet_notification_count(app.user)}}</span>
@@ -40,9 +43,12 @@
                             <span class="notification-number large-number" id="unseen-large-number">{{mgilet_notification_unseen_count(app.user)}}</span>
                             {% if notificationList|length > 0 %}
                                 {% if mgilet_notification_unseen_count(app.user) > 0 %}
-                                    <li style="padding: 10px;">
-                                        <b class="text-muted">{{ 'notifications'|trans({},'MgiletNotificationBundle') }}</b>
-                                        <a id="notification-MarkAllAsSeen" href="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}" class="no-margin btn btn-xs pull-right">{{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}</a>
+                                    <li class="py-2 text-center">
+                                            <a id="notification-MarkAllAsSeen"
+                                               href="{{ mgilet_notification_generate_path('notification_mark_all_as_seen', notificationList|first.notifiableEntity) }}"
+                                               class="">
+                                                     {{ 'mark_all_as_seen'|trans({},'MgiletNotificationBundle') }}
+                                            </a>
                                     </li>
                                 {% endif %}
                             {% endif %}
@@ -53,7 +59,7 @@
                     {% for notification in notificationList %}
                         {% set subject = notification.notification.subject  %}
                         <section class="one-note">
-                            <li class="list__item {% if notification.seen %}{{ 'seen' }}{% endif %}">
+                            <li class="list__item pt-2 {% if notification.seen %}{{ 'seen' }}{% endif %}">
                                     <a href="{{ notification.notification.link }}"
                                        class="list__item--link my-0
                                         {% if     subject is same as ('profilePoints') %}{{" profilePoints"}}
@@ -78,7 +84,7 @@
                                               subject is same as ('removeCarpoolPoints')or
                                               subject is same as ('carpoolAddPoints')or
                                               subject is same as ('pointsVoyageCanceled')%}
-                                            <img src="{{asset('/assets/images/logo/face.png')}}" alt="" class="user-image mx-2 mt-1" />
+                                            <img src="{{asset('/assets/images/icons/face-icon.png')}}" alt="" class="user-image mx-2 mt-1" />
                                         {% else %}
                                             <img src="{{data[notification.notification.id]['sender'].photoProfile()}}" alt="" class="user-image mx-2 mt-1" />
                                         {% endif %}
@@ -410,7 +416,7 @@
                                     </a>
                                 <div class="row">
                                     <div class="col btn-group">
-                                        <div class="col-md-6 ">
+                                        <div class="col-6 col-md-6 ">
                                             {% if notification.seen %}
                                             <div class=" seen">
                                             {% else %}
@@ -419,10 +425,10 @@
                                             {% endif %}
                                             </div>
                                         </div>
-                                        <div class="col-md-2 offset-4">
+                                        <div class="col-2 col-md-2 offset-4">
                                             <div class="row">
-                                                <div class=" mb-1 mt-0 float-right">
-                                                    <b class=" all-as-seen">
+                                                <div class=" mb-1 mt-0 ">
+                                                    <b class=" all-as-seen float-right">
                                                         {{ notifiedBy.date_format(notification.notification.date ) }}
                                                     </b>
                                                 </div>

@@ -1,9 +1,7 @@
-{% extends "layout_user.html.twig" %}
+{% extends 'hosting/layout_hosting.html.twig' %}
 
-{% block title %}{% trans %} Hosting{% endtrans %}{% endblock %}
-
-{% block content %}
-    <h1 class="title-blue text-center">{% trans %} Hosting{% endtrans %}</h1>
+{% block hosting %}
+    <h1 class="title-blue text-center">{% trans %} Hosting request{% endtrans %}</h1>
     {% if hosting_received is not empty %}
         <div class="col-md-6 offset-3 my-2">
             {% for hosting in hosting_received %}

@@ -5,6 +5,7 @@
 @import "jqueryui";
 @import "profile";
 @import "bootswatchunited";
+@import "~bootstrap-slider";
 @import "navbar";
 @import "offer";
 @import "~bootstrap4-toggle/css/bootstrap4-toggle.min.css";
@@ -26,6 +27,8 @@
 @import "login";
 @import "photoOffer";
 @import "footer";
+@import "header";
+@import "searchBar";
 
 
 
@@ -35,14 +38,17 @@ body .welcome-text {
   color: $blued;
 }
 
-
-
-/*------------dropdown user--------------------*/
-#avatar-small {
-  width:  40px;
-  height: 40px;
-  float: right;
+/*for tooltip slider*/
+.slider.slider-horizontal:hover, .slider.slider-vertical:hover {
+  .tooltip.tooltip-main {
+    opacity: 0.7 !important;
+  }
+  .tooltip-inner {
+    font-size: 90%;
+    width: auto;
+  }
 }
+/*end tooltip slider*/
 
 /*------------dropdown user-------end-------------*/
 
@@ -54,6 +60,7 @@ body .welcome-text {
 /*----------------charchbar---------------*/
 #search-bar{
   background-color: $noird;
+  margin-top: -3em;
 }
 #search-bar .form-control {
   font-size: 85%;
@@ -127,6 +134,17 @@ body .welcome-text {
 }
 .nearme{
   margin-bottom: 1rem;
+}
+.local-border{
+  border: 1px solid rgba(0,181,206,0.3);
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border-radius: 2px;
+  padding-right: -2em;
+}
+.local-border-non{
+  margin-left: 2em;
+  padding-right: -2em;
 }
 #offer_search_distance{
   margin-top: 0.5rem;

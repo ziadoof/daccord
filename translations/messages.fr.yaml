@@ -31,8 +31,8 @@ ADMINISTRATION: ADMINISTRATION
 'My demands': 'Mes demandes'
 'My deals': 'Mes deals'
 'Hosting request': 'Demande d''hébergement'
-Favoris: Favoris
-Favorite: Favoris
+Favorite: Favori
+Favorites: Favoris
 'Driver Request': 'Demande du driver'
 'Hosting Request': 'Demande d''hébergement'
 'Hosting :': 'Hébergement :'
@@ -227,8 +227,10 @@ available: disponible
 'Start at :': 'Commencer à :'
 Finish: Terminer
 Search: Chercher
-'With ability to host :': 'Avec capacité d''accueil :'
-'With ability to share :': 'Avec capacité à partager :'
+'With ability to host :': 'Avec possibilité d''héberger:'
+'Ability to host': 'Possibilité d''héberger:'
+'With ability to share :': 'Avec possibilité de partager :'
+'Ability to share': 'Possibilité de partager :'
 'Your cafe': 'Votre café'
 'Expires in': 'Expire dans'
 'Another cafe': 'Autre café'
@@ -315,7 +317,7 @@ Pending: 'En attente'
 'There is no join requests in this meetup': 'Il n''y a aucune demande de rejoindre dans ce meetup'
 'Send join request to this meetup': 'Envoyer une demande de rejoindre à ce Meetup'
 'There is no rating for this event': 'Il n''y a pas d''évaluation pour cet événement'
-'My Deals': 'My Deals'
+'My Deals': 'Mes Deals'
 'Suggested Deals': 'Deals suggérées'
 'Suggested at': 'Suggéré à'
 'Your offer': 'Votre offre'
@@ -1214,14 +1216,18 @@ Usb: USB
 Ges: Ges
 'Select Ges': 'Sélectionnez Ges'
 'With Furniture': 'Avec des meubles'
+'Furniture': 'Meubles'
 'With Garden': 'Avec jardin'
+'Garden': 'Jardin'
 Floor: Étage
 'Select Floor': 'Sélectionnez l''étage'
 'Select Heating': 'Sélectionnez Chauffage'
 'Floors in the building': 'Étages du bâtiment'
 'Select Floors in the building': 'Sélectionnez les étages du bâtiment'
 'With Elevator': 'Avec ascenseur'
+'Elevator': 'Ascenseur'
 'With Verandah': 'Avec Véranda'
+'Verandah': 'Véranda'
 Covered: Couvert
 Rent: Location
 Caliber: Calibre
@@ -1695,6 +1701,6 @@ About us: À propos de nous
 about us: À propos de nous
 Legal Notice: Mention légale
 Legal notice: Mention légale
-
+Kilometre: Kilometrage
 
 

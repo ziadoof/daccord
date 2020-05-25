@@ -4,47 +4,51 @@
         {{ form_start(meetupForm, {'attr': {'id': 'search-meetup'}}) }}
         <div class="text-center ">
             <div class="row">
-                <div class="col-md-2 border-search">
-                    <div class="">
-                        {{ form_row(meetupForm.region) }}
-                    </div>
-                    <div class="">
-                        {{ form_row(meetupForm.department) }}
-                    </div>
-                    <div class="">
-                        {{ form_row(meetupForm.city) }}
-                    </div>
-                </div>
-                <div class="col-md-10">
-                    <div class="row">
-                        <div class="col-md-8 offset-2">
-                            {{ form_row(meetupForm.title) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 offset-2">
-                            <div class="">
-                                {{ form_row(meetupForm.type) }}
+                <div class="col-lg-6 col-md-6 ">
+                    <div class="local-border ">
+                        <div class="mx-2 mt-2">
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(meetupForm.region) }}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(meetupForm.department) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    {{ form_row(meetupForm.city) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="">
-                                {{ form_row(meetupForm.maxParticipants) }}
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="local-border px-3 py-3">
+                        <div id="meetup-specifications">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    {{ form_row(meetupForm.title) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    {{ form_row(meetupForm.type) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                                    <span class="blued pr-3">{% trans %}Max Number of participants{% endtrans %}</span><br>
+                                    <input class="" id="maxParticipants-slider-meetup" type="text"/>
+                                    <div class="checkbox-hidden">
+                                        {{ form_row(meetupForm.maxParticipants, { 'attr': {'hidden': true} }) }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center mb-2">
+        <div class="row justify-content-center my-3">
             <div class="col-md-12">
-                <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
+                <input type="submit" id="valide-meetup-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
             </div>
         </div>
     </div>
 </div>
-
 {{ form_end(meetupForm) }}
-<a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-<a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-

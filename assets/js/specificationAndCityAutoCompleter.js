@@ -1,5 +1,6 @@
 import tail from './meetup/tail.datetime-full';
 import Translator from "bazinga-translator";
+import {addOfferSearchSlider,hideElementsOfferSearch, addDemandSearchSlider,hideElementsDemandSearch} from './slider';
 
 /*this file grouped th specification for new ad  & city auto complete for form & template for dateTime offer and demand and other*/
 var $ospecification = $("#offer_category");
@@ -20,7 +21,6 @@ $(document).on('change', '#offer_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#new_form_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('offer');
             $('#offer_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -51,7 +51,6 @@ $(document).on('change', '#demand_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#new_form_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('demand');
             $('#demand_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -82,7 +81,6 @@ $(document).on('change', '#demand_search_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#search_demand_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('demand_search');
             $('#demand_search_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -90,6 +88,8 @@ $(document).on('change', '#demand_search_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+            addDemandSearchSlider();
+            hideElementsDemandSearch();
         }
     });
 });
@@ -112,7 +112,6 @@ $(document).on('change', '#offer_search_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#search_offer_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('offer_search');
             $('#offer_search_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -120,6 +119,9 @@ $(document).on('change', '#offer_search_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+
+            addOfferSearchSlider();
+            hideElementsOfferSearch();
         }
     });
 });
@@ -127,15 +129,6 @@ donate('offer_search');
 donate('offer');
 donate('demand');
 
-var $checkbox = ['accessories','cdRoom', 'covered', 'electricHead', 'hdmi', 'threeInOne', 'usb',
-    'withOven', 'wifi', 'withElevator', 'withFreezer', 'withFurniture', 'withGarden', 'withVerandah', 'withDriver','donate'];
-
-
-function addBootstrapToggle($type) {
-    for (var i=0, total = $checkbox.length; i < total; i++) {
-        $('#'+ $type +'_'+$checkbox[i]).bootstrapToggle();
-    }
-}
 
 function donate($type) {
     $(document).on('change', '#'+$type+'_donate', function () {
@@ -236,3 +229,50 @@ function addBirthdayForm($id){
         closeButton:false,
     });
 }
+
+$('#more-localisation').on('click',function(){
+    let status = $('#localisation');
+    if(status.hasClass('show')){
+        $('#more-localisation i').removeClass('fa-arrow-alt-circle-up');
+        $('#more-localisation i').addClass('fa-arrow-alt-circle-down');
+    }
+    else {
+        $('#more-localisation i').removeClass('fa-arrow-alt-circle-down');
+        $('#more-localisation i').addClass('fa-arrow-alt-circle-up');
+    }
+});
+$('#more-localisation-demand').on('click',function(){
+    let status = $('#localisation-demand');
+    if(status.hasClass('show')){
+        $('#more-localisation-demand i').removeClass('fa-arrow-alt-circle-up');
+        $('#more-localisation-demand i').addClass('fa-arrow-alt-circle-down');
+    }
+    else {
+        $('#more-localisation-demand i').removeClass('fa-arrow-alt-circle-down');
+        $('#more-localisation-demand i').addClass('fa-arrow-alt-circle-up');
+    }
+});
+
+$('#more-host').on('click',function(){
+    let status = $('#list-more-host');
+    if(status.hasClass('show')){
+        $('#more-host i').removeClass('fa-arrow-alt-circle-up');
+        $('#more-host i').addClass('fa-arrow-alt-circle-down');
+    }
+    else {
+        $('#more-host i').removeClass('fa-arrow-alt-circle-down');
+        $('#more-host i').addClass('fa-arrow-alt-circle-up');
+    }
+});
+
+$('#more-share').on('click',function(){
+    let status = $('#list-more-share');
+    if(status.hasClass('show')){
+        $('#more-share i').removeClass('fa-arrow-alt-circle-up');
+        $('#more-share i').addClass('fa-arrow-alt-circle-down');
+    }
+    else {
+        $('#more-share i').removeClass('fa-arrow-alt-circle-down');
+        $('#more-share i').addClass('fa-arrow-alt-circle-up');
+    }
+});

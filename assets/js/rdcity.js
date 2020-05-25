@@ -131,6 +131,9 @@ $(document).on('change', '#offer_search_department', function () {
 $(document).ready(function () {
     $('#offer_search_ville').select2({
         placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        width: '100%',
+        height: '30px',
     });
     $('#demand_search_ville').select2({
         placeholder: Translator.trans('Select region'),
@@ -139,6 +142,13 @@ $(document).ready(function () {
         height: '30px',
     });
     $('#hosting_search_ville').select2({
+        placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        width: '100%',
+        height: '30px',
+    });
+
+    $('#meetup_search_city').select2({
         placeholder: Translator.trans('Select region'),
         dropdownAutoWidth: true,
         width: '100%',

@@ -1,16 +1,16 @@
 .locale-icon img{
     width: 25px;
     height: 25px;
-  margin-right: 1%;
+    margin-right: 1%;
 }
-footer{
+.footer{
     background-color: $noird;
     position: relative;
     bottom: 0;
     width: 100%;
-
+    z-index: 9999;
 }
-footer a{
+.footer a{
     color: white;
 }
 .user_layout {

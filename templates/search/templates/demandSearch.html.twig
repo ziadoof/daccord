@@ -2,537 +2,816 @@
 <div class="row register-form">
     <div class="col-md-12 mt-4">
         {{ form_start(demandForm, {'attr': {'id': 'search-demand'}}) }}
-        <div class="text-center ">
+        <div class="">
             <div class="row ">
-                <div class="col-md-2 border-search">
-                    <div class="row nearme">
-                        <div class="col-md-6 mt-2">
-                            {{ form_row(demandForm.nearme,{'attr':{'id':'demand_location'}}) }}
-                            <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %} ">
-                                {{ form_row(demandForm.myArea) }}
+                <div class="col-lg-6 col-md-6 ">
+                    <div class="local-border ">
+                        <div class="row nearme px-2 pt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form_row(demandForm.nearme,{'attr':{'id':'demand_location',},label_attr:{'class':'checkbox-custom'}}) }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form_row(demandForm.distance) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 search-down">
+                                <a id="more-localisation-demand" class="float-right" data-toggle="collapse" href="#localisation-demand" role="button" aria-expanded="false" aria-controls="localisation-demand">
+                                    <i class="far fa-arrow-alt-circle-down mt-3 "></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            {{ form_row(demandForm.distance) }}
-                        </div>
-                    </div>
-                    <div class="">
-                        {{ form_row(demandForm.region) }}
-                    </div>
-                    <div class="">
-                        {{ form_row(demandForm.department) }}
-                    </div>
-                    <div class="">
-                        {{ form_row(demandForm.ville) }}
-                    </div>
-                </div>
-                <div class="col-md-2 border-search-category mt-4">
-                    <div class="">
-                        {{ form_row(demandForm.generalcategory) }}
-                    </div>
-                    <div class="" >
-                        {{ form_row(demandForm.category) }}
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-12 ">
-                            {{ form_row(demandForm.title) }}
-                            {{ form_row(demandForm.lat) }}
-                            {{ form_row(demandForm.lng) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="search_demand_dynamic">
-                                <div class="">
-                                    <div class="row">
-                                        {% if demandForm.manufactureCompany is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.manufactureCompany) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.minManufacturingYear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.minManufacturingYear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.manufacturingYear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.manufacturingYear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxManufacturingYear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxManufacturingYear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.subjectName is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.subjectName) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.brand is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.brand) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.city is defined %}
-                                            <div class="col-md-6">
-                                                {{ form_row(demandForm.city) }}
-                                                <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-                                                <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.age is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.age) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.model is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.model) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.material is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.material) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.theType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.theType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.minKilometer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.minKilometer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.kilometer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.kilometer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxKilometer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxKilometer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.changeGear is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.changeGear) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.fuelType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.fuelType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.ability is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.ability) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.acitvityArea is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.acitvityArea) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.mission is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.mission) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.workHours is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.workHours) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.experience is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.experience) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.levelOfStudent is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.levelOfStudent) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.levelOfStudy is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.levelOfStudy) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.typeOfContract is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.typeOfContract) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.salary is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.salary) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.typeOfTranslation is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.typeOfTranslation) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.placeOfLesson is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.placeOfLesson) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.durationOfLesson is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.durationOfLesson) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.language is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.language) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.languages is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.languages) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.secondLanguage is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.secondLanguage) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.accuracy is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.accuracy) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.capacity is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.capacity) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.minCapacity is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.minCapacity) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxCapacity is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxCapacity) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.dvdCd is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.dvdCd) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.analogDigital is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.analogDigital) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.minArea is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.minArea) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.area is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.area) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxArea is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxArea) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.floor is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.floor) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.heating is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.heating) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.heatingType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.heatingType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.coverMaterial is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.coverMaterial) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.shape is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.shape) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.originCountry is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.originCountry) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.animalSpecies is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.animalSpecies) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.minCaliber is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.minCaliber) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.caliber is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.caliber) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxCaliber is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxCaliber) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.generalSituation is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.generalSituation) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.processor is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.processor) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.ram is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.ram) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.printingColor is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.printingColor) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.printingType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.printingType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.paperSize is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.paperSize) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.iSize is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.iSize) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.sSize is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.sSize) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.screenSizeCm is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.screenSizeCm) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.screenSizeInch is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.screenSizeInch) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.number is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.number) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfPassengers is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfPassengers) }}
-                                            </div>
-                                        {% endif %}
-
-                                        {% if demandForm.numberOfDoors is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfDoors) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfDrawer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfDrawer) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.eventType is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.eventType) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfFloors is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfFloors) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfHead is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfHead) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfPersson is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfPersson) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.minNumberOfRooms is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.minNumberOfRooms) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfRooms is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfRooms) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxNumberOfRooms is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxNumberOfRooms) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.numberOfStaging is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.numberOfStaging) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.length is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.length) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.width is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.width) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.height is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.height) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.weight is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.weight) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.classEnergie is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.classEnergie) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.ges is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.ges) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.color is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.color) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.maxDistance is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.maxDistance) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.accessories is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.accessories, {'attr': {'data-toggle':'toggle' ,'data-on':'With accessories', 'data-off':'With out accessories', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.cdRoom is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.cdRoom, {'attr': {'data-toggle':'toggle' ,'data-on':'With CD room', 'data-off':'With out CD room', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.covered is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.covered, {'attr': {'data-toggle':'toggle' ,'data-on':'With covered', 'data-off':'With out covered', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.electricHead is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.electricHead, {'attr': {'data-toggle':'toggle' ,'data-on':'With elctric head', 'data-off':'With out elctric head', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.hdmi is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.hdmi, {'attr': {'data-toggle':'toggle' ,'data-on':'With HDMI', 'data-off':'With out HDMI', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.threeInOne is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.threeInOne, {'attr': {'data-toggle':'toggle' ,'data-on':'Three in one', 'data-off':'One function', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.usb is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.usb, {'attr': {'data-toggle':'toggle' ,'data-on':'With USB', 'data-off':'With out USB', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.withOven is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.withOven, {'attr': {'data-toggle':'toggle' ,'data-on':'With oven', 'data-off':'With out oven', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.wifi is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.wifi, {'attr': {'data-toggle':'toggle' ,'data-on':'With wifi', 'data-off':'With out wifi', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.withElevator is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.withElevator, {'attr': {'data-toggle':'toggle' ,'data-on':'With elevator', 'data-off':'With out elevator', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.withFreezer is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.withFreezer, {'attr': {'data-toggle':'toggle' ,'data-on':'With freezer', 'data-off':'with out freezer', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.withFurniture is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.withFurniture, {'attr': {'data-toggle':'toggle' ,'data-on':'With furniture', 'data-off':'With out furniture', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.withGarden is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.withGarden, {'attr': {'data-toggle':'toggle' ,'data-on':'With garden', 'data-off':'with out garden', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
-                                        {% if demandForm.withVerandah is defined %}
-                                            <div class="col-md-3">
-                                                {{ form_row(demandForm.withVerandah, {'attr': {'data-toggle':'toggle' ,'data-on':'with verandah', 'data-off':'with out verandah', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
-                                            </div>
-                                        {% endif %}
+                        <div class="collapse mx-2" id="localisation-demand">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 white">
+                                    <div class="{% if app.user==null %} {{ "my-area-hidden" }}{% endif %}">
+                                        {{ form_row(demandForm.myArea, {label_attr:{'class':'checkbox-custom'}}) }}
                                     </div>
-                                    <hr>
-                                    <div class="row">
-                                        {% if demandForm.donate is defined %}
-                                            <div class="col-md-3 ">
-                                                {{ form_row(demandForm.donate, {'attr': {'data-toggle':'toggle' ,'data-on':'Donate', 'data-off':'For sale', 'data-onstyle':'warning', 'data-offstyle':'info'}}) }}
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(demandForm.region) }}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(demandForm.department) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    {{ form_row(demandForm.ville) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2  local-border mb-3">
+                        <div class="row px-1 pt-2">
+                            <div class="col-lg-6 col-md-6 col-6">
+                                {{ form_row(demandForm.generalcategory) }}
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6">
+                                {{ form_row(demandForm.category) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="local-border">
+                        <div class="row px-1 pt-2">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                {{ form_row(demandForm.title) }}
+                                <div class="checkbox-hidden">
+                                    {{ form_row(demandForm.lat) }}
+                                    {{ form_row(demandForm.lng) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row px-1">
+                            <div class="col">
+                                <div id="search_demand_dynamic">
+                                    <div class="">
+                                        <div class="row">
+                                            {% if demandForm.manufacturingYear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-manufacturingYear">
+                                                    <span class="blued pr-3">{% trans %}Manufacturing Year{% endtrans %}</span><br>
+                                                    <input id="manufacturingYear-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.manufacturingYear, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+
+
+                                            {% if demandForm.changeGear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-changeGear">
+                                                    <span class="blued pr-3">{% trans %}Change Gear{% endtrans %}</span><br>
+                                                    <div class="change-gear">
+                                                        <input id="changeGear-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="2"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.changeGear, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfPassengers is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfPassengers">
+                                                    <span id="numberOfPassengersDemandSearch" class="blued pr-3"></span><br>
+                                                    <input id="numberOfPassengers-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.numberOfPassengers, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfDoors is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfDoors">
+                                                    <span id="numberOfDoorsDemandSearch" class="blued pr-3"></span><br>
+                                                    <input id="numberOfDoors-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.numberOfDoors, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.workHours is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-workHours">
+                                                    <span class="blued pr-3">{% trans %}Work Hours{% endtrans %}</span><br>
+                                                    <div class="workHoursDemandSearch">
+                                                        <input id="workHours-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="2"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.workHours, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.dvdCd is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-dvdCd">
+                                                    <span class="blued pr-3">{% trans %}DVD CD{% endtrans %}</span><br>
+                                                    <div class="dvdCdDemandSearch">
+                                                        <input id="dvdCd-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="2"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.dvdCd , { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.ram is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-ram">
+                                                    <span id="ramDemandSearch" class="blued pr-3"></span><br>
+                                                    <input id="ram-slider-demand" type="text" data-slider-lock-to-ticks="true" />
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.ram, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.capacity is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-capacity">
+                                                    <span id="capacityDemandSearch" class="blued pr-3"></span><br>
+                                                    <input id="capacity-slider-demand" type="text" data-slider-lock-to-ticks="true" />
+                                                    {{ form_row(demandForm.capacity, { 'attr': {'hidden': true}}) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.wifi is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-wifi">
+                                                    <span class="blued pr-3">{% trans %}Wifi{% endtrans %}</span><br>
+                                                    <div class="wifiDemandSearch">
+                                                        <input id="wifi-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.wifi, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.usb is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-usb">
+                                                    <span class="blued pr-3">{% trans %}Usb{% endtrans %}</span><br>
+                                                    <div class="usbDemandSearch">
+                                                        <input id="usb-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.usb, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.accessories is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-accessories">
+                                                    <span class="blued pr-3">{% trans %}Accessories{% endtrans %}</span><br>
+                                                    <div class="accessoriesDemandSearch">
+                                                        <input id="accessories-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.accessories , { 'attr': {'hidden': true}} ) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.hdmi is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-hdmi">
+                                                    <span class="blued pr-3">{% trans %}Hdmi{% endtrans %}</span><br>
+                                                    <div class="hdmiDemandSearch">
+                                                        <input id="hdmi-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.hdmi, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.cdRoom is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-cdRoom">
+                                                    <span class="blued pr-3">{% trans %}Cd Room{% endtrans %}</span><br>
+                                                    <div class="cdRoomDemandSearch">
+                                                        <input id="cdRoom-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.cdRoom, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.covered is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-covered">
+                                                    <span class="blued pr-3">{% trans %}Covered{% endtrans %}</span><br>
+                                                    <div class="coveredDemandSearch">
+                                                        <input id="covered-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.covered, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.electricHead is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-electricHead">
+                                                    <span class="blued pr-3">{% trans %}Electric Head{% endtrans %}</span><br>
+                                                    <div class="electricHeadDemandSearch">
+                                                        <input id="electricHead-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.electricHead, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.threeInOne is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-threeInOne">
+                                                    <span class="blued pr-3">{% trans %}Three In One{% endtrans %}</span><br>
+                                                    <div class="threeInOneDemandSearch">
+                                                        <input id="threeInOne-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.threeInOne, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.withOven is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-withOven">
+                                                    <span class="blued pr-3">{% trans %}Oven{% endtrans %}</span><br>
+                                                    <div class="OvenDemandSearch">
+                                                        <input id="Oven-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.withOven, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.withElevator is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-withElevator">
+                                                    <span class="blued pr-3">{% trans %}Elevator{% endtrans %}</span><br>
+                                                    <div class="ElevatorDemandSearch">
+                                                        <input id="Elevator-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.withElevator, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.withFreezer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-withFreezer">
+                                                    <span class="blued pr-3">{% trans %}Freezer{% endtrans %}</span><br>
+                                                    <div class="FreezerDemandSearch">
+                                                        <input id="Freezer-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.withFreezer, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.withFurniture is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-withFurniture">
+                                                    <span class="blued pr-3">{% trans %}Furniture{% endtrans %}</span><br>
+                                                    <div class="FurnitureDemandSearch">
+                                                        <input id="Furniture-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.withFurniture, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.withGarden is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-withGarden">
+                                                    <span class="blued pr-3">{% trans %}Garden{% endtrans %}</span><br>
+                                                    <div class="GardenDemandSearch">
+                                                        <input id="Garden-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.withGarden, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.withVerandah is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-withVerandah">
+                                                    <span class="blued pr-3">{% trans %}Verandah{% endtrans %}</span><br>
+                                                    <div class="VerandahDemandSearch">
+                                                        <input id="Verandah-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="1"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.withVerandah, {'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfHead is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfHead">
+                                                    <span id="numberOfHeadDemandSearch" class="blued pr-3"></span><br>
+                                                    <input id="numberOfHead-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.numberOfHead, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfPersson is defined %}
+                                                {% if demandForm.category.vars.value is same as("1856") or
+                                                    demandForm.category.vars.value is same as("1857") or
+                                                    demandForm.category.vars.value is same as("1858") %}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfPersson1">
+                                                        {{ form_row(demandForm.numberOfPersson) }}
+                                                    </div>
+                                                {% else%}
+                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfPersson">
+                                                        <span class="blued pr-3">{% trans %}Number Of Persson{% endtrans %}</span><br>
+                                                        <input id="numberOfPersson-slider-demand" type="text"/>
+                                                        <div class="checkbox-hidden">
+                                                            {{ form_row(demandForm.numberOfPersson, { 'attr': {'hidden': true}}) }}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if demandForm.number is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-number">
+                                                    <span id="numberDemandSearch" class="blued pr-3"></span><br>
+                                                    <input id="number-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.number, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfRooms">
+                                                    <span id="numberOfRoomsDemandSearch" class="blued pr-3">{% trans %}Number Of Rooms{% endtrans %}</span><br>
+                                                    <input id="numberOfRooms-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.numberOfRooms, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.classEnergie is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-classEnergie">
+                                                    <span class="blued pr-3">{% trans %}Class Energie{% endtrans %}</span><br>
+                                                    <div class="classEnergieDemandSearch">
+                                                        <input id="classEnergie-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2,3,4,5,6,7]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="7"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.classEnergie, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.ges is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-ges">
+                                                    <span class="blued pr-3">{% trans %}Ges{% endtrans %}</span><br>
+                                                    <div class="classGesDemandSearch">
+                                                        <input id="classGes-slider-demand" type="text"
+                                                               data-provide="slider"
+                                                               data-slider-ticks="[0, 1, 2,3,4,5,6,7]"
+                                                               data-slider-min="0"
+                                                               data-slider-max="7"
+                                                               data-slider-step="1"
+                                                               data-slider-value="0"
+                                                               data-slider-tooltip="hide" />
+                                                    </div>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.ges, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfDrawer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfDrawer">
+                                                    <span class="blued pr-3">{% trans %}Number Of Drawer{% endtrans %}</span><br>
+                                                    <input id="numberOfDrawer-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.numberOfDrawer, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.numberOfStaging is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-numberOfStaging">
+                                                    <span class="blued pr-3">{% trans %}Number Of Staging{% endtrans %}</span><br>
+                                                    <input id="numberOfStaging-slider-demand" type="text"/>
+                                                    <div class="checkbox-hidden">
+                                                        {{ form_row(demandForm.numberOfStaging, { 'attr': {'hidden': true}}) }}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.minCapacity is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-minCapacity">
+                                                    {{ form_row(demandForm.minCapacity) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.maxCapacity is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-maxCapacity">
+                                                    {{ form_row(demandForm.maxCapacity) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.kilometer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-kilometer">
+                                                    {{ form_row(demandForm.kilometer) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.fuelType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-fuelType">
+                                                    {{ form_row(demandForm.fuelType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.brand is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-brand">
+                                                    {{ form_row(demandForm.brand) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.model is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-model">
+                                                    {{ form_row(demandForm.model) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.manufactureCompany is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-manufactureCompany">
+                                                    {{ form_row(demandForm.manufactureCompany) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.subjectName is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-subjectName">
+                                                    {{ form_row(demandForm.subjectName) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.generalSituation is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-generalSituation">
+                                                    {{ form_row(demandForm.generalSituation) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.acitvityArea is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-acitvityArea">
+                                                    {{ form_row(demandForm.acitvityArea) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if demandForm.experience is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-experience">
+                                                    {{ form_row(demandForm.experience) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.levelOfStudent is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-levelOfStudent">
+                                                    {{ form_row(demandForm.levelOfStudent) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.levelOfStudy is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-levelOfStudy">
+                                                    {{ form_row(demandForm.levelOfStudy) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.typeOfContract is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-typeOfContract">
+                                                    {{ form_row(demandForm.typeOfContract) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.salary is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-salary">
+                                                    {{ form_row(demandForm.salary) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.typeOfTranslation is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-typeOfTranslation">
+                                                    {{ form_row(demandForm.typeOfTranslation) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.languages is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-languages">
+                                                    {{ form_row(demandForm.languages) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.placeOfLesson is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-placeOfLesson">
+                                                    {{ form_row(demandForm.placeOfLesson) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.language is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-language">
+                                                    {{ form_row(demandForm.language) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if demandForm.secondLanguage is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-secondLanguage">
+                                                    {{ form_row(demandForm.secondLanguage) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.material is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-material">
+                                                    {{ form_row(demandForm.material) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.theType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-theType">
+                                                    {{ form_row(demandForm.theType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.accuracy is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-accuracy">
+                                                    {{ form_row(demandForm.accuracy) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.paperSize is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-paperSize">
+                                                    {{ form_row(demandForm.paperSize) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.printingColor is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-printingColor">
+                                                    {{ form_row(demandForm.printingColor) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.printingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-printingType">
+                                                    {{ form_row(demandForm.printingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.iSize is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-">
+                                                    {{ form_row(demandForm.iSize) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.sSize is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-iSize">
+                                                    {{ form_row(demandForm.sSize) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if demandForm.heatingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-heatingType">
+                                                    {{ form_row(demandForm.heatingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.heating is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-heating">
+                                                    {{ form_row(demandForm.heating) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.weight is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-weight">
+                                                    {{ form_row(demandForm.weight) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.analogDigital is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-analogDigital">
+                                                    {{ form_row(demandForm.analogDigital) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.originCountry is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-originCountry">
+                                                    {{ form_row(demandForm.originCountry) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.age is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-age">
+                                                    {{ form_row(demandForm.age) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.animalSpecies is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-animalSpecies">
+                                                    {{ form_row(demandForm.animalSpecies) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.coverMaterial is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-coverMaterial">
+                                                    {{ form_row(demandForm.coverMaterial) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.shape is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-shape">
+                                                    {{ form_row(demandForm.shape) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.city is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-city">
+                                                    {{ form_row(demandForm.city) }}
+                                                </div>
+                                            {% endif %}
+                                            {#not yet useed#}
+
+
+                                            {% if demandForm.area is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-area">
+                                                    {{ form_row(demandForm.area) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.minCaliber is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-minCaliber">
+                                                    {{ form_row(demandForm.minCaliber) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.maxCaliber is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-maxCaliber">
+                                                    {{ form_row(demandForm.maxCaliber) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.printingType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-printingType">
+                                                    {{ form_row(demandForm.printingType) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.screenSizeCm is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-screenSizeCm">
+                                                    {{ form_row(demandForm.screenSizeCm) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.screenSizeInch is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-screenSizeInch">
+                                                    {{ form_row(demandForm.screenSizeInch) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.minNumberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-minNumberOfRooms">
+                                                    {{ form_row(demandForm.minNumberOfRooms) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.maxNumberOfRooms is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-maxNumberOfRooms">
+                                                    {{ form_row(demandForm.maxNumberOfRooms) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.eventType is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-eventType">
+                                                    {{ form_row(demandForm.eventType) }}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if demandForm.minManufacturingYear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-minManufacturingYear">
+                                                    {{ form_row(demandForm.minManufacturingYear) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.maxManufacturingYear is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-maxManufacturingYear">
+                                                    {{ form_row(demandForm.maxManufacturingYear) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.minKilometer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-minKilometer">
+                                                    {{ form_row(demandForm.minKilometer) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.maxKilometer is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-maxKilometer">
+                                                    {{ form_row(demandForm.maxKilometer) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.minArea is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-minArea">
+                                                    {{ form_row(demandForm.minArea) }}
+                                                </div>
+                                            {% endif %}
+                                            {% if demandForm.maxArea is defined %}
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-maxArea">
+                                                    {{ form_row(demandForm.maxArea) }}
+                                                </div>
+                                            {% endif %}
+                                            {#not yet useed#}
+                                        </div>
+                                        <div class="row">
+                                            <div class="btn-group btn-block white">
+                                                {% if demandForm.price is defined %}
+                                                    <div id="demand-section-price">
+                                                        {{ form_row(demandForm.price) }}
+                                                    </div>
+                                                {% endif %}
+                                                <div class="ml-1 mt-1">
+                                                    {% if demandForm.donate is defined %}
+                                                        <div id="demand-section-donate">
+                                                            {{ form_row(demandForm.donate, {'label':'Donate',label_attr:{'class':'checkbox-custom'}}) }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
                                             </div>
-                                        {% endif %}
-                                        {% if demandForm.price is defined %}
-                                            <div class="col-md-3  ">
-                                                {{ form_row(demandForm.price) }}
-                                            </div>
-                                        {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -540,7 +819,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-2">
+            <div class="row justify-content-center my-3">
                 <div class="col-md-12">
                     <input type="submit" id="valide-demand-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
                 </div>
@@ -549,5 +828,4 @@
     </div>
 </div>
 {{ form_end(demandForm) }}
-<a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-<a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
+

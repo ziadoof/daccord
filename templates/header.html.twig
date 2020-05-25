@@ -1,98 +1,182 @@
 <header class="header pb-5">
     <nav class="navbar navbar-toggleable-md navbar-light pt-0 pb-0 pl-0" id="nav">
         <div class=" navbar-collapse flex-row-reverse" id="navbarNavDropdown">
-           <div class="row">
-              <div class=" col-md-12">
-                  <div class="logo py-2">
-                      <a href="{{ path('index') }}">
-                          <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
-                      </a>
-                  </div>
-                  {% if app.user != null%}
-                  <div class="col-md-3 col-sm-4 col-xs-4 backnavbar">
-                      <div class="">
-                          <div id="all-logo" >
-                              <div class="logo-acoord ">
-                                  <div onclick="dashboard();"><span class="blued forlogo">FOR<span class="rosed dealLogo">DEAL</span>ING </span></div>
-                              </div>
-                          </div>
-                          <div class="sidebar-toggle-box">
-                              <div class="float-left"> <a  class="button-left ml-2"><span class="fa fa-fw fa-bars"></span></a> </div>
-                          </div>
-                      </div>
-                  </div>
-                  {% endif %}
-                  {% if app.user==null %}
-                  <div class="col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5  col-xs-3 col-xs-offset-5 float-md-right pt-2">
-                      <form class="form-inline my-2 my-lg-0 float-right">
-                          <a class=" my-2 my-sm-0 mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button"><i class="fas fa-search search-icon"></i></a>
-                          <a class="btn btn-info my-2 my-sm-0 ml-2" href="{{ path('security_login') }}">{% trans %}Sign in{% endtrans %}</a>
-                      </form>
-                  </div>
-                  {% else %}
-
-
-                  <div class="col-md-3  col-sm-3   col-xs-3  float-right">
-                 <!-- user login dropdown start-->
-                      <div class="user-profile">
-                         <a data-toggle="dropdown"  href="#">
-                             <span class="profile-ava">
-                                 {% if app.user.profileImage != "" or app.user.profileImage != null %}
-                                 <img alt="" src="{{ asset('/assets/images/profile/'~app.user.profileImage) }}" id="avatar-small">
-                                 {% else %}
-                                 <img  src="{{ asset('/assets/images/profile/user-avatar.png') }}" id="avatar-small">
-                                 {% endif %}
-                             </span>
-                         </a>
-                         <ul class="dropdown-menu extended logout">
-                             <li class="username">
-                                 <h6 >{{ app.user.firstName }} {{ app.user.lastname }}</h6>
-                             </li>
-                             <li >
-                                 <a href="{{ path('ad_new',{'type': 'Offer'}) }}">{% trans %}New offer{% endtrans %}</a>
-                             </li>
-                             <li >
-                                 <a href="{{ path('ad_new',{'type': 'Demand'}) }}">{% trans %}New demand{% endtrans %}</a>
-                             </li>
-                             <li >
-                                 <a href="{{ path('fos_user_profile_show') }}">{% trans %}My profile{% endtrans %}</a>
-                             </li>
-                             <li >
-                               <a href="{{ path('fos_user_profile_edit') }}">{% trans %}Edit my profile{% endtrans %}</a>
-                             </li>
-                             <li>
-                                 <a href="{{ path('fos_user_change_password') }}">{% trans %}change my password{% endtrans %}</a>
-                             </li>
-                             {% if is_granted('ROLE_ADMIN') %}
-                                 <li>
-                                     <a href="{{ path('admin_index') }}">{% trans %}ADMINISTRATION{% endtrans %}</a>
-                                 </li>
-                             {% endif %}
-                             <li>
-                                 <a href="{{ path('security_logout') }}">{% trans %}Log out{% endtrans %}</a>
-                             </li>
-                         </ul>
-                    <!-- user login dropdown end -->
-                      </div>
-                      {% set messageCount = MessageCount.getNbUnreadMessage(app.user) %}
-                      <div class="col-md-4 float-right mr-3 mt-1 justify-content-center btn-group mr-4">
-                          <a  href="{{path('message_index')}}">
-                              <div id="centerOfMessages">
-                                  <p id="messagesCount" class="{% if messageCount is same as (0) %}{{ 'hide-padge' }}{% endif %}">
-                                      {{ messageCount }}
-                                  </p>
-                              </div>
-                              <i class="fas fa-envelope search-icon"></i>
-                          </a>
-                          <a class="justify-content-center mx-4 mt-1"  data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-search search-icon"></i></a>
-                          {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
-                      </div>
-                  </div>
-                  {% endif %}
-                  </div>
-              </div>
-           </div>
+            <div class="row">
+                {% if app.user is same as (null) %} {#visitor#}
+                    <div class="col-md-6 col-sm-6 col-8 col-lg-6 col-xl-6">
+                        <div class="big-logo mt-sm-2 mt-md-3 mt-2 ">
+                            <a href="{{ path('index') }}">
+                                <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
+                                <span class="blued forlogo pl-1 ">FOR<b class="rosed dealLogo">DEAL</b>ING </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-4 col-lg-6 col-xl-6">
+                        <div class=" pt-2">
+                            <form class="form-inline my-2 float-right">
+                                <a class=" my-2  mx-2" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button">
+                                    <img src="{{ asset('assets/images/icons/search.png') }} " class="icon-visitor">
+                                </a>
+                                <a class="my-2  ml-2" href="{{ path('security_login') }}">
+                                    <img src="{{ asset('assets/images/icons/login.png') }} " class="icon-visitor">
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}{#user#}
+                    <div class="col-md-6 col-sm-2 col-2 col-lg-6 col-xl-6">
+                        <div class="d-none d-md-inline-block">
+                            <div class="backnavbar ">
+                                <div class="big-logo mt-sm-2 mt-md-3 mt-2 ">
+                                    <a href="{{ path('index') }}">
+                                        <img src="{{ asset('assets/images/logo/small.png') }}" alt="" >
+                                        <span class="blued forlogo pl-1 logo-acoord">FOR<b class="rosed dealLogo">DEAL</b>ING </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-none d-lg-inline-block big-logo">
+                            <a  class="button-left ml-2 pt-1 sidebar-toggle-box " >
+                                <span class="fa fa-fw fa-bars"></span>
+                            </a>
+                        </div>
+                        {#--------------------#}
+                        <div class="sm-sidebar-toggle mt-2">
+                            <div class="float-left pt-1 d-sm-block d-md-none  menu-toggle">
+                                <a class=" button-left ml-2 pt-1 sidebar-toggle-box">
+                                    <span class="fa fa-fw fa-bars"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-10 col-10 col-lg-6 col-xl-6 header-icons">
+                        <div class="pt-2">
+                            <form class="form-inline float-right">
+                                <a class=" my-2  mr-5" data-toggle="collapse" href="#search-bar" role="button" aria-expanded="false" aria-controls="collapseExample" id="search_bar_button">
+                                    <img src="{{ asset('assets/images/icons/search.png') }} " class="icon-visitor">
+                                </a>
+                                {% set messageCount = MessageCount.getNbUnreadMessage(app.user) %}
+                                <a  href="{{path('message_index')}}" class=" mr-5">
+                                    <div id="centerOfMessages" >
+                                        <p id="messagesCount" class="{% if messageCount is same as (0) %}{{ 'hide-padge' }}{% endif %}">
+                                            {{ messageCount }}
+                                        </p>
+                                    </div>
+                                    <img src="{{ asset('assets/images/icons/message.png') }} " class="icon-visitor">
+                                </a>
+                                <div class="mr-5">
+                                    {{notification(app.user,{'template':'bundles/MgiletNotificationBundle/template.html.twig','order':'DESC'})}}
+                                </div>
+                                <div class="user-profile ml-sm-2">
+                                    <a data-toggle="dropdown"  href="#">
+                                        <span class="profile-ava">
+                                            <img alt="" src="{{ app.user.photoProfile() }}" id="avatar-small">
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu extended logout">
+                                        <ul class="username mt-2 pb-2">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h6 class="ml-2 mt-3 font-weight-bold blued">{{ app.user.firstName|title }} {{ app.user.lastname|upper }}</h6>
+                                                </div>
+                                                <div class="col-4 offer-user">
+                                                    <img class="mr-3" src="{{ app.user.photoProfile() }}" >
+                                                </div>
+                                            </div>
+                                        </ul>
+                                        <li >
+                                            <a href="{{ path('ad_new',{'type': 'Offer'}) }}">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="ml-2 mt-1">{% trans %}New offer{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="mr-2" src="{{ asset('assets/images/icons/o-gray.png') }}" id="profile-list">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('ad_new',{'type': 'Demand'}) }}">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="ml-2 mt-1">{% trans %}New demand{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="mr-2" src="{{ asset('assets/images/icons/d-gray.png') }}" id="profile-list">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('fos_user_profile_show') }}">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="ml-2 mt-1">{% trans %}My profile{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="mr-2" src="{{ asset('assets/images/icons/profile-gray.png') }}" id="profile-list">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li >
+                                            <a href="{{ path('fos_user_profile_edit') }}">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="ml-2 mt-1">{% trans %}Edit my profile{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="mr-2" src="{{ asset('assets/images/icons/edit-profile-gray.png') }}" id="profile-list">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('fos_user_change_password') }}">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="ml-2 mt-1">{% trans %}change my password{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="mr-2" src="{{ asset('assets/images/icons/password-gray.png') }}" id="profile-list">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li>
+                                                <a href="{{ path('admin_index') }}">
+                                                    <div class="row">
+                                                        <div class="col-9">
+                                                            <h6 class="ml-2 mt-1">{% trans %}ADMINISTRATION{% endtrans %}</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <img class="mr-2" src="{{ asset('assets/images/icons/admin-gray.png') }}" id="profile-list">
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="{{ path('security_logout') }}">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="ml-2 mt-1">{% trans %}Log out{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img class="mr-2" src="{{ asset('assets/images/icons/logout-gray.png') }}" id="profile-list">
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!-- user login dropdown end -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </nav>
 </header>
-

@@ -5,9 +5,12 @@ import ListsHosting from "../Components/ListsHosting";
 import ListsMeetup from "../Components/ListsMeetup";
 import ListsVoyages from "../Components/ListsVoyages";
 import Translator from "bazinga-translator";
+import {generateSearchOfferSlide,generateSearchDemandSlide,generateHostingSlide,generateMeetupSlide} from '../../generate_slider';
 
 $('#search-offer').submit( function(e) {
     e.preventDefault();
+    generateSearchOfferSlide();
+
     var url = Routing.generate('add-offerType');
     var formSerialize = $(this).serialize();
 
@@ -30,6 +33,7 @@ $('#search-offer').submit( function(e) {
 
 $('#search-demand').submit( function(e) {
     e.preventDefault();
+    generateSearchDemandSlide();
 
     var url = Routing.generate('add-DemandType');
     var formSerialize = $(this).serialize();
@@ -98,9 +102,9 @@ window.addEventListener('popstate', function(e) {
 
 $('#search-hosting').submit( function(e) {
     e.preventDefault();
+    generateHostingSlide();
     var url = Routing.generate('add-hostingType');
     var formSerialize = $(this).serialize();
-
     $.ajax({
         method: "post",
         dataType: "json",
@@ -121,9 +125,9 @@ $('#search-hosting').submit( function(e) {
 
 $('#search-meetup').submit( function(e) {
     e.preventDefault();
+    generateMeetupSlide();
     var url = Routing.generate('add-meetupType');
     var formSerialize = $(this).serialize();
-
     $.ajax({
         method: "post",
         dataType: "json",
@@ -192,8 +196,7 @@ function setFavorite() {
                 data: data,
             }).done(function (response) {
             })
-
-
         })
     }
 }
+

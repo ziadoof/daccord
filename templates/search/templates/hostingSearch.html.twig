@@ -2,76 +2,108 @@
 <div class="row register-form">
     <div class="col-md-12 mt-4">
         {{ form_start(hostingForm, {'attr': {'id': 'search-hosting'}}) }}
-        <div class="text-center ">
+        <div class="">
             <div class="row">
-                <div class="col-md-2 border-search">
-                    <div class="">
-                        {{ form_row(hostingForm.region) }}
+                <div class="col-lg-6 col-md-6 ">
+                    <div class="local-border ">
+                        <div class="mx-2 mt-2">
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(hostingForm.region) }}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    {{ form_row(hostingForm.department) }}
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    {{ form_row(hostingForm.ville) }}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="">
-                        {{ form_row(hostingForm.department) }}
-                    </div>
-                    <div class="">
-                        {{ form_row(hostingForm.ville) }}
+                    <div class="mt-2  local-border mb-3">
+                        <div class="row px-1 pt-2">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                {{ form_row(hostingForm.languages) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2 border-search">
-                    <div class="">
-                        {{ form_row(hostingForm.languages) }}
-                    </div>
-                </div>
-                <div id="hosting-specifications"class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-5 offset-1">
-                            {{ form_row(hostingForm.numberOfPersons) }}
-                        </div>
-                        <div class="col-md-5 ">
-                            {{ form_row(hostingForm.numberOfDays) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4  offset-2 ">
-                            <div class="row">
-                                <span class="blued float-left mb-2">{% trans %}With ability to host :  {% endtrans %}</span>
-                            </div>
-                            <div class="row">
-                                {{ form_row(hostingForm.handicapped)}}
-                            </div>
-                            <div class="row">
-                                {{ form_row(hostingForm.child) }}
-                            </div>
-                            <div class="row">
-                                {{ form_row(hostingForm.animal) }}
-                            </div>
-                        </div>
-                        <div class="col-md-5 offset-1">
-                            <div class="row">
-                                <span class="blued float-left mb-2">{% trans %}With ability to share : {% endtrans %} </span>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        {{ form_row(hostingForm.food)}}
-                                    </div>
-                                    <div class="row">
-                                        {{ form_row(hostingForm.conversation) }}
-                                    </div>
-                                    <div class="row">
-                                        {{ form_row(hostingForm.cityTour) }}
-                                    </div>
-                                    <div class="row">
-                                        {{ form_row(hostingForm.music) }}
+                <div class="col-lg-6 col-md-6">
+                    <div class="local-border">
+                        <div id="hosting-specifications">
+                            <div class="row px-1 pt-2">
+                                <div class="col-lg-12 col-md-12 col-12 text-center">
+                                    <span class="blued pr-3">{% trans %}Number Of Persons{% endtrans %}</span><br>
+                                    <input class="" id="numberOfPerson-slider-hosting" type="text"/>
+                                    <div class="checkbox-hidden">
+                                        {{ form_row(hostingForm.numberOfPersons, { 'attr': {'hidden': true} }) }}
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        {{ form_row(hostingForm.videoGame) }}
+                            </div>
+                            <div class="row px-1 pt-2">
+                                <div class="col-lg-12 col-md-12 col-12 text-center">
+                                    <span class="blued pr-3">{% trans %}Number Of Days{% endtrans %}</span><br>
+                                    <input class="" id="numberOfDays-slider-hosting" type="text"/>
+                                    <div class="checkbox-hidden">
+                                        {{ form_row(hostingForm.numberOfDays, { 'attr': {'hidden': true} }) }}
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row px-3">
+                                <div class="col-lg-6 col-md-6 col-sm-4 col-6">
                                     <div class="row">
-                                        {{ form_row(hostingForm.movie) }}
+                                        <div class="col-lg-12 col-md-12 col-12 text-center">
+                                            <span class="blued mt-2 mr-2 span-hosting">{% trans %}Ability to host{% endtrans %}</span>
+                                            <a id="more-host" class="hosting-down mt-2" data-toggle="collapse" href="#list-more-host" role="button" aria-expanded="false" aria-controls="list-more-host">
+                                                <i class="far fa-arrow-alt-circle-down"></i>
+                                            </a>
+                                        </div>
+                                        <div id="list-more-host" class="collapse">
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                {{ form_row(hostingForm.handicapped,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                {{ form_row(hostingForm.child,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                {{ form_row(hostingForm.animal,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+
                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-8 col-6">
                                     <div class="row">
-                                        {{ form_row(hostingForm.television) }}
+                                        <div class="col-lg-12 col-md-12 col-12  text-center">
+                                            <span class="blued mt-2 mr-2 span-hosting">{% trans %}Ability to share{% endtrans %}</span>
+                                            <a id="more-share" class="hosting-down mt-2" data-toggle="collapse" href="#list-more-share" role="button" aria-expanded="false" aria-controls="list-more-share">
+                                                <i class="far fa-arrow-alt-circle-down"></i>
+                                            </a>
+                                        </div>
+                                        <div id="list-more-share" class="collapse">
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.food,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.conversation,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.cityTour,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.music,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.movie,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.television,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                                                {{ form_row(hostingForm.videoGame,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -79,16 +111,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center mb-2">
-            <div class="col-md-12">
-                <input type="submit" id="valide-offer-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
+            <div class="row justify-content-center my-3">
+                <div class="col-md-12">
+                    <input type="submit" id="valide-hosting-search" class="btn btn-info btn-block" value="{{ 'Search'|trans }}" />
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 {{ form_end(hostingForm) }}
-<a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-<a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-

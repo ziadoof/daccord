@@ -13,7 +13,7 @@
     </head>
     <body>
         {% block body %}
-            <section id="container" >
+            {#<section id="container" >
                 <section id="main-content">
                     <section class="container-fluid ">
                         <div class="wrapper ">
@@ -25,13 +25,14 @@
                         </div>
                     </section>
                 </section>
-            </section>
+            </section>#}
         {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
             <script src="{{ url('bazinga_jstranslation_js') }}"></script>
             <script src="{{ asset('build/runtime.js') }}"></script>
             <script src="{{ asset('build/app.js') }}"></script>
+
         {% endblock %}
     </body>
 </html>
