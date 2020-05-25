@@ -21,7 +21,6 @@ $(document).on('change', '#offer_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#new_form_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('offer');
             $('#offer_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -52,7 +51,6 @@ $(document).on('change', '#demand_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#new_form_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('demand');
             $('#demand_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -83,7 +81,6 @@ $(document).on('change', '#demand_search_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#search_demand_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('demand_search');
             $('#demand_search_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -115,7 +112,6 @@ $(document).on('change', '#offer_search_category', function () {
                 $item.find(".help-block").remove();
             });
             $('#search_offer_dynamic').replaceWith($dynamicForm);
-            addBootstrapToggle('offer_search');
             $('#offer_search_languages').select2({
                 placeholder: Translator.trans("Select languages"),
                 tage: true,
@@ -133,15 +129,6 @@ donate('offer_search');
 donate('offer');
 donate('demand');
 
-var $checkbox = [/*'accessories','cdRoom', 'covered', 'electricHead', 'hdmi', 'threeInOne', 'usb',
-    'withOven', 'wifi', 'withElevator', 'withFreezer', 'withFurniture', 'withGarden', 'withVerandah', 'withDriver','donate'*/];
-
-
-function addBootstrapToggle($type) {
-    for (var i=0, total = $checkbox.length; i < total; i++) {
-        $('#'+ $type +'_'+$checkbox[i]).bootstrapToggle();
-    }
-}
 
 function donate($type) {
     $(document).on('change', '#'+$type+'_donate', function () {

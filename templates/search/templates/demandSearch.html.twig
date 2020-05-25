@@ -713,8 +713,6 @@
                                             {% if demandForm.city is defined %}
                                                 <div class="col-xl-12 col-lg-12 col-md-12 col-12 text-center" id="demand-section-city">
                                                     {{ form_row(demandForm.city) }}
-                                                    <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-                                                    <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
                                                 </div>
                                             {% endif %}
                                             {#not yet useed#}
@@ -811,7 +809,6 @@
                                                             {{ form_row(demandForm.donate, {'label':'Donate',label_attr:{'class':'checkbox-custom'}}) }}
                                                         </div>
                                                     {% endif %}
-
                                                 </div>
                                             </div>
                                         </div>
@@ -831,5 +828,4 @@
     </div>
 </div>
 {{ form_end(demandForm) }}
-<a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-<a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
+

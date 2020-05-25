@@ -128,7 +128,6 @@ $('#search-meetup').submit( function(e) {
     generateMeetupSlide();
     var url = Routing.generate('add-meetupType');
     var formSerialize = $(this).serialize();
-    console.log(formSerialize);
     $.ajax({
         method: "post",
         dataType: "json",
@@ -197,8 +196,6 @@ function setFavorite() {
                 data: data,
             }).done(function (response) {
             })
-
-
         })
     }
 }

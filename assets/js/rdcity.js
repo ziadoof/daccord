@@ -147,6 +147,13 @@ $(document).ready(function () {
         width: '100%',
         height: '30px',
     });
+
+    $('#meetup_search_city').select2({
+        placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        width: '100%',
+        height: '30px',
+    });
     $('.select2-search__field').css('width', '100%');
 });
 
