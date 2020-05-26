@@ -1,0 +1,10 @@
+
+.ui-autocomplete { height: 40vh; overflow-y: scroll; overflow-x: hidden;}
+.accept-gcu a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.accept-gcu a:hover{
+    text-decoration: none;
+    color: #750505;
+}

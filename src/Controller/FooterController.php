@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class FooterController extends AbstractController
 {
@@ -28,4 +29,5 @@ class FooterController extends AbstractController
         $legal = 'legal_notice_'.$locale.'.html.twig';
         return $this->render($legal);
     }
+
 }

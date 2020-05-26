@@ -797,6 +797,10 @@ Name: Nom
 'Select type of meetup': 'Sélectionnez le type de meetup'
 type: type
 title: titre
+Home page: Page d'accueil
+Thank you for your registration: Merci pour votre inscription
+the General Conditions of Use: les Conditions Générales d'Utilisation
+I accept: j'accepte
 maxParticipants: maxParticipants
 isParent: 'Catégorie principale'
 'Select a period': 'Sélectionnez une période'

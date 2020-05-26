@@ -5,6 +5,7 @@ namespace App\Form\User;
 use App\Entity\Location\City;
 use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -45,7 +46,7 @@ class RegistrationType extends AbstractType
                     'placeholder'=>'City or Zip code'
                 ]
             ]);
-        ;
+
     }
 
     /**

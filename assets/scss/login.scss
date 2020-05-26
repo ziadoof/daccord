@@ -39,9 +39,14 @@
 }
 .login_btn {
   width: 100%;
-  background: #F70055 !important;
+  background: #444444 !important;
   color: white !important;
 }
+
+.login_btn:hover {
+  background: #F70055 !important;
+}
+
 .login_btn:focus {
   box-shadow: none !important;
   outline: 0px !important;
@@ -68,5 +73,5 @@
   color: whitesmoke;
 }
 .register-form a:hover{
-  color: yellow;
+  color: #750505;
 }

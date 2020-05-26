@@ -284,6 +284,7 @@ function completeNormalCity(id) {
         formatNoMatches: Translator.trans('No city found.'),
         formatSearching: Translator.trans('Searching city...'),
         formatInputTooShort: Translator.trans('Insert at least 2 character'),
+
         close: function(e, ui) {
             if (!makeSelect) {
                 $this.val(false);
