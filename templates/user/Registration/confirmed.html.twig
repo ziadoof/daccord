@@ -1,7 +1,36 @@
 {% extends "layout_user.html.twig" %}
 {% block content %}
 {% block fos_user_content %}
-    <div class="container pt-lg-5 pt-3">
+<div class=" bd-highlight">
+    <div class="row ">
+        <div class="col-4  ">
+            <div class="lg-side-bar ">
+                <h6>ddddd</h6>
+                <span>Dramatically productivate high-payoff </span>
+            </div>
+        </div>
+        <div class="col-4  ">
+            <div class="lg-side-bar ">
+                <h6>ddddd</h6>
+                <span>Dramatically productivate high-payoff </span>
+            </div>
+        </div>
+        <div class="col-4  ">
+            <div class="lg-side-bar ">
+                <h6>ddddd</h6>
+                <span>Dramatically productivate high-payoff </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    {#<div class="container pt-lg-5 pt-3">
         <div class="row mb-md-3 mb-lg-3">
             <div class="col-12">
                 <h1 class="welcome-text mt-3 text-center">{% trans %}Welcome to FORDEALING{% endtrans %}</h1>
@@ -9,7 +38,7 @@
         </div>
         <hr>
         <div class="row justify-content-center formLogin mt-4">
-            <p>{#{{ 'registration.confirmed'|trans({'%username%': user.username}) }}#}
+            <p>#}{#{{ 'registration.confirmed'|trans({'%username%': user.username}) }}#}{#
                 {% trans %}Congrats{% endtrans%} {{ user.username }}{% trans %}, your account is now activated.{% endtrans %}
             <div class="col-12">
             {% if targetUrl %}
@@ -17,6 +46,6 @@
             {% endif %}
             </div>
         </div>
-    </div>
+    </div>#}
 {% endblock fos_user_content %}
 {% endblock %}

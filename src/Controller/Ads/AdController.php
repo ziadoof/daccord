@@ -56,7 +56,7 @@ class AdController extends AbstractController
         $user = $this->getUser();
 
         $result = $adRepository->findAll();
-        $results = $paginator->paginate(
+        $allResults = $paginator->paginate(
         // Doctrine Query, not results
             $result,
             // Define the page parameter
@@ -78,14 +78,19 @@ class AdController extends AbstractController
 
 
             $ad_area = $adRepository->findByArea($min_x,$max_x,$min_y,$max_y);
-            $results = $paginator->paginate(
-            // Doctrine Query, not results
-                $ad_area,
-                // Define the page parameter
-                $request->query->getInt('page', 1),
-                // Items per page
-                20
-            );
+            if(empty($ad_area)){
+                $results = $allResults;
+            }
+            else{
+                $results = $paginator->paginate(
+                // Doctrine Query, not results
+                    $ad_area,
+                    // Define the page parameter
+                    $request->query->getInt('page', 1),
+                    // Items per page
+                    20
+                );
+            }
             return $this->render('Ads/ad/index.html.twig', [
                 'ad_area'=>$results,
                 'ads' => $results
@@ -94,7 +99,7 @@ class AdController extends AbstractController
         }
 
         return $this->render('Ads/ad/index.html.twig', [
-            'ads' => $results,
+            'ads' => $allResults,
         ]);
     }
 

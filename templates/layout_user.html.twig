@@ -8,8 +8,7 @@
     {% block min %}
         <div class="row">
             <div id="main">
-                {#------------------#}
-                <div class="wrapper d-flex align-items-stretch">
+                <div class="wrapper d-flex align-items-stretch ">
                     <div>
                         {% if app.user != null%}
                             {% block sidebar %}
@@ -27,7 +26,7 @@
                     </div>
 
                     <!-- Page Content  -->
-                    <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout">
+                    <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
                         {% include "search/searchbar.html.twig" %}
                         <div id="all">
                             {% block content %}
@@ -41,7 +40,6 @@
                         </div>
                     </div>
                 </div>
-                {#------------------#}
             </div>
         </div>
         <div class=" message-flash mb-4"style="z-index: 9999;">
@@ -58,8 +56,9 @@
                 {% endfor %}
             {% endfor %}
         </div>
+
     {% endblock %}
     {% block footer %}
-            {% include "footer.html.twig" %}
+           {% include "footer.html.twig" %}
     {% endblock %}
 {% endblock %}

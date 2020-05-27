@@ -1,22 +1,39 @@
 <!-- Footer -->
-<div class="d-none d-md-block footer text-white-50 py-3">
+<div class="d-none d-md-block footer text-white-50 py-3 width-100">
     <div class="row">
-        <div class="col-md-3 justify-content-center">
-            <div class=" pl-5">
+        {#<div class="col-md-3 justify-content-center">
+            <div class="footer-text pl-5">
                 <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
                 <span class="rosed">|</span>
                 <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class=" text-center">
+        </div>#}
+        <div class="col-md-6 offset-3">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="footer-text">
+                        <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
+                        <span class="rosed">|</span>
+                        <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+                    <h6 class="text-center"><span class="white">Copyright©</span>
+                        <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
+                        <span class="white">{{ 'now'|date('Y')}}</span>
+                    </h6>
+                </div>
+            </div>
+            {#<div class=" text-center">
                 <h6 class="ml-5"><span class="white">Copyright©</span>
                     <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
                     <span class="white">{{ 'now'|date('Y')}}</span>
                 </h6>
-            </div>
+            </div>#}
         </div>
-        <div class="col-md-3 pr-5">
+        <div class="col-md-3 pr-5 mt-2">
                 <ul class="navbar-nav float-right  ">
                     {% for locale in locales if locale is not same as(app.request.locale)%}
                         <li class="nav-item locale-icon">
@@ -30,7 +47,7 @@
 <div class="d-sm-block d-md-none footer text-white-50 py-3 px-2">
     <div class="row">
         <div class="col text-center">
-            <div class="">
+            <div class="footer-text">
                 <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
                 <span class="rosed">|</span>
                 <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>

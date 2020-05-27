@@ -8,3 +8,43 @@
     text-decoration: none;
     color: #750505;
 }
+
+.lg-side-bar{
+    border: solid 2px #0c5460 ;
+
+}
+.max-fix{
+    width: 96vw;
+}
+.min-fix{
+    width: 89vw;
+}
+@media  (max-width: 992px){
+    .min-fix{
+        width: 96vw;
+    }
+}
+@media  (max-width: 768px){
+    .min-fix{
+        width: 100vw;
+    }
+    .max-fix{
+        width: 100vw;
+    }
+}
+
+.list-sidebar ::-webkit-scrollbar {
+    width: 2px;
+    height: 4px;
+    background-color: lightgray;
+}
+body ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 2px;
+    height: 4px;
+    background-color: lightgray;
+}
+
+
+
+
