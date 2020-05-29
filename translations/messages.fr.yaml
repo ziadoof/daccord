@@ -24,6 +24,7 @@ to: 'à :'
 'New demand': 'Nouvelle demande'
 'My profile': 'Mon profil'
 'Edit my profile': 'Modifier mon profil'
+Profile: Profil
 'change my password': 'Changer mon mot de passe'
 ADMINISTRATION: ADMINISTRATION
 'Log out': 'Se déconnecter'
@@ -147,7 +148,8 @@ Update: 'Mettre à jour'
 'Be a host': 'Soyez un hôte'
 'Car brand :': 'Marque de voiture :'
 'Car color :': 'Couleur de la voiture :'
-'Max distance:': 'Max distance :'
+'Max distance:': 'Distance max :'
+There is no comment: Il n'y a pas de commentaire
 'Be a driver in simple steps': 'Soyez un Driver en quelques étapes simples'
 'Be a driver': 'Soyez un Driver'
 'Your current area': 'Votre zone actuelle'
@@ -163,7 +165,7 @@ Carpool: Covoiturage
 'Phone number :': 'Numéro de téléphone :'
 'Sex :': 'Sexe :'
 'Birthday :': 'Anniversaire :'
-'Max distance :': 'Max distance :'
+'Max distance :': 'Distance max :'
 Positioning: Positionnement
 'Zip Code :': 'Code postal :'
 'Department :': 'Département :'
@@ -190,6 +192,10 @@ Your: Votre
 'Send hosting request to': 'Envoyer une demande d''hébergement à'
 'Login to send hosting request to': 'Connectez-vous pour envoyer une demande d''hébergement à'
 'Welcome to FORDEALING': 'Bienvenue sur FORDEALING'
+'Welcome to': 'Bienvenue sur'
+You will have to complete your personal data and define your activity area: Vous devrez compléter vos données personnelles et définir votre zone d'activité
+Complete your profile: Complètez votre profil
+'Add your': 'Ajoutez votre'
 Hello: Bonjour
 'You can now activate your account by clicking on the link:': 'Vous pouvez maintenant activer votre compte en cliquant sur le lien:'
 'If your browser cannot move automatically, you can copy the link and place it in the custom location of your browser.': 'Si votre navigateur ne peut pas se déplacer automatiquement, vous pouvez copier le lien et le placer dans l''emplacement personnalisé de votre navigateur.'
@@ -198,7 +204,7 @@ Hello: Bonjour
 'Cordially from the FORDEALING team': 'Cordialement de l''équipe de FORDEALING'
 'See you soon!': 'À bientôt!'
 Congrats: Félicitations
-', your account is now activated.': ', votre compte est maintenant activé.'
+'Your account is now activated.': 'Votre compte est maintenant activé.'
 'Back to the originating page.': 'Retour à la page d''origine.'
 'An email has been sent to': 'Un courriel a été envoyé à '
 'It contains an activation link you must click to activate your account.': 'Il contient un lien d''activation sur lequel vous devez cliquer pour activer votre compte. '
@@ -426,13 +432,13 @@ form.password: 'Mot de passe'
 form.password_confirmation: 'Répéter le mot de passe'
 plainPassword: 'Mot de passe simple'
 'City or Zip code': 'Ville ou code postal'
-'Max distance': 'Max distance'
+'Max distance': 'Distance max'
 email: email
 Type: Type
 'Type of choice': 'Type de choix'
 name: Nom
 parent: parent
-maxDistance: 'Max distance'
+maxDistance: 'Distance max'
 'Select max distance': 'Sélectionnez la distance maximale'
 category: catégorie
 demandUser: 'demande utilisateur'
@@ -1174,12 +1180,12 @@ Languages: Langues
 'Select Place Of Lesson': 'Sélectionnez le lieu de la leçon'
 'Duration of lesson (minute)': 'Durée du cours (minute)'
 'Select Duration of lesson (minute)': 'Sélectionnez la durée de la leçon (minute)'
-'Max distance (km)': 'MAX Distance (km)'
+'Max distance (km)': 'Distance max (km)'
 'Select Max distance (km)': 'Sélectionnez la distance maximale (km)'
 'Select Subject Name': 'Sélectionnez le nom du sujet'
 'Select Language': 'Choisir la langue'
 'Select Second Language': 'Sélectionnez une deuxième langue'
-'Max Distance': 'Max Distance'
+'Max Distance': 'Distance max'
 'Select Max Distance': 'Sélectionnez la distance maximale'
 'Select Place Of Servic': 'Sélectionnez le lieu de service'
 'Select The Type': 'Sélectionnez le type'
@@ -1258,7 +1264,7 @@ Caliber: Calibre
 'Select MAX Number of doors': 'Sélectionnez MAX Nombre de portes'
 'Select MIN capacity (cm³)': 'Sélectionnez la capacité MIN (cm³)'
 'Select MAX capacity (cm³)': 'Sélectionnez la capacité MAX (cm³)'
-'Max distance KM': 'Max distance KM'
+'Max distance KM': 'Distance max KM'
 'Select Max distance KM': 'Sélectionnez la distance max KM'
 'MIN power (watt)': 'Puissance MIN (watt)'
 'Select MAX HDD Capacity (gb)': 'Sélectionnez MAX HDD capacité (go)'

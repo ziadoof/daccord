@@ -48,12 +48,12 @@
     <div>
         {% for vote in rating.votes %}
             <div class="row">
-                <div class="col-md-6 offset-3 border-respo">
+                <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-12 border-respo shadow-border">
                     <div class="row border-bottom">
-                        <div class="col-md-6 my-1">
+                        <div class="col-3 my-1">
                             <img class="vote-avatar"  src="{{ asset(vote.voter.photoProfile()) }}" alt="voter-image">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-9">
                             {% set reste = 5 - vote.value%}
                             <span class="float-right mt-2 blued">
                                {% if  vote.value is not same as(null)%}
@@ -73,11 +73,23 @@
                             </span>
                         </div>
                     </div>
+
                     <div class="row border-bottom">
-                        <p class="my-2 mx-2"> <span class="rosed">{% trans %} Comment : {% endtrans %}</span>{{ vote.comment }}</p>
+                        {% if vote.comment %}
+                            <p class="my-2 mx-2">{{ vote.comment }}</p>
+                        {% else %}
+                            <p class="my-2 mx-2">There is no comment</p>
+                        {% endif %}
                     </div>
-                    <div class="row border-bottom float-right">
-                        <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>
+
+                    <div class="row float-right">
+                        <span class="mx-2 rosed mt-1">
+                            {% if "now"|date('Y-m-d') == vote.createdAt|date('Y-m-d') %}
+                                {{ vote.createdAt|date('H:i') }}
+                            {% else %}
+                                {{ vote.createdAt|date('d M Y') }}
+                            {% endif %}
+                        </span>
                     </div>
                 </div>
             </div>

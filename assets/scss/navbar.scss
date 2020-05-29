@@ -469,3 +469,51 @@
 
 
 
+
+.lg-side-bar{
+  border: solid 2px #0c5460 ;
+
+}
+.max-fix{
+  width: 96vw;
+}
+.min-fix{
+  width: 89vw;
+}
+@media (min-width: 768px) and  (max-width: 992px){
+  .min-fix{
+    width: 96vw;
+  }
+}
+@media (min-width: 551px) and (max-width: 767px){
+  .min-fix{
+    width: 100vw;
+  }
+  .max-fix{
+    width: 100vw;
+  }
+}
+@media  (max-width: 550px){
+  .min-fix{
+    width: 100%;
+  }
+  .max-fix{
+    width: 100%;
+  }
+}
+
+.list-sidebar ::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+  background-color: lightgray;
+}
+body ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 2px;
+  height: 4px;
+  background-color: lightgray;
+}
+
+
+
+

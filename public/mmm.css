@@ -1,49 +1,69 @@
-
-.ui-autocomplete { height: 40vh; overflow-y: scroll; overflow-x: hidden;}
-.accept-gcu a{
-    text-decoration: none;
-    color: whitesmoke;
-}
-.accept-gcu a:hover{
-    text-decoration: none;
-    color: #750505;
-}
-
-.lg-side-bar{
-    border: solid 2px #0c5460 ;
-
-}
-.max-fix{
-    width: 96vw;
-}
-.min-fix{
-    width: 89vw;
-}
-@media  (max-width: 992px){
-    .min-fix{
-        width: 96vw;
-    }
-}
-@media  (max-width: 768px){
-    .min-fix{
-        width: 100vw;
-    }
-    .max-fix{
+@media (max-width: 580px) {
+    .profile-show{
         width: 100vw;
     }
 }
 
-.list-sidebar ::-webkit-scrollbar {
-    width: 2px;
-    height: 4px;
-    background-color: lightgray;
+.area-map iframe{
+    width: 100%;
+    height: 60vh;
 }
-body ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 2px;
-    height: 4px;
-    background-color: lightgray;
+.fix-height{
+    min-height: 18em;
 }
+.fix-height-hosting{
+    min-height: 11em;
+}
+.fix-height-form-hosting{
+    min-height: 24em;
+}
+@media (max-width: 768px) {
+    .fix-height-hosting{
+        min-height: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .fix-height-hosting{
+        min-height: 13em;
+        margin-bottom: 1em;
+    }
+    .fix-height-form-hosting{
+        min-height: 15em;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .fix-height-hosting{
+        min-height: auto;
+        margin-bottom: 1em;
+    }
+    .fix-height-form-hosting{
+        min-height: 33em;
+    }
+}
+@media (min-width: 1200px) {
+    .fix-height-hosting{
+        min-height: auto;
+        margin-bottom: 1em;
+    }
+    .fix-height-form-hosting{
+        min-height: 35em;
+    }
+}
+.profile-edit .custom-fileg {
+    width: inherit;
+    height: inherit;
+}
+.image-free .custom-fileg {
+    width: inherit;
+    height: inherit;
+}
+.image-free input {
+    display: none;
+}
+.shadow-border{
+    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.176) !important;
+}
+
 
 
 

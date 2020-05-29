@@ -1,51 +1,28 @@
 {% extends "layout_user.html.twig" %}
 {% block content %}
 {% block fos_user_content %}
-<div class=" bd-highlight">
-    <div class="row ">
-        <div class="col-4  ">
-            <div class="lg-side-bar ">
-                <h6>ddddd</h6>
-                <span>Dramatically productivate high-payoff </span>
-            </div>
-        </div>
-        <div class="col-4  ">
-            <div class="lg-side-bar ">
-                <h6>ddddd</h6>
-                <span>Dramatically productivate high-payoff </span>
-            </div>
-        </div>
-        <div class="col-4  ">
-            <div class="lg-side-bar ">
-                <h6>ddddd</h6>
-                <span>Dramatically productivate high-payoff </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-    {#<div class="container pt-lg-5 pt-3">
+    <div class="container pt-lg-5 pt-3">
         <div class="row mb-md-3 mb-lg-3">
             <div class="col-12">
-                <h1 class="welcome-text mt-3 text-center">{% trans %}Welcome to FORDEALING{% endtrans %}</h1>
+                <h4 class=" mt-3 text-center">{% trans %}Welcome to{% endtrans %}</h4>
+                <h1 class="text-center"><span class="blued forlogo pl-1 ">FOR<b class="rosed dealLogo">DEAL</b>ING </span></h1>
+            </div>
+        </div>
+        <div class="row justify-content-center formLogin mt-4">
+            <span class="text-center">{% trans %}Your account is now activated.{% endtrans %}</span>
+            <div class="col-12">
+                {% if targetUrl %}
+                    <p><a href="{{ targetUrl }}">{% trans %}Back to the originating page.{% endtrans %}</a></p>
+                {% endif %}
             </div>
         </div>
         <hr>
-        <div class="row justify-content-center formLogin mt-4">
-            <p>#}{#{{ 'registration.confirmed'|trans({'%username%': user.username}) }}#}{#
-                {% trans %}Congrats{% endtrans%} {{ user.username }}{% trans %}, your account is now activated.{% endtrans %}
-            <div class="col-12">
-            {% if targetUrl %}
-            <p><a href="{{ targetUrl }}">{% trans %}Back to the originating page.{% endtrans %}</a></p>
-            {% endif %}
-            </div>
+        <div class="row mt-5">
+           <div class="col-12">
+               <h6 class="text-center rosed">{% trans %}You will have to complete your personal data and define your activity area{% endtrans %}</h6>
+               <a href="{{ path('fos_user_profile_edit') }}" class="btn login_btn">{% trans %}Complete your profile{% endtrans %}</a>
+           </div>
         </div>
-    </div>#}
+    </div>
 {% endblock fos_user_content %}
 {% endblock %}

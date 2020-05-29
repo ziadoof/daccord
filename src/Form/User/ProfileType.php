@@ -37,12 +37,10 @@ class ProfileType extends AbstractType
             ->add('firstname', TextType::class, [
                 'label' => 'First name',
                 'translation_domain'=> 'manual',
-                'attr' => array('rows' => '4', 'cols' => '10'),
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Last name',
                 'translation_domain'=> 'manual',
-                'attr' => array('rows' => '4', 'cols' => '10')
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Email',
@@ -52,7 +50,6 @@ class ProfileType extends AbstractType
             ->add('phoneNumber', TextType::class, [
                 'label' => 'Phone number',
                 'translation_domain'=> 'manual',
-                'attr' => array('rows' => '4', 'cols' => '10'),
                  'required' => false,
             ])
             ->add('gender', ChoiceType::class, [
@@ -80,22 +77,22 @@ class ProfileType extends AbstractType
             ->add('genderStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
-                'label'    => 'Public ?',
+                'label'    => 'Visible',
             ])
             ->add('birthdayStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
-                'label'    => 'Public ?',
+                'label'    => 'Visible',
             ])
             ->add('phonNumberStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
-                'label'    => 'Public ?',
+                'label'    => 'Visible',
             ])
             ->add('emailStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
-                'label'    => 'Public ?',
+                'label'    => 'Visible',
             ])
             ->add('profileImage', PhotoType::class, [
                 'data_class' => null,

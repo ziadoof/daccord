@@ -3,122 +3,108 @@
         {% if app.user.hosting %}
             <div class="fos_user_user_show px-4 py-4">
                 <div class="row ">
-                    <div class="col-md-4 offset-4 ">
-                        <div class="row">
-                            <div class="my-3 border-deal">
-                                <a class="">
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12 text-center">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h6 class="blued mt-2">{% trans %}A picture of your house{% endtrans %}</h6>
+                                <a class="image-free">
                                     {{ form_row(HostingForm.image) }}
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="">
-                    <div class="col-md-4 offset-4 text-center mt-3">
+                <div class="row">
+                    <div class="col-12 text-center mt-2">
                         {{ form_row(HostingForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
                     </div>
                 </div>
-                <div class="row ">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(HostingForm.aboutMe) }}
-                    </div>
-                </div>
                 <div class="row">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(HostingForm.hostingFor) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <hr>
-                        <span class="blued">{% trans %}The number of people and days you can host{% endtrans %}</span>
-                        <div class="row mt-1">
-                            <div class="col-md-6">
-                                {{ form_row(HostingForm.numberOfPersons) }}
+                    <div class="col-lg-6 mt-2">
+                        <div class="local-border px-2 fix-height-form-hosting">
+                            <h6 class="blued mt-1">{% trans %}The number of people and days you can host{% endtrans %}</h6>
+                            <div class="row mt-3">
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.numberOfPersons) }}
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.numberOfDays) }}
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                {{ form_row(HostingForm.numberOfDays) }}
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.sex) }}
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.age) }}
+                                </div>
+                                <div class="col-xl-4 col-lg-12 col-md-4 col-12">
+                                    {{ form_row(HostingForm.languages) }}
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.sex) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.age) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.languages) }}
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <span class="blued">{% trans %}You have the possibility to host{% endtrans %}</span>
-                        <div class="row mt-1">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.child) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.animal) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.handicapped) }}
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <span class="blued">{% trans %}What can you share with the guest?{% endtrans %}</span>
-                        <div class="row mt-1">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.conversation) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.cityTour) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.food) }}
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="border-driver py-2 px-2 fix-height-hosting">
+                                        <span class="blued">{% trans %}You have the possibility to host{% endtrans %}</span>
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.child,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.animal,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.handicapped,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="border-driver py-2 px-2 fix-height-hosting">
+                                        <h6 class="blued">{% trans %}What can you share with the guest?{% endtrans %}</h6>
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.conversation,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6col-sm-4 col-6">
+                                                {{ form_row(HostingForm.cityTour,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.food,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.television,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.movie,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.videoGame,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.music,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.television) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.movie) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.videoGame) }}
+                    <div class="col-lg-6 mt-2">
+                        <div class="local-border px-2 py-2 fix-height-form-hosting">
+                            <div class="row ">
+                                <div class=" col-lg-12 col-md-6">
+                                    {{ form_row(HostingForm.aboutMe) }}
+                                </div>
+                                <div class=" col-lg-12 col-md-6">
+                                    {{ form_row(HostingForm.hostingFor) }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <div class="row">
-                            <div class="col-md-4 offset-4">
-                                {{ form_row(HostingForm.music) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class=" col-md-4 offset-4 justify-content-center">
+                    <div class=" col justify-content-center mt-4 mx-2">
                         <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
                     </div>
                 </div>
@@ -127,7 +113,7 @@
         {% else %}
             <div class="fos_user_user_show px-4 py-4">
                 <div class="row ">
-                    <div class="col-md-4 offset-4 mt-5">
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12">
                         <div class="row border-driver">
                             <div class="col my-2 mx-2 text-center">
                                 <h4 class="title-blue my-1 mx-1">{% trans %}Be a host in simple steps{% endtrans %}</h4>
@@ -136,115 +122,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
-                    <div class="col-md-4 offset-4 text-center mt-3">
-                        {{ form_row(HostingForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
-                    </div>
-                </div>
                 <div class="row ">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(HostingForm.aboutMe) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(HostingForm.hostingFor) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <hr>
-                        <span class="blued">{% trans %}The number of people and days you can host{% endtrans %}</span>
-                        <div class="row mt-1">
-                            <div class="col-md-6">
-                                {{ form_row(HostingForm.numberOfPersons) }}
-                            </div>
-                            <div class="col-md-6">
-                                {{ form_row(HostingForm.numberOfDays) }}
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.sex) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.age) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.languages) }}
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <span class="blued">{% trans %}You have the possibility to host{% endtrans %}</span>
-                        <div class="row mt-1">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.child) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.animal) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.handicapped) }}
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <span class="blued">{% trans %}What can you share with the guest?{% endtrans %}</span>
-                        <div class="row mt-1">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.conversation) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.cityTour) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.food) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.television) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.movie) }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ form_row(HostingForm.videoGame) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        <div class="row">
-                            <div class="col-md-4 offset-4">
-                                {{ form_row(HostingForm.music) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-md-4 offset-4 ">
-                        <span class="blued ">{% trans %}A picture of your house{% endtrans %}</span>
-                        <div class="row">
-                            <div class="my-3 border-deal">
-                                <a class="">
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12 text-center">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h6 class="blued mt-2">{% trans %}A picture of your house{% endtrans %}</h6>
+                                <a class="image-free">
                                     {{ form_row(HostingForm.image) }}
                                 </a>
                             </div>
@@ -252,11 +135,99 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class=" col-md-4 offset-4 justify-content-center">
+                    <div class="col-12 text-center mt-2">
+                        {{ form_row(HostingForm.active, {'attr': {'data-toggle':'toggle' ,'data-on':'Active', 'data-off':'Desactive', 'data-onstyle':'info', 'data-offstyle':'danger', 'data-width':"140"}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mt-2">
+                        <div class="local-border px-2 fix-height-form-hosting">
+                            <h6 class="blued mt-1">{% trans %}The number of people and days you can host{% endtrans %}</h6>
+                            <div class="row mt-3">
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.numberOfPersons) }}
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.numberOfDays) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.sex) }}
+                                </div>
+                                <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 col-12">
+                                    {{ form_row(HostingForm.age) }}
+                                </div>
+                                <div class="col-xl-4 col-lg-12 col-md-4 col-12">
+                                    {{ form_row(HostingForm.languages) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="border-driver py-2 px-2 fix-height-hosting">
+                                        <span class="blued">{% trans %}You have the possibility to host{% endtrans %}</span>
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.child,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.animal,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.handicapped,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="border-driver py-2 px-2 fix-height-hosting">
+                                        <h6 class="blued">{% trans %}What can you share with the guest?{% endtrans %}</h6>
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.conversation,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6col-sm-4 col-6">
+                                                {{ form_row(HostingForm.cityTour,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.food,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.television,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.movie,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.videoGame,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-4 col-6">
+                                                {{ form_row(HostingForm.music,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                        <div class="local-border px-2 py-2 fix-height-form-hosting">
+                            <div class="row ">
+                                <div class=" col-lg-12 col-md-6">
+                                    {{ form_row(HostingForm.aboutMe) }}
+                                </div>
+                                <div class=" col-lg-12 col-md-6">
+                                    {{ form_row(HostingForm.hostingFor) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col justify-content-center mt-4 mx-2">
                         <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
                     </div>
                 </div>
                 {{ form_end(HostingForm) }}
             </div>
-            {{ form_end(HostingForm) }}
         {% endif %}

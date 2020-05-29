@@ -1,22 +1,87 @@
 {% extends "layout_user.html.twig" %}
 {% block content %}
 {% block fos_user_content %}
-    <div class="mt-4">
+    <div class="profile-show">
         <ul class="nav nav-tabs nav-justified" id="user-edit" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#edit_personal" role="tab" aria-controls="profile" aria-selected="true">{% trans %}Personal information{% endtrans %}</a>
+                <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#edit_personal" role="tab" aria-controls="profile" aria-selected="true">
+                    <div class="d-none d-lg-inline-block">
+                        <img src="{{ asset('assets/images/icons/login.png') }}" id="profile-list">
+                        {% trans %}Profile{% endtrans %}
+                    </div>
+                    <div class="d-none d-md-block d-lg-none">
+                        {% trans %}Profile{% endtrans %}
+                    </div>
+                    <div class=" no-gutters">
+                        <div class="d-block d-md-none ">
+                            <img src="{{ asset('assets/images/icons/login.png') }}" id="profile-list">
+                        </div>
+                    </div>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="driver-tab" data-toggle="tab" href="#edit_driver" role="tab" aria-controls="driver" aria-selected="false">{% trans %}Driver{% endtrans %}</a>
+                <a class="nav-link" id="driver-tab" data-toggle="tab" href="#edit_driver" role="tab" aria-controls="driver" aria-selected="false">
+                    <div class="d-none d-lg-inline-block">
+                        <img src="{{ asset('assets/images/icons/driver-request.png') }}" id="profile-list">
+                        {% trans %}Driver{% endtrans %}
+                    </div>
+                    <div class="d-none d-md-block d-lg-none">
+                        {% trans %}Driver{% endtrans %}
+                    </div>
+                    <div class=" no-gutters">
+                        <div class="d-block d-md-none ">
+                            <img src="{{ asset('assets/images/icons/driver-request.png') }}" id="profile-list">
+                        </div>
+                    </div>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="area-tab" data-toggle="tab" href="#edit_area" role="tab" aria-controls="area" aria-selected="false">{% trans %}My area{% endtrans %}</a>
+                <a class="nav-link" id="area-tab" data-toggle="tab" href="#edit_area" role="tab" aria-controls="area" aria-selected="false">
+                    <div class="d-none d-lg-inline-block">
+                        <img src="{{ asset('assets/images/icons/area-icon.png') }}" id="profile-list">
+                        {% trans %}My area{% endtrans %}
+                    </div>
+                    <div class="d-none d-md-block d-lg-none">
+                        {% trans %}My area{% endtrans %}
+                    </div>
+                    <div class=" no-gutters">
+                        <div class="d-block d-md-none ">
+                            <img src="{{ asset('assets/images/icons/area-icon.png') }}" id="profile-list">
+                        </div>
+                    </div>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="hostingt-tab" data-toggle="tab" href="#edit_hosting" role="tab" aria-controls="hosting" aria-selected="false">{% trans %}Hosting{% endtrans %}</a>
+                <a class="nav-link" id="hostingt-tab" data-toggle="tab" href="#edit_hosting" role="tab" aria-controls="hosting" aria-selected="false">
+                    <div class="d-none d-lg-inline-block">
+                        <img src="{{ asset('assets/images/icons/hosting-icon.png') }}" id="profile-list">
+                        {% trans %}Hosting{% endtrans %}
+                    </div>
+                    <div class="d-none d-md-block d-lg-none">
+                        {% trans %}Hosting{% endtrans %}
+                    </div>
+                    <div class=" no-gutters">
+                        <div class="d-block d-md-none ">
+                            <img src="{{ asset('assets/images/icons/hosting-icon.png') }}" id="profile-list">
+                        </div>
+                    </div>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="carpool-tab" data-toggle="tab" href="#edit_carpool" role="tab" aria-controls="carpool" aria-selected="false">{% trans %}Carpool{% endtrans %}</a>
+                <a class="nav-link" id="carpool-tab" data-toggle="tab" href="#edit_carpool" role="tab" aria-controls="carpool" aria-selected="false">
+                    <div class="d-none d-lg-inline-block">
+                        <img src="{{ asset('assets/images/icons/voyage-icon.png') }}" id="profile-list">
+                        {% trans %}Carpool{% endtrans %}
+                    </div>
+                    <div class="d-none d-md-block d-lg-none">
+                        {% trans %}Carpool{% endtrans %}
+                    </div>
+                    <div class=" no-gutters">
+                        <div class="d-block d-md-none ">
+                            <img src="{{ asset('assets/images/icons/voyage-icon.png') }}" id="profile-list">
+                        </div>
+                    </div>
+                </a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">

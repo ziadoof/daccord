@@ -28,6 +28,7 @@ $(document).on('change', '#offer_category', function () {
                 dropdownAutoWidth: true,
                 width: '100%',
             });
+
             completeNormalCity('#offer_city');
             addDateTimeForm('#offer_dateOfEvent');
         }
