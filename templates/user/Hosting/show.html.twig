@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="justify-content-center">
-            <h1 class="text-center pt-3">{{ hosting.user.firstname|title }} {{ hosting.user.lastname|upper }}</h1>
-            <h1 class="pt-3 bdg-accord ">{{ hosting.user.hosting.point }} <span>Points</span></h1>
+            <h3 class="text-center pt-3">{{ hosting.user.firstname|title }} {{ hosting.user.lastname|upper }}</h3>
+            <h3 class="pt-3 bdg-accord ">{{ hosting.user.hosting.point }} <span>Points</span></h3>
         </div>
-        {% if app.user is not same as(hosting.user) %}
+        {% if app.user is not same as(hosting.user) and not hosting.user.deleted %}
             {% if app.user is not same as (null) %}
                 <div class="justify-content-center">
                     <div class="text-center pt-2">
@@ -31,9 +31,9 @@
                 </div>
             {% endif %}
         {% endif %}
+        {% if not hosting.user.deleted %}
         <div class="justify-content-center">
             <div class="text-center pt-2">
-
                 <h6 class="d-inline font-weight-bold blued">{% trans %} Active :  {% endtrans %}</h6>
                 <b class="deal-terminate">
                     {% if hosting.active %}
@@ -58,12 +58,16 @@
                 <div class="col ">
                     <h6 class="d-inline font-weight-bold blued">{% trans %} City  : {% endtrans %} </h6><span>  {{ hosting.ville}}</span>
                 </div>
-                <div class="col-md-4 offset-4 my-2 ">
+                {% if hosting.aboutMe is not same as('') %}
+                <div class="col my-2 ">
                     <h6 class="d-inline font-weight-bold blued">{% trans %} About me  : {% endtrans %} </h6><span>  {{ hosting.aboutMe}}</span>
                 </div>
-                <div class="col-md-4 offset-4 my-2">
+                {% endif %}
+                {% if hosting.aboutMe is not same as('') %}
+                <div class="col my-2">
                     <h6 class="d-inline font-weight-bold blued">{% trans %} Hosting for  : {% endtrans %} </h6><span>  {{ hosting.hostingFor}}</span>
                 </div>
+                {% endif %}
                 <div class="col mb-2">
                     <h6 class="d-inline font-weight-bold blued">{% trans %} Languages  : {% endtrans %} </h6>
                     {% for language in hosting.languages %}
@@ -71,23 +75,24 @@
                     {% endfor %}
                 </div>
                 {% if hosting.getPossibility() %}
-                    <h6 class="blued">{% trans %} I have the possibility to host{% endtrans %}</h6>
+                    <h6 class="rosed">{% trans %} I have the possibility to host{% endtrans %}</h6>
                     <div class="col my-2">
                         {% for possible in hosting.getPossibility() %}
-                            <span class="badge badge-primary"><h5>{{ possible }}</h5></span>
+                            <span class="badge badge-primary mb-1"><h5>{{ possible }}</h5></span>
                         {% endfor %}
                     </div>
                 {% endif %}
                 {% if hosting.getShare() %}
-                    <h6 class="blued">{% trans %}I can share with the guest {% endtrans %}</h6>
+                    <h6 class="rosed">{% trans %}I can share with the guest {% endtrans %}</h6>
                     <div class="col my-2">
                         {% for share in hosting.getShare() %}
-                            <span class="badge badge-info"><h5>{{ share }}</h5></span>
+                            <span class="badge badge-info mb-1"><h5>{{ share }}</h5></span>
                         {% endfor %}
                     </div>
                 {% endif %}
             </div>
         </div>
+        {% endif %}
         {% if rating  %}
         <h4 class="text-center blued mt-4">{% trans %} Rating{% endtrans %}</h4>
         <div class="text-center">
@@ -138,36 +143,48 @@
             <div>
                 {% for vote in rating.votes %}
                     <div class="row">
-                        <div class="col-md-6 offset-3 border-respo">
+                        <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-12 border-respo shadow-border">
                             <div class="row border-bottom">
-                                <div class="col-md-6 my-1">
+                                <div class="col-3 my-1">
                                     <img class="vote-avatar"  src="{{ asset(vote.voter.photoProfile()) }}" alt="voter-image">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-9">
                                     {% set reste = 5 - vote.value%}
                                     <span class="float-right mt-2 blued">
-                                       {% if  vote.value is not same as(null)%}
-                                           {% for  i in vote.value ..1%}
-                                               <i class="fas fa-star"></i>
-                                           {% endfor %}
-                                        {% if reste>0 %}
-                                           {% for  i in reste..1%}
-                                               <i class="far fa-star"></i>
-                                           {% endfor %}
-                                       {% endif %}
-                                    {% else %}
-                                           {% for  i in 5..1%}
-                                               <i class="far fa-star"></i>
-                                           {% endfor %}
-                                       {% endif %}
-                                    </span>
+                           {% if  vote.value is not same as(null)%}
+                               {% for  i in vote.value ..1%}
+                                   <i class="fas fa-star"></i>
+                               {% endfor %}
+                               {% if reste>0 %}
+                               {% for  i in reste..1%}
+                                   <i class="far fa-star"></i>
+                               {% endfor %}
+                           {% endif %}
+                           {% else %}
+                               {% for  i in 5..1%}
+                                   <i class="far fa-star"></i>
+                               {% endfor %}
+                           {% endif %}
+                        </span>
                                 </div>
                             </div>
+
                             <div class="row border-bottom">
-                                <p class="my-2 mx-2"> <span class="rosed">{% trans %}Comment :  {% endtrans %}</span>{{ vote.comment }}</p>
+                                {% if vote.comment %}
+                                    <p class="my-2 mx-2">{{ vote.comment }}</p>
+                                {% else %}
+                                    <p class="my-2 mx-2">There is no comment</p>
+                                {% endif %}
                             </div>
-                            <div class="row border-bottom float-right">
-                                <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>
+
+                            <div class="row float-right">
+                    <span class="mx-2 rosed mt-1">
+                        {% if "now"|date('Y-m-d') == vote.createdAt|date('Y-m-d') %}
+                            {{ vote.createdAt|date('H:i') }}
+                        {% else %}
+                            {{ vote.createdAt|date('d M Y') }}
+                        {% endif %}
+                    </span>
                             </div>
                         </div>
                     </div>
@@ -188,7 +205,7 @@
                     {{ render(controller('App\\Controller\\Hosting\\HostingRequestController::new',{ 'hosting': hosting.id  })) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
                 </div>
             </div>
         </div>

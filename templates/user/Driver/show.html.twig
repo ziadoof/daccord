@@ -1,6 +1,6 @@
 {% extends "layout_user.html.twig" %}
 {% block content %}
-    <div class="fos_user_user_show px-4 py-4">
+    <div class="fos_user_user_show px-4 py-4 profile-show">
         <div class="row">
             <div class="col-md-2 offset-5 btn-group ">
                 <div class=" profile-edit ml-2  ">
@@ -22,9 +22,10 @@
             </div>
         </div>
         <div class="justify-content-center">
-            <h1 class="text-center pt-3">{{ driver.user.firstname|title }} {{ driver.user.lastname|upper }}</h1>
-            <h1 class="pt-3 bdg-accord ">{{ driver.user.driver.point }} <span>Points</span></h1>
+            <h3 class="text-center pt-3">{{ driver.user.firstname|title }} {{ driver.user.lastname|upper }}</h3>
+            <h3 class="pt-3 bdg-accord ">{{ driver.user.driver.point }} <span>Points</span></h3>
         </div>
+        {% if not driver.user.deleted %}
         <div class="justify-content-center">
             <div class="text-center pt-2">
                 <div class="col">
@@ -51,6 +52,7 @@
                 </form>
             </div>
         </div>
+        {% endif %}
         {% if rating  %}
         <h4 class="text-center blued mt-4">{% trans %} Rating{% endtrans %}</h4>
         <div class="text-center">
@@ -96,47 +98,59 @@
                 </span>
             </div>
         </div>
-        <div class="">
-            <h6 class="text-center blued mt-4" >{% trans %} Comments{% endtrans %}</h6>
-            <div>
-                {% for vote in rating.votes %}
-                    <div class="row">
-                        <div class="col-md-6 offset-3 border-respo">
-                            <div class="row border-bottom">
-                                <div class="col-md-6 my-1">
-                                    <img class="vote-avatar"  src="{{ asset(vote.voter.photoProfile()) }}" alt="voter-image">
+            <div class="">
+                <h6 class="text-center blued mt-4" >{% trans %} Comments{% endtrans %}</h6>
+                <div>
+                    {% for vote in rating.votes %}
+                        <div class="row">
+                            <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-12 border-respo shadow-border">
+                                <div class="row border-bottom">
+                                    <div class="col-3 my-1">
+                                        <img class="vote-avatar"  src="{{ asset(vote.voter.photoProfile()) }}" alt="voter-image">
+                                    </div>
+                                    <div class="col-9">
+                                        {% set reste = 5 - vote.value%}
+                                        <span class="float-right mt-2 blued">
+                               {% if  vote.value is not same as(null)%}
+                                   {% for  i in vote.value ..1%}
+                                       <i class="fas fa-star"></i>
+                                   {% endfor %}
+                                   {% if reste>0 %}
+                                   {% for  i in reste..1%}
+                                       <i class="far fa-star"></i>
+                                   {% endfor %}
+                               {% endif %}
+                               {% else %}
+                                   {% for  i in 5..1%}
+                                       <i class="far fa-star"></i>
+                                   {% endfor %}
+                               {% endif %}
+                            </span>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    {% set reste = 5 - vote.value%}
-                                    <span class="float-right mt-2 blued">
-                                       {% if  vote.value is not same as(null)%}
-                                           {% for  i in vote.value ..1%}
-                                               <i class="fas fa-star"></i>
-                                           {% endfor %}
-                                        {% if reste>0 %}
-                                           {% for  i in reste..1%}
-                                               <i class="far fa-star"></i>
-                                           {% endfor %}
-                                       {% endif %}
+
+                                <div class="row border-bottom">
+                                    {% if vote.comment %}
+                                        <p class="my-2 mx-2">{{ vote.comment }}</p>
                                     {% else %}
-                                           {% for  i in 5..1%}
-                                               <i class="far fa-star"></i>
-                                           {% endfor %}
-                                       {% endif %}
-                                    </span>
+                                        <p class="my-2 mx-2">There is no comment</p>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            <div class="row border-bottom">
-                                <p class="my-2 mx-2"> <span class="rosed">{% trans %} Comment :{% endtrans %} </span>{{ vote.comment }}</p>
-                            </div>
-                            <div class="row border-bottom float-right">
-                                <span class="mx-2 rosed">{{ vote.createdAt|date }}</span>
+
+                                <div class="row float-right">
+                        <span class="mx-2 rosed mt-1">
+                            {% if "now"|date('Y-m-d') == vote.createdAt|date('Y-m-d') %}
+                                {{ vote.createdAt|date('H:i') }}
+                            {% else %}
+                                {{ vote.createdAt|date('d M Y') }}
+                            {% endif %}
+                        </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
         {% endif %}
     </div>
 {% endblock %}

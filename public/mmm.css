@@ -17,6 +17,9 @@
 .fix-height-form-hosting{
     min-height: 24em;
 }
+.fix-height-carpool{
+    min-height: 9em;
+}
 @media (max-width: 768px) {
     .fix-height-hosting{
         min-height: auto;
@@ -29,6 +32,9 @@
     }
     .fix-height-form-hosting{
         min-height: 15em;
+    }
+    .fix-height-carpool{
+        min-height: auto;
     }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -47,6 +53,11 @@
     }
     .fix-height-form-hosting{
         min-height: 35em;
+    }
+}
+@media (max-width: 575px) {
+    .fix-height-carpool{
+        min-height: auto;
     }
 }
 .profile-edit .custom-fileg {
