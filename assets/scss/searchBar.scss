@@ -16,7 +16,7 @@
 }
 
 .slider{
-  width: auto;!important;
+  width: auto;
 }
 
 /*overload bootswitch for search tab and user tab*/
@@ -52,9 +52,9 @@
   border-bottom: none;
 }
 .p-respo{
-  padding: 1.5rem;!important;
+  padding: 1.5rem;
 }
-@media (max-width: 550px) {
+@media (max-width: 580px) {
   .wrapper {
     padding: 0.5rem 0;
   }
@@ -62,7 +62,7 @@
     padding:  2.5rem 1rem 1rem 1.5rem
   }
 }
-@media (min-width: 550px)and (max-width: 767px) {
+@media (min-width: 581px)and (max-width: 767px) {
   .p-respo{
     padding:  2.5rem 0.2rem 1rem 1rem
   }

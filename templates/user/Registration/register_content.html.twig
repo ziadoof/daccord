@@ -12,7 +12,14 @@
                     {{ form_row(form.email) }}
                     {{ form_row(form.plainPassword) }}
                     {{ form_row(form.city) }}
-                    <button type="submit" class="btn login_btn col-md-10 offset-1 mt-4">{% trans %}Sign up!{% endtrans %}</button>
+                    <div class="custom-control custom-checkbox accept-gcu">
+                        <input type="checkbox" id="app_user_registration_accept" name="app_user_registration[accept]" required="required" class="custom-control-input" value="1">
+                        <label class="checkbox-custom custom-control-label required" for="app_user_registration_accept">
+                            {% trans %}I accept{% endtrans %}
+                            <a class="d-inline" href="#"  onclick="window.open('assets/documents/gcu_{{ app.request.locale|split('_')[0] }}.html','newwindow','width=500,height=800');return false;"
+                            ><span class="small"> {% trans %}the General Conditions of Use{% endtrans %}</span></a></label>
+                    </div>
+                    <button type="submit" class="btn login_btn mt-4">{% trans %}Sign up!{% endtrans %}</button>
                     {{ form_end(form) }}
                 </div>
             </div>
@@ -20,6 +27,53 @@
                 <div class="d-flex justify-content-center links register-form">
                     {% trans %}You have an account?{% endtrans %} <a href="{{ path('security_login') }}" class="ml-2">{% trans %}Sign In{% endtrans %}</a>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade pt-5" id="accept" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">{% trans %}the General Conditions of Use{% endtrans %}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <p>
+                   Intrinsicly coordinate progressive metrics after inexpensive technologies. Professionally enable functionalized meta-services rather than interactive e-markets. Quickly synthesize synergistic core competencies with viral strategic theme areas. Phosfluorescently synergize process-centric partnerships after web-enabled convergence. Dramatically visualize business results through bleeding-edge leadership skills.
+
+                   Continually impact worldwide supply chains after state of the art vortals. Authoritatively syndicate scalable networks vis-a-vis robust deliverables. Assertively network prospective services through highly efficient processes. Uniquely disseminate economically sound users before extensible e-commerce. Dramatically disintermediate client-based applications via resource sucking potentialities.
+
+                   Dynamically develop ubiquitous metrics through maintainable web-readiness. Continually build impactful meta-services for exceptional initiatives. Enthusiastically simplify multimedia based users and distinctive total linkage. Completely mesh web-enabled scenarios via leading-edge bandwidth. Energistically fabricate user friendly resources with out-of-the-box vortals.
+
+                   Professionally architect resource-leveling deliverables vis-a-vis collaborative users. Globally synthesize client-based applications after leveraged channels. Continually build client-centric web services and professional mindshare. Dramatically facilitate intuitive best practices before extensible supply chains. Synergistically formulate bleeding-edge manufactured products whereas granular best practices.
+
+                   Intrinsicly aggregate real-time information via integrated e-markets. Interactively integrate timely markets and best-of-breed manufactured products. Efficiently engineer bleeding-edge testing procedures through cross-unit data. Appropriately redefine long-term high-impact imperatives before extensible solutions. Energistically coordinate covalent strategic theme areas before robust growth strategies.
+
+                   Appropriately enable plug-and-play core competencies whereas extensible best practices. Interactively unleash front-end catalysts for change after client-centered methods of empowerment. Monotonectally synthesize viral portals for economically sound process improvements. Synergistically transform interactive content whereas cross functional e-markets. Proactively mesh 2.0 customer service after market-driven supply chains.
+
+                   Efficiently disintermediate multimedia based bandwidth whereas one-to-one benefits. Competently facilitate front-end systems through cooperative strategic theme areas. Quickly customize state of the art quality vectors vis-a-vis functionalized paradigms. Continually restore B2C markets without proactive testing procedures. Dynamically unleash standards compliant infomediaries after high-payoff models.
+
+                   Objectively incentivize web-enabled technology for multifunctional information. Uniquely communicate 2.0 paradigms without worldwide meta-services. Proactively fabricate top-line communities via low-risk high-yield sources. Assertively implement pandemic leadership vis-a-vis cross-platform meta-services. Compellingly evisculate multimedia based action items via sticky supply chains.
+
+                   Energistically create enterprise-wide convergence through turnkey growth strategies. Credibly impact client-centered networks before synergistic paradigms. Conveniently evisculate vertical architectures with client-focused quality vectors. Collaboratively parallel task high-quality total linkage after team driven functionalities. Professionally exploit corporate resources rather than economically sound services.
+
+                   Dynamically simplify goal-oriented growth strategies for bleeding-edge best practices. Collaboratively unleash progressive resources through parallel convergence. Rapidiously reinvent emerging technologies before adaptive markets. Efficiently brand efficient niches with enabled ROI. Monotonectally disintermediate enterprise-wide models vis-a-vis real-time scenarios.
+
+                   Distinctively provide access to just in time products with highly efficient convergence. Holisticly streamline excellent scenarios for premier architectures. Competently fabricate go forward content whereas high-quality imperatives. Dynamically innovate backend quality vectors whereas flexible partnerships. Compellingly utilize backend materials with bleeding-edge interfaces.
+
+                   Seamlessly iterate high-payoff initiatives with integrated ideas. Objectively pursue stand-alone markets with go forward sources. Professionally leverage existing front-end internal or "organic" sources after quality e-tailers. Distinctively facilitate seamless platforms rather than maintainable technology. Compellingly unleash adaptive e-commerce through covalent interfaces.
+
+                   Compellingly target resource-leveling ideas vis-a-vis client-focused sources. Conveniently.
+               </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

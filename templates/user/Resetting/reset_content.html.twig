@@ -1,22 +1,38 @@
-{% extends "layout_user.html.twig" %}
+{% extends "layout_visitor.html.twig" %}
 {% block content %}
     {% block fos_user_content %}
-        <div class="container pt-lg-5 pt-3">
-            <div class="row mb-md-3 mb-lg-3">
-                <div class="col-12">
-                    <h1 class="welcome-text mt-3">{% trans %}Welcome to FORDEALING{% endtrans %}</h1>
-                </div>
-            </div>
-            <hr>
-            <div class="row justify-content-center formLogin mt-4">
-                <p>{% trans %}Reset your password{% endtrans %}</p>
-                <div class="col-12">
-                    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-                    {{ form_widget(form) }}
-                    <div class="text-center">
-                        <input type="submit" value="{% trans %}Reset password{% endtrans %}" class="btn btn-dark"/>
+        <div class="container h-100 mt-5 pt-5">
+            <div class="d-flex justify-content-center h-100 ">
+                <div class="user_card">
+                    <div class="d-flex justify-content-center">
+                        <div class="brand_logo_container">
+                            <img src="{{ asset('assets/images/profile/user-avatar.png') }}" class="brand_logo" alt="Logo">
+                        </div>
                     </div>
-                    {{ form_end(form) }}
+                    <div class="justify-content-center form_container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="white mt-3 text-center">{% trans %}Reset your password{% endtrans %}</h5>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class=" justify-content-center">
+                                    <div class="row justify-content-center formLogin mt-4">
+                                        <div class="col-12">
+                                            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                                            {{ form_widget(form) }}
+                                            <div class="text-center">
+                                                <input type="submit" value="{% trans %}Reset password{% endtrans %}" class="btn login_btn"/>
+                                            </div>
+                                            {{ form_end(form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

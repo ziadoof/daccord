@@ -2,7 +2,7 @@
 
 {% block title %}{% trans %}User{% endtrans %}{% endblock %}
 {% block content %}
-    <div class="fos_user_user_show px-4 py-4">
+    <div class="fos_user_user_show px-4 py-4 profile-show">
         <div class="row">
             <div class="col-md-2 offset-5 btn-group ">
                 <div class=" profile-edit ml-2  ">
@@ -20,6 +20,7 @@
             <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
             <h1 class="pt-3 bdg-accord ">{{ user.point }} <span>Points</span></h1>
         </div>
+        {% if not user.deleted %}
         <div class="justify-content-center">
             <div class="text-center pt-2">
                 <h5 class=" pt-0 title-blue">{% trans %}Personal information{% endtrans %}</h5>
@@ -67,5 +68,6 @@
                 </form>
             </div>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

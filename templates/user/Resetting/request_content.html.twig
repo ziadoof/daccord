@@ -1,35 +1,6 @@
-{% extends "layout_user.html.twig" %}
+{% extends "layout_visitor.html.twig" %}
 {% block content %}
     {% block fos_user_content %}
-        {#<div class="container pt-lg-5 pt-3">
-            <div class="row mb-md-3 mb-lg-3">
-                <div class="col-12">
-                    <h1 class="welcome-text mt-3">Mot de passe oublié.</h1>
-                </div>
-            </div>
-            <hr>
-            <div class="row justify-content-center formLogin mt-4">
-                <p>Veuillez entrer le mail de connection.</p>
-                <div class="col-12">
-                    <form class="form-group formLogin" action="{{ path('fos_user_resetting_send_email') }}"
-                          method="POST" class="fos_user_resetting_request">
-                        <div>
-                            <label for="username">{{ 'resetting.request.username'|trans }} de connexion</label>
-                            <input class="form-control" type="text" id="username" name="username" required="required"/>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="row">
-                                <div class="btn btn-primary">
-                                    <input class="btn btn-primary" type="submit" value="{{ 'resetting.request.submit'|trans }}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>#}
-
-
         <div class="container h-100 mt-5 pt-5">
             <div class="d-flex justify-content-center h-100 ">
                 <div class="user_card">
@@ -54,11 +25,10 @@
                             </div>
                         </form>
                     </div>
-
                     <div class="register-form my-4">
                         <div class="d-flex justify-content-center links">
-                            <a href="{{ path('user_registration') }}" class="ml-2 btn btn-outline-secondary">{% trans %}Sign Up{% endtrans %}</a>
-                            <a href="{{ path('security_login') }}" class="ml-2 btn btn-outline-secondary">{% trans %}Sign In{% endtrans %}</a>
+                            <a href="{{ path('user_registration') }}" class="ml-2 btn login_btn">{% trans %}Sign Up{% endtrans %}</a>
+                            <a href="{{ path('security_login') }}" class="ml-2 btn login_btn">{% trans %}Sign In{% endtrans %}</a>
                         </div>
                     </div>
                 </div>

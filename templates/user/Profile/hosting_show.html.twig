@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="justify-content-center">
-            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
-            <h1 class="pt-3 bdg-accord ">{{ user.hosting.point }} <span>Points</span></h1>
+            <h3 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h3>
+            <h3 class="pt-3 bdg-accord ">{{ user.hosting.point }} <span>Points</span></h3>
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
@@ -41,10 +41,10 @@
                 <div class="col ">
                     <h6 class="d-inline font-weight-bold blued">{% trans %}City  :  {% endtrans %}</h6><span>  {{ user.hosting.ville}}</span>
                 </div>
-                <div class="col-md-4 offset-4 my-2 ">
+                <div class="col my-2 ">
                     <h6 class="d-inline font-weight-bold blued">{% trans %}About me  : {% endtrans %} </h6><span>  {{ user.hosting.aboutMe}}</span>
                 </div>
-                <div class="col-md-4 offset-4 my-2">
+                <div class="col my-2">
                     <h6 class="d-inline font-weight-bold blued">{% trans %}Hosting for  : {% endtrans %} </h6><span>  {{ user.hosting.hostingFor}}</span>
                 </div>
                 <div class="col mb-2">
@@ -65,7 +65,7 @@
                     <h6 class="blued">{% trans %}I can share with the guest{% endtrans %}</h6>
                     <div class="col my-2">
                         {% for share in user.hosting.getShare() %}
-                            <span class="badge badge-info"><h5>{{ share|trans }}</h5></span>
+                            <span class="badge badge-info my-1"><h5>{{ share|trans }}</h5></span>
                         {% endfor %}
                     </div>
                 {% endif %}

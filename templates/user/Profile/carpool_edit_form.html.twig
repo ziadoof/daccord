@@ -3,71 +3,85 @@
         {% if app.user.carpool %}
             <div class="fos_user_user_show px-4 py-4">
                 <div class="row ">
-                    <div class="col-md-4 offset-4 btn-group ">
-                        <div class=" carpool-edit ml-2  ">
-                            <a class="">
-                                {{ form_row(CarpoolForm.carImage) }}
-                            </a>
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12 text-center">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h6 class="blued mt-2">{% trans %}A picture of your house{% endtrans %}</h6>
+                                <a class="image-free">
+                                    {{ form_row(CarpoolForm.carImage) }}
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(CarpoolForm.carBrand) }}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(CarpoolForm.carColor) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(CarpoolForm.numberOfPassengers) }}
-                        <hr>
-                    </div>
-                </div>
-                <h6 class="text-center blued mb-4">{% trans %}Possibility to{% endtrans %}</h6>
-                <div class="row ">
-                    <div class="col-md-2 offset-4">
-                        <div class="">
-                            {{ form_row(CarpoolForm.bag) }}
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12 mt-2">
+                        <div class="local-border py-2 px-2">
+                            <div class="row ">
+                                <div class="col-6">
+                                    {{ form_row(CarpoolForm.carBrand) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ form_row(CarpoolForm.carColor) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(CarpoolForm.numberOfPassengers) }}
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-12 col-sm-6 col-12">
+                                    <div class="border-driver px-2 py-2 fix-height-carpool">
+                                        <h6 class="blued mb-4">{% trans %}Possibility to{% endtrans %}</h6>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.bag,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.animal,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.baby,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.bankCard,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-6 col-12">
+                                    <div class="border-driver px-2 py-2 fix-height-carpool">
+                                        <h6 class="blued mb-4">{% trans %}I can share{% endtrans %}</h6>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="">
+                                                    {{ form_row(CarpoolForm.conversation,{label_attr:{'class':'checkbox-custom'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="">
+                                                    {{ form_row(CarpoolForm.music,{label_attr:{'class':'checkbox-custom'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="">
-                            {{ form_row(CarpoolForm.animal) }}
+                        <div class="row">
+                            <div class="col justify-content-center mt-4 mx-2">
+                                <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="">
-                            {{ form_row(CarpoolForm.baby) }}
-                        </div>
-                        <div class="">
-                            {{ form_row(CarpoolForm.bankCard) }}
-                        </div>
-                    </div>
-                </div>
-                <h6 class="text-center blued mb-4">{% trans %}I can share{% endtrans %}</h6>
-                <div class="row">
-                    <div class="col-md-2 offset-4">
-                        <div class="">
-                            {{ form_row(CarpoolForm.conversation) }}
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="">
-                            {{ form_row(CarpoolForm.music) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="row col-md-4 offset-4 justify-content-center">
-                    <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
                 </div>
                 {{ form_end(CarpoolForm) }}
             </div>
         {% else %}
             <div class="fos_user_user_show px-4 py-4">
                 <div class="row ">
-                    <div class="col-md-4 offset-4 mt-5">
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12">
                         <div class="row border-driver">
                             <div class="col my-2 mx-2 text-center">
                                 <h4 class="title-blue my-1 mx-1">{% trans %}Share your car in simple steps{% endtrans %}</h4>
@@ -77,68 +91,81 @@
                     </div>
                 </div>
                 <div class="row ">
-                    <div class="col-md-4 offset-4 btn-group ">
-                        <div class=" carpool-edit ml-2  ">
-                            <a class="">
-                                {{ form_row(CarpoolForm.carImage) }}
-                            </a>
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12 text-center">
+                        <div class="row border-driver">
+                            <div class="col my-2 mx-2 text-center">
+                                <h6 class="blued mt-2">{% trans %}A picture of your house{% endtrans %}</h6>
+                                <a class="image-free">
+                                    {{ form_row(CarpoolForm.carImage) }}
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(CarpoolForm.carBrand) }}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(CarpoolForm.carColor) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
-                        {{ form_row(CarpoolForm.numberOfPassengers) }}
-                    </div>
-                </div>
-                <h6 class="text-center blued mb-4">{% trans %}Possibility to{% endtrans %}</h6>
-                <div class="row ">
-                    <div class="col-md-2 offset-4">
-                        <div class="">
-                            {{ form_row(CarpoolForm.bag) }}
+                    <div class="col-xl-6 offset-xl-3 col-md-10 offset-md-1 col-12 mt-2">
+                        <div class="local-border py-2 px-2">
+                            <div class="row ">
+                                <div class="col-6">
+                                    {{ form_row(CarpoolForm.carBrand) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ form_row(CarpoolForm.carColor) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_row(CarpoolForm.numberOfPassengers) }}
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-lg-6 col-md-12 col-sm-6 col-12">
+                                    <div class="border-driver px-2 py-2 fix-height-carpool">
+                                        <h6 class="blued mb-4">{% trans %}Possibility to{% endtrans %}</h6>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.bag,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.animal,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.baby,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_row(CarpoolForm.bankCard,{label_attr:{'class':'checkbox-custom'}}) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-6 col-12">
+                                    <div class="border-driver px-2 py-2 fix-height-carpool">
+                                        <h6 class="blued mb-4">{% trans %}I can share{% endtrans %}</h6>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="">
+                                                    {{ form_row(CarpoolForm.conversation,{label_attr:{'class':'checkbox-custom'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="">
+                                                    {{ form_row(CarpoolForm.music,{label_attr:{'class':'checkbox-custom'}}) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="">
-                            {{ form_row(CarpoolForm.animal) }}
+                        <div class="row">
+                            <div class="col justify-content-center mt-4 mx-2">
+                                <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="">
-                            {{ form_row(CarpoolForm.baby) }}
-                        </div>
-                        <div class="">
-                            {{ form_row(CarpoolForm.bankCard) }}
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <h6 class="text-center blued mb-4">{% trans %}I can share{% endtrans %}</h6>
-                <div class="row">
-                    <div class="col-md-2 offset-4">
-                        <div class="">
-                            {{ form_row(CarpoolForm.conversation) }}
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="">
-                            {{ form_row(CarpoolForm.music) }}
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="row col-md-4 offset-4 justify-content-center">
-                    <input type="submit"  class="btn btn-info btn-block" value="{{ 'Update'|trans }}" />
                 </div>
                 {{ form_end(CarpoolForm) }}
             </div>
-            {{ form_end(CarpoolForm) }}
         {% endif %}
 

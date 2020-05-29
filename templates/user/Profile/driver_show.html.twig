@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="justify-content-center">
-            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
-            <h1 class="pt-3 bdg-accord ">{{ user.driver.point }} <span>Points</span></h1>
+            <h3 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h3>
+            <h3 class="pt-3 bdg-accord ">{{ user.driver.point }} <span>Points</span></h3>
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
@@ -52,14 +52,14 @@
         {{ render(controller('App\\Controller\\User\\ProfileController::ratingDriver',{ 'user': user })) }}
     </div>
     {% else %}
-    <div class="col-md-4 offset-4 mt-5">
+    <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-12 mt-5">
         <div class="row border-driver">
-            <div class="col my-4 mx-2 text-center">
+            <div class="col my-2 mx-2 text-center text-center">
                 <h4 class="title-blue my-1 mx-1">{% trans %}Be a driver in simple steps{% endtrans %}</h4>
                 <p>{% trans %}Registering yourself as a driver enables you to see the deals taking place in your area and you can also receive notifications of potential deals and your profile is displayed as a potential driver within these deals. If one of the parties wishes to transfer his purchases through you, you will receive a notification and you will be able to talk to the owner of the transaction.At any moment you can stop or reset your account as a driver{% endtrans %}</p>
             </div>
         </div>
-        <div class="row text-center ">
+        <div class="row text-center mt-2">
             <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-info btn-block">{% trans %}Be a driver{% endtrans %}</a>
         </div>
     </div>

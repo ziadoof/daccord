@@ -2,15 +2,15 @@
     {% if app.user.carpool %}
     <div class="fos_user_user_show px-4 py-4">
         <div class="row">
-            <div class="col-md-4 offset-4 btn-group ">
+            <div class="col-xl-4 offset-xl-4 col-md-6 offset-md-3 col-8 offset-2 btn-group ">
                 <div class=" carpool-edit ml-2  ">
-                        <img class="mb-3 " src="{{ app.user.carpool.photoCarpool() }}" alt="User">
+                    <img class="mb-3 " src="{{ app.user.carpool.photoCarpool() }}" alt="User">
                 </div>
             </div>
         </div>
         <div class="justify-content-center">
-            <h1 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h1>
-            <h1 class="pt-3 bdg-accord ">{{ user.carpool.point }} <span>Points</span></h1>
+            <h3 class="text-center pt-3">{{ user.firstname|title }} {{ user.lastname|upper }}</h3>
+            <h3 class="pt-3 bdg-accord ">{{ user.carpool.point }} <span>Points</span></h3>
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">

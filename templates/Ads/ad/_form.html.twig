@@ -1,560 +1,554 @@
 {% block content %}
-    <div class="">
-        {{ form_start(form, {'attr': {'id': ad.typeOfAd}}) }}
-        <div class="row mt-4 pt-4">
+    {{ form_start(form, {'attr': {'id': ad.typeOfAd}}) }}
+        <div class="row my-2">
             <div class="col-md-12 ">
                 <h1 class="text-center pt-0 title-blue">{% if ad.typeOfAd is same as ('Offer') %}{% trans%}New Offer {% endtrans%} {% else %} {% trans%}New Demand {% endtrans%} {% endif %}</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                {{ form_row(form.generalcategory) }}
-            </div>
-            <div class="col-md-6" >
-                {{ form_row(form.category) }}
-            </div>
-        </div>
-        <div class="row">
-                <div class="col-md-4">
-                    {{ form_row(form.title) }}
+                <div class="local-border px-2 py-2 mt-2">
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-6 col-6">
+                            {{ form_row(form.generalcategory) }}
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-6">
+                            {{ form_row(form.category) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 description-ads">
+                            {{ form_row(form.description) }}
+                        </div>
+                    </div>
+                    {% if ad.typeOfAd is same as('Offer') %}
+                    <div class="row">
+                        <div class="btn-group pb-5">
+                            {% if form.imageOne is defined %}
+                                {{ form_row(form.imageOne) }}
+                            {% endif %}
+                            {% if form.imageTow is defined %}
+                                {{ form_row(form.imageTow) }}
+                            {% endif %}
+                            {% if form.imageThree is defined %}
+                                {{ form_row(form.imageThree) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                {{ form_row(form.description) }}
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 offset-3">
-                {% if form.imageOne is defined %}
-                {{ form_row(form.imageOne) }}
-                {% endif %}
-            </div>
-            <div class="col-md-2">
-                {% if form.imageTow is defined %}
-                {{ form_row(form.imageTow) }}
-                {% endif %}
-            </div>
-            <div class="col-md-2">
-                {% if form.imageThree is defined %}
-                {{ form_row(form.imageThree) }}
-                {% endif %}
-            </div>
-        </div>
-        <div id="new_form_dynamic">
-            <div class="col">
-                <div class="row">
-                    {% if form.manufactureCompany is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.manufactureCompany) }}
-                        </div>
-                    {% endif %}
-                    {% if form.minManufacturingYear is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.minManufacturingYear) }}
-                        </div>
-                    {% endif %}
-                    {% if form.manufacturingYear is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.manufacturingYear) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxManufacturingYear is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.maxManufacturingYear) }}
-                        </div>
-                    {% endif %}
-                    {% if form.subjectName is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.subjectName) }}
-                        </div>
-                    {% endif %}
-                    {% if form.brand is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.brand) }}
-                        </div>
-                    {% endif %}
-                    {% if form.city is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.city) }}
-                        </div>
-                    {% endif %}
-                    {% if form.age is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.age) }}
-                        </div>
-                    {% endif %}
-                    {% if form.dateOfEvent is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.dateOfEvent) }}
-                        </div>
-                    {% endif %}
-                    {% if form.model is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.model) }}
-                        </div>
-                    {% endif %}
-                    {% if form.material is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.material) }}
-                        </div>
-                    {% endif %}
-                    {% if form.theType is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.theType) }}
-                        </div>
-                    {% endif %}
-                    {% if form.minKilometer is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.minKilometer) }}
-                        </div>
-                    {% endif %}
-                    {% if form.kilometer is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.kilometer) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxKilometer is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.maxKilometer) }}
-                        </div>
-                    {% endif %}
-                    {% if form.changeGear is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.changeGear) }}
-                        </div>
-                    {% endif %}
-                    {% if form.fuelType is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.fuelType) }}
-                        </div>
-                    {% endif %}
-                    {% if form.ability is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.ability) }}
-                        </div>
-                    {% endif %}
-                    {% if form.acitvityArea is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.acitvityArea) }}
-                        </div>
-                    {% endif %}
-                    {% if form.mission is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.mission) }}
-                        </div>
-                    {% endif %}
-                    {% if form.workHours is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.workHours) }}
-                        </div>
-                    {% endif %}
-                    {% if form.experience is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.experience) }}
-                        </div>
-                    {% endif %}
-                    {% if form.levelOfStudent is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.levelOfStudent) }}
-                        </div>
-                    {% endif %}
-                    {% if form.levelOfStudy is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.levelOfStudy) }}
-                        </div>
-                    {% endif %}
-                    {% if form.typeOfContract is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.typeOfContract) }}
-                        </div>
-                    {% endif %}
-                    {% if form.salary is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.salary) }}
-                        </div>
-                    {% endif %}
-                    {% if form.eventType is defined %}
-                        <div class="col-md-3">
-                                {{ form_row(form.eventType) }}
-                        </div>
-                    {% endif %}
-                    {% if form.typeOfTranslation is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.typeOfTranslation) }}
-                        </div>
-                    {% endif %}
-                    {% if form.placeOfLesson is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.placeOfLesson) }}
-                        </div>
-                    {% endif %}
-                    {% if form.durationOfLesson is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.durationOfLesson) }}
-                        </div>
-                    {% endif %}
-                    {% if form.language is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.language) }}
-                        </div>
-                    {% endif %}
-                    {% if form.languages is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.languages) }}
-                        </div>
-                    {% endif %}
-                    {% if form.secondLanguage is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.secondLanguage) }}
-                        </div>
-                    {% endif %}
-                    {% if form.accuracy is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.accuracy) }}
-                        </div>
-                    {% endif %}
-                    {% if form.capacity is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.capacity) }}
-                        </div>
-                    {% endif %}
-                    {% if form.minCapacity is defined %}
-                        <div class="col-md-3">
-                                {{ form_row(form.minCapacity) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxCapacity is defined %}
-                        <div class="col-md-3">
-                                {{ form_row(form.maxCapacity) }}
-                        </div>
-                    {% endif %}
-                    {% if form.dvdCd is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.dvdCd) }}
-                        </div>
-                    {% endif %}
-                    {% if form.analogDigital is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.analogDigital) }}
-                        </div>
-                    {% endif %}
-                    {% if form.minArea is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.minArea) }}
-                        </div>
-                    {% endif %}
-                    {% if form.area is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.area) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxArea is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.maxArea) }}
-                        </div>
-                    {% endif %}
-                    {% if form.floor is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.floor) }}
-                        </div>
-                    {% endif %}
-                    {% if form.heating is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.heating) }}
-                        </div>
-                    {% endif %}
-                    {% if form.heatingType is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.heatingType) }}
-                        </div>
-                    {% endif %}
-                    {% if form.coverMaterial is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.coverMaterial) }}
-                        </div>
-                    {% endif %}
-                    {% if form.shape is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.shape) }}
-                        </div>
-                    {% endif %}
-                    {% if form.originCountry is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.originCountry) }}
-                        </div>
-                    {% endif %}
-                    {% if form.animalSpecies is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.animalSpecies) }}
-                        </div>
-                    {% endif %}
-                    {% if form.minCaliber is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.minCaliber) }}
-                        </div>
-                    {% endif %}
-                    {% if form.caliber is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.caliber) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxCaliber is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.maxCaliber) }}
-                        </div>
-                    {% endif %}
-                    {% if form.generalSituation is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.generalSituation) }}
-                        </div>
-                    {% endif %}
-                    {% if form.processor is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.processor) }}
-                        </div>
-                    {% endif %}
-                    {% if form.ram is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.ram) }}
-                        </div>
-                    {% endif %}
-                    {% if form.printingColor is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.printingColor) }}
-                        </div>
-                    {% endif %}
-                    {% if form.printingType is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.printingType) }}
-                        </div>
-                    {% endif %}
-                    {% if form.paperSize is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.paperSize) }}
-                        </div>
-                    {% endif %}
-                    {% if form.iSize is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.iSize) }}
-                        </div>
-                    {% endif %}
-                    {% if form.sSize is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.sSize) }}
-                        </div>
-                    {% endif %}
-                    {% if form.screenSizeCm is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.screenSizeCm) }}
-                        </div>
-                    {% endif %}
-                    {% if form.screenSizeInch is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.screenSizeInch) }}
-                        </div>
-                    {% endif %}
-                    {% if form.number is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.number) }}
-                        </div>
-                    {% endif %}
-                    {% if form.numberOfPassengers is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfPassengers) }}
-                        </div>
-                    {% endif %}
+            <div class="col-md-6">
+                <div class="local-border px-2 py-2 mt-2">
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form_row(form.title) }}
+                        </div>
+                    </div>
 
-                    {% if form.numberOfDoors is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfDoors) }}
+                    <div id="new_form_dynamic">
+                        <div class="col">
+                            <div class="row">
+                                {% if form.manufactureCompany is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.manufactureCompany) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.minManufacturingYear is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.minManufacturingYear) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.manufacturingYear is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.manufacturingYear) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxManufacturingYear is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxManufacturingYear) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.subjectName is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.subjectName) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.brand is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.brand) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.city is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.city) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.age is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.age) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.dateOfEvent is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.dateOfEvent) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.model is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.model) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.material is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.material) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.theType is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.theType) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.minKilometer is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.minKilometer) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.kilometer is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.kilometer) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxKilometer is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxKilometer) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.changeGear is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.changeGear) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.fuelType is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.fuelType) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.ability is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.ability) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.acitvityArea is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.acitvityArea) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.mission is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.mission) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.workHours is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.workHours) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.experience is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.experience) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.levelOfStudent is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.levelOfStudent) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.levelOfStudy is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.levelOfStudy) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.typeOfContract is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.typeOfContract) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.salary is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.salary) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.eventType is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.eventType) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.typeOfTranslation is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.typeOfTranslation) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.placeOfLesson is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.placeOfLesson) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.durationOfLesson is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.durationOfLesson) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.language is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.language) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.languages is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.languages) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.secondLanguage is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.secondLanguage) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.accuracy is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.accuracy) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.capacity is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.capacity) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.minCapacity is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.minCapacity) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxCapacity is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxCapacity) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.dvdCd is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.dvdCd) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.analogDigital is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.analogDigital) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.minArea is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.minArea) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.area is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.area) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxArea is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxArea) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.floor is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.floor) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.heating is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.heating) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.heatingType is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.heatingType) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.coverMaterial is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.coverMaterial) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.shape is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.shape) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.originCountry is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.originCountry) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.animalSpecies is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.animalSpecies) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.minCaliber is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.minCaliber) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.caliber is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.caliber) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxCaliber is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxCaliber) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.generalSituation is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.generalSituation) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.processor is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.processor) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.ram is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.ram) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.printingColor is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.printingColor) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.printingType is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.printingType) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.paperSize is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.paperSize) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.iSize is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.iSize) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.sSize is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.sSize) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.screenSizeCm is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.screenSizeCm) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.screenSizeInch is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.screenSizeInch) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.number is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.number) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfPassengers is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfPassengers) }}
+                                    </div>
+                                {% endif %}
+
+                                {% if form.numberOfDoors is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfDoors) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfDrawer is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfDrawer) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfFloors is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfFloors) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfHead is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfHead) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfPersson is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfPersson) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.minNumberOfRooms is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.minNumberOfRooms) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfRooms is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfRooms) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxNumberOfRooms is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxNumberOfRooms) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.numberOfStaging is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.numberOfStaging) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.length is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.length) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.width is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.width) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.height is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.height) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.weight is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.weight) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.classEnergie is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.classEnergie) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.ges is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.ges) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.color is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.color) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.maxDistance is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                        {{ form_row(form.maxDistance) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.accessories is defined %}
+                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                            {{ form_row(form.accessories, {label_attr:{'class':'checkbox-custom'}}) }}
+                                    </div>
+                                {% endif %}
+                                {% if form.cdRoom is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                    {{ form_row(form.cdRoom, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.covered is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                    {{ form_row(form.covered, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.electricHead is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                    {{ form_row(form.electricHead, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.hdmi is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.hdmi, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.threeInOne is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.threeInOne, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.usb is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.usb, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.wifi is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.wifi, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.withElevator is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.withElevator, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.withOven is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.withOven, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.withFreezer is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.withFreezer, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.withFurniture is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.withFurniture, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.withGarden is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.withGarden, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                                {% if form.withVerandah is defined %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-6">
+                                {{ form_row(form.withVerandah, {label_attr:{'class':'checkbox-custom'}}) }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="row">
+                                <div class="btn-group btn-block">
+                                    {% if form.price is defined %}
+                                        {{ form_row(form.price) }}
+                                    {% endif %}
+                                    <div class="ml-1 mt-4 pt-4">
+                                        {% if form.donate is defined %}
+                                            {{ form_row(form.donate, {label_attr:{'class':'checkbox-custom'}}) }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    {% endif %}
-                    {% if form.numberOfDrawer is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfDrawer) }}
-                        </div>
-                    {% endif %}
-                    {% if form.numberOfFloors is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfFloors) }}
-                        </div>
-                    {% endif %}
-                    {% if form.numberOfHead is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfHead) }}
-                        </div>
-                    {% endif %}
-                    {% if form.numberOfPersson is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfPersson) }}
-                        </div>
-                    {% endif %}
-                    {% if form.minNumberOfRooms is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.minNumberOfRooms) }}
-                        </div>
-                    {% endif %}
-                    {% if form.numberOfRooms is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfRooms) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxNumberOfRooms is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.maxNumberOfRooms) }}
-                        </div>
-                    {% endif %}
-                    {% if form.numberOfStaging is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.numberOfStaging) }}
-                        </div>
-                    {% endif %}
-                    {% if form.length is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.length) }}
-                        </div>
-                    {% endif %}
-                    {% if form.width is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.width) }}
-                        </div>
-                    {% endif %}
-                    {% if form.height is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.height) }}
-                        </div>
-                    {% endif %}
-                    {% if form.weight is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.weight) }}
-                        </div>
-                    {% endif %}
-                    {% if form.classEnergie is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.classEnergie) }}
-                        </div>
-                    {% endif %}
-                    {% if form.ges is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.ges) }}
-                        </div>
-                    {% endif %}
-                    {% if form.color is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.color) }}
-                        </div>
-                    {% endif %}
-                    {% if form.maxDistance is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.maxDistance) }}
-                        </div>
-                    {% endif %}
-                    {% if form.accessories is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.accessories) }}
-                        </div>
-                    {% endif %}
-                    {% if form.cdRoom is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.cdRoom) }}
-                        </div>
-                    {% endif %}
-                    {% if form.covered is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.covered) }}
-                        </div>
-                    {% endif %}
-                    {% if form.electricHead is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.electricHead) }}
-                        </div>
-                    {% endif %}
-                    {% if form.hdmi is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.hdmi) }}
-                        </div>
-                    {% endif %}
-                    {% if form.threeInOne is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.threeInOne) }}
-                        </div>
-                    {% endif %}
-                    {% if form.usb is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.usb) }}
-                        </div>
-                    {% endif %}
-                    {% if form.whitOven is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.whitOven) }}
-                        </div>
-                    {% endif %}
-                    {% if form.wifi is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.wifi) }}
-                        </div>
-                    {% endif %}
-                    {% if form.withElevator is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.withElevator) }}
-                        </div>
-                    {% endif %}
-                    {% if form.withOven is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.withOven) }}
-                        </div>
-                    {% endif %}
-                    {% if form.withFreezer is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.withFreezer) }}
-                        </div>
-                    {% endif %}
-                    {% if form.withFurniture is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.withFurniture) }}
-                        </div>
-                    {% endif %}
-                    {% if form.withGarden is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.withGarden) }}
-                        </div>
-                    {% endif %}
-                    {% if form.withVerandah is defined %}
-                        <div class="col-md-3">
-                            {{ form_row(form.withVerandah) }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="row">
-                    {% if form.price is defined %}
-                        <div class="col-md-3 mt-5 ">
-                            {{ form_row(form.price) }}
-                        </div>
-                    {% endif %}
-                    {% if form.donate is defined %}
-                        <div class="col-md-3 mt-5 ">
-                                {{ form_row(form.donate) }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="row">
-                    {% if form.withDriver is defined %}
-                        <div class="col-md-12 mt-5 text-center">
-                                {{ form_row(form.withDriver) }}
-                        </div>
-                    {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="row justify-content-center">
-            <input type="submit" class="btn btn-primary" value="{% trans %}Ok{% endtrans %}" />
+        <div class="row justify-content-center mt-4 mx-4">
+            <input type="submit" class="btn btn-primary btn-block mx-3" value="{% trans %}Add your{% endtrans %}{{ ' ' }}{% if ad.typeOfAd is same as('Offer') %}{% trans%}Offer{% endtrans %}{% else %}{% trans %}Demand{% endtrans %}{% endif %}" />
         </div>
-        {{ form_end(form) }}
-            <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
-            <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
-    </div>
+    {{ form_end(form) }}
+    <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>
+    <a href="{{ path('get_city') }}" id ="url-get" class="hidden"></a>
 {% endblock %}
 
 

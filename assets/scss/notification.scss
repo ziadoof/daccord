@@ -165,3 +165,9 @@
 .active-notification{
   list-style: none;
 }
+
+@media (max-width:358px ) {
+  .notification__list {
+    width: 22em;
+  }
+}

@@ -39,9 +39,14 @@
 }
 .login_btn {
   width: 100%;
-  background: #F70055 !important;
+  background: #444444 !important;
   color: white !important;
 }
+
+.login_btn:hover {
+  background: #F70055 !important;
+}
+
 .login_btn:focus {
   box-shadow: none !important;
   outline: 0px !important;
@@ -63,10 +68,25 @@
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
   background-color: #F70055 !important;
 }
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #F70055 !important;
+  background-color: #F70055 !important;
+}
 .register-form a{
   text-decoration: none;
   color: whitesmoke;
 }
 .register-form a:hover{
-  color: yellow;
+  color: #750505;
+}
+
+
+.ui-autocomplete { height: 40vh; overflow-y: scroll; overflow-x: hidden;}
+.accept-gcu a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+.accept-gcu a:hover{
+  text-decoration: none;
+  color: #750505;
 }

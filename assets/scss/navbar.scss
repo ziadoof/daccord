@@ -56,12 +56,14 @@
   min-height: 100vh;
   max-height: calc(100% - 5px);
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 9999;
 }
 
 .fix-search  {
   max-height: calc(100% - 5px);
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 
@@ -78,6 +80,7 @@
   padding-left: 2px;
   margin-top: 80px;
   list-style:none;
+  padding-bottom: 10em;
 }
 
 .sidebar li a i{ padding-right:5px;
@@ -131,6 +134,7 @@
   min-height: 100vh;
   max-height: calc(100% - 5px);
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 9999;
 }
 
@@ -145,6 +149,7 @@
   padding-left: 2px;
   margin-top: 80px;
   list-style:none;
+  padding-bottom: 10em;
 }
 
 .mdSidebar li a i{ padding-right:5px;
@@ -459,6 +464,54 @@
   #sidebarCollapse span {
     display: none;
   }
+}
+
+
+
+
+
+.lg-side-bar{
+  border: solid 2px #0c5460 ;
+
+}
+.max-fix{
+  width: 96vw;
+}
+.min-fix{
+  width: 89vw;
+}
+@media (min-width: 768px) and  (max-width: 992px){
+  .min-fix{
+    width: 96vw;
+  }
+}
+@media (min-width: 551px) and (max-width: 767px){
+  .min-fix{
+    width: 100vw;
+  }
+  .max-fix{
+    width: 100vw;
+  }
+}
+@media  (max-width: 550px){
+  .min-fix{
+    width: 100%;
+  }
+  .max-fix{
+    width: 100%;
+  }
+}
+
+.list-sidebar ::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+  background-color: lightgray;
+}
+body ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 2px;
+  height: 4px;
+  background-color: lightgray;
 }
 
 

@@ -1,14 +1,34 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-{% block header %}{% include "header.html.twig" %}{% endblock %}
+    {% block header %}
+        <html lang="{{ app.request.locale|split('_')[0] }}">
+        {% include "header.html.twig" %}
+    {% endblock %}
+
+    {% block min %}
     <section class="wrapper">
-        <div class="">
-            <div class="user_layout">
+        <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout">
+            {% include "search/searchbar.html.twig" %}
+            <div id="all">
                 {% block content %}
 
                 {% endblock %}
             </div>
+            <div id="searching">
+                {% block content_search %}
+
+                {% endblock %}
+            </div>
         </div>
-        {% block footer %}{% include "footer.html.twig" %}{% endblock %}
     </section>
+    {% endblock %}
+
+    {% block footer %}
+        {% include "footer.html.twig" %}
+    {% endblock %}
 {% endblock %}
+
+
+
+
+
