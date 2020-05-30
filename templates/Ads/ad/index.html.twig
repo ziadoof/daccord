@@ -10,7 +10,7 @@
     <div class="text-center">
     {% if app.user is same as (null) %}
         {% if ads is empty %}
-          <h1>{% trans %} no results fond{% endtrans %}</h1>
+            <h2 class="blued text-center">{% trans %}Sorry .. there are no results{% endtrans %}</h2>
         {% endif %}
         {% block ads_content %}
             {% include "Ads/ad/view/ads.html.twig" %}
@@ -24,7 +24,7 @@
             {% endblock area_ads_content %}
         {% else %}
             {% if ads is empty %}
-                <h1>{% trans %}no results fond {% endtrans %}</h1>
+                <h2 class="blued text-center">{% trans %}Sorry .. there are no results{% endtrans %}</h2>
             {% endif %}
             {% block user_ads_content %}
                 {% include "Ads/ad/view/ads.html.twig" %}

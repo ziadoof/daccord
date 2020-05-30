@@ -54,6 +54,30 @@ class ListsAds extends React.Component {
             const dateOfAd = result.dateOfAd;
             const typeOfAd = result.typeOfAd;
             const favorite = result.favorite;
+            const donate = result.donate;
+
+            let price_status;
+            if(donate){
+                let transDonate = Translator.trans('Donate');
+                price_status= <h5 className="blued mb-0 font-weight-bold d-inline">{transDonate}</h5>;
+            }
+            else{
+                if(pPrice){
+                    price_status =
+                    <div>
+                        <h5 className="blued mb-0 font-weight-bold d-inline">{price}€</h5>
+                        <h5 className="rosed mb-0 font-weight-bold d-inline ml-2"><del>{pPrice}€</del></h5>
+                    </div>;
+                }
+                else{
+                    if(price){
+                        price_status = <h5 className="blued mb-0 font-weight-bold d-inline">{price}€</h5>;
+                    }
+                    else{
+                        price_status = <br></br> ;
+                    }
+                }
+            }
 
             let offerImage;
             if (imageOne !== null) {
@@ -71,11 +95,16 @@ class ListsAds extends React.Component {
             }
             let demandImage = "../../assets/images/icons/demand.png";
             let image;
+            let mine_class ;
             if (typeOfAd === 'Offer') {
                 image = offerImage;
+                mine_class = "ad_index shadow-border ad_offer";
             } else {
                 image = demandImage;
+                mine_class = "ad_index shadow-border ad_demand";
             }
+
+
             let oldPrice;
             let newPrice;
             if (pPrice !== null) {
@@ -84,6 +113,8 @@ class ListsAds extends React.Component {
             if (pPrice !== null) {
                 newPrice = <span className="title-rose float-left">{price}€</span>;
             }
+
+
             let place;
             if (city === null) {
                 place = ville;
@@ -95,7 +126,7 @@ class ListsAds extends React.Component {
             let favoriteStatus;
             if(favorite === 'false'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add  float-left mr-2" data-object={id} data-type="ad" data-favorite="false">
+                    <form method="post" action="" className="js-favorite-add  ad-favorite mr-2 mt-3" data-object={id} data-type="ad" data-favorite="false">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
@@ -105,7 +136,7 @@ class ListsAds extends React.Component {
             }
             else if(favorite === 'true'){
               favoriteStatus =
-                  <form method="post" action="" className="js-favorite-add  float-left mr-2" data-object={id} data-type="ad" data-favorite="true">
+                  <form method="post" action="" className="js-favorite-add  ad-favorite mr-2 mt-3" data-object={id} data-type="ad" data-favorite="true">
                       <div className="flexbox">
                           <div className="fav-btn">
                             <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
@@ -118,36 +149,27 @@ class ListsAds extends React.Component {
             }
 
             return (
-
-                <div className="text-center col-md-3 px-md-2 my-2 ad_show" key={Math.random()}>
-                    <div id="ad_index" className="ad_index">
-                            <div className="px-2 border-ad">
-                                <div className="row">
-                                    <div className="col-md-12 pt-2">
-                                        <div className=" ">
-                                            {favoriteStatus}
-                                            <b className="title-blue float-left">{category}</b>
-                                            <b className="float-right ">{dateOfAd}</b>
-                                        </div>
-                                    </div>
+                <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4" key={Math.random()}>
+                    <div id="ad_index" className={mine_class}>
+                        <a href={url}>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <img className="image_ad" src={image}/>
                                 </div>
-                                <a href={url}>
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <img className="image_ad" src={image}/>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-8">
-                                            {oldPrice}
-                                            {newPrice}
-                                        </div>
-                                        <div className="col-md-4">
-                                            <span className="float-right mt-3">{place}</span>
-                                        </div>
-                                    </div>
-                                </a>
                             </div>
+                        </a>
+                        <div className="row no-gutters">
+                            <div className="col-10">
+                                <div className="ml-2 py-1">
+                                    {price_status}
+                                    <p className="mt-0 blacked">{place}</p>
+
+                                </div>
+                            </div>
+                            <div className="col-2">
+                                {favoriteStatus}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )
