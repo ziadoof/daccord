@@ -1,4 +1,10 @@
-{% extends "layout_user.html.twig" %}
+{% if app.user is not same as(null) %}
+    {% set layout = 'layout_user.html.twig' %}
+{% else %}
+    {% set layout = 'layout_visitor.html.twig' %}
+{% endif %}
+
+{% extends layout %}
 
 {% block title %}{% trans %}User{% endtrans %}{% endblock %}
 {% block content %}

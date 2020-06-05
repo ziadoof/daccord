@@ -1,5 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% extends 'layout_user.html.twig' %}
+{% if app.user is not same as(null) %}
+    {% set layout = 'layout_user.html.twig' %}
+{% else %}
+    {% set layout = 'layout_visitor.html.twig' %}
+{% endif %}
+
+{% extends layout %}
 
 {% block content %}
     <div class="fos_user_user_show px-4 py-4">

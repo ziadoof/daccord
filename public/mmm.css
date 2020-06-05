@@ -1,28 +1,5 @@
-.ad-card{
-    background-color: #444444;
-}
 
-#avatar-ad {
-    width:  50px;
-    height: 50px;
-    border-radius: 5px;
-}
-.profile-ava a{
-    text-decoration: none;
-}
-.profile-ava a:hover{
-    opacity: 0.9;
-}
-.full-border{
-    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.176) !important;
-    border: solid 1px #ededed;
-}
-.ad-slide{
-    background-color: #444444;
-}
-.demand-image img{
-    height: 100%;
-}
+
 
 
 
