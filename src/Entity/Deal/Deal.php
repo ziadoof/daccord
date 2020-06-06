@@ -92,6 +92,16 @@ class Deal
     private $favorites;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $offerNew;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $demandNew;
+
+    /**
      * Deal constructor.
      */
     public function __construct()
@@ -101,6 +111,50 @@ class Deal
         $this->demandUserStatus = false;
         $this->driverStatus = false;
         $this->driverRequests = new ArrayCollection();
+        $this->offerNew = true;
+        $this->demandNew = true;
+    }
+
+    public function isNew(User $user){
+        if($user === $this->getOfferUser()){
+            return $this->offerNew;
+        }
+        elseif ($user === $this->getDemandUser()){
+            return $this->demandNew;
+        }
+        return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOfferNew()
+    {
+        return $this->offerNew;
+    }
+
+    /**
+     * @param mixed $offerNew
+     */
+    public function setOfferNew($offerNew): void
+    {
+        $this->offerNew = $offerNew;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDemandNew()
+    {
+        return $this->demandNew;
+    }
+
+    /**
+     * @param mixed $demandNew
+     */
+    public function setDemandNew($demandNew): void
+    {
+        $this->demandNew = $demandNew;
     }
 
     /**
@@ -240,6 +294,21 @@ class Deal
         $dateString = $date->format('d-m-Y');
         switch (true) {
             case $interval === 0:
+                return $date->format('H:i');
+                break;
+            case $interval === 1:
+                return 'Yesterday';
+                break;
+            default:
+                return $date->format('d M');
+                break;
+        }
+
+        /*$now  = new \DateTime('now');
+        $interval = date_diff($date, $now)->days;
+        $dateString = $date->format('d-m-Y');
+        switch (true) {
+            case $interval === 0:
                 return 'Today';
                 break;
             case $interval === 1:
@@ -275,7 +344,7 @@ class Deal
             case 30:
                 return '1 Month ago';
                 break;
-        }
+        }*/
     }
 
     /**

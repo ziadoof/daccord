@@ -1,10 +1,43 @@
 {% extends "layout_user.html.twig" %}
 
+
 {% block title %}Deal index{% endblock %}
 {% block content %}
-    <h1 class="text-center title-blue"> {% trans %}My Deals{% endtrans %}</h1>
+    <h3 class="text-center title-blue"> {% trans %}My Deals{% endtrans %}</h3>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs nav-justified pt-2" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="suggested-tab" data-toggle="tab" href="#suggested_deals" role="tab" aria-controls="offer" aria-selected="true">
+                        <div class="">
+                            {% trans %}Suggested deals{% endtrans %}
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="done-tab" data-toggle="tab" href="#done_deals" role="tab" aria-controls="offer" aria-selected="true">
+                        <div class="">
+                            {% trans %}Done deals{% endtrans %}
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active text-align form-new" id="suggested_deals" role="tabpanel" aria-labelledby="suggested-tab">
+                    {% include "deal/suggested_deals.html.twig" %}
+                </div>
+                <div class="tab-pane fade show text-align form-new " id="done_deals" role="tabpanel" aria-labelledby="done-tab">
+                    {% include "deal/done_deals.html.twig" %}
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        {#<div class="col-md-5">
             <h1 class="text-center title-rose">{% trans %}Suggested Deals {% endtrans %} </h1>
             <div>
                 {% if suggestedDeals is not empty %}
@@ -19,7 +52,7 @@
                                     <div class="col-md-2">
                                         {% if app.user %}
                                             {% set isFavorite = 'false' %}
-                                            {#data-favorite must be string not boolean#}
+                                            #}{#data-favorite must be string not boolean#}{#
                                             {% for favorite in app.user.getFavoritesByType('deal')  %}
                                                 {% if favorite.deal is same as (deal) %}
                                                     {% set isFavorite = 'true' %}
@@ -131,8 +164,8 @@
                         <h2 class="title-blue text-center">{% trans %} There is no suggested deals{% endtrans %}</h2>
                 {% endif %}
             </div>
-        </div>
-        <div class="col-md-5 offset-2 ">
+        </div>#}
+        {#<div class="col-md-5 offset-2 ">
             <h1 class="text-center title-rose">{% trans %} Done Deals{% endtrans %} </h1>
             <div>
                 {% if pendingDeals is not empty or doneDeals is not empty %}
@@ -298,7 +331,7 @@
                         {% if deal.driverUser %}
                         <div class="border-top py-2">
                             <div class="col-md-12 ">
-                                {# TO DO add 5 star evaluate and comment for driver in his driver profile#}
+                                #}{# TO DO add 5 star evaluate and comment for driver in his driver profile#}{#
                                 {% if votesDriver[deal.driverUser.id] is defined %}
                                 <p class="blued">{% trans %}Your rating for this driver : {% endtrans %}
                                     {% set reste = 5 - votesDriver[deal.driverUser.id]%}
@@ -333,9 +366,9 @@
                     <h2 class="title-blue text-center">{% trans %} There is no done deals{% endtrans %}</h2>
                 {% endif %}
             </div>
-        </div>
+        </div>#}
     </div>
-    <!-- modal start-->
+    {#<!-- modal start-->
     {% for driverId in listDriverModel %}
         {% if votesDriver[driverId] is not defined %}
             <div class="modal fade bd-example-modal-lg mt-4" id="driver_vote-{{ driverId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
@@ -357,5 +390,5 @@
             </div>
         {% endif %}
     {% endfor %}
-    <!-- modal end-->
+    <!-- modal end-->#}
 {% endblock %}

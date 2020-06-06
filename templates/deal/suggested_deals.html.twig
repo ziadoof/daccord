@@ -1,0 +1,77 @@
+<div class="row">
+    {% if suggestedDeals is not empty %}
+        {% for deal in suggestedDeals|sort((b, a) => a.suggestionDate <=> b.suggestionDate) %}
+            <div class="col-xl-4 col-lg-4 col-sm-6 col-12 my-4  deal">
+                <div id="ad_index" class="ad_index full-border {% if deal.offerUser is same as(app.user) %} deal_offer{% else %} deal_demand{% endif %}">
+                    <div class="row ">
+                        <div class="col ">
+                            <div class="{% if deal.isNew(app.user) %}new-deal{% endif %} deal-border-bottom">
+                            <a href="{{ path('deal_show',{'id': deal.id})  }}"class="">
+                                <div class="row ">
+                                    <div class="col-md-12 text-center py-5">
+                                        <div class="offer-user ">
+                                            <img alt="" src="{{ deal.offerUser.photoProfile() }}" alt="offerUser" >
+                                            <i class="fas fa-handshake deal-photo"></i>
+                                            <img alt="" src="{{ deal.demandUser.photoProfile() }}" alt="offerUser" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-center pb-2 ">
+                                        {% if app.user is same as(deal.offerUser) %}
+                                            <span class="blued">{{ 'Your offer-deal'|trans({'%username%':deal.demandUser.firstname}) }}</span>
+                                        {% elseif app.user is same as(deal.demandUser) %}
+                                            <span class="blued">{{ 'Your demand-deal'|trans({'%username%':deal.offerUser.firstname}) }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-9  grayed py-2">
+                            <div class="row">
+                                <div class="col-12 ml-2">
+                                    <p><span class="font-weight-bold">{#{% trans %}Category{% endtrans%} : #}</span>{{ deal.category|trans }}</p>
+                                </div>
+                                <div class="col-12 ml-2">
+                                    <p><span class="font-weight-bold">{#{% trans %} Suggested at{% endtrans %}#}</span> {{ deal.date_format(deal.suggestionDate) }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 ">
+                            {% if app.user %}
+                                {% set isFavorite = 'false' %}
+                                {#data-favorite must be string not boolean#}
+                                {% for favorite in app.user.getFavoritesByType('deal')  %}
+                                    {% if favorite.deal is same as (deal) %}
+                                        {% set isFavorite = 'true' %}
+                                    {% endif %}
+                                {% endfor %}
+                                <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right mr-2 mt-1" data-object="{{ deal.id }}" data-type="deal" data-favorite="{{ isFavorite }}">
+                                    <div class="flexbox">
+                                        <div class="fav-btn mt-3">
+                                            <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+    <div class="col ">
+        <h4 class="title-blue text-center mt-4">{% trans %} There is no suggested deals{% endtrans %}</h4>
+    </div>
+    {% endif %}
+</div>
+{% if suggestedDeals is not empty %}
+        <div class="pagination-search row justify-content-center mt-4">
+            <div class="navigation ">
+                {{ knp_pagination_render(suggestedDeals) }}
+            </div>
+        </div>
+{% endif %}

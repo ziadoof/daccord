@@ -18,6 +18,7 @@ use App\Repository\Rating\VoteRepository;
 use App\Repository\UserRepository;
 use App\Service\Notification;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,12 +34,14 @@ class DealController extends AbstractController
 {
     /**
      * @Route("/", name="deal_index", methods={"GET","POST"})
+     * @param Request $request
      * @param DoneDealRepository $doneDealRepository
+     * @param PaginatorInterface $paginator
      * @param UserRepository $userRepository
      * @param VoteRepository $voteRepository
      * @return Response
      */
-    public function index(DoneDealRepository $doneDealRepository, UserRepository $userRepository, VoteRepository $voteRepository): Response
+    public function index(Request $request, DoneDealRepository $doneDealRepository, PaginatorInterface $paginator, UserRepository $userRepository, VoteRepository $voteRepository): Response
     {
 
         $user = $this->getUser();
@@ -58,6 +61,15 @@ class DealController extends AbstractController
             }
         }
 
+        $suggestedDealsPage = $paginator->paginate(
+        // Doctrine Query, not results
+            $suggestedDeals,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            18
+        );
+
         $voteDriversByThisUser = $voteRepository->findByVoter($this->getUser()->getId());
         $votesDrivers =[];
         foreach ($voteDriversByThisUser as $vote){
@@ -76,7 +88,7 @@ class DealController extends AbstractController
         return $this->render('deal/index.html.twig', [
             'votesDriver'=> $votesDrivers,
             'listDriverModel'=>$listDriverModel,
-            'suggestedDeals' => $suggestedDeals,
+            'suggestedDeals' => $suggestedDealsPage,
             'pendingDeals' => $pendingDeals,
             'doneDeals' => $doneDeals,
         ]);
@@ -93,9 +105,25 @@ class DealController extends AbstractController
         if(!$deal){
             throw $this->createNotFoundException('The deal does not exist');
         }
+
+        $entityManager = $this->getDoctrine()->getManager();
         $offerUser = $deal->getOfferUser();
         $demandUser= $deal->getDemandUser();
         $driverUser= $deal->getDriverUser();
+
+        // set new
+        $user = $this->getUser();
+        if($user === $offerUser && $deal->isNew($offerUser)){
+            $deal->setOfferNew(false);
+            $entityManager->persist($deal);
+            $entityManager->flush();
+        }
+        if($user === $demandUser && $deal->isNew($demandUser)){
+            $deal->setDemandNew(false);
+            $entityManager->persist($deal);
+            $entityManager->flush();
+        }
+
         if($driverUser){
             $users = [$offerUser, $demandUser, $driverUser];
         }
