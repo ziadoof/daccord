@@ -49,6 +49,7 @@ class DealController extends AbstractController
         $doneDeals = $doneDealRepository->findByUser($user);
         $pendingDeals = [];
         $suggestedDeals = [];
+        $dealsGroup=[];
         foreach ($deals as $pendingDeal){
             if($pendingDeal->getOfferUser()===$user && $pendingDeal->getOfferUserStatus()){
                 $pendingDeals []= $pendingDeal;
@@ -61,6 +62,37 @@ class DealController extends AbstractController
             }
         }
 
+        usort($pendingDeals, function ($a, $b)
+        {
+            if ($a->getSuggestionDate() == $b->getSuggestionDate()) {
+                return 0;
+            }
+            return ($a->getSuggestionDate() > $b->getSuggestionDate()) ? -1 : 1;
+        });
+
+        usort($doneDeals, function ($a, $b)
+        {
+            if ($a->getDate() == $b->getDate()) {
+                return 0;
+            }
+            return ($a->getDate() > $b->getDate()) ? -1 : 1;
+        });
+
+        foreach ($pendingDeals as $oneDeal){
+            $dealsGroup[] = $oneDeal;
+        }
+        foreach ($doneDeals as $oneDeal){
+            $dealsGroup[] = $oneDeal;
+        }
+
+        $dealsGroupPage = $paginator->paginate(
+        // Doctrine Query, not results
+            $dealsGroup,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            18
+        );
         $suggestedDealsPage = $paginator->paginate(
         // Doctrine Query, not results
             $suggestedDeals,
@@ -91,6 +123,7 @@ class DealController extends AbstractController
             'suggestedDeals' => $suggestedDealsPage,
             'pendingDeals' => $pendingDeals,
             'doneDeals' => $doneDeals,
+            'dealsGroup'=> $dealsGroupPage
         ]);
     }
 

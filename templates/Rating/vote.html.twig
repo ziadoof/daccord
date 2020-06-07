@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {{ form_start(form, {'method': 'post', 'action': path('new_vote', {'candidate': candidate.id, 'type':type}) }) }}
 <div class="row">
-    <div class="col-md-8 offset-2">
+    <div class="col-lg-8 offset-lg-2 col-12">
         <h4 class="title-blue text-center">{% trans %} Driver Rating{% endtrans %}</h4>
         <div class="driver">
             <div class="row ">

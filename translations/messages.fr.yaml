@@ -337,6 +337,9 @@ offer: offre
 'Done Deals': 'Done Deals'
 'Deal status :': 'Statut du deal :'
 'DONE DEAL': 'DONE DEAL'
+'Done deal': 'DONE DEAL'
+'Pending deal': 'DEAL en attente'
+This deal was without driver: 'Ce DEAL était sans Driver'
 'You have completed a deal on': 'Vous avez terminé un deal le '
 with: avec
 'and in cooperation with the driver': 'et en collaboration avec le Driver'
