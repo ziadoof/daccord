@@ -895,5 +895,17 @@
         <target>Reject the request</target>
       </segment>
     </unit>
+    <unit id="5IpPeVI15" name="Your demand-deal">
+      <segment>
+        <source>Your demand-deal</source>
+        <target>Your demand and %username% offer</target>
+      </segment>
+    </unit>
+    <unit id="5IpPeVI16" name="Your offer-deal">
+      <segment>
+        <source>Your offer-deal</source>
+        <target>Your offer and %username% demand</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

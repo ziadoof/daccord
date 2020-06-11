@@ -111,7 +111,7 @@
   background-color: #f28a8a;
 }
 .accepted {
-  background-color: #ddff63;
+  background-color: #7cbf8a;
 }
 
 .deal-terminate img{
@@ -193,4 +193,13 @@
 
 .border-bottom-none .nav-tabs .nav-link {
   border-bottom: none;
+}
+#driver_request textarea{
+  resize: none;
+  height: 7em;
+}
+@media (max-width: 575px) {
+  .driver-request-button button{
+    min-height: 6em;
+  }
 }

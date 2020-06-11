@@ -14,6 +14,7 @@ use App\Repository\Deal\DealRepository;
 use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
+use App\Repository\Rating\RatingRepository;
 use App\Repository\Rating\VoteRepository;
 use App\Repository\UserRepository;
 use App\Service\Notification;
@@ -133,7 +134,7 @@ class DealController extends AbstractController
      * @param DriverRepository $driverRepository
      * @return Response
      */
-    public function show(Deal $deal, DriverRepository $driverRepository): Response
+    public function show(Deal $deal, DriverRepository $driverRepository, RatingRepository $ratingRepository): Response
     {
         if(!$deal){
             throw $this->createNotFoundException('The deal does not exist');
@@ -166,7 +167,11 @@ class DealController extends AbstractController
         $specification = $this->specificationDeal($deal->getOffer(), $deal->getDemand());
         $withOutDrivers = ['Jobs and services','Residence','Holidays'];
         $drivers = $this->getDriversArea($deal,$driverRepository);
+        $driverRating = [];
 
+        foreach ($drivers as $driver){
+            $driverRating[$driver->getId()]= $ratingRepository->findByTypeAndCandidate('driver',$driver->getUser()->getId());
+        }
         if(in_array($deal->getCategory()->getParent()->getName(),$withOutDrivers,true ) ){
             $drivers = null;
         }
@@ -176,6 +181,7 @@ class DealController extends AbstractController
                 'specification'=>$specification,
                 'drivers'=> $drivers,
                 'deal' => $deal,
+                'driverRating'=>$driverRating
             ]);
         }
         else{
