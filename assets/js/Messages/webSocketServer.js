@@ -460,6 +460,10 @@ function wsConnect(id) {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 meetupParticipant" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
+                else if(typeON==='doneDeal'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 doneDealTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                }
                 else {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';

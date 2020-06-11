@@ -45,11 +45,23 @@ $(document).ready(function(){
         });
     }
 
+    var linksDealTabs = document.getElementsByClassName('doneDealTab');
+    for(var doneDeal of linksDealTabs){
+        doneDeal.addEventListener('click', function (e) {
+            localStorage.setItem('doneDeal_tap','#done_deals' );
+        });
+    }
+
+
+
     //for save the tab and return to it
     $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
         localStorage.setItem('profile_tap', $(e.target).attr('href'));
     });
     //
+    $('#dealTab a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('doneDeal_tap', $(e.target).attr('href'));
+    });
 
     var activeTab = localStorage.getItem('profile_tap');
     if(activeTab){
@@ -57,5 +69,17 @@ $(document).ready(function(){
         $('#user-edit a[href="' + activeTab + '"]').tab('show');
 
     }
+
+    var dealTab = localStorage.getItem('doneDeal_tap');
+    if(dealTab){
+        $('#dealTab a[href="' + dealTab + '"]').tab('show');
+    }
+    console.log(localStorage.getItem('doneDeal_tap'));
+});
+$('html,body').bind('mousewheel', function(event) {
+    event.preventDefault();
+    var scrollTop = this.scrollTop;
+    this.scrollTop = (scrollTop + ((event.deltaY * event.deltaFactor) * -1));
+    //console.log(event.deltaY, event.deltaFactor, event.originalEvent.deltaMode, event.originalEvent.wheelDelta);
 });
 

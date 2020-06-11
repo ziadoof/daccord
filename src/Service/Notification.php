@@ -303,7 +303,7 @@ class Notification
             if($status ==='offer'){
                 $sender = $deal->getOfferUser();
 
-                $doneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+                $doneDealNotification = $this->notificationManager->createNotification('doneDeal','','/deal/');
                 $this->notificationManager->addNotification(array($deal->getDemandUser()), $doneDealNotification, true);
                 $demandNotifiedBy = new NotifiedBy($doneDealNotification, $deal->getOfferUser(), $deal->getDemandUser(), 'doneDeal',$category);
                 $this->em->persist($demandNotifiedBy);
@@ -330,7 +330,7 @@ class Notification
             elseif ($status === 'demand'){
                 $sender = $deal->getDemandUser();
 
-                $doneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+                $doneDealNotification = $this->notificationManager->createNotification('doneDeal','','/deal/');
                 $this->notificationManager->addNotification(array($deal->getOfferUser()), $doneDealNotification, true);
                 $offerNotifiedBy = new NotifiedBy($doneDealNotification, $deal->getDemandUser(), $deal->getOfferUser(), 'doneDeal',$category);
                 $this->em->persist($offerNotifiedBy);
@@ -358,7 +358,7 @@ class Notification
             else{//driver
                 $sender = $deal->getDriverUser();
 
-                $firstDoneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+                $firstDoneDealNotification = $this->notificationManager->createNotification('doneDeal','','/deal/');
                 $this->notificationManager->addNotification(array($deal->getOfferUser()), $firstDoneDealNotification, true);
                 $offerNotifiedBy = new NotifiedBy($firstDoneDealNotification, $deal->getDriverUser(), $deal->getOfferUser(), 'doneDeal',$category);
                 $this->em->persist($offerNotifiedBy);
@@ -369,7 +369,7 @@ class Notification
                 $firstRecipient = $deal->getOfferUser();
                 $firstLink= '/deal/';
 
-                $secondDoneDealNotification = $this->notificationManager->createNotification('','','/deal/');
+                $secondDoneDealNotification = $this->notificationManager->createNotification('doneDeal','','/deal/');
                 $this->notificationManager->addNotification(array($deal->getDemandUser()), $secondDoneDealNotification, true);
                 $demandNotifiedBy = new NotifiedBy($secondDoneDealNotification, $deal->getDriverUser(), $deal->getDemandUser(), 'doneDeal',$category);
                 $this->em->persist($demandNotifiedBy);
