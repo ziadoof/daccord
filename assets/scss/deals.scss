@@ -58,12 +58,12 @@
 /* deal-show */
 
 .deal-show img {
-  width:80px;
-  height:80px;
+  width:5em;
+  height:5em;
   border-radius: 50%;
 }
 .deal-show{
-  display: inline;
+  /*display: inline;*/
 
 }
 .deal-show-photo{
@@ -198,8 +198,9 @@
   resize: none;
   height: 7em;
 }
-@media (max-width: 575px) {
-  .driver-request-button button{
-    min-height: 6em;
-  }
+.driver-request-button button{
+  min-width: 4em;
+}
+.driver-rating-deal span{
+  font-size: 0.8em;
 }

@@ -3,12 +3,12 @@
         <h4 class="title-blue text-center">{% trans %} Driver Request{% endtrans %}</h4>
         <div class="driver border-deal px-2">
             <div class="row">
-                <div class="col-12 mt-2">
-                    <div class="text-center btn-group">
-                        <div class="d-inline deal-show">
-                            <img class="mb-3 {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset(driver.user.photoProfile()) }}" alt="User" >
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-sm-3 deal-show text-center">
+                            <img class="mb-3 float-sm-left {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset(driver.user.photoProfile()) }}" alt="User" >
                         </div>
-                        <div class="d-inline pl-2 pt-2">
+                        <div class="col-sm-6 text-center float-sm-none">
                             <h6 class="blued font-weight-bold">{% trans %} Driver : {% endtrans %} <span class="grayed"> {{ driver.user.firstname }}{{ ' ' }}{{ driver.user.lastname }}</span></h6>
                             {% if driver.carbrand %}
                                 <h6 class="blued font-weight-bold">{% trans %} Car : {% endtrans %}<span class="grayed"> {{ driver.carbrand }}</span></h6>
@@ -23,9 +23,9 @@
                                 <h6 class="blued font-weight-bold">{% trans %} Max distance :{% endtrans %}<span class="grayed"> {{ driver.maxDistance }}{{ ' KM' }}</span></h6>
                             {% endif %}
                         </div>
-                    </div>
-                    <div class="d-inline deal-show float-right">
-                        <img src="{{ driver.photoDriver() }}" alt="car_image">
+                        <div class="col-sm-3 deal-show text-center">
+                            <img class=" float-sm-right" src="{{ driver.photoDriver() }}" alt="car_image">
+                        </div>
                     </div>
                 </div>
             </div>

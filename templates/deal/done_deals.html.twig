@@ -69,7 +69,6 @@
                                             <b class="deal-terminate">{% trans %} Demand{% endtrans %}</b>
                                         </a>
                                         {% if deal.driverUser %}
-                                            <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
                                             <a class="text-center mx-2 px-2 py-2  ">
                                                 <img  src="{{ deal.driverUser.photoProfile() }}" alt="offerUser" class=""><br>
                                                 <b class="deal-terminate">{{deal.driverUser.firstname}}
@@ -81,7 +80,6 @@
                                                 <i class="fas fa-truck-moving button-left" title="Driver request"></i>
                                                 <b class="deal-terminate">{% trans %} Driver{% endtrans %}</b>
                                             </a>
-                                            <i class="fas fa-handshake deal-show-photo-small mt-5"></i>
                                         {% else %}
                                             <i class="fas fa-handshake deal-show-photo mt-4"></i>
                                         {% endif %}
