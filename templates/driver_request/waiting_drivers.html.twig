@@ -1,0 +1,235 @@
+<div class="row">
+    <div class="col-12 mt-2">
+        <h6 class="title-rose text-center mb-4">{% trans %}In waiting{% endtrans %}</h6>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-8 offset-md-2 mt-2">
+        {% if driver_requests is not empty %}
+            {% for driver_request in driver_requests %}
+                <div class="row  full-border my-3 mx-1">
+                    <div class="col">
+                        <div class="row border-bottom">
+                            <div class="col-12 {{ driver_request.status }} px-2 py-2">
+                                <span>{{ driver_request.date|date("d M Y") }}</span>
+                                <span class="float-right">{% trans %} Suggested price : {% endtrans %} <span class="grayed font-weight-bold">{{ driver_request.price }}{{ '€' }}</span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center my-2">
+                                <b class=" pb-2"> <span class="title-blue">{{ driver_request.user.firstname }}</span> {% trans %}has sent you driver request for transfer {% endtrans %}
+                                    <span class="title-blue">{% if driver_request.deal.category.name is same as('Other') %}{{ driver_request.deal.offer.subjectName }}
+                                    {% else %}{{ driver_request.deal.category}}{% endif %}</span>
+                                    {% trans %} from{% endtrans %} <span class="title-blue">{{ driver_request.deal.offer.ville }}</span>
+                                    {% trans %} to{% endtrans %} <span class="title-blue">{{ driver_request.deal.demand.ville }}</span>
+                                </b>
+                                {% if driver_request.status is same as('accepted') %}
+                                <br>
+                                    <span class="rosed">{% trans %}After you accept this request, you are waiting for your addition to this deal{% endtrans %}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col driver deal-show btn-group">
+                                <div class="justify-content-center">
+                                    <a href="{{ path('user_show',{'id':driver_request.deal.offerUser.id}) }}" class="btn-group">
+                                        <img alt="" src="{{ driver_request.deal.offerUser.photoProfile() }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                    </a>
+                                    <h6 class="grayed font-weight-bold text-center py-2">{{ driver_request.deal.offerUser.firstname|title }}</h6>
+                                </div>
+                                <a class=" mx-2">
+                                    <i class="fas fa-handshake deal-show-photo mt-0"></i>
+                                </a>
+                                <div class="justify-content-center">
+                                    <a href="{{ path('user_show',{'id':driver_request.deal.demandUser.id}) }}" class="btn-group">
+                                        <img alt="" src="{{ driver_request.deal.demandUser.photoProfile() }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                    </a>
+                                    <h6 class="grayed font-weight-bold text-center py-2">{{ driver_request.deal.demandUser.firstname|title }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        {% if  driver_request.description is not same as(null)%}
+                        <div class="row border-bottom ">
+                            <div class="col-12 col-lg-8 offset-lg-2 mb-2">
+                                <div class="px-4 py-1">
+                                    <p class="font-weight-bold blued">{% trans %} Message{% endtrans %}</p>
+                                    <p class="minimize">{{ driver_request.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row  local-border mb-2 mx-1">
+                            <div class="col-6 col-md-6">
+                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                    <button class="btn btn-outline-info btn-block my-1" >
+                                        <input type="hidden" name="user" value="{{ driver_request.deal.offerUser.id }}">
+                                        <p class=""><i class="fas fa-comments"></i> {{driver_request.deal.offerUser.firstname}}</p>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                    <button class="btn btn-outline-info btn-block my-1" >
+                                        <input type="hidden" name="user" value="{{ driver_request.deal.demandUser.id }}">
+                                        <p class=""><i class="fas fa-comments"></i> {{driver_request.deal.demandUser.firstname}}</p>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <form>
+                                    <a class="btn btn-info my-1 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.offer.id}) }}">{% trans %}Offer{% endtrans %}</a>
+                                </form>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <form >
+                                    <a class="btn btn-info my-1  btn-block" href="{{ path('ad_show', {'id': driver_request.deal.demand.id}) }}">{% trans %}Demand{% endtrans %}</a>
+                                </form>
+                            </div>
+
+                            <div class="col-6 col-md-6">
+                                <form>
+                                    <a class="btn btn-success my-1 btn-block
+                                        {% if driver_request.status is same as('accepted') %}
+                                            disable-links
+                                        {% endif %}"
+                                       href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id,'type': 'accepted'}) }}"
+                                       onclick="return confirm(Translator.trans('Are you sure you want to accept this Deal?'));">{% trans %}Accept{% endtrans %}
+                                    </a>
+                                </form>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <form>
+                                    <a class="btn btn-danger my-1 btn-block"
+                                       href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id, 'type': 'rejected'}) }}"
+                                       onclick="return confirm(Translator.trans('Are you sure you want to reject this Deal?'));">{% trans %}Reject{% endtrans %}</a>
+                                </form>
+                            </div>
+
+                            {#<div class="col-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                            <button class="btn btn-outline-info btn-block mx-1  my-1" >
+                                                <input type="hidden" name="user" value="{{ driver_request.deal.offerUser.id }}">
+                                                <p class=""><i class="fas fa-comments"></i> {{driver_request.deal.offerUser.firstname}}</p>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                            <button class="btn btn-outline-info btn-block mx-1  my-1" >
+                                                <input type="hidden" name="user" value="{{ driver_request.deal.demandUser.id }}">
+                                                <p class=""><i class="fas fa-comments"></i> {{driver_request.deal.demandUser.firstname}}</p>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row ml-2">
+                                    <div class="col-12">
+                                        <form>
+                                            <a class="btn btn-info my-1 mx-2 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.offer.id}) }}">{% trans %}Offer{% endtrans %}</a>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <form >
+                                            <a class="btn btn-info my-1 mx-2 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.demand.id}) }}">{% trans %}Demand{% endtrans %}</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row ml-2">
+                                    <div class="col-12">
+                                        <form>
+                                            <a class="btn btn-success my-1 mx-2 btn-block"
+                                               href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id,'type': 'accepted'}) }}"
+                                               onclick="return confirm(Translator.trans('Are you sure you want to accept this Deal?'));">{% trans %}Accept{% endtrans %}</a>
+                                        </form>
+                                    </div>
+                                    <div class="col-12">
+                                        <form>
+                                            <a class="btn btn-danger my-1 mx-2 btn-block"
+                                               href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id, 'type': 'rejected'}) }}"
+                                               onclick="return confirm(Translator.trans('Are you sure you want to reject this Deal?'));">{% trans %}Reject{% endtrans %}</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>#}
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <h4 class="title-blue text-center">{% trans %} There is no driver request{% endtrans %}</h4>
+        {% endif %}
+        {#{% if driver_requests is not empty %}
+            {% for driver_request in driver_requests %}
+                <div class="border-deal {{ driver_request.status }}">
+                    <div class=" pt-2 mx-4">
+                        <b>{% trans %} Requested at : {% endtrans %}{{ driver_request.date|date("m/d/Y") }}</b>
+                        <b class="float-right">{% trans %} Suggested price : {% endtrans %}<span class="title-blue">{{ driver_request.price }}</span>{{ ' €' }}</b>
+                    </div>
+                    <hr>
+                    <div class="row mx-4 justify-content-center">
+                        <b class=" pb-2"> <span class="title-blue">{{ driver_request.user.firstname }}</span>{% trans %}has sent you driver request for transfer {% endtrans %}
+                            <span class="title-blue">{% if driver_request.deal.category.name is same as('Other') %}{{ driver_request.deal.offer.subjectName }}
+                                    {% else %}{{ driver_request.deal.category}}{% endif %}</span>
+                            {% trans %} from{% endtrans %} <span class="title-blue">{{ driver_request.deal.offer.ville }}</span>
+                            {% trans %} to{% endtrans %} <span class="title-blue">{{ driver_request.deal.demand.ville }}</span></b>
+                    </div>
+                    <div class="btn-group driver deal-show">
+                        <div class="justify-content-center">
+                            <a href="{{ path('user_show',{'id':driver_request.deal.offerUser.id}) }}" class="btn-group">
+                                <img alt="" src="{{ driver_request.deal.offerUser.photoProfile() }}" class="{% if driver_request.deal.offerUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                            </a>
+                            <a class="btn btn-info my-1 btn-block">{% trans %} Message to {% endtrans %}{{driver_request.deal.offerUser.firstname}}</a>
+                        </div>
+                        <a class="mt-5 mx-5">
+                            <i class="fas fa-handshake deal-show-photo mt-0"></i>
+                        </a>
+                        <div class="justify-content-center">
+                            <a href="{{ path('user_show',{'id':driver_request.deal.demandUser.id}) }}" class="btn-group">
+                                {% if driver_request.deal.demandUser.profileImage %}
+                                    <img alt="" src="{{ asset('/assets/images/profile/'~driver_request.deal.demandUser.profileImage) }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                {% else %}
+                                    <img alt="" src="{{ asset('/assets/images/profile/user-avatar.png') }}" class="{% if driver_request.deal.demandUser.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}">
+                                {% endif %}
+                            </a>
+                            <a class="btn btn-info my-1 btn-block">{% trans %}Message to  {% endtrans %}{{driver_request.deal.demandUser.firstname}}</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="px-4 py-1">
+                        <p class="font-weight-bold">{% trans %} Message{% endtrans %}</p>
+                        {{ driver_request.description }}
+                    </div>
+                    <hr>
+                    <div class=" btn-group pb-2">
+                        <form>
+                            <a class="btn btn-info my-1 mx-2 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.offer.id}) }}">{{driver_request.deal.offerUser.firstname}}{{ ' offer' }}</a>
+                        </form>
+                        <form >
+                            <a class="btn btn-info my-1 mx-2 btn-block" href="{{ path('ad_show', {'id': driver_request.deal.demand.id}) }}">{{driver_request.deal.demandUser.firstname}}{{ ' demand' }}</a>
+                        </form>
+                        <form>
+                            <a class="btn btn-danger my-1 mx-2 btn-block"
+                               href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id, 'type': 'rejected'}) }}"
+                               onclick="return confirm(Translator.trans('Are you sure you want to reject this Deal?'));">{% trans %}Reject the request {% endtrans %}</a>
+                        </form>
+                        <form>
+                            <a class="btn btn-success my-1 mx-2 btn-block"
+                               href="{{ path('driver_request_treatment', {'driverRequest':driver_request.id,'type': 'accepted'}) }}"
+                               onclick="return confirm(Translator.trans('Are you sure you want to accept this Deal?'));">{% trans %}Accept the request {% endtrans %}</a>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2 class="title-blue text-center">{% trans %} There is no driver request{% endtrans %}</h2>
+        {% endif %}#}
+    </div>
+
+</div>

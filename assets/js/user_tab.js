@@ -74,7 +74,6 @@ $(document).ready(function(){
     if(dealTab){
         $('#dealTab a[href="' + dealTab + '"]').tab('show');
     }
-    console.log(localStorage.getItem('doneDeal_tap'));
 });
 $('html,body').bind('mousewheel', function(event) {
     event.preventDefault();

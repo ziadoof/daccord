@@ -165,7 +165,7 @@ body .welcome-text {
 
 @-moz-document url-prefix() {
   html,body{
-    overflow: hidden !important;
+    overflow: auto !important;
     scrollbar-color: transparent transparent;
   }
 }
