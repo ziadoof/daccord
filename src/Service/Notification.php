@@ -146,8 +146,8 @@ class Notification
         $demandUser = $deal->getDemandUser();
 
         $category = $deal->getCategory()->getName()==='Other'?$deal->getOffer()->getSubjectName():$deal->getCategory()->getName();
-        $offerNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
-        $demandNotification = $this->notificationManager->createNotification('','','/deal/'.$deal->getId());
+        $offerNotification = $this->notificationManager->createNotification('deal','','/deal/'.$deal->getId());
+        $demandNotification = $this->notificationManager->createNotification('deal','','/deal/'.$deal->getId());
 
         $this->notificationManager->addNotification(array($offerUser), $offerNotification, true);
         $this->notificationManager->addNotification(array($demandUser), $demandNotification, true);
@@ -188,7 +188,7 @@ class Notification
 
         $category = $driverRequest->getDeal()->getCategory()->getName()==='Other'?$driverRequest->getDeal()->getOffer()->getSubjectName()
                                                                                 :$driverRequest->getDeal()->getCategory()->getName();
-        $notification = $this->notificationManager->createNotification('','','/driver_request/');
+        $notification = $this->notificationManager->createNotification('dRequest','','/driver_request/');
 
         $this->notificationManager->addNotification(array($driver), $notification, true);
 
@@ -253,7 +253,7 @@ class Notification
 
         $category = $driverRequest->getDeal()->getCategory()->getName()==='Other'?$driverRequest->getDeal()->getOffer()->getSubjectName()
             :$driverRequest->getDeal()->getCategory()->getName();
-        $notification = $this->notificationManager->createNotification('','','/driver_request/');
+        $notification = $this->notificationManager->createNotification('dToDeal','','/driver_request/');
 
         $this->notificationManager->addNotification(array($driver), $notification, true);
 
@@ -315,7 +315,7 @@ class Notification
                 $firstLink= '/deal/';
 
                 if($deal->getDriverUser()){
-                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
+                    $driverNotification = $this->notificationManager->createNotification('dDoneDeal','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getOfferUser(), $deal->getDriverUser(), 'doneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
@@ -343,7 +343,7 @@ class Notification
 
                 if($deal->getDriverUser()){
 
-                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
+                    $driverNotification = $this->notificationManager->createNotification('dDoneDeal','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getDemandUser(), $deal->getDriverUser(), 'doneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
@@ -400,7 +400,7 @@ class Notification
                 $firstLink= '/deal/'.$deal->getId();
 
                 if($deal->getDriverUser()){
-                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
+                    $driverNotification = $this->notificationManager->createNotification('dDoneDeal','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getOfferUser(), $deal->getDriverUser(), 'semiDoneDeal',$category);
                     $this->em->persist($driverNotifiedBy);
@@ -427,7 +427,7 @@ class Notification
                 $firstLink= '/deal/'.$deal->getId();
 
                 if($deal->getDriverUser()){
-                    $driverNotification = $this->notificationManager->createNotification('','','/driver_request/');
+                    $driverNotification = $this->notificationManager->createNotification('dDoneDeal','','/driver_request/');
                     $this->notificationManager->addNotification(array($deal->getDriverUser()), $driverNotification, true);
                     $driverNotifiedBy = new NotifiedBy($driverNotification, $deal->getDemandUser(), $deal->getDriverUser(), 'semiDoneDeal',$category);
                     $this->em->persist($driverNotifiedBy);

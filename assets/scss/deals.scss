@@ -204,3 +204,12 @@
 .driver-rating-deal span{
   font-size: 0.8em;
 }
+
+.disable-links {
+  pointer-events: none;
+  background-color:#444444;
+  border: #444444;
+}
+p{
+  word-wrap: break-word;
+}

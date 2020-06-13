@@ -52,6 +52,20 @@ $(document).ready(function(){
         });
     }
 
+    var inWaitingTabs = document.getElementsByClassName('inWaitingTab');
+    for(var waiting of inWaitingTabs){
+        waiting.addEventListener('click', function (e) {
+            localStorage.setItem('driverRequest_tap','#waiting_drivers' );
+        });
+    }
+
+    var doneDriverTabs = document.getElementsByClassName('doneDriverTab');
+    for(var doneDriver of doneDriverTabs){
+        doneDriver.addEventListener('click', function (e) {
+            localStorage.setItem('driverRequest_tap','#done_drivers' );
+        });
+    }
+
 
 
     //for save the tab and return to it
@@ -61,6 +75,10 @@ $(document).ready(function(){
     //
     $('#dealTab a[data-toggle="tab"]').on('show.bs.tab', function(e) {
         localStorage.setItem('doneDeal_tap', $(e.target).attr('href'));
+    });
+
+    $('#driverRequestTab a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('driverRequest_tap', $(e.target).attr('href'));
     });
 
     var activeTab = localStorage.getItem('profile_tap');
@@ -73,6 +91,11 @@ $(document).ready(function(){
     var dealTab = localStorage.getItem('doneDeal_tap');
     if(dealTab){
         $('#dealTab a[href="' + dealTab + '"]').tab('show');
+    }
+
+    var driverRequestTab = localStorage.getItem('driverRequest_tap');
+    if(driverRequestTab){
+        $('#driverRequestTab a[href="' + driverRequestTab + '"]').tab('show');
     }
 });
 $('html,body').bind('mousewheel', function(event) {

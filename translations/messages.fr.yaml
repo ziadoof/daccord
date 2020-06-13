@@ -390,8 +390,8 @@ search: chercher
 'has sent you driver request for transfer': 'vous a envoyé une demande de Driver pour transfert'
 'There is no driver request': 'Il n''y a pas de demande de Driver'
 'Done drivers': 'Done Drivers'
-'Show deal': 'Afficher le deal'
-'Finish this deal': 'Terminez ce deal'
+'Show this deal': 'Afficher ce deal'
+'Finish this deal': 'Terminer ce deal'
 'You have cooperated in a deal on': 'Vous avez collaboré à un deal le '
 Seven: Sept
 'There is no done drivers': 'Il n''y a pas de Done Drivers'
@@ -1723,4 +1723,3 @@ Your offer-deal : Votre offer et la demande de %username%
 DRIVERS: LIVRAISON
 In waiting: En attente
 After you accept this request, you are waiting for your addition to this deal: Après avoir accepté cette demande, vous attendez votre ajout à ce deal
-
