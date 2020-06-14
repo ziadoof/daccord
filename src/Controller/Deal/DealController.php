@@ -14,10 +14,12 @@ use App\Repository\Deal\DealRepository;
 use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
+use App\Repository\Rating\RatingRepository;
 use App\Repository\Rating\VoteRepository;
 use App\Repository\UserRepository;
 use App\Service\Notification;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use PhpParser\Node\Expr\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,12 +35,14 @@ class DealController extends AbstractController
 {
     /**
      * @Route("/", name="deal_index", methods={"GET","POST"})
+     * @param Request $request
      * @param DoneDealRepository $doneDealRepository
+     * @param PaginatorInterface $paginator
      * @param UserRepository $userRepository
      * @param VoteRepository $voteRepository
      * @return Response
      */
-    public function index(DoneDealRepository $doneDealRepository, UserRepository $userRepository, VoteRepository $voteRepository): Response
+    public function index(Request $request, DoneDealRepository $doneDealRepository, PaginatorInterface $paginator, UserRepository $userRepository, VoteRepository $voteRepository): Response
     {
 
         $user = $this->getUser();
@@ -46,6 +50,7 @@ class DealController extends AbstractController
         $doneDeals = $doneDealRepository->findByUser($user);
         $pendingDeals = [];
         $suggestedDeals = [];
+        $dealsGroup=[];
         foreach ($deals as $pendingDeal){
             if($pendingDeal->getOfferUser()===$user && $pendingDeal->getOfferUserStatus()){
                 $pendingDeals []= $pendingDeal;
@@ -57,6 +62,46 @@ class DealController extends AbstractController
                 $suggestedDeals [] = $pendingDeal;
             }
         }
+
+        usort($pendingDeals, function ($a, $b)
+        {
+            if ($a->getSuggestionDate() == $b->getSuggestionDate()) {
+                return 0;
+            }
+            return ($a->getSuggestionDate() > $b->getSuggestionDate()) ? -1 : 1;
+        });
+
+        usort($doneDeals, function ($a, $b)
+        {
+            if ($a->getDate() == $b->getDate()) {
+                return 0;
+            }
+            return ($a->getDate() > $b->getDate()) ? -1 : 1;
+        });
+
+        foreach ($pendingDeals as $oneDeal){
+            $dealsGroup[] = $oneDeal;
+        }
+        foreach ($doneDeals as $oneDeal){
+            $dealsGroup[] = $oneDeal;
+        }
+
+        $dealsGroupPage = $paginator->paginate(
+        // Doctrine Query, not results
+            $dealsGroup,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            18
+        );
+        $suggestedDealsPage = $paginator->paginate(
+        // Doctrine Query, not results
+            $suggestedDeals,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            18
+        );
 
         $voteDriversByThisUser = $voteRepository->findByVoter($this->getUser()->getId());
         $votesDrivers =[];
@@ -76,9 +121,10 @@ class DealController extends AbstractController
         return $this->render('deal/index.html.twig', [
             'votesDriver'=> $votesDrivers,
             'listDriverModel'=>$listDriverModel,
-            'suggestedDeals' => $suggestedDeals,
+            'suggestedDeals' => $suggestedDealsPage,
             'pendingDeals' => $pendingDeals,
             'doneDeals' => $doneDeals,
+            'dealsGroup'=> $dealsGroupPage
         ]);
     }
 
@@ -88,14 +134,30 @@ class DealController extends AbstractController
      * @param DriverRepository $driverRepository
      * @return Response
      */
-    public function show(Deal $deal, DriverRepository $driverRepository): Response
+    public function show(Deal $deal, DriverRepository $driverRepository, RatingRepository $ratingRepository): Response
     {
         if(!$deal){
             throw $this->createNotFoundException('The deal does not exist');
         }
+
+        $entityManager = $this->getDoctrine()->getManager();
         $offerUser = $deal->getOfferUser();
         $demandUser= $deal->getDemandUser();
         $driverUser= $deal->getDriverUser();
+
+        // set new
+        $user = $this->getUser();
+        if($user === $offerUser && $deal->isNew($offerUser)){
+            $deal->setOfferNew(false);
+            $entityManager->persist($deal);
+            $entityManager->flush();
+        }
+        if($user === $demandUser && $deal->isNew($demandUser)){
+            $deal->setDemandNew(false);
+            $entityManager->persist($deal);
+            $entityManager->flush();
+        }
+
         if($driverUser){
             $users = [$offerUser, $demandUser, $driverUser];
         }
@@ -105,7 +167,11 @@ class DealController extends AbstractController
         $specification = $this->specificationDeal($deal->getOffer(), $deal->getDemand());
         $withOutDrivers = ['Jobs and services','Residence','Holidays'];
         $drivers = $this->getDriversArea($deal,$driverRepository);
+        $driverRating = [];
 
+        foreach ($drivers as $driver){
+            $driverRating[$driver->getId()]= $ratingRepository->findByTypeAndCandidate('driver',$driver->getUser()->getId());
+        }
         if(in_array($deal->getCategory()->getParent()->getName(),$withOutDrivers,true ) ){
             $drivers = null;
         }
@@ -115,6 +181,7 @@ class DealController extends AbstractController
                 'specification'=>$specification,
                 'drivers'=> $drivers,
                 'deal' => $deal,
+                'driverRating'=>$driverRating
             ]);
         }
         else{

@@ -3,103 +3,105 @@
 {% block title %}{% trans %} Cafe{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h1 class="text-center rosed mb-4">{% trans %} Cafe{% endtrans %}</h1>
-
+<div class="fix-width">
+    <h4 class="text-center rosed mb-4">{% trans %} Cafe{% endtrans %}</h4>
     {% if form is defined %}
      {% include 'cafe/_form.html.twig' %}
     {% endif %}
     {% if currentCafe is defined %}
-        <h5 class="text-center blued" id="myCafe">{% trans %} Your cafe{% endtrans %}</h5>
+        <h5 class="text-center blued" id="myCafe">{% trans %}Your cafe{% endtrans %}</h5>
         <div class="row " id="div-cafe-timer{{ currentCafe.id }}" data-value="myCafe">
-            <div class="col-md-6 offset-3 border-deal">
-                <div class="row my-2">
-                    <div class="col-md-3 ">
-                        <img src="{{ currentCafe.createdBy.photoProfile() }}" alt="" class="cafe-avatar mt-1">
-                        <div class="pt-4">
-                            <span class="blued  ml-2">{{ currentCafe.createdBy.firstname|title }}</span>
+            <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-10 offset-1  full-border pending ">
+                <div class="row">
+                    <div class="col border-bottom py-2">
+                        <div class="btn-group">
+                            <img src="{{ currentCafe.createdBy.photoProfile() }}" alt="" class="cafe-avatar mt-1 d-block">
+                            <span class="blued  ml-2 mt-3">{{ currentCafe.createdBy.firstname|title }}</span>
+                        </div>
+                        <div class="float-right mt-3">
+                            <form method="post" action="{{path('cafe_index')}}" id="cafe_deactivate">
+                                <button class="btn btn-danger btn-block" id="btn-cafe_deactivate" >
+                                    <input type="hidden" name="lat" id="cafe_deactivate_gps_lat">
+                                    <input type="hidden" name="lng" id="cafe_deactivate_gps_lng">
+                                    <input type="hidden" name="currentCafe" id="cafe_deactivate_gps_cafe" value="{{ currentCafe.id }}">
+                                    <i class="fas fa-trash"></i>
+                                    <span class="nav-label">{% trans %} Delete{% endtrans %}</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-md-3 mt-3">
+                </div>
+                <div class="row my-2">
+                    <div class="col btn-group d-block text-center">
                         {% if currentCafe.type is same as('Cafe') %}
-                            <span id="cafe-icones"><i class="fas fa-coffee rosed"></i> {{ currentCafe.type }}</span>
+                            <span id="cafe-icones" class="d-block"><i class="fas fa-coffee rosed"></i> {{ currentCafe.type }}</span>
                         {% elseif currentCafe.type is same as('Beer') %}
-                            <span id="cafe-icones"><i class="fas fa-wine-glass-alt rosed"></i> {{ currentCafe.type }}</span>
+                            <span id="cafe-icones" class="d-block"><i class="fas fa-wine-glass-alt rosed"></i> {{ currentCafe.type }}</span>
                         {% else %}
-                            <span id="cafe-icones"><i class="fas fa-walking rosed"></i> {{ currentCafe.type }}</span>
+                            <span id="cafe-icones" class="d-block"><i class="fas fa-walking rosed"></i> {{ currentCafe.type }}</span>
                         {% endif %}
-                    </div>
-                    <div class="col-md-3 mt-4 text-center">
-                        <div class="cafe-timer" id="cafe-timer{{ currentCafe.id }}">
+                        <div class="cafe-timer d-block" id="cafe-timer{{ currentCafe.id }}">
                             <input type="hidden" name="expiresTime"  value="{{ currentCafe.expireAt|date }}">
-                            <span class="rosed ">{% trans %} Expires in {% endtrans %}</span>
+                            <span class="rosed d-block">{% trans %} Expires in {% endtrans %}</span>
                             <span class="hours"></span>
                             <span class="minutes"></span>
                             <span class="seconds"></span>
                         </div>
-                    </div>
-                    <div class="col-md-3 mt-3">
-                        <form method="post" action="{{path('cafe_index')}}" id="cafe_deactivate">
-                            <button class="btn btn-danger btn-block" id="btn-cafe_deactivate" >
-                                <input type="hidden" name="lat" id="cafe_deactivate_gps_lat">
-                                <input type="hidden" name="lng" id="cafe_deactivate_gps_lng">
-                                <input type="hidden" name="currentCafe" id="cafe_deactivate_gps_cafe" value="{{ currentCafe.id }}">
-                                <i class="fas fa-trash"></i>
-                                <span class="nav-label">{% trans %} Delete{% endtrans %}</span>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
     {% if areaCafes is defined %}
-    {% if areaCafes is not empty %}
-        <hr>
-        <h5 class="text-center blued mt-4" id="anotherCafe">{% trans %} Another cafe{% endtrans %}</h5>
-        {% for cafe in areaCafes %}
-        <div class="row anotherCafe" id="div-cafe-timer{{ cafe.id }}" >
-            <div class="col-md-6 offset-3 border-deal">
-                <div class="row my-2">
-                    <div class="col-md-3 ">
-                        <img src="{{ cafe.createdBy.photoProfile() }}" alt="" class="cafe-avatar mt-2">
-                        <div class="pt-3">
-                            <span class="blued  ml-2">{{ cafe.createdBy.firstname }}</span>
+        {% if areaCafes is not empty %}
+            <h5 class="text-center blued mt-4" id="anotherCafe">{% trans %} Another cafe{% endtrans %}</h5>
+            {% for cafe in areaCafes %}
+                <div class="row anotherCafe" id="div-cafe-timer{{ cafe.id }}" >
+                    <div class="col-xl-6 offset-xl-3 col-md-8 offset-md-2 col-10 offset-1 full-border lightblue">
+                        <div class="row">
+                            <div class="col border-bottom py-2">
+                                <div class="btn-group">
+                                    <img src="{{ cafe.createdBy.photoProfile() }}" alt="" class="cafe-avatar mt-1 d-block">
+                                    <span class="blued  ml-2 mt-3">{{ cafe.createdBy.firstname|title }}</span>
+                                </div>
+                                <div class="float-right mt-3">
+                                    <form method="post" action="{{ url('new_conversation') }}" class="cafe-message">
+                                        <button class="btn btn-info btn-block" >
+                                            <input type="hidden" name="user" value="{{ cafe.createdBy.id }}">
+                                            <p class="mt-1"><i class="fas fa-comments"></i> {% trans %} Message{% endtrans %}</p>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 mt-3">
-                        {% if cafe.type is same as('Cafe') %}
-                            <span id="cafe-icones"><i class="fas fa-coffee rosed"></i> {{ cafe.type }}</span>
-                        {% elseif cafe.type is same as('Beer') %}
-                            <span id="cafe-icones"><i class="fas fa-wine-glass-alt rosed"></i> {{ cafe.type }}</span>
-                        {% else %}
-                            <span id="cafe-icones"><i class="fas fa-walking rosed"></i> {{ cafe.type }}</span>
-                        {% endif %}                    </div>
-                    <div class="col-md-3 mt-4 text-center">
-                        <div class="cafe-timer" id="cafe-timer{{ cafe.id }}">
-                            <input type="hidden" name="expiresTime" value="{{ cafe.expireAt|date }}">
-                            <span class="rosed ">{% trans %} Expires in {% endtrans %}</span>
-                            <span class="hours"></span>
-                            <span class="minutes"></span>
-                            <span class="seconds"></span>
+                        <div class="row my-2">
+                            <div class="col btn-group d-block text-center">
+                                {% if cafe.type is same as('Cafe') %}
+                                    <span id="cafe-icones" class="d-block"><i class="fas fa-coffee rosed"></i> {{ cafe.type }}</span>
+                                {% elseif cafe.type is same as('Beer') %}
+                                    <span id="cafe-icones" class="d-block"><i class="fas fa-wine-glass-alt rosed"></i> {{ cafe.type }}</span>
+                                {% else %}
+                                    <span id="cafe-icones" class="d-block"><i class="fas fa-walking rosed"></i> {{ cafe.type }}</span>
+                                {% endif %}
+                                <div class="cafe-timer d-block" id="cafe-timer{{ cafe.id }}">
+                                    <input type="hidden" name="expiresTime"  value="{{ cafe.expireAt|date }}">
+                                    <span class="rosed d-block">{% trans %} Expires in {% endtrans %}</span>
+                                    <span class="hours"></span>
+                                    <span class="minutes"></span>
+                                    <span class="seconds"></span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 mt-3">
-                        <form method="post" action="{{ url('new_conversation') }}" class="cafe-message">
-                            <button class="btn btn-info btn-block" >
-                                <input type="hidden" name="user" value="{{ cafe.createdBy.id }}">
-                                <p class="mt-1">{% trans %} Message{% endtrans %}</p>
-                            </button>
-                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        {% endfor %}
-    {% else %}
-        <h4 class="text-center blued mt-4">{% trans %} There is no invitations in your area{% endtrans %}</h4>
+            {% endfor %}
+        {% else %}
+            <h4 class="text-center blued mt-4">{% trans %} There is no invitations in your area{% endtrans %}</h4>
+        {% endif %}
     {% endif %}
-    {% endif %}
+
     {% if form is not defined and areaCafes is not defined and currentCafe is not defined %}
-    <h4 class="text-center blued">{{error}}</h4>
+        <h4 class="text-center blued mt-2">{{error}}</h4>
     {% endif %}
+</div>
 {% endblock %}

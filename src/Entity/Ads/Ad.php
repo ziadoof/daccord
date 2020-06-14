@@ -2672,7 +2672,7 @@ class Ad
     public function serialize():array
     {
         if($this->getCity() !== null){
-            $city = $this->getCity()->getName();
+            $city = $this->getCity()->getName().' ('.$this->getCity()->getZipCode().')';
         }
         else{
             $city = null;
@@ -2688,9 +2688,10 @@ class Ad
             'price'=> $this->price,
             'pPrice'=> $this->pPrice,
             'city'=> $city,
-            'ville'=> $this->getVille()->getName(),
+            'ville'=> $this->getVille()->getName().' ('.$this->getVille()->getZipCode().')',
             'dateOfAd'=> $this->date_format($this->getDateOfAd()),
-            'typeOfAd'=> $this->getTypeOfAd()
+            'typeOfAd'=> $this->getTypeOfAd(),
+            'donate'=> $this->getDonate()
         ];
     }
 

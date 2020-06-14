@@ -287,7 +287,7 @@
 
 
 }
-@media (max-width: 1200px)and (min-width: 992px){
+@media (max-width: 1199px)and (min-width: 992px){
   .logo-acoord span {
     font-size: 16px;
   }
@@ -386,6 +386,8 @@
 }
 
 
+
+
 .side-bar-icon img{
   width: 3em;
   height: 3em;
@@ -441,7 +443,7 @@
   margin-left: -220px;
   transition: all 0.5s  ease-in-out;
 }
-@media (max-width: 991px)and (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .mar-open{
     margin-left: 60px;
 
@@ -466,10 +468,6 @@
   }
 }
 
-
-
-
-
 .lg-side-bar{
   border: solid 2px #0c5460 ;
 
@@ -480,12 +478,12 @@
 .min-fix{
   width: 89vw;
 }
-@media (min-width: 768px) and  (max-width: 992px){
+@media (min-width: 768px) and  (max-width: 991px){
   .min-fix{
     width: 96vw;
   }
 }
-@media (min-width: 551px) and (max-width: 767px){
+@media (min-width: 576px) and (max-width: 767px){
   .min-fix{
     width: 100vw;
   }
@@ -493,7 +491,7 @@
     width: 100vw;
   }
 }
-@media  (max-width: 550px){
+@media  (max-width: 575px){
   .min-fix{
     width: 100%;
   }

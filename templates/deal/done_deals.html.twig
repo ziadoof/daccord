@@ -1,0 +1,259 @@
+<div class="row">
+    {% if dealsGroup is not empty %}
+        {% for deal in dealsGroup %}
+            {% if deal.offer is defined %}
+                <div class="col-xl-4 col-lg-6 col-sm-12 col-12 my-4 done-deal-font-color">
+                    <div id="ad_index" class="full-border {% if deal.offerUser is same as(app.user) %} deal_offer{% else %} deal_demand{% endif %}">
+                        <div class="row ">
+                            <div class="col text-center">
+                                <h6 class="py-2  p-deal font-weight-bold">{% trans %}Pending deal{% endtrans %}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                            {% if deal.offerUser.id is same as(app.user.id) %}
+                                <div class="row mt-2 pb-1 justify-content-center">
+                                    <div class="">
+                                        <div class="btn-group driver deal-show">
+                                            <a class="text-center mx-2 px-2 py-2  ">
+                                                <img  src="{{ deal.offerUser.photoProfile() }}" alt="offerUser" class=""><br>
+                                                <b class="deal-terminate">{{deal.offerUser.firstname}}
+                                                    {% if deal.offerUserStatus %}
+                                                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                    {% else %}
+                                                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                    {% endif %}</b><br>
+                                                <b class="deal-terminate float-left mt-1"><img src="{{ asset('/assets/images/icons/o-gray.png') }}" class="mr-1"><span class="blued">{% trans %} Offer{% endtrans %}</span></b>
+                                            </a>
+                                            {% if deal.driverUser %}
+                                            {#<i class="fas fa-handshake deal-show-photo-small mt-5"></i>#}
+                                            <a class="text-center py-2  ">
+                                                <img  src="{{ deal.driverUser.photoProfile() }}" alt="offerUser" class=""><br>
+                                                <b class="deal-terminate">{{deal.driverUser.firstname}}
+                                                    {% if deal.driverStatus %}
+                                                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                    {% else %}
+                                                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                    {% endif %}</b><br>
+                                                <b class="deal-terminate float-left mt-1"><img src="{{ asset('/assets/images/icons/driver-gray.png') }}" class="mr-1">{% trans %} Driver{% endtrans %}</b>
+                                            </a>
+                                            {#<i class="fas fa-handshake deal-show-photo-small mt-5"></i>#}
+                                            {% else %}
+                                            <i class="fas fa-handshake deal-show-photo mt-4"></i>
+                                            {% endif %}
+                                            <a class="text-center mx-2 px-2 py-2  ">
+                                                <img  src="{{ deal.demandUser.photoProfile() }}" alt="offerUser" class=""><br>
+                                                <b class="deal-terminate">{{deal.demandUser.firstname}}
+                                                    {% if deal.demandUserStatus %}
+                                                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                    {% else %}
+                                                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                    {% endif %}</b><br>
+                                                <b class="deal-terminate float-left mt-1"><img src="{{ asset('/assets/images/icons/d-gray.png') }}" class="mr-1"><span class="rosed">{% trans %} Demand{% endtrans %}</span></b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                            <div class="row mt-2 pb-1 justify-content-center">
+                                <div class="">
+                                    <div class="btn-group driver deal-show">
+                                        <a class="text-center mx-2 px-2 py-2  ">
+                                            <img  src="{{ deal.demandUser.photoProfile() }}" alt="offerUser" class=""><br>
+                                            <b class="deal-terminate">{{deal.demandUser.firstname}}
+                                                {% if deal.demandUserStatus %}
+                                                    <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                {% else %}
+                                                    <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                {% endif %}</b><br>
+                                            <b class="deal-terminate">{% trans %} Demand{% endtrans %}</b>
+                                        </a>
+                                        {% if deal.driverUser %}
+                                            <a class="text-center mx-2 px-2 py-2  ">
+                                                <img  src="{{ deal.driverUser.photoProfile() }}" alt="offerUser" class=""><br>
+                                                <b class="deal-terminate">{{deal.driverUser.firstname}}
+                                                    {% if deal.driverStatus %}
+                                                        <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                    {% else %}
+                                                        <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                    {% endif %}</b><br>
+                                                <i class="fas fa-truck-moving button-left" title="Driver request"></i>
+                                                <b class="deal-terminate">{% trans %} Driver{% endtrans %}</b>
+                                            </a>
+                                        {% else %}
+                                            <i class="fas fa-handshake deal-show-photo mt-4"></i>
+                                        {% endif %}
+                                        <a class="text-center mx-2 px-2 py-2  ">
+                                            <img  src="{{ deal.OfferUser.photoProfile() }}" alt="offerUser" class=""><br>
+                                            <b class="deal-terminate">{{deal.OfferUser.firstname}}
+                                                {% if deal.OfferUserStatus %}
+                                                    <img src="{{ asset('/assets/images/icons/yes.png') }}" alt="yes">
+                                                {% else %}
+                                                    <img src="{{ asset('/assets/images/icons/no.png') }}" alt="no">
+                                                {% endif %}</b><br>
+                                            <b class="deal-terminate">{% trans %} Offer{% endtrans %}</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class=" deal-border-top">
+                                    <div class="row">
+                                        <div class="col-12 ml-2">
+                                            <p><span class="font-weight-bold">{#{% trans %}Category{% endtrans%} : #}</span>{{ deal.category|trans }}</p>
+                                        </div>
+                                        <div class="col-12 ml-2">
+                                            <p><span class="font-weight-bold">{#{% trans %} Suggested at{% endtrans %}#}</span> {{ deal.date_format(deal.suggestionDate) }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+            <div class="col-xl-4 col-lg-6 col-sm-12 col-12 my-4 ">
+                <div id="ad_index" class="full-border">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h6 class="py-2  d-deal font-weight-bold">{% trans %}Done deal{% endtrans %}</h6>
+                        </div>
+                    </div>
+                    <div class="row  done-deal-height">
+                        <div class="col-8 my-2">
+                            <p class="pl-2">
+                                {% trans %} You have completed a deal on {% endtrans %}<span class="rosed">{{ ' ' }}{{deal.date|date("d M Y")}}{{ ' ' }}</span>{% trans %}for {% endtrans %}  <span class="rosed">{{ ' ' }}{{deal.category}}{{ ' ' }}</span>{% trans %}with {% endtrans %}
+                                {% if deal.offerUser is same as (app.user)  %}
+                                    {{ ' ' }}
+                                    <span class="blued">
+                                        {% if deal.demandUser.firstname %}
+                                            {{deal.demandUser.firstname}}
+                                        {% else %}
+                                            {{ deal.demandUserName }}
+                                        {% endif %}
+                                    </span>
+                                    {{ ' ' }}
+                                {% else %}
+                                    {{ ' ' }}
+                                    <span class="blued">
+                                        {% if deal.offerUser.firstname %}
+                                            {{deal.offerUser.firstname}}
+                                        {% else %}
+                                            {{ deal.offerUserName }}
+                                        {% endif %}
+                                    </span>
+                                    {{ ' ' }}
+                                {% endif %}
+                                {% if deal.driverUser %}
+                                    {% trans %} and in cooperation with the driver{% endtrans %}
+                                    {{ ' ' }}
+                                    <span class="blued">
+                                        {% if deal.driverUser.firstname %}
+                                            {{deal.driverUser.firstname}}
+                                        {% else %}
+                                            {{ deal.driverUserName }}
+                                        {% endif %}
+                                    </span>
+                                    {{ ' ' }}
+                                {% endif %}
+                                {% trans %} and you get {% endtrans %}<span class="rosed">{{ ' ' }}{% trans %} Five{% endtrans %}{{ ' ' }}</span>{% trans %} extra  points. {% endtrans %}
+                            </p>
+                        </div>
+                        <div class="col-4 five-point">
+                            <img src="{{ asset('/assets/images/icons/5-points.png') }}" alt="5 points" class=" float-right mb-2 mr-2">
+                            {#<span class="badge badge-pill my-4 badge-points">5 POINTS</span>#}
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-12 ">
+                            <div class="border-top">
+                                <p class="my-2 mx-2  text-center ">
+                                    {% trans %} Based on this deal, The associated ads and all possible deals for these ads have been deleted.{% endtrans %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {% if deal.driverUser %}
+                                <div class="border-top py-2">
+                                    <div class="col-md-12 ">
+                                        {% if votesDriver[deal.driverUser.id] is defined %}
+                                            <p class="blued">{% trans %}Your rating for this driver : {% endtrans %}
+                                                {% set reste = 5 - votesDriver[deal.driverUser.id]%}
+                                                {% if  votesDriver[deal.driverUser.id] is not same as(null)%}
+                                                    {% for  i in votesDriver[deal.driverUser.id] ..1%}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endfor %}
+                                                    {% if reste>0 %}
+                                                        {% for  i in reste..1%}
+                                                            <i class="far fa-star"></i>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% for  i in 5..1%}
+                                                        <i class="far fa-star"></i>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </p>
+                                        {% else %}
+                                            <button  data-toggle="modal" class="btn btn-outline-info btn-block "
+                                                     data-target="#driver_vote-{{ deal.driverUser.id }}">
+                                                {% trans %}Rate this driver {% endtrans %}
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% else %}
+                            <div class="border-top py-3">
+                                <div class="col-md-12 text-center">
+                                <p class="blued">{% trans %}This deal was without driver{% endtrans %}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="col">
+            <h4 class="title-blue text-center mt-4">{% trans %} There is no done deals{% endtrans %}</h4>
+        </div>
+    {% endif %}
+</div>
+{% if dealsGroup is not empty %}
+    <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation ">
+            {{ knp_pagination_render(dealsGroup) }}
+        </div>
+    </div>
+{% endif %}
+<!-- modal start-->
+{% for driverId in listDriverModel %}
+    {% if votesDriver[driverId] is not defined %}
+        <div class="modal fade bd-example-modal-lg mt-4" id="driver_vote-{{ driverId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        {{ render(controller('App\\Controller\\RatingController::createVote',{ 'candidate': driverId, 'type':'driver' })) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+<!-- modal end-->

@@ -72,6 +72,9 @@
                                         {% elseif subject is same as ('carpoolAddPoints') %}{{" carpoolPoints"}}
                                         {% elseif subject is same as ('ratingCarpool') %}{{" carpoolPoints"}}
                                         {% elseif subject is same as ('pointsVoyageCanceled') %}{{" profilePoints"}}
+                                        {% elseif subject is same as ('doneDeal') %}{{" doneDealTab"}}
+                                        {% elseif subject is same as ('dRequest') %}{{" inWaitingTab"}}
+                                        {% elseif subject is same as ('dToDeal') or subject is same as ('dDoneDeal') %}{{" doneDriverTab"}}
                                         {% endif %}
                                         {% if notification.notification.message is same as ('meetupParticipant') %}{{" meetupParticipant"}}{% endif %}"
                                        {% if not notification.seen %}notifiable="{{notification.notifiableEntity.id}}"

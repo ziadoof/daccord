@@ -1,55 +1,5 @@
 import Translator from 'bazinga-translator';
 
-//test//
-$(document).ready(function() {
-   /* let nearMe = localStorage.getItem('offer_nearme');
-    $('#offer_search_lat').hide();
-    $('#offer_search_lng').hide();
-    $("#offer_search_distance").attr("disabled", false);
-
-    $("#offer_search_nearme").change(function() {
-        let nearmeState = document.getElementById('offer_search_nearme').checked;
-        let areaState = document.getElementById('offer_search_myArea').checked;
-        if (nearmeState) {
-            if (areaState) {
-                $('#offer_search_myArea').bootstrapToggle('off');
-            }
-            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
-            $("#offer_search_distance").attr("disabled", true);
-            localStorage.setItem('offer_nearme', 'desactive');
-
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(offer_showLocation);
-            }else{
-                let error_message = Translator.trans('Geolocation is not supported by this browser.');
-                $('#offer_location').html(error_message);
-            }
-        } else {
-            $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
-            $("#offer_search_distance").attr("disabled", false);
-            localStorage.setItem('offer_nearme', 'active');
-        }
-    });*/
-
-    /*if (nearMe === 'desactive') {
-        $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", false);
-        $("#offer_search_distance").attr("disabled", true);
-    }
-    else{
-        let areaState = document.getElementById('offer_search_myArea').checked;
-        $('#offer_search_nearme').bootstrapToggle('on');
-        /!*$('#offer_search_nearme').prop('checked', true).change();*!/
-        $("#offer_search_distance").attr("disabled", false);
-        $("#offer_search_region,#offer_search_department,#offer_search_ville").attr("disabled", true);
-        if (areaState) {
-            $('#offer_search_myArea').bootstrapToggle('off');
-        }
-        localStorage.setItem('offer_nearme', 'active');
-    }*/
-
-});
-//end test//
-
 // offer search location
 $(document).ready(function() {
     var nearme = localStorage.getItem('offer_nearme');

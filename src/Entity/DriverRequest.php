@@ -153,4 +153,20 @@ class DriverRequest
 
         return $this;
     }
+    public function date_format(\DateTime $date): string
+    {
+        $now  = new \DateTime('now');
+        $interval = date_diff($date, $now)->days;
+        switch (true) {
+            case $interval === 0:
+                return $date->format('H:i');
+                break;
+            case $interval === 1:
+                return 'Yesterday';
+                break;
+            default:
+                return $date->format('d M Y');
+                break;
+        }
+    }
 }

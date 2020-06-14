@@ -1,14 +1,7 @@
 .offer-user{
   display: inline-block;
 }
-.offer-user img {
-  vertical-align: middle;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-}
+
 .deon-deal{
   display: inline-block;
 }
@@ -26,12 +19,7 @@
 .done-deal span{
   color: $rosed;
 }
-.deal-photo{
-  font-size: 56px;
-  color:$gray-400;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-}
+
 
 .deal a{
   text-decoration:none !important
@@ -65,25 +53,17 @@
   margin: auto;
 }
 
-.deal:hover{
-  -webkit-box-shadow: 0px 0px 10px #00B5CE;
-  -moz-box-shadow: 0px 0px 10px #00B5CE;
-  box-shadow: 0px 0px 10px #00B5CE;
-  text-decoration:none;
-  color:black;
-  font-weight: lighter;
 
-}
 
 /* deal-show */
 
 .deal-show img {
-  width:80px;
-  height:80px;
+  width:5em;
+  height:5em;
   border-radius: 50%;
 }
 .deal-show{
-  display: inline;
+  /*display: inline;*/
 
 }
 .deal-show-photo{
@@ -93,7 +73,7 @@
 }
 .deal-show-photo-small{
   font-size: 36px;
-  color:$blued;
+  color:$blued ;
 
 }
 
@@ -131,7 +111,7 @@
   background-color: #f28a8a;
 }
 .accepted {
-  background-color: #ddff63;
+  background-color: #7cbf8a;
 }
 
 .deal-terminate img{
@@ -148,4 +128,88 @@
 }
 .rosed{
   color:$rosed;
+}
+
+.new-deal{
+  background-color: #00B5CE;
+  color: whitesmoke;
+}
+.new-deal span{
+  color: whitesmoke;
+
+}
+
+.deal:hover{
+  text-decoration:none;
+  opacity: 0.8;
+}
+.deal-photo{
+  font-size: 4em;
+  color: #444444;
+  vertical-align: middle;
+}
+.offer-user img {
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.grayed{
+  color: #444444;
+}
+.deal-border-bottom{
+  border-bottom: solid 1px lavender;
+}
+.deal-border-top{
+  border-top: solid 1px lavender;
+}
+.deal_offer{
+  border-bottom: solid 2px rgba(0, 181, 206, 0.5) ;
+  border-right: solid 2px rgba(0, 181, 206, 0.5) ;
+}
+.deal_demand{
+  /*background-color: #F70055;*/
+  border-bottom: solid 2px rgba(247, 0, 85, 0.5) ;
+  border-right: solid 2px rgba(247, 0, 85, 0.5) ;
+}
+.p-deal{
+  background-color: #ffffc4;
+}
+.d-deal{
+  background-color: #7cbf8a;
+}
+
+.done-deal-font-color b{
+  color: #444444;
+}
+
+.five-point img{
+  height: 5em;
+  width: 5em;
+}
+.done-deal-height{
+  min-height: 8em;
+}
+
+.border-bottom-none .nav-tabs .nav-link {
+  border-bottom: none;
+}
+#driver_request textarea{
+  resize: none;
+  height: 7em;
+}
+.driver-request-button button{
+  min-width: 4em;
+}
+.driver-rating-deal span{
+  font-size: 0.8em;
+}
+
+.disable-links {
+  pointer-events: none;
+  background-color:#444444;
+  border: #444444;
+}
+p{
+  word-wrap: break-word;
 }

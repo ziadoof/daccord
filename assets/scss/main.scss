@@ -162,3 +162,10 @@ body .welcome-text {
   right: 5px;
   width: 20em;
 }
+
+@-moz-document url-prefix() {
+  html,body{
+    overflow: auto !important;
+    scrollbar-color: transparent transparent;
+  }
+}

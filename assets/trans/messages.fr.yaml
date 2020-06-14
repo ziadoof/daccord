@@ -31,6 +31,9 @@ ADMINISTRATION: ADMINISTRATION
 'My offers': 'Mes offres'
 'My demands': 'Mes demandes'
 'My deals': 'Mes deals'
+'Sorry .. there are no results': Désolé, il n'y a pas de résultats
+Specifications: Caractéristiques
+Sign in to send message to: Connectez-vous pour envoyer un message à
 'Hosting request': 'Demande d''hébergement'
 Favorite: Favori
 Favorites: Favoris
@@ -334,6 +337,9 @@ offer: offre
 'Done Deals': 'Done Deals'
 'Deal status :': 'Statut du deal :'
 'DONE DEAL': 'DONE DEAL'
+'Done deal': 'DONE DEAL'
+'Pending deal': 'DEAL en attente'
+This deal was without driver: 'Ce DEAL était sans Driver'
 'You have completed a deal on': 'Vous avez terminé un deal le '
 with: avec
 'and in cooperation with the driver': 'et en collaboration avec le Driver'
@@ -1712,5 +1718,7 @@ about us: À propos de nous
 Legal Notice: Mention légale
 Legal notice: Mention légale
 Kilometre: Kilometrage
+Your demand-deal : Votre demande et l'offre de %username%
+Your offer-deal : Votre offer et la demande de %username%
 
 

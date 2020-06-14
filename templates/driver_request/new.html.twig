@@ -1,31 +1,49 @@
 <div class="row">
-    <div class="col-md-8 offset-2">
+    <div class="col-lg-8 offset-lg-2 px-2">
         <h4 class="title-blue text-center">{% trans %} Driver Request{% endtrans %}</h4>
-        <div class="driver">
-           <div class="row border-deal">
-               <div class="col-md-2 deal-show my-4">
-                   <img src="{{ asset('/assets/images/profile/'~driver.user.profileImage) }}" alt="">
-               </div>
-               <div class="col mt-2 justify-content-center">
-                  <b>{% trans %} Driver : {% endtrans %}{{ driver.user.firstname }}{{ ' ' }}{{ driver.user.lastname }}</b><br>
-                  <b>{% trans %} Car : {% endtrans %}{{ driver.carbrand }}</b><br>
-                  <b>{% trans %} Car color : {% endtrans %}{{ driver.carColor }}</b><br>
-                  <b>{% trans %} City : {% endtrans %}{{ driver.city.name }}</b><br>
-                   <b>{% trans %} Max distance :{% endtrans %} {{ driver.maxDistance }}{{ ' KM' }}</b>
-               </div>
-               <div class="col-md-2 deal-show my-4 mx-4">
-                   <img src="{{ driver.photoDriver() }}" alt="car_image">
-               </div>
-           </div>
-        </div>
-        <div class="row border-deal justify-content-center">
-            <div class=" deal-show my-2  ">
-               <span class="">{% trans %}Request for transfer {% endtrans %}{{ deal.category }}{% trans %} From{% endtrans %} {{ deal.offerUser.city }}{% trans %} To{% endtrans %}  {{ deal.demandUser.city }}</span>
+        <div class="driver border-deal px-2">
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-sm-3 deal-show text-center">
+                            <img class="mb-3 float-sm-left {% if driver.user.isActiveNow %}{{ 'online-status' }}{% else %}{{ 'offline-status' }}{% endif %}" src="{{ asset(driver.user.photoProfile()) }}" alt="User" >
+                        </div>
+                        <div class="col-sm-6 text-center float-sm-none">
+                            <h6 class="blued font-weight-bold">{% trans %} Driver : {% endtrans %} <span class="grayed"> {{ driver.user.firstname }}{{ ' ' }}{{ driver.user.lastname }}</span></h6>
+                            {% if driver.carbrand %}
+                                <h6 class="blued font-weight-bold">{% trans %} Car : {% endtrans %}<span class="grayed"> {{ driver.carbrand }}</span></h6>
+                            {% endif %}
+                            {% if driver.carbrand %}
+                                <h6 class="blued font-weight-bold">{% trans %} Car color : {% endtrans %}<span class="grayed"> {{ driver.carColor }}</span></h6>
+                            {% endif %}
+                            {% if driver.carbrand %}
+                                <h6 class="blued font-weight-bold">{% trans %} City : {% endtrans %}<span class="grayed"> {{ driver.city.name }}</span></h6>
+                            {% endif %}
+                            {% if driver.carbrand %}
+                                <h6 class="blued font-weight-bold">{% trans %} Max distance :{% endtrans %}<span class="grayed"> {{ driver.maxDistance }}{{ ' KM' }}</span></h6>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-3 deal-show text-center">
+                            <img class=" float-sm-right" src="{{ driver.photoDriver() }}" alt="car_image">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 border-deal">
-                {{ include('driver_request/_form.html.twig') }}
+        <div class="driver border-deal px-2 py-2 ad-slide">
+            <div class="row">
+                <div class="col-12 mt-2 text-center">
+                    <div class="deal-show my-2">
+                        <span class="blued">{% trans %}Request for transfer {% endtrans %} <span class="rosed">{{ deal.category }}</span> {% trans %} From{% endtrans %} {{ ' ' }}{{ deal.offerUser.city }}{{ ' ' }}{% trans %} To{% endtrans %}{{ ' ' }}  {{ deal.demandUser.city }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="driver border-deal px-2 py-2">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ include('driver_request/_form.html.twig') }}
+                </div>
             </div>
         </div>
     </div>

@@ -460,6 +460,18 @@ function wsConnect(id) {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 meetupParticipant" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
+                else if(typeON==='addDriverToDeal' ||typeON === 'doneDeal'|| typeON === 'semiDoneDeal'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 doneDealTab doneDriverTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                }
+                else if(typeON==='driverRequest'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 inWaitingTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                }
+                /*else if(typeON==='addDriverToDeal'|| typeON === 'doneDeal'|| typeON === 'semiDoneDeal'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 doneDriverTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                    image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
+                }*/
                 else {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
@@ -540,6 +552,26 @@ function wsConnect(id) {
                 for(var carpoolP of linksCarpool){
                     carpoolP.addEventListener('click', function (e) {
                         localStorage.setItem('profile_tap','#edit_carpool' );
+                    });
+                }
+                var linksDealTabs = document.getElementsByClassName('doneDealTab');
+                for(var doneDeal of linksDealTabs){
+                    doneDeal.addEventListener('click', function (e) {
+                        localStorage.setItem('doneDeal_tap','#done_deals' );
+                    });
+                }
+
+                var inWaitingTabs = document.getElementsByClassName('inWaitingTab');
+                for(var waiting of inWaitingTabs){
+                    waiting.addEventListener('click', function (e) {
+                        localStorage.setItem('driverRequest_tap','#waiting_drivers' );
+                    });
+                }
+
+                var doneDriverTabs = document.getElementsByClassName('doneDriverTab');
+                for(var doneDriver of doneDriverTabs){
+                    doneDriver.addEventListener('click', function (e) {
+                        localStorage.setItem('driverRequest_tap','#done_drivers' );
                     });
                 }
 

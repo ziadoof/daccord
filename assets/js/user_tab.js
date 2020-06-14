@@ -45,11 +45,41 @@ $(document).ready(function(){
         });
     }
 
+    var linksDealTabs = document.getElementsByClassName('doneDealTab');
+    for(var doneDeal of linksDealTabs){
+        doneDeal.addEventListener('click', function (e) {
+            localStorage.setItem('doneDeal_tap','#done_deals' );
+        });
+    }
+
+    var inWaitingTabs = document.getElementsByClassName('inWaitingTab');
+    for(var waiting of inWaitingTabs){
+        waiting.addEventListener('click', function (e) {
+            localStorage.setItem('driverRequest_tap','#waiting_drivers' );
+        });
+    }
+
+    var doneDriverTabs = document.getElementsByClassName('doneDriverTab');
+    for(var doneDriver of doneDriverTabs){
+        doneDriver.addEventListener('click', function (e) {
+            localStorage.setItem('driverRequest_tap','#done_drivers' );
+        });
+    }
+
+
+
     //for save the tab and return to it
     $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
         localStorage.setItem('profile_tap', $(e.target).attr('href'));
     });
     //
+    $('#dealTab a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('doneDeal_tap', $(e.target).attr('href'));
+    });
+
+    $('#driverRequestTab a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('driverRequest_tap', $(e.target).attr('href'));
+    });
 
     var activeTab = localStorage.getItem('profile_tap');
     if(activeTab){
@@ -57,5 +87,21 @@ $(document).ready(function(){
         $('#user-edit a[href="' + activeTab + '"]').tab('show');
 
     }
+
+    var dealTab = localStorage.getItem('doneDeal_tap');
+    if(dealTab){
+        $('#dealTab a[href="' + dealTab + '"]').tab('show');
+    }
+
+    var driverRequestTab = localStorage.getItem('driverRequest_tap');
+    if(driverRequestTab){
+        $('#driverRequestTab a[href="' + driverRequestTab + '"]').tab('show');
+    }
+});
+$('html,body').bind('mousewheel', function(event) {
+    event.preventDefault();
+    var scrollTop = this.scrollTop;
+    this.scrollTop = (scrollTop + ((event.deltaY * event.deltaFactor) * -1));
+    //console.log(event.deltaY, event.deltaFactor, event.originalEvent.deltaMode, event.originalEvent.wheelDelta);
 });
 

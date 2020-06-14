@@ -1,68 +1,79 @@
 {% extends "layout_user.html.twig" %}
 
 {% block title %}{% trans %} My ads{% endtrans %}{% endblock %}
-
 {% block content %}
-    <h1 class="text-center title-rose">{% trans %} My ads{% endtrans %}</h1>
+    <h3 class="text-center title-blue mb-3">{% trans %} My ads{% endtrans %}</h3>
     {% if app.user is not same as (null) %}
         {% if my_ads is not empty %}
             <div class="row">
                 {% for my_ad in my_ads %}
-                    <div class="text-center col-md-3 px-md-2 my-2 ad_show">
-                        <div id="ad_index" class="ad_index">
+                    {% set type = my_ad.typeOfAd %}
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+                        <div id="ad_index" class="ad_index shadow-border {% if type is same as('Offer') %}ad_offer{% else %}ad_demand{% endif %}">
                             <a href="{{ path('ad_show', {'id': my_ad.id}) }}"class="">
-                                <div class="px-2 border-ad">
-                                    <div class="row">
-                                        <div class="col-md-12 pt-2">
-                                            <div class=" ">
-                                                <b class="title-blue float-left">{{ my_ad.typeOfAd }}</b>
-                                                <b class="float-right ">{{ my_ad.date_format(my_ad.dateOfAd)|trans }}</b>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% if my_ad.typeOfAd is same as ('Offer') %}
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                {% if my_ad.imageOne is not null %}
-                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageOne) }}" alt="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {% if type is same as ('Offer') %}
+                                            {% if my_ad.imageOne is not null %}
+                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageOne) }}" alt="">
+                                            {% else %}
+                                                {% if my_ad.imageTow is not null %}
+                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageTow) }}" alt="">
                                                 {% else %}
-                                                    {% if my_ad.imageTow is not null %}
-                                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageTow) }}" alt="">
+                                                    {% if my_ad.imageThree is not null %}
+                                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageThree) }}" alt="">
                                                     {% else %}
-                                                        {% if my_ad.imageThree is not null %}
-                                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ my_ad.imageThree) }}" alt="">
-                                                        {% else %}
-                                                            <img class="image_ad " src="/assets/images/icons/offer.png" alt="">
-                                                        {%endif%}
+                                                        <img class="image_ad " src="/assets/images/icons/offer.png" alt="">
                                                     {%endif%}
                                                 {%endif%}
-                                            </div>
-                                        </div>
-                                    {% else %}
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <img class="image_ad" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            {% if my_ad.pPrice is not same as (null) %}
-                                                <span class="title-blue float-left"><del>{{ my_ad.pPrice }}€</del></span>
-                                            {% endif %}
-                                            {% if my_ad.price %}
-                                                <span class="title-rose float-left">{{ my_ad.price }}€</span>
-                                            {% endif %}
-                                        </div>
-                                        <div class="col-md-4">
-                                            <span class="float-right mt-3">{{ my_ad.user.city.name }}</span>
-                                        </div>
+                                            {%endif%}
+                                        {% else %}
+                                            <img class="image_ad" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
+                                        {% endif %}
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                        <div class="mx-2">
-
+                            <div class="row no-gutters">
+                                <div class="col-10">
+                                    <div class="ml-2 py-1">
+                                        {% if my_ad.donate %}
+                                            <h5 class="blued mb-0 font-weight-bold d-inline">{% trans %}Donate{% endtrans %}</h5>
+                                        {% else %}
+                                            {% if my_ad.price %}
+                                                <h5 class="blued mb-0 font-weight-bold d-inline">{{ my_ad.price }}€</h5>
+                                            {% else %}
+                                                <br>
+                                            {% endif %}
+                                            {% if my_ad.pPrice is not same as (null) %}
+                                                <h5 class="rosed mb-0 font-weight-bold d-inline ml-2"><del>{{ my_ad.pPrice }}€</del></h5>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if my_ad.city %}
+                                            <p class="mt-0 blacked">{{ my_ad.city.name }}{{ ' (' }}{{ my_ad.city.zipCode }}{{ ')' }}</p>
+                                        {% else %}
+                                            <p class="mt-0 blacked">{{ my_ad.ville.name }}{{ ' (' }}{{ my_ad.ville.zipCode }}{{ ')' }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    {% if app.user %}
+                                        {% set isFavorite = 'false' %}
+                                        {#data-favorite must be string not boolean#}
+                                        {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                            {% if favorite.ad is same as (my_ad) %}
+                                                {% set isFavorite = 'true' %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <form method="post" action="" class="js-favorite-add ad-favorite mr-2 mt-3" data-object="{{ my_ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                            <div class="flexbox">
+                                                <div class="fav-btn">
+                                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
@@ -73,7 +84,7 @@
                 </div>
             </div>
         {% else %}
-            <h1 class="text-center title-blue">{% trans %}You don't have ads{% endtrans %}</h1>
+            <h2 class="text-center title-blue">{% trans %}You don't have ads{% endtrans %}</h2>
         {% endif %}
     {% endif %}
 {# ------------------  End area ads -------------------#}

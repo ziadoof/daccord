@@ -42,10 +42,10 @@
                 </li>
             {% endif %}
             <li class="icon ">
-                <form method="post" action="{{path('cafe_index')}}" id="cafe-gps">
-                    <a class="" id="btn-cafe-gps" class="side-bar-icon">
-                        <input type="hidden" name="lat" id="cafe_gps_lat">
-                        <input type="hidden" name="lng" id="cafe_gps_lng">
+                <form method="post" action="{{path('cafe_index')}}" id="sm-cafe-gps" class="side-bar-icon">
+                    <a class="" id="sm-btn-cafe-gps" class="side-bar-icon">
+                        <input type="hidden" name="lat" id="sm-cafe_gps_lat">
+                        <input type="hidden" name="lng" id="sm-cafe_gps_lng">
                         <img src="{{ asset('assets/images/icons/cafe-icon.png') }}"  >
                         <span class="nav-label">{% trans %}Cafe{% endtrans %}</span>
                     </a>
