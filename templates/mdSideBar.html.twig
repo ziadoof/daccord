@@ -12,31 +12,31 @@
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('deal_index')}}"  class="side-bar-icon">
-                        <img src="{{ asset('assets/images/icons/deal-icon.png') }}"  >
+                        <img src="{{ asset('assets/images/icons/deal-icon.png') }}"   alt="">
                     </a>
                 </li>
                 {% if app.user.driver %}
                     <li class="icon">
                         <a  href="{{path('driver_request_index')}}" id="my_driver_request" class="side-bar-icon">
-                            <img src="{{ asset('assets/images/icons/driver-request.png') }}"  >
+                            <img src="{{ asset('assets/images/icons/driver-request.png') }}"   alt="">
                         </a>
                     </li>
                 {% endif %}
                 <li class="icon ">
-                    <form method="post" action="{{path('cafe_index')}}" id="cafe-gps">
-                        <a class="" id="btn-cafe-gps" class="side-bar-icon">
-                            <input type="hidden" name="lat" id="cafe_gps_lat">
-                            <input type="hidden" name="lng" id="cafe_gps_lng">
-                            <img src="{{ asset('assets/images/icons/cafe-icon.png') }}"  >
+                    <form method="post" action="{{path('cafe_index')}}" id="md-cafe-gps" class="side-bar-icon">
+                        <a id="md-btn-cafe-gps" class="side-bar-icon">
+                            <input type="hidden" name="lat" id="md-cafe_gps_lat">
+                            <input type="hidden" name="lng" id="md-cafe_gps_lng">
+                            <img src="{{ asset('assets/images/icons/cafe-icon.png') }}"   alt="">
                         </a>
                     </form>
                 </li>
                 <li class="icon "> <a href="{{path('hosting_request_index')}}" class="side-bar-icon">
-                        <img src="{{ asset('assets/images/icons/hosting-icon.png') }}"  >
+                        <img src="{{ asset('assets/images/icons/hosting-icon.png') }}"   alt="">
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('meetup_index')}}" class="side-bar-icon">
-                        <img src="{{ asset('assets/images/icons/meetup-icon.png') }}"  >
+                        <img src="{{ asset('assets/images/icons/meetup-icon.png') }}"   alt="">
                     </a>
                 </li>
                 <li class="icon "> <a href="{{path('voyage_index')}}" class="side-bar-icon">

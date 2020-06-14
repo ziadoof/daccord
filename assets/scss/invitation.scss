@@ -5,28 +5,31 @@
     float: left;
     border-radius: 5px;
 }
-#cafe-icones{
-    font-size: 150%;
+#cafe-icones {
+  font-size: 250%;
 }
 
 
 #cafe-gps a, #cafe-gps a.collapsed.active{
   display: block;
   color: #999999;
-  border-left: 0px solid #dedede;
+  border-left: 0 solid #dedede;
   text-decoration: none;
   cursor: pointer;
 }
 
 .cafe-timer .hours {
-  font-size: 100%;
+  font-size: 200%;
   color: #00B5CE;
 }
 .cafe-timer .minutes {
-  font-size: 100%;
+  font-size: 200%;
   color: #00B5CE;
 }
 .cafe-timer .seconds {
-  font-size: 70%;
+  font-size: 120%;
   color: #F70055;
+}
+.lightblue{
+  background-color: #e8eeff;
 }

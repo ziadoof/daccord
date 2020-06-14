@@ -8,7 +8,24 @@ $("#btn-cafe-gps").click(function(e) {
         let error_message = Translator.trans('Geolocation is not supported by this browser.');
         alert(error_message);
     }
-
+});
+$("#sm-btn-cafe-gps").click(function(e) {
+    e.preventDefault();
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(smShowPosition);
+    }else{
+        let error_message = Translator.trans('Geolocation is not supported by this browser.');
+        alert(error_message);
+    }
+});
+$("#md-btn-cafe-gps").click(function(e) {
+    e.preventDefault();
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(mdShowPosition);
+    }else{
+        let error_message = Translator.trans('Geolocation is not supported by this browser.');
+        alert(error_message);
+    }
 });
 
 function showPosition(position){
@@ -18,6 +35,22 @@ function showPosition(position){
     $('#cafe_gps_lat').val( lat);
     $('#cafe_gps_lng').val( lng);
     document.getElementById("cafe-gps").submit();
+}
+function smShowPosition(position){
+    let lat= position.coords.latitude;
+    let lng= position.coords.longitude;
+
+    $('#sm-cafe_gps_lat').val( lat);
+    $('#sm-cafe_gps_lng').val( lng);
+    document.getElementById("sm-cafe-gps").submit();
+}
+function mdShowPosition(position){
+    let lat= position.coords.latitude;
+    let lng= position.coords.longitude;
+
+    $('#md-cafe_gps_lat').val( lat);
+    $('#md-cafe_gps_lng').val( lng);
+    document.getElementById("md-cafe-gps").submit();
 }
 
 $("#btn-cafe_deactivate").click(function(e) {
