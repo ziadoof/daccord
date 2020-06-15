@@ -11,7 +11,7 @@ Delete: Supprimer
 'with other people': 'avec d''autres personnes'
 from: 'de :'
 to: 'à :'
-'Your rating for this hosting :': 'Votre note pour cet hébergement :'
+'Your rating for this hosting': 'Votre note pour cet hébergement'
 'Rate this hosting': 'Évaluez cet hébergement'
 'Waiting for DONE HOSTING by': 'En attente de DONE HOSTING par'
 'to end this hosting': 'pour mettre fin à cet hébergement'
@@ -364,6 +364,7 @@ and: et
 'There is no Drivers in this area': 'Il n''y a pas de Drivers dans cette zone'
 'Meetup Rating': 'Évaluation de Meetup'
 'Driver Rating': 'Évaluation de Driver'
+'Hosting Rating': 'Évaluation d''Hébergement'
 'From :': 'De :'
 'To :': 'À :'
 'Date:': 'Date:'
@@ -1723,3 +1724,4 @@ Your offer-deal : Votre offer et la demande de %username%
 DRIVERS: LIVRAISON
 In waiting: En attente
 After you accept this request, you are waiting for your addition to this deal: Après avoir accepté cette demande, vous attendez votre ajout à ce deal
+My hosting request: Ma demande d'hébergement

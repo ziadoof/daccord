@@ -1,16 +1,30 @@
-{% extends 'hosting/layout_hosting.html.twig' %}
+{% extends 'layout_user.html.twig' %}
 
-{% block hosting %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if app.user is not same as(null) %}
+                {% if app.user.hosting %}
+                    <div class="row">
+                        <div class="btn-group btn-block" id="meetup-button">
+                            <a class="btn btn-info" href="{{path('hosting_request_index')}}" >{% trans %}My hosting request{% endtrans %}</a>
+                            <a class="btn btn-gray" href="{{path('hosting_request_received')}}">{% trans %}Hosting{% endtrans %}</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
     <h1 class="title-blue text-center">{% trans %} Hosting request{% endtrans %}</h1>
     {% if hosting_received is not empty %}
         <div class="col-md-6 offset-3 my-2">
             {% for hosting in hosting_received %}
                 <div class="border-respo px-2 py-2
-                                    {% if hosting.treatment is same as('pending') %}
-                                    pending
-                                    {% else %}
-                                    accepted
-                                    {% endif %}">
+                        {% if hosting.treatment is same as('pending') %}
+                        pending
+                        {% else %}
+                        accepted
+                        {% endif %}">
                     <div class="row">
                         <div class="col-md-4">
                             <a class="d-block" href="{{ path('user_show', {'id': hosting.sender.id}) }}">
