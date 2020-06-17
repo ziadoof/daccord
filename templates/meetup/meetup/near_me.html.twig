@@ -7,7 +7,7 @@
                     <div class="btn-group btn-block" id="meetup-button">
                         <a class="btn btn-info" href="{{path('meetup_index')}}" >{% trans %} My meetup{% endtrans %}</a>
                         <a class="btn btn-info" href="{{path('meetup_join')}}">{% trans %} Meetup join{% endtrans %}</a>
-                        <a class="btn btn-gray " id="btn-meetup-gps">{% trans %} Meetup near Me{% endtrans %}
+                        <a class="btn btn-gray " id="btn-meetup-gps">{% trans %}Near me{% endtrans %}
                             <form method="post" action="{{path('meetup_near_me')}}" id="meetup-gps" >
                                 <input type="hidden" name="meetup_lat" id="meetup_gps_lat">
                                 <input type="hidden" name="meetup_lng" id="meetup_gps_lng">

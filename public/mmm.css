@@ -1,2 +1,33 @@
 
+#meetup-form .custom-file-input{
+    display: none;
+}
+.meetup-form-group{
+    min-height: 13em;
+}
 
+.meetup-form-image img {
+    width: 20vw;
+    height: 12em;
+    margin-left:  calc((30vw - 20vw - 2em)/2);
+}
+
+
+@media (max-width: 575px) {
+    .meetup-form-image img {
+        width: 80vw;
+        margin-left:  calc((98vw - 80vw - 2em)/2);
+    }
+}
+@media (min-width: 576px) and (max-width: 766px) {
+    .meetup-form-image img {
+        width: 65vw;
+        margin-left:  calc((98vw - 65vw - 2em)/2) ;
+    }
+}
+@media (min-width: 767px) and (max-width: 991px) {
+    .meetup-form-image img {
+        width: 60vw;
+        margin-left:  calc((98vw - 60vw - 7em)/2) ;
+    }
+}
