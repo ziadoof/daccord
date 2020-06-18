@@ -11,12 +11,18 @@
     height: 12em;
     margin-left:  calc((30vw - 20vw - 2em)/2);
 }
-
+.meetup-modal-image img {
+    width: 33vw;
+    height: 12em;
+}
 
 @media (max-width: 575px) {
     .meetup-form-image img {
         width: 80vw;
         margin-left:  calc((98vw - 80vw - 2em)/2);
+    }
+    .meetup-modal-image img {
+        width: 80vw;
     }
 }
 @media (min-width: 576px) and (max-width: 766px) {
@@ -24,10 +30,35 @@
         width: 65vw;
         margin-left:  calc((98vw - 65vw - 2em)/2) ;
     }
+    .meetup-modal-image img {
+        width: 40vw;
+    }
 }
 @media (min-width: 767px) and (max-width: 991px) {
     .meetup-form-image img {
         width: 60vw;
         margin-left:  calc((98vw - 60vw - 7em)/2) ;
     }
+    .meetup-modal-image img {
+        width: 40vw;
+    }
 }
+@media (min-width: 2240px) {
+
+    .meetup-modal-image img {
+        width: 20vw;
+    }
+}
+#js_meetup_tab .nav-link {
+     border: none;
+}
+.accept-joining-user i {
+    font-size: 2em;
+    color: springgreen;
+}
+.reject-joining-user i {
+    font-size: 2em;
+    color: red;
+}
+
+
