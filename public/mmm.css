@@ -1,3 +1,31 @@
 
+.numberCircle {
+    border-radius: 50%;
+    width: 1.2em;
+    height: 1.2em;
+    text-align: center;
+    font: 3em Arial, sans-serif;
+}
+.badge-blue{
+    background-color: #00B5CE;
+    color: whitesmoke;
+}
+.badge-gray{
+    background-color: #444444;
+    color: whitesmoke;
+}
+.map-style{
+    width: auto;
+    height: 40vh;
+    min-height: 17em;
+    border: solid 0.8em #444444;
+    border-radius: 5px;
+}
 
-
+.local-border-rosed{
+    border: 1px solid rgba(247,0,85,0.3);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border-radius: 2px;
+    padding-right: -2em;
+}

@@ -3,15 +3,13 @@
 {% block title %}{% trans %} New Voyage{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h5 class="blued text-center">{% trans %} Create new Voyage{% endtrans %}</h5>
-    <div id="etape_simulation" class="text-center mt-2 ">
-        <div class="col-md-4 offset-4 ">
-            <div class=" ">
-                <span class="dot-active mx-2">1</span>
-                <span class="dot mx-2">2</span>
+        <div class="row">
+            <div class="col-12 btn-group">
+                <div class="numberCircle mx-1 badge-blue">1</div>
+                <div class="numberCircle mx-1 badge-gray">2</div>
+            </div>
+            <div class="col-12">
+                {{ include('carpool/voyage/formFirst.html.twig') }}
             </div>
         </div>
-    </div>
-    {{ include('carpool/voyage/formFirst.html.twig') }}
-
 {% endblock %}
