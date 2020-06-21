@@ -29,3 +29,14 @@
     border-radius: 2px;
     padding-right: -2em;
 }
+.one-voyage{
+    min-height: 14em;
+}
+.rating-voyage a:hover{
+    color: #F70055;
+}
+.rating-voyage a{
+    cursor:pointer ;
+    text-decoration: none;
+    color: #00B5CE;
+}
