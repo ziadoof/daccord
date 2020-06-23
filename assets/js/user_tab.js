@@ -66,6 +66,19 @@ $(document).ready(function(){
         });
     }
 
+    var voyageReqTabs = document.getElementsByClassName('voyageReqTab');
+    for(var voyage of voyageReqTabs){
+        voyage.addEventListener('click', function (e) {
+            localStorage.setItem('voyage-control_tap','#joinRequest' );
+        });
+    }
+    // whine voyage creator accept voyage request change request tab to passenger tab
+    var accept_voyage_req = document.getElementsByClassName('js-accept-request');
+    for(var voyage_req of accept_voyage_req){
+        voyage_req.addEventListener('click', function (e) {
+            localStorage.setItem('voyage-control_tap','#passengers' );
+        });
+    }
 
 
     //for save the tab and return to it
@@ -81,11 +94,19 @@ $(document).ready(function(){
         localStorage.setItem('driverRequest_tap', $(e.target).attr('href'));
     });
 
+    $('#voyage-control a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('voyage-control_tap', $(e.target).attr('href'));
+    });
+
+    var voyage_control = localStorage.getItem('voyage-control_tap');
+    if(voyage_control){
+        $('#voyageControlTab a[href="' + voyage_control + '"]').tab('show');
+    }
+
     var activeTab = localStorage.getItem('profile_tap');
     if(activeTab){
         $('#user-show a[href="' + activeTab + '"]').tab('show');
         $('#user-edit a[href="' + activeTab + '"]').tab('show');
-
     }
 
     var dealTab = localStorage.getItem('doneDeal_tap');

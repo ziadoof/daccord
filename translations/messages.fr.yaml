@@ -271,6 +271,7 @@ Passengers: Passagers
 'Join requests': 'Demandes de rejoindre'
 'Description:': Description
 'There are no requests for this': 'Il n''y a pas encore de demande pour ce'
+'There are no passengers for this': 'Il n''y a pas encore de passagers pour ce'
 voyage: voyage
 yet: ' '
 'Cancel this voyage': 'Annuler ce voyage'

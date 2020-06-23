@@ -468,10 +468,11 @@ function wsConnect(id) {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0 inWaitingTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
                 }
-                /*else if(typeON==='addDriverToDeal'|| typeON === 'doneDeal'|| typeON === 'semiDoneDeal'){
-                    elemantA = '<a href="'+link+'" class="list__item--link my-0 doneDriverTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
+                else if(typeON==='voyageRequest'){
+                    elemantA = '<a href="'+link+'" class="list__item--link my-0 voyageReqTab" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
-                }*/
+                }
+
                 else {
                     elemantA = '<a href="'+link+'" class="list__item--link my-0" notifiable="'+notifiableId+'" notification="'+notificationId+'">';
                     image='<img src="'+senderUserImage+'" alt="" class="user-image mx-2 mt-1">';
@@ -572,6 +573,13 @@ function wsConnect(id) {
                 for(var doneDriver of doneDriverTabs){
                     doneDriver.addEventListener('click', function (e) {
                         localStorage.setItem('driverRequest_tap','#done_drivers' );
+                    });
+                }
+
+                var voyageReqTabs = document.getElementsByClassName('voyageReqTab');
+                for(var voyage of voyageReqTabs){
+                    voyage.addEventListener('click', function (e) {
+                        localStorage.setItem('voyage-control_tap','#joinRequest' );
                     });
                 }
 

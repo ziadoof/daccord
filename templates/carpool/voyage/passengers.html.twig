@@ -1,0 +1,71 @@
+{% if voyage.getAllVoyageRequests() %}
+    {% set pass = 0 %}
+    {% for passenger in voyage.getAllVoyageRequests() %}
+        {% if passenger.status is same as('Accepted') %}
+            {% set pass = pass + 1 %}
+        {% endif %}
+    {% endfor %}
+    {% if pass > 0 %}
+        {% for passenger in voyage.getAllVoyageRequests() %}
+            {% if passenger.status is same as('Accepted') %}
+                <div class="row">
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 local-border my-2">
+                        <div class="row border-bottom">
+                            <div class="col-12">
+                                <div class="d-inline">
+                                    <div class="d-inline">
+                                        <a href="{{ path('user_show',{'id': passenger.sender.id}) }}" >
+                                            <div class="btn-group">
+                                                <img src="{{ passenger.sender.photoProfile() }}" alt="profile photo" class="vote-avatar my-2">
+                                                <span class="blued ml-1 mt-3">{{ passenger.sender.firstname|title }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="d-inline">
+                                        <div class="btn-group float-right mt-1">
+                                            <div class=" cancel-joining-user my-1 message-voyage ">
+                                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                    <button class="btn" >
+                                                        <input type="hidden" name="user" value="{{ passenger.sender.id }}">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            {% if not voyage.isFinish() %}
+                                                <div class="cancel-joining-user my-1 rejected-voyage ">
+                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?Ten points will be deducted');">
+                                                        <button class="btn "><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-12">
+                                <div class="col text-center mt-2">
+                                    <span class="blued">{{ passenger.voyage.stationDeparture.name }}</span>
+                                    <span> <i class="fas fa-arrow-right rosed"></i></span>
+                                    <span class="blued">{{ passenger.voyage.stationArrival.name }}</span>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center my-3">
+                                <span class="badge badge-info py-1 px-1"><h5> {{ passenger.numberOfSeats }}{% if passenger.numberOfSeats >1 %} {% trans %} Seats{% endtrans %}{% else %} {% trans %} Seat{% endtrans %}{% endif %} </h5></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="col my-4 mx-2 text-center">
+            <span class=" blued"> {% trans %} There are no passengers for this {% endtrans %} <span class="rosed">{% trans %} voyage{% endtrans %}</span> {% trans %} yet{% endtrans %}</span>
+        </div>
+    {% endif %}
+{% else %}
+    <div class="col my-4 mx-2 text-center">
+        <span class=" blued"> {% trans %} There are no passengers for this {% endtrans %} <span class="rosed">{% trans %} voyage{% endtrans %}</span> {% trans %} yet{% endtrans %}</span>
+    </div>
+{% endif %}
