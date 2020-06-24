@@ -322,7 +322,7 @@
 
 .wrapper {
   display: inline-block;
-  padding: 15px;
+  padding-top: 1.3em;
   width: 100%;
 }
 
@@ -410,8 +410,6 @@
   -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
 
-.wrapper {
-  width: 100%; }
 
 #sidebar {
   min-width: 300px;
@@ -493,10 +491,10 @@
 }
 @media  (max-width: 575px){
   .min-fix{
-    width: 100%;
+    width: 100vw;
   }
   .max-fix{
-    width: 100%;
+    width: 100vw;
   }
 }
 

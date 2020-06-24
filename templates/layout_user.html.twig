@@ -6,38 +6,36 @@
         {% include "header.html.twig" %}
     {% endblock %}
     {% block min %}
-        <div class="row">
-            <div id="main">
-                <div class="wrapper d-flex align-items-stretch ">
-                    <div>
-                        {% if app.user != null%}
-                            {% block sidebar %}
-                                <div class="d-none d-lg-block">
-                                    {% include "sideBar.html.twig" %}
-                                </div>
-                                <div class="d-none d-md-block d-lg-none">
-                                    {% include "mdSideBar.html.twig" %}
-                                </div>
-                                <div class="d-sm-block d-md-none">
-                                    {% include "smSideBar.html.twig" %}
-                                </div>
-                            {% endblock %}
-                        {% endif %}
+        <div id="main">
+            <div class="wrapper d-flex align-items-stretch ">
+                <div>
+                    {% if app.user != null%}
+                        {% block sidebar %}
+                            <div class="d-none d-lg-block">
+                                {% include "sideBar.html.twig" %}
+                            </div>
+                            <div class="d-none d-md-block d-lg-none">
+                                {% include "mdSideBar.html.twig" %}
+                            </div>
+                            <div class="d-sm-block d-md-none">
+                                {% include "smSideBar.html.twig" %}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+
+                <!-- Page Content  -->
+                <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
+                    {% include "search/searchbar.html.twig" %}
+                    <div id="all">
+                        {% block content %}
+
+                        {% endblock %}
                     </div>
+                    <div id="searching">
+                        {% block content_search %}
 
-                    <!-- Page Content  -->
-                    <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
-                        {% include "search/searchbar.html.twig" %}
-                        <div id="all">
-                            {% block content %}
-
-                            {% endblock %}
-                        </div>
-                        <div id="searching">
-                            {% block content_search %}
-
-                            {% endblock %}
-                        </div>
+                        {% endblock %}
                     </div>
                 </div>
             </div>

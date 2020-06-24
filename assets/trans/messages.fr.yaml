@@ -11,7 +11,7 @@ Delete: Supprimer
 'with other people': 'avec d''autres personnes'
 from: 'de :'
 to: 'à :'
-'Your rating for this hosting :': 'Votre note pour cet hébergement :'
+'Your rating for this hosting': 'Votre note pour cet hébergement'
 'Rate this hosting': 'Évaluez cet hébergement'
 'Waiting for DONE HOSTING by': 'En attente de DONE HOSTING par'
 'to end this hosting': 'pour mettre fin à cet hébergement'
@@ -271,6 +271,7 @@ Passengers: Passagers
 'Join requests': 'Demandes de rejoindre'
 'Description:': Description
 'There are no requests for this': 'Il n''y a pas encore de demande pour ce'
+'There are no passengers for this': 'Il n''y a pas encore de passagers pour ce'
 voyage: voyage
 yet: ' '
 'Cancel this voyage': 'Annuler ce voyage'
@@ -364,6 +365,7 @@ and: et
 'There is no Drivers in this area': 'Il n''y a pas de Drivers dans cette zone'
 'Meetup Rating': 'Évaluation de Meetup'
 'Driver Rating': 'Évaluation de Driver'
+'Hosting Rating': 'Évaluation d''Hébergement'
 'From :': 'De :'
 'To :': 'À :'
 'Date:': 'Date:'
@@ -390,8 +392,8 @@ search: chercher
 'has sent you driver request for transfer': 'vous a envoyé une demande de Driver pour transfert'
 'There is no driver request': 'Il n''y a pas de demande de Driver'
 'Done drivers': 'Done Drivers'
-'Show deal': 'Afficher le deal'
-'Finish this deal': 'Terminez ce deal'
+'Show this deal': 'Afficher ce deal'
+'Finish this deal': 'Terminer ce deal'
 'You have cooperated in a deal on': 'Vous avez collaboré à un deal le '
 Seven: Sept
 'There is no done drivers': 'Il n''y a pas de Done Drivers'
@@ -1720,5 +1722,8 @@ Legal notice: Mention légale
 Kilometre: Kilometrage
 Your demand-deal : Votre demande et l'offre de %username%
 Your offer-deal : Votre offer et la demande de %username%
-
-
+DRIVERS: LIVRAISON
+In waiting: En attente
+After you accept this request, you are waiting for your addition to this deal: Après avoir accepté cette demande, vous attendez votre ajout à ce deal
+My hosting request: Ma demande d'hébergement
+Carpool Rating: Évaluation du covoiturage

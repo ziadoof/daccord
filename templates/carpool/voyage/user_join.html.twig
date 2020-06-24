@@ -1,0 +1,135 @@
+{#user not joined#}
+{% if voyage.isPassenger(app.user) %}
+    {% for passenger in voyage.passenger  %}
+        {% if app.user is same as (passenger) %}
+            {% set seats = voyage.getPassengerSeats(passenger) %}
+            <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 local-border my-2">
+                <div class="row border-bottom">
+                    <div class="col-12">
+                        <div class="d-inline">
+                            <span class="mt-2 badge badge-success py-1 px-1"><h5>{{seats }} {% if seats >1 %}{% trans %} Seats{% endtrans %}{% else %}{% trans %} Seat{% endtrans %}{% endif %} {% trans %} reserved{% endtrans %}</h5></span>
+                        </div>
+                        <div class="float-right cancel-joining-user my-1 rejected-voyage mt-2 d-inline">
+                            <form class="d-inline" method="post" action="{{ path('cancel_joining_passenger',{'voyage':voyage.id}) }}" onsubmit="return confirm('Do you really want to withdraw from this voyage ?Three points will be deducted');">
+                                <button class="btn d-inline float-right"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center mt-2">
+                        <span class="blued">{{ voyage.stationDeparture.name }}</span>
+                        <span> <i class="fas fa-arrow-right rosed"></i></span>
+                        <span class="blued">{{ voyage.stationArrival.name }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center my-2">
+                        <span class="rosed">{{ voyage.timeDeparture|date('d M  H:i') }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center cancel-joining-user message-voyage">
+                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                            <button class="btn btn-outline-info my-1" >
+                                <input type="hidden" name="user" value="{{ voyage.creator.user.id }}">
+                                <span class=""><i class="fas fa-comments"></i> {{ voyage.creator.user.firstname|title }}</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    {% if voyage.haveRequest(app.user) %}{#pending or rijected#}
+        {% for request in voyage.voyageRequests  %}
+            {% if request.sender is same as(app.user) and request.status is not same as('Accepted')%}
+                {% if not voyage.isFinish() %}
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 local-border my-2">
+                        <div class="row border-bottom">
+                            <div class="col-12">
+                                <div class="d-inline">
+                                    <span class="mt-2 badge py-1 px-1 {% if request.status is same as('Pending') %}badge-warning{% else %}badge-danger{% endif %}"><h5 class="d-inline">{{request.status}}</h5></span>
+                                </div>
+                                <div class="cancel-joining-user mt-1 rejected-voyage d-inline">
+                                    <form class="d-inline" method="post" action="{{ path('carpool_voyage_request_delete', {'id':request.id}) }}" onsubmit="return confirm('Are you sure you want to delete this request?');">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}">
+                                        <button class="btn d-inline float-right mt-2"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col text-center">
+                                {% if request.status is same as('Pending') %}
+                                    <span class="blued ">{% trans %} Your request is being processed{% endtrans %}</span>
+                                {% else %}
+                                    <span class="rosed ">{% trans %} Your request has been rejected{% endtrans %}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col mb-2 ml-2">
+                                <span class="blued font-weight-bold  d-block">{% trans %} Number of seats : {% endtrans %} <span class="grayed">{{ request.numberOfSeats }}</span></span>
+                                {% if request.description %}
+                                <span class="rosed  d-inline">{% trans %} Description :{% endtrans %}</span>
+                                <p class="d-inline minimize ml-2">{{ request.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 local-border my-2">
+                        <div class="row py-2">
+                            <div class="col text-center">
+                                <span class="rosed ">{% trans %} This voyage is finish{% endtrans %}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if not voyage.isFinish() %}
+            {% if not voyage.isClosedVoyage %}
+                {% if not voyage.isPartOfAllPassenger(app.user) %}
+                    <div class="col text-center my-4 white">
+                        <a data-toggle="modal" data-target="#voyage-request"  class="btn btn-info">{% trans %} Join request{% endtrans %}</a>
+                    </div>
+                {% else %}
+                    <div class="col text-center my-4 white">
+                        <span class="badge badge-danger py-2 px-2"><span>{% trans %} You are a passenger on this or part of this voyage{% endtrans %}</span></span>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="col text-center my-4 white">
+                    <span class="badge badge-danger py-2 px-2"><span>{% trans %} Closed Voyage{% endtrans %}</span></span>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="col text-center my-4 white">
+                <span class="rosed ">{% trans %} This voyage is finish{% endtrans %}</span>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+<div class="modal fade bd-example-modal-lg mt-4" id="voyage-request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                {{ render(controller('App\\Controller\\Carpool\\VoyageRequestController::new',{ 'voyage': voyage.id  })) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">{% trans %} Close{% endtrans %}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,78 +1,22 @@
 {{ form_start(secondForm,{'attr':{'id':'voyage-second-form'}}) }}
-<div class="new-voyage">
-    <div class="row">
-        <div class="col-md-6 border-deal">
-            <div class=" py-2 px-2">
-                {% for  key, value in  partialVoyages %}
-                    <div class="row border-deal">
-                        <div class="col-md-9">
-                            <div class="voyage-partial mt-4 text-center">
-                                <h5><span class="blued px-2">{{value['from']}}</span> <i class="fas fa-arrow-right"></i>
-                                    <span class="blued px-2">{{value['to']}}</span></h5>
-                                <small>{{ value['distance'] }}{{ ' Km' }}</small>
-                                <small>{{ value['duration']}}</small>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mt-4">
-                            {{ form_row(attribute(secondForm, 'partialPrice_' ~ key)) }}
-                        </div>
-                        <div class="col-md-1 mt-3 voyage_euro ml-0">
-                            <span class="badge badge-info"><i class="fas fa-euro-sign"></i></span>
-                        </div>
-                    </div>
-                {% endfor %}
-                <div class="row border-deal">
-                    <div class="col-md-9 ">
-                        <div class="voyage-partial mt-4 text-center">
-                            <h5><span class="rosed px-2">{{voyage.mainDeparture.name}}</span> <i class="fas fa-arrow-right"></i>
-                                <span class="rosed px-2">{{voyage.mainArrival.name}}</span></h5>
-                            <small>{{ voyage.distance }}{{ ' Km' }}</small>
-                            <small>{{ voyage.fixDuration(voyage.duration) }}</small>
-                        </div>
-                    </div>
-                    <div class="col-md-2 mt-4">
-                        {{ form_row(secondForm.mainPrice) }}
-                    </div>
-                    <div class="col-md-1 mt-3 voyage_euro ml-0">
-                        <span class="badge badge-info"><i class="fas fa-euro-sign"></i></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {{ form_row(secondForm.description) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {{ form_row(secondForm.numberOfPlaces) }}
-                    </div>
-                    <div class="col mt-3">
-                        {{ form_row(secondForm.highway) }}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col my-2">
-                    <button class="btn btn-info float-right btn-block">{% trans %} Save{% endtrans %}</button>
-                </div>
-            </div>
-        </div>
+<div class="new-voyage mt-2">
+    <div class="row local-border px-2 py-2">
         <div class="col-md-6 mt-5">
             <div class="voyage-map">
                 <div class="row">
                     <div class="col text-center">
-                        <span class="badge badge-info py-2 px-2">{{ voyage.date|date('d-M-Y') }}</span>
+                        <span class="badge badge-info py-2 px-2">{{ voyage.date|date('d M Y') }}</span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2 offset-3 ">
+                    <div class="col-2 offset-3">
                         <span class="float-right mt-1 city-time">{{ voyage.time|date('H:i') }}</span>
                     </div>
-                    <div class="col-md-2 text-center">
+                    <div class="col-2 text-center">
                         <span class="point-departre pl-0"><i class="fas fa-car"></i></span>
                         <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical"></i></span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-4">
                         <span class="rosed city-time">{{voyage.mainDeparture.name}}</span>
                     </div>
                 </div>
@@ -80,12 +24,12 @@
                 {% for  station in  voyage.stations %}
                     {%  set duration = duration + station.duration %}
                     <div class="row">
-                        <div class="col-md-2 offset-5 text-center">
+                        <div class="col-2 offset-5 text-center">
                             <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical"></i></span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 offset-3 ">
+                        <div class="col-2 offset-3 ">
                             {% set arrivalTime =  voyage.createTime(voyage.date,voyage.time,duration) %}
                             <span class="float-right mt-1 city-time">
                             {% if arrivalTime|date('d') is same as (voyage.date|date('d')) %}
@@ -97,26 +41,27 @@
                             {% endif %}
                             </span>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-2 text-center">
                             <span class="point-departre d-block mb-0"><i class="far fa-dot-circle"></i></span>
+                            <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical"></i></span>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-4">
                             <span class="blued city-time">{{station.city.name}}</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2 offset-5 text-center">
+                        <div class="col-2 offset-5 text-center">
                             <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical"></i></span>
                         </div>
                     </div>
                 {% endfor %}
                 <div class="row">
-                    <div class="col-md-2 offset-5 text-center">
+                    <div class="col-2 offset-5 text-center">
                         <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical"></i></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2 offset-3 ">
+                    <div class="col-2 offset-3 ">
                         {% set mainArrivalTime =  voyage.createTime(voyage.date,voyage.time,voyage.duration) %}
                         <span class="float-right mt-1 city-time">
                         {% if mainArrivalTime|date('d') is same as (voyage.date|date('d')) %}
@@ -128,16 +73,72 @@
                         {% endif %}
                         </span>
                     </div>
-                    <div class="col-md-2 text-center">
+                    <div class="col-2 text-center">
                         <span class="point-departre d-block mb-0"><i class="far fa-dot-circle"></i></span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-4">
                         <span class="rosed city-time">{{voyage.mainArrival.name}}</span>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class=" py-2 px-2">
+                {% for  key, value in  partialVoyages %}
+                    <div class="row local-border mb-1">
+                        <div class="col-sm-9 col-md-12 col-lg-8">
+                            <div class="voyage-partial mt-4 text-center">
+                                <h5><span class="blued px-2">{{value['from']}}</span> <i class="fas fa-arrow-right"></i>
+                                    <span class="blued px-2">{{value['to']}}</span></h5>
+                                <small>{{ value['distance'] }}{{ ' Km' }}</small>
+                                <small>{{ value['duration']}}</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-12 col-lg-4 mt-sm-4 mt-md-1 mt-lg-4 btn-group">
+                            {{ form_row(attribute(secondForm, 'partialPrice_' ~ key)) }}
+                            <span class="blued large ml-1 mt-2"><i class="fas fa-euro-sign"></i></span>
 
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="row local-border-rosed mb-1">
+                    <div class="col-sm-9 col-md-12 col-lg-8">
+                        <div class="voyage-partial mt-4 text-center">
+                            <h5><span class="rosed px-2">{{voyage.mainDeparture.name}}</span> <i class="fas fa-arrow-right"></i>
+                                <span class="rosed px-2">{{voyage.mainArrival.name}}</span></h5>
+                            <small>{{ voyage.distance }}{{ ' Km' }}</small>
+                            <small>{{ voyage.fixDuration(voyage.duration) }}</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-12 col-lg-4 mt-sm-4 mt-md-1 mt-lg-4 btn-group">
+                        {{ form_row(secondForm.mainPrice) }}
+                        <span class="rosed large ml-1 mt-2"><i class="fas fa-euro-sign"></i></span>
+                    </div>
+                </div>
+                <div class="row local-border">
+                    <div class="col">
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                {{ form_row(secondForm.description) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                {{ form_row(secondForm.numberOfPlaces) }}
+                            </div>
+                            <div class="col-sm-3 mt-sm-2">
+                                {{ form_row(secondForm.highway) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 my-2 text-center">
+                    <button class="btn btn-info float-sm-right">{% trans %} Save{% endtrans %}</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {{ form_end(secondForm) }}

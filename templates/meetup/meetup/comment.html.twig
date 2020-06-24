@@ -1,30 +1,28 @@
 <div class="row">
-    <div class="col-md-12 mt-3">
+    <div class="col-12 mt-3">
         {% if app.user is not same as(null) %}
         <h4 class="text-center blued">{% trans %} Comments{% endtrans %}</h4>
         <div class="row">
-            <div class="col-md-6 offset-3 border-deal pt-2">
+            <div class="col-lg-8 offset-lg-2 mt-3 local-border pt-2">
                 {{ include('meetup/meetup/comment_form.html.twig') }}
             </div>
         </div>
         {% else %}
             <div class="row">
-                <div class="col-md-4 offset-4">
-                    <a class="btn btn-outline-info btn-block my-4 my-sm-0 ml-2" data-toggle="modal" data-target="#login">{% trans %} Login for add a comment{% endtrans %}</a>
+                <div class="col-lg-8 offset-lg-2 mt-3 text-center">
+                    <a class="btn btn-outline-info my-4" href="{{ path('security_login') }}">{% trans %} Login for add a comment{% endtrans %}</a>
                 </div>
             </div>
         {% endif %}
         {% for comment in comments|sort|reverse %}
             <div class="row">
-                <div class="col-md-6 offset-3 border-deal border-comment">
+                <div class="col-lg-8 offset-lg-2 border-deal border-comment">
                     <div class="row border-comment-head pt-1">
-                        <div class="col-md-4">
-                            <img src="{{ comment.sender.photoProfile() }}" alt="" class="vote-avatar">
-                            <div class="mt-2">
-                                <span class="ml-1">{{ comment.sender.firstname|title }}</span>
+                        <div class="col-12 py-1">
+                            <div class="d-inline">
+                                <img src="{{ comment.sender.photoProfile() }}" alt="" class="vote-avatar">
+                                <h6 class="ml-2 mt-2 d-inline btn-group">{{ comment.sender.firstname|title }}</h6>
                             </div>
-                        </div>
-                        <div class="col-md-4 offset-4 mt-1">
                             <div class="float-right pt-1">
                                 {% set date = comment.date_format(comment.createdAt) %}
                                 {{   date|trans }}

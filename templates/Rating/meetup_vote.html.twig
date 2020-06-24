@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {{ form_start(form, {'method': 'post', 'action': path('new_meetup_vote', {'meetup': meetup.id, 'type':type}) }) }}
 <div class="row">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-8 offset-md-2">
         <h4 class="title-blue text-center">{% trans %} Meetup Rating{% endtrans %}</h4>
         <div class="driver">
             <div class="row ">
@@ -12,7 +12,7 @@
             <div class="meetup-text justify-content-center">
                 {{ form_row(form.comment) }}
             </div>
-            <button class="btn btn-info float-right">{% trans %} Rating{% endtrans %}</button>
+            <button class="btn btn-warning float-right">{% trans %} Rating{% endtrans %}</button>
             {{ form_end(form) }}
         </div>
     </div>

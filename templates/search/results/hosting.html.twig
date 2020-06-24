@@ -3,26 +3,28 @@
     <div class="row">
     {% if hostings is defined %}
         {% for hosting in hostings %}
-            <div class="col-md-3 px-md-2 my-2 ad_show" >
-                <div id="hosting_index" class="hosting_index">
-                    <a href={{path('hosting_show',{'id':hosting['id']})}}>
-                        <div class="px-2 border-respo">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <img class="image_hosting" src="{{hosting['image']}}"/>
-                                </div>
+            <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4" >
+                <div id="ad_index" class="ad_index shadow-border border-left">
+                    <a href="{{path('hosting_show',{'id':hosting['id']})}}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img class="image_hosting_search" src="{{hosting['image']}}"/>
                             </div>
-                            <div class="row">
-                                <div class="col mb-2">
-                                    <img class="cafe-avatar ml-2" src="{{hosting['userImage']}}"/>
-                                    <div class="row">
-                                        <span class="ml-2 blued">{{hosting['user']}}</span>
+                        </div>
+                    </a>
+                    <div class="row">
+                        <div class="col-12 mt-1">
+                            <div class="d-inline">
+                                <div class="btn-group">
+                                    <div class="d-inline">
+                                        <img class="vote-avatar ml-2 d-inline" src="{{hosting['userImage']}}"/>
                                     </div>
-                                    <div class="row">
-                                        <span class="ml-2 blued">{{hosting['city']}}</span>
+                                    <div class=" d-inline">
+                                        <small class="ml-2 blued d-block">{{hosting['user']}}</small>
+                                        <small class="ml-2 blued d-block">{{hosting['city']}}</small>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="d-inline">
                                     {% if app.user %}
                                         {% set isFavorite = 'false' %}
                                         {#data-favorite must be string not boolean#}
@@ -31,7 +33,7 @@
                                                 {% set isFavorite = 'true' %}
                                             {% endif %}
                                         {% endfor %}
-                                        <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add  mt-3 mr-4" data-object="{{ hosting['id'] }}" data-type="hosting" data-favorite="{{ isFavorite }}">
+                                        <form method="post" action="{{ url('favorite_add') }}" class="d-inline js-favorite-add float-right mt-1 mr-1" data-object="{{ hosting['id'] }}" data-type="hosting" data-favorite="{{ isFavorite }}">
                                             <div class="flexbox">
                                                 <div class="fav-btn">
                                                     <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
@@ -42,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         {% endfor %}

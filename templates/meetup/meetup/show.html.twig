@@ -1,20 +1,69 @@
-{% extends 'meetup/layout_meetup.html.twig' %}
+{% extends 'layout_user.html.twig' %}
 
 {% block title %}{% trans %} Meetup{% endtrans %}{% endblock %}
 
-{% block meetup %}
-    <div class="meetup-show">
-        <div class="row">
-            <div class="col border-deal">
-                <div class="row ">
-                    <div class="col-md-6 mt-1">
-                        <img src="{{ meetup.creator.photoProfile() }}" alt="profile photo" class="vote-avatar">
-                        <div class="mt-1 ">
-                            <span class="blued ml-2">{{ meetup.creator.firstname|title }}</span>
-                        </div>
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if app.user is not same as(null) %}
+                <div class="row">
+                    <div class="btn-group btn-block" id="meetup-button">
+                        <a class="btn btn-info" href="{{path('meetup_index')}}" >{% trans %} My meetup{% endtrans %}</a>
+                        <a class="btn btn-info" href="{{path('meetup_join')}}">{% trans %} Meetup join{% endtrans %}</a>
+                        <a class="btn btn-info " id="btn-meetup-gps">{% trans %}Near me{% endtrans %}
+                            <form method="post" action="{{path('meetup_near_me')}}" id="meetup-gps" >
+                                <input type="hidden" name="meetup_lat" id="meetup_gps_lat">
+                                <input type="hidden" name="meetup_lng" id="meetup_gps_lng">
+                            </form>
+                        </a>
+                        <a class="btn btn-info" href="{{path('meetup_new')}}">{% trans %} New meetup{% endtrans %}</a>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mt-3">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="meetup-show mt-2">
+        <div class="row mb-3">
+            <div class="col local-border">
+                <div class="row">
+                    <div class="col-12 text-center mt-2">
+                        {% if meetup.isFinish() and app.user is not same as(null)%}
+                            {% if meetup.isParticipant(app.user) %}
+                                {% if votesMeetup[meetup.id] is defined %}
+                                    <p class="blued">
+                                        {% set reste = 5 - votesMeetup[meetup.id]%}
+                                        {% if  votesMeetup[meetup.id] is not same as(null)%}
+                                            {% for  i in votesMeetup[meetup.id] ..1%}
+                                                <i class="fas fa-star"></i>
+                                            {% endfor %}
+                                            {% if reste>0 %}
+                                                {% for  i in reste..1%}
+                                                    <i class="far fa-star"></i>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% else %}
+                                            {% for  i in 5..1%}
+                                                <i class="far fa-star"></i>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </p>
+                                {% else %}
+                                    <button  data-toggle="modal" class="btn btn-warning"
+                                             data-target="#meetup_rating">
+                                        <i class="fas fa-star"></i> {% trans %}Rate this meetup {% endtrans %}
+                                    </button>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row px-1 py-1">
+                    <div class="col-12 back-gray py-2">
+                        <div class="btn-group">
+                            <img src="{{ meetup.creator.photoProfile() }}" alt="profile photo" class="vote-avatar">
+                            <span class="blued ml-2 mt-1">{{ meetup.creator.firstname|title }}</span>
+                        </div>
+                        <div class="mt-1">
                             {% if app.user is not same as (null) %}
                             {% set isFavorite = 'false' %}
                             {#data-favorite must be string not boolean#}
@@ -31,11 +80,21 @@
                                 </div>
                             </form>
                             {% endif %}
-                            <span class="blued float-right ">{{ meetup.createdAt|date('d M Y') }}</span>
                         </div>
                     </div>
                 </div>
-                <hr>
+                <div class="row px-1 py-1">
+                    <div class="col-12 back-gray text-center py-2 ">
+                            {% if meetup.startAt|date('d m y')is same as(meetup.endAt|date('d m y')) %}
+                                <span class="white">{{meetup.startAt|date('d M Y')}} <span class="blued">{% trans %} From{% endtrans %}  </span>{{ meetup.startAt|date('H:i') }}
+                                <span class="blued"> {% trans %} To{% endtrans %} </span> {{ meetup.endAt|date('H:i') }}
+                            </span>
+                            {% else %}
+                                <span class="blued">{% trans %}From {% endtrans %}  <span class="white">{{ meetup.startAt|date('d M Y - H:i') }}</span></span>
+                                <span class="blued  d-block d-sm-inline"> {% trans %}To {% endtrans %} <span class="white">{{ meetup.endAt|date('d M Y - H:i') }}</span></span>
+                            {% endif %}
+                    </div>
+                </div>
                 <div class="row ">
                     <div class="col-md-4 show-image-meetup my-2">
                         <img src="{{ meetup.meetupImage() }}" alt="meetup photo" class="">
@@ -66,7 +125,7 @@
                                         <span class="meetup-text mt-3"><span class="blued">{% trans %} City : {% endtrans %}</span>{{ meetup.city.name }}</span>
                                 </div>
                                 <div class="">
-                                    {% if meetup.address %}
+                                    {% if meetup.maxParticipants %}
                                         <span class=" mt-3"><span class="blued">{% trans %} Max participants :{% endtrans %} </span>{{ meetup.maxParticipants }}</span>
                                     {% endif %}
                                 </div>
@@ -80,56 +139,10 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-9 mb-2">
-                        {% if meetup.startAt|date('d m y')is same as(meetup.endAt|date('d m y')) %}
-                            <span>{{meetup.startAt|date('d M Y')}} <span class="blued">{% trans %} From{% endtrans %}  </span>{{ meetup.startAt|date('H:i') }}
-                                <span class="blued"> {% trans %} To{% endtrans %} </span> {{ meetup.endAt|date('H:i') }}
-                            </span>
-                        {% else %}
-                            <span><span class="blued">{% trans %}From {% endtrans %}  </span>{{ meetup.startAt|date('d M Y - H:i') }}
-                                <span class="blued"> {% trans %}To {% endtrans %} </span> {{ meetup.endAt|date('d M Y - H:i') }}
-                            </span>
-                        {% endif %}
-                    </div>
-                    {% if meetup.isFinish() and app.user is not same as(null)%}
-                        {% if meetup.isParticipant(app.user) %}
-                            <div class="col-md-3  mb-2">
-                                <div class="float-right">
-                                {% if votesMeetup[meetup.id] is defined %}
-                                        <p class="blued">
-                                            {% set reste = 5 - votesMeetup[meetup.id]%}
-                                            {% if  votesMeetup[meetup.id] is not same as(null)%}
-                                                {% for  i in votesMeetup[meetup.id] ..1%}
-                                                    <i class="fas fa-star"></i>
-                                                {% endfor %}
-                                                {% if reste>0 %}
-                                                    {% for  i in reste..1%}
-                                                        <i class="far fa-star"></i>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            {% else %}
-                                                {% for  i in 5..1%}
-                                                    <i class="far fa-star"></i>
-                                                {% endfor %}
-                                            {% endif %}
-                                        </p>
-                            {% else %}
-                                <button  data-toggle="modal" class="btn btn-info btn-block "
-                                         data-target="#meetup_rating">
-                                    <i class="fas fa-star"></i> {% trans %}Rate this meetup {% endtrans %}
-                                </button>
-                            {% endif %}
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-12" >
                 <ul class="nav nav-tabs nav-justified " id="js_meetup_tab" >
                     <li class="nav-item "><a  href="#meetupParticipant" class="nav-link active">{% trans %}Participants{% endtrans %}</a></li>
                     <li class="nav-item "><a  href="#meetupComment" class="nav-link">{% trans %}Comment {% endtrans %}</a></li>
@@ -153,14 +166,13 @@
             </div>
         </div>
         {% if app.user is same as(meetup.creator) %}
-        <div class="row border-deal py-2 mt-5">
-            <div class="col-md-2 offset-10">
-                    {{ include('meetup/meetup/_delete_form.html.twig') }}
+        <div class="row local-border py-2 mt-5">
+            <div class="col-12 text-center">
+                {{ include('meetup/meetup/_delete_form.html.twig') }}
             </div>
         </div>
         {% endif %}
     </div>
-
     <div class="modal fade bd-example-modal-lg mt-4" id="meetup_rating" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999;">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

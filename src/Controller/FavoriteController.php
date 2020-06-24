@@ -13,6 +13,7 @@ use App\Repository\Hosting\HostingRepository;
 use App\Repository\Meetup\MeetupRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,12 +53,23 @@ class FavoriteController extends AbstractController
 
     /**
      * @Route("/", name="favorite_index", methods={"GET"})
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
      */
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $favorites = $this->getUser()->getFavorites();
+        $favorites = $this->getUser()->getFavorites()->toArray();
+        $fav = $paginator->paginate(
+        // Doctrine Query, not results
+            $favorites,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            18
+        );
         return $this->render('favorite/index.html.twig', [
-            'favorites' => $favorites,
+            'favorites' => $fav,
         ]);
     }
 

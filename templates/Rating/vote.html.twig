@@ -1,8 +1,17 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {{ form_start(form, {'method': 'post', 'action': path('new_vote', {'candidate': candidate.id, 'type':type}) }) }}
+
+{% if type is same as('driver') %}
+    {% set typeDeVote = 'Driver Rating' %}
+{% elseif type is same as('hosting') %}
+    {% set typeDeVote = 'Hosting Rating' %}
+{% elseif type is same as('carpool') %}
+    {% set typeDeVote = 'Carpool Rating' %}
+{% endif %}
+
 <div class="row">
     <div class="col-lg-8 offset-lg-2 col-12">
-        <h4 class="title-blue text-center">{% trans %} Driver Rating{% endtrans %}</h4>
+        <h4 class="title-blue text-center">{{ typeDeVote|trans }}</h4>
         <div class="driver">
             <div class="row ">
                 <div class="col-md-2 offset-5 deal-show mt-4 btn-group">

@@ -4,7 +4,18 @@
   text-align: center;
   margin: auto;
 }
-
+.image_hosting_search{
+  height: 20vh;
+  width: 100%;
+/top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+}
 .hosting-edit:hover img {
   opacity: 0.6;
   cursor: pointer;
@@ -64,8 +75,13 @@
 .image_hosting_request{
   height: 8vh;
   width: auto;
-  float: right;
 }
-.hostingPending{
-  background-color: #f5bfff;
+
+.btn-gray {
+  color: #fff;
+  background-color: #444444;
+  border-color: #444444;
+}
+.hostingPending {
+  background-color: #ffffc4;
 }

@@ -1,5 +1,24 @@
-{% extends 'meetup/layout_meetup.html.twig' %}
-{% block meetup %}
-    <h6 class="text-center rosed">{% trans %} Create new meetup{% endtrans %} </h6>
+{% extends 'layout_user.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if app.user is not same as(null) %}
+                <div class="row">
+                    <div class="btn-group btn-block" id="meetup-button">
+                        <a class="btn btn-info" href="{{path('meetup_index')}}" >{% trans %} My meetup{% endtrans %}</a>
+                        <a class="btn btn-info" href="{{path('meetup_join')}}">{% trans %} Meetup join{% endtrans %}</a>
+                        <a class="btn btn-info " id="btn-meetup-gps">{% trans %}Near me{% endtrans %}
+                            <form method="post" action="{{path('meetup_near_me')}}" id="meetup-gps" >
+                                <input type="hidden" name="meetup_lat" id="meetup_gps_lat">
+                                <input type="hidden" name="meetup_lng" id="meetup_gps_lng">
+                            </form>
+                        </a>
+                        <a class="btn btn-gray" href="{{path('meetup_new')}}">{% trans %} New meetup{% endtrans %}</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <h6 class="text-center blued my-2">{% trans %} Create new meetup{% endtrans %} </h6>
     {{ include('meetup/meetup/_form.html.twig') }}
 {% endblock %}

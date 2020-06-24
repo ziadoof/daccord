@@ -37,7 +37,7 @@ class ListsVoyages extends React.Component {
     isHighway(highway) {
         if(highway){
             return (
-                <span className="blued mt-2 mr-4 "><i className="fas fa-road"></i></span>
+                <span className="blued mt-2"><i className="fas fa-road"></i></span>
 
             );
         }
@@ -54,12 +54,14 @@ class ListsVoyages extends React.Component {
 
     }
     getSeats(seats) {
-        if(seats > 1){
-            return (
-                <span className="badge badge-info mt-1 btn-block"><h7>{seats} {Translator.trans('Seats available')} </h7></span>
-            );
+        if(seats > 0){
+            if(seats > 1)
+            return (<span className="badge badge-info py-2 ml-2"><h7>{seats} {Translator.trans('Seats available')} </h7></span>);
+            else {
+                return (<span className="badge badge-info py-2 ml-2"><h7>{seats} {Translator.trans('Seat available')} </h7></span>);
+            }
         }
-        return (<span className="badge badge-info mt-1 btn-block"><h7>{seats} {Translator.trans('Seat available')} </h7></span>);
+        return (<span className="badge badge-danger"><h7>{Translator.trans('Closed Voyage')} </h7></span>);
 
     }
 
@@ -89,7 +91,7 @@ class ListsVoyages extends React.Component {
             let favoriteStatus;
             if(favorite === 'false'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add float-right ml-2" data-object={id} data-type="voyage" data-favorite="false">
+                    <form method="post" action="" className="js-favorite-add float-right mr-2" data-object={id} data-type="voyage" data-favorite="false">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
@@ -99,7 +101,7 @@ class ListsVoyages extends React.Component {
             }
             else if(favorite === 'true'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add float-right ml-2" data-object={id} data-type="voyage" data-favorite="true">
+                    <form method="post" action="" className="js-favorite-add float-right mr-2" data-object={id} data-type="voyage" data-favorite="true">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
@@ -112,84 +114,51 @@ class ListsVoyages extends React.Component {
             }
 
             return (
-                <div className=" col-md-3 px-md-2 my-2 ad_show" key={Math.random()}>
-                    <div id="ad_index" className="ad_index">
-                        <a href={url} className="">
-                            <div className="px-2 border-ad">
-                                <div className="row">
-                                    <div className="col-md-2 mt-1">
-                                        <img src={creatorImage} alt="" className="cafe-avatar"/>
-                                    </div>
-                                    <div className="col-md-7 mt-1">
-                                        <span className="d-block rosed small">{creatorName}</span>
-                                        <span className="d-block blued small">{creatorPoint} Points</span>
-                                        <span className="d-block blued small">{creatorRating} <i className="far fa-star rosed"></i></span>
-                                    </div>
-                                    <div className="col-md-3 mt-2">
-                                        {this.isHighway(highway)}
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col my-4">
-                                        <div className="row">
-                                            <div className="col-md-2 offset-3 ">
-                                                <span className="float-right mb-1 city-time">{timeDeparture}</span>
-                                            </div>
-                                            <div className="col-md-2 text-center">
-                                                <span className="point-departre pl-0"><i className="fas fa-car"></i></span>
-                                                <span className="point-departre  d-block "><i className="fas fa-grip-lines-vertical"></i></span>
-                                                <span className="point-departre  d-block "><i className="fas fa-grip-lines-vertical"></i></span>
-                                            </div>
-                                            <div className="col-md-4">
-                                                <span className="rosed city-time">{departure}</span>
+                <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4" key={Math.random()}>
+                    <div id="voyage_index" className="shadow-border full-border">
+                        <div className="meetup_index">
+                            <a href={url}>
+                                <div className="text-center border-bottom back-gray">
+                                    <div className="row">
+                                        <div className="col-12 one-voyage">
+                                            <div className="one-voyage">
+                                                <div className="pt-5">
+                                                    <h4 className="meetup-text blued d-inline">{departure}</h4>
+                                                    <i className="fas fa-arrow-right rosed d-inline mx-4"></i>
+                                                    <h4 className="meetup-text blued d-inline">{arrival}</h4>
+                                                </div>
+                                                <div className="">
+                                                    <span className="white mt-3"><span className="blued">{departureDate}</span></span>
+                                                </div>
+                                                <div className="">
+                                                    <span className="white mt-3"><span className="blued">{timeDeparture}</span></span>
+                                                </div>
+                                                <div>
+                                                    {this.isHighway(highway)}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="row">
-                                            <div className="col-md-2 offset-5 text-center">
-                                                <span className="point-departre d-block mt-0"><i className="fas fa-grip-lines-vertical"></i></span>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-2 offset-3 ">
-                                                <span className="float-right mb-1 city-time">
-                                                    {timeArrival}
-                                                    {this.isArrivalDate(arrivalDate)}
-                                                </span>
-                                            </div>
-                                            <div className="col-md-2 text-center">
-                                                <span className="point-departre d-block mb-0"><i className="far fa-dot-circle"></i></span>
-                                            </div>
-                                            <div className="col-md-4">
-                                                <span className="rosed city-time">
-                                                    {arrival}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-md-8 offset-2">
-                                                {this.getSeats(seats)}
-                                            </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <h4 className="float-right pr-2 pb-1 rosed font-weight-bold">
+                                                {price} €
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row ">
-                                    <div className="col-md-6">
-                                        <span>{departureDate}</span>
-                                    </div>
-                                    <div className="col-md-6 ">
-                                        <div>
-                                            {favoriteStatus}
-                                        </div>
-                                        <span className="float-right">
-                                            {price} €
-                                        </span>
-                                    </div>
-                                </div>
+                            </a>
+                        </div>
+                        <div className="row py-2">
+                            <div className="col-10 rating-voyage">
+                                {this.getSeats(seats)}
                             </div>
-                        </a>
+                            <div className="col-2">
+                                {favoriteStatus}
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             )
         });
     }
