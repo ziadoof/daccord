@@ -50,7 +50,7 @@ class ListsHosting extends React.Component {
             let favoriteStatus;
             if(favorite === 'false'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add mt-3 mr-4" data-object={id} data-type="hosting" data-favorite="false">
+                    <form method="post" action="" className="d-inline js-favorite-add float-right mt-1 mr-1" data-object={id} data-type="hosting" data-favorite="false">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
@@ -60,7 +60,7 @@ class ListsHosting extends React.Component {
             }
             else if(favorite === 'true'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add mt-3 mr-4" data-object={id} data-type="hosting" data-favorite="true">
+                    <form method="post" action="" className="d-inline js-favorite-add float-right mt-1 mr-1" data-object={id} data-type="hosting" data-favorite="true">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
@@ -73,31 +73,33 @@ class ListsHosting extends React.Component {
             }
 
             return (
-                <div className="col-md-3 px-md-2 my-2 ad_show" key={Math.random()}>
-                    <div id="hosting_index" className="hosting_index">
+                <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4" key={Math.random()}>
+                    <div id="ad_index" className="ad_index shadow-border border-left">
                         <a href={url}>
-                            <div className="px-2 border-respo">
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <img className="image_hosting" src={imageHosting}/>
-                                    </div>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <img className="image_hosting_search" src={imageHosting}/>
                                 </div>
-                                <div className="row">
-                                    <div className="col mb-2">
-                                        <img className="cafe-avatar ml-2" src={userImage}/>
-                                        <div className="row">
-                                            <span className="ml-2 blued">{user}</span>
+                            </div>
+                        </a>
+                        <div className="row">
+                            <div className="col-12 mt-1">
+                                <div className="d-inline">
+                                    <div className="btn-group">
+                                        <div className="d-inline">
+                                            <img className="vote-avatar ml-2 d-inline" src={userImage}/>
                                         </div>
-                                        <div className="row">
-                                            <span className="ml-2 blued">{city}</span>
+                                        <div className=" d-inline">
+                                            <small className="ml-2 blued d-block">{user}</small>
+                                            <small className="ml-2 blued d-block">{city}</small>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className="d-inline">
                                         {favoriteStatus}
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             )

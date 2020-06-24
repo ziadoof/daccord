@@ -37,7 +37,7 @@ class ListsMeetup extends React.Component {
      isFinish(finish) {
         if(finish){
             return (
-                <span className="badge badge-danger float-right mt-2">{Translator.trans('Finish')}</span>
+                <span className="badge badge-danger float-left mt-2">{Translator.trans('Finish')}</span>
             );
         }
         return (<div></div>);
@@ -57,6 +57,7 @@ class ListsMeetup extends React.Component {
             const startAt = result.start;
             const finish = this.isFinish(isFinish);
             const favorite = result.favorite;
+            const longTitle = title.slice(0, 27) + (title.length > 27 ? "..." : "");
 
 
 
@@ -65,7 +66,7 @@ class ListsMeetup extends React.Component {
             let favoriteStatus;
             if(favorite === 'false'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add float-right mr-2 mb-2" data-object={id} data-type="meetup" data-favorite="false">
+                    <form method="post" action="" className="js-favorite-add  float-right mr-2 mb-2" data-object={id} data-type="meetup" data-favorite="false">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
@@ -75,7 +76,7 @@ class ListsMeetup extends React.Component {
             }
             else if(favorite === 'true'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add float-right mr-2 mb-2" data-object={id} data-type="meetup" data-favorite="true">
+                    <form method="post" action="" className="js-favorite-add  float-right mr-2 mb-2" data-object={id} data-type="meetup" data-favorite="true">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
@@ -88,33 +89,51 @@ class ListsMeetup extends React.Component {
             }
 
             return (
-                    <div className="col-md-12 px-2" key={Math.random()}>
-                        <div id="meetup_index" className="meetup_index">
+
+                <div className="col-md-6 col-lg-4 my-2 meetup_index" key={Math.random()}>
+                    <div className="full-border border-right-0">
+                        <div className="back-gray">
                             <a href={url} >
-                                <div className="px-2 border-deal">
-                                    <div className="row">
-                                        <div className="col-md-3 my-1 image_meetup_index">
-                                            <img className="" src={imageMeetup} alt="meetup image"/>
+                                <div className="row">
+                                    <div className="col-12 image_meetup_index text-center">
+                                        <div className="">
+                                            <img src={imageMeetup} alt="meetup image"/>
                                         </div>
-                                        <div className="col-md-8 float-left py-2">
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="px-2 pb-2">
                                             <div className="">
-                                                <h4 className="meetup-text rosed">{title}</h4>
+                                                <h6 className="meetup-text rosed mt-1">
+                                                    {/*{{ meetup.title|length > 27 ? meetup.title|slice(0, 27) ~ '...' : meetup.title  }}*/}
+                                                    {longTitle}
+                                                </h6>
                                             </div>
-                                            <div className=""><span className=" mt-3"><span className="blued">{Translator.trans('Type :')}  </span> {type}</span></div>
-                                            <div className=""><span className=" mt-3"><span className="blued">{Translator.trans('Start at :')}  </span> {startAt}</span></div>
-                                            <div className=""><span className=" mt-3"><span className="blued">{Translator.trans('City :')}  </span> {city}</span></div>
-                                        </div>
-                                        <div className="col-md-1">
-                                            {finish}
-                                        </div>
-                                        <div className="col">
-                                            {favoriteStatus}
+                                            <div className="">
+                                                <span className="white mt-3"><span
+                                                    className="blued">{Translator.trans('Type :')}  </span> {type}</span>
+                                            </div>
+                                            <div className="">
+                                                <span className="white mt-3"><span className="blued">{Translator.trans('Start at :')}  </span> {startAt}</span>
+                                            </div>
+                                            <div className="">
+                                                <span className="white mt-3"><span
+                                                    className="blued">{Translator.trans('City :')}  </span> {city}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </div>
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="px-2 py-2">
+                                    {finish}
+                                    {favoriteStatus}
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
             )
         });
     }

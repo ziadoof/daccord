@@ -3,111 +3,76 @@
     {% if voyages is defined %}
         <div class="row">
         {% for voyage in voyages %}
-        <div class=" col-md-3 px-md-2 my-2 ad_show">
-            <div id="ad_index" class="ad_index">
-                <a href="{{ path('voyage_show', {'id': voyage['id']}) }}"class="">
-                    <div class="px-2 border-ad">
-                        <div class="row">
-                            <div class="col-md-2 mt-1">
-                                <img src="{{ voyage['creatorImage'] }}" alt="" class="cafe-avatar">
-                            </div>
-                            <div class="col-md-7 mt-1">
-                                <span class="d-block rosed small">{{ voyage['creatorName'] }}</span>
-                                <span class="d-block blued small">{{ voyage['creatorPoint'] }}{{ ' Points' }}</span>
-                                <span class="d-block blued small">{{ voyage['creatorRating'] }} <i class="far fa-star rosed"></i></span>
-                            </div>
-                            <div class="col-md-3 mt-2">
-                                <span class="blued mt-2 mr-4 ">{% if voyage['highway'] %}<i class="fas fa-road"></i>{% endif %}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col my-4">
+            <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+                <div id="voyage_index" class="shadow-border full-border">
+                    <div class="meetup_index">
+                        <a href="{{ path('voyage_show', {'id': voyage['id']}) }}">
+                            <div class="text-center border-bottom back-gray">
                                 <div class="row">
-                                    <div class="col-md-2 offset-3 ">
-                                        <span class="float-right mb-1 city-time">{{ voyage['timeDeparture'] }}</span>
-                                    </div>
-                                    <div class="col-md-2 text-center">
-                                        <span class="point-departre pl-0"><i class="fas fa-car"></i></span>
-                                        <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical"></i></span>
-                                        <span class="point-departre  d-block "><i class="fas fa-grip-lines-vertical"></i></span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="rosed city-time">
-                                            {{voyage['departure']}}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2 offset-5 text-center">
-                                        <span class="point-departre d-block mt-0"><i class="fas fa-grip-lines-vertical"></i></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2 offset-3 ">
-                                        <span class="float-right mb-1 city-time">
-                                            {{ voyage['timeArrival'] }}
-                                            {% if voyage['arrivalDate'] is same as('.') %}
-                                                <p class="white very-small text-center">{{voyage['arrivalDate']}}</p>
-                                            {% else %}
-                                                <p class="rosed very-small text-center">{{voyage['arrivalDate']}}</p>
-                                            {% endif %}
-                                        </span>
-                                    </div>
-                                    <div class="col-md-2 text-center">
-                                        <span class="point-departre d-block mb-0"><i class="far fa-dot-circle"></i></span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="rosed city-time">
-                                            {{voyage['arrival']}}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8 offset-2">
-                                        <span class="badge badge-info mt-1 btn-block">
-                                            <h7>
-                                                {{voyage['seats']}}
-                                                {% if voyage['seats']>1 %}{% trans %} Seats{% endtrans %} {% else %} {% trans %} Seat{% endtrans %}{% endif %}
-                                                {% trans %} available{% endtrans %}
-                                            </h7>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-1">
-                            <div class="col-md-6  ">
-                                <span>{{ voyage['departureDate'] }}</span>
-                            </div>
-                            <div class="col-md-6  ">
-                                <div class=" ">
-                                    {% if app.user %}
-                                        {% set isFavorite = 'false' %}
-                                        {#data-favorite must be string not boolean#}
-                                        {% for favorite in app.user.getFavoritesByType('voyage')  %}
-                                            {% if favorite.voyage.id is same as (voyage['id']) %}
-                                                {% set isFavorite = 'true' %}
-                                            {% endif %}
-                                        {% endfor %}
-                                        <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right ml-2" data-object="{{ voyage['id'] }}" data-type="voyage" data-favorite="{{ isFavorite }}">
-                                            <div class="flexbox">
-                                                <div class="fav-btn">
-                                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
-                                                </div>
+                                    <div class="col-12 one-voyage">
+                                        <div class="one-voyage">
+                                            <div class="pt-5">
+                                                <h4 class="meetup-text blued d-inline">{{voyage['departure']}}</h4>
+                                                <i class="fas fa-arrow-right rosed d-inline mx-4"></i>
+                                                <h4 class="meetup-text blued d-inline">{{ voyage['timeArrival'] }}</h4>
                                             </div>
-                                        </form>
-                                    {% endif %}
+                                            <div class="">
+                                                <span class="white mt-3"><span class="blued">{% trans %} Date : {% endtrans %}</span> {{ voyage['departureDate'] }}</span>
+                                            </div>
+                                            <div class="">
+                                                <span class="white mt-3"><span class="blued">{% trans %} Time : {% endtrans %}</span> {{ voyage['timeDeparture'] }}</span>
+                                            </div>
+                                            <div>
+                                                <span class="blued mt-2">{% if voyage['highway'] %}<i class="fas fa-road"></i>{% endif %}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="float-right">
-                                    {{voyage['price']}}{{ '€' }}
-                                </span>
-
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="float-right pr-2 pb-1 rosed font-weight-bold">
+                                            {{voyage['price']}}{{ '€' }}
+                                        </h4>
+                                    </div>
+                                </div>
                             </div>
+                        </a>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-10 rating-voyage">
+                                {% if voyage['seats']>0 %}
+                                    <span class="badge badge-info py-2 ml-2">
+                                        <h7>
+                                            {{voyage['seats']}}
+                                            {% if voyage['seats']>1 %}{% trans %} Seats{% endtrans %} {% else %} {% trans %} Seat{% endtrans %}{% endif %}
+                                            {% trans %} available{% endtrans %}
+                                        </h7>
+                                    </span>
+                                {% else %}
+                                    <span class="badge badge-danger"><h7>{% trans %} Closed Voyage{% endtrans %}</h7></span>
+                                {% endif %}
+                        </div>
+                        <div class="col-2">
+                            {% if app.user %}
+                                {% set isFavorite = 'false' %}
+                                {#data-favorite must be string not boolean#}
+                                {% for favorite in app.user.getFavoritesByType('voyage')  %}
+                                    {% if favorite.voyage.id is same as (voyage['id']) %}
+                                        {% set isFavorite = 'true' %}
+                                    {% endif %}
+                                {% endfor %}
+                                <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right mr-2" data-object="{{ voyage['id'] }}" data-type="voyage" data-favorite="{{ isFavorite }}">
+                                    <div class="flexbox">
+                                        <div class="fav-btn">
+                                            <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-        </div>
         {% endfor %}
         </div>
         <div class="pagination-search row justify-content-center mt-4">
