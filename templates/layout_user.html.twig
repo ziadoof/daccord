@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- Page Content  -->
-                <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
+                <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-2 {#p-md-5#}px-md-5 pt-md-3 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
                     {% include "search/searchbar.html.twig" %}
                     <div id="all">
                         {% block content %}

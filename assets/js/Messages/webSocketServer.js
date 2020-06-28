@@ -691,23 +691,32 @@ function wsConnect(id) {
                     }
                 }
             }
-            function sendMessage(messageData) {
-                if($('#message-center').length > 0 ){
-                    let message = messageData['message'];
-                    let thread = messageData['thread'];
-                    let date = new Date();
-                    let now = new Date().toLocaleTimeString('en-US', { hour12: false,
-                        hour: "numeric",
-                        minute: "numeric"});
+            function isBreakpoint( alias ) {
+                return $('.device-' + alias).is(':visible');
+            }
 
-                    let _receiver = document.getElementById('messages-chat-'+thread);
-                    let active = _receiver.parentNode.getAttribute('id');
-                    let isActive = $('#'+active).hasClass('active');
-                    let messageCounter = document.getElementById('new-message-'+thread);
-                    let firstMessageCounter = document.getElementById('first-message-'+thread);
+            function sendMessage(messageData) {
+                let message = messageData['message'];
+                let thread = messageData['thread'];
+                let date = new Date();
+                let now = new Date().toLocaleTimeString('en-US', { hour12: false,
+                    hour: "numeric",
+                    minute: "numeric"});
+
+                let _receiver = document.getElementById('messages-chat-'+thread);
+                let active = _receiver.parentNode.parentNode.getAttribute('id');
+                let isActive = $('#'+active).hasClass('active');
+                let messageCounter = document.getElementById('new-message-'+thread);
+                let smallMessageCounter = document.getElementById('small-new-message-'+thread);
+                let firstMessageCounter = document.getElementById('first-message-'+thread);
+                let smallFirstMessageCounter = document.getElementById('small-first-message-'+thread);
+                let id = 'new-message-'+thread;
+                let smallId = 'small-new-message-'+thread;
+
+                if(($('#message-center').length > 0) && isBreakpoint('sm')){ //general page and sm-md-lg screen
                     _receiver.innerHTML +=
                         '<br>'+
-                        '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-md-6 offset-6 box-clint">'+
+                        '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 offset-6 box-clint">'+
                         '<div class="messenger_thread_message_body d-block" >'+
                         '<p class=" clint-message">' + message + '</p>'+
                         '</div>'+
@@ -718,7 +727,7 @@ function wsConnect(id) {
                         '</div>'+
                         '</div>';
                     jQuery("div#messages-chat-"+thread).scrollTop(jQuery("div#messages-chat-"+thread)[0].scrollHeight);
-                    let id = 'new-message-'+thread;
+
                     if(!isActive)
                     {
                         if(null === messageCounter){
@@ -748,7 +757,42 @@ function wsConnect(id) {
                     plusAllUnReadMessage();
                 }
 
+                if(($('#small-thread-list').length >0) && isBreakpoint('xs')){ //general page and mobile
+
+                    if(smallMessageCounter === null){
+                        smallFirstMessageCounter.innerHTML =
+                            '<p id= '+smallId+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
+                    }
+                    else{
+                        let messageNumber = parseInt(smallMessageCounter.innerHTML);
+                        if(isNaN(messageNumber)){
+                            smallFirstMessageCounter.innerHTML =
+                                '<p id= '+smallId+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
+                        }
+                        else{
+                            messageNumber++;
+                            smallMessageCounter.innerText = messageNumber.toString() ;
+                        }
+                    }
+                }
+                if(($('#js-small-thread-open').length >0) && isBreakpoint('xs')){ //thread open in mobile
+                    _receiver.innerHTML +=
+                        '<br>'+
+                        '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 offset-6 box-clint">'+
+                        '<div class="messenger_thread_message_body d-block" >'+
+                        '<p class=" clint-message">' + message + '</p>'+
+                        '</div>'+
+                        '<div class="messenger_thread_message_info d-block " id="">'+
+                        '<small class="clint-message float-right">'+
+                        now
+                        +'</small>'+
+                        '</div>'+
+                        '</div>';
+                    jQuery("div#messages-chat-"+thread).scrollTop(jQuery("div#messages-chat-"+thread)[0].scrollHeight);
+                    markMessagesToSeen(thread);
+                }
             }
+
             function addMessageToCurrentUser(message, thread) {
                 let now = new Date().toLocaleTimeString('en-US', { hour12: false,
                     hour: "numeric",
@@ -756,7 +800,7 @@ function wsConnect(id) {
                 var _receiver = document.getElementById('messages-chat-'+thread);
                 _receiver.innerHTML +=
                     '<br>'+
-                    '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-md-6  box-user" id="temporary-message">'+
+                    '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6  box-user" id="temporary-message">'+
                     '<div class="messenger_thread_message_body d-block" >'+
                     '<p class=" user-message">' + message + '</p>'+
                     '</div>'+
@@ -774,7 +818,7 @@ function wsConnect(id) {
                 let text_value = $('#numberMessagesThread-'+thread).text();
                 let value = parseInt(text_value);
                 value++;
-                number.innerHTML = '<b class="title-blue" id="numberMessagesThread-'+thread+'">'+value+'</b>';
+                number.innerHTML = '<small class="title-blue" id="numberMessagesThread-'+thread+'">'+value+ "Message"+ '</small>';
 
             }
             function removePadge(thread) {
@@ -856,20 +900,24 @@ function wsConnect(id) {
             }
             let threads = document.getElementsByClassName('chat');
 
-            for (var thread of threads ){
+            for (const thread of threads ){
                 //for button enter to send message
-                /*thread.querySelector('textarea').keyup(function(event) {
-                    if (event.keyCode === 13) {
-                        thread.querySelector('#send').children[1].click();
+                let textArea = thread.querySelector('textarea');
+                textArea.addEventListener('keypress', function(e){
+                    if (e.keyCode === 13){
+                        thread.getElementsByClassName('send-form')[0].children[0].children[1].children[0].click();
+                        if(e.preventDefault) e.preventDefault(); // This should fix it
+                        return false;
                     }
-                });*/
-                thread.querySelector('#send').children[1].addEventListener('click', function (e) {
-                    e.preventDefault();
+                },false);
 
-                    let conversation = this.parentNode.getAttribute('data-conversation');
-                    let recipient = this.parentNode.getAttribute('data-user');
+                // for button
+                thread.getElementsByClassName('js-send-button')[0].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    let conversation = this.parentNode.parentNode.parentNode.getAttribute('data-conversation');
+                    let recipient = this.parentNode.parentNode.parentNode.getAttribute('data-user');
                     /*let messageDom = this.parentNode.children[0].children[0].children[0];*/
-                    let messageDom = this.parentNode.children[0].children[0].children[1];
+                    let messageDom = this.parentNode.parentNode.children[0].children[0].children[0].children[1];
                     let message = messageDom.value.replace(/<\/?[^>]+(>|$)/g, "");
 
                     let data = {'conversation':conversation,'message':message,'recipient':recipient};
@@ -896,7 +944,6 @@ function wsConnect(id) {
                     markMessagesToSeen(thread_id);
                 })
             }
-
             if($('#message-center').length > 0 ){
                 let parent = document.getElementById('v-pills-tabContent');
                 if(parent){

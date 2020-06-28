@@ -1,28 +1,47 @@
 <div class="tab-pane fade show active new_chat" id="user-{{ recipient.id }}" role="tabpanel" aria-labelledby="v-pills-home-tab">
-    <div class="row border-bottom">
-        <div class="col-md-3">
-            <div class=" message-link">
-                {% if recipient is not same as (app.user) %}
-                    <h5 class="rosed mb-0">{{ recipient.point }}<span class="mt-5">{{ ' Points' }}</span></h5>
-                    <span class="blued mt-0 justify-content-center">{{recipient.city.name }}</span>
-                {% else %}
-                    <h5 class="rosed mb-0"> {{ recipient.point }}<span class="blued mt-2">{{ ' Points' }}</span></h5>
-                    <span class="blued mt-0 justify-content-center">{{ recipient.city.name }}</span>
-                {% endif %}
+    <div class="row">
+        <div class="col-12 back-gray-radius-top pt-2">
+            {% if recipient is not same as (app.user)  %}
+                <div class="btn-group py-1">
+                    <img src="{{ recipient.photoProfile() }}" class="user-image photo-small-message" >
+                    <div class="d-inline ml-2 text-center">
+                        <h7 class="blued mb-0 font-weight-bold  d-inline">{{ recipient.firstname|title }}</h7>
+                        <br>
+                        <small class="rosed mb-0">{{ recipient.point }}<span>{{ ' Points' }}</span></small>
+                    </div>
+                </div>
+            {% else %}
+                <div class="btn-group py-1">
+                    <img src="{{ recipient.photoProfile() }}" class="user-image photo-small-message" ><br>
+                    <div class="d-inline ml-2 text-center">
+                        <h7 class="lued mb-0 font-weight-bold  d-inline"> {{ recipient.firstname|title }}</h7>
+                        <br>
+                        <small class="rosed mb-0"> {{ recipient.point }}<span>{{ ' Points' }}</span></small>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="d-inline float-right">
+                <div class="delete-thread float-right">
+
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            {#من اين اتى المرسل#}
+        <div class="col-12 pending message-scroll">
+            <div class="chat-messages" id="messages-chat">
+                {#here new message for new recipient#}
+            </div>
         </div>
-        <div class="col-md-3">
-
+        <div class="col-12 border-top">
+            <form action="{{ url('fos_message_thread_new') }}" method="post" class="mt-2">
+                <div class="row">
+                    <div class="col-10 col-sm-11 py-2">
+                        {{ form_widget(form) }}
+                    </div>
+                    <div class="col-2 col-sm-1 justify-content-center">
+                        <button type="submit" class="btn btn-info btn-circle btn-sm send-message-chat mt-4 float-right"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="chat-messages" id="messages-chat">
-      {#here new message for new recipient#}
-    </div>
-    <form action="{{ url('fos_message_thread_new') }}" method="post" class="mt-5">
-        {{ form_widget(form) }}
-        <input type="submit" class="send-message-chat btn btn-info mb-" />
-    </form>
 </div>
