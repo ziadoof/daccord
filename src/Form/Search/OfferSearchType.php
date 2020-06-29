@@ -122,7 +122,7 @@ class OfferSearchType extends  AbstractType
             ->addEventSubscriber(new AddSearchSpecificationFieldSubscriber($category, $entityManager, 'SearchOffer'));
         $builder
             ->add('title', TextType::class, ['required' => false, 'label'=> false, 'attr' => array(
-                'placeholder' => 'What are you looking for....',
+                'placeholder' => 'Search by title',
             )]);
     }
 

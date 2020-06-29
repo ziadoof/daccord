@@ -113,7 +113,7 @@ class DemandSearchType extends  AbstractType
 
         $builder
             ->add('title', TextType::class, ['required' => false, 'label'=> false, 'attr' => array(
-                'placeholder' => 'What are you looking for....',
+                'placeholder' => 'Search by title',
             )]);
     }
 

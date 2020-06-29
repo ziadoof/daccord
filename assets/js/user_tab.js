@@ -82,7 +82,10 @@ $(document).ready(function(){
 
 
     //for save the tab and return to it
-    $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+    $('#user-show a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('profile_tap', $(e.target).attr('href'));
+    });
+    $('#user-edit a[data-toggle="tab"]').on('show.bs.tab', function(e) {
         localStorage.setItem('profile_tap', $(e.target).attr('href'));
     });
     //

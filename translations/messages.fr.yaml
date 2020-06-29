@@ -351,7 +351,8 @@ Five: Cinq
 'Your rating for this driver :': 'Votre note pour ce Driver :'
 'Rate this driver': 'Évaluez ce Driver'
 'There is no done deals': 'Il n''y a aucun DONE DEALS'
-'ended the deal.': 'a mis fin à ce deal.'
+'has ended the deal.': 'a mis fin à ce deal.'
+'ended the deal.': 'ont mis fin à ce deal.'
 and: et
 'Deal done': 'DONE DEAL'
 'Cancel the deal': ' Annuler le deal'
@@ -1723,8 +1724,11 @@ Legal notice: Mention légale
 Kilometre: Kilometrage
 Your demand-deal : Votre demande et l'offre de %username%
 Your offer-deal : Votre offer et la demande de %username%
+deal-demand-deal : La demande de %username%
+deal-offer-deal : L'offre de %username%
 DRIVERS: LIVRAISON
 In waiting: En attente
 After you accept this request, you are waiting for your addition to this deal: Après avoir accepté cette demande, vous attendez votre ajout à ce deal
 My hosting request: Ma demande d'hébergement
 Carpool Rating: Évaluation du covoiturage
+Write your message...: Écrivez votre message...

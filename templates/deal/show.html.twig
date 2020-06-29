@@ -109,12 +109,14 @@
                                     <div class="col-12">
                                         <div class="justify-content-center my-0">
                                             <p class="text-center rosed">
-                                    <span class="blued">{{ deal.demandUser.firstname|title  }}
-                                        {% if deal.driverStatus %}
-                                            {% trans %}and{% endtrans%} {{ deal.driverUser.firstname|title  }}
-                                        {% endif %}
-                                    </span>
-                                                {% trans %} ended the deal.{% endtrans %}
+                                                <span class="blued">{{ deal.demandUser.firstname|title  }}
+                                                    {% if deal.driverStatus %}
+                                                        {% trans %}and{% endtrans%} {{ deal.driverUser.firstname|title  }}
+                                                        <span class="rosed">{% trans %} ended the deal.{% endtrans %}</span>
+                                                    {% else %}
+                                                        <span class="rosed">{% trans %}has ended the deal.{% endtrans %}</span>
+                                                    {% endif %}
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
@@ -129,12 +131,14 @@
                                     <div class="col-12">
                                         <div class="justify-content-center my-0">
                                             <p class="text-center rosed">
-                                    <span class="blued">{{ deal.offerUser.firstname|title  }}
-                                        {% if deal.driverStatus %}
-                                            {% trans %} and{% endtrans %} {{ deal.driverUser.firstname|title  }}
-                                        {% endif %}
-                                    </span>
-                                                {% trans %} ended the deal.{% endtrans %}
+                                                <span class="blued">{{ deal.offerUser.firstname|title  }}
+                                                    {% if deal.driverStatus %}
+                                                        {% trans %} and{% endtrans %} {{ deal.driverUser.firstname|title  }}
+                                                        <span class="rosed">{% trans %} ended the deal.{% endtrans %}</span>
+                                                    {% else %}
+                                                        <span class="rosed">{% trans %}has ended the deal.{% endtrans %}</span>
+                                                    {% endif %}
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
@@ -149,7 +153,7 @@
                                         <div class="justify-content-center my-0">
                                             <p class="text-center rosed">
                                                 <span class="blued">{{ deal.driverUser.firstname|title }}</span>
-                                                {% trans %} ended the deal.{% endtrans %}
+                                                {% trans %} has ended the deal.{% endtrans %}
                                             </p>
                                         </div>
                                     </div>
@@ -179,11 +183,11 @@
                                             <th scope="col">
                                                 {% if deal.demandUser.id is same as(app.user.id) %}
                                                     <a href="{{ path('ad_show', {'id': deal.offer.id}) }}" class="deal-terminate btn-group">
-                                                        <img class="d-none d-sm-block" src="{{ asset('assets/images/icons/o-gray.png') }}"><span class="ml-1 blued">{{ deal.offerUser.firstname }}{{' '}}{% trans %} offer{% endtrans %}</span>
+                                                        <img class="d-none d-sm-block" src="{{ asset('assets/images/icons/o-gray.png') }}"><span class="ml-1 blued">{{ 'deal-offer-deal'|trans({'%username%':deal.offerUser.firstname}) }}</span>
                                                     </a>
                                                 {% else %}
                                                     <a href="{{ path('ad_show', {'id': deal.demand.id}) }}" class="deal-terminate btn-group">
-                                                        <img class="d-none d-sm-block" src="{{ asset('assets/images/icons/d-gray.png') }}"><span class="ml-1 rosed"> {{ deal.demandUser.firstname }}{{' '}}{% trans %} demand{% endtrans %}</span>
+                                                        <img class="d-none d-sm-block" src="{{ asset('assets/images/icons/d-gray.png') }}"><span class="ml-1 rosed"> {{ 'deal-demand-deal'|trans({'%username%':deal.demandUser.firstname}) }}</span>
                                                     </a>
                                                 {% endif %}
                                             </th>

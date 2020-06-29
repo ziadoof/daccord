@@ -34,6 +34,7 @@ class NewThreadMessageFormType extends BaseType
             ->add('body', TextType::class, array(
                 'label' => false,
                 'attr' => array('class'=>'message-text'),
+                'placeholder' => 'Write your message',
             ));
         $builder->get('recipient')
             ->addModelTransformer($this->transformer);
