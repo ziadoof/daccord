@@ -155,17 +155,54 @@ body .welcome-text {
 .my-area-hidden{
   display: none;
 }
-/* messag alert */
-.message-flash{
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
-  width: 20em;
-}
+
 
 @-moz-document url-prefix() {
   html,body{
     overflow: auto !important;
     scrollbar-color: transparent transparent;
   }
+}
+
+
+// message flash
+/* messag alert */
+.message-flash{
+  position: fixed;
+  top: 4em;
+  right: 0;
+  width: 450px;
+}
+.vertical-center-icon i{
+  font-size: 2.5em;
+}
+.back-icon-success{
+  background-color: springgreen;
+}
+.back-icon-danger{
+  background-color: #F70055;
+}
+.back-icon-warning{
+  background-color: #f7e09b;
+}
+@media (max-width: 575px) {
+  .message-flash{
+    width: 320px;
+  }
+}
+.alert{
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+.alert-dismissible .close {
+  padding: 0.2rem 3rem;
+}
+.vertical-center-icon {
+  margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
 }
