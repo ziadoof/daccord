@@ -55,7 +55,7 @@
                                     <img src="{{ asset('assets/images/icons/search.png') }} " class="icon-visitor">
                                 </a>
                                 {% set messageCount = MessageCount.getNbUnreadMessage(app.user) %}
-                                <a  href="{{path('message_index')}}" class=" mr-5">
+                                <a  href="{{path('message_index')}}" class="mr-5" id="js-general-message-center">
                                     <div id="centerOfMessages" >
                                         <p id="messagesCount" class="{% if messageCount is same as (0) %}{{ 'hide-padge' }}{% endif %}">
                                             {{ messageCount }}

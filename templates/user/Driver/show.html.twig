@@ -50,7 +50,7 @@
         </div>
         <div class="justify-content-center">
             <div class="text-center pt-2">
-                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
                     <button class="btn btn-info mx-1" >
                         <input type="hidden" name="user" value="{{ driver.user.id }}">
                         <p class="mt-1">{% trans %}Message to {% endtrans %} {{driver.user.firstname}}</p>

@@ -10,40 +10,26 @@ $(document).ready(function () {
         $('#v-pills-tab a[href="' + message + '"]').tab('show');
     }
 
-    var offerUser = document.getElementById('offerUser-message');
-    var demandUser = document.getElementById('demandUser-message');
+    const user_messages = document.getElementsByClassName('js-user-message');
 
-    if(offerUser){
-        offerUser.addEventListener('click',function () {
-            let offerUserId = this.children[0].children[0].getAttribute('value');
-            if(offerUserId){
-                localStorage.setItem('message-tap', '#user-'+offerUserId);
-            }
-            else {
-                localStorage.setItem('message-tap', null);
-            }
-
-        });
+    for (const user of user_messages){
+        if(user){
+            user.addEventListener('click',function () {
+                let userId = this.children[0].children[0].getAttribute('value');
+                if(userId){
+                    localStorage.setItem('message-tap', '#user-'+userId);
+                }
+                else {
+                    localStorage.setItem('message-tap', null);
+                }
+            });
+        }
     }
-    if(demandUser){
-        demandUser.addEventListener('click',function () {
-            let demandUserId = this.children[0].children[0].getAttribute('value');
-            if (demandUserId){
-                localStorage.setItem('message-tap', '#user-'+demandUserId);
-            }
-            else {
-                localStorage.setItem('message-tap', null);
-            }
+    let general = document.getElementById('js-general-message-center');
+    general.addEventListener('click', function () {
+        localStorage.setItem('message-tap', null);
+    })
 
-        });
-    }
+
+
 });
-
-        // زر سيند وتحسس زر انتر
-        /*textSender.onclick = sendTextInputContent;
-        _textInput.onkeyup = function(e) {
-            // Check for Enter key
-            if (e.keyCode === enterKeyCode) {
-                sendTextInputContent();
-            }
-        };*/

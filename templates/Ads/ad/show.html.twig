@@ -259,7 +259,7 @@
                                                 <div class="col-sm-6 col-12">
                                                     {% if app.user is not same as(null) %}
                                                         <div class="mt-md-3 mt-1 float-sm-left text-center">
-                                                            <form method="post" action="{{ url('new_conversation') }}"id="ad-message">
+                                                            <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
                                                                 <button class="btn btn-outline-info mx-1 " >
                                                                     <input type="hidden" name="user" value="{{ ad.user.id }}">
                                                                     <p class="mt-1"><i class="fas fa-comments"></i>{{ ' ' }}{% trans %} Message to {% endtrans %} {{ad.user.firstname}}</p>
@@ -268,7 +268,7 @@
                                                         </div>
                                                     {% else %}
                                                         <div class="mt-md-3 mt-1 float-sm-left text-center">
-                                                            <form method="post" action="{{ url('new_conversation') }}"id="ad-message">
+                                                            <form method="post" action="{{ url('new_conversation') }}">
                                                                 <a href="{{ path('security_login') }}" class="btn btn-outline-info mx-1 " >
                                                                     {% trans %}Sign in to send message to{% endtrans %}{{ ' ' }}{{ ad.user.firstname }}
                                                                 </a>

@@ -4,6 +4,7 @@
 namespace App\Controller\Message;
 
 
+use App\Entity\Message\Thread;
 use App\Form\Message\NewThreadMessageFormHandler;
 use App\Repository\Message\MessageRepository;
 use App\Repository\UserRepository;
@@ -129,6 +130,7 @@ class MessageController extends BaseController
 
         $recipient = null;
         $haveConversation = false;
+        $haveConversationThread = 0;
         $form = $this->localContainer->get('fos_message.new_thread_form.factory')->create();
         if (isset($_POST['user']))
         {
@@ -140,28 +142,33 @@ class MessageController extends BaseController
                     )
                 {
                     $haveConversation = true;
+                    $haveConversationThread= $thread;
                 }
             }
         }
 
         if($recipient){
             if($haveConversation){
-                return new RedirectResponse($this->localContainer->get('router')->generate('fos_message_inbox', array(
+                /*return new RedirectResponse($this->localContainer->get('router')->generate('fos_message_inbox', array(*/
+                return $this->localContainer->get('templating')->renderResponse('@FOSMessage/Message/inbox.html.twig', array(
+
                     'threads' => $threads,
                     'forms' => $forms,
-                    'unReadMessages'=>$unReadMessages
-
-                )));
+                    'unReadMessages'=>$unReadMessages,
+                    'haveConversation'=>$haveConversation,
+                    'haveConversationThread'=>[$haveConversationThread]
+                ));
             }
             $form->get('recipient')->setData($user);
 
-            return $this->localContainer->get('templating')->renderResponse('FOSMessageBundle:Message:inbox.html.twig', array(
+            return $this->localContainer->get('templating')->renderResponse('@FOSMessage/Message/inbox.html.twig', array(
                 'form' => $form->createView(),
                 'data' => $form->getData(),
                 'recipient'=>$recipient,
                 'threads' => $threads,
                 'forms' => $forms,
-                'unReadMessages'=>$unReadMessages
+                'unReadMessages'=>$unReadMessages,
+                'haveConversation'=>$haveConversation
 
             ));
         }
@@ -289,5 +296,24 @@ class MessageController extends BaseController
         return ['threads'=>$sortThread,'forms'=>$forms, 'unReadMessages'=>$unReadMessages];
     }
 
+    /**
+     * show a thread exist.
+     * @Route( "/thread/{thread}",name="showThreadExist", methods={"GET","POST"})
+     * @param Thread $thread
+     * @return Response
+     */
+    public function showThreadExist(Thread $thread): ?Response
+    {
+        $allForms =  $this->getFormsTreads()['forms'];
+        $formExist = $allForms[$thread->getId()];
+        $unReadMessages =  $this->getFormsTreads()['unReadMessages'];
+        $forms = [$thread->getId() => $formExist];
+        return $this->localContainer->get('templating')->renderResponse('@FOSMessage/Message/thread_exist.html.twig', array(
+            'thread' => $thread,
+            'forms' => $formExist,
+            'unReadMessages'=>$unReadMessages
+
+        ));
+    }
 
 }

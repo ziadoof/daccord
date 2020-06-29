@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-center cancel-joining-user message-voyage">
-                        <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                        <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
                             <button class="btn btn-outline-info my-1" >
                                 <input type="hidden" name="user" value="{{ voyage.creator.user.id }}">
                                 <span class=""><i class="fas fa-comments"></i> {{ voyage.creator.user.firstname|title }}</span>

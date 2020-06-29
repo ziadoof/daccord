@@ -66,10 +66,10 @@ $(document).ready(function() {
 });
 //message flash fide out
 window.setTimeout(function() {
-    $(".message-flash").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove();
-    });
-}, 5000);
+    $('.message-flash').toggle("slide", { direction: "right" }, 50);
+}, 5000)
+
+
 $(document).ready(function (){
     $('[data-toggle="tooltip"]').tooltip({
         container : 'body'

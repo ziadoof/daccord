@@ -1,0 +1,109 @@
+{% extends '@FOSMessageBundle/layout.html.twig' %}
+
+{% block fos_message_content %}
+    <div class="row">
+        <div class="col-3 back-message">
+            <a href="{{path('message_index')}}"><i class="fas fa-arrow-left rosed"></i></a>
+        </div>
+        <div class="col-9">
+            <h5 class="blued">{% trans%}Message center{% endtrans %}</h5>
+        </div>
+    </div>
+    <div class="row" id="message-center">
+        <div class="col-12" id="js-small-thread-open">
+            <div class="tab-pane chat active" id="user-{{thread.getOtherParticipants(app.user)[0].id}}"  data-thread="{{ thread.id }}">
+                <div class="row">
+                    <div class="col-12 back-gray-radius-top pt-2">
+                        {% if thread.createdBy is not same as (app.user) %}
+                            <div class="btn-group py-1">
+                                <img src="{{ thread.createdBy.photoProfile() }}" class="user-image photo-small-message" >
+                                <div class="d-inline ml-2 text-center">
+                                    <h7 class="blued mb-0 font-weight-bold  d-inline">{{ thread.createdBy.firstname|title }}</h7>
+                                    <br>
+                                    <small class="rosed mb-0">{{ thread.createdBy.point }}<span>{{ ' Points' }}</span></small>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="btn-group py-1">
+                                <img src="{{ thread.getOtherParticipants(app.user)[0].photoProfile() }}" class="user-image photo-small-message" ><br>
+                                <div class="d-inline ml-2 text-center">
+                                    <h7 class="blued mb-0 font-weight-bold  d-inline"> {{ thread.getOtherParticipants(app.user)[0].firstname|title }}</h7>
+                                    <br>
+                                    <small class="rosed mb-0"> {{ thread.getOtherParticipants(app.user)[0].point }}<span>{{ ' Points' }}</span></small>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="d-inline float-right">
+                            <div id="numberMessagesThread-{{ thread.id }}">
+                                <div class="cancel-joining-user" >
+                                    <small class="blued" >{{ thread.messages|length }} Message</small>
+                                </div>
+                            </div>
+                            <div class="delete-thread float-right">
+                                {% if fos_message_can_delete_thread(thread) %}
+                                    {% if fos_message_deleted_by_participant(thread) %}
+                                        {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                                        {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+                                    {% else %}
+                                        {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
+                                        {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
+                                    {% endif %}
+                                    <form action="{{ formAction }}" method="post" onsubmit="return confirm('Do you really want to delete this conversation ?');">
+                                        <button class="btn cancel-joining-user" >
+                                            <input type="hidden" name="user" value="{{ submitValue }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 pending message-scroll chat-messages" id="messages-chat-{{ thread.id }}">
+                        {% for message in thread.messages %}
+                            <br>
+                            <div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 {% if message.sender is not same as (app.user) %}{{ 'offset-6 box-clint ' }}{% else %}{{ ' box-user ' }}{% endif %}" id="message_{{ message.id }}">
+                                <div class="messenger_thread_message_body d-block" >
+                                    <p class=" {% if message.sender is same as (app.user) %}{{ ' user-message  ' }}{% else %}{{ ' clint-message ' }}{% endif %}">
+                                        {{ message.body }}
+                                    </p>
+                                </div>
+                                <div class="messenger_thread_message_info d-block" id="message-info-{{ message.id }}">
+                                    <small class=" {% if message.sender is same as (app.user) %}{{ ' user-message  float-right ' }}{% else %}{{ ' clint-message float-right ' }}{% endif %}">
+                                        {{ message.dateFormat(message.createdAt) }}
+                                        {% if message.sender is same as (app.user) %}
+                                            {% if  message.sender is same as (message.metadata[0].participant) %}
+                                                {% if message.metadata[1].isRead %}
+                                                    <i class="fas fa-check"></i>
+                                                {% else %}
+                                                    <i class="far fa-clock"></i>
+                                                {% endif %}
+                                            {% else %}
+                                                {% if message.metadata[0].isRead %}
+                                                    <i class="fas fa-check"></i>
+                                                {% else %}
+                                                    <i class="far fa-clock"></i>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-12 border-top">
+                        <form method="post" class="send-form mt-2" data-conversation="{{ thread.id }}" data-user="{{ thread.getOtherParticipants(app.user)[0].id }}" >
+                            <div class="row">
+                                <div class="col-10 col-sm-11 py-2">
+                                    {{ form_widget(forms) }}
+                                </div>
+                                <div class="col-2 col-sm-1 justify-content-center">
+                                    <button type="submit" class="btn btn-info btn-circle btn-sm send-message-chat mt-4 float-right js-send-button"><i class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

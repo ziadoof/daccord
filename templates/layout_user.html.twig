@@ -25,7 +25,7 @@
                 </div>
 
                 <!-- Page Content  -->
-                <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-respo p-md-5 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
+                <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-2 {#p-md-5#}px-md-5 pt-md-3 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
                     {% include "search/searchbar.html.twig" %}
                     <div id="all">
                         {% block content %}
@@ -40,15 +40,32 @@
                 </div>
             </div>
         </div>
-        <div class=" message-flash mb-4"style="z-index: 9999;">
+        <div class="message-flash mb-4"style="z-index: 9999;">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     {% if label != 'comment' %}
-                        <div class="alert alert-{{ label }} alert-dismissible fade show text-center">
-                            <p class="py-4 ">{{ message|trans }}</p>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                        <div class="row alert alert-{{ label }} alert-dismissible fade show">
+                            <div class="col-2 back-icon-{{ label }}">
+                                <div class="vertical-center-icon ">
+                                    {% if label is same as('success') %}
+                                        <i class="fas fa-check"></i>
+                                    {% elseif label is same as('danger') %}
+                                        <i class="fas fa-times"></i>
+                                    {% elseif label is same as('warning') %}
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="">
+                                    <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <div class="py-2 pr-4 text-center">
+                                        <p class="py-4 ">{{ message|trans }}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     {% endif %}
                 {% endfor %}

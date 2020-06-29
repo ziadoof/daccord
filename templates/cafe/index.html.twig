@@ -65,7 +65,7 @@
                                     <span class="blued  ml-2 mt-3">{{ cafe.createdBy.firstname|title }}</span>
                                 </div>
                                 <div class="float-right mt-3">
-                                    <form method="post" action="{{ url('new_conversation') }}" class="cafe-message">
+                                    <form method="post" action="{{ url('new_conversation') }}" class="cafe-message js-user-message">
                                         <button class="btn btn-info btn-block" >
                                             <input type="hidden" name="user" value="{{ cafe.createdBy.id }}">
                                             <p class="mt-1"><i class="fas fa-comments"></i> {% trans %} Message{% endtrans %}</p>

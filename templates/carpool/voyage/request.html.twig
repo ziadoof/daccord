@@ -24,7 +24,7 @@
                                     <div class="d-inline">
                                         <div class="btn-group float-right mt-1">
                                             <div class=" cancel-joining-user my-1 message-voyage ">
-                                                <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                                <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
                                                     <button class="btn" >
                                                         <input type="hidden" name="user" value="{{ request.sender.id }}">
                                                         <i class="fas fa-comments"></i>

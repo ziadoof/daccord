@@ -61,7 +61,7 @@
                             {% endif %}
                             <div class="row  local-border mb-2 mx-1">
                                 <div class="col-6 col-md-6">
-                                    <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                    <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
                                         <button class="btn btn-outline-info btn-block my-1" >
                                             <input type="hidden" name="user" value="{{ driver_request.deal.offerUser.id }}">
                                             <p class=""><i class="fas fa-comments"></i> {{driver_request.deal.offerUser.firstname}}</p>
@@ -69,7 +69,7 @@
                                     </form>
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <form method="post" action="{{ url('new_conversation') }}" id="offerUser-message">
+                                    <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
                                         <button class="btn btn-outline-info btn-block my-1" >
                                             <input type="hidden" name="user" value="{{ driver_request.deal.demandUser.id }}">
                                             <p class=""><i class="fas fa-comments"></i> {{driver_request.deal.demandUser.firstname}}</p>
