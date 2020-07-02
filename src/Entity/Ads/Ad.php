@@ -294,7 +294,7 @@ class Ad
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $acitvityArea;
+    private $activityArea;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -1270,17 +1270,17 @@ class Ad
     /**
      * @return mixed
      */
-    public function getAcitvityArea()
+    public function getActivityArea()
     {
-        return $this->acitvityArea;
+        return $this->activityArea;
     }
 
     /**
-     * @param mixed $acitvityArea
+     * @param mixed $activityArea
      */
-    public function setAcitvityArea($acitvityArea): void
+    public function setActivityArea($activityArea): void
     {
-        $this->acitvityArea = $acitvityArea;
+        $this->activityArea = $activityArea;
     }
 
     /**

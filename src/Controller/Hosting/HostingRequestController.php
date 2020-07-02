@@ -10,6 +10,7 @@ use App\Repository\Hosting\HostingRequestRepository;
 use App\Repository\Rating\VoteRepository;
 use App\Repository\UserRepository;
 use App\Service\Notification;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,15 @@ class HostingRequestController extends AbstractController
 {
     /**
      * @Route("/", name="hosting_request_index", methods={"GET"})
+     * @param Request $request
      * @param HostingRequestRepository $hostingRequestRepository
      * @param VoteRepository $voteRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(HostingRequestRepository $hostingRequestRepository, VoteRepository $voteRepository): Response
+    public function index(Request $request, HostingRequestRepository $hostingRequestRepository, VoteRepository $voteRepository, PaginatorInterface $paginator): Response
     {
-        $hosting_requests = $hostingRequestRepository->findBySender($this->getUser()->getId());
+        $requests = $hostingRequestRepository->findBySender($this->getUser()->getId());
 
         $voteHostingByThisUser = $voteRepository->findByVoterHosting($this->getUser()->getId());
         $votesHosting =[];
@@ -38,11 +41,22 @@ class HostingRequestController extends AbstractController
         }
         // for select all the hosting id where who the user is not rating them for create the modals
         $listHosting =[];
-        foreach ($hosting_requests as $hosting){
+        foreach ($requests as $hosting){
             if(!in_array($hosting->getHosting()->getId(), $listHosting, true)){
                 $listHosting[]= $hosting->getHosting()->getId();
             }
         }
+
+
+        $hosting_requests = $paginator->paginate(
+        // Doctrine Query, not results
+            $requests,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            24
+        );
+
         return $this->render('hosting/hosting_request/index.html.twig', [
             'hosting_requests' => $hosting_requests,
             'votesHosting' => $votesHosting,
@@ -52,12 +66,23 @@ class HostingRequestController extends AbstractController
 
     /**
      * @Route("/received", name="hosting_request_received", methods={"GET"})
+     * @param Request $request
      * @param HostingRequestRepository $hostingRequestRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function indexReceived(HostingRequestRepository $hostingRequestRepository): Response
+    public function indexReceived(Request $request, HostingRequestRepository $hostingRequestRepository, PaginatorInterface $paginator): Response
     {
-        $hosting_received = $hostingRequestRepository->findByHostingNotRegected($this->getUser()->getId());
+        $hostings = $hostingRequestRepository->findByHostingNotRegected($this->getUser()->getId());
+
+        $hosting_received = $paginator->paginate(
+        // Doctrine Query, not results
+            $hostings,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            24
+        );
         return $this->render('hosting/hosting_request/received.html.twig', [
             'hosting_received' => $hosting_received,
         ]);

@@ -12,6 +12,7 @@ use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\DriverRequestRepository;
 use App\Service\Notification;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,24 +26,49 @@ class DriverRequestController extends AbstractController
 {
     /**
      * @Route("/", name="driver_request_index", methods={"GET"})
+     * @param Request $request
      * @param DriverRequestRepository $driverRequestRepository
      * @param DealRepository $dealRepository
      * @param DoneDealRepository $doneDealRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      */
-    public function index(DriverRequestRepository $driverRequestRepository, DealRepository $dealRepository, DoneDealRepository $doneDealRepository): Response
+    public function index(Request $request,DriverRequestRepository $driverRequestRepository, DealRepository $dealRepository, DoneDealRepository $doneDealRepository, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         $driver = $user->getDriver();
-        $driverRequest = $driverRequestRepository->findByDriver($driver);
+        $dRequest = $driverRequestRepository->findByDriver($driver);
+
+        $driverRequest = $paginator->paginate(
+        // Doctrine Query, not results
+            $dRequest,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            18
+        );
         // in deals the driver user is User object and not Driver so we use $user instant of driver
         $deals = $dealRepository->findByDriver($user);
         $doneDeals = $doneDealRepository->findByDriver($user);
+        $group=[];
+        foreach ($doneDeals as $doneDeal){
+            $group [] = $doneDeal;
+        }
+        foreach ($deals as $deal){
+            $group[] = $deal;
+        }
 
+        $dealsGroup = $paginator->paginate(
+        // Doctrine Query, not results
+            array_reverse($group),
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            24
+        );
         return $this->render('driver_request/index.html.twig', [
             'driver_requests' => $driverRequest,
-            'doneDeals' => $doneDeals,
-            'deals'=>$deals
+            'dealsGroup'=>$dealsGroup
         ]);
     }
 

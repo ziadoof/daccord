@@ -33,7 +33,7 @@
                                             </div>
                                             {% if not voyage.isFinish() %}
                                                 <div class="cancel-joining-user my-1 rejected-voyage ">
-                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm('Are you sure you want to remove this passenger ?Ten points will be deducted');">
+                                                    <form method="post" action="{{ path('remove_passenger',{'voyageRequest':passenger.id,'passenger':passenger.sender.id}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to remove this passenger ?Ten points will be deducted'));">
                                                         <button class="btn "><i class="fas fa-trash-alt"></i></button>
                                                     </form>
                                                 </div>

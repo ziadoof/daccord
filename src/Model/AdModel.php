@@ -334,7 +334,7 @@ class AdModel
 
     protected $languages = [];
 
-    protected $acitvityArea;
+    protected $activityArea;
 
     protected $workHours;
 
@@ -644,17 +644,17 @@ class AdModel
     /**
      * @return mixed
      */
-    public function getAcitvityArea()
+    public function getActivityArea()
     {
-        return $this->acitvityArea;
+        return $this->activityArea;
     }
 
     /**
-     * @param mixed $acitvityArea
+     * @param mixed $activityArea
      */
-    public function setAcitvityArea($acitvityArea): void
+    public function setActivityArea($activityArea): void
     {
-        $this->acitvityArea = $acitvityArea;
+        $this->activityArea = $activityArea;
     }
 
     /**

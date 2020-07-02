@@ -1,14 +1,6 @@
-<!-- Footer -->
-<div class="d-none d-md-block footer text-white-50 py-3 width-100">
-    <div class="row">
-        {#<div class="col-md-3 justify-content-center">
-            <div class="footer-text pl-5">
-                <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
-                <span class="rosed">|</span>
-                <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
-            </div>
-        </div>#}
-        <div class="col-md-6 offset-3">
+<div class="row">
+    <div class="d-none d-md-block footer text-white-50 py-3 width-100">
+        <div class="col-md-6 offset-md-3">
             <div class="row">
                 <div class="col text-center">
                     <div class="footer-text">
@@ -26,78 +18,9 @@
                     </h6>
                 </div>
             </div>
-            {#<div class=" text-center">
-                <h6 class="ml-5"><span class="white">Copyright©</span>
-                    <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
-                    <span class="white">{{ 'now'|date('Y')}}</span>
-                </h6>
-            </div>#}
-        </div>
-        <div class="col-md-3 pr-5 mt-2">
-                <ul class="navbar-nav float-right  ">
-                    {% for locale in locales if locale is not same as(app.request.locale)%}
-                        <li class="nav-item locale-icon">
-                            <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
-                        </li>
-                    {% endfor %}
-                </ul>
-        </div>
-    </div>
-</div>
-<div class="d-sm-block d-md-none footer text-white-50 py-3 px-2">
-    <div class="row">
-        <div class="col text-center">
-            <div class="footer-text">
-                <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
-                <span class="rosed">|</span>
-                <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col ">
-            <h6 class="text-center"><span class="white">Copyright©</span>
-                <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
-                <span class="white">{{ 'now'|date('Y')}}</span>
-            </h6>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            <ul class="navbar-nav">
-                {% for locale in locales if locale is not same as(app.request.locale)%}
-                    <li class="nav-item locale-icon">
-                        <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- Footer -->
-{#
-<footer class="text-white-50">
-    <div class=" mt-5 py-2">
-        <div class="">
-            <div class="col justify-content-center">
-                <div class="">
-                    <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
-                    <span class="rosed">|</span>
-                    <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
-                </div>
-            </div>
-            <div class="col-md-6">
+            <div class="row">
                 <div class="col text-center">
-                    <h6 class="ml-5"><span class="white">Copyright©</span>
-                        <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
-                        <span class="white">{{ 'now'|date('Y')}}</span>
-                    </h6>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="">
-                    <ul class="navbar-nav float-right">
+                    <ul class="navbar-nav text-center">
                         {% for locale in locales if locale is not same as(app.request.locale)%}
                             <li class="nav-item locale-icon">
                                 <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
@@ -108,4 +31,29 @@
             </div>
         </div>
     </div>
-</footer>#}
+    <div class="d-sm-block d-md-none footer text-white-50 py-3 px-2">
+        <div class="col-12 text-center">
+            <div class="footer-text">
+                <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
+                <span class="rosed">|</span>
+                <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
+            </div>
+        </div>
+        <div class="col-12 ">
+            <h6 class="text-center"><span class="white">Copyright©</span>
+                <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
+                <span class="white">{{ 'now'|date('Y')}}</span>
+            </h6>
+        </div>
+        <div class="col-12 text-center">
+            <ul class="navbar-nav">
+                {% for locale in locales if locale is not same as(app.request.locale)%}
+                    <li class="nav-item locale-icon">
+                        <a href="{{path('change_locale',{'locale':locale})}}"><img src="{{ asset('assets/images/icons/'~locale~'.png') }}" alt=""></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Footer -->

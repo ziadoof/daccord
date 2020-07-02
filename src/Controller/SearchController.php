@@ -92,9 +92,9 @@ class SearchController extends AbstractController
 
                     return new JsonResponse($response);
                 }
-                    return $this->render('Ads/ad/results/offer.html.twig');
+                    return $this->render('search/results/offer.html.twig');
             }
-            return $this->render('Ads/ad/results/offer.html.twig');
+            return $this->render('search/results/offer.html.twig');
         }
         $result =$session->get($id);
 
@@ -107,11 +107,11 @@ class SearchController extends AbstractController
                 // Items per page
                 20
             );
-            return $this->render('Ads/ad/results/offer.html.twig', [
+            return $this->render('search/results/offer.html.twig', [
                 'ads' => $results
             ]);
         }
-        return $this->render('Ads/ad/results/offer.html.twig', [
+        return $this->render('search/results/offer.html.twig', [
 
         ]);
 
@@ -170,9 +170,9 @@ class SearchController extends AbstractController
 
                     return new JsonResponse($response);
                 }
-                return $this->render('Ads/ad/results/demand.html.twig');
+                return $this->render('search/results/demand.html.twig');
             }
-            return $this->render('Ads/ad/results/demand.html.twig');
+            return $this->render('search/results/demand.html.twig');
         }
         $result =$session->get($id);
         if(isset($result)){
@@ -184,11 +184,11 @@ class SearchController extends AbstractController
                 // Items per page
                 20
             );
-            return $this->render('Ads/ad/results/demand.html.twig', [
+            return $this->render('search/results/demand.html.twig', [
                 'ads' => $results
             ]);
         }
-        return $this->render('Ads/ad/results/demand.html.twig', [
+        return $this->render('search/results/demand.html.twig', [
 
         ]);
     }

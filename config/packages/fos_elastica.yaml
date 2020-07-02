@@ -42,7 +42,7 @@ fos_elastica:
             sSize: ~
             languages:
               type: ~
-            acitvityArea: ~
+            activityArea: ~
             workHours: ~
             typeOfContract: ~
             experience:

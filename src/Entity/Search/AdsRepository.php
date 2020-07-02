@@ -293,7 +293,7 @@ class AdsRepository extends Repository
             'heatingType'=>       $search->getHeatingType(),
             'eventType'=>         $search->getEventType(),
             'subjectName'=>       $search->getSubjectName(),
-            'acitvityArea'=>      $search->getAcitvityArea()
+            'activityArea'=>      $search->getActivityArea()
 
         ];
 
@@ -662,7 +662,7 @@ class AdsRepository extends Repository
             'heatingType'=>       $search->getHeatingType(),
             'eventType'=>         $search->getEventType(),
             'subjectName'=>       $search->getSubjectName(),
-            'acitvityArea'=>      $search->getAcitvityArea()
+            'activityArea'=>      $search->getActivityArea()
 
         ];
 
@@ -936,7 +936,7 @@ class AdsRepository extends Repository
             'heating'=>           $ad->getHeating(),
             'heatingType'=>       $ad->getHeatingType(),
             'eventType'=>         $ad->getEventType(),
-            'acitvityArea'=>      $ad->getAcitvityArea(),
+            'activityArea'=>      $ad->getActivityArea(),
 
         ];
 
@@ -1219,7 +1219,7 @@ class AdsRepository extends Repository
             'heating'=>           $ad->getHeating(),
             'heatingType'=>       $ad->getHeatingType(),
             'eventType'=>         $ad->getEventType(),
-            'acitvityArea'=>      $ad->getAcitvityArea(),
+            'activityArea'=>      $ad->getActivityArea(),
 
         ];
 

@@ -10,7 +10,7 @@
                             <span class="mt-2 badge badge-success py-1 px-1"><h5>{{seats }} {% if seats >1 %}{% trans %} Seats{% endtrans %}{% else %}{% trans %} Seat{% endtrans %}{% endif %} {% trans %} reserved{% endtrans %}</h5></span>
                         </div>
                         <div class="float-right cancel-joining-user my-1 rejected-voyage mt-2 d-inline">
-                            <form class="d-inline" method="post" action="{{ path('cancel_joining_passenger',{'voyage':voyage.id}) }}" onsubmit="return confirm('Do you really want to withdraw from this voyage ?Three points will be deducted');">
+                            <form class="d-inline" method="post" action="{{ path('cancel_joining_passenger',{'voyage':voyage.id}) }}" onsubmit="return confirm(Translator.trans('Do you really want to withdraw from this voyage ?Three points will be deducted'));">
                                 <button class="btn d-inline float-right"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </div>
@@ -53,7 +53,7 @@
                                     <span class="mt-2 badge py-1 px-1 {% if request.status is same as('Pending') %}badge-warning{% else %}badge-danger{% endif %}"><h5 class="d-inline">{{request.status}}</h5></span>
                                 </div>
                                 <div class="cancel-joining-user mt-1 rejected-voyage d-inline">
-                                    <form class="d-inline" method="post" action="{{ path('carpool_voyage_request_delete', {'id':request.id}) }}" onsubmit="return confirm('Are you sure you want to delete this request?');">
+                                    <form class="d-inline" method="post" action="{{ path('carpool_voyage_request_delete', {'id':request.id}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to delete this request?'));">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ request.id) }}">
                                         <button class="btn d-inline float-right mt-2"><i class="fas fa-trash-alt"></i></button>

@@ -24,15 +24,28 @@ use Symfony\Component\Form\FormInterface;
 use App\Entity\User;
 use Symfony\Component\Form\Form;
 use Doctrine\ORM\EntityRepository;
-
+use App\Controller\i18next;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProfileType extends AbstractType
 {
+    protected $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        // use for translate tooltip
+        $request = $this->requestStack->getCurrentRequest();
+        $local = $request->getLocale();
+        i18next::init($local, '../translations/translation.json');
+
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'First name',
@@ -78,21 +91,45 @@ class ProfileType extends AbstractType
                 'required' => false,
                 'translation_domain'=> 'manual',
                 'label'    => 'Visible',
+                'help' => ' ',
+                'help_attr'=> array(
+                    'class'=> 'help-tooltip d-inline fas fa-question-circle',
+                    'data-toggle'=> "tooltip",
+                    'data-original-title'=>i18next::getTranslation('tooltip.sex')
+                )
             ])
             ->add('birthdayStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
                 'label'    => 'Visible',
+                'help' => ' ',
+                'help_attr'=> array(
+                    'class'=> 'help-tooltip d-inline fas fa-question-circle',
+                    'data-toggle'=> "tooltip",
+                    'data-original-title'=>i18next::getTranslation('tooltip.birthday')
+                )
             ])
             ->add('phonNumberStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
                 'label'    => 'Visible',
+                'help' => ' ',
+                'help_attr'=> array(
+                    'class'=> 'help-tooltip d-inline fas fa-question-circle',
+                    'data-toggle'=> "tooltip",
+                    'data-original-title'=>i18next::getTranslation('tooltip.phone')
+                )
             ])
             ->add('emailStatus', CheckboxType::class, [
                 'required' => false,
                 'translation_domain'=> 'manual',
                 'label'    => 'Visible',
+                'help' => ' ',
+                'help_attr'=> array(
+                    'class'=> 'help-tooltip d-inline fas fa-question-circle',
+                    'data-toggle'=> "tooltip",
+                   'data-original-title'=>  i18next::getTranslation('tooltip.e-mail')
+                )
             ])
             ->add('profileImage', PhotoType::class, [
                 'data_class' => null,

@@ -1,79 +1,82 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    {% block header %}
-        <html lang="{{ app.request.locale|split('_')[0] }}">
-        <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
-        {% include "header.html.twig" %}
-    {% endblock %}
-    {% block min %}
-        <div id="main">
-            <div class="wrapper d-flex align-items-stretch ">
-                <div>
-                    {% if app.user != null%}
-                        {% block sidebar %}
-                            <div class="d-none d-lg-block">
-                                {% include "sideBar.html.twig" %}
-                            </div>
-                            <div class="d-none d-md-block d-lg-none">
-                                {% include "mdSideBar.html.twig" %}
-                            </div>
-                            <div class="d-sm-block d-md-none">
-                                {% include "smSideBar.html.twig" %}
-                            </div>
-                        {% endblock %}
-                    {% endif %}
-                </div>
 
-                <!-- Page Content  -->
-                <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-2 {#p-md-5#}px-md-5 pt-md-3 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
-                    {% include "search/searchbar.html.twig" %}
-                    <div id="all">
-                        {% block content %}
+        {% block header %}
+            <html lang="{{ app.request.locale|split('_')[0] }}"></html>
+            <div id="socket_identifier" data-value="{% if app.user != null%}{{app.user.id}}{% else %}{{ 0 }}{% endif %}"></div>
+            {% include "header.html.twig" %}
+        {% endblock %}
 
-                        {% endblock %}
+        {% block min %}
+            <div id="main">
+                <div class="wrapper d-flex align-items-stretch ">
+                    <div>
+                        {% if app.user != null%}
+                            {% block sidebar %}
+                                <div class="d-none d-lg-block">
+                                    {% include "sideBar.html.twig" %}
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    {% include "mdSideBar.html.twig" %}
+                                </div>
+                                <div class="d-sm-block d-md-none">
+                                    {% include "smSideBar.html.twig" %}
+                                </div>
+                            {% endblock %}
+                        {% endif %}
                     </div>
-                    <div id="searching">
-                        {% block content_search %}
 
-                        {% endblock %}
+                    <!-- Page Content  -->
+                    <div id="{% if app.user is not same as(null) %}content{% endif %}" class="p-2 {#p-md-5#}px-md-5 pt-md-3 {% if app.user is not same as(null) %}mar-open{% endif %} user_layout min-fix">
+                        {% include "search/searchbar.html.twig" %}
+                        <div id="all">
+                            {% block content %}
+
+                            {% endblock %}
+
+                        </div>
+                        <div id="searching">
+                            {% block content_search %}
+
+                            {% endblock %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="message-flash mb-4"style="z-index: 9999;">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    {% if label != 'comment' %}
-                        <div class="row alert alert-{{ label }} alert-dismissible fade show">
-                            <div class="col-2 back-icon-{{ label }}">
-                                <div class="vertical-center-icon ">
-                                    {% if label is same as('success') %}
-                                        <i class="fas fa-check"></i>
-                                    {% elseif label is same as('danger') %}
-                                        <i class="fas fa-times"></i>
-                                    {% elseif label is same as('warning') %}
-                                        <i class="fas fa-exclamation-circle"></i>
-                                    {% endif %}
+            <div class="message-flash mb-4"style="z-index: 9999;">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        {% if label != 'comment' %}
+                            <div class="row alert alert-{{ label }} alert-dismissible fade show">
+                                <div class="col-2 back-icon-{{ label }}">
+                                    <div class="vertical-center-icon ">
+                                        {% if label is same as('success') %}
+                                            <i class="fas fa-check"></i>
+                                        {% elseif label is same as('danger') %}
+                                            <i class="fas fa-times"></i>
+                                        {% elseif label is same as('warning') %}
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-10">
-                                <div class="">
-                                    <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <div class="py-2 pr-4 text-center">
-                                        <p class="py-4 ">{{ message|trans }}</p>
+                                <div class="col-10">
+                                    <div class="">
+                                        <button type="button" class="close float-right" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="py-2 pr-4 text-center">
+                                            <p class="py-4 ">{{ message|trans }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        </div>
+            </div>
+        {% endblock %}
 
-    {% endblock %}
-    {% block footer %}
-           {% include "footer.html.twig" %}
-    {% endblock %}
+        {% block footer %}
+            {% include "footer.html.twig" %}
+        {% endblock %}
 {% endblock %}

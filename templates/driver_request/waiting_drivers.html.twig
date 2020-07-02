@@ -109,6 +109,11 @@
                         </div>
                     </div>
                 {% endfor %}
+                <div class="pagination-search row justify-content-center mt-4">
+                    <div class="navigation">
+                        {{ knp_pagination_render(driver_requests) }}
+                    </div>
+                </div>
             {% else %}
                 <h4 class="title-blue text-center">{% trans %} There is no driver request{% endtrans %}</h4>
             {% endif %}

@@ -34,13 +34,13 @@
                                             {% if not voyage.isFinish() %}
                                                 {% if not request.voyage.isClosedVoyage and  request.numberOfSeats <= request.voyage.getAvailableSeats() and not voyage.isPartOfAllPassenger(request.sender)  %}
                                                     <div class=" cancel-joining-user my-1 accepted-voyage ">
-                                                        <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm('Do you really want to accept this request ?');">
+                                                        <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Accepted'}) }}" onsubmit="return confirm(Translator.trans('Do you really want to accept this request ?'));">
                                                             <button class="btn js-accept-request"><i class="fas fa-check-circle "></i></button>
                                                         </form>
                                                     </div>
                                                 {% endif %}
                                                 <div class="cancel-joining-user my-1 rejected-voyage ">
-                                                    <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm('Are you sure you want to reject this request ?');">
+                                                    <form method="post" action="{{ path('treatment_voyage_request',{'voyageRequest':request.id,'status':'Rejected'}) }}" onsubmit="return confirm(Translator.trans('Are you sure you want to reject this request ?'));">
                                                         <button class="btn "><i class="fas fa-trash-alt"></i></button>
                                                     </form>
                                                 </div>

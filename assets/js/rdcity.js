@@ -1,5 +1,6 @@
 import Translator from 'bazinga-translator';
 
+
 $(document).on('change', '#area_region, #area_department', function () {
     let $field = $(this)
     let $regionField = $('#area_region')
@@ -126,36 +127,7 @@ $(document).on('change', '#offer_search_department', function () {
 
 //end search offer
 
-// fonction for placeholder on load the search page
 
-$(document).ready(function () {
-    $('#offer_search_ville').select2({
-        placeholder: Translator.trans('Select region'),
-        dropdownAutoWidth: true,
-        width: '100%',
-        height: '30px',
-    });
-    $('#demand_search_ville').select2({
-        placeholder: Translator.trans('Select region'),
-        dropdownAutoWidth: true,
-        width: '100%',
-        height: '30px',
-    });
-    $('#hosting_search_ville').select2({
-        placeholder: Translator.trans('Select region'),
-        dropdownAutoWidth: true,
-        width: '100%',
-        height: '30px',
-    });
-
-    $('#meetup_search_city').select2({
-        placeholder: Translator.trans('Select region'),
-        dropdownAutoWidth: true,
-        width: '100%',
-        height: '30px',
-    });
-    $('.select2-search__field').css('width', '100%');
-});
 
 //search hosting
 $(document).on('change', '#hosting_search_region', function () {
@@ -312,6 +284,31 @@ function completeNormalCity(id) {
 
 
 
+// fonction for placeholder on load the search page
+
+$(document).ready(function () {
+    $('#offer_search_ville').select2({
+        placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        height: '30px',
+    });
+    $('#demand_search_ville').select2({
+        placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        height: '30px',
+    });
+    $('#hosting_search_ville').select2({
+        placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        height: '30px',
+    });
+
+    $('#meetup_search_city').select2({
+        placeholder: Translator.trans('Select region'),
+        dropdownAutoWidth: true,
+        height: '30px',
+    });
+});
 
 
 

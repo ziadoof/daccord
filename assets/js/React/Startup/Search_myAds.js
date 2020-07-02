@@ -26,9 +26,11 @@ $('#search-offer').submit( function(e) {
         $('#all').hide();
         ReactDOM.render(<ListsAds result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
+        $('#search-bar').collapse('hide');
     }).fail(function(jxh,textmsg,errorThrown){
          alert(Translator.trans('Something went wrong during processing search for offers!'));
     });
+
 });
 
 $('#search-demand').submit( function(e) {
@@ -50,7 +52,7 @@ $('#search-demand').submit( function(e) {
         $('#all').hide();
         ReactDOM.render(<ListsAds  result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
-
+        $('#search-bar').collapse('hide');
     }).fail(function(jxh,textmsg,errorThrown){
                  alert(Translator.trans('Something went wrong during processing search for demands!'));
     });
@@ -69,9 +71,10 @@ $(document).on('click', '#my_offer', function () {
         window.history.pushState("", "", '/my_ads/offers');
         ReactDOM.render(<ListsAds  result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
-
+        //close sm-side bar when click my offer and my demand
+        $('#sm-sidebar').removeClass('toggled');
     }).fail(function(jxh,textmsg,errorThrown){
-                 alert(Translator.trans('Something went wrong during processing your offers!'));
+         alert(Translator.trans('Something went wrong during processing your offers!'));
     });
 
 });
@@ -89,7 +92,8 @@ $(document).on('click', '#my_demand', function () {
 
         ReactDOM.render(<ListsAds  result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
-
+        //close sm-side bar when click my offer and my demand
+        $('#sm-sidebar').removeClass('toggled');
     }).fail(function(jxh,textmsg,errorThrown){
                  alert(Translator.trans('Something went wrong during processing your demands!'));
     });
@@ -117,7 +121,7 @@ $('#search-hosting').submit( function(e) {
         $('#all').hide();
         ReactDOM.render(<ListsHosting result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
-
+        $('#search-bar').collapse('hide');
     }).fail(function(jxh,textmsg,errorThrown){
         alert(Translator.trans('Something went wrong during processing search for hosting!'));
     });
@@ -140,7 +144,7 @@ $('#search-meetup').submit( function(e) {
         $('#all').hide();
         ReactDOM.render(<ListsMeetup result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
-
+        $('#search-bar').collapse('hide');
     }).fail(function(jxh,textmsg,errorThrown){
         alert(Translator.trans('Something went wrong during processing search for meetup!'));
     });
@@ -163,7 +167,7 @@ $('#search-carpooling').submit( function(e) {
         $('#all').hide();
         ReactDOM.render(<ListsVoyages result={response['result']}/>, document.getElementById('searching'));
         setFavorite();
-
+        $('#search-bar').collapse('hide');
     }).fail(function(jxh,textmsg,errorThrown){
         alert(Translator.trans('Something went wrong during processing search for voyage!'));
     });

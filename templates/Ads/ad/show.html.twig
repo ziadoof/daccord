@@ -9,107 +9,103 @@
 {% block title %}{% trans %} Ad{% endtrans %}{% endblock %}
 {% block content %}
     {% set type = ad.typeOfAd %}
-    <div class="fix-width">
-    <div class="row mb-2">
-        <div class="col-12">
-            <div class="shadow-border ad-slide">
-                <div class="row px-2 py-2">
-                    <div class="col-sm-6 col-7">
-                        <div class="d-inline float-left">
-                            <span class="profile-ava">
-                                <a href="{{ path('user_show',{'id':ad.user.id}) }}">
-                                    <img alt="" src="{{ ad.user.photoProfile() }}" id="avatar-ad" class="mt-2 mb-2 mr-3">
-                                </a>
-                            </span>
+    <div class="">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="shadow-border ad-slide">
+                    <div class="row px-2 py-2">
+                        <div class="col-sm-6 col-7">
+                            <div class="d-inline float-left">
+                                <span class="profile-ava">
+                                    <a href="{{ path('user_show',{'id':ad.user.id}) }}">
+                                        <img alt="" src="{{ ad.user.photoProfile() }}" id="avatar-ad" class="mt-2 mb-2 mr-3">
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="d-inline btn-group">
+                                <h5 class="blued d-block mt-3 mb-0">{{ ad.user.firstname }}</h5>
+                                <h6 class="rosed d-inline font-weight-bold">{{ ad.user.point }} {% trans %}Point {% endtrans %}</h6>
+                            </div>
                         </div>
-                        <div class="d-inline btn-group">
-                            <h5 class="blued d-block mt-3 mb-0">{{ ad.user.firstname }}</h5>
-                            <h6 class="rosed d-inline font-weight-bold">{{ ad.user.point }} {% trans %}Point {% endtrans %}</h6>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-5 mt-4">
-                        {% if app.user %}
-                            {% set isFavorite = 'false' %}
-                            {#data-favorite must be string not boolean#}
-                            {% for favorite in app.user.getFavoritesByType('ad')  %}
-                                {% if favorite.ad is same as (ad) %}
-                                    {% set isFavorite = 'true' %}
-                                {% endif %}
-                            {% endfor %}
-                            <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right  mr-2" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
-                                <div class="flexbox">
-                                    <div class="fav-btn">
-                                        <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                        <div class="col-sm-6 col-5 mt-4">
+                            {% if app.user %}
+                                {% set isFavorite = 'false' %}
+                                {#data-favorite must be string not boolean#}
+                                {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                    {% if favorite.ad is same as (ad) %}
+                                        {% set isFavorite = 'true' %}
+                                    {% endif %}
+                                {% endfor %}
+                                <form method="post" action="{{ url('favorite_add') }}" class="js-favorite-add float-right  mr-2" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                    <div class="flexbox">
+                                        <div class="fav-btn">
+                                            <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        {% endif %}
-                        <span class="badge badge-success float-right mr-2"><h5>{% trans %}Donate{% endtrans %}</h5></span>
+                                </form>
+                            {% endif %}
+                            <span class="badge badge-success float-right mr-2"><h5>{% trans %}Donate{% endtrans %}</h5></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row ">
-        <div class="col-12">
-            <div class="">
-                <div class="row">
-                    <div class="col-lg-4 col-12">
-                        <div class="shadow-border ad-slide ">
-                            {% if type is same as ('Offer') %}
-                            <div class="col-12 mt-4 mb-4 ">
-                                <!--Carousel Wrapper-->
-                                <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half " data-ride="carousel">
-                                    <!--Indicators-->
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carousel-example-2" data-slide-to="1"></li>
-                                        <li data-target="#carousel-example-2" data-slide-to="2"></li>
-                                    </ol>
-                                    <!--/.Indicators-->
-                                    <!--Slides-->
-                                    <div class="carousel-inner g-photo" role="listbox">
-                                        {%  if ad.imageOne is not null %}
-                                            <div class="carousel-item active">
-                                                <div class="view">
-                                                    <div class="item active">
-                                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
-                                                    </div>
-                                                    <div class="mask rgba-black-light"></div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
+        <div class="row ">
+            <div class="col-12">
+                <div class="">
+                    <div class="row">
+                        <div class="col-lg-4 col-12">
+                            <div class="shadow-border ad-slide ">
+                                {% if type is same as ('Offer') %}
+                                    <div class="col-12 mt-4 mb-4 ">
+                                        <!--Carousel Wrapper-->
+                                        <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half " data-ride="carousel">
+                                            <!--Indicators-->
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                                                <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                                                <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                                            </ol>
+                                            <!--/.Indicators-->
+                                            <!--Slides-->
+                                            <div class="carousel-inner g-photo" role="listbox">
+                                                {%  if ad.imageOne is not null %}
+                                                    <div class="carousel-item active">
+                                                        <div class="view">
+                                                            <div class="item active">
+                                                                <img src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                                            </div>
+                                                            <div class="mask rgba-black-light">
 
-                                        {% if ad.imageTow is not null %}
-                                        {% if ad.imageOne is  null %}
-                                        <div class="carousel-item active">
-                                            {% else %}
-                                            <div class="carousel-item">
-                                                {% endif %}
-                                                <!--Mask color-->
-                                                <div class="view">
-                                                    <div class="item active">
-                                                        <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
-                                                    </div>
-                                                    <div class="mask rgba-black-light"></div>
-                                                </div>
-                                            </div>
-                                            {% endif %}
-
-                                            {% if ad.imageThree is not null %}
-                                            {% if (ad.imageOne is  null) and (ad.imageTow is null) %}
-                                            <div class="carousel-item active">
-                                                {% else %}
-                                                <div class="carousel-item">
-                                                    {% endif %}
-                                                    <!--Mask color-->
-                                                    <div class="view">
-                                                        <div class="item active">
-                                                            <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                                            </div>
                                                         </div>
-                                                        <div class="mask rgba-black-light"></div>
                                                     </div>
-                                                </div>
+                                                {% endif %}
+
+                                                {% if ad.imageTow is not null %}
+                                                    <div class="carousel-item {% if ad.imageOne is  null %} active {% endif %}">
+                                                        <!--Mask color-->
+                                                        <div class="view">
+                                                            <div class="item active">
+                                                                <img src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                                            </div>
+                                                            <div class="mask rgba-black-light">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+                                                {% if ad.imageThree is not null %}
+                                                    <div class="carousel-item {% if (ad.imageOne is  null) and (ad.imageTow is null) %}active{% endif %}">
+                                                        <!--Mask color-->
+                                                        <div class="view">
+                                                            <div class="item active">
+                                                                <img src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                                            </div>
+                                                            <div class="mask rgba-black-light">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 {%endif%}
 
                                                 {% if (ad.imageOne is null) and (ad.imageTow is null) and (ad.imageThree is null) %}
@@ -133,179 +129,177 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {% else %}
-                                        <div class="col-12 mt-4 mb-4 demand-image text-center">
-                                            <img class="item " src="/assets/images/icons/demand.png" alt="demand">
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="col-lg-8 col-12">
-                                <div class="row mb-2">
-                                    <div class="col-12">
-                                        <div class="shadow-border ad-card blued">
-                                            <div class="row px-2 py-2 ">
-                                                <div class="col-12">
-                                                    <h5 class="text-center mb-0"><span class="font-weight-bold {% if type is same as('Offer') %}blued{% else %}rosed{% endif %}">{{ type|trans }}</span> {{ ad.generalCategory|trans }} <span class="rosed">{{ ' | ' }}</span>{{ ad.category|trans }}  </h5>
-                                                </div>
-                                            </div>
-                                            <hr class="my-1">
-                                            <div class="row py-2">
-                                                <div class="col-6">
-                                                    <h5 class="text-center">{{ ad.dateOfAd|date('d M Y') }}</h5>
-                                                </div>
-                                                <div class="col-6">
-                                                    <h5 class="text-center">{{ ad.ville }}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
+                                {% else %}
+                                    <div class="col-12 mt-4 mb-4 demand-image text-center">
+                                        <img class="item " src="/assets/images/icons/demand.png" alt="demand">
                                     </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12">
-                                        <div class="full-border">
-                                            <div class="row px-2 py-2">
-                                                <div class="col-12">
-                                                    <div class="row">
-                                                        <div class="col-12 p-2 pl-4">
-                                                            <span class="text-center title-rose">{{ ad.title }}</span>
-                                                        </div>
-                                                    </div>
-                                                    {% if ad.description %}
-                                                        <div class="row">
-                                                            <div class="col-12 p-2 px-4">
-                                                                <span class="title-blue">{% trans %} Description{% endtrans %}</span><br>
-                                                                <p>{{ ad.description }}</p>
-                                                            </div>
-                                                        </div>
-                                                    {% endif %}
-                                                    <div class="row">
-                                                        <div class="col-12 p-2 px-4">
-                                                            {% if type is same as('Offer') %}
-                                                                <table class="table table-striped">
-                                                                    <tbody>
-                                                                    {% for spe in ad.category.specifications   %}
-                                                                        <tr>
-                                                                            {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
-                                                                                {% if spe.name is same as ('languages') %}
-                                                                                    <th scope="row">{{ spe.label|trans }}</th>
-                                                                                    <td>
-                                                                                        {% for language in specifications[spe.name] %}
-                                                                                            <span class="">{{ language|trans }}&nbsp; </span>
-                                                                                        {% endfor %}
-                                                                                    </td>
-                                                                                {% else %}
-                                                                                    <th scope="row">{{ spe.label|trans }}</th>
-                                                                                    {% if spe.name is same as ('dateOfEvent') %}
-                                                                                        <td>{{ specifications[spe.name]|date("m/d/Y") }}</td>
-                                                                                    {% else %}
-                                                                                        <td>{{ specifications[spe.name] }}</td>
-                                                                                    {% endif %}
-                                                                                {% endif %}
-                                                                            {% endif %}
-                                                                        </tr>
-                                                                    {% endfor %}
-                                                                    </tbody>
-                                                                </table>
-                                                                <hr>
-                                                            {% else %}
-                                                                <table class="table table-striped">
-                                                                    <tbody>
-                                                                    {% for spe in realCategory.specifications  %}
-                                                                        <tr>
-                                                                            {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
-                                                                                {% if spe.name is same as ('languages') %}
-                                                                                    <th scope="row">{{ spe.label|trans }}</th>
-                                                                                    <td>
-                                                                                        {% for language in specifications[spe.name] %}
-                                                                                            <span class="">{{ language|trans }}&nbsp; </span>
-                                                                                        {% endfor %}
-                                                                                    </td>
-                                                                                {% else %}
-                                                                                    <th scope="row">{{ spe.label|trans }}</th>
-                                                                                    {% if spe.name is same as ('dateOfEvent') %}
-                                                                                        <td>{{ specifications[spe.name]|date("m/d/Y") }}</td>
-                                                                                    {% else %}
-                                                                                        <td>{{ specifications[spe.name] }}</td>
-                                                                                    {% endif %}
-                                                                                {% endif %}
-                                                                            {% endif %}
-                                                                        </tr>
-                                                                    {% endfor %}
-                                                                    </tbody>
-                                                                </table>
-                                                                <hr>
-                                                            {% endif %}
-                                                            <div class="col text-center">
-                                                                {% if(ad.price is not null) %}
-                                                                    <span class="font-weight-bold blued text-center"><h4>{{ ad.price }} €</h4></span>
-                                                                {% endif %}
-                                                                {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
-                                                                    <span class=""><del class="rosed"><h5>{{ ad.pPrice }} €</h5></del></span><br>
-                                                                {% endif %}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-12">
-                                        <div class="full-border">
-                                            <div class="row px-2 py-2">
-                                                {% if ad.user is not same as (app.user)  %}
-                                                <div class="col-sm-6 col-12">
-                                                    {% if app.user is not same as(null) %}
-                                                        <div class="mt-md-3 mt-1 float-sm-left text-center">
-                                                            <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
-                                                                <button class="btn btn-outline-info mx-1 " >
-                                                                    <input type="hidden" name="user" value="{{ ad.user.id }}">
-                                                                    <p class="mt-1"><i class="fas fa-comments"></i>{{ ' ' }}{% trans %} Message to {% endtrans %} {{ad.user.firstname}}</p>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    {% else %}
-                                                        <div class="mt-md-3 mt-1 float-sm-left text-center">
-                                                            <form method="post" action="{{ url('new_conversation') }}">
-                                                                <a href="{{ path('security_login') }}" class="btn btn-outline-info mx-1 " >
-                                                                    {% trans %}Sign in to send message to{% endtrans %}{{ ' ' }}{{ ad.user.firstname }}
-                                                                </a>
-                                                            </form>
-                                                        </div>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="col-sm-6 col-12">
-                                                    <div class="d-inline btn-group float-sm-right float-none text-center">
-                                                        {% if ad.user.phonNumberStatus %}
-                                                            <h6 class="blued d-block mt-3 mb-0"><i class="fas fa-phone-square rosed"></i>{{ ' ' }}{{ ad.user.phoneNumber }}</h6>
-                                                        {% endif %}
-                                                        {% if ad.user.emailStatus %}
-                                                            <h6 class="blued d-block mt-3 mb-0"><i class="fas fa-at rosed"></i>{{ ' ' }}{{ ad.user.email }}</h6>
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                                {% else %}
-                                                <div class="col">
-                                                    <div class="text-center float-md-right">
-                                                        <div class="col p-2 pl-4">
-                                                            <a class="btn btn-info" href="{{ path('ad_edit', {'id': ad.id}) }}"><i class="fas fa-pencil-alt"></i>{{ ' ' }}{% trans %} Edit{% endtrans %}</a>
-                                                            <div class="btn " >{{ include('Ads/ad/_delete_form.html.twig') }}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {% endif %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
-                    </div> <!--/ end row -->
+                        <div class="col-lg-8 col-12">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="shadow-border ad-card blued">
+                                        <div class="row px-2 py-2 ">
+                                            <div class="col-12">
+                                                <h5 class="text-center mb-0"><span class="font-weight-bold {% if type is same as('Offer') %}blued{% else %}rosed{% endif %}">{{ type|trans }}</span> {{ ad.generalCategory|trans }} <span class="rosed">{{ ' | ' }}</span>{{ ad.category|trans }}  </h5>
+                                            </div>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div class="row py-2">
+                                            <div class="col-6">
+                                                <h5 class="text-center">{{ ad.dateOfAd|date('d M Y') }}</h5>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5 class="text-center">{{ ad.ville }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="full-border">
+                                        <div class="row px-2 py-2">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-12 p-2 pl-4">
+                                                        <span class="text-center title-rose">{{ ad.title }}</span>
+                                                    </div>
+                                                </div>
+                                                {% if ad.description %}
+                                                    <div class="row">
+                                                        <div class="col-12 p-2 px-4">
+                                                            <span class="title-blue">{% trans %} Description{% endtrans %}</span><br>
+                                                            <p>{{ ad.description }}</p>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="row">
+                                                    <div class="col-12 p-2 px-4">
+                                                        {% if type is same as('Offer') %}
+                                                            <table class="table table-striped">
+                                                                <tbody>
+                                                                {% for spe in ad.category.specifications   %}
+                                                                    <tr>
+                                                                        {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                                                                            {% if spe.name is same as ('languages') %}
+                                                                                <th scope="row">{{ spe.label|trans }}</th>
+                                                                                <td>
+                                                                                    {% for language in specifications[spe.name] %}
+                                                                                        <span class="">{{ language|trans }}&nbsp; </span>
+                                                                                    {% endfor %}
+                                                                                </td>
+                                                                            {% else %}
+                                                                                <th scope="row">{{ spe.label|trans }}</th>
+                                                                                {% if spe.name is same as ('dateOfEvent') %}
+                                                                                    <td>{{ specifications[spe.name]|date("m/d/Y") }}</td>
+                                                                                {% else %}
+                                                                                    <td>{{ specifications[spe.name] }}</td>
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        {% endif %}
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                            <hr>
+                                                        {% else %}
+                                                            <table class="table table-striped">
+                                                                <tbody>
+                                                                {% for spe in realCategory.specifications  %}
+                                                                    <tr>
+                                                                        {% if(spe.name is not same as ("donate")) and (spe.name is not same as("price")and (specifications[spe.name] is defined)) %}
+                                                                            {% if spe.name is same as ('languages') %}
+                                                                                <th scope="row">{{ spe.label|trans }}</th>
+                                                                                <td>
+                                                                                    {% for language in specifications[spe.name] %}
+                                                                                        <span class="">{{ language|trans }}&nbsp; </span>
+                                                                                    {% endfor %}
+                                                                                </td>
+                                                                            {% else %}
+                                                                                <th scope="row">{{ spe.label|trans }}</th>
+                                                                                {% if spe.name is same as ('dateOfEvent') %}
+                                                                                    <td>{{ specifications[spe.name]|date("m/d/Y") }}</td>
+                                                                                {% else %}
+                                                                                    <td>{{ specifications[spe.name] }}</td>
+                                                                                {% endif %}
+                                                                            {% endif %}
+                                                                        {% endif %}
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                            <hr>
+                                                        {% endif %}
+                                                        <div class="col text-center">
+                                                            {% if(ad.price is not null) %}
+                                                                <span class="font-weight-bold blued text-center"><h4>{{ ad.price }} €</h4></span>
+                                                            {% endif %}
+                                                            {% if((ad.pPrice is not same as (ad.price)) and (ad.pPrice is not null)) %}
+                                                                <span class=""><del class="rosed"><h5>{{ ad.pPrice }} €</h5></del></span><br>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <div class="full-border">
+                                        <div class="row px-2 py-2">
+                                            {% if ad.user is not same as (app.user)  %}
+                                            <div class="col-sm-6 col-12">
+                                                {% if app.user is not same as(null) %}
+                                                    <div class="mt-md-3 mt-1 float-sm-left text-center">
+                                                        <form method="post" action="{{ url('new_conversation') }}" class="js-user-message">
+                                                            <button class="btn btn-outline-info mx-1 " >
+                                                                <input type="hidden" name="user" value="{{ ad.user.id }}">
+                                                                <p class="mt-1"><i class="fas fa-comments"></i>{{ ' ' }}{% trans %} Message to {% endtrans %} {{ad.user.firstname}}</p>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="mt-md-3 mt-1 float-sm-left text-center">
+                                                        <form method="post" action="{{ url('new_conversation') }}">
+                                                            <a href="{{ path('security_login') }}" class="btn btn-outline-info mx-1 " >
+                                                                {% trans %}Sign in to send message to{% endtrans %}{{ ' ' }}{{ ad.user.firstname }}
+                                                            </a>
+                                                        </form>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-sm-6 col-12">
+                                                <div class="d-inline btn-group float-sm-right float-none text-center">
+                                                    {% if ad.user.phonNumberStatus %}
+                                                        <h6 class="blued d-block mt-3 mb-0"><i class="fas fa-phone-square rosed"></i>{{ ' ' }}{{ ad.user.phoneNumber }}</h6>
+                                                    {% endif %}
+                                                    {% if ad.user.emailStatus %}
+                                                        <h6 class="blued d-block mt-3 mb-0"><i class="fas fa-at rosed"></i>{{ ' ' }}{{ ad.user.email }}</h6>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <div class="col">
+                                                <div class="text-center float-md-right">
+                                                    <div class="col p-2 pl-4">
+                                                        <a class="btn btn-info" href="{{ path('ad_edit', {'id': ad.id}) }}"><i class="fas fa-pencil-alt"></i>{{ ' ' }}{% trans %} Edit{% endtrans %}</a>
+                                                        <div class="btn " >{{ include('Ads/ad/_delete_form.html.twig') }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div> <!--/ end row -->
     </div>
 {% endblock %}
