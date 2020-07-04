@@ -45,7 +45,13 @@ class RegistrationType extends AbstractType
                     'autocomplete'=> 'off',
                     'placeholder'=>'City or Zip code'
                 ]
-            ]);
+            ])
+            ->add('enabled', CheckboxType::class,[
+                'required'=> true,
+                'label'=>false,
+                'empty_data'=>false
+            ])
+        ;
 
     }
 

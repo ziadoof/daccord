@@ -4,19 +4,19 @@ fos_user:
     firewall_name: main
     user_class: App\Entity\User
     service:                                              # since Symfony 3.4
-        mailer: fos_user.mailer.twig_swift    # since Symfony 3.4
+        mailer: app.custom_mailer    # since Symfony 3.4
     from_email:
-        address: "info@onadaccord.fr"
-        sender_name: "On a d'accord"
+        address: "info@fordealing.fr"
+        sender_name: "FORDEALING"
     resetting:
         email:
             from_email:
-                address:        "resetting@onadaccord.fr"
-                sender_name:    "On a d'accord"
-            template:   'user/Resetting/email.txt.twig'
+                address:        "resetting@fordealing.fr"
+                sender_name:    "FORDEALING"
+            template:   'user/Mail/password_resetting_email.twig'
     registration:
         confirmation:
-            template:   'user/Registration/email.txt.twig'
+            template:   'user/Mail/registration_email.twig'
             enabled:    true
     profile:
         form:

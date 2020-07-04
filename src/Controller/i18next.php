@@ -168,9 +168,10 @@ class i18next
         }
 
         $dir = glob($path);
-
-        if (count($dir) === 0)
+        // i comment this if for execute the cash clear problem
+        /*if (count($dir) === 0){
             throw new Exception('Translation file not found');
+        }*/
 
         foreach ($dir as $file) {
 

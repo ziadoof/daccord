@@ -1,0 +1,71 @@
+
+{% block subject %}
+    {%- autoescape false -%}
+        {#{{ 'registration.email.subject'|trans({'%username%': 'To FORDEALING', '%confirmationUrl%': confirmationUrl}) }}#}
+        {#{% trans %} %user.username% -Welcome to FORDEALING{% endtrans %}#}
+        {{ user.username}} {% trans %}Welcome to FORDEALING{% endtrans %}
+    {%- endautoescape -%}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        {#{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}#}
+        {% trans %}Hello{% endtrans %}{{ ' ' }}{{ user.username }}
+        {% trans %}You can now activate your account by clicking on the link:{% endtrans %}
+        {{ confirmationUrl }}
+        {% trans %}If your browser cannot move automatically, you can copy the link and place it in the custom location of your browser.{% endtrans %}
+        {% trans %}This link can only be used once to validate your account.{% endtrans %}
+        {% trans %}NOTE: If you received this email in error, just ignore this message. No further action is required on your part.{% endtrans %}
+        {% trans %}Cordially from the FORDEALING team{% endtrans %}
+        {% trans %}See you soon!{% endtrans %}
+
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% apply inline_css(source("user/Mail/css/email.css")) %}
+    <h3 class="blued text-center">{% trans %}Welcome to FORDEALING{% endtrans %}</h3>
+    <div class="container message-border-blue">
+        <div>
+            <div class="logo-name text-center mt-1 message-border pading">
+                <a href="https://www.fordealing.fr" target="_blank">
+                    <img src="{{ logo }}" alt="FORDEALING">
+                    <br>
+                    <span class="blued">FOR<span class="rosed">DEAL</span>ING</span>
+                </a>
+            </div>
+            <div class="message-border mt-1 mb-1 pxy">
+                <div class="mt-1 mb-1 text-center">
+                    <span class="grayed">{% trans %}Hello{% endtrans %}</span>
+                    <br>
+                    <br>
+                    <span class="grayed">{% trans %}You can now activate your account by clicking on the link:{% endtrans %}</span>
+                    <br>
+                    <br>
+                    {{ confirmationUrl }}
+                    <br>
+                </div>
+                <br>
+                <div class="">
+                    <span class=""><span class="rosed ml-1">&#9899;</span> {% trans %}If your browser cannot move automatically, you can copy the link and place it in the custom location of your browser.{% endtrans %}</span>
+                    <br>
+                    <span><span class="rosed ml-1">&#9899;</span> {% trans %}This link can only be used once to validate your account.{% endtrans %}</span>
+                    <br>
+                    <br>
+                    <span><span class="rosed ml-1">{% trans %}NOTE{% endtrans %}</span>{% trans %}: If you received this email in error, just ignore this message. No further action is required on your part.{% endtrans %}</span>
+                </div>
+                <br>
+                <div class="mt-1 mb-1 text-center">
+                    <span>{% trans %}Cordially from the FORDEALING team{% endtrans %}</span>
+                    <br>
+                    <span>{% trans %}See you soon!{% endtrans %}</span>
+                    <br>
+                </div>
+            </div>
+            <div class="text-center footer message-border mb-1">
+                <span>{% trans %}With best wishes from the team at  {% endtrans%} <a href="https://fordealing.fr"><span class="blued">FOR<span class="rosed">DEAL</span>ING</span></a> </span>
+            </div>
+        </div>
+    </div>
+    {% endapply %}
+{% endblock %}

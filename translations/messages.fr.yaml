@@ -204,7 +204,8 @@ Hello: Bonjour
 'You can now activate your account by clicking on the link:': 'Vous pouvez maintenant activer votre compte en cliquant sur le lien:'
 'If your browser cannot move automatically, you can copy the link and place it in the custom location of your browser.': 'Si votre navigateur ne peut pas se déplacer automatiquement, vous pouvez copier le lien et le placer dans l''emplacement personnalisé de votre navigateur.'
 'This link can only be used once to validate your account.': 'Ce lien ne peut être utilisé qu''une seule fois pour valider votre compte.'
-'NOTE: If you received this email in error, just ignore this message. No further action is required on your part.': 'REMARQUE: si vous avez reçu cet e-mail par erreur, ignorez simplement ce message. Aucune autre action n''est requise de votre part.'
+NOTE: REMARQUE
+': If you received this email in error, just ignore this message. No further action is required on your part.': ': Si vous avez reçu cet e-mail par erreur, ignorez simplement ce message. Aucune autre action n''est requise de votre part.'
 'Cordially from the FORDEALING team': 'Cordialement de l''équipe de FORDEALING'
 'See you soon!': 'À bientôt!'
 Congrats: Félicitations
@@ -223,7 +224,7 @@ Register: 'S''inscrire'
 'Reset password': 'Réinitialiser le mot de passe'
 'Reset Password': 'Réinitialiser le mot de passe'
 'To reset your password - please visit': 'Pour réinitialiser votre mot de passe - veuillez visiter'
-'Regards,': 'Cordialement,'
+'Regards': 'Cordialement'
 'the FORDEALING Team.': 'l''équipe de FORDEALING.'
 'An email has been sent. It contains a link you must click to reset your password.': 'Un e-mail a été envoyé. Il contient un lien sur lequel vous devez cliquer pour réinitialiser votre mot de passe.'
 'Note: You can only request a new password once within': 'Remarque: Vous ne pouvez demander un nouveau mot de passe qu''une seule fois dans'
@@ -1744,3 +1745,11 @@ Do you really want to withdraw from this voyage ?Three points will be deducted: 
 Are you sure you want to delete this meetup ?: Voulez-vous vraiment supprimer ce Meetup?
 Are you sure you want to close your account?: Voulez-vous vraiment fermer votre compte?
 The time and distance calculated based on the highway: Le temps et la distance calculés en fonction de l'autoroute
+The requested page couldn't be located. Checkout for any URL misspelling or: La page demandée n'a pas pu être localisé. Commander pour toute faute d'orthographe URL ou
+return to the homepage: retour à la page d'accueil
+Page not found error: Erreur de page non trouvée
+Page not found: Page non trouvée
+Your FORDEALING Account has been created: Votre compte FORDEALING a été créé
+Login: S'identifier
+You can now log in according to the following information: Vous pouvez maintenant vous connecter en fonction des informations suivantes
+account has been created: compte a été créé

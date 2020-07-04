@@ -3,33 +3,45 @@
     {% apply inline_css(source("user/Mail/css/email.css")) %}
         <html>
             <body>
-            <div class="container">
-                <div>
-                    <div class="b-blued">
-                        <img src="{{img}}" alt="On est d'accord" class="d-inline">
-                        <h1 class="d-inline">FORDEALING</h1>
-                    </div>
-                    <h2 class="text-center blued">{% trans %} Create new user by admin{% endtrans %}</h2>
-                    <h4 class="text-center">{% trans %}Your{% endtrans %} <span class="rosed">FORDEALING</span>
-                        {% trans %}account has been created, You can now log in according to the following information{% endtrans %}
-                    </h4>
-                    <div class="text-center">
-                        <div class="d-block">
-                            <b class="rosed">{% trans %}User name :{% endtrans %}</b> <span class="blued">{{user.email}}</span>
+                <h3 class="blued text-center">{% trans %} Create new user by admin{% endtrans %}</h3>
+                <div class="container message-border-blue">
+                    <div>
+                        <div class="logo-name text-center mt-1 message-border pading">
+                            <a href="https://www.fordealing.fr" target="_blank">
+                                <img src="{{img}}" alt="aaa">
+                                <br>
+                                <span class="blued">FOR<span class="rosed">DEAL</span>ING</span>
+                            </a>
                         </div>
-                        <div class="d-block">
-                            <b class="rosed">{% trans %}Password :{% endtrans %}</b> <span class="blued">{{user.plainPassword}}</span>
+                        <div class="message-border mt-1 mb-1">
+                            <div class="mt-1 mb-1 text-center">
+                                <span class="grayed">{% trans %}Your{% endtrans %} <span class="blued">FOR<span class="rosed">DEAL</span>ING</span> {% trans %}account has been created{% endtrans %}</span>
+                                <br>
+                                <span class="grayed">{% trans %}You can now log in according to the following information{% endtrans %}</span>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="content-data">
+                                    <div class="d-block">
+                                        <b class="rosed">{% trans %}User name :{% endtrans %}</b> <span class="blued">{{user.email}}</span>
+                                    </div>
+                                    <div class="d-block">
+                                        <b class="rosed">{% trans %}Password :{% endtrans %}</b> <span class="blued">{{pass}}</span>
+                                    </div>
+                                    <div class="d-block">
+                                        <b class="rosed">{% trans %}City :{% endtrans %}</b> <span class="blued">{{user.city}}</span>
+                                    </div>
+                                    <div class="d-block mt-1">
+                                        <a href="https://www.fordealing.fr/login" class="btn btn-info" target="_blank">{% trans %}Login{% endtrans %}</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-block">
-                            <b class="rosed">{% trans %}City :{% endtrans %}</b> <span class="blued">{{user.city}}</span>
+                        <div class="text-center footer message-border mb-1">
+                            <span>{% trans %}With best wishes from the team at  {% endtrans %} <a href="https://fordealing.fr" target="_blank"> <span class="blued">FOR<span class="rosed">DEAL</span>ING</span></a> </span>
                         </div>
-                    </div>
-                    <br>
-                    <div class="text-center footer b-blued">
-                        <b>{% trans %}With best wishes from the team at  {% endtrans %}<a href="127.0.0.1:8000"><span class="white">FORDEALING</span></a> </b>
                     </div>
                 </div>
-            </div>
             </body>
         </html>
     {% endapply %}

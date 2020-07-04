@@ -3,10 +3,17 @@
 {% block title %}403 Error{% endblock %}
 
 {% block content %}
-    <h1>Page not found 403</h1>
-
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="/">return to the homepage</a>.
-    </p>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="row">
+                <div class="col-12 text-center mt-5 error-img">
+                    <img src="{{ asset('assets/images/logo/face.png') }}" alt="Karo">
+                    <h1 class="rosed">{% trans %}Page not found{% endtrans%} 403</h1>
+                </div>
+                <div class="col-12 text-center mt-2">
+                    <p>{% trans %}The requested page couldn't be located. Checkout for any URL misspelling or {% endtrans %} <a href="/">{% trans %}return to the homepage{% endtrans %}</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

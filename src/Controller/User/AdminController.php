@@ -34,6 +34,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 /**
@@ -141,10 +142,11 @@ class AdminController extends AbstractController
      * @Route("/newuser", name="user_new", methods={"POST"})
      * @param Request $request
      * @param \Swift_Mailer $mailer
+     * @param TranslatorInterface $translator
      * @return Response
      * @throws \Exception
      */
-    public function new(Request $request, \Swift_Mailer $mailer): Response
+    public function new(Request $request, \Swift_Mailer $mailer, TranslatorInterface $translator): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -159,6 +161,7 @@ class AdminController extends AbstractController
             $lastname = random_int(1001,9999);
             $user->setUsername($email);
             $user->setLastname((string)$lastname);
+            $plainPassword = $user->getPlainPassword();
             $encoded = $this->encoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($encoded);
             $user->setVille($user->getCity()->getName());
@@ -171,15 +174,16 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $subject = $translator->trans('Your FORDEALING Account has been created');
             $message = (new \Swift_Message())
                 ->setContentType('text/html')
-                ->setSubject('New user created')
+                ->setSubject($subject)
                 /*change to prod email*/
-                ->setFrom('info@onestdaccord.com')
+                ->setFrom('info@fordealing.fr')
                 /*send to $email*/
                 ->setTo('ziadoof@gmail.com');
-            $img = $message->embed(\Swift_Image::fromPath('assets/images/logo/big.png'));
-            $message->setBody($this->renderView('user/Mail/new_user_mail.html.twig', ['user' => $user, 'img' => $img]));
+            $img = $message->embed(\Swift_Image::fromPath('assets/images/logo/face.png'));
+            $message->setBody($this->renderView('user/Mail/new_user_mail.html.twig', ['user' => $user, 'img' => $img, 'pass'=>$plainPassword]));
             $mailer->send($message);
 
             return $this->redirectToRoute('user_index');
