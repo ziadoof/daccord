@@ -80,3 +80,20 @@ $(".menu-toggle").click(function(e) {
     e.preventDefault();
     $("#sm-sidebar").toggleClass("toggled");
 });
+
+// cookies
+function termsUse() {
+    var el = document.getElementById( 'terms-use' );
+    if ( el ) {
+        var cmd = el.querySelectorAll( 'button' )[0];
+        el.style.display = 'block'; // @note Par défaut l'élément est caché afin d'éviter un visuel désagréable au chargement de la page
+        cmd.onclick = function(){
+            localStorage.setItem( 'termsuse', 'true' );
+            el.style.display = 'none';
+        };
+        if (localStorage.getItem( 'termsuse' ) === 'true' ) {
+            el.style.display = 'none';
+        }
+    }
+}
+termsUse();

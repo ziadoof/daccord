@@ -248,3 +248,14 @@ body .welcome-text {
   width: 16em;
   height: 12em;
 }
+//cookies
+#terms-use{
+  position: fixed;
+  bottom: 0;
+  height: 40vh;
+  width: 100vw;
+  z-index: 99997;
+  background-color: #444444;
+  opacity: 0.8;
+  display: none;
+}
