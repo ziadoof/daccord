@@ -259,3 +259,26 @@ body .welcome-text {
   opacity: 0.8;
   display: none;
 }
+
+//documents
+.logo-name{
+  background-color: #444444;
+}
+.logo-name img{
+  width: 5.2em;
+  height: 4em;
+}
+.logo-name a{
+  text-decoration: none;
+}
+.content-data a{
+  text-decoration: none;
+
+}
+.logo-name span{
+  font-size: 25px;
+  font-weight: bold;
+}
+.logo-name h1:hover{
+  opacity: 0.8;
+}

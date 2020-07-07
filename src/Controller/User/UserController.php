@@ -237,6 +237,7 @@ class UserController extends AbstractController
         $user->setUsername((string) $user->getId());
         $newEmail = (string) $user->getId().'@fordealing.fr';
         $user->setEmail($newEmail);
+        $user->setEmailStatus(false);
         $user->setEmailCanonical($newEmail);
         $user->setEnabled(false);
         $user->setFirstname('FORDEALING User');
@@ -244,8 +245,11 @@ class UserController extends AbstractController
         $user->setMaxDistance(1);
         $user->setPoint(0);
         $user->setPhoneNumber(null);
+        $user->setPhonNumberStatus(false);
         $user->setGender(null);
+        $user->setGenderStatus(false);
         $user->setBirthday(null);
+        $user->setBirthdayStatus(false);
         $user->setProfileImage(null);
 
         $entityManager->persist($user);
