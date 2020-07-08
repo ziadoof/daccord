@@ -419,8 +419,6 @@ class AdsRepository extends Repository
             $minLng= $lng - $total;
             $maxLng= $lng + $total;
             if(($lat != null) && ($lng != null)){
-                dump($lat);
-                dump($lng);
                 $latMatch = new Query\Range();
                 $latMatch->addField('gpsLat',["gte" => $minLat,"lte" => $maxLat]);
                 $bool->addMust($latMatch);

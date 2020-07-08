@@ -20,8 +20,8 @@ class Chat implements MessageComponentInterface
     public function onOpen(ConnectionInterface $conn)
     {
         $this->clients->attach($conn);
-        echo "New connection: Hello', $conn->resourceId";
-        echo "\n";
+        /*echo "New connection: Hello', $conn->resourceId";
+        echo "\n";*/
     }
 
     public function onClose(ConnectionInterface $closedConnection)
@@ -30,8 +30,8 @@ class Chat implements MessageComponentInterface
         /*unset($this->clients[$closedConnection->resourceId]);*/
         foreach ($this->users as $key=>$value){
             if($value === $closedConnection){
-                echo 'User withe key ('.$key.') is disconnected';
-                echo "\n";
+                /*echo 'User withe key ('.$key.') is disconnected';
+                echo "\n";*/
                 unset($this->users[$key]);
             }
         }
@@ -58,22 +58,22 @@ class Chat implements MessageComponentInterface
                         $id = $key;
                     }
                 }
-                echo 'Message connexion user id save at users ['.$id.'] |';
-                echo "\n";
+                /*echo 'Message connexion user id save at users ['.$id.'] |';
+                echo "\n";*/
                 return false;
             }
             if ($messageData['message']=== 'close'){
                 $this->clients->detach($conn);
                 unset($this->users[$messageData['userId']]);
 
-                echo 'Message disconnexion user id save at users ['.$messageData['userId'].'] |';
-                echo "\n";
+                /*echo 'Message disconnexion user id save at users ['.$messageData['userId'].'] |';
+                echo "\n";*/
                 return false;
             }
         }
 
-        echo 'Message sent to user '.$recipient.' msg is  '.$msg.'|';
-        echo "\n";
+        /*echo 'Message sent to user '.$recipient.' msg is  '.$msg.'|';
+        echo "\n";*/
         if(isset($messageData['type'])){
             if($messageData['type']==='seen'){
                 $messages = $messageData['messages'];
@@ -87,8 +87,8 @@ class Chat implements MessageComponentInterface
                             'type'=> 'seen',
                             'recipient'=>$recipient
                         ]));
-                        echo 'kokooooooooooo';
-                        echo "\n";
+                        /*echo 'kokooooooooooo';
+                        echo "\n";*/
                     }
                 }
             }
@@ -106,8 +106,8 @@ class Chat implements MessageComponentInterface
                 'message' => $msg,
                 'thread' => $thread,
             ]));
-            echo 'message to user is sent';
-            echo "\n";
+            /*echo 'message to user is sent';
+            echo "\n";*/
         }
         return false;
 
@@ -119,17 +119,17 @@ class Chat implements MessageComponentInterface
      */
     public function handleZmqMessage($message)
     {
-        echo 'handle Zmq Message';
-        echo "\n";
+        /*echo 'handle Zmq Message';
+        echo "\n";*/
         $messageData = json_decode($message, true);
         $id = $messageData['recipient'];
         if (/*$this->users[$id]*/ array_key_exists($id,$this->users)){
-            echo 'notification to user is sent';
-            echo "\n";
+           /* echo 'notification to user is sent';
+            echo "\n";*/
             return $this->users[$id]->send($message);
         }
-        echo 'notification NOT sent';
-        echo "\n";
+        /*echo 'notification NOT sent';
+        echo "\n";*/
         return false;
     }
 

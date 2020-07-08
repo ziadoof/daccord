@@ -18,7 +18,7 @@
       </notes>
       <segment>
         <source>mark_all_as_seen</source>
-        <target>Marquer tout comme vu</target>
+        <target>marquer_tout_comme_vu</target>
       </segment>
     </unit>
   </file>

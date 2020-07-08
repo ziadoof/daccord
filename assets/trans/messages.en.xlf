@@ -907,5 +907,17 @@
         <target>Your offer and %username% demand</target>
       </segment>
     </unit>
+    <unit id="5IpPeVI17" name="deal-demand-deal">
+      <segment>
+        <source>deal-demand-deal</source>
+        <target>%username% demand</target>
+      </segment>
+    </unit>
+    <unit id="5IpPeVI18" name="deal-offer-deal">
+      <segment>
+        <source>deal-offer-deal</source>
+        <target>%username% offer</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
