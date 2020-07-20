@@ -206,3 +206,79 @@ body .welcome-text {
   transform: translateY(-50%);
   text-align: center;
 }
+
+//last fiw bug
+#previewOfferImgeOne,#previewOfferImgeTow,#previewOfferImgeThree {
+  cursor: pointer;
+}
+#previewOfferImgeOne:hover,#previewOfferImgeTow:hover,#previewOfferImgeThree:hover{
+  opacity: 0.8;
+}
+.sidebar-nav a{
+  text-decoration: none;
+}
+.select2-container {
+  display:block;
+  width: auto;
+}
+.select2 {
+  width: 100% !important;
+}
+.select2 input{
+  width: 100% !important;
+}
+
+.hide-for-search{
+  display: none;
+  max-height: 1px;
+}
+
+.help-tooltip{
+  margin-left: 0.3em;
+  font-size: 100%;
+}
+.help-tooltip:hover{
+  cursor: help;
+}
+.custom-control.custom-checkbox{
+  display: inline;
+}
+//page not found error
+.error-img img{
+  width: 16em;
+  height: 12em;
+}
+//cookies
+#terms-use{
+  position: fixed;
+  bottom: 0;
+  height: 40vh;
+  width: 100vw;
+  z-index: 99997;
+  background-color: #444444;
+  opacity: 0.8;
+  display: none;
+}
+
+//documents
+.logo-name{
+  background-color: #444444;
+}
+.logo-name img{
+  width: 5.2em;
+  height: 4em;
+}
+.logo-name a{
+  text-decoration: none;
+}
+.content-data a{
+  text-decoration: none;
+
+}
+.logo-name span{
+  font-size: 25px;
+  font-weight: bold;
+}
+.logo-name h1:hover{
+  opacity: 0.8;
+}

@@ -1,27 +1,30 @@
-{% extends "layout_user.html.twig" %}
+{% if app.user is not same as(null) %}
+    {% set layout = 'layout_user.html.twig' %}
+{% else %}
+    {% set layout = 'layout_visitor.html.twig' %}
+{% endif %}
+
+{% extends layout %}
 
 {% block title %}{% trans %}Legal notice{% endtrans %}{% endblock %}
 
 {% block content %}
-    <h2 class="text-center blued">Legal notice</h2>
-    <p>
-        Compellingly enable market positioning interfaces through revolutionary partnerships. Conveniently plagiarize cross-media sources for leading-edge products. Appropriately target ubiquitous relationships without high-quality quality vectors. Intrinsicly productivate clicks-and-mortar applications whereas top-line methodologies. Completely envisioneer backend paradigms through backend content.
-
-        Proactively engineer magnetic meta-services without go forward mindshare. Efficiently embrace value-added web services without exceptional architectures. Uniquely initiate highly efficient initiatives before cross-unit ROI. Completely deliver an expanded array of innovation and high standards in alignments. Distinctively matrix client-centered models and team building processes.
-
-        Collaboratively expedite interdependent process improvements rather than bleeding-edge content. Authoritatively grow world-class services before high-quality synergy. Credibly incubate highly efficient web services before high standards in services. Synergistically foster cooperative markets whereas state of the art scenarios. Uniquely architect high standards in bandwidth and leveraged initiatives.
-
-        Continually disintermediate multimedia based benefits after resource sucking expertise. Assertively productivate enabled architectures and innovative experiences. Monotonectally initiate fully tested benefits and cooperative convergence. Holisticly matrix diverse total linkage after revolutionary ideas. Efficiently harness focused leadership skills after top-line interfaces.
-
-        Progressively maximize long-term high-impact channels via next-generation growth strategies. Appropriately evolve enterprise architectures via holistic intellectual capital. Competently impact ubiquitous communities with intuitive e-commerce. Rapidiously network world-class scenarios without integrated imperatives. Competently morph covalent services before one-to-one experiences.
-
-        Objectively coordinate go forward supply chains before integrated human capital. Assertively seize competitive architectures via effective materials. Intrinsicly leverage other's robust supply chains after plug-and-play internal or "organic" sources. Seamlessly productivate world-class action items and an expanded array of strategic theme areas. Quickly fashion open-source materials rather than extensive niche markets.
-
-        Energistically reinvent 24/7 catalysts for change through revolutionary metrics. Holisticly seize collaborative testing procedures for exceptional solutions. Completely disseminate vertical best practices with cross functional services. Interactively architect bleeding-edge platforms for unique human capital. Authoritatively engineer revolutionary relationships with front-end channels.
-
-        Efficiently generate granular growth strategies after synergistic leadership. Intrinsicly streamline bricks-and-clicks mindshare through timely paradigms. Distinctively disintermediate multidisciplinary benefits via intermandated collaboration and idea-sharing. Appropriately productivate B2B total linkage before parallel opportunities. Quickly strategize 24/7 e-business through maintainable interfaces.
-
-        Continually extend e-business metrics after corporate web services. Synergistically engage resource maximizing functionalities for top-line leadership. Seamlessly leverage existing backward-compatible content after tactical testing procedures. Enthusiastically fashion holistic leadership skills before ethical niches. Holisticly extend cross functional e-services without open-source niche markets.
-    </p>
-    <h3 class="rosed text-center"> info@fordealing.fr</h3>
+    <h2 class="text-center blued mt-4">Mention légale</h2>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+            <span class="blued d-inline text-center"><span class="rosed">Dispo</span>Deal</span>
+            <p>
+                is currently a private site which provides a service completely free and which is experimental.
+                in the future which will be affiliated with NajiSoft (a company under construction).
+            </p>
+            <span class="blued d-inline text-center"><span class="rosed">Dispo</span>Deal</span>
+            <p>
+                Hosted with OVH SAS : is a subsidiary of OVH Groupe SAS, a company registered with the Lille RCS under number 537 407 926 located 2 rue Kellermann, 59100 Roubaix.
+            </p>
+        </div>
+    </div>
+    <div class="mt-5">
+        <h6 class="blued text-center">You can contact us via e-mail</h6>
+        <h5 class="rosed text-center"> info@dispodeal.fr</h5>
+    </div>
 {% endblock %}

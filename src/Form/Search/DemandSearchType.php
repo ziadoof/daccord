@@ -9,6 +9,7 @@
 namespace App\Form\Search;
 
 
+use App\Controller\i18next;
 use App\Entity\Location\Department;
 use App\Entity\Location\Region;
 use App\Form\EventListener\AddSearchCategoryFieldSubscriber;
@@ -22,12 +23,26 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 class DemandSearchType extends  AbstractType
 {
+    protected $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // use for translate tooltip
+        $request = $this->requestStack->getCurrentRequest();
+        $local = $request? $request->getLocale():'en';
+        i18next::init($local, '../translations/translation.json');
+
         $builder->add('nearme', CheckboxType::class, [
             'label'    => 'Near me',
             'required' => false,
@@ -58,6 +73,12 @@ class DemandSearchType extends  AbstractType
         $builder->add('myArea', CheckboxType::class, [
             'label'    => 'My area',
             'required' => false,
+            'help' => ' ',
+            'help_attr'=> array(
+                'class'=> 'help-tooltip d-inline fas fa-question-circle',
+                'data-toggle'=> "tooltip",
+                'data-original-title'=>i18next::getTranslation('tooltip.myArea')
+            )
         ]);
         $builder
             ->add('region', EntityType::class, [
@@ -113,7 +134,7 @@ class DemandSearchType extends  AbstractType
 
         $builder
             ->add('title', TextType::class, ['required' => false, 'label'=> false, 'attr' => array(
-                'placeholder' => 'What are you looking for....',
+                'placeholder' => 'Search by title',
             )]);
     }
 

@@ -27,13 +27,26 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use App\Controller\i18next;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class OfferSearchType extends  AbstractType
 {
 
+    protected $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
+        // use for translate tooltip
+        $request = $this->requestStack->getCurrentRequest();
+        $local = $request?$request->getLocale():'en';
+        i18next::init($local, '../translations/translation.json');
 
         $builder->add('nearme', CheckboxType::class, [
                     'label'    => 'Near me',
@@ -66,6 +79,12 @@ class OfferSearchType extends  AbstractType
         $builder->add('myArea', CheckboxType::class, [
             'label'    => 'My area',
             'required' => false,
+            'help' => ' ',
+            'help_attr'=> array(
+                'class'=> 'help-tooltip d-inline fas fa-question-circle',
+                'data-toggle'=> "tooltip",
+                'data-original-title'=>i18next::getTranslation('tooltip.myArea')
+            )
         ]);
 
 
@@ -122,7 +141,7 @@ class OfferSearchType extends  AbstractType
             ->addEventSubscriber(new AddSearchSpecificationFieldSubscriber($category, $entityManager, 'SearchOffer'));
         $builder
             ->add('title', TextType::class, ['required' => false, 'label'=> false, 'attr' => array(
-                'placeholder' => 'What are you looking for....',
+                'placeholder' => 'Search by title',
             )]);
     }
 

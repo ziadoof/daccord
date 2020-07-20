@@ -92,6 +92,9 @@
                                     <span class="blued px-2">{{value['to']}}</span></h5>
                                 <small>{{ value['distance'] }}{{ ' Km' }}</small>
                                 <small>{{ value['duration']}}</small>
+                                <small class='help-tooltip d-inline ' data-toggle ="tooltip" data-original-title="{{ 'The time and distance calculated based on the highway'|trans }}">
+                                    <i class="fas fa-question-circle"></i>
+                                </small>
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-12 col-lg-4 mt-sm-4 mt-md-1 mt-lg-4 btn-group">
@@ -108,6 +111,9 @@
                                 <span class="rosed px-2">{{voyage.mainArrival.name}}</span></h5>
                             <small>{{ voyage.distance }}{{ ' Km' }}</small>
                             <small>{{ voyage.fixDuration(voyage.duration) }}</small>
+                            <small class='help-tooltip d-inline ' data-toggle ="tooltip" data-original-title="{{ 'The time and distance calculated based on the highway'|trans }}">
+                                <i class="fas fa-question-circle"></i>
+                            </small>
                         </div>
                     </div>
                     <div class="col-sm-3 col-md-12 col-lg-4 mt-sm-4 mt-md-1 mt-lg-4 btn-group">

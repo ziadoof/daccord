@@ -1,0 +1,23 @@
+{
+  "en": {
+    "tooltip": {
+      "e-mail":"Others can view your e-mail.",
+      "phone":"Others can view your phone number.",
+      "sex":"Others can view your sex.",
+      "birthday":"Others can view your birthday.",
+      "myArea":"Related to the distance recorded in your account.",
+      "autoroute":"Search only on voyages that use the highway."
+    }
+
+  },
+  "fr": {
+    "tooltip": {
+      "e-mail":"Les autres peuvent voir votre e-mail.",
+      "phone":"Les autres peuvent voir votre numéro de téléphone.",
+      "sex":"Les autres peuvent voir votre sexe.",
+      "birthday":"Les autres peuvent voir votre anniversaire.",
+      "myArea":"Lié à la distance enregistrée dans votre compte.",
+      "autoroute":"Rechercher uniquement sur les trajets utilisant l'autoroute."
+    }
+  }
+}

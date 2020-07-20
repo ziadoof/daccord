@@ -98,7 +98,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
             //Jobs and services-------------------------------------------------------------------------------------
             // Job opportunity
             ['name'=>'mission', 'type'=>'TextType', 'category'=>'Job opportunity'],
-            ['name'=>'acitvityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
+            ['name'=>'activityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
             ['name'=>'workHours', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Full','Partial']],
             ['name'=>'salary','label'=>'Salary (€)', 'type'=>'TextType', 'category'=>'Job opportunity'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Job opportunity'],
@@ -1420,7 +1420,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             //Jobs and services-------------------------------------------------------------------------------------
             // Job opportunity
-            ['name'=>'acitvityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
+            ['name'=>'activityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
             ['name'=>'workHours', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Full','Partial']],
             ['name'=>'salary','label'=>'Salary MIN (€)', 'type'=>'TextType', 'category'=>'Job opportunity'],
             ['name'=>'city', 'type'=>'EntityType', 'category'=>'Job opportunity'],
@@ -2566,7 +2566,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             //Jobs and services-------------------------------------------------------------------------------------
             // Job opportunity
-            ['name'=>'acitvityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
+            ['name'=>'activityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
             ['name'=>'workHours', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Full','Partial']],
             ['name'=>'salary','label'=>'Salary MIN (€)', 'type'=>'TextType', 'category'=>'Job opportunity'],
             ['name'=>'typeOfContract', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['CDI','CDD','CTT','CUI','alternation','Independent']],
@@ -3567,7 +3567,7 @@ class SpecificationsFixtures extends Fixture implements DependentFixtureInterfac
 
             //Jobs and services-------------------------------------------------------------------------------------
             // Job opportunity
-            ['name'=>'acitvityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
+            ['name'=>'activityArea', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Agriculture','Mining and quarrying ','Manufacturing','Electricity/gas','Construction','Transporting','food service','Information','Financial and insurance','Real estate','scientific and technical','Administrative and support','Public administration','Education','Human health','Arts','General services','Rights and Law','Tourism and Hotels','Fashion']],
             ['name'=>'workHours', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Full','Partial']],
             ['name'=>'typeOfContract', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['CDI','CDD','CTT','CUI','alternation','Independent']],
             ['name'=>'experience', 'type'=>'ChoiceType', 'category'=>'Job opportunity','typeOfChoice'=>'TextOptions', 'choice'=>['Not required' => 0,'1 YEAR'=> 1,'2 YEARS' => 2,'3 YEARS' => 3,'4 YEARS' => 4,'5 YEARS' => 5,'+ 5 YEARS' => 6]],

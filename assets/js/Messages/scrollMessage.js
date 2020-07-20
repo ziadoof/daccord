@@ -1,5 +1,10 @@
+import Translator from 'bazinga-translator';
+
 $(document).ready(function () {
     $(".chat-messages").animate({ scrollTop: 20000000 }, "slow");
+
+    // add placeholder for text area message
+    $("#message_body").attr("placeholder", Translator.trans("Write your message..."));
 
     //for save the tab and return to it
     $('a[data-toggle="pill"]').on('show.bs.tab', function(e) {

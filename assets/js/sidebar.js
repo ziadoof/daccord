@@ -32,6 +32,8 @@ $(document).ready(function(){
         $('.sidebar-toggle-box').toggleClass('ana');
 
     });
+
+
 });
 /*link logo for dashboard*/
 function dashboard(){

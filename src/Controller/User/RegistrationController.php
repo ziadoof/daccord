@@ -66,6 +66,7 @@ class RegistrationController extends BaseController
         $form = $this->createForm(RegistrationType::class,$user);
         /*$form->setData($user);*/
         $form->remove('username');
+        $form->get('enabled')->setData(false);
 /*        $form->add('city');*/
         $form->handleRequest($request);
 

@@ -86,7 +86,7 @@ class VoyageController extends AbstractController
             // Define the page parameter
             $request->query->getInt('page', 1),
             // Items per page
-            20
+            24
         );
         return $this->render('carpool/voyage/index.html.twig', [
             'voyages' => $results,

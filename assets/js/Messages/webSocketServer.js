@@ -871,7 +871,6 @@ function wsConnect(id) {
                     }
 
                 }).fail(function(jxh,textmsg,errorThrown){
-                    alert('filer');
                 });
             }
             function sendMessageToUser(data){
@@ -893,7 +892,7 @@ function wsConnect(id) {
                         addMessageToCurrentUser(response[0],response[1]);
 
                     }).fail(function(jxh,textmsg,errorThrown){
-                        alert('filer');
+
                     });
                 }
 

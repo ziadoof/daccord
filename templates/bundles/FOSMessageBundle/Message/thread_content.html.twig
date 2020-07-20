@@ -36,7 +36,7 @@
                                 {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
                                 {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
                             {% endif %}
-                            <form action="{{ formAction }}" method="post" onsubmit="return confirm('Do you really want to delete this conversation ?');">
+                            <form action="{{ formAction }}" method="post" onsubmit="return confirm(Translator.trans('Do you really want to delete this conversation ?'));">
                                 <button class="btn cancel-joining-user" >
                                     <input type="hidden" name="user" value="{{ submitValue }}">
                                     <i class="fas fa-trash-alt"></i>

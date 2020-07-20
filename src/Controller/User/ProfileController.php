@@ -55,8 +55,11 @@ class ProfileController extends BaseProController
 
         return parent::__construct( $eventDispatcher,  $formFactory,  $userManager);
     }
+
     /**
      * @Route("/profile/edit", name="profile_edit")
+     * @param Request $request
+     * @return RedirectResponse|Response|null
      */
     public function editAction(Request $request)
     {

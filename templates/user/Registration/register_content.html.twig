@@ -12,13 +12,24 @@
                     {{ form_row(form.email) }}
                     {{ form_row(form.plainPassword) }}
                     {{ form_row(form.city) }}
-                    <div class="custom-control custom-checkbox accept-gcu">
+                    <div class="btn-group accept-gcu">
+                        <div class="d-inline">
+                            {{ form_row(form.enabled,{label:'I accept'|trans,label_attr:{'class':'checkbox-custom'}}) }}
+                        </div>
+                        <a class="d-inline ml-1" href="#"  onclick="window.open('assets/documents/gcu_{{ app.request.locale|split('_')[0] }}.html','newwindow','width=500,height=800');return false;">
+                            <span class="small"> {% trans %}the General Conditions of Use{% endtrans %}</span>
+                        </a>
+                    </div>
+
+                    {#<div class="custom-control custom-checkbox accept-gcu">
                         <input type="checkbox" id="app_user_registration_accept" name="app_user_registration[accept]" required="required" class="custom-control-input" value="1">
                         <label class="checkbox-custom custom-control-label required" for="app_user_registration_accept">
                             {% trans %}I accept{% endtrans %}
-                            <a class="d-inline" href="#"  onclick="window.open('assets/documents/gcu_{{ app.request.locale|split('_')[0] }}.html','newwindow','width=500,height=800');return false;"
-                            ><span class="small"> {% trans %}the General Conditions of Use{% endtrans %}</span></a></label>
-                    </div>
+                            <a class="d-inline" href="#"  onclick="window.open('assets/documents/gcu_{{ app.request.locale|split('_')[0] }}.html','newwindow','width=500,height=800');return false;">
+                                <span class="small"> {% trans %}the General Conditions of Use{% endtrans %}</span>
+                            </a>
+                        </label>
+                    </div>#}
                     <button type="submit" class="btn login_btn mt-4">{% trans %}Sign up!{% endtrans %}</button>
                     {{ form_end(form) }}
                 </div>

@@ -192,6 +192,11 @@
                     {% endif %}
                 </div>
             {% endfor %}
+            <div class="pagination-search row justify-content-center mt-4">
+                <div class="navigation">
+                    {{ knp_pagination_render(hosting_requests) }}
+                </div>
+            </div>
         </div>
     {% else %}
         <div class="fix-width">

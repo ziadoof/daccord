@@ -718,7 +718,6 @@ function hideElementsOfferSearch() {
 }
 function hideElementsDemandSearch() {
     let items = $('[id^="demand-section"]');
-    console.log(items.length);
     if(items.length>4){
         for (let i=4;i<items.length;i++){
             let id=$(items[i]).attr('id');

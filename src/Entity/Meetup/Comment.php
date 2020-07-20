@@ -4,6 +4,8 @@ namespace App\Entity\Meetup;
 
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\Meetup\CommentRepository")
@@ -25,6 +27,7 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+     *  @Assert\NotBlank
      */
     private $description;
 
