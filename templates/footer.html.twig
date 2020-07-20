@@ -5,9 +5,9 @@
                 <div class="col-12 text-center">
                     <br>
                     <h1 class="rosed mt-2">Cookies</h1>
-                    <h3 class="white "><span class="blued font-weight-bold">FOR<span class="rosed">DEAL</span>ING</span> {% trans %}uses cookies{% endtrans %} </h3>
+                    <h3 class="white "><span class="blued font-weight-bold"><span class="rosed">Dispo</span>Deal</span> {% trans %}uses cookies{% endtrans %} </h3>
                     <br>
-                    <h4 class="white">{% trans %}By continuing to browser, you are agreeing to our use of cookies{% endtrans %}</h4>
+                    <h4 class="white">{% trans %}By continuing to browser (by clicking on a link or scrolling down the page, for example) you are agreeing to our use of cookies{% endtrans %}</h4>
                     <br>
                     <button class="btn btn-info large"><h2>{% trans %}Close{% endtrans %}</h2></button>
                 </div>
@@ -23,13 +23,17 @@
                         <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
                         <span class="rosed">|</span>
                         <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
+                        <span class="rosed">|</span>
+                        <a href="#"  onclick="window.open('assets/documents/gcu_{{ app.request.locale|split('_')[0] }}.html','newwindow','width=500,height=800');return false;">
+                             {% trans %}GCU{% endtrans %}
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col ">
                     <h6 class="text-center"><span class="white">Copyright©</span>
-                        <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
+                        <span class="rosed"></span><span class="blued">Dispo</span><span class="rosed">Deal</span>
                         <span class="white">{{ 'now'|date('Y')}}</span>
                     </h6>
                 </div>
@@ -53,11 +57,15 @@
                 <a href="{{path('about_us')}}">{% trans %}About us{% endtrans %}</a>
                 <span class="rosed">|</span>
                 <a href="{{ path('legal_notice') }}">{% trans %}Legal Notice{% endtrans %}</a>
+                <span class="rosed">|</span>
+                <a href="#"  onclick="window.open('assets/documents/gcu_{{ app.request.locale|split('_')[0] }}.html','newwindow','width=500,height=800');return false;">
+                    {% trans %}GCU{% endtrans %}
+                </a>
             </div>
         </div>
         <div class="col-12 ">
             <h6 class="text-center"><span class="white">Copyright©</span>
-                <span class="rosed">FOR</span><span class="blued">DEAL</span><span class="rosed">ING</span>
+                <span class="rosed"></span><span class="blued">Dispo</span><span class="rosed">Deal</span>
                 <span class="white">{{ 'now'|date('Y')}}</span>
             </h6>
         </div>

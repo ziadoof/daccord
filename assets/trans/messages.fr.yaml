@@ -195,7 +195,7 @@ Your: Votre
 'hosting index': Hébergement
 'Send hosting request to': 'Envoyer une demande d''hébergement à'
 'Login to send hosting request to': 'Connectez-vous pour envoyer une demande d''hébergement à'
-'Welcome to FORDEALING': 'Bienvenue sur FORDEALING'
+'Welcome to DispoDeal': 'Bienvenue sur DispoDeal'
 'Welcome to': 'Bienvenue sur'
 You will have to complete your personal data and define your activity area: Vous devrez compléter vos données personnelles et définir votre zone d'activité
 Complete your profile: Complètez votre profil
@@ -206,7 +206,7 @@ Hello: Bonjour
 'This link can only be used once to validate your account.': 'Ce lien ne peut être utilisé qu''une seule fois pour valider votre compte.'
 NOTE: REMARQUE
 ': If you received this email in error, just ignore this message. No further action is required on your part.': ': Si vous avez reçu cet e-mail par erreur, ignorez simplement ce message. Aucune autre action n''est requise de votre part.'
-'Cordially from the FORDEALING team': 'Cordialement de l''équipe de FORDEALING'
+'Cordially from the DispoDeal team': 'Cordialement de l''équipe de DispoDeal'
 'See you soon!': 'À bientôt!'
 Congrats: Félicitations
 'Your account is now activated.': 'Votre compte est maintenant activé.'
@@ -225,7 +225,7 @@ Register: 'S''inscrire'
 'Reset Password': 'Réinitialiser le mot de passe'
 'To reset your password - please visit': 'Pour réinitialiser votre mot de passe - veuillez visiter'
 'Regards': 'Cordialement'
-'the FORDEALING Team.': 'l''équipe de FORDEALING.'
+'the DispoDeal Team.': 'l''équipe de DispoDeal.'
 'An email has been sent. It contains a link you must click to reset your password.': 'Un e-mail a été envoyé. Il contient un lien sur lequel vous devez cliquer pour réinitialiser votre mot de passe.'
 'Note: You can only request a new password once within': 'Remarque: Vous ne pouvez demander un nouveau mot de passe qu''une seule fois dans'
 hours.: heures.
@@ -1749,9 +1749,13 @@ The requested page couldn't be located. Checkout for any URL misspelling or: La 
 return to the homepage: retour à la page d'accueil
 Page not found error: Erreur de page non trouvée
 Page not found: Page non trouvée
-Your FORDEALING Account has been created: Votre compte FORDEALING a été créé
+Your DispoDeal Account has been created: Votre compte DispoDeal a été créé
 Login: S'identifier
 You can now log in according to the following information: Vous pouvez maintenant vous connecter en fonction des informations suivantes
 account has been created: compte a été créé
-By continuing to browser, you are agreeing to our use of cookies: En poursuivant votre navigation, vous acceptez notre utilisation des cookies
+By continuing to browser (by clicking on a link or scrolling down the page, for example) you are agreeing to our use of cookies: En poursuivant votre navigation (en cliquant sur un lien ou en faisant défiler la page, par exemple) vous acceptez notre utilisation des cookies
 uses cookies: utilise des cookies
+A platform for managing user needs and offers, made up of products and services, with the aim of improving social integration and encouraging exchanges.: Une plateforme de gestion des besoins et des offres des utilisateurs, composée de produits et services, dans le but d'améliorer l'intégration sociale et d'encourager les échanges.
+cares about encouraging the virtual world to come closer to realism through interest-based communication between users in an area, based on a set of services.: se soucie d'encourager le monde virtuel à se rapprocher du réalisme grâce à une communication basée sur les intérêts entre les utilisateurs d'une zone, basée sur un ensemble de services.
+offers deals based on your published ads, and other services that make your life easier.: propose des deals basées sur vos annonces publiées et d'autres services qui vous facilitent la vie.
+GCU: CGU

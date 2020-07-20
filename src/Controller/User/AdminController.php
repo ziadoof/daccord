@@ -174,12 +174,12 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $subject = $translator->trans('Your FORDEALING Account has been created');
+            $subject = $translator->trans('Your DispoDeal Account has been created');
             $message = (new \Swift_Message())
                 ->setContentType('text/html')
                 ->setSubject($subject)
                 /*change to prod email*/
-                ->setFrom('info@fordealing.fr')
+                ->setFrom('info@dispodeal.fr')
                 /*send to $email*/
                 ->setTo('ziadoof@gmail.com');
             $img = $message->embed(\Swift_Image::fromPath('assets/images/logo/face.png'));

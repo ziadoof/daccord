@@ -235,12 +235,12 @@ class UserController extends AbstractController
 
         $user->setDeleted(true);
         $user->setUsername((string) $user->getId());
-        $newEmail = (string) $user->getId().'@fordealing.fr';
+        $newEmail = (string) $user->getId().'@dispodeal.fr';
         $user->setEmail($newEmail);
         $user->setEmailStatus(false);
         $user->setEmailCanonical($newEmail);
         $user->setEnabled(false);
-        $user->setFirstname('FORDEALING User');
+        $user->setFirstname('DispoDeal User');
         $user->setLastname('Deleted');
         $user->setMaxDistance(1);
         $user->setPoint(0);
