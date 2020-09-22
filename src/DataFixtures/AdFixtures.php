@@ -10,12 +10,12 @@ use App\Entity\Ads\Ad;
 
 
 
-class AdFixtures extends Fixture implements DependentFixtureInterface
+class AdFixtures/* extends Fixture implements DependentFixtureInterface*/
 {
     public function load(ObjectManager $manager)
     {
 
-        $ad1 = new Ad();
+       /* $ad1 = new Ad();
         $ad1->setTitle('Voiture a vendre');
         $ad1->setPrice(1400);
         $ad1->setTypeOfAd('Offer');
@@ -168,15 +168,15 @@ class AdFixtures extends Fixture implements DependentFixtureInterface
         $ad16->setGeneralCategory($this->getReference('Jewelry and accessories_Offer'));
         $manager->persist($ad16);
 
-        $manager->flush();
+        $manager->flush();*/
     }
 
     public function getDependencies()
     {
-        return [
+       /* return [
             UserFixtures::class,
             CategoryFixtures::class,
             GeneralCategoryFixtures::class,
-        ];
+        ];*/
     }
 }

@@ -1,8 +1,8 @@
-{% extends 'admin/layout_admin.html.twig' %}
+{% extends 'layout_user.html.twig' %}
 
 {% block title %}Admin cafes{% endblock %}
 
-{% block admin %}
+{% block content %}
     <h1 class="rosed font-weight-bold text-center my-2">{% trans %} Cafe{% endtrans %}</h1>
     <table class="table">
         <thead class="thead-dark text-center">
@@ -21,7 +21,11 @@
         {% for cafe in cafes %}
             <tr>
                 <td>{{ cafe.id }}</td>
-                <td ><a href="{{ path('user_show',{'id':cafe.createdBy.id}) }}" class="float-left"><i class="fas fa-user blued"></i> {{ cafe.createdBy.firstname|title }} {{ cafe.createdBy.lastname|upper }}</a>  </td>
+                {% if cafe.createdBy %}
+                    <td ><a href="{{ path('user_show',{'id':cafe.createdBy.id}) }}" class="float-left"><i class="fas fa-user blued"></i> {{ cafe.createdBy.firstname|title }} {{ cafe.createdBy.lastname|upper }}</a>  </td>
+                {% else %}
+                    <td>User</td>
+                {% endif %}
                 <td>{{ cafe.type }}</td>
                 <td>{{ cafe.duration }}{{ ' Minuts' }}</td>
                 <td>{{ cafe.createdAt|date('d M -y H:i')  }}</td>

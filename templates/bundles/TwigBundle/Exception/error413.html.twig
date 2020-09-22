@@ -1,0 +1,24 @@
+{% if app.user is not same as(null) %}
+    {% set layout = 'layout_user.html.twig' %}
+{% else %}
+    {% set layout = 'layout_visitor.html.twig' %}
+{% endif %}
+
+{% extends layout %}
+{% block title %}413 Error{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="row">
+                <div class="col-12 text-center mt-5 error-img">
+                    <img src="{{ asset('assets/images/logo/face.png') }}" alt="Karo">
+                    <h1 class="rosed">{% trans %}Too Large Image{% endtrans%} 404</h1>
+                </div>
+                <div class="col-12 text-center mt-2">
+                    <p>{% trans %}The image must be less than 1 MB{% endtrans %} <a href="/">{% trans %}return to the homepage{% endtrans %}</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

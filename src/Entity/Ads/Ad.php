@@ -154,7 +154,7 @@ class Ad
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ads\Category", inversedBy="ads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ads\Category", inversedBy="ads", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull
      */
@@ -2672,23 +2672,23 @@ class Ad
     public function serialize():array
     {
         if($this->getCity() !== null){
-            $city = $this->getCity()->getName().' ('.$this->getCity()->getZipCode().')';
+            $city = $this->getCity()->getName();
         }
         else{
             $city = null;
         }
         $url = '../../assets/images/annonce/';
+        $category = $this->getCategory()->getName()==='Other'?$this->getGeneralCategory()->getName():$this->getCategory()->getName();
         return [
             'id'=> $this->id,
-            'generalCategory'=> $this->getGeneralCategory()->getName(),
-            'category'=> $this->getCategory()->getName(),
+            'category'=> $category,
             'imageOne'=> $this->imageOne ?$url.$this->imageOne:null,
             'imageTow'=> $this->imageTow ?$url.$this->imageTow:null,
             'imageThree'=> $this->imageThree ?$url.$this->imageThree:null,
             'price'=> $this->price,
             'pPrice'=> $this->pPrice,
             'city'=> $city,
-            'ville'=> $this->getVille()->getName().' ('.$this->getVille()->getZipCode().')',
+            'ville'=> $this->getVille()->getName(),
             'dateOfAd'=> $this->date_format($this->getDateOfAd()),
             'typeOfAd'=> $this->getTypeOfAd(),
             'donate'=> $this->getDonate()

@@ -1,0 +1,49 @@
+{% extends 'layout_user.html.twig' %}
+
+{% block title %}Visits{% endblock %}
+
+{% block content %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %}Visits Index{% endtrans %}</h1>
+        <div class="row px-2 my-1" id="visit-index">
+            <div class="col-md-4   card-body bg-primary">
+                <a href="{{ path('visit_all') }}">
+                    <div class="row">
+                        <h5 class="col text-center white">ALL</h5>
+                    </div>
+                    <div class="row">
+                        <h1 class="col text-center font-weight-bold white mb-1">{{all}}</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4  border-left-success card-body driver-count">
+                <a href="{{ path('visit_month') }}">
+                    <div class="row">
+                        <h5 class="col text-center white">From 01 To {{ date|date('d F Y') }}</h5>
+                    </div>
+                    <div class="row">
+                        <h1 class="col text-center white font-weight-bold  mb-1">{{month}}</h1>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4  border-left-success card-body activated">
+                <a href="{{ path('visit_day') }}">
+                    <div class="row">
+                        <h5 class="col text-center white">
+                            {% if date|date('y-m-d') is same as ('now'|date('y-m-d')) %}
+                                Today {{ 'now'|date('d M Y') }}
+                            {% else %}
+                                {{ date|date('d F') }}
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="row">
+                        <h1 class="col text-center white font-weight-bold  mb-1">{{day}}</h1>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    {% block visit %}
+
+    {% endblock %}
+{% endblock %}

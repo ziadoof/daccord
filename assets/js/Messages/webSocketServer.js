@@ -2,17 +2,20 @@ import Translator from "bazinga-translator";
 
 $(document).ready(function() {
     let user = document.getElementById('socket_identifier');
-    let id = parseInt(user.getAttribute('data-value'));
+    if (user !== null){
+        let id = parseInt(user.getAttribute('data-value'));
 
-    if (id >0){
-        wsConnect(id)
+        if (id >0){
+            wsConnect(id)
+        }
     }
+
 });
 
 function wsConnect(id) {
 
         (function() {
-            var ws = new WebSocket('ws://127.0.0.1:8080');
+            var ws = new WebSocket('ws://127.0.0.1:8443');
             ws.onopen = function () {
                 ws.send(JSON.stringify({
                     message: 'open',
@@ -399,8 +402,12 @@ function wsConnect(id) {
                 }
                 else{
                     let firstNotificationCounter = document.getElementById('notificationDropdown');
-                    firstNotificationCounter.innerHTML +=
-                        '<span id="notificationCount">'+1+'</span>';
+                    firstNotificationCounter.innerHTML =
+                        '<span id="notificationCount"  class="px-1">'+1+'</span>'
+                        +'<img src="/assets/images/icons/notification.png" class ="icon-visitor">'
+                    ;
+
+
                 }
 
             }
@@ -704,92 +711,97 @@ function wsConnect(id) {
                     minute: "numeric"});
 
                 let _receiver = document.getElementById('messages-chat-'+thread);
-                let active = _receiver.parentNode.parentNode.getAttribute('id');
-                let isActive = $('#'+active).hasClass('active');
-                let messageCounter = document.getElementById('new-message-'+thread);
-                let smallMessageCounter = document.getElementById('small-new-message-'+thread);
-                let firstMessageCounter = document.getElementById('first-message-'+thread);
-                let smallFirstMessageCounter = document.getElementById('small-first-message-'+thread);
-                let id = 'new-message-'+thread;
-                let smallId = 'small-new-message-'+thread;
+                if (_receiver !== null){
+                     let active = _receiver.parentNode.parentNode.getAttribute('id');
+                     let isActive = $('#'+active).hasClass('active');
+                     let messageCounter = document.getElementById('new-message-'+thread);
+                     let smallMessageCounter = document.getElementById('small-new-message-'+thread);
+                     let firstMessageCounter = document.getElementById('first-message-'+thread);
+                     let smallFirstMessageCounter = document.getElementById('small-first-message-'+thread);
+                     let id = 'new-message-'+thread;
+                     let smallId = 'small-new-message-'+thread;
 
-                if(($('#message-center').length > 0) && isBreakpoint('sm')){ //general page and sm-md-lg screen
-                    _receiver.innerHTML +=
-                        '<br>'+
-                        '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 offset-6 box-clint">'+
-                        '<div class="messenger_thread_message_body d-block" >'+
-                        '<p class=" clint-message">' + message + '</p>'+
-                        '</div>'+
-                        '<div class="messenger_thread_message_info d-block " id="">'+
-                        '<small class="clint-message float-right">'+
-                        now
-                        +'</small>'+
-                        '</div>'+
-                        '</div>';
-                    jQuery("div#messages-chat-"+thread).scrollTop(jQuery("div#messages-chat-"+thread)[0].scrollHeight);
+                     if(($('#message-center').length > 0) && isBreakpoint('sm')){ //general page and sm-md-lg screen
+                         _receiver.innerHTML +=
+                             '<br>'+
+                             '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 offset-6 box-clint">'+
+                             '<div class="messenger_thread_message_body d-block" >'+
+                             '<p class=" clint-message">' + message + '</p>'+
+                             '</div>'+
+                             '<div class="messenger_thread_message_info d-block " id="">'+
+                             '<small class="clint-message float-right">'+
+                             now
+                             +'</small>'+
+                             '</div>'+
+                             '</div>';
+                         jQuery("div#messages-chat-"+thread).scrollTop(jQuery("div#messages-chat-"+thread)[0].scrollHeight);
 
-                    if(!isActive)
-                    {
-                        if(null === messageCounter){
-                            firstMessageCounter.innerHTML =
-                                '<p id= '+id+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
-                        }
-                        else{
+                         if(!isActive)
+                         {
+                             if(null === messageCounter){
+                                 firstMessageCounter.innerHTML =
+                                     '<p id= '+id+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
+                             }
+                             else{
 
-                            let messageNumber = parseInt(messageCounter.innerHTML);
-                            if(isNaN(messageNumber)){
-                                firstMessageCounter.innerHTML =
-                                    '<p id= '+id+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
-                            }
-                            else{
-                                messageNumber++;
-                                messageCounter.innerText = messageNumber.toString() ;
-                            }
-                        }
-                        plusAllUnReadMessage();
-                    }
-                    else{
-                        markMessagesToSeen(thread);
-                    }
-                    plusNumberMessagesThread(thread);
+                                 let messageNumber = parseInt(messageCounter.innerHTML);
+                                 if(isNaN(messageNumber)){
+                                     firstMessageCounter.innerHTML =
+                                         '<p id= '+id+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
+                                 }
+                                 else{
+                                     messageNumber++;
+                                     messageCounter.innerText = messageNumber.toString() ;
+                                 }
+                             }
+                             plusAllUnReadMessage();
+                         }
+                         else{
+                             markMessagesToSeen(thread);
+                         }
+                         plusNumberMessagesThread(thread);
+                     }
+                     else{
+                         plusAllUnReadMessage();
+                     }
+
+                     if(($('#small-thread-list').length >0) && isBreakpoint('xs')){ //general page and mobile
+
+                         if(smallMessageCounter === null){
+                             smallFirstMessageCounter.innerHTML =
+                                 '<p id= '+smallId+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
+                         }
+                         else{
+                             let messageNumber = parseInt(smallMessageCounter.innerHTML);
+                             if(isNaN(messageNumber)){
+                                 smallFirstMessageCounter.innerHTML =
+                                     '<p id= '+smallId+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
+                             }
+                             else{
+                                 messageNumber++;
+                                 smallMessageCounter.innerText = messageNumber.toString() ;
+                             }
+                         }
+                     }
+                     if(($('#js-small-thread-open').length >0) && isBreakpoint('xs')){ //thread open in mobile
+                         _receiver.innerHTML +=
+                             '<br>'+
+                             '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 offset-6 box-clint">'+
+                             '<div class="messenger_thread_message_body d-block" >'+
+                             '<p class=" clint-message">' + message + '</p>'+
+                             '</div>'+
+                             '<div class="messenger_thread_message_info d-block " id="">'+
+                             '<small class="clint-message float-right">'+
+                             now
+                             +'</small>'+
+                             '</div>'+
+                             '</div>';
+                         jQuery("div#messages-chat-"+thread).scrollTop(jQuery("div#messages-chat-"+thread)[0].scrollHeight);
+                         markMessagesToSeen(thread);
+                     }
                 }
                 else{
                     plusAllUnReadMessage();
-                }
-
-                if(($('#small-thread-list').length >0) && isBreakpoint('xs')){ //general page and mobile
-
-                    if(smallMessageCounter === null){
-                        smallFirstMessageCounter.innerHTML =
-                            '<p id= '+smallId+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
-                    }
-                    else{
-                        let messageNumber = parseInt(smallMessageCounter.innerHTML);
-                        if(isNaN(messageNumber)){
-                            smallFirstMessageCounter.innerHTML =
-                                '<p id= '+smallId+' class=" ml-2 mt-4 float-right new-message ">' +1+ '</p>';
-                        }
-                        else{
-                            messageNumber++;
-                            smallMessageCounter.innerText = messageNumber.toString() ;
-                        }
-                    }
-                }
-                if(($('#js-small-thread-open').length >0) && isBreakpoint('xs')){ //thread open in mobile
-                    _receiver.innerHTML +=
-                        '<br>'+
-                        '<div class=" my-2 py-2 messenger_thread_message d-inline-block col-6 offset-6 box-clint">'+
-                        '<div class="messenger_thread_message_body d-block" >'+
-                        '<p class=" clint-message">' + message + '</p>'+
-                        '</div>'+
-                        '<div class="messenger_thread_message_info d-block " id="">'+
-                        '<small class="clint-message float-right">'+
-                        now
-                        +'</small>'+
-                        '</div>'+
-                        '</div>';
-                    jQuery("div#messages-chat-"+thread).scrollTop(jQuery("div#messages-chat-"+thread)[0].scrollHeight);
-                    markMessagesToSeen(thread);
                 }
             }
 
@@ -956,8 +968,12 @@ function wsConnect(id) {
                         else {
                             active = parent.querySelector('.active .show');
                         }
-                        let thread = active.getAttribute('data-thread');
-                        markMessagesToSeen(thread);
+
+                        if(active !== null){
+                            let thread = active.getAttribute('data-thread');
+                            markMessagesToSeen(thread);
+                        }
+
                     }
                 }
             }

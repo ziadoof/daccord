@@ -4,27 +4,30 @@
 
 {% block content %}
     <div class="row">
-        <div class="btn-group btn-block" id="meetup-button">
-            <a class="btn btn-info" href="{{path('admin_index')}}" >{% trans %} Dashboard{% endtrans %}</a>
-            <div class="dropdown show">
-                <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {% trans %} All Users {% endtrans %}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="col-12">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="AdminMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin's options
+                </button>
+                <div class="dropdown-menu" aria-labelledby="AdminMenuButton">
+                    <a class="dropdown-item" href="{{path('admin_index')}}" >{% trans %} Dashboard{% endtrans %}</a>
+                    <h6 class="dropdown-header">{% trans %} All Users {% endtrans %}</h6>
                     <a class="dropdown-item" href="{{path('user_index')}}" >{% trans %} Users{% endtrans %}</a>
                     <a class="dropdown-item" href="{{ path('driver_index') }}">{% trans %} Driver users{% endtrans %}</a>
                     <a class="dropdown-item" href="{{ path('hostings_index') }}">{% trans %}Hosting users {% endtrans %}</a>
                     <a class="dropdown-item" href="{{ path('carpool_index') }}">{% trans %}Carpool users {% endtrans %}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{path('admin_category')}}">{% trans %}Category {% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('admin_ads')}}">{% trans %} Ads{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('admin_deals')}}">{% trans %} Deals{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('admin_cafe')}}">{% trans %} Cafe{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('admin_hosting')}}">{% trans %} Hosting{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('admin_meetup')}}">{% trans %} Meetup{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('admin_voyage')}}">{% trans %} Voyages{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('jms_jobs_overview')}}">{% trans %} Job{% endtrans %}</a>
+                    <a class="dropdown-item" href="{{path('visit_index')}}">{% trans %} Visits{% endtrans %}</a>
                 </div>
             </div>
-            <a class="btn btn-info" href="{{path('admin_category')}}">{% trans %}Category {% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('admin_ads')}}">{% trans %} Ads{% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('admin_deals')}}">{% trans %} Deals{% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('admin_cafe')}}">{% trans %} Cafe{% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('admin_hosting')}}">{% trans %} Hosting{% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('admin_meetup')}}">{% trans %} Meetup{% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('admin_voyage')}}">{% trans %} Voyages{% endtrans %}</a>
-            <a class="btn btn-info" href="{{path('jms_jobs_overview')}}">{% trans %} Job{% endtrans %}</a>
         </div>
     </div>
     <div class="mt-3">

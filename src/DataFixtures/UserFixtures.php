@@ -24,29 +24,42 @@ class UserFixtures extends Fixture
 
 
         //create sub category
+        $user = new User();
+        $user->setEmail('ziadoof@gmail.com');
+        $password = $this->encoder->encodePassword($user, 'Mrn$1980Mrn$');
+        $user->setPassword($password);
+        $user->setFirstname('Naji');
+        $user->setLastname('ALABED');
+        $user->setUsername('Ziadoof');
+        $user->setRoles(['ROLE_ADMIN']);
+        /*$this->addReference('naji',$user1);*/
+
+        $manager->persist($user);
+
+        //create sub category
         $user1 = new User();
-        $user1->setEmail('ziadoof@gmail.com');
-        $password = $this->encoder->encodePassword($user1, '123');
+        $user1->setEmail('support@dispodeal.com');
+        $password = $this->encoder->encodePassword($user1, 'Mrn$1980Mrn$');
         $user1->setPassword($password);
-        $user1->setFirstname('Naji');
-        $user1->setLastname('ALABED');
-        $user1->setUsername('ALABED');
-        $this->addReference('naji',$user1);
+        $user1->setFirstname('Dispo');
+        $user1->setLastname('Deal');
+        $user1->setUsername('DD');
+        /*$this->addReference('naji',$user1);*/
 
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setEmail('ziadoof2@gmail.com');
-        $password = $this->encoder->encodePassword($user2, '123');
+        $user2->setEmail('info@dispodeal.com');
+        $password = $this->encoder->encodePassword($user2, 'Mrn$1980Mrn$');
         $user2->setPassword($password);
-        $user2->setFirstname('Reem');
-        $user2->setLastname('FADEL');
-        $user2->setUsername('FADEL');
-        $this->addReference('reem',$user2);
+        $user2->setFirstname('Dispo');
+        $user2->setLastname('deal');
+        $user2->setUsername('DDFR');
+        /*$this->addReference('reem',$user2);*/
 
         $manager->persist($user2);
 
-        $user3 = new User();
+        /*$user3 = new User();
         $user3->setEmail('ziadoof3@gmail.com');
         $password = $this->encoder->encodePassword($user3, '123');
         $user3->setPassword($password);
@@ -110,7 +123,7 @@ class UserFixtures extends Fixture
         $user8->setUsername('zaitouneh');
         $this->addReference('razan',$user8);
 
-        $manager->persist($user8);
+        $manager->persist($user8);*/
 
         $manager->flush();
     }

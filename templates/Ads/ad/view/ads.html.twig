@@ -1,86 +1,107 @@
 {% block content %}
-    <div class="row">
+    <div class="row no-gutters">
         {% if ads is defined %}
         {% for ad in ads %}
             {% set type = ad.typeOfAd %}
             <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
-                <div id="ad_index" class="ad_index shadow-border {% if type is same as('Offer') %}ad_offer{% else %}ad_demand{% endif %}">
+                <div id="" class=" shadow-border  mx-1 {% if type is same as('Offer') %}ad_offer{% else %}ad_demand{% endif %}">
                     <a href="{{ path('ad_show', {'id': ad.id}) }}"class="">
-                        <div class="row">
-                            <div class="col-md-12">
-                                {% if type is same as ('Offer') %}
-                                    {% if ad.imageOne is not null %}
-                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
-                                    {% else %}
-                                        {% if ad.imageTow is not null %}
-                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                        <div class="row ">
+                            <div class="col-12">
+                                <div  class="text-center">
+                                    {% if type is same as ('Offer') %}
+                                        {% if ad.imageOne is not null %}
+                                            <div class="ad-photo-index text-center">
+                                                <img class="image_ad2" src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                            </div>
                                         {% else %}
-                                            {% if ad.imageThree is not null %}
-                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                            {% if ad.imageTow is not null %}
+                                                <div class="ad-photo-index text-center">
+                                                    <img class="image_ad2" src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                                </div>
                                             {% else %}
-                                                <img class="image_ad " src="/assets/images/icons/offer.png" alt="">
+                                                {% if ad.imageThree is not null %}
+                                                    <div class="ad-photo-index text-center">
+                                                        <img class="image_ad2" src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                                    </div>
+                                                {% else %}
+                                                    <div class="ad-photo-index text-center">
+                                                        <img class="image_ad2 " src="/assets/images/icons/offer.png" alt="">
+                                                    </div>
+                                                {%endif%}
                                             {%endif%}
                                         {%endif%}
-                                    {%endif%}
-                                {% else %}
-                                    <img class="image_ad" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
-                                {% endif %}
-                            </div>
-                        </div>
-                    </a>
-                    <div class="row no-gutters">
-                        <div class="col-10">
-                            <div class="ml-2 py-1">
-                                {% if ad.donate %}
-                                    <h5 class="blued mb-0 font-weight-bold d-inline">{% trans %}Donate{% endtrans %}</h5>
-                                {% else %}
-                                    {% if ad.price %}
-                                        <h5 class="blued mb-0 font-weight-bold d-inline">{{ ad.price }}€</h5>
                                     {% else %}
-                                        <br>
+                                        <div class="ad-photo-index text-center">
+                                            <img class="image_ad2" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
+                                        </div>
                                     {% endif %}
-                                    {% if ad.pPrice is not same as (null) %}
-                                        <h5 class="rosed mb-0 font-weight-bold d-inline ml-2"><del>{{ ad.pPrice }}€</del></h5>
+
+
+                                    {% if app.user %}
+                                        {% set isFavorite = 'false' %}
+                                        {#data-favorite must be string not boolean#}
+                                        {% for favorite in app.user.getFavoritesByType('ad')  %}
+                                            {% if favorite.ad is same as (ad) %}
+                                                {% set isFavorite = 'true' %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <form method="post" action="" class="js-favorite-add ad-favorite mr-2 mt-3" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
+                                            <div class="flexbox">
+                                                <div class="fav-btn">
+                                                    <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+                                                </div>
+                                            </div>
+                                        </form>
                                     {% endif %}
-                                {% endif %}
-                                {% if ad.city %}
-                                    <p class="mt-0 blacked">{{ ad.city.name }}{{ ' (' }}{{ ad.city.zipCode }}{{ ')' }}</p>
-                                {% else %}
-                                    <p class="mt-0 blacked">{{ ad.ville.name }}{{ ' (' }}{{ ad.ville.zipCode }}{{ ')' }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            {% if app.user %}
-                                {% set isFavorite = 'false' %}
-                                {#data-favorite must be string not boolean#}
-                                {% for favorite in app.user.getFavoritesByType('ad')  %}
-                                    {% if favorite.ad is same as (ad) %}
-                                        {% set isFavorite = 'true' %}
-                                    {% endif %}
-                                {% endfor %}
-                                <form method="post" action="" class="js-favorite-add ad-favorite mr-2 mt-3" data-object="{{ ad.id }}" data-type="ad" data-favorite="{{ isFavorite }}">
-                                    <div class="flexbox">
-                                        <div class="fav-btn">
-                                            <span class="fas fa-heart  favme dashicons dashicons-heart  {% if isFavorite is same as ('true') %} {{'active'}} {% endif %}"></span>
+
+
+
+                                        <div class="row">
+                                            {% if ad.category.name is same as('Other') %}
+                                                {% set category = ad.category.parent.name|trans() %}
+                                            {% else %}
+                                                {% set category = ad.category|trans() %}
+                                            {% endif %}
+                                            <div class="col mt-1">
+                                                <b class="mt-0 blacked font-weight-bolder float-left pl-2">{{ category }}</b>
+                                                {% if ad.pPrice is not same as (null) and not ad.donate %}
+                                                    <h5 class="rosed mb-0 font-weight-bold d-inline mr-2 float-right"><del>{{ ad.pPrice }}€</del></h5>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mt-0">
+                                                {% if ad.city %}
+                                                    <h6 class="mt-0 blacked float-left pl-2">{{ ad.city.name }}</h6>
+                                                {% else %}
+                                                    <h6 class="mt-0 blacked float-left pl-2">{{ ad.ville.name }}</h6>
+                                                {% endif %}
+                                                {% if ad.donate %}
+                                                    <h6 class="blued mb-0 font-weight-bold d-inline mr-2 float-right">{% trans %}Donate{% endtrans %}</h6>
+                                                {% else %}
+                                                    {% if ad.price %}
+                                                        <h6 class="blued mb-0 font-weight-bold d-inline mr-2 float-right">{{ ad.price }}€</h6>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
-                            {% endif %}
-                        </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="pagination-search row justify-content-center mt-4">
-        <div class="navigation">
-            {{ knp_pagination_render(ads) }}
+            {% endfor %}
         </div>
-    </div>
-    {% else %}
-    <div class="col"><!-- this col it is in a row from another page-->
-        {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
+        <div class="pagination-search row justify-content-center mt-4">
+            <div class="navigation">
+                {{ knp_pagination_render(ads) }}
+            </div>
+        </div>
+        {% else %}
+        <div class="col"><!-- this col it is in a row from another page-->
+            {# this will run whene the user com from get methode with rong id after /search/offers/ or /search/demands/#}
         <h2 class="blued text-center">{% trans %}Sorry .. there are no results{% endtrans %}</h2>
     </div>
     {% endif %}

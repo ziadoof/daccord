@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Entity\Ads\Category;
 use App\Entity\Ads\Specification;
 use App\Entity\Driver;
+use App\Entity\Visit;
 use App\Form\Ads\CategorySpecificationType;
 use App\Form\Ads\CategoryType;
 use App\Form\Ads\SpecificationType;
@@ -24,6 +25,9 @@ use App\Repository\Deal\DoneDealRepository;
 use App\Repository\DriverRepository;
 use App\Repository\Hosting\HostingRepository;
 use App\Repository\UserRepository;
+use App\Repository\VisitRepository;
+use DateInterval;
+use DatePeriod;
 use Knp\Component\Pager\PaginatorInterface;
 use Swift_Attachment;
 use Swift_Image;
@@ -34,6 +38,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 
@@ -55,6 +60,7 @@ class AdminController extends AbstractController
     private $cafeRepo;
     private $hostingRequestRepo;
     private $categoryRepo;
+    private $visitRepo;
 
 
     public function __construct(
@@ -70,7 +76,8 @@ class AdminController extends AbstractController
         UserPasswordEncoderInterface $encoder,
         CafeRepository $cafeRepository,
         HostingRequestRepository $hostingRequestRepo,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        VisitRepository $visitRepository
 
     )
     {
@@ -87,6 +94,7 @@ class AdminController extends AbstractController
         $this->cafeRepo = $cafeRepository;
         $this->hostingRequestRepo = $hostingRequestRepo;
         $this->categoryRepo = $categoryRepository;
+        $this->visitRepo = $visitRepository;
 
     }
 
@@ -96,6 +104,7 @@ class AdminController extends AbstractController
      */
     public function index(): Response
     {
+
         $data = [];
         $data['userCount']= $this->userRepo->userCount();
         $data['activeUsers']= $this->userRepo->activeUserCount();
@@ -716,6 +725,243 @@ class AdminController extends AbstractController
         );
         return $this->render('admin/view/users/carpoolUsers.html.twig', [
             'carpools' => $results,
+        ]);
+    }
+
+
+    /**
+     * @Route("/users/map", name="users_map", methods={"POST"}, options={"expose"=true})
+     * @param Request $request
+     * @return Response
+     */
+    public function users_map(Request $request, UserRepository $repository){
+        $usersData = $repository->findUserData();
+        $locations = [];
+        $data = [];
+        foreach ($usersData as $user){
+            if ($user['mapX']!== null){
+                $locations[]= [$user['mapY'],$user['mapX']];
+                $data[]= [
+                    'firstname'=>$user['firstname'],
+                    'lastname'=>$user['lastname'],
+                    'id'=>$user['id'],
+                    'ville'=>$user['ville'],
+                    'lastLogin'=>$user['lastLogin'],
+                    'lastActivityAt'=>$user['lastActivityAt'],
+                    'enabled'=>$user['enabled'],
+                    'image'=>$user['profileImage'],
+                ];
+            }
+        }
+        $response = ['location'=>$locations, 'data'=>$data];
+
+        return new JsonResponse($response);
+    }
+
+
+
+    /**
+     * @Route("/visit", name="visit_index", methods={"GET","POST"})
+     */
+    public function visit_index(){
+        $date = new \DateTime('now');
+        /*$date->modify('+1 day');*/
+        $day = $this->visitRepo->dayVisitCount($date);
+        $month = $this->visitRepo->monthVisitCount($date);
+        $all = $this->visitRepo->allVisitCount();
+
+        return $this->render('admin/view/visits/index.html.twig', [
+            'all' => $all,
+            'month' => $month,
+            'day' => $day,
+            'date'=>$date
+        ]);
+    }
+
+    /**
+     * @Route("/day", name="visit_day", methods={"GET","POST"})
+     * @param null $day
+     * @return Response
+     */
+    public function visit_day(){
+        $date = new \DateTime('now');
+
+        /*$date->modify('+1 day');*/
+        $visits = $this->visitRepo->findAllByDay($date);
+
+        $day = $this->visitRepo->dayVisitCount($date);
+        $month = $this->visitRepo->monthVisitCount($date);
+        $all = $this->visitRepo->allVisitCount();
+
+        return $this->render('admin/view/visits/day_visits.html.twig', [
+            'visits'=>$visits,
+            'all' => $all,
+            'month' => $month,
+            'day' => $day,
+            'date'=>$date
+        ]);
+    }
+
+    /**
+     * @Route("/showday/{day}", name="show_day", methods={"GET","POST"})
+     * @param DateTime $day
+     * @return Response
+     */
+    public function show_day(string $day){
+
+        $date = new \DateTime($day." 00:00:00");
+        /*$date->modify('+1 day');*/
+        $visits = $this->visitRepo->findAllByDay($date);
+
+        $day = $this->visitRepo->dayVisitCount($date);
+        $month = $this->visitRepo->monthVisitCount($date);
+        $all = $this->visitRepo->allVisitCount();
+
+        return $this->render('admin/view/visits/day_visits.html.twig', [
+            'visits'=>$visits,
+            'all' => $all,
+            'month' => $month,
+            'day' => $day,
+            'date'=>$date
+        ]);
+    }
+
+    /**
+     * @Route("/month", name="visit_month", methods={"GET","POST"})
+     */
+    public function visit_month(){
+        $date = new \DateTime('now');
+        /*$date->modify('+1 day');*/
+        $visits = [];
+        $from = new \DateTime($date->format("Y-m")."-1 00:00:00");
+        $to   = new \DateTime($date->format("Y-m-d")." 23:59:59");
+
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($from, $interval, $to);
+        foreach ($period as $one) {
+            $oneDay ['date']= $one;
+            $oneDay ['nOfVisit']= $this->visitRepo->dayVisitCount($one);
+            $nOfPages = 0;
+            $allDayVisits = $this->visitRepo->findAllByDay($one);
+            foreach ($allDayVisits as $visit){
+                $nOfPages += $visit->getPagesVisited();
+            }
+            $oneDay ['nOfPages']= $nOfPages;
+
+            $visits[]=$oneDay;
+        }
+
+        $day = $this->visitRepo->dayVisitCount($date);
+        $month = $this->visitRepo->monthVisitCount($date);
+        $all = $this->visitRepo->allVisitCount();
+
+        return $this->render('admin/view/visits/multi_visits.html.twig', [
+            'visits'=>$visits,
+            'all' => $all,
+            'month' => $month,
+            'day' => $day,
+            'date'=>$date
+        ]);
+    }
+
+    /**
+     * @Route("/showmonth/{month}", name="show_month", methods={"GET","POST"})
+     * @param string $month
+     * @return Response
+     * @throws \Exception
+     */
+    public function show_month(string $month){
+
+        $date = new \DateTime($month."-1 00:00:00");
+        $visits = [];
+        $from = new \DateTime($date->format("Y-m")."-1 00:00:00");
+        $to   = new \DateTime($date->format("Y-m")."-31 23:59:59");
+
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($from, $interval, $to);
+        foreach ($period as $one) {
+            $oneDay ['date']= $one;
+            $oneDay ['nOfVisit']= $this->visitRepo->dayVisitCount($one);
+            $nOfPages = 0;
+            $allDayVisits = $this->visitRepo->findAllByDay($one);
+            foreach ($allDayVisits as $visit){
+                $nOfPages += $visit->getPagesVisited();
+            }
+            $oneDay ['nOfPages']= $nOfPages;
+
+            $visits[]=$oneDay;
+        }
+        $day = $this->visitRepo->dayVisitCount(new \DateTime('now'));
+        $month = $this->visitRepo->allMonthVisitCount($date);
+        $all = $this->visitRepo->allVisitCount();
+
+        $lastDayOfMonth = null;
+        $now = new \DateTime('now');
+        if($date->format('m-y')=== $now->format('m-y')){
+            $lastDayOfMonth = $now;
+        }
+        else{
+            $lastDayOfMonth = $date->format( 'Y-m-t' );
+        }
+
+        return $this->render('admin/view/visits/multi_visits.html.twig', [
+            'visits'=>$visits,
+            'all' => $all,
+            'month' => $month,
+            'day' => $day,
+            'date'=>$lastDayOfMonth
+        ]);
+    }
+
+    /**
+     * @Route("/allvisit", name="visit_all", methods={"GET","POST"})
+     */
+    public function visit_all(){
+
+        $firstVisit = $this->visitRepo->findFirstVisits();
+        $firstDate = $firstVisit->getDate();
+        $date = new \DateTime('now');
+        $allVisits = [];
+        $allInterval = DateInterval::createFromDateString('1 month');
+        $allPeriod = new DatePeriod($firstDate, $allInterval, $date);
+
+
+        foreach ($allPeriod as $oneMonth) {
+            $month = [];
+            $pageByMonth =0;
+
+            $month['month'] = $oneMonth;
+            $month ['vByMonth']= $this->visitRepo->monthVisitCount($oneMonth);
+            $from = new \DateTime($oneMonth->format("Y-m")."-1 00:00:00");
+            $to   = new \DateTime($oneMonth->format("Y-m")."-31 23:59:59");
+
+            $interval = DateInterval::createFromDateString('1 day');
+            $period = new DatePeriod($from, $interval, $to);
+            foreach ($period as $one) {
+                $oneDay ['date']= $one;
+                $oneDay ['nOfVisit']= $this->visitRepo->dayVisitCount($one);
+                $nOfPages = 0;
+                $allDayVisits = $this->visitRepo->findAllByDay($one);
+                foreach ($allDayVisits as $visit){
+                    $nOfPages += $visit->getPagesVisited();
+                }
+                $oneDay ['nOfPages']= $nOfPages;
+                $pageByMonth += $nOfPages;
+            }
+            $month['pageByMonth'] = $pageByMonth;
+            $allVisits[] = $month;
+        }
+
+        $day = $this->visitRepo->dayVisitCount($date);
+        $month = $this->visitRepo->monthVisitCount($date);
+        $all = $this->visitRepo->allVisitCount();
+
+        return $this->render('admin/view/visits/all_visits.html.twig', [
+            'visits'=>$allVisits,
+            'all' => $all,
+            'month' => $month,
+            'day' => $day,
+            'date'=>$date
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Controller\Ads;
 use App\Entity\Ads\Ad;
 use App\Entity\Ads\Category;
 use App\Entity\Deal\Deal;
+use App\Entity\Visit;
 use App\Events\Events;
 use App\Form\Ads\OfferType;
 use App\Form\Ads\DemandType;
@@ -12,6 +13,7 @@ use App\Form\Ads\AdType;
 use App\Repository\Ads\AdRepository;
 use App\Repository\Deal\DealRepository;
 use App\Repository\Location\CityRepository;
+use App\Repository\VisitRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\PaginatorInterface;
@@ -53,6 +55,7 @@ class AdController extends AbstractController
      */
     public function index(Request $request, AdRepository $adRepository , PaginatorInterface $paginator, TranslatorInterface $translator): Response
     {
+
         $user = $this->getUser();
 
         $result = $adRepository->findAll();
@@ -132,14 +135,43 @@ class AdController extends AbstractController
 
                 $category = $form->get('category')->getData();
 
-                $file1 = $form->get('imageOne')->getData();
+                /*$file1 = $form->get('imageOne')->getData();
                 $file2 = $form->get('imageTow')->getData();
                 $file3 = $form->get('imageThree')->getData();
 
                 $file1 ?$ad->setImageOne($fileUploader->upload($file1)):$ad->setImageOne(null);
                 $file2 ?$ad->setImageTow($fileUploader->upload($file2)):$ad->setImageTow(null);
-                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);
+                $file3 ?$ad->setImageThree($fileUploader->upload($file3)):$ad->setImageThree(null);*/
 
+                //photo new code
+                $image1 = $form->get('imageOne')->getData();
+                $image2 = $form->get('imageTow')->getData();
+                $image3 = $form->get('imageThree')->getData();
+
+                if (!empty($_POST['adImageOne'])){
+                    if ($_POST['adImageOne'][0] !== null){
+                        $file1_name = $this->generateUniqueFileName();
+                        $image1 = $this->base64ToImage($_POST['adImageOne'][0],'assets/images/annonce/'.$file1_name.'.jpg');
+                    }
+                }
+                if (!empty($_POST['adImageTow'])){
+                    if ($_POST['adImageTow'][0] !== null){
+                        $file2_name = $this->generateUniqueFileName();
+                        $image2 = $this->base64ToImage($_POST['adImageTow'][0],'assets/images/annonce/'.$file2_name.'.jpg');
+                    }
+                }
+                if (!empty($_POST['adImageThree'])){
+                    if ($_POST['adImageThree'][0] !== null){
+                        $file3_name = $this->generateUniqueFileName();
+                        $image3 = $this->base64ToImage($_POST['adImageThree'][0],'assets/images/annonce/'.$file3_name.'.jpg');
+                    }
+                }
+                // upload new photo
+                $image1 ? $ad->setImageOne($file1_name.'.jpg'):$ad->setImageOne(null);
+                $image2 ? $ad->setImageTow($file2_name.'.jpg'):$ad->setImageTow(null);
+                $image3 ? $ad->setImageThree($file3_name.'.jpg'):$ad->setImageThree(null);
+
+                //end photo new code
 
                 $ad->setUser($this->getUser());
                 $ad->setCategory($category);
@@ -353,10 +385,19 @@ class AdController extends AbstractController
                 $my_ads []= $ad;
             }
         }
-        $response = array(
-            'result' => $serializedResult,
-            'message' => 'succese',
-        );
+        if(!empty($serializedResult)){
+            $response = array(
+                'result' => $serializedResult,
+                'message' => 'succese',
+            );
+        }
+        else{
+            $response = array(
+                'result' => [],
+                'message' => 'empty',
+            );
+        }
+
         if($data === 'Offer'){
             return new JsonResponse($response);
         }
@@ -398,6 +439,20 @@ class AdController extends AbstractController
             'result' => $serializedResult,
             'message' => 'succese',
         );
+
+        if(!empty($serializedResult)){
+            $response = array(
+                'result' => $serializedResult,
+                'message' => 'succese',
+            );
+        }
+        else{
+            $response = array(
+                'result' => [],
+                'message' => 'empty',
+            );
+        }
+
         if($data === 'Demand'){
             return new JsonResponse($response);
         }
@@ -428,10 +483,8 @@ class AdController extends AbstractController
 
         foreach ($allSpecifications as $key=>$value){
             switch ($key){
-                case 'ges':
-                    $allSpecifications[$key] = $classEnergieAndGes[$value];
-                    break;
                 case 'classEnergie':
+                case 'ges':
                     $allSpecifications[$key] = $classEnergieAndGes[$value];
                     break;
                 case 'experience':
@@ -486,5 +539,53 @@ class AdController extends AbstractController
         $manager->addNotification(array($this->getUser()), $notif, true);
 
         return $this->redirectToRoute('ad_index');
+    }
+
+
+
+    function base64ToImage($base64_string, $output_file) {
+        $data = explode(',', $base64_string);
+        file_put_contents($output_file, base64_decode($data[1]));
+        return $output_file;
+    }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        // md5() reduces the similarity of the file names generated by
+        // uniqid(), which is based on timestamps
+        return md5(uniqid());
+    }
+
+
+    /**
+     * @Route("/visit", name="add_visit", methods={"POST"}, options={"expose"=true})
+     * @param VisitRepository $repository
+     * @return JsonResponse
+     */
+    public function addVisit(VisitRepository $repository){
+        $ip   =  $_SERVER["REMOTE_ADDR"];
+
+         $visit = new Visit($ip);
+         $entityManager = $this->getDoctrine()->getManager();
+
+         if($this->getUser()!== null){
+             $visit->setIdOfUser($this->getUser()->getId());
+         }
+         $isVisitedToday = $repository->findByIpToday($ip);
+         if(empty($isVisitedToday)){
+             $entityManager->persist($visit);
+             $entityManager->flush();
+         }
+         else{
+             $hisVisit = $repository->findByIpToday($ip)[0];
+             $hisVisit->setPagesVisited($hisVisit->getPagesVisited()+1);
+             $entityManager->persist($hisVisit);
+             $entityManager->flush();
+         }
+        $response = [$ip];
+        return new JsonResponse($response);
     }
 }

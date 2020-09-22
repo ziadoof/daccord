@@ -51,14 +51,24 @@
   text-decoration:none;
   color:black;
 }
-.image_ad {
-  height: 20vh;
-  width: 100%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+
+.ad-photo-index{
+  background-color: #444444;
 }
+
+
+.image_ad {
+  height: 18vh;
+  width: auto;
+  max-width: 100%;
+}
+.image_ad2 {
+  height: 18vh;
+  max-width: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .ad_offer{
   /*background-color: rgba(0, 181, 206, 1);*/
   border-bottom: solid 2px rgba(0, 181, 206, 0.5) ;
@@ -78,6 +88,11 @@
 }
 .ad-favorite{
   float: right;
+}
+.ad-favorite2{
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .smoked{
   color: whitesmoke;

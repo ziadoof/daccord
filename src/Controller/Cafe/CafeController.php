@@ -56,12 +56,13 @@ class CafeController extends AbstractController
         }
         if($currentCafe && $deleteCafe !== 0){
             $cafe = $cafeRepository->findOneById($deleteCafe);
+            //delete cafe by user
             $cafe->setActive(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cafe);
             $entityManager->flush();
-            return  $this->generateIndex($session->get('lat'), $session->get('lng'), $request, $cafeRepository,$kernel);
 
+            return  $this->generateIndex($session->get('lat'), $session->get('lng'), $request, $cafeRepository,$kernel);
         }
 
         return  $this->generateIndex($session->get('lat'), $session->get('lng'), $request, $cafeRepository,$kernel);
@@ -133,6 +134,7 @@ class CafeController extends AbstractController
     public function desActiveCafe(Cafe $cafe): void
     {
         $cafe->setActive(false);
+        $cafe->setCreatedBy(null);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($cafe);
         $entityManager->flush();

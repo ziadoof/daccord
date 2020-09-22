@@ -39,7 +39,9 @@ class DeactivateCafeCommand  extends Command
         $id =$input->getArgument('cafeId');
         $cafe = $this->cafeRepository->findOneById($id);
         if($cafe->getActive()){
+            //delete cafe by cron
             $cafe->setActive(false);
+            $cafe->setCreatedBy(null);
             $this->em->persist($cafe);
             $this->em->flush();
             $output->writeln([

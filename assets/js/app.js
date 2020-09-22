@@ -5,6 +5,9 @@ window.jQuery = $;
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 
+
+
+
 require('./router');
 require('./jquery-ui.min');
 require('../../public/bundles/pugxautocompleter/js/autocompleter-jqueryui');
@@ -52,13 +55,14 @@ require('./voyage/searchVoyage');
 require('./favorite');
 require('./admin/admin');
 
-
 //-----------React.js
 //require('./React/startup/result_offer_search');
 
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
+
+
 
 
 $(document).ready(function() {
@@ -85,7 +89,8 @@ $(".menu-toggle").click(function(e) {
 function termsUse() {
     var el = document.getElementById( 'terms-use' );
     if ( el ) {
-        var cmd = el.querySelectorAll( 'button' )[0];
+        /*var cmd = el.querySelectorAll( 'a' )[0];*/
+        var cmd = document.getElementById('b_cookies');
         el.style.display = 'block'; // @note Par défaut l'élément est caché afin d'éviter un visuel désagréable au chargement de la page
         cmd.onclick = function(){
             localStorage.setItem( 'termsuse', 'true' );

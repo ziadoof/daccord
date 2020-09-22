@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 /**
  * @method Ad|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ad|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ad[]    findAll()
  * @method Ad[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class AdRepository extends ServiceEntityRepository
@@ -18,6 +17,20 @@ class AdRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Ad::class);
+    }
+
+    /**
+     * @return Ad[] Returns an array of Ad objects
+     */
+
+    public function findAll()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.dateOfAd', 'DESC')
+            ->setMaxResults(1000)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
      /**

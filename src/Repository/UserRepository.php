@@ -85,4 +85,13 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function findUserData()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u.mapX','u.mapY', 'u.firstname', 'u.lastname','u.id','u.ville','u.lastLogin','u.lastActivityAt','u.enabled','u.profileImage')
+            ->where('u.deleted = FALSE')
+            ->getQuery()
+            ->getResult();
+    }
 }

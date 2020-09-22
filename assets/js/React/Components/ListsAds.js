@@ -42,7 +42,6 @@ class ListsAds extends React.Component {
         return items.map((result) => {
 
             const id = result.id;
-            const generalCategory = result.generalCategory;
             const category = Translator.trans(result.category);
             const imageOne = result.imageOne;
             const imageTow = result.imageTow;
@@ -55,29 +54,6 @@ class ListsAds extends React.Component {
             const typeOfAd = result.typeOfAd;
             const favorite = result.favorite;
             const donate = result.donate;
-
-            let price_status;
-            if(donate){
-                let transDonate = Translator.trans('Donate');
-                price_status= <h5 className="blued mb-0 font-weight-bold d-inline">{transDonate}</h5>;
-            }
-            else{
-                if(pPrice){
-                    price_status =
-                    <div>
-                        <h5 className="blued mb-0 font-weight-bold d-inline">{price}€</h5>
-                        <h5 className="rosed mb-0 font-weight-bold d-inline ml-2"><del>{pPrice}€</del></h5>
-                    </div>;
-                }
-                else{
-                    if(price){
-                        price_status = <h5 className="blued mb-0 font-weight-bold d-inline">{price}€</h5>;
-                    }
-                    else{
-                        price_status = <br></br> ;
-                    }
-                }
-            }
 
             let offerImage;
             if (imageOne !== null) {
@@ -98,20 +74,31 @@ class ListsAds extends React.Component {
             let mine_class ;
             if (typeOfAd === 'Offer') {
                 image = offerImage;
-                mine_class = "ad_index shadow-border ad_offer";
+                mine_class = "shadow-border  mx-1 ad_offer";
             } else {
                 image = demandImage;
-                mine_class = "ad_index shadow-border ad_demand";
+                mine_class = "shadow-border  mx-1 ad_demand";
             }
 
 
             let oldPrice;
             let newPrice;
-            if (pPrice !== null) {
-                oldPrice = <span className="title-blue float-left"><del>{pPrice}€</del></span>;
+            if(donate){
+                let transDonate = Translator.trans('Donate');
+                oldPrice = <div></div>;
+                newPrice = <h6 className="blued mb-0 font-weight-bold d-inline mr-2 float-right">{transDonate}</h6>;
             }
-            if (pPrice !== null) {
-                newPrice = <span className="title-rose float-left">{price}€</span>;
+            else{
+                if(pPrice){
+                    oldPrice =  <h5 className="rosed mb-0 font-weight-bold d-inline mr-2 float-right"><del>{pPrice}€</del></h5>;
+                }
+                if(price){
+                    newPrice = <h6 className="blued mb-0 font-weight-bold d-inline mr-2 float-right">{price}€</h6>;
+                }
+                else{
+                    newPrice = <div></div>;
+                }
+
             }
 
 
@@ -126,7 +113,7 @@ class ListsAds extends React.Component {
             let favoriteStatus;
             if(favorite === 'false'){
                 favoriteStatus =
-                    <form method="post" action="" className="js-favorite-add  ad-favorite mr-2 mt-3" data-object={id} data-type="ad" data-favorite="false">
+                    <form method="post" action="" className="js-favorite-add  ad-favorite2 mr-4 mt-1" data-object={id} data-type="ad" data-favorite="false">
                         <div className="flexbox">
                             <div className="fav-btn">
                                 <span className="fas fa-heart  favme dashicons dashicons-heart "></span>
@@ -136,7 +123,7 @@ class ListsAds extends React.Component {
             }
             else if(favorite === 'true'){
               favoriteStatus =
-                  <form method="post" action="" className="js-favorite-add  ad-favorite mr-2 mt-3" data-object={id} data-type="ad" data-favorite="true">
+                  <form method="post" action="" className="js-favorite-add  ad-favorite2 mr-4 mt-1" data-object={id} data-type="ad" data-favorite="true">
                       <div className="flexbox">
                           <div className="fav-btn">
                             <span className="fas fa-heart  favme dashicons dashicons-heart active"></span>
@@ -150,32 +137,36 @@ class ListsAds extends React.Component {
 
             return (
                 <div className="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4" key={Math.random()}>
-                    <div id="ad_index" className={mine_class}>
-                        <a href={url}>
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <img className="image_ad" src={image}/>
+                    <div id=""  className={mine_class}>
+                        <a href={url} className="">
+                            <div className="row ">
+                                <div className="col-12">
+                                    {favoriteStatus}
+                                    <div className="text-center">
+                                        <div className="ad-photo-index text-center">
+                                            <img className="image_ad2" src={image} />
+                                        </div>
+                                        <div className="row">
+                                            <div className="col mt-1">
+                                                <b className="mt-0 blacked font-weight-bolder float-left pl-2">{category}</b>
+                                                {oldPrice}
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col mt-0">
+                                                <h6 className="mt-0 blacked float-left pl-2">{place}</h6>
+                                                {newPrice}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
-                        <div className="row no-gutters">
-                            <div className="col-10">
-                                <div className="ml-2 py-1">
-                                    {price_status}
-                                    <p className="mt-0 blacked">{place}</p>
-
-                                </div>
-                            </div>
-                            <div className="col-2">
-                                {favoriteStatus}
-                            </div>
-                        </div>
                     </div>
                 </div>
             )
         });
     }
-
     render()
     {
 
@@ -207,7 +198,7 @@ class ListsAds extends React.Component {
 
             return (
                 <div >
-                    <div className="row" >
+                    <div className="row no-gutters" >
                         {this.renderResult(currentItems)}
                     </div>
                     <div className="pagination-search row justify-content-center mt-4">
@@ -234,7 +225,7 @@ class ListsAds extends React.Component {
         } else {
             return (
                 <div key={Math.random()}>
-                    <h1 className="text-center">{Translator.trans('There is no results')}</h1>
+                    <h1 className="text-center blued">{Translator.trans('There is no results')}</h1>
                 </div>
             );
         }

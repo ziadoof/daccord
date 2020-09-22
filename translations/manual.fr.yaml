@@ -272,13 +272,13 @@ Synthetics: Synthétique
 Rubber: Caoutchouc
 Foam: Mousse
 'MIN Capacity (liter)': 'MIN Capacité (litre)'
-'Less than 50 Liters': 'Less than 50 Litres'
-'50-80 Liters': '50-80 Litres'
-'80-150 Liters': '80-150 Litres'
-'150-250 Liters': '150-250 Litres'
-'250-330 Liters': '250-330 Litres'
-'330-490 Liters': '330-490 Litres'
-'More than 50 Liters': 'More than 50 Litres'
+'Less than 50 Liters': 'Moins de 50 litres'
+'50-80 Liters': '50-80 Litrse'
+'80-150 Liters': '80-150 Litrse'
+'150-250 Liters': '150-250 Litrse'
+'250-330 Liters': '250-330 Litrse'
+'330-490 Liters': '330-490 Litrse'
+'More than 50 Liters': 'Plus de 50 litres'
 'City gas': 'Gaz de ville'
 'Bottle gas': 'Bouteille de gaz'
 'MIN Number Of Head': 'MIN Nombre de foyers'
@@ -1049,7 +1049,7 @@ shape: shape
 sSize: sSize
 subjectName: subjectName
 theType: theType
-threeInOne: threeInOne
+threeInOne: trois en un
 typeOfContract: typeOfContract
 typeOfTranslation: typeOfTranslation
 usb: usb
@@ -1081,3 +1081,16 @@ Beer: Bière
 Address: Adresse
 'Number of seats': 'Nombre de places'
 Time: Temps
+Vehicles: Véhicules
+'Jobs and services': 'Emplois et services'
+Media: Médias
+'Home appliances': 'Appareils ménagers'
+'Agriculture and gardens': 'Agriculture et jardins'
+Residence: Résidence
+'Jewelry and accessories': 'Bijoux et accessoires'
+Pets: 'Animaux domestiques'
+Kids: Enfants
+'Furniture and decorations': 'Meubles et décorations'
+Holidays: Vacances
+Electronic cigarette: Cigarette electronique
+Glasses: Lunettes

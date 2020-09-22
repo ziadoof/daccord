@@ -14,7 +14,16 @@
   background-color: #8175c7;
 }
 .activated{
-  background-color: #ffa8fa;
+  background-color: #088c0c;
+}
+.unactivated{
+  background-color: #d02121;
+}
+
+.numberCaree {
+  border-radius: 12px;
+  text-align: center;
+  font: 3em Arial, sans-serif;
 }
 
 .circle-red {
@@ -41,4 +50,22 @@
 .admin-check label{
   margin-top: 1vh;
   width:100px;
+}
+
+//visits and footer
+.social-media-icon img{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+#admin-ul{
+  padding-left: 2px;
+  margin-top: 80px;
+  list-style: none;
+  padding-bottom: 1em;
+}
+
+#visit-index a{
+  text-decoration: none;
 }

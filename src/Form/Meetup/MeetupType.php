@@ -113,7 +113,7 @@ class MeetupType extends AbstractType
                 'class' => City::class,
                 'required'=> true,
                 'attr'=>[
-                    'autocomplete'=> 'off',
+                    'autocomplete'=> 'new-password',
                 ]
             ]);
     }

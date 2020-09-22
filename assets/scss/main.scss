@@ -30,7 +30,16 @@
 @import "header";
 @import "searchBar";
 
-
+body{
+  scrollbar-width: none;
+  overflow: auto;
+  overflow-x: hidden;
+}
+html{
+  overflow: auto;
+  overflow-x: hidden;
+  scrollbar-color: transparent transparent;
+}
 
 body .welcome-text {
   font-size: calc(20px + 10 * (100vw - 200px) / 1200);
@@ -161,6 +170,7 @@ body .welcome-text {
   html,body{
     overflow: auto !important;
     scrollbar-color: transparent transparent;
+
   }
 }
 
@@ -282,3 +292,45 @@ body .welcome-text {
 .logo-name h1:hover{
   opacity: 0.8;
 }
+
+
+/*----------------*/
+
+.souscard-header {
+  padding: 0.10rem 0.10rem;
+  margin-bottom: 0;
+  background-color: lightgray;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.souscard-header2{
+  padding: 0.10rem 0.10rem;
+  margin-bottom: 0;
+  background-color: #fbb450;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#accordion .card-header {
+  padding: 0.10rem 0.10rem;
+  margin-bottom: 0;
+  background-color: dimgray;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#accordion .card-header:first-child {
+  border-radius: unset;
+}
+#accordion .card {
+  border: unset;
+}
+
+.user-map-style{
+  width: auto;
+  height: 70vh;
+  min-height: 17em;
+  border-radius: 5px;
+}
+#users_map img{
+  width: 40px;
+  height: 40px
+}
+

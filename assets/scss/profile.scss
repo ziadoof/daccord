@@ -67,6 +67,10 @@
   text-align: center;
   margin: auto;
 }
+#without-pointer:hover img{
+  opacity: 1;
+  cursor: default;
+}
 
 .profile-edit:hover img {
   opacity: 0.6;
@@ -82,14 +86,16 @@
   transition: .5s ease;
   opacity: 0;
 }
-.profile-edit span{
+
+
+/*.profile-edit span{
   position: absolute;
   top: 58%;
   left: 14ex;
   transform: translate(-50%, -50%);
   color: #0a2f39;
   font-weight: bolder;
-}
+}*/
 
 
 .online-status{

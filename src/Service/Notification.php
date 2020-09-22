@@ -959,7 +959,7 @@ class Notification
         $recipient = $voyageRequest->getVoyage()->getCreator()->getUser();
         $sender = $voyageRequest->getSender();
 
-        $notification = $this->notificationManager->createNotification('voyageReq','','/voyage/'.$voyageRequest->getVoyage()->getId());
+        $notification = $this->notificationManager->createNotification('voyageReq','','/voyage/'.$voyageRequest->getVoyage()->parentVoyage()->getId());
 
         $this->notificationManager->addNotification(array($recipient), $notification, true);
 

@@ -146,7 +146,7 @@
                                             </a>
                                         </li>
                                         {% if is_granted('ROLE_ADMIN') %}
-                                            <li>
+                                           {# <li>
                                                 <a href="{{ path('admin_index') }}">
                                                     <div class="row">
                                                         <div class="col-9">
@@ -157,7 +157,7 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                            </li>
+                                            </li>#}
                                         {% endif %}
                                         <li>
                                             <a href="{{ path('security_logout') }}">
@@ -182,3 +182,4 @@
         </div>
     </nav>
 </header>
+

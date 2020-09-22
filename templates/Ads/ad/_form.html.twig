@@ -544,7 +544,7 @@
             </div>
         </div>
         <div class="row justify-content-center mt-4 mx-4">
-            <input type="submit" class="btn btn-primary btn-block mx-3" value="{% trans %}Add your{% endtrans %}{{ ' ' }}{% if ad.typeOfAd is same as('Offer') %}{% trans%}Offer{% endtrans %}{% else %}{% trans %}Demand{% endtrans %}{% endif %}" />
+            <input type="submit" class="btn btn-primary btn-block mx-3" id="js-new-ad" value="{% trans %}Add your{% endtrans %}{{ ' ' }}{% if ad.typeOfAd is same as('Offer') %}{% trans%}Offer{% endtrans %}{% else %}{% trans %}Demand{% endtrans %}{% endif %}" />
         </div>
     {{ form_end(form) }}
     <a href="{{ path('search_city') }}" id="url-list" class="hidden"></a>

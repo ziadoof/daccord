@@ -1,8 +1,13 @@
 .carpool-edit img{
-  width: 100%;
+  width: auto;
   height: 14em;
   text-align: center;
   margin: auto;
+}
+
+.carpool-edit:hover img {
+  opacity: 0.6;
+  cursor: pointer;
 }
 #previewCarpoolImge{
   cursor: pointer;

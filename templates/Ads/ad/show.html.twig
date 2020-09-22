@@ -195,7 +195,7 @@
                                                                                 {% if spe.name is same as ('dateOfEvent') %}
                                                                                     <td>{{ specifications[spe.name]|date("m/d/Y") }}</td>
                                                                                 {% else %}
-                                                                                    <td>{{ specifications[spe.name] }}</td>
+                                                                                    <td>{{ specifications[spe.name]|trans }}</td>
                                                                                 {% endif %}
                                                                             {% endif %}
                                                                         {% endif %}
@@ -222,7 +222,7 @@
                                                                                 {% if spe.name is same as ('dateOfEvent') %}
                                                                                     <td>{{ specifications[spe.name]|date("m/d/Y") }}</td>
                                                                                 {% else %}
-                                                                                    <td>{{ specifications[spe.name] }}</td>
+                                                                                    <td>{{ specifications[spe.name]|trans }}</td>
                                                                                 {% endif %}
                                                                             {% endif %}
                                                                         {% endif %}

@@ -9,47 +9,51 @@ ymaps
     .then(maps => {
 
         maps.ready(init);
+        let activeVoyageForm = $('#voyage-form-new2').length > 0;
         function init () {
-            // Map parameters can be set in the constructor.
-            myMap = new maps.Map('map',
-                // Map parameters.
-                {
-                    // Geographical coordinates of the center of the displayed map.
-                    center: [47.050661,2.342608],
-                    // Scale.
-                    zoom: 5,
-                    controls: []
-                }
-            );
-
+            if(activeVoyageForm){
+                // Map parameters can be set in the constructor.
+                myMap = new maps.Map('map',
+                    // Map parameters.
+                    {
+                        // Geographical coordinates of the center of the displayed map.
+                        center: [47.050661,2.342608],
+                        // Scale.
+                        zoom: 5,
+                        controls: []
+                    }
+                );
+            }
         }
 
         let NofStation = -1;
-        $('.carpooling-form').collection({
-            add:'<a href="#" class="collection-add btn btn-info mb-4"><i class="fas fa-plus"></i>' +Translator.trans('Add station')+ '</a>',
-            up:false,
-            down:false,
-            max: 5,
-            min:0,
-            after_add: function(collection, element) {
-                NofStation ++;
-                let city_id = '#voyage_first_stations_' + NofStation + '_city';
-                $(city_id).attr('data-id',NofStation);
-                $(completeAuto(city_id,'point',NofStation));
+        if(activeVoyageForm){
+            $('.carpooling-form').collection({
+                add:'<a href="#" class="collection-add btn btn-info mb-4"><i class="fas fa-plus"></i>' +Translator.trans('Add station')+ '</a>',
+                up:false,
+                down:false,
+                max: 5,
+                min:0,
+                after_add: function(collection, element) {
+                    NofStation ++;
+                    let city_id = '#voyage_first_stations_' + NofStation + '_city';
+                    $(city_id).attr('data-id',NofStation);
+                    $(completeAuto(city_id,'point',NofStation));
 
-            },
-            before_remove: function(collection, element){
-                let pointKey = parseInt(element[0].childNodes[1].childNodes[1].childNodes[1].childNodes[3].childNodes[1].getAttribute('data-id'), 10);
-                for(let g=0;g<fixedVia.length;g++){
+                },
+                before_remove: function(collection, element){
+                    let pointKey = parseInt(element[0].childNodes[1].childNodes[1].childNodes[1].childNodes[3].childNodes[1].getAttribute('data-id'), 10);
+                    for(let g=0;g<fixedVia.length;g++){
 
-                    if(fixedVia[g][3]=== pointKey){
-                        fixedVia.splice(g, 1);
+                        if(fixedVia[g][3]=== pointKey){
+                            fixedVia.splice(g, 1);
+                        }
                     }
-                }
-                createRoute(points);
-            },
-            add_at_the_end: true,
-        });
+                    createRoute(points);
+                },
+                add_at_the_end: true,
+            });
+        }
 
 
         function createRoute(points){
@@ -308,3 +312,4 @@ document.addEventListener("DOMContentLoaded", function(){
 
     });
 });
+

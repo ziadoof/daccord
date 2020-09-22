@@ -72,7 +72,7 @@ class AddSearchGeneralcategoryFieldSubscriber implements EventSubscriberInterfac
                     ->orderBy('c.id', 'ASC');
             },
             'choice_label' => 'name',
-            'choice_translation_domain'=> 'category',
+            'choice_translation_domain'=> 'manual',
             'attr'          => array(
                 'class' => 'generalcategory_selector',
             ),

@@ -2,6 +2,112 @@
     <div  class="main pt-0" id="sidebar">
         <div class="sidebar left">
             <ul class="list-sidebar justify-content-center">
+
+                {#admin#}
+                {% if is_granted('ROLE_ADMIN') %}
+                <ul id="admin-ul" class="list-sidebar justify-content-center">
+                    <li class="icon">
+                        <a  data-toggle="collapse" href="#collapseAdmin" role="button" aria-expanded="false" aria-controls="collapseExample" class="side-bar-icon">
+                            {#<i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>#}
+                            <i class="fas fa-user-cog rosed "></i>
+                            <span class="nav-label">{% trans %}Administration{% endtrans %}</span>
+                        </a>
+                    </li>
+                    <div class="collapse ml-2" id="collapseAdmin">
+                        <div class="">
+                            <li class="icon ">
+                                <a href="{{path('admin_index')}}"  class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{path('user_index')}}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Users</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{path('visit_index')}}"  class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Visits</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('driver_index') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Driver users</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('hostings_index') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Hosting users</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('carpool_index') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Carpool users</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_category') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Categories</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_ads') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Ads</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_deals') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Deals</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_cafe') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Cafe</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_hosting') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Hosting</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_meetup') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Meetup</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('admin_voyage') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Voyages</span>
+                                </a>
+                            </li>
+                            <li class="icon ">
+                                <a href="{{ path('jms_jobs_overview') }}" class="side-bar-icon">
+                                    <i class="fas fa-user-cog blued"></i>
+                                    <span class="nav-label">Job</span>
+                                </a>
+                            </li>
+
+
+                        </div>
+                    </div>
+
+
+                </ul>
+                {#admin#}
+                {% endif %}
                 <li class="icon">
                     <a  href="javascript:void(0)" id="my_offer" class="side-bar-icon">
                         {#<i class="fab fa-adversal" class="button-left"  title="Mes offres"></i>#}

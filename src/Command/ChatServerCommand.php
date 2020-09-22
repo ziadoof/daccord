@@ -39,12 +39,12 @@ class ChatServerCommand  extends Command
         $checkedApp->allowedOrigins[] = '127.0.0.1';
         $loop = Factory::create();
 
-        $socket = new Server('tcp://0.0.0.0:8080', $loop);
+        $socket = new Server('0.0.0.0:8443', $loop);
         $server = new IoServer(new HttpServer($checkedApp), $socket, $loop);
 
         $context = new Context($loop);
         $responder = $context->getSocket(ZMQ::SOCKET_PULL);
-        $responder->bind('tcp://127.0.0.1:5555');
+        $responder->bind('tcp://0.0.0.0:5555');
         $responder->on('message', array($chatApp, 'handleZmqMessage'));
 
         $server->run();

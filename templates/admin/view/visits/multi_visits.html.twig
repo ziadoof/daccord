@@ -1,0 +1,41 @@
+{% extends 'admin/view/visits/index.html.twig' %}
+
+{% block title %}Visits{% endblock %}
+
+{% block visit %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %}Visits Of This Month{% endtrans %}</h1>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>Date</th>
+                <th>Number of visit</th>
+                <th>Pages visited</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for visit in visits %}
+            <tr>
+                <td>{{ visit['date']|date('d M - Y') }}</td>
+                <td>{{ visit['nOfVisit'] }}</td>
+                <td>{{ visit['nOfPages'] }}</td>
+                <td>
+                    <a href="{{ path('show_day',{'day':visit['date']|date('Y-m-d')}) }}">
+                        Show
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   {# <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(visits) }}
+        </div>
+    </div>#}
+
+{% endblock %}

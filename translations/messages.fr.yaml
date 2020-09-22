@@ -1,8 +1,8 @@
 'Category :': 'Catégorie :'
 Hosting: Hébergement
-'Done hosting': 'Hébergement terminé'
-'Semi done hosting': 'Hébergement semi-terminé'
-'Your request pending processing by': 'Votre demande en attente de traitement par'
+'Done hosting': 'Séjour terminé'
+'Semi done hosting': 'Séjour semi-terminé'
+'Your request pending processing by': 'Votre demande est en attente de traitement par'
 'Arrival :': 'Arrivée :'
 'Departure :': 'Départ :'
 'Number of persons :': 'Nombre de personnes :'
@@ -11,12 +11,12 @@ Delete: Supprimer
 'with other people': 'avec d''autres personnes'
 from: 'de :'
 to: 'à :'
-'Your rating for this hosting': 'Votre note pour cet hébergement'
-'Rate this hosting': 'Évaluez cet hébergement'
-'Waiting for DONE HOSTING by': 'En attente de DONE HOSTING par'
-'to end this hosting': 'pour mettre fin à cet hébergement'
+'Your rating for this hosting': 'Votre note pour cet séjour'
+'Rate this hosting': 'Évaluez ce séjour'
+'Waiting for DONE HOSTING by': 'En attente de HEBERGEMENT TERMINE par'
+'to end this hosting': 'pour mettre fin à ce séjour'
 'Message to': ' Message à '
-'Your hosting has been approved by': 'Votre hébergement a été approuvé par '
+'Your hosting has been approved by': 'Votre séjour a été approuvé par '
 'in his home': 'chez lui'
 'New Offer': 'Nouvelle offre'
 'New Demand': 'Nouvelle demande'
@@ -56,12 +56,12 @@ Demand: Demande
 'New voyage': 'Nouveau voyage'
 'New Voyage': 'Nouveau voyage'
 'Create new Voyage': 'Créer un nouveau voyage'
-'Next day': 'Le lendemain'
+'Next day': 'jour suivant'
 'Create  Voyage 2': 'Créer Voyage 2'
 Close: Fermer
 Meetup: Meetup
 'My meetup': 'Mes meetups'
-'Meetup join': 'Rejoindre Meetup'
+'Meetup join': 'Rejoindre meetup'
 'Meetup near Me': 'Meetup près de chez moi'
 'New meetup': 'Nouveau meetup'
 'Add new comment': 'Ajouter un nouveau commentaire'
@@ -70,11 +70,11 @@ Comment: Commentaire
 'You don''t have meetups': 'Vous n''avez pas de meetups'
 'You don''t have ads': 'Vous n''avez pas d''annonces'
 'You don''t have favorites': 'Vous n''avez pas de favoris'
-'Create new meetup': 'Créer un nouveau Meetup'
+'Create new meetup': 'Créer un nouveau meetup'
 'What are you looking for....': 'Que cherchez-vous....'
 Cafe: Café
 'Driver request': 'Demande Driver'
-'DONE HOSTING': 'DONE HOSTING'
+'DONE HOSTING': 'Séjour terminé'
 'There is no hosting requests': 'Il n''y a aucune demande d''hébergement'
 'Number of days :': 'Nombre de jours :'
 'City :': 'Ville :'
@@ -89,10 +89,10 @@ persons: personnes
 'Reject the request': 'Rejeter la demande'
 'You have hosting': 'Vous avez un hébergement'
 'and get allocated points.': 'et obtenez des points attribués.'
-'has been DONE this hosting': 'a été DONE cet hébergement'
+'has been DONE this hosting': 'a été effectué ce séjour'
 'You have accepted to host': 'Vous avez accepté d''héberger'
 'Attention :': 'Attention :'
-'adding an rating to your account.': 'ajouter une note à votre compte.'
+'adding a rating to your account.': 'ajouter une note à votre compte.'
 Edit: Modifier
 'no records found': 'Aucun enregistrement trouvé'
 Ads: Annonces
@@ -137,7 +137,7 @@ Comments: Commentaires
 'You have the possibility to host': 'Vous avez la possibilité d''héberger'
 'What can you share with the guest?': 'Que pouvez-vous partager avec l''invité?'
 Update: 'Mettre à jour'
-'Be a host in simple steps': 'Soyez un hôte en quelques étapes simples'
+'Be a host in simple steps': 'Soyez devenez un hôte en quelques étapes'
 'A picture of your house': 'Une photo de votre maison'
 'A picture of your car': 'Une photo de votre voiture'
 'Active :': 'actif :'
@@ -150,12 +150,12 @@ Update: 'Mettre à jour'
 'I have the possibility to host': 'J''ai la possibilité d''héberger'
 'I can share with the guest': 'Je peux partager avec l''invité'
 'Be a host': 'Soyez un hôte'
-'Car brand :': 'Marque de voiture :'
+'Car brand :': 'Marque de la voiture :'
 'Car color :': 'Couleur de la voiture :'
 'Max distance:': 'Distance max :'
 There is no comment: Il n'y a pas de commentaire
-'Be a driver in simple steps': 'Soyez un Driver en quelques étapes simples'
-'Be a driver': 'Soyez un Driver'
+'Be a driver in simple steps': 'Soyez devenez un Driver en quelques étapes'
+'Be a driver': 'Soyez devenez un Driver'
 'Your current area': 'Votre zone actuelle'
 'You did not choose a city': 'Vous n''avez pas choisi de ville'
 'Enter your city name': 'Entrez le nom de votre ville'
@@ -184,7 +184,7 @@ Baby: Bébé
 'bank card': 'Carte bancaire'
 'I can share': 'Je peux partager'
 Conversation: Conversation
-'Share your car in simple steps': 'Partagez votre voiture en quelques étapes simples'
+'Share your car in simple steps': 'Partagez votre voiture en quelques étapes'
 'Share your car': 'Partagez votre voiture'
 'Create new user by admin': 'Créer un nouvel utilisateur par admin'
 Your: Votre
@@ -205,7 +205,7 @@ Hello: Bonjour
 'If your browser cannot move automatically, you can copy the link and place it in the custom location of your browser.': 'Si votre navigateur ne peut pas se déplacer automatiquement, vous pouvez copier le lien et le placer dans l''emplacement personnalisé de votre navigateur.'
 'This link can only be used once to validate your account.': 'Ce lien ne peut être utilisé qu''une seule fois pour valider votre compte.'
 NOTE: REMARQUE
-': If you received this email in error, just ignore this message. No further action is required on your part.': ': Si vous avez reçu cet e-mail par erreur, ignorez simplement ce message. Aucune autre action n''est requise de votre part.'
+': If you received this email in error, just ignore this message. No further action is required on your part.': ': Si vous avez reçu cet e-mail par erreur, veuillez ignorez ce message. Aucune autre action n''est requise de votre part.'
 'Cordially from the DispoDeal team': 'Cordialement de l''équipe de DispoDeal'
 'See you soon!': 'À bientôt!'
 Congrats: Félicitations
@@ -247,8 +247,8 @@ Search: Chercher
 'Another cafe': 'Autre café'
 Message: Message
 'There is no invitations in your area': 'Il n''y a pas d''invitations dans votre zone'
-'Once the invitation is created, all': 'Une fois l''invitation créée, tout les'
-'users located within one kilometer area will be able to view your invitations.': 'utilisateurs situés dans un rayon d''un kilomètre pourront voir votre invitation.'
+'Once the invitation is created, all': 'Une fois l''invitation créée, tout les utilisateurs de '
+'users located within one kilometer area will be able to view your invitations.': ' situés dans un rayon d''un kilomètre pourront voir votre invitation.'
 'Date :': 'Date :'
 'Time :': 'Temps :'
 Points: Points
@@ -256,7 +256,7 @@ Points: Points
 'Your rating for this voyage :': 'Votre note pour ce voyage :'
 'Rate this voyage': 'Évaluez ce voyage'
 Description: Description
-'This voyage uses the highway': 'Ce voyage utilise l''autoroute'
+'This voyage uses the highway': 'Ce voyage passe par l''autoroute'
 'We can share': 'Nous pouvons partager'
 'No seats available': 'Aucun Places disponible'
 'Available seats': 'Places disponibles'
@@ -313,11 +313,11 @@ edit: modifier
 'Max participants :': 'Max participants :'
 From: De
 To: à
-'Rate this meetup': 'Évaluez cette meetup'
+'Rate this meetup': 'Évaluez ce meetup'
 Participants: 'Les participants'
 'Meetup near me (8Km)': 'Meetup près de moi (8Km)'
-'There is no participant in this meetup': 'Il n''y a aucun participant à cette meetup'
-'This meetup is full': 'Cette rencontre est pleine'
+'There is no participant in this meetup': 'Il n''y a aucun participant à ce meetup'
+'This meetup is full': 'Ce meetup est plein'
 'Join to this meetup': 'Rejoignez ce meetup'
 'Waiting list': 'Liste d''attente'
 'There is no participant in the wait list': 'Il n''y a aucun participant sur la liste d''attente'
@@ -326,8 +326,8 @@ Accept: Accepte
 Reject: Rejeter
 Rejected: Rejeté
 Pending: 'En attente'
-'There is no join requests in this meetup': 'Il n''y a aucune demande de rejoindre dans ce meetup'
-'Send join request to this meetup': 'Envoyer une demande de rejoindre à ce Meetup'
+'There is no join requests in this meetup': 'Il n''y a aucune demande de rejoindre ce meetup'
+'Send join request to this meetup': 'Envoyer une demande pour rejoindre ce Meetup'
 'There is no rating for this event': 'Il n''y a pas d''évaluation pour cet événement'
 'My Deals': 'Mes Deals'
 'Suggested Deals': 'Deals suggérées'
@@ -379,9 +379,9 @@ and: et
 'Mark all as seen': 'Marquer tout comme vu'
 'seen :': 'vu :'
 'Mark as seen': 'Marquer comme vu'
-'Mark as unseen': 'Marquer comme invisible'
+'Mark as unseen': 'Marquer comme non lu'
 Notification: Notification
-Unseen: Invisible
+Unseen: Non lu
 'There is no notification found!': 'Aucune notification trouvée!'
 'New suggested deal !': 'Nouvelle deal suggérée!'
 'There is a proposed deal with': 'Il y a un deal proposé avec'
@@ -422,15 +422,15 @@ baby: bébé
 animal: animal
 bag: valise
 carColor: 'Couleur de la voiture'
-carBrand: 'marque de voiture'
+carBrand: 'marque de la voiture'
 television: télévision
 movie: film
 videoGame: 'jeu vidéo'
-cityTour: 'tour de la ville'
-food: aliments
-handicapped: handicapé
+cityTour: 'Tour de la ville'
+food: Nourriture
+handicapped: Handicapé
 child: enfant
-Child: enfant
+Child: Enfant
 Région: Région
 Male: Homme
 Female: Femme
@@ -478,8 +478,8 @@ Title: Titre
 'Your voyage request has bin sent successfully!': 'Votre demande de rejoindre ce voyage a bien été envoyée!'
 'This request was successfully rejected!': 'Cette demande a été rejetée avec succès!'
 'This request was successfully Accepted!': 'Cette demande a été acceptée avec succès!'
-'You lost 10 points as Carpool!': 'Vous avez perdu 10 points en tant que covoiturage!'
-'You no longer have points as Carpool!': 'Vous n''avez plus de points en tant que Covoiturage!'
+'You lost 10 points as Carpool!': 'Vous avez perdu 10 points en tant que covoitureur!'
+'You no longer have points as Carpool!': 'Vous n''avez plus de points en tant que covoitureur!'
 'This passenger was successfully removed!': 'Ce passager a été supprimé avec succès!'
 'You lost 3 points!': 'Vous avez perdu 3 points!'
 'You no longer have points!': 'Vous n''avez plus de points!'
@@ -550,10 +550,10 @@ Title: Titre
 'You have no points left!': 'Vous n''avez plus de points!'
 'You lost': 'vous avez perdu'
 points: points
-'You have no points left as carpool!': 'Vous n''avez plus de points en tant que covoiturage!'
+'You have no points left as carpool!': 'Vous n''avez plus de points en tant que covoitureur!'
 'points as carpool!': 'points comme covoiturage!'
 'Congratulations ... 30 extra points have been added to you as carpool': 'Félicitations ... 30 points supplémentaires vous ont été ajoutés comme covoiturage'
-'has added a rating for you as a carpool, based on your latest voyage..': 'a ajouté une note pour vous en tant que covoiturage, en fonction de votre dernier voyage.'
+'has added a rating for you as a carpool, based on your latest voyage..': 'a ajouté une note pour vous en tant que covoitureur, en fonction de votre dernier voyage.'
 'Cancel voyage!': 'Annuler le voyage!'
 'canceled a voyage you are traveling on.': 'annulé un voyage sur lequel vous voyagez.'
 'You earned five extra points for canceling a voyage you are traveling on.': 'Vous avez gagné cinq points supplémentaires pour avoir annulé un voyage sur lequel vous voyagez.'
@@ -626,7 +626,7 @@ Translation: Traduction
 'House work': 'Travaux ménagers'
 'Maintenance services': 'Services de maintenance'
 TV: Télévision
-Wolkman: Wolkman
+Walkman: Walkman
 Camera: Caméra
 'Audio accessories': 'Accessoires audio'
 'Camera accessories': 'Accessoires pour appareil photo'
@@ -634,7 +634,7 @@ Headphones: Écouteurs
 Telephone: Téléphone
 'Video games': 'Jeux vidéo'
 'DVD Games': 'Jeux DVD'
-'Games accessories': 'Accessoires de jeux'
+'Games accessories': 'Gaming'
 Books: Livres
 Computer: Ordinateur
 laptop: 'Ordinateur portable'
@@ -655,14 +655,14 @@ Costume: Costume
 Dress: Robe
 'Wedding dress': 'Robe de mariée'
 Jacket: Veste
-Langerie: Langerie
+Lingerie: Lingerie
 Shoe: Chaussure
-'Slide sandal': 'Sandale Slide'
+'Slide sandal': 'Sandale'
 'Athletic shoe': 'Chaussure de sport'
 Refrigerator: Réfrigérateur
 'Cookers gas': Gazinière
 'Cookers electric': 'Cuisinière électrique'
-'Gas plate': 'Plaque Gaz'
+'Gas plate': 'Plaque de gaz'
 'Washing machine': 'Machine à laver'
 Fan: Ventilateur
 'Coffee machine': Cafetière
@@ -670,7 +670,7 @@ Fan: Ventilateur
 'Vaccuum cleaner': Aspirateur
 Oven: Four
 Blender: Mixeur
-'Stand Mixer': 'Batteur sur socle'
+'Stand Mixer': 'mixeur industriel'
 Dishwashers: Lave-vaisselle
 'Electric fryer': 'Friteuse électrique'
 Freezer: Congélateur
@@ -678,7 +678,7 @@ Freezer: Congélateur
 Heater: Chauffage
 Iron: 'Fer à repasser'
 'Lady shavers': 'Rasoirs pour femmes'
-'Sandwich toaster': 'Grille-pain sandwich'
+'Sandwich toaster': 'Toaster'
 'Meat grinder': 'Hachoir à viande'
 'Grilling charcoal': 'Charbon de bois à griller'
 'Hair dryer': Sèche-cheveux
@@ -706,11 +706,10 @@ Chainsaw: Tronçonneuse
 'Rent car parking': 'Parking à louer'
 'Rent farm': 'Ferme à louer'
 'Collective housing': 'Logement collectif'
-Necklaces: Necklaces
 Collier: Collier
 Bracelet: Bracelet
 Ring: Bague
-Watch: Montre-bracelet
+Watch: Montre
 Earrings: 'Boucles d''oreilles'
 Perfumes: Parfums
 Wine: Vin
@@ -735,12 +734,12 @@ Basketball: Basketball
 Cat: Chat
 Dog: Chien
 Hamster: Hamster
-Crib: 'Lit de bébé'
+Crib: 'Berceau'
 Stroller: Poussette
 Diapers: Couches
 Mattress: Matelas
 'Baby clothes': 'Vêtements de bébé'
-'Baby tools': 'Outils bébé'
+'Baby tools': 'Accessoires bébé'
 'Baby toys': 'Jouets pour bébé'
 Couch: Canapé
 'Dining table': 'Table à manger'
@@ -1049,13 +1048,13 @@ Synthetics: Synthétique
 Rubber: Caoutchouc
 Foam: Mousse
 'MIN Capacity (liter)': 'MIN Capacité (litre)'
-'Less than 50 Liters': 'Less than 50 Litres'
-'50-80 Liters': '50-80 Litres'
-'80-150 Liters': '80-150 Litres'
-'150-250 Liters': '150-250 Litres'
-'250-330 Liters': '250-330 Litres'
-'330-490 Liters': '330-490 Litres'
-'More than 50 Liters': 'More than 50 Litres'
+'Less than 50 Liters': 'Moins de 50 litres'
+'50-80 Liters': '50-80 Litrse'
+'80-150 Liters': '80-150 Litrse'
+'150-250 Liters': '150-250 Litrse'
+'250-330 Liters': '250-330 Litrse'
+'330-490 Liters': '330-490 Litrse'
+'More than 50 Liters': 'Plus de 50 litres'
 'City gas': 'Gaz de ville'
 'Bottle gas': 'Bouteille de gaz'
 'MIN Number Of Head': 'MIN Nombre de foyers'
@@ -1228,7 +1227,7 @@ Usb: USB
 'Electric Head': 'Electric foyer'
 'With Oven': 'Avec four'
 'Select Capacity (kg)': 'Sélectionnez la capacité (kg)'
-'Select Number Of Persson': 'Sélectionnez le nombre de Persson'
+'Select Number Of Persson': 'Sélectionnez le nombre de personnes'
 'Select Number (unit)': 'Sélectionnez le numéro (unité)'
 'Select Heating Type': 'Sélectionnez le type de chauffage'
 'Select Number Of Rooms': 'Sélectionnez le nombre de chambres'
@@ -1236,7 +1235,7 @@ Usb: USB
 'Select Class Energie': 'Sélectionnez Class Energie'
 Ges: Ges
 'Select Ges': 'Sélectionnez Ges'
-'With Furniture': 'Avec des meubles'
+'With Furniture': 'meublé'
 'Furniture': 'Meubles'
 'With Garden': 'Avec jardin'
 'Garden': 'Jardin'
@@ -1655,7 +1654,7 @@ ChoiceType: ChoiceType
 TextOptions: TextOptions
 NumericOptions: NumericOptions
 SequentialNumericOptions: SequentialNumericOptions
-'users located within one kilometer area will be able to view your invitation.': 'utilisateurs situés dans un rayon d''un kilomètre pourront voir votre invitation.'
+'users located within one kilometer area will be able to view your invitation.': ' situés dans un rayon d''un kilomètre pourront voir votre invitation.'
 'You have not meetups': 'Vous n''avez pas de meetups'
 'The driver request has bin accepted ..!': 'La demande du Driver a été acceptée ..!'
 Today: 'Aujourd''hui'
@@ -1759,3 +1758,8 @@ A platform for managing user needs and offers, made up of products and services,
 cares about encouraging the virtual world to come closer to realism through interest-based communication between users in an area, based on a set of services.: se soucie d'encourager le monde virtuel à se rapprocher du réalisme grâce à une communication basée sur les intérêts entre les utilisateurs d'une zone, basée sur un ensemble de services.
 offers deals based on your published ads, and other services that make your life easier.: propose des deals basées sur vos annonces publiées et d'autres services qui vous facilitent la vie.
 GCU: CGU
+Yes: Oui
+No: Non
+A social media platform that handles offers and demands by proposing deals to users in addition to other constantly developing services such as hosting, car sharing, meetings, activities and acquaintance ...: Une plateforme de médias sociaux qui gère les offres et les demandes en proposant des deals aux utilisateurs en plus d'autres services en constante évolution tels que l'hébergement, le covoiturage, les réunions, les activités et la connaissance ...
+Electronic cigarette: Cigarette electronique
+Glasses: Lunettes

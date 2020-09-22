@@ -1,0 +1,49 @@
+{% extends 'admin/view/visits/index.html.twig' %}
+
+{% block title %}Visits{% endblock %}
+
+{% block visit %}
+    <h1 class="rosed font-weight-bold text-center my-2">{% trans %}Visits{% endtrans %}</h1>
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>Visitor ip</th>
+                <th>Region</th>
+                <th>City</th>
+                <th>Zip code</th>
+                <th>date</th>
+                <th>number of pages</th>
+                <th>User profile</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for visit in visits %}
+            <tr>
+                <td>{{ visit.ip }}</td>
+                <td>{{ visit.region }}</td>
+                <td>{{ visit.city }}</td>
+                <td>{{ visit.zipcode }}</td>
+                <td>{{ visit.date|date('d M-y | H:i') }}</td>
+                <td>{{ visit.pagesVisited }}</td>
+                <td>
+                    {% if visit.idOfUser is not same as(0) %}
+                        <a href="{{ path('user_show', {'id': visit.idOfUser}) }}">Show profile</a>
+                    {% else %}
+                        Unknown
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="34">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   {# <div class="pagination-search row justify-content-center mt-4">
+        <div class="navigation">
+            {{ knp_pagination_render(visits) }}
+        </div>
+    </div>#}
+
+{% endblock %}

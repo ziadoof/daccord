@@ -17,20 +17,30 @@
                             <div class="col-md-12">
                                 {% if type is same as ('Offer') %}
                                     {% if ad.imageOne is not null %}
-                                        <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                        <div class="ad-photo-index text-center">
+                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageOne) }}" alt="">
+                                        </div>
                                     {% else %}
                                         {% if ad.imageTow is not null %}
-                                            <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                            <div class="ad-photo-index text-center">
+                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageTow) }}" alt="">
+                                            </div>
                                         {% else %}
                                             {% if ad.imageThree is not null %}
-                                                <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                                <div class="ad-photo-index text-center">
+                                                    <img class="image_ad" src="{{ asset('assets/images/annonce/'~ ad.imageThree) }}" alt="">
+                                                </div>
                                             {% else %}
-                                                <img class="image_ad " src="/assets/images/icons/offer.png" alt="">
+                                                <div class="ad-photo-index text-center">
+                                                    <img class="image_ad " src="/assets/images/icons/offer.png" alt="">
+                                                </div>
                                             {%endif%}
                                         {%endif%}
                                     {%endif%}
                                 {% else %}
-                                    <img class="image_ad" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
+                                    <div class="ad-photo-index text-center">
+                                        <img class="image_ad" src="{{ asset('assets/images/icons/demand.png') }}" alt="">
+                                    </div>
                                 {% endif %}
                             </div>
                         </div>

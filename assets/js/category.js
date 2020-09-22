@@ -16,10 +16,18 @@ $(function(){
 
                 $category_selector.html('<option value="">' + all_category + '</option>');
 
+                let other; // for but the other category in end of list
                 for (var i=0, total = data.length; i < total; i++) {
-                    let name = Translator.trans(data[i].name);
-                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    if(data[i].name === 'Other'){
+                        other = data[i];
+                    }
+                    else {
+                        let name = Translator.trans(data[i].name);
+                        $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    }
                 }
+                $category_selector.append('<option value="' + other.id + '">' + Translator.trans(other.name) + '</option>');
+
             }
         });
     });
@@ -41,10 +49,17 @@ $(function(){
 
                 $category_selector.html('<option value="">' + all_category + '</option>');
 
+                let other; // for but the other category in end of list
                 for (var i=0, total = data.length; i < total; i++) {
-                    let name = Translator.trans(data[i].name);
-                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    if(data[i].name === 'Other'){
+                        other = data[i];
+                    }
+                    else {
+                        let name = Translator.trans(data[i].name);
+                        $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    }
                 }
+                $category_selector.append('<option value="' + other.id + '">' + Translator.trans(other.name) + '</option>');
             }
         });
     });
@@ -68,10 +83,17 @@ $(function(){
                 let all_category = Translator.trans('Category');
 
                 $category_selector.html('<option value="">' + all_category + '</option>');
+                let other; // for but the other category in end of list
                 for (var i=0, total = data.length; i < total; i++) {
-                    let name = Translator.trans(data[i].name);
-                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    if(data[i].name === 'Other'){
+                        other = data[i];
+                    }
+                    else {
+                        let name = Translator.trans(data[i].name);
+                        $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    }
                 }
+                $category_selector.append('<option value="' + other.id + '">' + Translator.trans(other.name) + '</option>');
             }
         });
     });
@@ -94,10 +116,17 @@ $(function(){
 
                 $category_selector.html('<option value="">' + all_category + '</option>');
 
+                let other; // for but the other category in end of list
                 for (var i=0, total = data.length; i < total; i++) {
-                    let name = Translator.trans(data[i].name);
-                    $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    if(data[i].name === 'Other'){
+                        other = data[i];
+                    }
+                    else {
+                        let name = Translator.trans(data[i].name);
+                        $category_selector.append('<option value="' + data[i].id + '">' + name + '</option>');
+                    }
                 }
+                $category_selector.append('<option value="' + other.id + '">' + Translator.trans(other.name) + '</option>');
             }
         });
     });

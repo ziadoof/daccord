@@ -86,12 +86,25 @@ class ProfileController extends BaseProController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $filesystem = new Filesystem();
-            $fileUploader = new FileUploader('assets/images/profile/');
+            /*$fileUploader = new FileUploader('assets/images/profile/');
             $profileImage = $form->get('profileImage')->getData();
             //delet old photo
             $oldImage && $profileImage ?$filesystem->remove('assets/images/profile/'.$oldImage):null;
             // upload new photo
-            $profileImage ? $user->setProfileImage($fileUploader->upload($profileImage)):$user->setProfileImage($oldImage);
+            $profileImage ? $user->setProfileImage($fileUploader->upload($profileImage)):$user->setProfileImage($oldImage);*/
+            //new profile image code
+            $profileImage = $form->get('profileImage')->getData();
+            if (!empty($_POST['newProfileImage'])){
+                if ($_POST['newProfileImage'][0] !== null){
+                    $file_name = $this->generateUniqueFileName();
+                    $profileImage = $this->base64ToImage($_POST['newProfileImage'][0],'assets/images/profile/'.$file_name.'.jpg');
+                }
+            }
+            //delet old photo
+            $oldImage && $profileImage ?$filesystem->remove('assets/images/profile/'.$oldImage):null;
+            // upload new photo
+            $profileImage ? $user->setProfileImage($file_name.'.jpg'):$user->setProfileImage($oldImage);
+            // end new code
 
             $event = new FormEvent($form, $request);
             $this->eventDispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
@@ -139,7 +152,7 @@ class ProfileController extends BaseProController
     public function areaAction(Request $request, DriverRequestRepository $driverRequestRepository,
                                DealRepository $dealRepository , EventDispatcherInterface $eventDispatcher,
                                \App\Service\City\CityAutoAreaType $cityType, CityAreaType $regionType,
-                                HostingRequestRepository $hostingRequestRepository)
+                               HostingRequestRepository $hostingRequestRepository)
     {
         $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
@@ -166,9 +179,9 @@ class ProfileController extends BaseProController
             $user->setCity($city);
             $driver = $user->getDriver();
             if($driver){
-              $driver->setCity($data->getCity());
-              $driver->setGpsLat($gpsLat);
-              $driver->setGpsLng($gpsLng);
+                $driver->setCity($data->getCity());
+                $driver->setGpsLat($gpsLat);
+                $driver->setGpsLng($gpsLng);
                 $entityManager->persist($user);
             }
 
@@ -183,8 +196,8 @@ class ProfileController extends BaseProController
                 $ad->setGpsLat($gpsLat);
                 $ad->setGpsLng($gpsLng);
                 $entityManager->persist($ad);
-                   $event = new GenericEvent($ad);
-                   $eventDispatcher->dispatch(Events::AD_ADD, $event);
+                $event = new GenericEvent($ad);
+                $eventDispatcher->dispatch(Events::AD_ADD, $event);
                 $ads +=1;
             }
 
@@ -279,7 +292,7 @@ class ProfileController extends BaseProController
         }
 
         return $this->render('user/Profile/edit_area.html.twig', [
-            ]);
+        ]);
     }
 
     /**
@@ -298,28 +311,55 @@ class ProfileController extends BaseProController
 
         $DriverForm = $formDriverType->getForm();
         $DriverForm->handleRequest($request);
-            if ($DriverForm->isSubmitted() && $DriverForm->isValid()) {
-                $driver = $DriverForm->getData();
-                $filesystem = new Filesystem();
-                $carImage = $DriverForm->get('carImage')->getData();
-                $fileUploader = new FileUploader('assets/images/car_driver/');
+        if ($DriverForm->isSubmitted() && $DriverForm->isValid()) {
+            /* $driver = $DriverForm->getData();
+             $filesystem = new Filesystem();
+             $carImage = $DriverForm->get('carImage')->getData();
+             $fileUploader = new FileUploader('assets/images/car_driver/');
 
-                //delet old photo
-                $driverOldPhoto && $carImage ?$filesystem->remove('assets/images/car_driver/'.$driverOldPhoto):null;
-                // upload new photo
-                $carImage ? $driver->setCarImage($fileUploader->upload($carImage)):$driver->setCarImage($driverOldPhoto?:'with out photo');
+             //delet old photo
+             $driverOldPhoto && $carImage ?$filesystem->remove('assets/images/car_driver/'.$driverOldPhoto):null;
+             // upload new photo
+             $carImage ? $driver->setCarImage($fileUploader->upload($carImage)):$driver->setCarImage($driverOldPhoto?:'with out photo');
 
-                $driver->setUser($user);
-                $driver->setCity($user->getCity());
-                $driver->setGpsLat($user->getMapY());
-                $driver->setGpsLng($user->getMapX());
+             $driver->setUser($user);
+             $driver->setCity($user->getCity());
+             $driver->setGpsLat($user->getMapY());
+             $driver->setGpsLng($user->getMapX());
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($driver);
-                $entityManager->flush();
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($driver);
+             $entityManager->flush();
 
-                return $this->redirectToRoute('fos_user_profile_show');
+             return $this->redirectToRoute('fos_user_profile_show');*/
+
+            $carImage = $DriverForm->get('carImage')->getData();
+            if (!empty($_POST['driverImage'])){
+                if ($_POST['driverImage'][0] !== null){
+                    $file_name = $this->generateUniqueFileName();
+                    $carImage = $this->base64ToImage($_POST['driverImage'][0],'assets/images/car_driver/'.$file_name.'.jpeg');
+                }
             }
+
+            $driver = $DriverForm->getData();
+            $filesystem = new Filesystem();
+            /*$fileUploader = new FileUploader('assets/images/car_driver/');*/
+            //delet old photo
+            $driverOldPhoto && $carImage ?$filesystem->remove('assets/images/car_driver/'.$driverOldPhoto):null;
+            // upload new pho$this->driverPhototo
+            $carImage ? $driver->setCarImage($file_name.'.jpeg'):$driver->setCarImage($driverOldPhoto?:'with out photo');
+
+            $driver->setUser($user);
+            $driver->setCity($user->getCity());
+            $driver->setGpsLat($user->getMapY());
+            $driver->setGpsLng($user->getMapX());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($driver);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
 
         return $this->render('user/Profile/driver_edit_form.html.twig', [
 
@@ -399,13 +439,29 @@ class ProfileController extends BaseProController
         if ($HostingForm->isSubmitted() && $HostingForm->isValid()) {
             $hosting = $HostingForm->getData();
             $filesystem = new Filesystem();
+
             $hostingImage = $HostingForm->get('image')->getData();
-            $fileUploader = new FileUploader('assets/images/Hosting/');
+            /*$fileUploader = new FileUploader('assets/images/Hosting/');
 
             //delet old photo
             $hostingOldPhoto && $hostingImage ?$filesystem->remove('assets/images/car_driver/'.$hostingOldPhoto):null;
             // upload new photo
-            $hostingImage ? $hosting->setImage($fileUploader->upload($hostingImage)):$hosting->setImage($hostingOldPhoto?:'with out photo');
+            $hostingImage ? $hosting->setImage($fileUploader->upload($hostingImage)):$hosting->setImage($hostingOldPhoto?:'with out photo');*/
+
+            //new photo code
+
+            if (!empty($_POST['hostingImage'])){
+                if ($_POST['hostingImage'][0] !== null){
+                    $file_name = $this->generateUniqueFileName();
+                    $hostingImage = $this->base64ToImage($_POST['hostingImage'][0],'assets/images/Hosting/'.$file_name.'.jpg');
+                }
+            }
+            //delet old photo
+            $hostingOldPhoto && $hostingImage ?$filesystem->remove('assets/images/Hosting/'.$hostingOldPhoto):null;
+            // upload new photo
+            $hostingImage ? $hosting->setImage($file_name.'.jpg'):$hosting->setImage($hostingOldPhoto);
+            //end new photo code
+
 
             $hosting->setUser($user);
             $hosting->setVille($user->getCity());
@@ -442,15 +498,30 @@ class ProfileController extends BaseProController
         $carpoolForm = $formCarpoolType->getForm();
         $carpoolForm->handleRequest($request);
         if ($carpoolForm->isSubmitted() && $carpoolForm->isValid()) {
+
             $carpool = $carpoolForm->getData();
             $filesystem = new Filesystem();
             $carImage = $carpoolForm->get('carImage')->getData();
-            $fileUploader = new FileUploader('assets/images/carpool/');
+            /*$fileUploader = new FileUploader('assets/images/carpool/');
 
             //delet old photo
             $carpoolOldPhoto && $carImage ?$filesystem->remove('assets/images/carpool/'.$carpoolOldPhoto):null;
             // upload new photo
-            $carImage ? $carpool->setCarImage($fileUploader->upload($carImage)):$carpool->setCarImage($carpoolOldPhoto?:'with out photo');
+            $carImage ? $carpool->setCarImage($fileUploader->upload($carImage)):$carpool->setCarImage($carpoolOldPhoto?:'with out photo');*/
+
+            //new photo code
+
+            if (!empty($_POST['carpoolImage'])){
+                if ($_POST['carpoolImage'][0] !== null){
+                    $file_name = $this->generateUniqueFileName();
+                    $carImage = $this->base64ToImage($_POST['carpoolImage'][0],'assets/images/carpool/'.$file_name.'.jpg');
+                }
+            }
+            //delet old photo
+            $carpoolOldPhoto && $carImage ?$filesystem->remove('assets/images/carpool/'.$carpoolOldPhoto):null;
+            // upload new photo
+            $carImage ? $carpool->setCarImage($file_name.'.jpg'):$carpool->setCarImage($carpoolOldPhoto);
+            //end new photo code
 
             $carpool->setUser($user);
 
@@ -495,5 +566,23 @@ class ProfileController extends BaseProController
         return $this->render('user/Carpool/rating.html.twig', [
             'rating'=>$rating,
         ]);
+    }
+
+
+
+    function base64ToImage($base64_string, $output_file) {
+        $data = explode(',', $base64_string);
+        file_put_contents($output_file, base64_decode($data[1]));
+        return $output_file;
+    }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        // md5() reduces the similarity of the file names generated by
+        // uniqid(), which is based on timestamps
+        return md5(uniqid());
     }
 }

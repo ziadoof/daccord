@@ -31,9 +31,12 @@ $(document).ready(function () {
         }
     }
     let general = document.getElementById('js-general-message-center');
-    general.addEventListener('click', function () {
-        localStorage.setItem('message-tap', null);
-    })
+    if (general !== null){
+        general.addEventListener('click', function () {
+            localStorage.setItem('message-tap', null);
+        })
+    }
+
 
 
 

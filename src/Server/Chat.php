@@ -22,6 +22,7 @@ class Chat implements MessageComponentInterface
         $this->clients->attach($conn);
         /*echo "New connection: Hello', $conn->resourceId";
         echo "\n";*/
+        echo 'hello';
     }
 
     public function onClose(ConnectionInterface $closedConnection)

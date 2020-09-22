@@ -4,12 +4,11 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <br>
-                    <h1 class="rosed mt-2">Cookies</h1>
-                    <h3 class="white "><span class="blued font-weight-bold"><span class="rosed">Dispo</span>Deal</span> {% trans %}uses cookies{% endtrans %} </h3>
+                    <h5 class="rosed mt-2">Cookies</h5>
+                    <h6 class="white"><span class="blued font-weight-bold"><span class="rosed">Dispo</span>Deal</span> {% trans %}uses cookies{% endtrans %} </h6>
+                    <span class="white">{% trans %}By continuing to browser (by clicking on a link or scrolling down the page, for example) you are agreeing to our use of cookies{% endtrans %}</span>
                     <br>
-                    <h4 class="white">{% trans %}By continuing to browser (by clicking on a link or scrolling down the page, for example) you are agreeing to our use of cookies{% endtrans %}</h4>
-                    <br>
-                    <button class="btn btn-info large"><h2>{% trans %}Close{% endtrans %}</h2></button>
+                    <a class="btn btn-secondary large" id="b_cookies"><h4>{% trans %}Close{% endtrans %}</h4></a>
                 </div>
             </div>
         </div>
@@ -49,6 +48,24 @@
                     </ul>
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="col text-center">
+                    <ul class="navbar-nav text-center  d-inline">
+                        <li class="nav-item  d-inline social-media-icon mx1">
+                            <a target="_blank" href="https://play.google.com/store/apps/details?id=com.najisoft.dispodeal&gl=FR"><img class=" d-inline" src="{{ asset('assets/images/icons/social_logo/google.png') }}" alt=""></a>
+                        </li>
+                        <li class="nav-item   d-inline social-media-icon mx-1">
+                            <a target="_blank" href="#"><img class=" d-inline" src="{{ asset('assets/images/icons/social_logo/huawei.png') }}" alt=""></a>
+                        </li>
+                        <li class="nav-item d-inline social-media-icon mx1">
+                            <a target="_blank" href="https://www.facebook.com/DispoDeal"><img class="d-inline" src="{{ asset('assets/images/icons/social_logo/facebook.png') }}" alt=""></a>
+                        </li>
+                        <li class="nav-item  d-inline social-media-icon mx-1">
+                            <a target="_blank" href="https://www.instagram.com/dispodeal/"><img class=" d-inline" src="{{ asset('assets/images/icons/social_logo/instagram.png') }}" alt=""></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="d-sm-block d-md-none footer text-white-50 py-3 px-2">
@@ -77,6 +94,25 @@
                     </li>
                 {% endfor %}
             </ul>
+        </div>
+
+        <div class="col-12 mt-2">
+            <div class=" text-center">
+                <ul class="navbar-nav text-center d-inline">
+                    <li class="nav-item  d-inline social-media-icon mx1">
+                        <a target="_blank" href="https://play.google.com/store/apps/details?id=com.najisoft.dispodeal&gl=FR"><img class="d-inline" src="{{ asset('assets/images/icons/social_logo/google.png') }}" alt=""></a>
+                    </li>
+                    <li class="nav-item d-inline social-media-icon mx-1">
+                        <a target="_blank" href="#"><img class=" d-inline" src="{{ asset('assets/images/icons/social_logo/huawei.png') }}" alt=""></a>
+                    </li>
+                    <li class="nav-item d-inline social-media-icon mx1">
+                        <a target="_blank" href="https://www.facebook.com/DispoDeal"><img class="d-inline" src="{{ asset('assets/images/icons/social_logo/facebook.png') }}" alt=""></a>
+                    </li>
+                    <li class="nav-item d-inline social-media-icon mx-1">
+                        <a target="_blank" href="https://www.instagram.com/dispodeal/"><img class=" d-inline" src="{{ asset('assets/images/icons/social_logo/instagram.png') }}" alt=""></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -2,7 +2,9 @@
 // add range slider for specification//
 import Translator from "bazinga-translator";
 
-const Slider = require("bootstrap-slider");
+const BootstrapSlider = require("bootstrap-slider");
+
+
 
 function addOfferSearchSlider() {
 
@@ -15,7 +17,7 @@ function addOfferSearchSlider() {
         }
         let last = options.length;
         let value = [options[0], options[last-1]];
-        let manufacturingYear = new Slider("#manufacturingYear-slider", {
+        let manufacturingYear = new BootstrapSlider("#manufacturingYear-slider", {
             min: options[0], max: options[last-1], value: value, focus: true
         });
     }
@@ -27,7 +29,7 @@ function addOfferSearchSlider() {
         }
         let last = Options.length;
         let value = [Options[0], Options[last - 1]];
-        let kilometrage = new Slider("#kilometrage-slider", {
+        let kilometrage = new BootstrapSlider("#kilometrage-slider", {
             value: value,
             ticks: Options,
         });
@@ -38,13 +40,13 @@ function addOfferSearchSlider() {
         let man = Translator.trans("Manual");
         let id = document.getElementById('changeGear-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ auto+'","'+ man + '"]');
-        let changeGear = new Slider('#changeGear-slider',{
+        let changeGear = new BootstrapSlider('#changeGear-slider',{
         });
         $( ".change-gear" ).children().addClass("white");
     }
     if ($("#numberOfPassengers-slider").is(":visible")) {
 
-        let numberOfPassengers = new Slider('#numberOfPassengers-slider',{
+        let numberOfPassengers = new BootstrapSlider('#numberOfPassengers-slider',{
             min: 0,
             max: 48,
             value: 0,
@@ -54,7 +56,7 @@ function addOfferSearchSlider() {
     if ($("#numberOfDoors-slider").is(":visible")) {
         let idOptions = document.getElementById('offer_search_numberOfDoors').options;
         let last = (idOptions.length)-1;
-        let numberOfDoors = new Slider('#numberOfDoors-slider',{
+        let numberOfDoors = new BootstrapSlider('#numberOfDoors-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -73,7 +75,7 @@ function addOfferSearchSlider() {
         let placeholder = $('#offer_search_minCapacity option:selected').text();
         let title = placeholder.substr(4);
         $("#minMaxCapacityOfferSearch").text(toTitleCase(title));
-        let capacity = new Slider("#capacityMinMax-slider", {
+        let capacity = new BootstrapSlider("#capacityMinMax-slider", {
             value: value,
             ticks: Options,
         });
@@ -84,7 +86,7 @@ function addOfferSearchSlider() {
         let partial = Translator.trans("Partial");
         let id = document.getElementById('workHours-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ full+'","'+ partial + '"]');
-        let workHours = new Slider('#workHours-slider',{
+        let workHours = new BootstrapSlider('#workHours-slider',{
         });
         $( ".workHoursOfferSearch" ).children().addClass("white");
     }
@@ -94,7 +96,7 @@ function addOfferSearchSlider() {
         let cd = Translator.trans("CD");
         let id = document.getElementById('dvdCd-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ dvd +'","'+ cd + '"]');
-        let dvdCd = new Slider('#dvdCd-slider',{
+        let dvdCd = new BootstrapSlider('#dvdCd-slider',{
         });
         $( ".dvdCdOfferSearch" ).children().addClass("white");
     }
@@ -108,7 +110,7 @@ function addOfferSearchSlider() {
         let placeholder = $('#offer_search_ram option:selected').text();
         let title = placeholder.substr(4);
         $("#ramOfferSearch").text(toTitleCase(title));
-        let ram = new Slider("#ram-slider", {
+        let ram = new BootstrapSlider("#ram-slider", {
             ticks: Options,
             value:0
         });
@@ -118,7 +120,7 @@ function addOfferSearchSlider() {
         let wifi = Translator.trans("Wifi");
         let id = document.getElementById('wifi-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ wifi + '"]');
-        let slider = new Slider('#wifi-slider',{
+        let slider = new BootstrapSlider('#wifi-slider',{
         });
         $( ".wifiOfferSearch" ).children().addClass("white");
     }
@@ -127,7 +129,7 @@ function addOfferSearchSlider() {
         let accessories = Translator.trans("Accessories");
         let id = document.getElementById('accessories-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ accessories + '"]');
-        let slider = new Slider('#accessories-slider',{
+        let slider = new BootstrapSlider('#accessories-slider',{
         });
         $( ".accessoriesOfferSearch" ).children().addClass("white");
     }
@@ -136,7 +138,7 @@ function addOfferSearchSlider() {
         let hdmi = Translator.trans("Hdmi");
         let id = document.getElementById('hdmi-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ hdmi + '"]');
-        let slider = new Slider('#hdmi-slider',{
+        let slider = new BootstrapSlider('#hdmi-slider',{
         });
         $( ".hdmiOfferSearch" ).children().addClass("white");
     }
@@ -145,7 +147,7 @@ function addOfferSearchSlider() {
         let cdRoom = Translator.trans("Cd Room");
         let id = document.getElementById('cdRoom-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ cdRoom + '"]');
-        let slider = new Slider('#cdRoom-slider',{
+        let slider = new BootstrapSlider('#cdRoom-slider',{
         });
         $( ".cdRoomOfferSearch" ).children().addClass("white");
     }
@@ -154,7 +156,7 @@ function addOfferSearchSlider() {
         let usb = Translator.trans("Usb");
         let id = document.getElementById('usb-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ usb + '"]');
-        let slider = new Slider('#usb-slider',{
+        let slider = new BootstrapSlider('#usb-slider',{
         });
         $( ".usbOfferSearch" ).children().addClass("white");
     }
@@ -163,7 +165,7 @@ function addOfferSearchSlider() {
         let covered = Translator.trans("Covered");
         let id = document.getElementById('covered-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ covered + '"]');
-        let slider = new Slider('#covered-slider',{
+        let slider = new BootstrapSlider('#covered-slider',{
         });
         $( ".coveredOfferSearch" ).children().addClass("white");
     }
@@ -172,7 +174,7 @@ function addOfferSearchSlider() {
         let electricHead = Translator.trans("Electric Head");
         let id = document.getElementById('electricHead-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ electricHead + '"]');
-        let slider = new Slider('#electricHead-slider',{
+        let slider = new BootstrapSlider('#electricHead-slider',{
         });
         $( ".electricHeadOfferSearch" ).children().addClass("white");
     }
@@ -181,7 +183,7 @@ function addOfferSearchSlider() {
         let threeInOne = Translator.trans("Three In One");
         let id = document.getElementById('threeInOne-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ threeInOne + '"]');
-        let slider = new Slider('#threeInOne-slider',{
+        let slider = new BootstrapSlider('#threeInOne-slider',{
         });
         $( ".threeInOneOfferSearch" ).children().addClass("white");
     }
@@ -190,7 +192,7 @@ function addOfferSearchSlider() {
         let withOven = Translator.trans("With Oven");
         let id = document.getElementById('Oven-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ withOven + '"]');
-        let slider = new Slider('#Oven-slider',{
+        let slider = new BootstrapSlider('#Oven-slider',{
         });
         $( ".OvenOfferSearch" ).children().addClass("white");
     }
@@ -199,7 +201,7 @@ function addOfferSearchSlider() {
         let withElevator = Translator.trans("With Elevator");
         let id = document.getElementById('Elevator-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ withElevator + '"]');
-        let slider = new Slider('#Elevator-slider',{
+        let slider = new BootstrapSlider('#Elevator-slider',{
         });
         $( ".ElevatorOfferSearch" ).children().addClass("white");
     }
@@ -208,7 +210,7 @@ function addOfferSearchSlider() {
         let withFreezer = Translator.trans("With Freezer");
         let id = document.getElementById('Freezer-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ withFreezer + '"]');
-        let slider = new Slider('#Freezer-slider',{
+        let slider = new BootstrapSlider('#Freezer-slider',{
         });
         $( ".FreezerOfferSearch" ).children().addClass("white");
     }
@@ -217,7 +219,7 @@ function addOfferSearchSlider() {
         let Furniture = Translator.trans("With Furniture");
         let id = document.getElementById('Furniture-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ Furniture + '"]');
-        let slider = new Slider('#Furniture-slider',{
+        let slider = new BootstrapSlider('#Furniture-slider',{
         });
         $( ".FurnitureOfferSearch" ).children().addClass("white");
     }
@@ -226,7 +228,7 @@ function addOfferSearchSlider() {
         let Garden = Translator.trans("With Garden");
         let id = document.getElementById('Garden-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ Garden + '"]');
-        let slider = new Slider('#Garden-slider',{
+        let slider = new BootstrapSlider('#Garden-slider',{
         });
         $( ".GardenOfferSearch" ).children().addClass("white");
     }
@@ -235,14 +237,14 @@ function addOfferSearchSlider() {
         let Verandah = Translator.trans("With Verandah");
         let id = document.getElementById('Verandah-slider');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ Verandah + '"]');
-        let slider = new Slider('#Verandah-slider',{
+        let slider = new BootstrapSlider('#Verandah-slider',{
         });
         $( ".VerandahOfferSearch" ).children().addClass("white");
     }
     if ($("#numberOfHead-slider").is(":visible")) {
         let idOptions = document.getElementById('offer_search_numberOfHead').options;
         let last = (idOptions.length)-1;
-        let numberOfDoors = new Slider('#numberOfHead-slider',{
+        let numberOfDoors = new BootstrapSlider('#numberOfHead-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -252,7 +254,7 @@ function addOfferSearchSlider() {
     if ($("#numberOfPersson-slider").is(":visible")) {
         let idOptions = document.getElementById('offer_search_numberOfPersson').options;
         let last = (idOptions.length)-1;
-        let numberOfPersson = new Slider('#numberOfPersson-slider',{
+        let numberOfPersson = new BootstrapSlider('#numberOfPersson-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -264,7 +266,7 @@ function addOfferSearchSlider() {
         let last = (idOptions.length)-1;
         let placeholder = $('#offer_search_number option:selected').text();
         $("#numberOfferSearch").text(placeholder);
-        let numberOfPersson = new Slider('#number-slider',{
+        let numberOfPersson = new BootstrapSlider('#number-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -274,7 +276,7 @@ function addOfferSearchSlider() {
     if ($("#numberOfRooms-slider").is(":visible")) {
         let idOptions = document.getElementById('offer_search_numberOfRooms').options;
         let last = (idOptions.length)-1;
-        let numberOfRooms = new Slider('#numberOfRooms-slider',{
+        let numberOfRooms = new BootstrapSlider('#numberOfRooms-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -293,7 +295,7 @@ function addOfferSearchSlider() {
         let placeholder = $('#offer_search_minArea option:selected').text();
         let title = placeholder.substr(4);
         $("#minMaxAreaOfferSearch").text(toTitleCase(title));
-        let area = new Slider("#AreaMinMax-slider", {
+        let area = new BootstrapSlider("#AreaMinMax-slider", {
             value: value,
             ticks: Options,
         });
@@ -301,21 +303,21 @@ function addOfferSearchSlider() {
     if ($("#classEnergie-slider").is(":visible")) {
         let id = document.getElementById('classEnergie-slider');
         id.setAttribute('data-slider-ticks-labels','["All", "A", "B", "C", "D", "E", "F", "G"]');
-        let classEnergie = new Slider('#classEnergie-slider',{
+        let classEnergie = new BootstrapSlider('#classEnergie-slider',{
         });
         $( ".classEnergieOfferSearch" ).children().addClass("white");
     }
     if ($("#classGes-slider").is(":visible")) {
         let id = document.getElementById('classGes-slider');
         id.setAttribute('data-slider-ticks-labels','["All", "A", "B", "C", "D", "E", "F", "G"]');
-        let classGes = new Slider('#classGes-slider',{
+        let classGes = new BootstrapSlider('#classGes-slider',{
         });
         $( ".classGesOfferSearch" ).children().addClass("white");
     }
     if ($("#numberOfDrawer-slider").is(":visible")) {
         let idOptions = document.getElementById('offer_search_numberOfDrawer').options;
         let last = (idOptions.length)-1;
-        let numberOfDrawer = new Slider('#numberOfDrawer-slider',{
+        let numberOfDrawer = new BootstrapSlider('#numberOfDrawer-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -325,7 +327,7 @@ function addOfferSearchSlider() {
     if ($("#numberOfStaging-slider").is(":visible")) {
         let idOptions = document.getElementById('offer_search_numberOfStaging').options;
         let last = (idOptions.length)-1;
-        let numberOfStaging = new Slider('#numberOfStaging-slider',{
+        let numberOfStaging = new BootstrapSlider('#numberOfStaging-slider',{
             min: 0,
             max: last,
             value: 0,
@@ -343,7 +345,7 @@ function addDemandSearchSlider() {
         let max = parseInt(idOptions[1].value);
         let min = parseInt(idOptions[firstYear-1].value)-1;
 
-        let manufacturingYear = new Slider("#manufacturingYear-slider-demand", {
+        let manufacturingYear = new BootstrapSlider("#manufacturingYear-slider-demand", {
             min: min, max: max, value: max, focus: true
         });
     }
@@ -354,7 +356,7 @@ function addDemandSearchSlider() {
         let man = Translator.trans("Manual");
         let id = document.getElementById('changeGear-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ auto+'","'+ man + '"]');
-        let changeGear = new Slider('#changeGear-slider-demand',{
+        let changeGear = new BootstrapSlider('#changeGear-slider-demand',{
         });
         $( ".change-gear" ).children().addClass("white");
     }
@@ -363,7 +365,7 @@ function addDemandSearchSlider() {
         let idOptions = document.getElementById('demand_search_numberOfPassengers').options;
         let last = (idOptions.length)-1;
         $("#numberOfPassengersDemandSearch").text(placeholder);
-        let numberOfPassengers = new Slider('#numberOfPassengers-slider-demand',{
+        let numberOfPassengers = new BootstrapSlider('#numberOfPassengers-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -375,7 +377,7 @@ function addDemandSearchSlider() {
         let last = (idOptions.length)-1;
         let placeholder = $('#demand_search_numberOfDoors option:selected').text();
         $("#numberOfDoorsDemandSearch").text(placeholder);
-        let numberOfDoors = new Slider('#numberOfDoors-slider-demand',{
+        let numberOfDoors = new BootstrapSlider('#numberOfDoors-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -389,7 +391,7 @@ function addDemandSearchSlider() {
         let partial = Translator.trans("Partial");
         let id = document.getElementById('workHours-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ full+'","'+ partial + '"]');
-        let workHours = new Slider('#workHours-slider-demand',{
+        let workHours = new BootstrapSlider('#workHours-slider-demand',{
         });
         $( ".workHoursDemandSearch" ).children().addClass("white");
     }
@@ -399,7 +401,7 @@ function addDemandSearchSlider() {
         let cd = Translator.trans("CD");
         let id = document.getElementById('dvdCd-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ dvd +'","'+ cd + '"]');
-        let dvdCd = new Slider('#dvdCd-slider-demand',{
+        let dvdCd = new BootstrapSlider('#dvdCd-slider-demand',{
         });
         $( ".dvdCdDemandSearch" ).children().addClass("white");
     }
@@ -413,7 +415,7 @@ function addDemandSearchSlider() {
         let placeholder = $('#demand_search_ram option:selected').text();
 
         $("#ramDemandSearch").text(placeholder);
-        let ram = new Slider("#ram-slider-demand", {
+        let ram = new BootstrapSlider("#ram-slider-demand", {
             ticks: Options,
             value:0
         });
@@ -428,7 +430,7 @@ function addDemandSearchSlider() {
         let placeholder = $('#demand_search_capacity option:selected').text();
 
         $("#capacityDemandSearch").text(placeholder);
-        let ram = new Slider("#capacity-slider-demand", {
+        let ram = new BootstrapSlider("#capacity-slider-demand", {
             ticks: Options,
             value:0
         });
@@ -438,7 +440,7 @@ function addDemandSearchSlider() {
         let wifi = Translator.trans("Wifi");
         let id = document.getElementById('wifi-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ wifi + '"]');
-        let slider = new Slider('#wifi-slider-demand',{
+        let slider = new BootstrapSlider('#wifi-slider-demand',{
         });
         $( ".wifiDemandSearch" ).children().addClass("white");
     }
@@ -447,7 +449,7 @@ function addDemandSearchSlider() {
         let accessories = Translator.trans("Accessories");
         let id = document.getElementById('accessories-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ accessories + '"]');
-        let slider = new Slider('#accessories-slider-demand',{
+        let slider = new BootstrapSlider('#accessories-slider-demand',{
         });
         $( ".accessoriesDemandSearch" ).children().addClass("white");
     }
@@ -456,7 +458,7 @@ function addDemandSearchSlider() {
         let hdmi = Translator.trans("Hdmi");
         let id = document.getElementById('hdmi-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ hdmi + '"]');
-        let slider = new Slider('#hdmi-slider-demand',{
+        let slider = new BootstrapSlider('#hdmi-slider-demand',{
         });
         $( ".hdmiDemandSearch" ).children().addClass("white");
     }
@@ -465,7 +467,7 @@ function addDemandSearchSlider() {
         let cdRoom = Translator.trans("Cd Room");
         let id = document.getElementById('cdRoom-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ cdRoom + '"]');
-        let slider = new Slider('#cdRoom-slider-demand',{
+        let slider = new BootstrapSlider('#cdRoom-slider-demand',{
         });
         $( ".cdRoomDemandSearch" ).children().addClass("white");
     }
@@ -474,7 +476,7 @@ function addDemandSearchSlider() {
         let usb = Translator.trans("Usb");
         let id = document.getElementById('usb-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ usb + '"]');
-        let slider = new Slider('#usb-slider-demand',{
+        let slider = new BootstrapSlider('#usb-slider-demand',{
         });
         $( ".usbDemandSearch" ).children().addClass("white");
     }
@@ -483,7 +485,7 @@ function addDemandSearchSlider() {
         let covered = Translator.trans("Covered");
         let id = document.getElementById('covered-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ covered + '"]');
-        let slider = new Slider('#covered-slider-demand',{
+        let slider = new BootstrapSlider('#covered-slider-demand',{
         });
         $( ".coveredDemandSearch" ).children().addClass("white");
     }
@@ -492,7 +494,7 @@ function addDemandSearchSlider() {
         let electricHead = Translator.trans("Electric Head");
         let id = document.getElementById('electricHead-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ electricHead + '"]');
-        let slider = new Slider('#electricHead-slider-demand',{
+        let slider = new BootstrapSlider('#electricHead-slider-demand',{
         });
         $( ".electricHeadDemandSearch" ).children().addClass("white");
     }
@@ -501,7 +503,7 @@ function addDemandSearchSlider() {
         let threeInOne = Translator.trans("Three In One");
         let id = document.getElementById('threeInOne-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ threeInOne + '"]');
-        let slider = new Slider('#threeInOne-slider-demand',{
+        let slider = new BootstrapSlider('#threeInOne-slider-demand',{
         });
         $( ".threeInOneDemandSearch" ).children().addClass("white");
     }
@@ -510,7 +512,7 @@ function addDemandSearchSlider() {
         let withOven = Translator.trans("With Oven");
         let id = document.getElementById('Oven-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ withOven + '"]');
-        let slider = new Slider('#Oven-slider-demand',{
+        let slider = new BootstrapSlider('#Oven-slider-demand',{
         });
         $( ".OvenDemandSearch" ).children().addClass("white");
     }
@@ -519,7 +521,7 @@ function addDemandSearchSlider() {
         let withElevator = Translator.trans("With Elevator");
         let id = document.getElementById('Elevator-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ withElevator + '"]');
-        let slider = new Slider('#Elevator-slider-demand',{
+        let slider = new BootstrapSlider('#Elevator-slider-demand',{
         });
         $( ".ElevatorDemandSearch" ).children().addClass("white");
     }
@@ -528,7 +530,7 @@ function addDemandSearchSlider() {
         let withFreezer = Translator.trans("With Freezer");
         let id = document.getElementById('Freezer-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ withFreezer + '"]');
-        let slider = new Slider('#Freezer-slider-demand',{
+        let slider = new BootstrapSlider('#Freezer-slider-demand',{
         });
         $( ".FreezerDemandSearch" ).children().addClass("white");
     }
@@ -537,7 +539,7 @@ function addDemandSearchSlider() {
         let Furniture = Translator.trans("With Furniture");
         let id = document.getElementById('Furniture-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ Furniture + '"]');
-        let slider = new Slider('#Furniture-slider-demand',{
+        let slider = new BootstrapSlider('#Furniture-slider-demand',{
         });
         $( ".FurnitureDemandSearch" ).children().addClass("white");
     }
@@ -546,7 +548,7 @@ function addDemandSearchSlider() {
         let Garden = Translator.trans("With Garden");
         let id = document.getElementById('Garden-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ Garden + '"]');
-        let slider = new Slider('#Garden-slider-demand',{
+        let slider = new BootstrapSlider('#Garden-slider-demand',{
         });
         $( ".GardenDemandSearch" ).children().addClass("white");
     }
@@ -555,7 +557,7 @@ function addDemandSearchSlider() {
         let Verandah = Translator.trans("With Verandah");
         let id = document.getElementById('Verandah-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["'+ all +'","'+ Verandah + '"]');
-        let slider = new Slider('#Verandah-slider-demand',{
+        let slider = new BootstrapSlider('#Verandah-slider-demand',{
         });
         $( ".VerandahDemandSearch" ).children().addClass("white");
     }
@@ -565,7 +567,7 @@ function addDemandSearchSlider() {
         let placeholder = $('#demand_search_numberOfHead option:selected').text();
 
         $("#numberOfHeadDemandSearch").text(placeholder);
-        let numberOfDoors = new Slider('#numberOfHead-slider-demand',{
+        let numberOfDoors = new BootstrapSlider('#numberOfHead-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -575,7 +577,7 @@ function addDemandSearchSlider() {
     if ($("#numberOfPersson-slider-demand").is(":visible")) {
         let idOptions = document.getElementById('demand_search_numberOfPersson').options;
         let last = (idOptions.length)-1;
-        let numberOfPersson = new Slider('#numberOfPersson-slider-demand',{
+        let numberOfPersson = new BootstrapSlider('#numberOfPersson-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -587,7 +589,7 @@ function addDemandSearchSlider() {
         let last = (idOptions.length)-1;
         let placeholder = $('#demand_search_number option:selected').text();
         $("#numberDemandSearch").text(placeholder);
-        let numberOfPersson = new Slider('#number-slider-demand',{
+        let numberOfPersson = new BootstrapSlider('#number-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -599,7 +601,7 @@ function addDemandSearchSlider() {
         let last = (idOptions.length)-1;
         let placeholder = $('#demand_search_numberOfRooms option:selected').text();
         $("#numberOfRoomsDemandSearch").text(placeholder);
-        let numberOfRooms = new Slider('#numberOfRooms-slider-demand',{
+        let numberOfRooms = new BootstrapSlider('#numberOfRooms-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -609,21 +611,21 @@ function addDemandSearchSlider() {
     if ($("#classEnergie-slider-demand").is(":visible")) {
         let id = document.getElementById('classEnergie-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["All", "A", "B", "C", "D", "E", "F", "G"]');
-        let classEnergie = new Slider('#classEnergie-slider-demand',{
+        let classEnergie = new BootstrapSlider('#classEnergie-slider-demand',{
         });
         $( ".classEnergieDemandSearch" ).children().addClass("white");
     }
     if ($("#classGes-slider-demand").is(":visible")) {
         let id = document.getElementById('classGes-slider-demand');
         id.setAttribute('data-slider-ticks-labels','["All", "A", "B", "C", "D", "E", "F", "G"]');
-        let classGes = new Slider('#classGes-slider-demand',{
+        let classGes = new BootstrapSlider('#classGes-slider-demand',{
         });
         $( ".classGesDemandSearch" ).children().addClass("white");
     }
     if ($("#numberOfDrawer-slider-demand").is(":visible")) {
         let idOptions = document.getElementById('demand_search_numberOfDrawer').options;
         let last = (idOptions.length)-1;
-        let numberOfDrawer = new Slider('#numberOfDrawer-slider-demand',{
+        let numberOfDrawer = new BootstrapSlider('#numberOfDrawer-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -633,7 +635,7 @@ function addDemandSearchSlider() {
     if ($("#numberOfStaging-slider-demand").is(":visible")) {
         let idOptions = document.getElementById('demand_search_numberOfStaging').options;
         let last = (idOptions.length)-1;
-        let numberOfStaging = new Slider('#numberOfStaging-slider-demand',{
+        let numberOfStaging = new BootstrapSlider('#numberOfStaging-slider-demand',{
             min: 0,
             max: last,
             value: 0,
@@ -655,7 +657,7 @@ $(document).ready(function () {
     //hosting//
     let idPerson = document.getElementById('hosting_search_numberOfPersons').options;
     let lastPerson = (idPerson.length)-1;
-    let numberOfPersons = new Slider('#numberOfPerson-slider-hosting',{
+    let numberOfPersons = new BootstrapSlider('#numberOfPerson-slider-hosting',{
         min: 0,
         max: lastPerson,
         value: 0,
@@ -664,7 +666,7 @@ $(document).ready(function () {
 
     let idDays = document.getElementById('hosting_search_numberOfDays').options;
     let lastDays = (idDays.length)-1;
-    let numberOfDays = new Slider('#numberOfDays-slider-hosting',{
+    let numberOfDays = new BootstrapSlider('#numberOfDays-slider-hosting',{
         min: 0,
         max: lastDays,
         value: 0,
@@ -674,7 +676,7 @@ $(document).ready(function () {
     //meetup//
     let idParticipants = document.getElementById('meetup_search_maxParticipants').options;
     let lastParticipants = (idParticipants.length)-1;
-    let Participants = new Slider('#maxParticipants-slider-meetup',{
+    let Participants = new BootstrapSlider('#maxParticipants-slider-meetup',{
         min: 0,
         max: lastParticipants,
         value: 0,

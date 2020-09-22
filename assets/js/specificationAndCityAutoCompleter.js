@@ -158,13 +158,24 @@ $(document).ready(function () {
     completeNormalCity('#meetup_city');
     addBirthdayForm('#fos_user_profile_form_birthday');
 });
+$(document).ready(function(){
+    $( document ).on( 'focus', ':input', function(){
+        $( this ).attr( 'autocomplete', 'new-password' );
+    });
+    $( "input.select2-input" ).attr( 'autocomplete', 'new-password' );
 
+});
 function completeNormalCity(id) {
     let makeSelect = false;
     let $this = $(id), $fakeInput = $this.clone();
     $fakeInput.attr('id', 'fake_' + $fakeInput.attr('id'));
     $fakeInput.attr('name', 'fake_' + $fakeInput.attr('name'));
+    $fakeInput.attr('autocomplete', 'new-password' );
     $this.hide().after($fakeInput);
+/*
+    document.getElementById('fake_meetup_city').setAttribute('autocomplete','newpassword');
+*/
+
     $fakeInput.autocomplete({
         source: $('#url-list').attr('href'),
         autoFocus: true,
